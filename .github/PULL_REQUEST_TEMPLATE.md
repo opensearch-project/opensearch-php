@@ -1,14 +1,11 @@
-<!--
+### Description
+[Describe what this change achieves]
+ 
+### Issues Resolved
+[List any issues this PR will resolve]
+ 
+### Check List
+- [ ] Commits are signed per the DCO using --signoff 
 
-Thanks for the Pull Request!  Before you submit the PR, please
-look over this checklist:
-
-- Have you signed [Contributor License Agreement](https://www.elastic.co/contributor-agreement)?
-PR's (no matter how small) cannot be merged until the CLA has been signed.  It only needs to be signed once,
-however.
-
-- Have you read the [Contributing Guidelines](https://github.com/elastic/elasticsearch-php/blob/master/.github/CONTRIBUTING.md)?
-
-If you answered yes to both, thanks for the PR and we'll get to it ASAP! :)
-
--->
+By submitting this pull request, I confirm that my contribution is made under the terms of the Apache 2.0 license.
+For more information on following Developer Certificate of Origin and signing off your commits, please check [here](https://github.com/opensearch-project/OpenSearch/blob/main/CONTRIBUTING.md#developer-certificate-of-origin).
