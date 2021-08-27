@@ -35,7 +35,7 @@ class Utility
      */
     public static function getHost(): ?string
     {
-        $url = getenv('ELASTICSEARCH_URL');
+        $url = getenv('OPENSEARCH_URL');
         if (false !== $url) {
             return $url;
         }
