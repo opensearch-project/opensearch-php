@@ -15,7 +15,7 @@
 
 declare(strict_types = 1);
 
-namespace Elasticsearch\Util;
+namespace OpenSearch\Util;
 
 use Exception;
 
@@ -51,7 +51,7 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
-            $useNamespace .= sprintf("use Elasticsearch\Namespaces\%sNamespace;\n", NamespaceEndpoint::normalizeName($name));
+            $useNamespace .= sprintf("use OpenSearch\Namespaces\%sNamespace;\n", NamespaceEndpoint::normalizeName($name));
         }
         $class = str_replace(':use-namespaces', $useNamespace, $class);
 

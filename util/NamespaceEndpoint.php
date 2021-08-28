@@ -15,7 +15,7 @@
 
 declare(strict_types = 1);
 
-namespace Elasticsearch\Util;
+namespace OpenSearch\Util;
 
 use Exception;
 

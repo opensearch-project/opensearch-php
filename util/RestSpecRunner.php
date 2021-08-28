@@ -16,8 +16,8 @@
 
 declare(strict_types = 1);
 
-use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
-use Elasticsearch\Tests\Utility;
+use OpenSearch\Common\Exceptions\NoNodesAvailableException;
+use OpenSearch\Tests\Utility;
 
 // Set the default timezone. While this doesn't cause any tests to fail, PHP
 // complains if it is not set in 'date.timezone' of php.ini.

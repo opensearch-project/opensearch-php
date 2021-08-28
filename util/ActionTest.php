@@ -15,16 +15,16 @@
 
 declare(strict_types = 1);
 
-namespace Elasticsearch\Util;
+namespace OpenSearch\Util;
 
-use Elasticsearch\Common\Exceptions\BadRequest400Exception;
-use Elasticsearch\Common\Exceptions\Conflict409Exception;
-use Elasticsearch\Common\Exceptions\ElasticsearchException;
-use Elasticsearch\Common\Exceptions\Forbidden403Exception;
-use Elasticsearch\Common\Exceptions\Missing404Exception;
-use Elasticsearch\Common\Exceptions\RequestTimeout408Exception;
-use Elasticsearch\Common\Exceptions\Unauthorized401Exception;
-use Elasticsearch\Util\YamlTests;
+use OpenSearch\Common\Exceptions\BadRequest400Exception;
+use OpenSearch\Common\Exceptions\Conflict409Exception;
+use OpenSearch\Common\Exceptions\OpenSearchException;
+use OpenSearch\Common\Exceptions\Forbidden403Exception;
+use OpenSearch\Common\Exceptions\Missing404Exception;
+use OpenSearch\Common\Exceptions\RequestTimeout408Exception;
+use OpenSearch\Common\Exceptions\Unauthorized401Exception;
+use OpenSearch\Util\YamlTests;
 use PHPUnit\Runner\Version as PHPUnitVersion;
 use stdClass;
 
@@ -194,18 +194,18 @@ class ActionTest
                 $expectedException = Conflict409Exception::class;
                 break;
             case 'request':
-                $expectedException = ElasticsearchException::class;
+                $expectedException = OpenSearchException::class;
                 break;
             case 'unavailable':
-                $expectedException = ElasticsearchException::class;
+                $expectedException = OpenSearchException::class;
                 $scriptException = YamlTests::render(self::TEMPLATE_CATCH_UNAVAILABLE);
                 break;
             case 'param':
-                $expectedException = ElasticsearchException::class;
+                $expectedException = OpenSearchException::class;
                 $scriptException = 'var_dump($response);';
                 break;
             default:
-                $expectedException = ElasticsearchException::class;
+                $expectedException = OpenSearchException::class;
                 $scriptException = YamlTests::render(
                     ($this->phpUnitVersion > 8) ? (self::TEMPLATE_PHPUNIT9_CATCH_REGEX) : (self::TEMPLATE_CATCH_REGEX),
                     [ ':regex' => sprintf("'%s'", addslashes($action)) ]

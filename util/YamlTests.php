@@ -15,9 +15,9 @@
 
 declare(strict_types = 1);
 
-namespace Elasticsearch\Util;
+namespace OpenSearch\Util;
 
-use Elasticsearch\Util\ActionTest;
+use OpenSearch\Util\ActionTest;
 use Exception;
 use ParseError;
 use RecursiveDirectoryIterator;

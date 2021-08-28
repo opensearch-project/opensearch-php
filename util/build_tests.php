@@ -14,9 +14,9 @@
  */
 declare(strict_types = 1);
 
-use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
-use Elasticsearch\Util\YamlTests;
-use Elasticsearch\Tests\Utility;
+use OpenSearch\Common\Exceptions\NoNodesAvailableException;
+use OpenSearch\Util\YamlTests;
+use OpenSearch\Tests\Utility;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

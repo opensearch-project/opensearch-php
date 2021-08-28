@@ -14,9 +14,9 @@
  */
 declare(strict_types = 1);
 
-namespace Elasticsearch\Endpoints:namespace;
+namespace OpenSearch\Endpoints:namespace;
 :use-namespace
-use Elasticsearch\Endpoints\AbstractEndpoint;
+use OpenSearch\Endpoints\AbstractEndpoint;
 
 /**
  * Class :endpoint
