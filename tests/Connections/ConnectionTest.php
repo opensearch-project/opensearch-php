@@ -1,20 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
  *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-
-
-declare(strict_types = 1);
 
 namespace OpenSearch\Tests\Connections;
 
@@ -351,7 +348,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             $this->logger,
             $this->trace
         );
-        
+
         $options = [
             'client' => [
                 'headers' => [
@@ -359,7 +356,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
                 ]
             ]
         ];
-        
+
         $headersBefore = $connection->getHeaders();
         $result = $connection->performRequest('GET', '/', null, null, $options);
         $headersAfter = $connection->getHeaders();
@@ -367,7 +364,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Test if the x-elastic-client-meta header is sent if $params['client']['x-elastic-client-meta'] is true  
+     * Test if the x-elastic-client-meta header is sent if $params['client']['x-elastic-client-meta'] is true
      */
     public function testElasticMetaClientHeaderIsSentWhenParameterIsTrue()
     {
@@ -395,14 +392,14 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             1,
             preg_match(
-                '/^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$/', 
+                '/^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$/',
                 $request['headers']['x-elastic-client-meta'][0]
             )
         );
     }
 
     /**
-     * Test if the x-elastic-client-meta header is sent if $params['client']['x-elastic-client-meta'] is true  
+     * Test if the x-elastic-client-meta header is sent if $params['client']['x-elastic-client-meta'] is true
      */
     public function testElasticMetaClientHeaderIsNotSentWhenParameterIsFalse()
     {
@@ -462,7 +459,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
         $connection = new Connection(
             ClientBuilder::defaultHandler(),
-            [ 
+            [
                 'host'   => 'localhost',
                 'port'   => 9200,
                 'scheme' => 'http',
@@ -479,7 +476,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             'headers' => [
                 'User-Agent: Testing'
             ]
-        ]; 
+        ];
         $response = [
             'effective_url' => 'http://localhost/info',
             'status' => 200,
@@ -509,7 +506,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
         $connection = new Connection(
             ClientBuilder::defaultHandler(),
-            [ 
+            [
                 'host'   => 'localhost',
                 'port'   => 9200,
                 'scheme' => 'http',
@@ -526,7 +523,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             'headers' => [
                 'User-Agent: Testing'
             ]
-        ]; 
+        ];
         $response = [
             'effective_url' => 'http://localhost/info',
             'status' => 400,
@@ -537,7 +534,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             'body' => '{}'
         ];
         $connection->logRequestFail($request, $response, new Exception());
-        
+
         // Check for localhost:9200 in trace
         foreach ($trace->output as $row) {
             $this->assertStringContainsString('localhost:9200', $row);

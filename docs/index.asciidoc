@@ -1,5 +1,5 @@
 
-= Elasticsearch-PHP
+= OpenSearch-PHP
 
 include::{asciidoc-dir}/../../shared/attributes.asciidoc[]
 
@@ -16,7 +16,5 @@ include::operations.asciidoc[]
 include::build/classes.asciidoc[]
 
 include::helpers.asciidoc[]
-
-include::release-notes.asciidoc[]
 
 include::redirects.asciidoc[]

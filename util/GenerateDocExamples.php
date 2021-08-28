@@ -1,19 +1,18 @@
 <?php
-/**
- * Elasticsearch PHP client
- *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
 
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -72,7 +71,7 @@ foreach ($spec as $source) {
     if (!in_array($source['source_location']['file'], $fileToParse)) {
         continue;
     }
-    
+
     printf("Reading source: %s\n", $source['source_location']['file']);
     $head = sprintf("// %s:%d\n", $source['source_location']['file'], $source['source_location']['line']);
     $head .= "\n[source, php]\n----\n";
@@ -99,7 +98,7 @@ printf("\n");
 printf("Total source examples: %d\n", $tot);
 printf("Generated %d source examples in %.3f seconds\n", $parsed, $end - $start);
 
-// END 
+// END
 
 /**
  * Generate the client source code from the parsed_source field
@@ -147,7 +146,8 @@ function prettyPrintArray(array $input, int $space): string
         } else {
             if (is_string($value)) {
                 $value = "'" . str_replace("'", "\'", $value) . "'";
-            } if (is_bool($value)) {
+            }
+            if (is_bool($value)) {
                 $value = $value ? 'true' : 'false';
             }
             $output .= sprintf("%s,\n", $value);
@@ -189,10 +189,10 @@ function checkIfCodeHasValidSyntax(string $code): void
  */
 function removeAllFiles(string $folder): void
 {
-    $files = glob($folder); 
-    foreach($files as $file) { 
-        if(is_file($file)) {
-            unlink($file); 
+    $files = glob($folder);
+    foreach ($files as $file) {
+        if (is_file($file)) {
+            unlink($file);
         }
     }
 }

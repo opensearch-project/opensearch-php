@@ -7,12 +7,12 @@ rm -f doctum.phar
 rm -f doctum.phar.sha256
 
 # Download the latest (5.1.x) release
-curl -O https://doctum.long-term.support/releases/5.1/doctum.phar
-curl -O https://doctum.long-term.support/releases/5.1/doctum.phar.sha256
+curl -O https://doctum.long-term.support/releases/5.3/doctum.phar
+curl -O https://doctum.long-term.support/releases/5.3/doctum.phar.sha256
 
 sha256sum --strict --check doctum.phar.sha256
 rm -f doctum.phar.sha256
-# You can fetch the latest (5.1.x) version code here:
+# You can fetch the latest (5.3.x) version code here:
 # https://doctum.long-term.support/releases/5.1/VERSION
 
 # Show the version to inform users of the script

@@ -1,20 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
  *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-
-
-declare(strict_types = 1);
 
 namespace OpenSearch\Connections;
 
@@ -134,7 +131,6 @@ class Connection implements ConnectionInterface
         LoggerInterface $log,
         LoggerInterface $trace
     ) {
-
         if (isset($hostDetails['port']) !== true) {
             $hostDetails['port'] = 9200;
         }
@@ -216,7 +212,7 @@ class Connection implements ConnectionInterface
         if (isset($this->connectionParams['client']['port_in_header']) && $this->connectionParams['client']['port_in_header']) {
             $host .= ':' . $this->port;
         }
-        
+
         $request = [
             'http_method' => $method,
             'scheme'      => $this->transportSchema,
@@ -256,15 +252,13 @@ class Connection implements ConnectionInterface
     private function wrapHandler(callable $handler): callable
     {
         return function (array $request, Connection $connection, Transport $transport = null, $options) use ($handler) {
-
             $this->lastRequest = [];
             $this->lastRequest['request'] = $request;
 
             // Send the request using the wrapped handler.
             $response =  Core::proxy(
-                $handler($request), 
+                $handler($request),
                 function ($response) use ($connection, $transport, $request, $options) {
-
                     $this->lastRequest['response'] = $response;
 
                     if (isset($response['error']) === true) {
@@ -328,7 +322,7 @@ class Connection implements ConnectionInterface
                             // Skip 404 if succeeded true in the body (e.g. clear_scroll)
                             $body = $response['body'] ?? '';
                             if (strpos($body, '"succeeded":true') !== false) {
-                                 $ignore[] = 404;
+                                $ignore[] = 404;
                             }
                             $this->process4xxError($request, $response, $ignore);
                         } elseif ($response['status'] >= 500) {
@@ -440,7 +434,7 @@ class Connection implements ConnectionInterface
     {
         $port = $request['client']['curl'][CURLOPT_PORT] ?? $response['transfer_stats']['primary_port'] ?? '';
         $uri = $this->addPortInUrl($response['effective_url'], (int) $port);
-        
+
         $this->log->debug('Request Body', array($request['body']));
         $this->log->warning(
             'Request Failure:',
@@ -590,7 +584,7 @@ class Connection implements ConnectionInterface
 
     /**
      * Get the x-elastic-client-meta header
-     * 
+     *
      * The header format is specified by the following regex:
      * ^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$
      */
@@ -598,7 +592,7 @@ class Connection implements ConnectionInterface
     {
         $phpSemVersion = sprintf("%d.%d.%d", PHP_MAJOR_VERSION, PHP_MINOR_VERSION, PHP_RELEASE_VERSION);
         // Reduce the size in case of '-snapshot' version
-        $clientVersion = str_replace('-snapshot', '-s', strtolower(Client::VERSION)); 
+        $clientVersion = str_replace('-snapshot', '-s', strtolower(Client::VERSION));
         $clientMeta = sprintf(
             "es=%s,php=%s,t=%s,a=%d",
             $clientVersion,
@@ -675,7 +669,7 @@ class Connection implements ConnectionInterface
         if (array_search($response['status'], $ignore) !== false) {
             return null;
         }
-        
+
         $responseBody = $this->convertBodyToString($response['body'], $statusCode, $exception);
         if ($statusCode === 401) {
             $exception = new Unauthorized401Exception($responseBody, $statusCode);
@@ -734,7 +728,7 @@ class Connection implements ConnectionInterface
         throw $exception;
     }
 
-    private function convertBodyToString($body, int $statusCode, Exception $exception) : string
+    private function convertBodyToString($body, int $statusCode, Exception $exception): string
     {
         if (empty($body)) {
             return sprintf(
@@ -770,7 +764,7 @@ class Connection implements ConnectionInterface
                 // added json_encode to convert into a string
                 return new $errorClass(json_encode($response['body']), (int) $response['status']);
             }
-            
+
             // 2.0 structured exceptions
             if (is_array($error['error']) && array_key_exists('reason', $error['error']) === true) {
                 // Try to use root cause first (only grabs the first root cause)
@@ -790,7 +784,7 @@ class Connection implements ConnectionInterface
             // <2.0 semi-structured exceptions
             // added json_encode to convert into a string
             $original = new $errorClass(json_encode($response['body']), $response['status']);
-            
+
             $errorEncoded = $error['error'];
             if (is_array($errorEncoded)) {
                 $errorEncoded = json_encode($errorEncoded);

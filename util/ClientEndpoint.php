@@ -1,19 +1,18 @@
 <?php
-/**
- * Elasticsearch PHP client
- *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
 
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
 
 namespace OpenSearch\Util;
 
@@ -21,17 +20,17 @@ use Exception;
 
 class ClientEndpoint extends NamespaceEndpoint
 {
-    const CLIENT_CLASS_TEMPLATE   = __DIR__ . '/template/client-class';
-    const NEW_NAMESPACE_TEMPLATE  = __DIR__ . '/template/new-namespace';
-    const PROPERTY_CLASS_TEMPLATE = __DIR__ . '/template/namespace-property';
-    const NAMESPACE_FUNC_TEMPLATE = __DIR__ . '/template/client-namespace-function';
+    public const CLIENT_CLASS_TEMPLATE   = __DIR__ . '/template/client-class';
+    public const NEW_NAMESPACE_TEMPLATE  = __DIR__ . '/template/new-namespace';
+    public const PROPERTY_CLASS_TEMPLATE = __DIR__ . '/template/namespace-property';
+    public const NAMESPACE_FUNC_TEMPLATE = __DIR__ . '/template/client-namespace-function';
 
     protected $endpoints = [];
     protected $endpointNames = [];
     protected $namespace = [];
     protected $version; /* Elasticsearch version used to generate the class */
     protected $buildhash; /* Elasticsearch build hash used to generate the class */
-    
+
     public function __construct(array $namespace, string $version, string $buildhash)
     {
         $this->namespace = $namespace;
@@ -63,7 +62,7 @@ class ClientEndpoint extends NamespaceEndpoint
             }
             $normNamespace = NamespaceEndpoint::normalizeName($name);
             $newName = file_get_contents(self::NEW_NAMESPACE_TEMPLATE);
-            $newName = str_replace(':namespace',$normNamespace . 'Namespace', $newName);
+            $newName = str_replace(':namespace', $normNamespace . 'Namespace', $newName);
             $newName = str_replace(':name', lcfirst($normNamespace), $newName);
             $newNamespace .= $newName;
         }

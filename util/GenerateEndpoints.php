@@ -1,19 +1,18 @@
 <?php
-/**
- * Elasticsearch PHP client
- *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
 
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
 
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
@@ -35,11 +34,11 @@ try {
 try {
     $serverInfo = $client->info();
 } catch (NoNodesAvailableException $e) {
-    printf ("ERROR: Host %s is offline\n", Utility::getHost());
+    printf("ERROR: Host %s is offline\n", Utility::getHost());
     exit(1);
 }
 $version = $serverInfo['version']['number'];
-$buildHash = $serverInfo['version']['build_hash']; 
+$buildHash = $serverInfo['version']['build_hash'];
 
 if (version_compare($version, '7.4.0', '<')) {
     printf("Error: the ES version must be >= 7.4.0\n");
@@ -47,16 +46,16 @@ if (version_compare($version, '7.4.0', '<')) {
 }
 
 $backupFileName = sprintf(
-    "%s/backup_endpoint_namespace_%s.zip", 
+    "%s/backup_endpoint_namespace_%s.zip",
     __DIR__,
     Client::VERSION
 );
 
-printf ("Backup Endpoints and Namespaces in:\n%s\n", $backupFileName);
+printf("Backup Endpoints and Namespaces in:\n%s\n", $backupFileName);
 backup($backupFileName);
 
 $start = microtime(true);
-printf ("Generating endpoints for Elasticsearch\n");
+printf("Generating endpoints for Elasticsearch\n");
 
 $success = true;
 // Check if the rest-spec folder with the build hash exists
@@ -179,9 +178,8 @@ removeDirectory($outputDir);
  */
 function removeDirectory($directory, array $omit = [])
 {
-    foreach(glob("{$directory}/*") as $file)
-    {
-        if(is_dir($file)) { 
+    foreach (glob("{$directory}/*") as $file) {
+        if (is_dir($file)) {
             if (!in_array($file, $omit)) {
                 removeDirectory($file, $omit);
             }
@@ -234,17 +232,17 @@ function backup(string $fileName)
         exit(1);
     } else {
         $zip->addFile(__DIR__ . '/../src/Elasticsearch/Client.php', 'Client.php');
-        $zip->addGlob(__DIR__ . '/../src/Elasticsearch/Namespaces/*.php', GLOB_BRACE, [ 
+        $zip->addGlob(__DIR__ . '/../src/Elasticsearch/Namespaces/*.php', GLOB_BRACE, [
             'remove_path' => __DIR__ . '/../src/Elasticsearch'
         ]);
         // Add the Endpoints (including subfolders)
-        foreach(glob(__DIR__ . '/../src/Elasticsearch/Endpoints/*') as $file) {
+        foreach (glob(__DIR__ . '/../src/Elasticsearch/Endpoints/*') as $file) {
             if (is_dir($file)) {
-                $zip->addGlob("$file/*.php", GLOB_BRACE, [ 
+                $zip->addGlob("$file/*.php", GLOB_BRACE, [
                     'remove_path' => __DIR__ . '/../src/Elasticsearch'
                 ]);
             } else {
-                $zip->addGlob("$file", GLOB_BRACE, [ 
+                $zip->addGlob("$file", GLOB_BRACE, [
                     'remove_path' => __DIR__ . '/../src/Elasticsearch'
                 ]);
             }

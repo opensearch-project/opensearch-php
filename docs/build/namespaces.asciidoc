@@ -4,7 +4,7 @@
 
 This is a complete list of available namespaces:
 
-* <<Elasticsearch, Elasticsearch>>
-* <<Elasticsearch_Namespaces, Elasticsearch\Namespaces>>
-include::Elasticsearch.asciidoc[]
-include::Elasticsearch/Namespaces.asciidoc[]
+* <<OpenSearch, OpenSearch>>
+* <<OpenSearch_Namespaces, OpenSearch\Namespaces>>
+include::OpenSearch.asciidoc[]
+include::OpenSearch/Namespaces.asciidoc[]

@@ -2,7 +2,7 @@
 composer.lock
 vendor/
 composer.phar
-.php_cs.cache
+.php-cs-fixer.cache
 
 #editor related
 .idea

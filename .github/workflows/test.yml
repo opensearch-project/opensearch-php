@@ -43,9 +43,9 @@ jobs:
       run: |
         composer install --prefer-dist
 
-    - name: PHP Coding Standards
+    - name: PHP CS Fixer
       run: |
-        composer run-script phpcs
+        composer run-script php-cs
 
     - name: PHP Static Analysis Tool
       run: |
