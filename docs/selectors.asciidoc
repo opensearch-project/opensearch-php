@@ -24,7 +24,7 @@ you can do:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setSelector('\Elasticsearch\ConnectionPool\Selectors\RoundRobinSelector')
+            ->setSelector('\OpenSearch\ConnectionPool\Selectors\RoundRobinSelector')
             ->build();
 ----
 
@@ -60,7 +60,7 @@ If you wish to use this selector, you may do so with:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setSelector('\Elasticsearch\ConnectionPool\Selectors\StickyRoundRobinSelector')
+            ->setSelector('\OpenSearch\ConnectionPool\Selectors\StickyRoundRobinSelector')
             ->build();
 ----
 
@@ -78,7 +78,7 @@ If you wish to use this selector, you may do so with:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setSelector('\Elasticsearch\ConnectionPool\Selectors\RandomSelector')
+            ->setSelector('\OpenSearch\ConnectionPool\Selectors\RandomSelector')
             ->build();
 ----
 
@@ -94,8 +94,8 @@ You can implement your own custom selector. Custom selectors must implement
 ----
 namespace MyProject\Selectors;
 
-use Elasticsearch\Connections\ConnectionInterface;
-use Elasticsearch\ConnectionPool\Selectors\SelectorInterface
+use OpenSearch\Connections\ConnectionInterface;
+use OpenSearch\ConnectionPool\Selectors\SelectorInterface
 
 class MyCustomSelector implements SelectorInterface
 {
@@ -138,7 +138,7 @@ Selectors can be changed via the `setSelector()` method:
 
 [source,php]
 ----
-$selector = '\Elasticsearch\ConnectionPool\Selectors\StickyRoundRobinSelector';
+$selector = '\OpenSearch\ConnectionPool\Selectors\StickyRoundRobinSelector';
 $client = ClientBuilder::create()
             ->setSelector($selector)
             ->build();

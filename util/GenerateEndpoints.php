@@ -15,13 +15,13 @@
 
 declare(strict_types = 1);
 
-use Elasticsearch\Client;
-use Elasticsearch\Common\Exceptions\NoNodesAvailableException;
-use Elasticsearch\Common\Exceptions\RuntimeException;
-use Elasticsearch\Util\ClientEndpoint;
-use Elasticsearch\Util\Endpoint;
-use Elasticsearch\Util\NamespaceEndpoint;
-use Elasticsearch\Tests\Utility;
+use OpenSearch\Client;
+use OpenSearch\Common\Exceptions\NoNodesAvailableException;
+use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\Util\ClientEndpoint;
+use OpenSearch\Util\Endpoint;
+use OpenSearch\Util\NamespaceEndpoint;
+use OpenSearch\Tests\Utility;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 

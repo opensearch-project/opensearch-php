@@ -44,7 +44,7 @@ you may do so with the `setConnectionPool()` method of the ClientBuilder object:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setConnectionPool('\Elasticsearch\ConnectionPool\StaticNoPingConnectionPool', [])
+            ->setConnectionPool('\OpenSearch\ConnectionPool\StaticNoPingConnectionPool', [])
             ->build();
 ----
 
@@ -64,7 +64,7 @@ To use the `StaticConnectionPool`:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setConnectionPool('\Elasticsearch\ConnectionPool\StaticConnectionPool', [])
+            ->setConnectionPool('\OpenSearch\ConnectionPool\StaticConnectionPool', [])
             ->build();
 ----
 
@@ -86,7 +86,7 @@ To use the `SimpleConnectionPool`:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setConnectionPool('\Elasticsearch\ConnectionPool\SimpleConnectionPool', [])
+            ->setConnectionPool('\OpenSearch\ConnectionPool\SimpleConnectionPool', [])
             ->build();
 ----
 
@@ -106,7 +106,7 @@ To use the `SniffingConnectionPool`:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setConnectionPool('\Elasticsearch\ConnectionPool\SniffingConnectionPool', [])
+            ->setConnectionPool('\OpenSearch\ConnectionPool\SniffingConnectionPool', [])
             ->build();
 ----
 
@@ -246,7 +246,7 @@ Connection pools are configured via the `setConnectionPool()` method:
 
 [source,php]
 ----
-$connectionPool = '\Elasticsearch\ConnectionPool\StaticNoPingConnectionPool';
+$connectionPool = '\OpenSearch\ConnectionPool\StaticNoPingConnectionPool';
 $client = ClientBuilder::create()
             ->setConnectionPool($connectionPool)
             ->build();

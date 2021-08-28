@@ -16,8 +16,8 @@
 
 declare(strict_types = 1);
 
-use Elasticsearch\ClientBuilder;
-use Elasticsearch\Tests\Utility;
+use OpenSearch\ClientBuilder;
+use OpenSearch\Tests\Utility;
 
 error_reporting(E_ALL | E_STRICT);
 

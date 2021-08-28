@@ -19,7 +19,7 @@ $newEndpoint = function ($class) use ($transport, $serializer) {
         return new MyProject\SuperSearch($transport);
     } else {
         // Default handler
-        $fullPath = '\\Elasticsearch\\Endpoints\\' . $class;
+        $fullPath = '\\OpenSearch\\Endpoints\\' . $class;
         if ($class === 'Bulk' || $class === 'Msearch' || $class === 'MPercolate') {
             return new $fullPath($transport, $serializer);
         } else {

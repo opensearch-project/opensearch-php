@@ -51,7 +51,7 @@ method on the `ClientBuilder` object:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setSerializer('\Elasticsearch\Serializers\SmartSerializer');
+            ->setSerializer('\OpenSearch\Serializers\SmartSerializer');
             ->build();
 ----
 
@@ -94,7 +94,7 @@ the `ClientBuilder` object:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setSerializer('\Elasticsearch\Serializers\ArrayToJSONSerializer');
+            ->setSerializer('\OpenSearch\Serializers\ArrayToJSONSerializer');
             ->build();
 ----
 
@@ -135,7 +135,7 @@ method on the ClientBuilder object:
 [source,php]
 ----
 $client = ClientBuilder::create()
-            ->setSerializer('\Elasticsearch\Serializers\EverythingToJSONSerializer');
+            ->setSerializer('\OpenSearch\Serializers\EverythingToJSONSerializer');
             ->build();
 ----
 
@@ -218,7 +218,7 @@ The majority of people will never need to change the default Serializer
 
 [source,php]
 ----
-$serializer = '\Elasticsearch\Serializers\SmartSerializer';
+$serializer = '\OpenSearch\Serializers\SmartSerializer';
 $client = ClientBuilder::create()
             ->setSerializer($serializer)
             ->build();

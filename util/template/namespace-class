@@ -14,9 +14,9 @@
  */
 declare(strict_types = 1);
 
-namespace Elasticsearch\Namespaces;
+namespace OpenSearch\Namespaces;
 
-use Elasticsearch\Namespaces\AbstractNamespace;
+use OpenSearch\Namespaces\AbstractNamespace;
 
 /**
  * Class :namespace
