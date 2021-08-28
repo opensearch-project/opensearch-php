@@ -1,20 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
  *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-
-
-declare(strict_types = 1);
 
 namespace OpenSearch\Tests;
 
@@ -72,7 +69,7 @@ class Utility
 
     /**
      * Clean up the cluster after a test
-     * 
+     *
      * @see ESRestTestCase.java:cleanUpCluster()
      */
     public static function cleanUpCluster(Client $client): void
@@ -81,15 +78,15 @@ class Utility
         self::waitForClusterStateUpdatesToFinish($client);
     }
 
-     /**
-     * Delete the cluster
-     * 
-     * @see ESRestTestCase.java:wipeCluster()
-     */
+    /**
+    * Delete the cluster
+    *
+    * @see ESRestTestCase.java:wipeCluster()
+    */
     private static function wipeCluster(Client $client): void
     {
         if (version_compare(self::getVersion($client), '7.3.99') > 0) {
-            self::deleteAllSLMPolicies($client);  
+            self::deleteAllSLMPolicies($client);
         }
 
         self::wipeSnapshots($client);
@@ -117,8 +114,8 @@ class Utility
     }
 
     /**
-     * Delete all the Snapshots 
-     * 
+     * Delete all the Snapshots
+     *
      * @see ESRestTestCase.java:wipeSnapshots()
      */
     private static function wipeSnapshots(Client $client): void
@@ -147,7 +144,7 @@ class Utility
                         ]);
                     }
                 }
-            }         
+            }
             $client->snapshot()->deleteRepository([
                 'repository' => $repository,
                 'client' => [
@@ -159,7 +156,7 @@ class Utility
 
     /**
      * Delete all SLM policies
-     * 
+     *
      * @see ESRestTestCase.java:deleteAllSLMPolicies()
      */
     private static function deleteAllSLMPolicies(Client $client): void
@@ -174,7 +171,7 @@ class Utility
 
     /**
      * Delete all data streams
-     * 
+     *
      * @see ESRestTestCase.java:wipeDataStreams()
      */
     private static function wipeDataStreams(Client $client): void
@@ -201,7 +198,7 @@ class Utility
 
     /**
      * Delete all indices
-     * 
+     *
      * @see ESRestTestCase.java:wipeAllIndices()
      */
     private static function wipeAllIndices(Client $client): void
@@ -224,7 +221,7 @@ class Utility
 
     /**
      * Reset the cluster settings
-     * 
+     *
      * @see ESRestTestCase.java:wipeClusterSettings()
      */
     private static function wipeClusterSettings(Client $client): void
@@ -250,24 +247,24 @@ class Utility
 
     /**
      * A set of ILM policies that should be preserved between runs.
-     * 
+     *
      * @see ESRestTestCase.java:preserveILMPolicyIds
      */
     private static function preserveILMPolicyIds(): array
     {
         return [
-            "ilm-history-ilm-policy", 
+            "ilm-history-ilm-policy",
             "slm-history-ilm-policy",
-            "watch-history-ilm-policy", 
-            "ml-size-based-ilm-policy", 
-            "logs", 
+            "watch-history-ilm-policy",
+            "ml-size-based-ilm-policy",
+            "logs",
             "metrics"
         ];
     }
 
     /**
      * Wait for Cluster state updates to finish
-     * 
+     *
      * @see ESRestTestCase.java:waitForClusterStateUpdatesToFinish()
      */
     private static function waitForClusterStateUpdatesToFinish(Client $client, int $timeout = 30): void

@@ -1,18 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-declare(strict_types = 1);
 
 namespace OpenSearch\Namespaces;
 
@@ -24,7 +23,6 @@ use OpenSearch\Namespaces\AbstractNamespace;
  */
 class ClusterNamespace extends AbstractNamespace
 {
-
     /**
      * $params['include_yes_decisions'] = (boolean) Return 'YES' decisions in explanation (default: false)
      * $params['include_disk_info']     = (boolean) Return information about disk usage and shard sizes (default: false)
@@ -77,7 +75,6 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cluster\DeleteVotingConfigExclusions');
         $endpoint->setParams($params);
@@ -145,7 +142,6 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function getSettings(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cluster\GetSettings');
         $endpoint->setParams($params);
@@ -191,7 +187,6 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cluster\PendingTasks');
         $endpoint->setParams($params);
@@ -209,7 +204,6 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function postVotingConfigExclusions(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cluster\PostVotingConfigExclusions');
         $endpoint->setParams($params);
@@ -272,7 +266,6 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function remoteInfo(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cluster\RemoteInfo');
         $endpoint->setParams($params);

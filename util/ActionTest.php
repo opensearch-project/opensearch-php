@@ -1,19 +1,18 @@
 <?php
-/**
- * Elasticsearch PHP client
- *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
 
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
 
 namespace OpenSearch\Util;
 
@@ -30,42 +29,42 @@ use stdClass;
 
 class ActionTest
 {
-    const TEMPLATE_ENDPOINT             = __DIR__ . '/template/test/endpoint';
-    const TEMPLATE_MATCH_EQUAL          = __DIR__ . '/template/test/match-equal';
-    const TEMPLATE_MATCH_REGEX          = __DIR__ . '/template/test/match-regex';
-    const TEMPLATE_IS_FALSE             = __DIR__ . '/template/test/is-false';
-    const TEMPLATE_IS_TRUE              = __DIR__ . '/template/test/is-true';
-    const TEMPLATE_IS_NULL              = __DIR__ . '/template/test/is-null';
-    const TEMPLATE_LENGTH               = __DIR__ . '/template/test/length';
-    const TEMPLATE_SKIP_VERSION         = __DIR__ . '/template/test/skip-version';
-    const TEMPLATE_SKIP_FEATURE         = __DIR__ . '/template/test/skip-feature';
-    const TEMPLATE_SKIP_XPACK           = __DIR__ . '/template/test/skip-xpack';
-    const TEMPLATE_SKIP_NODE_SELECTOR   = __DIR__ . '/template/test/skip-node-selector';
-    const TEMPLATE_SKIP_OSS             = __DIR__ . '/template/test/skip-oss';
-    const TEMPLATE_CATCH                = __DIR__ . '/template/test/catch';
-    const TEMPLATE_CATCH_UNAVAILABLE    = __DIR__ . '/template/test/catch-unavailable';
-    const TEMPLATE_CATCH_REGEX          = __DIR__ . '/template/test/catch-regex';
-    const TEMPLATE_SET_VARIABLE         = __DIR__ . '/template/test/set-variable';
-    const TEMPLATE_TRANSFORM_AND_SET    = __DIR__ . '/template/test/transform-and-set';
-    const TEMPLATE_WARNINGS             = __DIR__ . '/template/test/warnings';
-    const TEMPLATE_ALLOWED_WARNINGS     = __DIR__ . '/template/test/allowed-warnings';
-    const TEMPLATE_GT                   = __DIR__ . '/template/test/gt';
-    const TEMPLATE_GTE                  = __DIR__ . '/template/test/gte';
-    const TEMPLATE_LT                   = __DIR__ . '/template/test/lt';
-    const TEMPLATE_LTE                  = __DIR__ . '/template/test/lte';
+    public const TEMPLATE_ENDPOINT             = __DIR__ . '/template/test/endpoint';
+    public const TEMPLATE_MATCH_EQUAL          = __DIR__ . '/template/test/match-equal';
+    public const TEMPLATE_MATCH_REGEX          = __DIR__ . '/template/test/match-regex';
+    public const TEMPLATE_IS_FALSE             = __DIR__ . '/template/test/is-false';
+    public const TEMPLATE_IS_TRUE              = __DIR__ . '/template/test/is-true';
+    public const TEMPLATE_IS_NULL              = __DIR__ . '/template/test/is-null';
+    public const TEMPLATE_LENGTH               = __DIR__ . '/template/test/length';
+    public const TEMPLATE_SKIP_VERSION         = __DIR__ . '/template/test/skip-version';
+    public const TEMPLATE_SKIP_FEATURE         = __DIR__ . '/template/test/skip-feature';
+    public const TEMPLATE_SKIP_XPACK           = __DIR__ . '/template/test/skip-xpack';
+    public const TEMPLATE_SKIP_NODE_SELECTOR   = __DIR__ . '/template/test/skip-node-selector';
+    public const TEMPLATE_SKIP_OSS             = __DIR__ . '/template/test/skip-oss';
+    public const TEMPLATE_CATCH                = __DIR__ . '/template/test/catch';
+    public const TEMPLATE_CATCH_UNAVAILABLE    = __DIR__ . '/template/test/catch-unavailable';
+    public const TEMPLATE_CATCH_REGEX          = __DIR__ . '/template/test/catch-regex';
+    public const TEMPLATE_SET_VARIABLE         = __DIR__ . '/template/test/set-variable';
+    public const TEMPLATE_TRANSFORM_AND_SET    = __DIR__ . '/template/test/transform-and-set';
+    public const TEMPLATE_WARNINGS             = __DIR__ . '/template/test/warnings';
+    public const TEMPLATE_ALLOWED_WARNINGS     = __DIR__ . '/template/test/allowed-warnings';
+    public const TEMPLATE_GT                   = __DIR__ . '/template/test/gt';
+    public const TEMPLATE_GTE                  = __DIR__ . '/template/test/gte';
+    public const TEMPLATE_LT                   = __DIR__ . '/template/test/lt';
+    public const TEMPLATE_LTE                  = __DIR__ . '/template/test/lte';
 
     // --- PHPUNIT 9 TEMPLATE ---
-    const TEMPLATE_PHPUNIT9_MATCH_REGEX = __DIR__ . '/template/test/match-regex-9';
-    const TEMPLATE_PHPUNIT9_CATCH_REGEX = __DIR__ . '/template/test/catch-regex-9';
+    public const TEMPLATE_PHPUNIT9_MATCH_REGEX = __DIR__ . '/template/test/match-regex-9';
+    public const TEMPLATE_PHPUNIT9_CATCH_REGEX = __DIR__ . '/template/test/catch-regex-9';
 
-    const TAB14                 = '              ';
-    const SUPPORTED_FEATURES    = [
-        'xpack', 
-        'no_xpack', 
-        'headers', 
-        'node_selector', 
-        'warnings', 
-        'catch_unauthorized', 
+    public const TAB14                 = '              ';
+    public const SUPPORTED_FEATURES    = [
+        'xpack',
+        'no_xpack',
+        'headers',
+        'node_selector',
+        'warnings',
+        'catch_unauthorized',
         'transform_and_set',
         'allowed_warnings'
     ];
@@ -79,7 +78,7 @@ class ActionTest
     public function __construct(array $steps)
     {
         $this->phpUnitVersion = (int) explode('.', PHPUnitVersion::id())[0];
-        
+
         foreach ($steps as $step) {
             foreach ($step as $name => $actions) {
                 if (method_exists($this, $name) && !$this->skippedTest) {
@@ -121,7 +120,7 @@ class ActionTest
                     $params = $this->convertStdClass($params); // convert "stdClass::__set_state(array())" in "(object)[]"
                 }
                 $vars[':endpoint'] = $this->convertDotToArrow($key);
-                $vars[':params']   = str_replace("\n","\n" . self::TAB14, $params);
+                $vars[':params']   = str_replace("\n", "\n" . self::TAB14, $params);
             }
         }
         return YamlTests::render(self::TEMPLATE_ENDPOINT, $vars);
@@ -178,8 +177,8 @@ class ActionTest
             case 'bad_request':
                 $expectedException = BadRequest400Exception::class;
                 break;
-            case 'unauthorized':  
-                $expectedException = Unauthorized401Exception::class;  
+            case 'unauthorized':
+                $expectedException = Unauthorized401Exception::class;
                 break;
             case 'forbidden':
                 $expectedException = Forbidden403Exception::class;
@@ -240,7 +239,7 @@ class ActionTest
         if (is_string($actions[$key]) && substr($actions[$key], 0, 1) !== '$') {
             $expected = sprintf("'%s'", addslashes($actions[$key]));
         } elseif (is_string($actions[$key]) && substr($actions[$key], 0, 2) === '${') {
-            $expected = sprintf("\$%s", substr($actions[$key],2, strlen($actions[$key])-3));
+            $expected = sprintf("\$%s", substr($actions[$key], 2, strlen($actions[$key])-3));
         } elseif (is_bool($actions[$key])) {
             $expected = $actions[$key] ? 'true' : 'false';
         } elseif (is_array($actions[$key])) {
@@ -257,7 +256,7 @@ class ActionTest
             // Add /sx preg modifier to ignore whitespace
             $vars[':expected'] .= "sx";
             return YamlTests::render(
-                ($this->phpUnitVersion > 8) ? (self::TEMPLATE_PHPUNIT9_MATCH_REGEX) : (self::TEMPLATE_MATCH_REGEX), 
+                ($this->phpUnitVersion > 8) ? (self::TEMPLATE_PHPUNIT9_MATCH_REGEX) : (self::TEMPLATE_MATCH_REGEX),
                 $vars
             );
         }
@@ -267,7 +266,7 @@ class ActionTest
         return YamlTests::render(self::TEMPLATE_MATCH_EQUAL, $vars);
     }
 
-    private function is_true(string $value) 
+    private function is_true(string $value)
     {
         $vars = [
             ':value' => $this->convertResponseField($value)
@@ -275,7 +274,7 @@ class ActionTest
         return YamlTests::render(self::TEMPLATE_IS_TRUE, $vars);
     }
 
-    private function is_false(string $value) 
+    private function is_false(string $value)
     {
         $vars = [
             ':value' => $this->convertResponseField($value)
@@ -286,7 +285,7 @@ class ActionTest
     private function length(array $actions)
     {
         $key = key($actions);
-       
+
         return YamlTests::render(self::TEMPLATE_LENGTH, [
             ':expected' => (int) $actions[$key],
             ':value'    => $this->convertResponseField($key)
@@ -297,7 +296,7 @@ class ActionTest
     {
         if (isset($actions['version']) && isset($actions['reason'])) {
             // Extract version compare constrain
-            $version = explode ('-', $actions['version']);
+            $version = explode('-', $actions['version']);
             $version = array_map('trim', $version);
             if (empty($version[0])) {
                 $version[0] = '0';
@@ -305,7 +304,7 @@ class ActionTest
             if (empty($version[1])) {
                 $version[1] = sprintf("%s", PHP_INT_MAX);
             }
-            if (strtolower($version[0]) === 'all' || 
+            if (strtolower($version[0]) === 'all' ||
                (version_compare(YamlTests::$esVersion, $version[0], '>=') && version_compare(YamlTests::$esVersion, $version[1], '<='))
             ) {
                 $this->skippedTest = true;
@@ -327,25 +326,24 @@ class ActionTest
                     ]);
                 }
                 switch ($feature) {
-                    case 'xpack': 
+                    case 'xpack':
                         if (YamlTests::$testSuite !== 'platinum') {
                             $this->skippedTest = true;
                             return YamlTests::render(self::TEMPLATE_SKIP_XPACK, [
                                 ':testname' => "__CLASS__ . '::' . __FUNCTION__"
                             ]);
-                        } 
+                        }
                         break;
-                    case 'no_xpack': 
+                    case 'no_xpack':
                         if (YamlTests::$testSuite !== 'free') {
                             $this->skippedTest = true;
                             return YamlTests::render(self::TEMPLATE_SKIP_OSS, [
                                 ':testname' => "__CLASS__ . '::' . __FUNCTION__"
                             ]);
-                        } 
+                        }
                         break;
                 }
             }
-
         }
     }
 
@@ -406,7 +404,7 @@ class ActionTest
 
     private function removeObjectFromArray(array $array): array
     {
-        array_walk_recursive($array, function(&$value, $key) {
+        array_walk_recursive($array, function (&$value, $key) {
             if (is_object($value)) {
                 $value = (array) $value;
             }
@@ -416,7 +414,7 @@ class ActionTest
 
     private function convertDotToArrow(string $dot)
     {
-        $result = str_replace ('.', '()->', $dot);
+        $result = str_replace('.', '()->', $dot);
         $tot = strlen($result);
         for ($i = 0; $i < $tot; $i++) {
             if ($result[$i] === '_' && ($i+1) < $tot) {
@@ -425,7 +423,7 @@ class ActionTest
         }
         return str_replace('_', '', $result);
     }
-    
+
     private function convertResponseField(string $field): string
     {
         $output = '$response';
@@ -437,11 +435,11 @@ class ActionTest
             $field = substr($field, 1);
         }
         # Remove \. from $field
-        $field = str_replace ('\.', chr(200), $field);
+        $field = str_replace('\.', chr(200), $field);
         $parts = explode('.', $field);
         foreach ($parts as $part) {
             # Replace \. in $part
-            $part = str_replace (chr(200), '.', $part);
+            $part = str_replace(chr(200), '.', $part);
             if (is_int($part)) {
                 $output .= sprintf("[%d]", $part);
             } else {
@@ -450,11 +448,10 @@ class ActionTest
         }
         return $output;
     }
-    
+
     private function convertDollarValueInVariable(string $value): string
     {
         foreach ($this->variables as $var) {
-            
             $value = str_replace("\${{$var}}", "\$$var", $value);
             $value = str_replace("'\$$var'", "\$$var", $value);
             if (preg_match("/'[^']*\\\${$var}[^']*',/", $value)) {
@@ -478,7 +475,7 @@ class ActionTest
             $matches[2][0] = str_replace('/', '\/', $matches[2][0]);
             return sprintf("%s%s%s", $matches[1][0], $matches[2][0], $matches[3][0]);
         }
-        
+
         return $regex;
     }
 

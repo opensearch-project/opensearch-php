@@ -1,18 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-declare(strict_types = 1);
 
 namespace OpenSearch;
 
@@ -59,7 +58,7 @@ use OpenSearch\Namespaces\WatcherNamespace;
  */
 class Client
 {
-    const VERSION = '7.10.0';
+    public const VERSION = '7.10.0';
 
     /**
      * @var Transport
@@ -85,47 +84,47 @@ class Client
      * @var CatNamespace
      */
     protected $cat;
-    
+
     /**
      * @var ClusterNamespace
      */
     protected $cluster;
-    
+
     /**
      * @var DanglingIndicesNamespace
      */
     protected $danglingIndices;
-    
+
     /**
      * @var IndicesNamespace
      */
     protected $indices;
-    
+
     /**
      * @var IngestNamespace
      */
     protected $ingest;
-    
+
     /**
      * @var NodesNamespace
      */
     protected $nodes;
-    
+
     /**
      * @var SnapshotNamespace
      */
     protected $snapshot;
-    
+
     /**
      * @var TasksNamespace
      */
     protected $tasks;
-    
+
     /**
      * @var AsyncSearchNamespace
      */
     protected $asyncSearch;
-    
+
     /**
      * @var AutoscalingNamespace
      */
@@ -135,77 +134,77 @@ class Client
      * @var DataFrameTransformDeprecatedNamespace
      */
     protected $dataFrameTransformDeprecated;
-    
+
     /**
      * @var EnrichNamespace
      */
     protected $enrich;
-    
+
     /**
      * @var EqlNamespace
      */
     protected $eql;
-    
+
     /**
      * @var GraphNamespace
      */
     protected $graph;
-    
+
     /**
      * @var IlmNamespace
      */
     protected $ilm;
-    
+
     /**
      * @var LicenseNamespace
      */
     protected $license;
-    
+
     /**
      * @var MigrationNamespace
      */
     protected $migration;
-    
+
     /**
      * @var MonitoringNamespace
      */
     protected $monitoring;
-    
+
     /**
      * @var RollupNamespace
      */
     protected $rollup;
-    
+
     /**
      * @var SearchableSnapshotsNamespace
      */
     protected $searchableSnapshots;
-    
+
     /**
      * @var SecurityNamespace
      */
     protected $security;
-    
+
     /**
      * @var SlmNamespace
      */
     protected $slm;
-    
+
     /**
      * @var SqlNamespace
      */
     protected $sql;
-    
+
     /**
      * @var SslNamespace
      */
     protected $ssl;
-    
+
     /**
      * @var TransformNamespace
      */
     protected $transform;
-    
+
     /**
      * @var WatcherNamespace
      */
@@ -709,7 +708,6 @@ class Client
      */
     public function getScriptContext(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('GetScriptContext');
         $endpoint->setParams($params);
@@ -727,7 +725,6 @@ class Client
      */
     public function getScriptLanguages(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('GetScriptLanguages');
         $endpoint->setParams($params);
@@ -813,7 +810,6 @@ class Client
      */
     public function info(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Info');
         $endpoint->setParams($params);

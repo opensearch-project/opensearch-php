@@ -1,18 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-declare(strict_types = 1);
 
 namespace OpenSearch\Namespaces;
 
@@ -24,7 +23,6 @@ use OpenSearch\Namespaces\AbstractNamespace;
  */
 class SecurityNamespace extends AbstractNamespace
 {
-
     /**
      *
      * @param array $params Associative array of parameters
@@ -33,7 +31,6 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function authenticate(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\Authenticate');
         $endpoint->setParams($params);
@@ -284,7 +281,6 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getApiKey(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\GetApiKey');
         $endpoint->setParams($params);
@@ -299,7 +295,6 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getBuiltinPrivileges(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\GetBuiltinPrivileges');
         $endpoint->setParams($params);
@@ -407,7 +402,6 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getUserPrivileges(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\GetUserPrivileges');
         $endpoint->setParams($params);

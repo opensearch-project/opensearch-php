@@ -1,20 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
  *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-
-
-declare(strict_types = 1);
 
 namespace OpenSearch\Tests;
 
@@ -30,13 +27,13 @@ class ClientBuilderTest extends TestCase
     public function testClientBuilderThrowsExceptionForIncorrectLoggerClass()
     {
         $this->expectException(\TypeError::class);
-        ClientBuilder::create()->setLogger(new DummyLogger);
+        ClientBuilder::create()->setLogger(new DummyLogger());
     }
 
     public function testClientBuilderThrowsExceptionForIncorrectTracerClass()
     {
         $this->expectException(\TypeError::class);
-        ClientBuilder::create()->setTracer(new DummyLogger);
+        ClientBuilder::create()->setTracer(new DummyLogger());
     }
 
     /**
@@ -185,11 +182,11 @@ class ClientBuilderTest extends TestCase
             $this->assertEquals(
                 1,
                 preg_match(
-                    '/^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$/', 
+                    '/^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$/',
                     $request['request']['headers']['x-elastic-client-meta'][0]
                 )
             );
-        }    
+        }
     }
 
     public function testElasticClientMetaHeaderIsSentWhenEnabled()
@@ -207,11 +204,11 @@ class ClientBuilderTest extends TestCase
             $this->assertEquals(
                 1,
                 preg_match(
-                    '/^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$/', 
+                    '/^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$/',
                     $request['request']['headers']['x-elastic-client-meta'][0]
                 )
             );
-        }    
+        }
     }
 
     public function testElasticClientMetaHeaderIsNotSentWhenDisabled()
@@ -226,7 +223,7 @@ class ClientBuilderTest extends TestCase
         } catch (OpenSearchException $e) {
             $request = $client->transport->getLastConnection()->getLastRequestInfo();
             $this->assertFalse(isset($request['request']['headers']['x-elastic-client-meta']));
-        }    
+        }
     }
 
     public function getCompatibilityHeaders()
@@ -248,7 +245,7 @@ class ClientBuilderTest extends TestCase
 
         $client = ClientBuilder::create()
             ->build();
-        
+
         try {
             $result = $client->info();
         } catch (OpenSearchException $e) {
@@ -260,20 +257,20 @@ class ClientBuilderTest extends TestCase
                 $this->assertNotContains('application/vnd.elasticsearch+json;compatible-with=7', $request['request']['headers']['Content-Type']);
                 $this->assertNotContains('application/vnd.elasticsearch+json;compatible-with=7', $request['request']['headers']['Accept']);
             }
-        }    
+        }
     }
 
     public function testCompatibilityHeaderDefaultIsOff()
     {
         $client = ClientBuilder::create()
             ->build();
-        
+
         try {
             $result = $client->info();
         } catch (OpenSearchException $e) {
             $request = $client->transport->getLastConnection()->getLastRequestInfo();
             $this->assertNotContains('application/vnd.elasticsearch+json;compatible-with=7', $request['request']['headers']['Content-Type']);
             $this->assertNotContains('application/vnd.elasticsearch+json;compatible-with=7', $request['request']['headers']['Accept']);
-        }    
+        }
     }
 }

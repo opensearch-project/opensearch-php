@@ -1,20 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-
-
-declare(strict_types = 1);
 
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\Tests\Utility;
@@ -38,12 +35,12 @@ printf("Executing %s...\n", basename(__FILE__));
 
 $client = Utility::getClient();
 
-printf ("Getting the Elasticsearch build_hash:\n");
+printf("Getting the Elasticsearch build_hash:\n");
 try {
     $serverInfo = $client->info();
     print_r($serverInfo);
 } catch (NoNodesAvailableException $e) {
-    printf ("ERROR: Host %s is offline\n", Utility::getHost());
+    printf("ERROR: Host %s is offline\n", Utility::getHost());
     exit(1);
 }
 
@@ -55,7 +52,7 @@ if (!file_exists($tempFilePath)) {
     // Download of Elasticsearch rest-api artifacts
     $json = file_get_contents("https://artifacts-api.elastic.co/v1/versions/$version");
     if (empty($json)) {
-        printf ("ERROR: I cannot download the artifcats from https://artifacts-api.elastic.co/v1/versions/%s\n", $version);
+        printf("ERROR: I cannot download the artifcats from https://artifacts-api.elastic.co/v1/versions/%s\n", $version);
         exit(1);
     }
     $content = json_decode($json, true);
@@ -64,7 +61,7 @@ if (!file_exists($tempFilePath)) {
             // Download the artifact ZIP file (rest-resources-zip-$version.zip)
             printf("Download %s\n", $builds['projects']['elasticsearch']['packages'][$artifactFile]['url']);
             if (!copy($builds['projects']['elasticsearch']['packages'][$artifactFile]['url'], $tempFilePath)) {
-                printf ("ERROR: failed to download %s\n", $artifactFile);
+                printf("ERROR: failed to download %s\n", $artifactFile);
             }
             break;
         }
@@ -83,4 +80,4 @@ printf("Extracting %s\ninto %s/rest-spec/%s\n", $tempFilePath, __DIR__, $serverI
 $zip->extractTo(sprintf("%s/rest-spec/%s", __DIR__, $serverInfo['version']['build_hash']));
 $zip->close();
 
-printf ("Rest-spec API installed successfully!\n\n");
+printf("Rest-spec API installed successfully!\n\n");

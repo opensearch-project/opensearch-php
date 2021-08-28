@@ -1,19 +1,18 @@
 <?php
-/**
- * Elasticsearch PHP client
- *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
 
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
 
 namespace OpenSearch\Util;
 
@@ -28,20 +27,21 @@ use function yaml_parse;
 
 class YamlTests
 {
-    const TEMPLATE_UNIT_TEST_OSS     = __DIR__ . '/template/test/unit-test-oss';
-    const TEMPLATE_UNIT_TEST_SKIPPED = __DIR__ . '/template/test/unit-test-skipped';
-    const TEMPLATE_FUNCTION_TEST     = __DIR__ . '/template/test/function-test';
-    const TEMPLATE_FUNCTION_SKIPPED  = __DIR__ . '/template/test/function-skipped';
-    const ELASTICSEARCH_GIT_URL      = 'https://github.com/elastic/elasticsearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s';
+    public const TEMPLATE_UNIT_TEST_OSS     = __DIR__ . '/template/test/unit-test-oss';
+    public const TEMPLATE_UNIT_TEST_XPACK   = __DIR__ . '/template/test/unit-test-xpack';
+    public const TEMPLATE_UNIT_TEST_SKIPPED = __DIR__ . '/template/test/unit-test-skipped';
+    public const TEMPLATE_FUNCTION_TEST     = __DIR__ . '/template/test/function-test';
+    public const TEMPLATE_FUNCTION_SKIPPED  = __DIR__ . '/template/test/function-skipped';
+    public const ELASTICSEARCH_GIT_URL      = 'https://github.com/elastic/elasticsearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s';
 
-    const SKIPPED_TEST_OSS = [
+    public const SKIPPED_TEST_OSS = [
         'Cat\Nodeattrs\_10_BasicTest::TestCatNodesAttrsOutput' => 'Regexp error, it seems not compatible with PHP',
         'Cat\Shards\_10_BasicTest::TestCatShardsOutput' => 'Regexp error, it seems not compatible with PHP',
         'Search\Aggregation\_10_HistogramTest::HistogramProfiler' => "Error reading 'n' field from YAML",
         'Indices\GetAlias\_10_BasicTest::GetAliasAgainstClosedIndices' => 'Failed asserting that true is false'
     ];
 
-    const SKIPPED_TEST_XPACK = [
+    public const SKIPPED_TEST_XPACK = [
         'DataStream\_80_Resolve_Index_Data_StreamsTest::*' => 'Skipped all tests',
         'License\_20_Put_LicenseTest::CurrentLicenseIsTrialMeansNotEligleToStartTrial' => 'License issue',
         'License\_20_Put_LicenseTest::MustAcknowledgeToStartBasic' => 'License issue',
@@ -82,7 +82,7 @@ class YamlTests
         'Vectors\_30_Sparse_Vector_BasicTest::DeprecatedFunctionSignature' => 'Failed asserting contains string',
     ];
 
-    const PHP_RESERVED_WORDS     = [
+    public const PHP_RESERVED_WORDS     = [
         'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch',
         'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do',
         'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach',
@@ -93,7 +93,7 @@ class YamlTests
         'protected', 'public', 'require', 'require_once', 'return', 'static',
         'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor'
     ];
-    
+
     private $tests = [];
     private $testOutput;
     private $testDir;
@@ -120,7 +120,7 @@ class YamlTests
         $this->tests = $this->getAllTests($testDir);
 
         self::$esVersion = $esVersion;
-        list($major, $minor, $patch) = explode('.',self::$esVersion);
+        list($major, $minor, $patch) = explode('.', self::$esVersion);
         self::$minorEsVersion = sprintf("%s.%s", $major, $minor);
     }
 
@@ -132,8 +132,8 @@ class YamlTests
         foreach (new RecursiveIteratorIterator($it) as $file) {
             if ($file->getExtension() === 'yml') {
                 $test = yaml_parse_file($file->getPathname(), -1, $ndocs, [
-                    YAML_MAP_TAG => function($value, $tag, $flags) {
-                        return empty($value) ? new stdClass : $value;
+                    YAML_MAP_TAG => function ($value, $tag, $flags) {
+                        return empty($value) ? new stdClass() : $value;
                     }
                 ]);
                 if (false === $test) {
@@ -158,9 +158,9 @@ class YamlTests
             $yamlFileName = substr($testFile, strlen($this->testDir) + 1);
 
             # Delete and create the output directory
-            $testDirName = sprintf("%s/%s", $this->testOutput, str_replace ('\\', '/', $namespace));
+            $testDirName = sprintf("%s/%s", $this->testOutput, str_replace('\\', '/', $namespace));
             if (!is_dir($testDirName)) {
-                mkdir ($testDirName, 0777, true);
+                mkdir($testDirName, 0777, true);
             }
 
             $functions = '';
@@ -183,28 +183,28 @@ class YamlTests
                         default:
                             $functionName = $this->filterFunctionName(ucwords($name), $alreadyAssignedNames);
                             $alreadyAssignedNames[] = $functionName;
-                            
+
                             $skippedTest = sprintf("%s\\%s::%s", $namespace, $testName, $functionName);
                             $skippedAllTest = sprintf("%s\\%s::*", $namespace, $testName);
                             $skippedAllFiles = sprintf("%s\\*", $namespace);
-                            $skip = strtolower(self::$testSuite) === 'free' 
-                                ? self::SKIPPED_TEST_OSS 
+                            $skip = strtolower(self::$testSuite) === 'free'
+                                ? self::SKIPPED_TEST_OSS
                                 : self::SKIPPED_TEST_XPACK;
                             if (isset($skip[$skippedAllFiles]) || isset($skip[$skippedAllTest])) {
                                 $allSkipped = true;
                                 $functions .= self::render(
                                     self::TEMPLATE_FUNCTION_SKIPPED,
-                                    [ 
+                                    [
                                         ':name' => $functionName,
-                                        ':skipped_msg'  => $skip[$skippedAllTest] 
+                                        ':skipped_msg'  => $skip[$skippedAllTest]
                                     ]
                                 );
                             } elseif (isset($skip[$skippedTest])) {
                                 $functions .= self::render(
                                     self::TEMPLATE_FUNCTION_SKIPPED,
-                                    [ 
+                                    [
                                         ':name' => $functionName,
-                                        ':skipped_msg'  => $skip[$skippedTest] 
+                                        ':skipped_msg'  => $skip[$skippedTest]
                                     ]
                                 );
                             } else {
@@ -233,7 +233,9 @@ class YamlTests
                 );
             } else {
                 $test = self::render(
-                    self::TEMPLATE_UNIT_TEST_OSS,
+                    strtolower(self::$testSuite) === 'free'
+                        ? self::TEMPLATE_UNIT_TEST_OSS
+                        : self::TEMPLATE_UNIT_TEST_XPACK,
                     [
                         ':namespace' => sprintf("Elasticsearch\Tests\Yaml\%s\%s", self::$testSuite, $namespace),
                         ':test-name' => $testName,
@@ -273,14 +275,13 @@ class YamlTests
         $namespace = str_replace(['.', '_', '/', '-'], ['\\', '', '\\', ''], ucwords($namespace, '.'));
 
         // Check if a PHP reserved word is present in the namespace
-        $parts = explode ('\\', $namespace);
+        $parts = explode('\\', $namespace);
         foreach ($parts as $part) {
             if (in_array(strtolower($part), self::PHP_RESERVED_WORDS)) {
-                $namespace = str_replace ($part, $part . '_', $namespace);
+                $namespace = str_replace($part, $part . '_', $namespace);
             }
         }
         return $namespace;
-
     }
 
     private function extractTestName(string $path): string
@@ -319,9 +320,8 @@ class YamlTests
 
     private function removeDirectory($directory)
     {
-        foreach(glob("{$directory}/*") as $file)
-        {
-            if(is_dir($file)) { 
+        foreach (glob("{$directory}/*") as $file) {
+            if (is_dir($file)) {
                 $this->removeDirectory($file);
             } else {
                 unlink($file);

@@ -31,5 +31,3 @@ https://www.php-fig.org/psr/psr-7/[PSR 7 standard documentation].
 
 
 include::community.asciidoc[]
-
-include::breaking-changes.asciidoc[]

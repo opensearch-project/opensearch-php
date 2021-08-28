@@ -1,18 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-declare(strict_types = 1);
 
 namespace OpenSearch\Namespaces;
 
@@ -24,10 +23,8 @@ use OpenSearch\Namespaces\AbstractNamespace;
  */
 class LicenseNamespace extends AbstractNamespace
 {
-
     public function delete(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('License\Delete');
         $endpoint->setParams($params);
@@ -44,7 +41,6 @@ class LicenseNamespace extends AbstractNamespace
      */
     public function get(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('License\Get');
         $endpoint->setParams($params);
@@ -59,7 +55,6 @@ class LicenseNamespace extends AbstractNamespace
      */
     public function getBasicStatus(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('License\GetBasicStatus');
         $endpoint->setParams($params);
@@ -74,7 +69,6 @@ class LicenseNamespace extends AbstractNamespace
      */
     public function getTrialStatus(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('License\GetTrialStatus');
         $endpoint->setParams($params);
@@ -109,7 +103,6 @@ class LicenseNamespace extends AbstractNamespace
      */
     public function postStartBasic(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('License\PostStartBasic');
         $endpoint->setParams($params);
@@ -126,7 +119,6 @@ class LicenseNamespace extends AbstractNamespace
      */
     public function postStartTrial(array $params = [])
     {
-
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('License\PostStartTrial');
         $endpoint->setParams($params);

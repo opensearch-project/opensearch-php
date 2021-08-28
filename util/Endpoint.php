@@ -1,19 +1,18 @@
 <?php
-/**
- * Elasticsearch PHP client
- *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1 
- * 
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
 
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
+ */
 
 namespace OpenSearch\Util;
 
@@ -22,15 +21,15 @@ use JsonException;
 
 class Endpoint
 {
-    const ENDPOINT_CLASS_TEMPLATE      = __DIR__ . '/template/endpoint-class';
-    const ENDPOINT_BULK_CLASS_TEMPLATE = __DIR__ . '/template/endpoint-bulk-class';
-    const REQUIRED_PART_TEMPLATE       = __DIR__ . '/template/required-part';
-    const SET_PART_TEMPLATE            = __DIR__ . '/template/set-part';
-    const SET_PART_LIST_TEMPLATE       = __DIR__ . '/template/set-part-list';
-    const CHECK_OPTIONS_TEMPLATE       = __DIR__ . '/template/check-options';
-    const SET_BULK_BODY_TEMPLATE       = __DIR__ . '/template/set-bulk-body';
-    const DEPRECATED_PART              = __DIR__ . '/template/deprecated';
-    const PHP_RESERVED_WORDS = [
+    public const ENDPOINT_CLASS_TEMPLATE      = __DIR__ . '/template/endpoint-class';
+    public const ENDPOINT_BULK_CLASS_TEMPLATE = __DIR__ . '/template/endpoint-bulk-class';
+    public const REQUIRED_PART_TEMPLATE       = __DIR__ . '/template/required-part';
+    public const SET_PART_TEMPLATE            = __DIR__ . '/template/set-part';
+    public const SET_PART_LIST_TEMPLATE       = __DIR__ . '/template/set-part-list';
+    public const CHECK_OPTIONS_TEMPLATE       = __DIR__ . '/template/check-options';
+    public const SET_BULK_BODY_TEMPLATE       = __DIR__ . '/template/set-bulk-body';
+    public const DEPRECATED_PART              = __DIR__ . '/template/deprecated';
+    public const PHP_RESERVED_WORDS = [
         'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch',
         'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do',
         'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach',
@@ -42,7 +41,7 @@ class Endpoint
         'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor'
     ];
     // this is for backward compatibility with elasticsearch-php 7.x
-    const BC_CLASS_NAME = [
+    public const BC_CLASS_NAME = [
         'Cat\Nodeattrs'      => 'NodeAttrs',
         'Indices\Forcemerge' => 'ForceMerge',
         'Mtermvectors'       => 'MTermVectors',
@@ -68,9 +67,9 @@ class Endpoint
      * @param $buildhash Elasticsearch build hash of the API specification
      */
     public function __construct(
-        string $fileName, 
-        string $content, 
-        string $version, 
+        string $fileName,
+        string $content,
+        string $version,
         string $buildhash
     ) {
         $this->apiName = basename($fileName, '.json');
@@ -351,7 +350,7 @@ class Endpoint
     {
         $urls = $this->removePathWithSameParts($paths);
         // Order the url based on descendant length
-        usort($urls, function($a,$b){
+        usort($urls, function ($a, $b) {
             return strlen($b)-strlen($a);
         });
 

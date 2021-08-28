@@ -1,20 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Elasticsearch PHP client
+ * SPDX-License-Identifier: Apache-2.0
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
  *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
-
-
-declare(strict_types = 1);
 
 namespace OpenSearch;
 
@@ -195,7 +192,7 @@ class ClientBuilder
      */
     public static function fromConfig(array $config, bool $quiet = false): Client
     {
-        $builder = new static;
+        $builder = new static();
         foreach ($config as $key => $value) {
             $method = "set$key";
             $reflection = new ReflectionClass($builder);
@@ -219,7 +216,7 @@ class ClientBuilder
 
     /**
      * Get the default handler
-     * 
+     *
      * @param array $multiParams
      * @param array $singleParams
      * @throws \RuntimeException
@@ -244,7 +241,7 @@ class ClientBuilder
 
     /**
      * Get the multi handler for async (CurlMultiHandler)
-     * 
+     *
      * @throws \RuntimeException
      */
     public static function multiHandler(array $params = []): CurlMultiHandler
@@ -258,7 +255,7 @@ class ClientBuilder
 
     /**
      * Get the handler instance (CurlHandler)
-     * 
+     *
      * @throws \RuntimeException
      */
     public static function singleHandler(): CurlHandler
@@ -272,7 +269,7 @@ class ClientBuilder
 
     /**
      * Set connection Factory
-     * 
+     *
      * @param ConnectionFactoryInterface $connectionFactory
      */
     public function setConnectionFactory(ConnectionFactoryInterface $connectionFactory): ClientBuilder
@@ -284,7 +281,7 @@ class ClientBuilder
 
     /**
      * Set the connection pool (default is StaticNoPingConnectionPool)
-     * 
+     *
      * @param  AbstractConnectionPool|string $connectionPool
      * @param array $args
      * @throws \InvalidArgumentException
@@ -305,7 +302,7 @@ class ClientBuilder
 
     /**
      * Set the endpoint
-     * 
+     *
      * @param callable $endpoint
      */
     public function setEndpoint(callable $endpoint): ClientBuilder
@@ -317,7 +314,7 @@ class ClientBuilder
 
     /**
      * Register namespace
-     * 
+     *
      * @param NamespaceBuilderInterface $namespaceBuilder
      */
     public function registerNamespace(NamespaceBuilderInterface $namespaceBuilder): ClientBuilder
@@ -329,7 +326,7 @@ class ClientBuilder
 
     /**
      * Set the transport
-     * 
+     *
      * @param Transport $transport
      */
     public function setTransport(Transport $transport): ClientBuilder
@@ -341,7 +338,7 @@ class ClientBuilder
 
     /**
      * Set the HTTP handler (cURL is default)
-     * 
+     *
      * @param  mixed $handler
      */
     public function setHandler($handler): ClientBuilder
@@ -353,7 +350,7 @@ class ClientBuilder
 
     /**
      * Set the PSR-3 Logger
-     * 
+     *
      * @param LoggerInterface $logger
      */
     public function setLogger(LoggerInterface $logger): ClientBuilder
@@ -365,7 +362,7 @@ class ClientBuilder
 
     /**
      * Set the PSR-3 tracer
-     * 
+     *
      * @param LoggerInterface $tracer
      */
     public function setTracer(LoggerInterface $tracer): ClientBuilder
@@ -377,7 +374,7 @@ class ClientBuilder
 
     /**
      * Set the serializer
-     * 
+     *
      * @param \OpenSearch\Serializers\SerializerInterface|string $serializer
      */
     public function setSerializer($serializer): ClientBuilder
@@ -389,7 +386,7 @@ class ClientBuilder
 
     /**
      * Set the hosts (nodes)
-     * 
+     *
      * @param array $hosts
      */
     public function setHosts(array $hosts): ClientBuilder
@@ -424,7 +421,7 @@ class ClientBuilder
 
     /**
      * Set connection parameters
-     * 
+     *
      * @param array $params
      */
     public function setConnectionParams(array $params): ClientBuilder
@@ -436,7 +433,7 @@ class ClientBuilder
 
     /**
      * Set number or retries (default is equal to number of nodes)
-     * 
+     *
      * @param int $retries
      */
     public function setRetries(int $retries): ClientBuilder
@@ -448,7 +445,7 @@ class ClientBuilder
 
     /**
      * Set the selector algorithm
-     * 
+     *
      * @param \OpenSearch\ConnectionPool\Selectors\SelectorInterface|string $selector
      */
     public function setSelector($selector): ClientBuilder
@@ -459,8 +456,8 @@ class ClientBuilder
     }
 
     /**
-     * Set sniff on start 
-     * 
+     * Set sniff on start
+     *
      * @param bool $sniffOnStart enable or disable sniff on start
      */
 
@@ -473,7 +470,7 @@ class ClientBuilder
 
     /**
      * Set SSL certificate
-     * 
+     *
      * @param string $cert The name of a file containing a PEM formatted certificate.
      * @param string $password if the certificate requires a password
      */
@@ -486,7 +483,7 @@ class ClientBuilder
 
     /**
      * Set SSL key
-     * 
+     *
      * @param string $key The name of a file containing a private SSL key
      * @param string $password if the private key requires a password
      */
@@ -498,8 +495,8 @@ class ClientBuilder
     }
 
     /**
-     * Set SSL verification 
-     * 
+     * Set SSL verification
+     *
      * @param bool|string $value
      */
     public function setSSLVerification($value = true): ClientBuilder
@@ -571,7 +568,7 @@ class ClientBuilder
         if (is_null($this->serializer)) {
             $this->serializer = new SmartSerializer();
         } elseif (is_string($this->serializer)) {
-            $this->serializer = new $this->serializer;
+            $this->serializer = new $this->serializer();
         }
 
         $this->connectionParams['client']['x-elastic-client-meta']= $this->elasticMetaHeader;
@@ -613,7 +610,7 @@ class ClientBuilder
         if (is_null($this->selector)) {
             $this->selector = new RoundRobinSelector();
         } elseif (is_string($this->selector)) {
-            $this->selector = new $this->selector;
+            $this->selector = new $this->selector();
         }
 
         $this->buildTransport();
@@ -623,7 +620,7 @@ class ClientBuilder
 
             $this->endpoint = function ($class) use ($serializer) {
                 $fullPath = '\\OpenSearch\\Endpoints\\' . $class;
-                
+
                 $reflection = new ReflectionClass($fullPath);
                 $constructor = $reflection->getConstructor();
 
@@ -694,7 +691,7 @@ class ClientBuilder
     private function parseStringOrObject($arg, &$destination, $interface): void
     {
         if (is_string($arg)) {
-            $destination = new $arg;
+            $destination = new $arg();
         } elseif (is_object($arg)) {
             $destination = $arg;
         } else {
@@ -791,7 +788,7 @@ class ClientBuilder
         try {
             list($name, $encoded) = explode(':', $cloudId);
             list($uri, $uuids)    = explode('$', base64_decode($encoded));
-            list($es,)            = explode(':', $uuids);
+            list($es, )            = explode(':', $uuids);
 
             return $es . '.' . $uri;
         } catch (\Throwable $t) {
