@@ -1,6 +1,6 @@
 <?php
 
-use Elasticsearch\ClientBuilder;
+use OpenSearch\ClientBuilder;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
