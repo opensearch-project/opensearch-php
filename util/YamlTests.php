@@ -29,7 +29,6 @@ use function yaml_parse;
 class YamlTests
 {
     const TEMPLATE_UNIT_TEST_OSS     = __DIR__ . '/template/test/unit-test-oss';
-    const TEMPLATE_UNIT_TEST_XPACK   = __DIR__ . '/template/test/unit-test-xpack';
     const TEMPLATE_UNIT_TEST_SKIPPED = __DIR__ . '/template/test/unit-test-skipped';
     const TEMPLATE_FUNCTION_TEST     = __DIR__ . '/template/test/function-test';
     const TEMPLATE_FUNCTION_SKIPPED  = __DIR__ . '/template/test/function-skipped';
@@ -234,9 +233,7 @@ class YamlTests
                 );
             } else {
                 $test = self::render(
-                    strtolower(self::$testSuite) === 'free'
-                        ? self::TEMPLATE_UNIT_TEST_OSS
-                        : self::TEMPLATE_UNIT_TEST_XPACK,
+                    self::TEMPLATE_UNIT_TEST_OSS,
                     [
                         ':namespace' => sprintf("Elasticsearch\Tests\Yaml\%s\%s", self::$testSuite, $namespace),
                         ':test-name' => $testName,

@@ -1,5 +1,5 @@
 {
-  "name": "opensearch/opensearch",
+  "name": "opensearch-project/opensearch-php",
   "description": "PHP Client for OpenSearch",
   "keywords": ["search","client", "opensearch","elasticsearch"],
   "type": "library",
