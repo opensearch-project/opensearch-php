@@ -18,39 +18,6 @@ This section contains code snippets to show you how to connect to various {es}
 providers.
 
 [discrete]
-[[auth-ec]]
-==== Elastic Cloud
-
-You can connect to Elastic Cloud using **Basic authentication**:
-
-[source,php]
-----
-$client = ClientBuilder::create()
-   ->setElasticCloudId('<cloud-id>')
-   ->setBasicAuthentication('<username>', '<password>')
-   ->build();
-----
-
-Where <cloud-id> is reported in the Deployment UI, and <username>, <password> 
-are generated when you deploy a new cloud instance. You need to store the 
-<username> and <password> since they will not be available via UI.
-
-Or using an **API key**:
-
-[source,php]
-----
-$client = ClientBuilder::create()
-   ->setElasticCloudId('<cloud-id>')
-   ->setApiKey('<id>', '<key>')
-   ->build();
-----
-
-Where <id> and <key> are generated when you create a new API key. The API key is 
-equivalent to Base64(<id>:<key>). You need to store the API key since it will 
-not be available via UI.
-
-
-[discrete]
 [[auth-http]]
 ==== HTTP Authentication
 
@@ -74,25 +41,6 @@ $client = ClientBuilder::create()
 Credentials are provided per-host, which allows each host to have their own set 
 of credentials. All requests sent to the cluster use the appropriate credentials 
 depending on the node being talked to.
-
-
-[discrete]
-[[auth-apikey]]
-==== ApiKey authentication
-
-If your {es} cluster is secured by API keys as described 
-{ref-7x}/security-api-create-api-key.html[here], you can use these values to 
-connect the client with your cluster, as illustrated in the following code 
-snippet.
-
-[source,php]
-----
-$client = ClientBuilder::create()
-                    ->setApiKey('id', 'api_key') <1>
-                    ->build();
-----
-<1> ApiKey pair of `id` and `api_key` from the create API key response.
-
 
 [discrete]
 [[ssl-encryption]]

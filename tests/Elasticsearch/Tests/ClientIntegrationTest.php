@@ -47,9 +47,6 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
     public function setUp(): void
     {
         $this->host = Utility::getHost();
-        if (null == $this->host) {
-            $this->markTestSkipped('I cannot execute integration test without TEST_SUITE env');
-        }
         $this->logger = new ArrayLogger();
     }
 
@@ -59,9 +56,6 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
             ->setHosts([$this->host])
             ->setLogger($this->logger);
 
-        if (getenv('TEST_SUITE') === 'platinum') {
-            $client->setSSLVerification(__DIR__ . '/../../../.ci/certs/ca.crt');
-        }
         return $client->build();
     }
 

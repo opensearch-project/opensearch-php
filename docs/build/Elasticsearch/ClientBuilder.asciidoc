@@ -29,9 +29,7 @@ The class defines the following methods:
 * <<Elasticsearch_ClientBuildersetTracer_setTracer,`setTracer()`>>
 * <<Elasticsearch_ClientBuildersetSerializer_setSerializer,`setSerializer()`>>
 * <<Elasticsearch_ClientBuildersetHosts_setHosts,`setHosts()`>>
-* <<Elasticsearch_ClientBuildersetApiKey_setApiKey,`setApiKey()`>>
 * <<Elasticsearch_ClientBuildersetBasicAuthentication_setBasicAuthentication,`setBasicAuthentication()`>>
-* <<Elasticsearch_ClientBuildersetElasticCloudId_setElasticCloudId,`setElasticCloudId()`>>
 * <<Elasticsearch_ClientBuildersetConnectionParams_setConnectionParams,`setConnectionParams()`>>
 * <<Elasticsearch_ClientBuildersetRetries_setRetries,`setRetries()`>>
 * <<Elasticsearch_ClientBuildersetSelector_setSelector,`setSelector()`>>
@@ -284,20 +282,6 @@ corresponds to setConnectionPool().
 
 
 
-[[Elasticsearch_ClientBuildersetApiKey_setApiKey]]
-.`setApiKey()`
-****
-[source,php]
-----
-/*
-    Set the APIKey Pair, consiting of the API Id and the ApiKey of the Response from /_security/api_key
-*/
-
-----
-****
-
-
-
 [[Elasticsearch_ClientBuildersetBasicAuthentication_setBasicAuthentication]]
 .`setBasicAuthentication()`
 ****
@@ -309,22 +293,6 @@ corresponds to setConnectionPool().
 
 ----
 ****
-
-
-
-[[Elasticsearch_ClientBuildersetElasticCloudId_setElasticCloudId]]
-.`setElasticCloudId()`
-****
-[source,php]
-----
-/*
-    Set Elastic Cloud ID to connect to Elastic Cloud
-*/
-
-----
-****
-
-
 
 [[Elasticsearch_ClientBuildersetConnectionParams_setConnectionParams]]
 .`setConnectionParams()`

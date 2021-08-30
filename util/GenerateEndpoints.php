@@ -83,6 +83,10 @@ $namespaces = [];
 
 // Generate endpoints
 foreach ($files as $file) {
+    if (stripos($file, 'xpack') !== false) {
+        continue;
+    }
+
     if (empty($file) || (basename($file) === '_common.json')) {
         continue;
     }

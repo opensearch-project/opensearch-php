@@ -122,17 +122,17 @@ class ClientBuilder
     /**
      * @var null|array
      */
-    private $sslCert = null;
+    private $sslCert;
 
     /**
      * @var null|array
      */
-    private $sslKey = null;
+    private $sslKey;
 
     /**
      * @var null|bool|string
      */
-    private $sslVerification = null;
+    private $sslVerification;
 
     /**
      * @var bool
@@ -265,9 +265,9 @@ class ClientBuilder
     {
         if (function_exists('curl_reset')) {
             return new CurlHandler();
-        } else {
-            throw new \RuntimeException('CurlSingle handler requires cURL.');
         }
+
+        throw new \RuntimeException('CurlSingle handler requires cURL.');
     }
 
     /**
@@ -400,24 +400,6 @@ class ClientBuilder
     }
 
     /**
-     * Set the APIKey Pair, consiting of the API Id and the ApiKey of the Response from /_security/api_key
-     *
-     * @throws AuthenticationConfigException
-     */
-    public function setApiKey(string $id, string $apiKey): ClientBuilder
-    {
-        if (isset($this->connectionParams['client']['curl'][CURLOPT_HTTPAUTH]) === true) {
-            throw new AuthenticationConfigException("You can't use APIKey - and Basic Authenication together.");
-        }
-
-        $this->connectionParams['client']['headers']['Authorization'] = [
-            'ApiKey ' . base64_encode($id . ':' . $apiKey)
-        ];
-
-        return $this;
-    }
-
-    /**
      * Set Basic access authentication
      *
      * @see https://en.wikipedia.org/wiki/Basic_access_authentication
@@ -428,10 +410,6 @@ class ClientBuilder
      */
     public function setBasicAuthentication(string $username, string $password): ClientBuilder
     {
-        if (isset($this->connectionParams['client']['headers']['Authorization']) === true) {
-            throw new AuthenticationConfigException("You can't use APIKey - and Basic Authenication together.");
-        }
-
         if (isset($this->connectionParams['client']['curl']) === false) {
             $this->connectionParams['client']['curl'] = [];
         }
@@ -440,32 +418,6 @@ class ClientBuilder
             CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
             CURLOPT_USERPWD  => $username.':'.$password
         ];
-
-        return $this;
-    }
-
-    /**
-     * Set Elastic Cloud ID to connect to Elastic Cloud
-     *
-     * @param string $cloudId
-     */
-    public function setElasticCloudId(string $cloudId): ClientBuilder
-    {
-        // Register the Hosts array
-        $this->setHosts(
-            [
-            [
-                'host'   => $this->parseElasticCloudId($cloudId),
-                'port'   => '',
-                'scheme' => 'https',
-            ]
-            ]
-        );
-
-        if (!isset($this->connectionParams['client']['curl'][CURLOPT_ENCODING])) {
-            // Merge best practices for the connection (enable gzip)
-            $this->connectionParams['client']['curl'][CURLOPT_ENCODING] = 'gzip';
-        }
 
         return $this;
     }

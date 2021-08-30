@@ -39,7 +39,7 @@ class Utility
         if (false !== $url) {
             return $url;
         }
-        return 'https://elastic:changeme@localhost:9200';
+        return 'http://elastic:changeme@localhost:9200';
     }
 
     /**
@@ -60,32 +60,6 @@ class Utility
         return $clientBuilder->build();
     }
 
-    /**
-     * Create a "x_pack_rest_user" user, used by some XPack YAML tests
-     */
-    public static function initYamlXPackUsers(Client $client): void
-    {
-        $client->security()->putUser([
-            'username' => 'x_pack_rest_user',
-            'body' => [
-                'password' => 'x-pack-test-password',
-                'roles' => ['superuser']
-            ]
-        ]);
-    }
-
-    /**
-     * Remove the "x_pack_rest_user" user, used by some XPack YAML tests
-     */
-    public static function removeYamlXPackUsers(Client $client): void
-    {
-        $client->security()->deleteUser([
-            'username' => 'x_pack_rest_user',
-            'client' => [
-                'ignore' => 404
-            ]
-        ]);
-    }
 
     private static function getVersion(Client $client): string
     {
@@ -114,10 +88,6 @@ class Utility
      */
     private static function wipeCluster(Client $client): void
     {
-        if (getenv('TEST_SUITE') === 'platinum') {
-            self::wipeRollupJobs($client);
-            self::waitForPendingRollupTasks($client);        
-        }
         if (version_compare(self::getVersion($client), '7.3.99') > 0) {
             self::deleteAllSLMPolicies($client);  
         }
@@ -126,67 +96,24 @@ class Utility
         self::wipeDataStreams($client);
         self::wipeAllIndices($client);
 
-        if (getenv('TEST_SUITE') === 'platinum') {
-            self::wipeTemplateForXpack($client);
-        } else {
-            // Delete templates
-            $client->indices()->deleteTemplate([
+        // Delete templates
+        $client->indices()->deleteTemplate([
+            'name' => '*'
+        ]);
+        try {
+            // Delete index template
+            $client->indices()->deleteIndexTemplate([
                 'name' => '*'
             ]);
-            try {
-                // Delete index template
-                $client->indices()->deleteIndexTemplate([
-                    'name' => '*'
-                ]);
-                // Delete component template
-                $client->cluster()->deleteComponentTemplate([
-                    'name' => '*'
-                ]);
-            } catch (ElasticsearchException $e) {
-                // We hit a version of ES that doesn't support index templates v2 yet, so it's safe to ignore
-            }
+            // Delete component template
+            $client->cluster()->deleteComponentTemplate([
+                'name' => '*'
+            ]);
+        } catch (ElasticsearchException $e) {
+            // We hit a version of ES that doesn't support index templates v2 yet, so it's safe to ignore
         }
 
         self::wipeClusterSettings($client);
-
-        if (getenv('TEST_SUITE') === 'platinum') {
-            self::deleteAllILMPolicies($client);
-            self::deleteAllAutoFollowPatterns($client);
-            self::deleteAllTasks($client);
-        }
-    }
-
-    /**
-     * Delete all the Roolup Jobs for XPack test suite
-     * 
-     * @see ESRestTestCase.java:wipeRollupJobs()
-     */
-    private static function wipeRollupJobs(Client $client): void
-    {
-        # Stop and delete all rollup
-        $rollups = $client->rollup()->getJobs([
-            'id' => '_all'
-        ]);
-        if (isset($rollups['jobs'])) {
-            foreach ($rollups['jobs'] as $job) {
-                $client->rollup()->stopJob([
-                    'id' => $job['config']['id'],
-                    'wait_for_completion' => true,
-                    'timeout' => '10s',
-                    'client' => [
-                        'ignore' => 404
-                    ]
-                ]);
-            }
-            foreach ($rollups['jobs'] as $job) {
-                $client->rollup()->deleteJob([
-                    'id' => $job['config']['id'],
-                    'client' => [
-                        'ignore' => 404
-                    ]
-                ]);
-            }
-        }
     }
 
     /**
@@ -228,41 +155,6 @@ class Utility
                 ]
             ]);
         }
-    }
-
-    /**
-     * Wait for pending rollup tasks containing "xpack/rollup/job"
-     * 
-     * @see ESRestTestCase.java:waitForPendingRollupTasks()
-     */
-    private static function waitForPendingRollupTasks(Client $client): void
-    {
-        self::waitForPendingTasks($client, 'xpack/rollup/job');
-    }
-
-    /**
-     * Wait for pending tasks
-     * 
-     * @see ESRestTestCase.java:waitForPendingTasks()
-     */
-    private static function waitForPendingTasks(Client $client, string $filter, int $timeout = 30): void
-    {
-        $start = time();
-        do {
-            $result = $client->cat()->tasks([
-                'detailed' => true
-            ]);
-            $tasks = explode("\n", $result);
-            $count = 0;
-            foreach ($tasks as $task) {
-                if (empty($task)) {
-                    continue;
-                }
-                if (strpos($task, $filter) !== false) {
-                    $count++;
-                }
-            }
-        } while ($count > 0 && time() < ($start + $timeout));
     }
 
     /**
@@ -331,97 +223,6 @@ class Utility
     }
 
     /**
-     * Delete only templates that xpack doesn't automatically
-     * recreate. Deleting them doesn't hurt anything, but it
-     * slows down the test because xpack will just recreate
-     * them.
-     * 
-     * @see ESRestTestCase.java:wipeCluster()
-     */
-    private static function wipeTemplateForXpack(Client $client): void
-    {
-        if (version_compare(self::getVersion($client), '7.6.99') > 0) {
-            try {
-                $result = $client->indices()->getIndexTemplate();
-                $names = [];
-                foreach ($result['index_templates'] as $template) {
-                    if (self::isXPackTemplate($template['name'])) {
-                        continue;
-                    }
-                    $names[] = $template['name'];
-                }
-                if (!empty($names)) {
-                    if (version_compare(self::getVersion($client), '7.12.99') > 0) {
-                        try {
-                            $client->indices()->deleteIndexTemplate([
-                                'name' => implode(',', $names)
-                            ]);
-                        } catch (ElasticsearchException $e) {
-                            // unable to remove index template
-                        }
-                    } else {
-                        foreach ($names as $name) {
-                            try {
-                                $client->indices()->deleteIndexTemplate([
-                                    'name' => $name
-                                ]);
-                            } catch (ElasticsearchException $e) {
-                                // unable to remove index template
-                            }
-                        }
-                    }
-                }
-            } catch (ElasticsearchException $e) {
-                // We hit a version of ES that doesn't support index templates v2 yet, so it's safe to ignore
-            }
-            // Delete component template
-            $result = $client->cluster()->getComponentTemplate();
-            $names = [];
-            foreach ($result['component_templates'] as $component) {
-                if (self::isXPackTemplate($component['name'])) {
-                    continue;
-                }
-                $names[] = $component['name'];
-            }
-            if (!empty($names)) {
-                if (version_compare(self::getVersion($client), '7.12.99') > 0) {
-                    try {
-                        $client->cluster()->deleteComponentTemplate([
-                            'name' => implode(',', $names)
-                        ]);
-                    } catch (ElasticsearchException $e) {
-                        // We hit a version of ES that doesn't support index templates v2 yet, so it's safe to ignore
-                    }
-                } else {
-                    foreach ($names as $name) {
-                        try {
-                            $client->cluster()->deleteComponentTemplate([
-                                'name' => $name
-                            ]);
-                        } catch (ElasticsearchException $e) {
-                            // We hit a version of ES that doesn't support index templates v2 yet, so it's safe to ignore
-                        }
-                    }
-                }
-            }
-        }
-        // Always check for legacy templates
-        $result = $client->indices()->getTemplate();
-        foreach ($result as $name => $value) {
-            if (self::isXPackTemplate($name)) {
-                continue;
-            }
-            try {
-                $result = $client->indices()->deleteTemplate([
-                    'name' => $name
-                ]);
-            } catch (ElasticsearchException $e) {
-                // unable to remove index template
-            }
-        }
-    }
-
-    /**
      * Reset the cluster settings
      * 
      * @see ESRestTestCase.java:wipeClusterSettings()
@@ -448,55 +249,6 @@ class Utility
     }
 
     /**
-     * Check if a template name is part of XPack
-     * 
-     * @see ESRestTestCase.java:isXPackTemplate()
-     */
-    private static function isXPackTemplate(string $name): bool
-    {
-        if (strpos($name, '.monitoring-') !== false) {
-            return true;
-        }
-        if (strpos($name, '.watch') !== false || strpos($name, '.triggered_watches') !== false) {
-            return true;
-        }
-        if (strpos($name, '.data-frame-') !== false) {
-            return true;
-        }
-        if (strpos($name, '.ml-') !== false) {
-            return true;
-        }
-        if (strpos($name, '.transform-') !== false) {
-            return true;
-        }
-        switch ($name) {
-            case ".watches":
-            case "logstash-index-template":
-            case ".logstash-management":
-            case "security_audit_log":
-            case ".slm-history":
-            case ".async-search":
-            case "saml-service-provider":
-            case "ilm-history":
-            case "logs":
-            case "logs-settings":
-            case "logs-mappings":
-            case "metrics":
-            case "metrics-settings":
-            case "metrics-mappings":
-            case "synthetics":
-            case "synthetics-settings":
-            case "synthetics-mappings":
-            case ".snapshot-blob-cache":
-            case ".deprecation-indexing-template":
-            case "logstash-index-template":
-            case "security-index-template":
-                return true;
-        }
-        return false;
-    }
-
-    /**
      * A set of ILM policies that should be preserved between runs.
      * 
      * @see ESRestTestCase.java:preserveILMPolicyIds
@@ -511,55 +263,6 @@ class Utility
             "logs", 
             "metrics"
         ];
-    }
-
-    /**
-     * Delete all ILM policies
-     * 
-     * @see ESRestTestCase.java:deleteAllILMPolicies()
-     */
-    private static function deleteAllILMPolicies(Client $client): void
-    {
-        $policies = $client->ilm()->getLifecycle();
-        foreach ($policies as $policy => $value) {
-            if (!in_array($policy, self::preserveILMPolicyIds())) {
-                $client->ilm()->deleteLifecycle([
-                    'policy' => $policy
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Delete all CCR Auto Follow Patterns
-     * 
-     * @see ESRestTestCase.java:deleteAllAutoFollowPatterns()
-     */
-    private static function deleteAllAutoFollowPatterns(Client $client): void
-    {
-        $patterns = $client->ccr()->getAutoFollowPattern();
-        foreach ($patterns['patterns'] as $pattern) {
-            $client->ccr()->deleteAutoFollowPattern([
-                'name' => $pattern['name']
-            ]);
-        }
-    }
-
-    /**
-     * Delete all tasks
-     */
-    private static function deleteAllTasks(Client $client): void
-    {
-        $tasks = $client->tasks()->list();
-        if (isset($tasks['nodes'])) {
-            foreach ($tasks['nodes'] as $node => $value) {
-                foreach ($value['tasks'] as $id => $data) {
-                    $client->tasks()->cancel([
-                        'task_id' => $id
-                    ]);
-                }
-            }
-        }
     }
 
     /**
