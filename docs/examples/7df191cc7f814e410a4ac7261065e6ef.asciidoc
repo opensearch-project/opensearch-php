@@ -1,6 +1,0 @@
-// docs/update-by-query.asciidoc:420
-
-[source, php]
-----
-$response = $client->tasks()->list();
-----

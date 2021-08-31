@@ -1,9 +1,0 @@
-// indices/update-settings.asciidoc:133
-
-[source, php]
-----
-$params = [
-    'index' => 'twitter',
-];
-$response = $client->indices()->forcemerge($params);
-----
