@@ -1,9 +1,0 @@
-// cluster/health.asciidoc:186
-
-[source, php]
-----
-$params = [
-    'index' => 'twitter',
-];
-$response = $client->cluster()->health($params);
-----

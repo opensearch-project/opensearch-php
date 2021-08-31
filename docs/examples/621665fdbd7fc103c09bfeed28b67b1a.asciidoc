@@ -1,6 +1,0 @@
-// api-conventions.asciidoc:307
-
-[source, php]
-----
-$response = $client->count();
-----

@@ -1,9 +1,0 @@
-// mapping.asciidoc:217
-
-[source, php]
-----
-$params = [
-    'index' => 'my-index',
-];
-$response = $client->indices()->getMapping($params);
-----
