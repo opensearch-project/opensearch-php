@@ -6,10 +6,10 @@
   "license": ["Apache-2.0", "LGPL-2.1-only"],
   "authors": [
     {
-        "name": "Zachary Tong"
+        "name": "Elastic"
     },
     {
-        "name": "Enrico Zimuel"
+        "name": "OpenSearch Contributors"
     }
   ],
   "require": {
