@@ -165,11 +165,6 @@ class Connection implements ConnectionInterface
             phpversion()
         )];
 
-        // Add x-elastic-client-meta header, if enabled
-        if (isset($connectionParams['client']['x-elastic-client-meta']) && $connectionParams['client']['x-elastic-client-meta']) {
-            $this->headers['x-elastic-client-meta'] = [$this->getElasticMetaHeader($connectionParams)];
-        }
-
         $host = $hostDetails['host'];
         $path = null;
         if (isset($hostDetails['path']) === true) {
@@ -580,33 +575,6 @@ class Connection implements ConnectionInterface
         }
 
         return $exception;
-    }
-
-    /**
-     * Get the x-elastic-client-meta header
-     *
-     * The header format is specified by the following regex:
-     * ^[a-z]{1,}=[a-z0-9\.\-]{1,}(?:,[a-z]{1,}=[a-z0-9\.\-]+)*$
-     */
-    private function getElasticMetaHeader(array $connectionParams): string
-    {
-        $phpSemVersion = sprintf("%d.%d.%d", PHP_MAJOR_VERSION, PHP_MINOR_VERSION, PHP_RELEASE_VERSION);
-        // Reduce the size in case of '-snapshot' version
-        $clientVersion = str_replace('-snapshot', '-s', strtolower(Client::VERSION));
-        $clientMeta = sprintf(
-            "es=%s,php=%s,t=%s,a=%d",
-            $clientVersion,
-            $phpSemVersion,
-            $clientVersion,
-            isset($connectionParams['client']['future']) && $connectionParams['client']['future'] === 'lazy' ? 1 : 0
-        );
-        if (function_exists('curl_version')) {
-            $curlVersion = curl_version();
-            if (isset($curlVersion['version'])) {
-                $clientMeta .= sprintf(",cu=%s", $curlVersion['version']); // cu = curl library
-            }
-        }
-        return $clientMeta;
     }
 
     /**
