@@ -27,7 +27,7 @@ $iterator = Finder::create()
 return new Doctum($iterator, [
     'theme'                => 'asciidoc',
     'template_dirs'        => [__DIR__.'/docstheme/'],
-    'title'                => 'Elasticsearch-php',
+    'title'                => 'OpenSearch PHP Client',
     'build_dir'            => __DIR__.'/../docs/build',
     'cache_dir'            => __DIR__.'/cache/',
 ]);

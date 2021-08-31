@@ -155,7 +155,7 @@ foreach ($namespaces as $name => $endpoints) {
     $countNamespace++;
 }
 
-$destDir = __DIR__ . "/../src/Elasticsearch";
+$destDir = __DIR__ . "/../src/OpenSearch";
 
 printf("Copying the generated files to %s\n", $destDir);
 cleanFolders();
@@ -195,19 +195,19 @@ function removeDirectory($directory, array $omit = [])
 }
 
 /**
- * Remove Endpoints, Namespaces and Client in src/Elasticsearch
+ * Remove Endpoints, Namespaces and Client in src/OpenSearch
  */
 function cleanFolders()
 {
-    removeDirectory(__DIR__ . '/../src/Elasticsearch/Endpoints', [
-        __DIR__ . '/../src/Elasticsearch/Endpoints/AbstractEndpoint.php',
+    removeDirectory(__DIR__ . '/../src/OpenSearch/Endpoints', [
+        __DIR__ . '/../src/OpenSearch/Endpoints/AbstractEndpoint.php',
     ]);
-    removeDirectory(__DIR__ . '/../src/Elasticsearch/Namespaces', [
-        __DIR__ . '/../src/Elasticsearch/Namespaces/AbstractNamespace.php',
-        __DIR__ . '/../src/Elasticsearch/Namespaces/BooleanRequestWrapper.php',
-        __DIR__ . '/../src/Elasticsearch/Namespaces/NamespaceBuilderInterface.php'
+    removeDirectory(__DIR__ . '/../src/OpenSearch/Namespaces', [
+        __DIR__ . '/../src/OpenSearch/Namespaces/AbstractNamespace.php',
+        __DIR__ . '/../src/OpenSearch/Namespaces/BooleanRequestWrapper.php',
+        __DIR__ . '/../src/OpenSearch/Namespaces/NamespaceBuilderInterface.php'
     ]);
-    @unlink(__DIR__ . '/../src/Elasticsearch/Client.php');
+    @unlink(__DIR__ . '/../src/OpenSearch/Client.php');
 }
 
 /**
@@ -221,7 +221,7 @@ function moveSubFolder(string $origin, string $destination)
 }
 
 /**
- * Backup Endpoints, Namespaces and Client in src/Elasticsearch
+ * Backup Endpoints, Namespaces and Client in src/OpenSearch
  */
 function backup(string $fileName)
 {
@@ -231,19 +231,19 @@ function backup(string $fileName)
         printf("Error opening the zip file %s: %s\n", $fileName, $result);
         exit(1);
     } else {
-        $zip->addFile(__DIR__ . '/../src/Elasticsearch/Client.php', 'Client.php');
-        $zip->addGlob(__DIR__ . '/../src/Elasticsearch/Namespaces/*.php', GLOB_BRACE, [
-            'remove_path' => __DIR__ . '/../src/Elasticsearch'
+        $zip->addFile(__DIR__ . '/../src/OpenSearch/Client.php', 'Client.php');
+        $zip->addGlob(__DIR__ . '/../src/OpenSearch/Namespaces/*.php', GLOB_BRACE, [
+            'remove_path' => __DIR__ . '/../src/OpenSearch'
         ]);
         // Add the Endpoints (including subfolders)
-        foreach (glob(__DIR__ . '/../src/Elasticsearch/Endpoints/*') as $file) {
+        foreach (glob(__DIR__ . '/../src/OpenSearch/Endpoints/*') as $file) {
             if (is_dir($file)) {
                 $zip->addGlob("$file/*.php", GLOB_BRACE, [
-                    'remove_path' => __DIR__ . '/../src/Elasticsearch'
+                    'remove_path' => __DIR__ . '/../src/OpenSearch'
                 ]);
             } else {
                 $zip->addGlob("$file", GLOB_BRACE, [
-                    'remove_path' => __DIR__ . '/../src/Elasticsearch'
+                    'remove_path' => __DIR__ . '/../src/OpenSearch'
                 ]);
             }
         }
@@ -252,7 +252,7 @@ function backup(string $fileName)
 }
 
 /**
- * Restore Endpoints, Namespaces and Client in src/Elasticsearch
+ * Restore Endpoints, Namespaces and Client in src/OpenSearch
  */
 function restore(string $fileName)
 {
@@ -262,7 +262,7 @@ function restore(string $fileName)
         printf("Error opening the zip file %s: %s\n", $fileName, $result);
         exit(1);
     }
-    $zip->extractTo(__DIR__ . '/../src/Elasticsearch');
+    $zip->extractTo(__DIR__ . '/../src/OpenSearch');
     $zip->close();
 }
 
