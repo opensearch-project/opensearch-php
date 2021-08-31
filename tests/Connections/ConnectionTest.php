@@ -95,7 +95,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
         $headers = $connection->getHeaders();
 
         $this->assertArrayHasKey('User-Agent', $headers);
-        $this->assertStringContainsString('elasticsearch-php/'. Client::VERSION, $headers['User-Agent'][0]);
+        $this->assertStringContainsString('opensearch-php/'. Client::VERSION, $headers['User-Agent'][0]);
     }
 
     /**
@@ -124,7 +124,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
         $request = $connection->getLastRequestInfo()['request'];
 
         $this->assertArrayHasKey('User-Agent', $request['headers']);
-        $this->assertStringContainsString('elasticsearch-php/'. Client::VERSION, $request['headers']['User-Agent'][0]);
+        $this->assertStringContainsString('opensearch-php/'. Client::VERSION, $request['headers']['User-Agent'][0]);
     }
 
     /**
