@@ -158,11 +158,11 @@ class Connection implements ConnectionInterface
 
         // Add the User-Agent using the format: <client-repo-name>/<client-version> (metadata-values)
         $this->headers['User-Agent'] = [sprintf(
-            "elasticsearch-php/%s (%s %s; PHP %s)",
+            'opensearch-php/%s (%s %s; PHP %s)',
             Client::VERSION,
             PHP_OS,
             $this->getOSVersion(),
-            phpversion()
+            PHP_VERSION
         )];
 
         $host = $hostDetails['host'];
