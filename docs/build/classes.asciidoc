@@ -1,0 +1,64 @@
+
+[[OpenSearchPHP_Endpoints]]
+== Reference - Endpoints
+
+This is a complete list of namespaces and their associated endpoints.
+
+NOTE: This is auto-generated documentation
+
+* <<OpenSearch_Client, OpenSearch\Client>>
+* <<OpenSearch_ClientBuilder, OpenSearch\ClientBuilder>>
+* <<OpenSearch_Namespaces_AsyncSearchNamespace, OpenSearch\Namespaces\AsyncSearchNamespace>>
+* <<OpenSearch_Namespaces_AutoscalingNamespace, OpenSearch\Namespaces\AutoscalingNamespace>>
+* <<OpenSearch_Namespaces_CatNamespace, OpenSearch\Namespaces\CatNamespace>>
+* <<OpenSearch_Namespaces_ClusterNamespace, OpenSearch\Namespaces\ClusterNamespace>>
+* <<OpenSearch_Namespaces_DanglingIndicesNamespace, OpenSearch\Namespaces\DanglingIndicesNamespace>>
+* <<OpenSearch_Namespaces_DataFrameTransformDeprecatedNamespace, OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace>>
+* <<OpenSearch_Namespaces_EnrichNamespace, OpenSearch\Namespaces\EnrichNamespace>>
+* <<OpenSearch_Namespaces_EqlNamespace, OpenSearch\Namespaces\EqlNamespace>>
+* <<OpenSearch_Namespaces_GraphNamespace, OpenSearch\Namespaces\GraphNamespace>>
+* <<OpenSearch_Namespaces_IlmNamespace, OpenSearch\Namespaces\IlmNamespace>>
+* <<OpenSearch_Namespaces_IndicesNamespace, OpenSearch\Namespaces\IndicesNamespace>>
+* <<OpenSearch_Namespaces_IngestNamespace, OpenSearch\Namespaces\IngestNamespace>>
+* <<OpenSearch_Namespaces_LicenseNamespace, OpenSearch\Namespaces\LicenseNamespace>>
+* <<OpenSearch_Namespaces_MigrationNamespace, OpenSearch\Namespaces\MigrationNamespace>>
+* <<OpenSearch_Namespaces_MonitoringNamespace, OpenSearch\Namespaces\MonitoringNamespace>>
+* <<OpenSearch_Namespaces_NodesNamespace, OpenSearch\Namespaces\NodesNamespace>>
+* <<OpenSearch_Namespaces_RollupNamespace, OpenSearch\Namespaces\RollupNamespace>>
+* <<OpenSearch_Namespaces_SearchableSnapshotsNamespace, OpenSearch\Namespaces\SearchableSnapshotsNamespace>>
+* <<OpenSearch_Namespaces_SecurityNamespace, OpenSearch\Namespaces\SecurityNamespace>>
+* <<OpenSearch_Namespaces_SlmNamespace, OpenSearch\Namespaces\SlmNamespace>>
+* <<OpenSearch_Namespaces_SnapshotNamespace, OpenSearch\Namespaces\SnapshotNamespace>>
+* <<OpenSearch_Namespaces_SqlNamespace, OpenSearch\Namespaces\SqlNamespace>>
+* <<OpenSearch_Namespaces_SslNamespace, OpenSearch\Namespaces\SslNamespace>>
+* <<OpenSearch_Namespaces_TasksNamespace, OpenSearch\Namespaces\TasksNamespace>>
+* <<OpenSearch_Namespaces_TransformNamespace, OpenSearch\Namespaces\TransformNamespace>>
+* <<OpenSearch_Namespaces_WatcherNamespace, OpenSearch\Namespaces\WatcherNamespace>>
+include::OpenSearch/Client.asciidoc[]
+include::OpenSearch/ClientBuilder.asciidoc[]
+include::OpenSearch/Namespaces/AsyncSearchNamespace.asciidoc[]
+include::OpenSearch/Namespaces/AutoscalingNamespace.asciidoc[]
+include::OpenSearch/Namespaces/CatNamespace.asciidoc[]
+include::OpenSearch/Namespaces/ClusterNamespace.asciidoc[]
+include::OpenSearch/Namespaces/DanglingIndicesNamespace.asciidoc[]
+include::OpenSearch/Namespaces/DataFrameTransformDeprecatedNamespace.asciidoc[]
+include::OpenSearch/Namespaces/EnrichNamespace.asciidoc[]
+include::OpenSearch/Namespaces/EqlNamespace.asciidoc[]
+include::OpenSearch/Namespaces/GraphNamespace.asciidoc[]
+include::OpenSearch/Namespaces/IlmNamespace.asciidoc[]
+include::OpenSearch/Namespaces/IndicesNamespace.asciidoc[]
+include::OpenSearch/Namespaces/IngestNamespace.asciidoc[]
+include::OpenSearch/Namespaces/LicenseNamespace.asciidoc[]
+include::OpenSearch/Namespaces/MigrationNamespace.asciidoc[]
+include::OpenSearch/Namespaces/MonitoringNamespace.asciidoc[]
+include::OpenSearch/Namespaces/NodesNamespace.asciidoc[]
+include::OpenSearch/Namespaces/RollupNamespace.asciidoc[]
+include::OpenSearch/Namespaces/SearchableSnapshotsNamespace.asciidoc[]
+include::OpenSearch/Namespaces/SecurityNamespace.asciidoc[]
+include::OpenSearch/Namespaces/SlmNamespace.asciidoc[]
+include::OpenSearch/Namespaces/SnapshotNamespace.asciidoc[]
+include::OpenSearch/Namespaces/SqlNamespace.asciidoc[]
+include::OpenSearch/Namespaces/SslNamespace.asciidoc[]
+include::OpenSearch/Namespaces/TasksNamespace.asciidoc[]
+include::OpenSearch/Namespaces/TransformNamespace.asciidoc[]
+include::OpenSearch/Namespaces/WatcherNamespace.asciidoc[]

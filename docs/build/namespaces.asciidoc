@@ -1,0 +1,10 @@
+
+[[OpenSearch_Namespaces]]
+== Reference - Namespaces
+
+This is a complete list of available namespaces:
+
+* <<OpenSearch, OpenSearch>>
+* <<OpenSearch_Namespaces, OpenSearch\Namespaces>>
+include::OpenSearch.asciidoc[]
+include::OpenSearch/Namespaces.asciidoc[]
