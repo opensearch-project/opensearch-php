@@ -36,7 +36,6 @@ The class defines the following methods:
 * <<OpenSearch_ClientBuildersetSSLCert_setSSLCert,`setSSLCert()`>>
 * <<OpenSearch_ClientBuildersetSSLKey_setSSLKey,`setSSLKey()`>>
 * <<OpenSearch_ClientBuildersetSSLVerification_setSSLVerification,`setSSLVerification()`>>
-* <<OpenSearch_ClientBuildersetElasticMetaHeader_setElasticMetaHeader,`setElasticMetaHeader()`>>
 * <<OpenSearch_ClientBuilderincludePortInHostHeader_includePortInHostHeader,`includePortInHostHeader()`>>
 * <<OpenSearch_ClientBuilderbuild_build,`build()`>>
 * <<OpenSearch_ClientBuilderinstantiate_instantiate,`instantiate()`>>
@@ -88,6 +87,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Can supply third parm to Client::__construct() when invoking manually or with dependency injection
 */
 ----
 ****
@@ -100,6 +100,9 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Build a new client from the provided config.  Hash keys
+should correspond to the method name e.g. ['connectionPool']
+corresponds to setConnectionPool().
 */
 ----
 ****
@@ -112,6 +115,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Get the default handler
 */
 ----
 ****
@@ -124,6 +128,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Get the multi handler for async (CurlMultiHandler)
 */
 ----
 ****
@@ -136,6 +141,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Get the handler instance (CurlHandler)
 */
 ----
 ****
@@ -148,6 +154,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set connection Factory
 */
 ----
 ****
@@ -155,11 +162,12 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 
 
 [[OpenSearch_ClientBuildersetConnectionPool_setConnectionPool]]
-.`setConnectionPool($connectionPool, array $args = [])`
+.`setConnectionPool(OpenSearch\ConnectionPool\AbstractConnectionPool|string $connectionPool, array $args = [])`
 ****
 [source,php]
 ----
 /*
+Set the connection pool (default is StaticNoPingConnectionPool)
 */
 ----
 ****
@@ -172,6 +180,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set the endpoint
 */
 ----
 ****
@@ -184,6 +193,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Register namespace
 */
 ----
 ****
@@ -196,6 +206,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set the transport
 */
 ----
 ****
@@ -203,11 +214,12 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 
 
 [[OpenSearch_ClientBuildersetHandler_setHandler]]
-.`setHandler($handler)`
+.`setHandler(mixed $handler)`
 ****
 [source,php]
 ----
 /*
+Set the HTTP handler (cURL is default)
 */
 ----
 ****
@@ -220,6 +232,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set the PSR-3 Logger
 */
 ----
 ****
@@ -232,6 +245,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set the PSR-3 tracer
 */
 ----
 ****
@@ -239,11 +253,12 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 
 
 [[OpenSearch_ClientBuildersetSerializer_setSerializer]]
-.`setSerializer($serializer)`
+.`setSerializer(OpenSearch\Serializers\SerializerInterface|string $serializer)`
 ****
 [source,php]
 ----
 /*
+Set the serializer
 */
 ----
 ****
@@ -256,6 +271,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set the hosts (nodes)
 */
 ----
 ****
@@ -268,6 +284,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set Basic access authentication
 */
 ----
 ****
@@ -280,6 +297,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set connection parameters
 */
 ----
 ****
@@ -292,6 +310,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set number or retries (default is equal to number of nodes)
 */
 ----
 ****
@@ -299,11 +318,12 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 
 
 [[OpenSearch_ClientBuildersetSelector_setSelector]]
-.`setSelector($selector)`
+.`setSelector(OpenSearch\ConnectionPool\Selectors\SelectorInterface|string $selector)`
 ****
 [source,php]
 ----
 /*
+Set the selector algorithm
 */
 ----
 ****
@@ -316,6 +336,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set sniff on start
 */
 ----
 ****
@@ -328,6 +349,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set SSL certificate
 */
 ----
 ****
@@ -340,6 +362,7 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 [source,php]
 ----
 /*
+Set SSL key
 */
 ----
 ****
@@ -347,24 +370,12 @@ Can supply second parm to Client::__construct() when invoking manually or with d
 
 
 [[OpenSearch_ClientBuildersetSSLVerification_setSSLVerification]]
-.`setSSLVerification($value = true)`
+.`setSSLVerification(bool|string $value = true)`
 ****
 [source,php]
 ----
 /*
-*/
-----
-****
-
-
-
-[[OpenSearch_ClientBuildersetElasticMetaHeader_setElasticMetaHeader]]
-.`setElasticMetaHeader($value = true)`
-****
-[source,php]
-----
-/*
-Set or disable the x-elastic-client-meta header
+Set SSL verification
 */
 ----
 ****
@@ -377,6 +388,7 @@ Set or disable the x-elastic-client-meta header
 [source,php]
 ----
 /*
+Include the port in Host header
 */
 ----
 ****
