@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Rollover
- * Elasticsearch API name indices.rollover
- *
- */
 class Rollover extends AbstractEndpoint
 {
     protected $alias;

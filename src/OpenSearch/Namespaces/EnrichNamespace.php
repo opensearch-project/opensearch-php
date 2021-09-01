@@ -28,7 +28,6 @@ class EnrichNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-enrich-policy-api.html
      */
     public function deletePolicy(array $params = [])
     {
@@ -47,7 +46,6 @@ class EnrichNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/execute-enrich-policy-api.html
      */
     public function executePolicy(array $params = [])
     {
@@ -65,7 +63,6 @@ class EnrichNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-enrich-policy-api.html
      */
     public function getPolicy(array $params = [])
     {
@@ -84,7 +81,6 @@ class EnrichNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-enrich-policy-api.html
      */
     public function putPolicy(array $params = [])
     {

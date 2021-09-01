@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetSettings
- * Elasticsearch API name indices.get_settings
- *
- */
 class GetSettings extends AbstractEndpoint
 {
     protected $name;

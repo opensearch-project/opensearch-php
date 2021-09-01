@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class RenderSearchTemplate
- * Elasticsearch API name render_search_template
- *
- */
 class RenderSearchTemplate extends AbstractEndpoint
 {
     public function getURI(): string

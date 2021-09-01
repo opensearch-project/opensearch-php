@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Stats
- * Elasticsearch API name indices.stats
- *
- */
 class Stats extends AbstractEndpoint
 {
     protected $metric;

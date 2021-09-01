@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Eql;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Delete
- * Elasticsearch API name eql.delete
- *
- */
 class Delete extends AbstractEndpoint
 {
     public function getURI(): string

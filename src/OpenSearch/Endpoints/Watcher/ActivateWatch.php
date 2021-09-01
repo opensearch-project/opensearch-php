@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Watcher;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ActivateWatch
- * Elasticsearch API name watcher.activate_watch
- *
- */
 class ActivateWatch extends AbstractEndpoint
 {
     protected $watch_id;

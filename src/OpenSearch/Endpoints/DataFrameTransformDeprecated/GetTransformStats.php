@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\DataFrameTransformDeprecated;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetTransformStats
- * Elasticsearch API name data_frame_transform_deprecated.get_transform_stats
- *
- */
 class GetTransformStats extends AbstractEndpoint
 {
     protected $transform_id;

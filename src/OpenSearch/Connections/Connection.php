@@ -700,7 +700,7 @@ class Connection implements ConnectionInterface
     {
         if (empty($body)) {
             return sprintf(
-                "Unknown %d error from Elasticsearch %s",
+                "Unknown %d error from OpenSearch %s",
                 $statusCode,
                 $exception->getMessage()
             );

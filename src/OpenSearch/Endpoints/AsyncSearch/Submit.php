@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\AsyncSearch;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Submit
- * Elasticsearch API name async_search.submit
- *
- */
 class Submit extends AbstractEndpoint
 {
     public function getURI(): string

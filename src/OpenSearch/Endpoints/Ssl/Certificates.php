@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Ssl;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Certificates
- * Elasticsearch API name ssl.certificates
- *
- */
 class Certificates extends AbstractEndpoint
 {
     public function getURI(): string

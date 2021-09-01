@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class FieldCaps
- * Elasticsearch API name field_caps
- *
- */
 class FieldCaps extends AbstractEndpoint
 {
     public function getURI(): string

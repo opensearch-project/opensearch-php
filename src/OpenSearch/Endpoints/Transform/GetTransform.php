@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Transform;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetTransform
- * Elasticsearch API name transform.get_transform
- *
- */
 class GetTransform extends AbstractEndpoint
 {
     protected $transform_id;

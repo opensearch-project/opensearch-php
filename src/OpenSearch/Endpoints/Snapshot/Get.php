@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Get
- * Elasticsearch API name snapshot.get
- *
- */
 class Get extends AbstractEndpoint
 {
     protected $repository;

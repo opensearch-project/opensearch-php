@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PendingTasks
- * Elasticsearch API name cat.pending_tasks
- *
- */
 class PendingTasks extends AbstractEndpoint
 {
     public function getURI(): string

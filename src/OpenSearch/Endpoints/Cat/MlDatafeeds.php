@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class MlDatafeeds
- * Elasticsearch API name cat.ml_datafeeds
- *
- */
 class MlDatafeeds extends AbstractEndpoint
 {
     protected $datafeed_id;

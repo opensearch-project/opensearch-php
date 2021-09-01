@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Freeze
- * Elasticsearch API name indices.freeze
- *
- */
 class Freeze extends AbstractEndpoint
 {
     public function getURI(): string

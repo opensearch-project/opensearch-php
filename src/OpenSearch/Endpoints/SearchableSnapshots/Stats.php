@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\SearchableSnapshots;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Stats
- * Elasticsearch API name searchable_snapshots.stats
- *
- */
 class Stats extends AbstractEndpoint
 {
     public function getURI(): string

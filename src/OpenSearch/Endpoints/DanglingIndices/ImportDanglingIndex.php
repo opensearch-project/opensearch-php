@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\DanglingIndices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ImportDanglingIndex
- * Elasticsearch API name dangling_indices.import_dangling_index
- *
- */
 class ImportDanglingIndex extends AbstractEndpoint
 {
     protected $index_uuid;

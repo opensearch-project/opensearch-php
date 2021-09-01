@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteDataStream
- * Elasticsearch API name indices.delete_data_stream
- *
- */
 class DeleteDataStream extends AbstractEndpoint
 {
     protected $name;

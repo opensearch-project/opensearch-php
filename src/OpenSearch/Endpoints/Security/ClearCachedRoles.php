@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearCachedRoles
- * Elasticsearch API name security.clear_cached_roles
- *
- */
 class ClearCachedRoles extends AbstractEndpoint
 {
     protected $name;

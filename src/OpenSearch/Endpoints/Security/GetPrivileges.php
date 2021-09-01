@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetPrivileges
- * Elasticsearch API name security.get_privileges
- *
- */
 class GetPrivileges extends AbstractEndpoint
 {
     protected $application;

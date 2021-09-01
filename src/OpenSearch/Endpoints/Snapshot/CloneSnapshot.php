@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class CloneSnapshot
- * Elasticsearch API name snapshot.clone
- *
- */
 class CloneSnapshot extends AbstractEndpoint
 {
     protected $repository;

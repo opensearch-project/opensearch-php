@@ -29,7 +29,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-ack-watch.html
      */
     public function ackWatch(array $params = [])
     {
@@ -49,7 +48,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-activate-watch.html
      */
     public function activateWatch(array $params = [])
     {
@@ -67,7 +65,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-deactivate-watch.html
      */
     public function deactivateWatch(array $params = [])
     {
@@ -85,7 +82,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-delete-watch.html
      */
     public function deleteWatch(array $params = [])
     {
@@ -105,7 +101,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-execute-watch.html
      */
     public function executeWatch(array $params = [])
     {
@@ -125,7 +120,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-get-watch.html
      */
     public function getWatch(array $params = [])
     {
@@ -148,7 +142,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-put-watch.html
      */
     public function putWatch(array $params = [])
     {
@@ -167,7 +160,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-start.html
      */
     public function start(array $params = [])
     {
@@ -183,7 +175,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stats.html
      */
     public function stats(array $params = [])
     {
@@ -200,7 +191,6 @@ class WatcherNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api-stop.html
      */
     public function stop(array $params = [])
     {

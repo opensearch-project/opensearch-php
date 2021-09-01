@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteAlias
- * Elasticsearch API name indices.delete_alias
- *
- */
 class DeleteAlias extends AbstractEndpoint
 {
     protected $name;

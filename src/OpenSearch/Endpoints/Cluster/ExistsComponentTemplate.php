@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Cluster;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ExistsComponentTemplate
- * Elasticsearch API name cluster.exists_component_template
- *
- */
 class ExistsComponentTemplate extends AbstractEndpoint
 {
     protected $name;

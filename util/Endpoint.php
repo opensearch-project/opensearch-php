@@ -254,7 +254,7 @@ class Endpoint
                         $this->name,
                         str_replace(':part', $part, $skeleton)
                     );
-                    $this->addNamespace('Elasticsearch\Common\Exceptions\RuntimeException');
+                    $this->addNamespace('OpenSearch\Common\Exceptions\RuntimeException');
                 } else {
                     $params .= sprintf("%s\$%s = \$this->%s ?? null;\n", $tab8, $part, $part);
                 }
@@ -316,7 +316,7 @@ class Endpoint
                 $tab8,
                 $this->apiName
             );
-            $this->addNamespace('Elasticsearch\Common\Exceptions\RuntimeException');
+            $this->addNamespace('OpenSearch\Common\Exceptions\RuntimeException');
         }
         return $checkPart . $params . $deprecated . $urls . $else;
     }
@@ -397,7 +397,7 @@ class Endpoint
     private function getSetBulkBody(): string
     {
         $setPart = file_get_contents(self::SET_BULK_BODY_TEMPLATE);
-        $this->addNamespace('Elasticsearch\Common\Exceptions\InvalidArgumentException');
+        $this->addNamespace('OpenSearch\Common\Exceptions\InvalidArgumentException');
 
         return str_replace(':endpoint', $this->getClassName(), $setPart);
     }

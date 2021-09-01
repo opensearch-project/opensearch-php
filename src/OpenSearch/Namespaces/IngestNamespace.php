@@ -30,7 +30,6 @@ class IngestNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html
      */
     public function deletePipeline(array $params = [])
     {
@@ -49,7 +48,6 @@ class IngestNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html
      */
     public function getPipeline(array $params = [])
     {
@@ -66,7 +64,6 @@ class IngestNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/grok-processor.html#grok-processor-rest-get
      */
     public function processorGrok(array $params = [])
     {
@@ -84,7 +81,6 @@ class IngestNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/put-pipeline-api.html
      */
     public function putPipeline(array $params = [])
     {
@@ -106,7 +102,6 @@ class IngestNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html
      */
     public function simulate(array $params = [])
     {

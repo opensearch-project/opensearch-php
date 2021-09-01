@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class SearchShards
- * Elasticsearch API name search_shards
- *
- */
 class SearchShards extends AbstractEndpoint
 {
     public function getURI(): string

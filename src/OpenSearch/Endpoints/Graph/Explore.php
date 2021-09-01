@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Graph;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Explore
- * Elasticsearch API name graph.explore
- *
- */
 class Explore extends AbstractEndpoint
 {
     public function getURI(): string

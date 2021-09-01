@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class RemoteInfo
- * Elasticsearch API name cluster.remote_info
- *
- */
 class RemoteInfo extends AbstractEndpoint
 {
     public function getURI(): string

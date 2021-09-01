@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteByQuery
- * Elasticsearch API name delete_by_query
- *
- */
 class DeleteByQuery extends AbstractEndpoint
 {
     public function getURI(): string

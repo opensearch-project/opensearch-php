@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\DanglingIndices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ListDanglingIndices
- * Elasticsearch API name dangling_indices.list_dangling_indices
- *
- */
 class ListDanglingIndices extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Slm;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Stop
- * Elasticsearch API name slm.stop
- *
- */
 class Stop extends AbstractEndpoint
 {
     public function getURI(): string

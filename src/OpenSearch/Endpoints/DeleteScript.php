@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteScript
- * Elasticsearch API name delete_script
- *
- */
 class DeleteScript extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Repositories
- * Elasticsearch API name cat.repositories
- *
- */
 class Repositories extends AbstractEndpoint
 {
     public function getURI(): string

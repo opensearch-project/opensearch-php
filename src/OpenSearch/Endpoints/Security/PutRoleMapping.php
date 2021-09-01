@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutRoleMapping
- * Elasticsearch API name security.put_role_mapping
- *
- */
 class PutRoleMapping extends AbstractEndpoint
 {
     protected $name;

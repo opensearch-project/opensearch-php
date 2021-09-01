@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Sql;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Query
- * Elasticsearch API name sql.query
- *
- */
 class Query extends AbstractEndpoint
 {
     public function getURI(): string

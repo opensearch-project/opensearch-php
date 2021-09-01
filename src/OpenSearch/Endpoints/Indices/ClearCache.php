@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearCache
- * Elasticsearch API name indices.clear_cache
- *
- */
 class ClearCache extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetRole
- * Elasticsearch API name security.get_role
- *
- */
 class GetRole extends AbstractEndpoint
 {
     protected $name;

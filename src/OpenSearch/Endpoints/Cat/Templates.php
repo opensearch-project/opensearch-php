@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Templates
- * Elasticsearch API name cat.templates
- *
- */
 class Templates extends AbstractEndpoint
 {
     protected $name;

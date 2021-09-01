@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Rollup;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class RollupSearch
- * Elasticsearch API name rollup.rollup_search
- *
- */
 class RollupSearch extends AbstractEndpoint
 {
     public function getURI(): string

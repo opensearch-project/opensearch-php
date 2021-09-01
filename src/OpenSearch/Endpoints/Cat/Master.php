@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Master
- * Elasticsearch API name cat.master
- *
- */
 class Master extends AbstractEndpoint
 {
     public function getURI(): string

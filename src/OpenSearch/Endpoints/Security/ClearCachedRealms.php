@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearCachedRealms
- * Elasticsearch API name security.clear_cached_realms
- *
- */
 class ClearCachedRealms extends AbstractEndpoint
 {
     protected $realms;

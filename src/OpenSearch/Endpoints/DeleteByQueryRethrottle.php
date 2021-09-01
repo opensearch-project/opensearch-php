@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteByQueryRethrottle
- * Elasticsearch API name delete_by_query_rethrottle
- *
- */
 class DeleteByQueryRethrottle extends AbstractEndpoint
 {
     protected $task_id;

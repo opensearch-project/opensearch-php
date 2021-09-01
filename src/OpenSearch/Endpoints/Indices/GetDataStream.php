@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetDataStream
- * Elasticsearch API name indices.get_data_stream
- *
- */
 class GetDataStream extends AbstractEndpoint
 {
     protected $name;

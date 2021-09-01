@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetMapping
- * Elasticsearch API name indices.get_mapping
- *
- */
 class GetMapping extends AbstractEndpoint
 {
     public function getURI(): string

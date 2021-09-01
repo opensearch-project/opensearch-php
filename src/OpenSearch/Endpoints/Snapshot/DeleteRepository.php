@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteRepository
- * Elasticsearch API name snapshot.delete_repository
- *
- */
 class DeleteRepository extends AbstractEndpoint
 {
     protected $repository;

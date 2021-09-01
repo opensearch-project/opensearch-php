@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Watcher;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutWatch
- * Elasticsearch API name watcher.put_watch
- *
- */
 class PutWatch extends AbstractEndpoint
 {
     public function getURI(): string

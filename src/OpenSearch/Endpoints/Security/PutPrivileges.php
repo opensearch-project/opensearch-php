@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutPrivileges
- * Elasticsearch API name security.put_privileges
- *
- */
 class PutPrivileges extends AbstractEndpoint
 {
     public function getURI(): string

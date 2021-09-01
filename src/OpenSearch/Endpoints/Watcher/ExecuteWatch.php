@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Watcher;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ExecuteWatch
- * Elasticsearch API name watcher.execute_watch
- *
- */
 class ExecuteWatch extends AbstractEndpoint
 {
     public function getURI(): string

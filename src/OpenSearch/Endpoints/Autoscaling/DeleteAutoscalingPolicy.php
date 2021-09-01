@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Autoscaling;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteAutoscalingPolicy
- * Elasticsearch API name autoscaling.delete_autoscaling_policy
- *
- */
 class DeleteAutoscalingPolicy extends AbstractEndpoint
 {
     protected $name;

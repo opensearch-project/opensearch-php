@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class InvalidateApiKey
- * Elasticsearch API name security.invalidate_api_key
- *
- */
 class InvalidateApiKey extends AbstractEndpoint
 {
     public function getURI(): string

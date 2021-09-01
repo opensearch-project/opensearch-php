@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutScript
- * Elasticsearch API name put_script
- *
- */
 class PutScript extends AbstractEndpoint
 {
     protected $context;

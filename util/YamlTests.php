@@ -16,14 +16,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Util;
 
-use OpenSearch\Util\ActionTest;
 use Exception;
 use ParseError;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use stdClass;
-
-use function yaml_parse;
 
 class YamlTests
 {
@@ -32,9 +29,9 @@ class YamlTests
     public const TEMPLATE_UNIT_TEST_SKIPPED = __DIR__ . '/template/test/unit-test-skipped';
     public const TEMPLATE_FUNCTION_TEST     = __DIR__ . '/template/test/function-test';
     public const TEMPLATE_FUNCTION_SKIPPED  = __DIR__ . '/template/test/function-skipped';
-    public const ELASTICSEARCH_GIT_URL      = 'https://github.com/elastic/elasticsearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s';
+    public const ELASTICSEARCH_GIT_URL      = 'https://github.com/opensearch-project/OpenSearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s';
 
-    public const SKIPPED_TEST_OSS = [
+    public const SKIPPED_TEST = [
         'Cat\Nodeattrs\_10_BasicTest::TestCatNodesAttrsOutput' => 'Regexp error, it seems not compatible with PHP',
         'Cat\Shards\_10_BasicTest::TestCatShardsOutput' => 'Regexp error, it seems not compatible with PHP',
         'Search\Aggregation\_10_HistogramTest::HistogramProfiler' => "Error reading 'n' field from YAML",
@@ -159,8 +156,8 @@ class YamlTests
 
             # Delete and create the output directory
             $testDirName = sprintf("%s/%s", $this->testOutput, str_replace('\\', '/', $namespace));
-            if (!is_dir($testDirName)) {
-                mkdir($testDirName, 0777, true);
+            if (!is_dir($testDirName) && !mkdir($testDirName, 0777, true) && !is_dir($testDirName)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $testDirName));
             }
 
             $functions = '';
@@ -187,9 +184,7 @@ class YamlTests
                             $skippedTest = sprintf("%s\\%s::%s", $namespace, $testName, $functionName);
                             $skippedAllTest = sprintf("%s\\%s::*", $namespace, $testName);
                             $skippedAllFiles = sprintf("%s\\*", $namespace);
-                            $skip = strtolower(self::$testSuite) === 'free'
-                                ? self::SKIPPED_TEST_OSS
-                                : self::SKIPPED_TEST_XPACK;
+                            $skip = self::SKIPPED_TEST;
                             if (isset($skip[$skippedAllFiles]) || isset($skip[$skippedAllTest])) {
                                 $allSkipped = true;
                                 $functions .= self::render(
@@ -224,7 +219,7 @@ class YamlTests
                 $test = self::render(
                     self::TEMPLATE_UNIT_TEST_SKIPPED,
                     [
-                        ':namespace' => sprintf("Elasticsearch\Tests\Yaml\%s\%s", self::$testSuite, $namespace),
+                        ':namespace' => sprintf("OpenSearch\Tests\Yaml\%s\%s", self::$testSuite, $namespace),
                         ':test-name' => $testName,
                         ':tests'     => $functions,
                         ':yamlfile'  => sprintf(self::ELASTICSEARCH_GIT_URL, self::$minorEsVersion, $yamlFileName),
@@ -237,7 +232,7 @@ class YamlTests
                         ? self::TEMPLATE_UNIT_TEST_OSS
                         : self::TEMPLATE_UNIT_TEST_XPACK,
                     [
-                        ':namespace' => sprintf("Elasticsearch\Tests\Yaml\%s\%s", self::$testSuite, $namespace),
+                        ':namespace' => sprintf("OpenSearch\Tests\Yaml\%s\%s", self::$testSuite, $namespace),
                         ':test-name' => $testName,
                         ':tests'     => $functions,
                         ':setup'     => $setup,

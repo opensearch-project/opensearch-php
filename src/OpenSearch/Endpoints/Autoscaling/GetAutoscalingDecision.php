@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Autoscaling;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetAutoscalingDecision
- * Elasticsearch API name autoscaling.get_autoscaling_decision
- *
- */
 class GetAutoscalingDecision extends AbstractEndpoint
 {
     public function getURI(): string

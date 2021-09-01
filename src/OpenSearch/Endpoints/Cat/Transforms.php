@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Transforms
- * Elasticsearch API name cat.transforms
- *
- */
 class Transforms extends AbstractEndpoint
 {
     protected $transform_id;

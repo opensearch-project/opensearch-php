@@ -21,8 +21,6 @@ Thumbs.db
 #generator related
 generator/*
 
-# Elasticsearch related
-util/elasticsearch/
 util/cache/
 util/*.zip
 util/output/
@@ -45,7 +43,7 @@ build
 tests/*-junit.xml
 
 # YAML tests
-tests/Elasticsearch/Tests/Yaml
+tests/OpenSearch/Tests/Yaml
 
 # Exclude .ci/make.sh artifcats
 .ci/output

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\SearchableSnapshots;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearCache
- * Elasticsearch API name searchable_snapshots.clear_cache
- *
- */
 class ClearCache extends AbstractEndpoint
 {
     public function getURI(): string

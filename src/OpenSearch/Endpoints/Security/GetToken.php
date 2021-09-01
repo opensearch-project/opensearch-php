@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetToken
- * Elasticsearch API name security.get_token
- *
- */
 class GetToken extends AbstractEndpoint
 {
     public function getURI(): string

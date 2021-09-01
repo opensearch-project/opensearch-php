@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Slm;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ExecuteLifecycle
- * Elasticsearch API name slm.execute_lifecycle
- *
- */
 class ExecuteLifecycle extends AbstractEndpoint
 {
     protected $policy_id;

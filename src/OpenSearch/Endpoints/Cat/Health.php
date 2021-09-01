@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Health
- * Elasticsearch API name cat.health
- *
- */
 class Health extends AbstractEndpoint
 {
     public function getURI(): string

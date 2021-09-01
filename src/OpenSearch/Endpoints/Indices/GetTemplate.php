@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetTemplate
- * Elasticsearch API name indices.get_template
- *
- */
 class GetTemplate extends AbstractEndpoint
 {
     protected $name;

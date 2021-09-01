@@ -55,7 +55,7 @@ printf("Backup Endpoints and Namespaces in:\n%s\n", $backupFileName);
 backup($backupFileName);
 
 $start = microtime(true);
-printf("Generating endpoints for Elasticsearch\n");
+printf("Generating endpoints for OpenSearch\n");
 
 $success = true;
 // Check if the rest-spec folder with the build hash exists

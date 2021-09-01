@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Ingest;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeletePipeline
- * Elasticsearch API name ingest.delete_pipeline
- *
- */
 class DeletePipeline extends AbstractEndpoint
 {
     public function getURI(): string

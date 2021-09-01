@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GrantApiKey
- * Elasticsearch API name security.grant_api_key
- *
- */
 class GrantApiKey extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ShardStores
- * Elasticsearch API name indices.shard_stores
- *
- */
 class ShardStores extends AbstractEndpoint
 {
     public function getURI(): string

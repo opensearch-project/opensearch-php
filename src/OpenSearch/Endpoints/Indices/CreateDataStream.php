@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class CreateDataStream
- * Elasticsearch API name indices.create_data_stream
- *
- */
 class CreateDataStream extends AbstractEndpoint
 {
     protected $name;

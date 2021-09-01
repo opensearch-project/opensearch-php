@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DisableUser
- * Elasticsearch API name security.disable_user
- *
- */
 class DisableUser extends AbstractEndpoint
 {
     protected $username;

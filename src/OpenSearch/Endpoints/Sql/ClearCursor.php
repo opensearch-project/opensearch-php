@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Sql;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearCursor
- * Elasticsearch API name sql.clear_cursor
- *
- */
 class ClearCursor extends AbstractEndpoint
 {
     public function getURI(): string

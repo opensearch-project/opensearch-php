@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class UpdateAliases
- * Elasticsearch API name indices.update_aliases
- *
- */
 class UpdateAliases extends AbstractEndpoint
 {
     public function getURI(): string

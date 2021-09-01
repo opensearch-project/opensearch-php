@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class MlTrainedModels
- * Elasticsearch API name cat.ml_trained_models
- *
- */
 class MlTrainedModels extends AbstractEndpoint
 {
     protected $model_id;

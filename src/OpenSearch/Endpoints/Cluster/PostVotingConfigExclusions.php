@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PostVotingConfigExclusions
- * Elasticsearch API name cluster.post_voting_config_exclusions
- *
- */
 class PostVotingConfigExclusions extends AbstractEndpoint
 {
     public function getURI(): string

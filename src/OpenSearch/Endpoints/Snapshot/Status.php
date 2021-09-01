@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Status
- * Elasticsearch API name snapshot.status
- *
- */
 class Status extends AbstractEndpoint
 {
     protected $repository;

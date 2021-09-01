@@ -20,11 +20,6 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Serializers\SerializerInterface;
 use Traversable;
 
-/**
- * Class MsearchTemplate
- * Elasticsearch API name msearch_template
- *
- */
 class MsearchTemplate extends AbstractEndpoint
 {
     public function __construct(SerializerInterface $serializer)

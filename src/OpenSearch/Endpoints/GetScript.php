@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetScript
- * Elasticsearch API name get_script
- *
- */
 class GetScript extends AbstractEndpoint
 {
     public function getURI(): string

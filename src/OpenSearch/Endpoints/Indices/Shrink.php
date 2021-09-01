@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Shrink
- * Elasticsearch API name indices.shrink
- *
- */
 class Shrink extends AbstractEndpoint
 {
     protected $target;

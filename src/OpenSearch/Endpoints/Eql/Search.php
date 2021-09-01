@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Eql;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Search
- * Elasticsearch API name eql.search
- *
- */
 class Search extends AbstractEndpoint
 {
     public function getURI(): string

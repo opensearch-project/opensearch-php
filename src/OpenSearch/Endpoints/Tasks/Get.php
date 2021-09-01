@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Tasks;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Get
- * Elasticsearch API name tasks.get
- *
- */
 class Get extends AbstractEndpoint
 {
     protected $task_id;

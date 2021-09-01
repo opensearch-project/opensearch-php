@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class VerifyRepository
- * Elasticsearch API name snapshot.verify_repository
- *
- */
 class VerifyRepository extends AbstractEndpoint
 {
     protected $repository;

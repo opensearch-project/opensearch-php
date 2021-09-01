@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\SearchableSnapshots;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Mount
- * Elasticsearch API name searchable_snapshots.mount
- *
- */
 class Mount extends AbstractEndpoint
 {
     protected $repository;

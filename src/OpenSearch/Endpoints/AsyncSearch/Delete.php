@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\AsyncSearch;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Delete
- * Elasticsearch API name async_search.delete
- *
- */
 class Delete extends AbstractEndpoint
 {
     public function getURI(): string

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteUser
- * Elasticsearch API name security.delete_user
- *
- */
 class DeleteUser extends AbstractEndpoint
 {
     protected $username;

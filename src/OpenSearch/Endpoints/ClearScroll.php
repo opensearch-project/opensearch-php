@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearScroll
- * Elasticsearch API name clear_scroll
- *
- */
 class ClearScroll extends AbstractEndpoint
 {
     protected $scroll_id;

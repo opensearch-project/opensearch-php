@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Rollup;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetJobs
- * Elasticsearch API name rollup.get_jobs
- *
- */
 class GetJobs extends AbstractEndpoint
 {
     public function getURI(): string

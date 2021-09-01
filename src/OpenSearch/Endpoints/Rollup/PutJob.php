@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Rollup;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutJob
- * Elasticsearch API name rollup.put_job
- *
- */
 class PutJob extends AbstractEndpoint
 {
     public function getURI(): string

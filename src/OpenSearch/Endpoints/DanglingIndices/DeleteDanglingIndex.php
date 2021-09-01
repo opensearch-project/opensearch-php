@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\DanglingIndices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteDanglingIndex
- * Elasticsearch API name dangling_indices.delete_dangling_index
- *
- */
 class DeleteDanglingIndex extends AbstractEndpoint
 {
     protected $index_uuid;

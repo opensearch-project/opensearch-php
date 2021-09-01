@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Segments
- * Elasticsearch API name indices.segments
- *
- */
 class Segments extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ThreadPool
- * Elasticsearch API name cat.thread_pool
- *
- */
 class ThreadPool extends AbstractEndpoint
 {
     protected $thread_pool_patterns;

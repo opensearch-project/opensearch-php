@@ -31,7 +31,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/searchable-snapshots-apis.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -56,7 +56,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/searchable-snapshots-api-mount-snapshot.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -81,7 +81,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/searchable-snapshots-apis.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -102,7 +102,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/searchable-snapshots-apis.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *

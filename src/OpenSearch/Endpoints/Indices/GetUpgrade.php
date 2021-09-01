@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetUpgrade
- * Elasticsearch API name indices.get_upgrade
- *
- */
 class GetUpgrade extends AbstractEndpoint
 {
     public function getURI(): string

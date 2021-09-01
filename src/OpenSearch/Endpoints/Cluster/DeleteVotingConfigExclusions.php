@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteVotingConfigExclusions
- * Elasticsearch API name cluster.delete_voting_config_exclusions
- *
- */
 class DeleteVotingConfigExclusions extends AbstractEndpoint
 {
     public function getURI(): string

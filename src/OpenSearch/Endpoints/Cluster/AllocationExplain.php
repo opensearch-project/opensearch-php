@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class AllocationExplain
- * Elasticsearch API name cluster.allocation_explain
- *
- */
 class AllocationExplain extends AbstractEndpoint
 {
     public function getURI(): string

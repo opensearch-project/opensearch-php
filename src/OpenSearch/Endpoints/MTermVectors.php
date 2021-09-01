@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class MTermVectors
- * Elasticsearch API name mtermvectors
- *
- */
 class MTermVectors extends AbstractEndpoint
 {
     public function getURI(): string

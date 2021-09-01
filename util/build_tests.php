@@ -46,10 +46,10 @@ $stack = getenv('TEST_SUITE');
 printf("*****************************************\n");
 printf("** Bulding YAML tests for %s suite\n", strtoupper($stack));
 printf("*****************************************\n");
-printf("Using Elasticsearch %s version\n", $version);
+printf("Using OpenSearch %s version\n", $version);
 printf("With build hash %s\n", $buildHash);
 
-$yamlOutputTest = __DIR__ . '/../tests/Elasticsearch/Tests/Yaml';
+$yamlOutputTest = __DIR__ . '/../tests/OpenSearch/Tests/Yaml';
 $yamlTestFolder = sprintf("%s/rest-spec/%s/rest-api-spec/test/%s", __DIR__, $buildHash, strtolower($stack));
 
 $test = new YamlTests($yamlTestFolder, $yamlOutputTest, $version, $stack);

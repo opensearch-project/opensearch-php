@@ -171,7 +171,7 @@ function normalizeApiName(string $api): string
 function checkIfCodeHasValidSyntax(string $code): void
 {
     $script = sprintf("require_once '%s/vendor/autoload.php';\n", dirname(__DIR__));
-    $script .= '$client = Elasticsearch\ClientBuilder::create()->build();' . "\n";
+    $script .= '$client = OpenSearch\ClientBuilder::create()->build();' . "\n";
     try {
         eval($script . $code);
     } catch (OpenSearchException $e) {

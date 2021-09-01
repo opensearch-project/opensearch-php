@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Tasks;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Cancel
- * Elasticsearch API name tasks.cancel
- *
- */
 class Cancel extends AbstractEndpoint
 {
     protected $task_id;

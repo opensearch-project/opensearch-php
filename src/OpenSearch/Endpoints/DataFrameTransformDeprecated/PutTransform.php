@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\DataFrameTransformDeprecated;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutTransform
- * Elasticsearch API name data_frame_transform_deprecated.put_transform
- *
- */
 class PutTransform extends AbstractEndpoint
 {
     protected $transform_id;

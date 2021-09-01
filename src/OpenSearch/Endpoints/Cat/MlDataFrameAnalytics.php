@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class MlDataFrameAnalytics
- * Elasticsearch API name cat.ml_data_frame_analytics
- *
- */
 class MlDataFrameAnalytics extends AbstractEndpoint
 {
     public function getURI(): string

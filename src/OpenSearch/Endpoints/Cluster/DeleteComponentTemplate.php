@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Cluster;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteComponentTemplate
- * Elasticsearch API name cluster.delete_component_template
- *
- */
 class DeleteComponentTemplate extends AbstractEndpoint
 {
     protected $name;

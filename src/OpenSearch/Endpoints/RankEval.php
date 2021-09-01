@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class RankEval
- * Elasticsearch API name rank_eval
- *
- */
 class RankEval extends AbstractEndpoint
 {
     public function getURI(): string

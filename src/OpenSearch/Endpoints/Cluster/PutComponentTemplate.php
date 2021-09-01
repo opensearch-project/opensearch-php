@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Cluster;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutComponentTemplate
- * Elasticsearch API name cluster.put_component_template
- *
- */
 class PutComponentTemplate extends AbstractEndpoint
 {
     protected $name;

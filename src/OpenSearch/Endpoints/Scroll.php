@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Scroll
- * Elasticsearch API name scroll
- *
- */
 class Scroll extends AbstractEndpoint
 {
     protected $scroll_id;

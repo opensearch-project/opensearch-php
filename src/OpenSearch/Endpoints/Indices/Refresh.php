@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Refresh
- * Elasticsearch API name indices.refresh
- *
- */
 class Refresh extends AbstractEndpoint
 {
     public function getURI(): string

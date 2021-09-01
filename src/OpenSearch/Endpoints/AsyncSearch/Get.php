@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\AsyncSearch;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Get
- * Elasticsearch API name async_search.get
- *
- */
 class Get extends AbstractEndpoint
 {
     public function getURI(): string

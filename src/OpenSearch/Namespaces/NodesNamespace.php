@@ -34,7 +34,6 @@ class NodesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html
      */
     public function hotThreads(array $params = [])
     {
@@ -55,7 +54,6 @@ class NodesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html
      */
     public function info(array $params = [])
     {
@@ -77,7 +75,6 @@ class NodesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings
      */
     public function reloadSecureSettings(array $params = [])
     {
@@ -107,7 +104,6 @@ class NodesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html
      */
     public function stats(array $params = [])
     {
@@ -131,7 +127,6 @@ class NodesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-usage.html
      */
     public function usage(array $params = [])
     {

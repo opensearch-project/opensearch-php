@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Rollup;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetRollupCaps
- * Elasticsearch API name rollup.get_rollup_caps
- *
- */
 class GetRollupCaps extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Fielddata
- * Elasticsearch API name cat.fielddata
- *
- */
 class Fielddata extends AbstractEndpoint
 {
     protected $fields;

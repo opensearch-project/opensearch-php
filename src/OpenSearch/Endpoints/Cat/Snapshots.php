@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Snapshots
- * Elasticsearch API name cat.snapshots
- *
- */
 class Snapshots extends AbstractEndpoint
 {
     protected $repository;
