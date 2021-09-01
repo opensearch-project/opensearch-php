@@ -254,7 +254,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html
      */
     public function bulk(array $params = [])
     {
@@ -277,7 +276,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-scroll-api.html
      */
     public function clearScroll(array $params = [])
     {
@@ -313,7 +311,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html
      */
     public function count(array $params = [])
     {
@@ -345,7 +342,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
      */
     public function create(array $params = [])
     {
@@ -379,7 +375,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html
      */
     public function delete(array $params = [])
     {
@@ -436,7 +431,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete-by-query.html
      */
     public function deleteByQuery(array $params = [])
     {
@@ -459,7 +453,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
      */
     public function deleteByQueryRethrottle(array $params = [])
     {
@@ -479,7 +472,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
      */
     public function deleteScript(array $params = [])
     {
@@ -509,7 +501,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
      */
     public function exists(array $params = []): bool
     {
@@ -545,7 +536,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
      */
     public function existsSource(array $params = []): bool
     {
@@ -585,7 +575,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html
      */
     public function explain(array $params = [])
     {
@@ -615,7 +604,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-caps.html
      */
     public function fieldCaps(array $params = [])
     {
@@ -647,7 +635,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
      */
     public function get(array $params = [])
     {
@@ -670,7 +657,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
      */
     public function getScript(array $params = [])
     {
@@ -687,7 +673,7 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-contexts.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -704,7 +690,7 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -733,7 +719,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
      */
     public function getSource(array $params = [])
     {
@@ -769,7 +754,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
      */
     public function index(array $params = [])
     {
@@ -792,7 +776,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
      */
     public function info(array $params = [])
     {
@@ -817,7 +800,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html
      */
     public function mget(array $params = [])
     {
@@ -848,7 +830,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html
      */
     public function msearch(array $params = [])
     {
@@ -877,7 +858,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-multi-search.html
      */
     public function msearchTemplate(array $params = [])
     {
@@ -913,7 +893,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html
      */
     public function mtermvectors(array $params = [])
     {
@@ -934,7 +913,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
      */
     public function ping(array $params = []): bool
     {
@@ -957,7 +935,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
      */
     public function putScript(array $params = [])
     {
@@ -984,7 +961,7 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -1015,7 +992,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html
      */
     public function reindex(array $params = [])
     {
@@ -1034,7 +1010,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html
      */
     public function reindexRethrottle(array $params = [])
     {
@@ -1053,7 +1028,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html#_validating_templates
      */
     public function renderSearchTemplate(array $params = [])
     {
@@ -1073,7 +1047,7 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -1097,7 +1071,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-body.html#request-body-search-scroll
      */
     public function scroll(array $params = [])
     {
@@ -1161,7 +1134,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html
      */
     public function search(array $params = [])
     {
@@ -1189,7 +1161,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
      */
     public function searchShards(array $params = [])
     {
@@ -1222,7 +1193,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
      */
     public function searchTemplate(array $params = [])
     {
@@ -1258,7 +1228,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
      */
     public function termvectors(array $params = [])
     {
@@ -1297,7 +1266,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html
      */
     public function update(array $params = [])
     {
@@ -1358,7 +1326,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update-by-query.html
      */
     public function updateByQuery(array $params = [])
     {
@@ -1381,7 +1348,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html
      */
     public function updateByQueryRethrottle(array $params = [])
     {
@@ -1399,7 +1365,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html
      */
     public function closePointInTime(array $params = [])
     {
@@ -1422,7 +1387,6 @@ class Client
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/point-in-time-api.html
      */
     public function openPointInTime(array $params = [])
     {

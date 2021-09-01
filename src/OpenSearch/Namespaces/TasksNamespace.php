@@ -32,7 +32,6 @@ class TasksNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
      */
     public function cancel(array $params = [])
     {
@@ -52,7 +51,6 @@ class TasksNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
      */
     public function get(array $params = [])
     {
@@ -76,7 +74,6 @@ class TasksNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
      */
     public function list(array $params = [])
     {

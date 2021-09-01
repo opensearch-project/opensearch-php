@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Nodes;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Info
- * Elasticsearch API name nodes.info
- *
- */
 class Info extends AbstractEndpoint
 {
     protected $node_id;

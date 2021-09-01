@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Transform;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PreviewTransform
- * Elasticsearch API name transform.preview_transform
- *
- */
 class PreviewTransform extends AbstractEndpoint
 {
     public function getURI(): string

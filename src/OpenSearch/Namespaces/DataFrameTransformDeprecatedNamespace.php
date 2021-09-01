@@ -29,7 +29,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -53,7 +53,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -77,7 +77,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -111,7 +111,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -135,7 +135,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -159,7 +159,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -182,7 +182,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *

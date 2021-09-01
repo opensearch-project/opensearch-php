@@ -35,7 +35,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html
      */
     public function aliases(array $params = [])
     {
@@ -61,7 +60,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html
      */
     public function allocation(array $params = [])
     {
@@ -84,7 +82,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html
      */
     public function count(array $params = [])
     {
@@ -108,7 +105,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
      */
     public function fielddata(array $params = [])
     {
@@ -132,7 +128,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html
      */
     public function health(array $params = [])
     {
@@ -148,7 +143,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html
      */
     public function help(array $params = [])
     {
@@ -176,7 +170,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html
      */
     public function indices(array $params = [])
     {
@@ -200,7 +193,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html
      */
     public function master(array $params = [])
     {
@@ -221,7 +213,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html
      */
     public function nodeattrs(array $params = [])
     {
@@ -245,7 +236,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html
      */
     public function nodes(array $params = [])
     {
@@ -267,7 +257,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html
      */
     public function pendingTasks(array $params = [])
     {
@@ -288,7 +277,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
      */
     public function plugins(array $params = [])
     {
@@ -312,7 +300,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html
      */
     public function recovery(array $params = [])
     {
@@ -336,7 +323,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-repositories.html
      */
     public function repositories(array $params = [])
     {
@@ -357,7 +343,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
      */
     public function segments(array $params = [])
     {
@@ -384,7 +369,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html
      */
     public function shards(array $params = [])
     {
@@ -410,7 +394,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-snapshots.html
      */
     public function snapshots(array $params = [])
     {
@@ -437,7 +420,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/tasks.html
      */
     public function tasks(array $params = [])
     {
@@ -459,7 +441,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-templates.html
      */
     public function templates(array $params = [])
     {
@@ -485,7 +466,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
      */
     public function threadPool(array $params = [])
     {
@@ -592,7 +572,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-trained-model.html
      */
     public function mlTrainedModels(array $params = [])
     {
@@ -619,7 +598,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/cat-transforms.html
      */
     public function transforms(array $params = [])
     {

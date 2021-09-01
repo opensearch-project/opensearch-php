@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ExistsType
- * Elasticsearch API name indices.exists_type
- *
- */
 class ExistsType extends AbstractEndpoint
 {
     public function getURI(): string

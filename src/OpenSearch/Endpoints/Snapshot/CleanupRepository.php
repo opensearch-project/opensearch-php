@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class CleanupRepository
- * Elasticsearch API name snapshot.cleanup_repository
- *
- */
 class CleanupRepository extends AbstractEndpoint
 {
     protected $repository;

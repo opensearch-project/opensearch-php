@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class UpdateByQuery
- * Elasticsearch API name update_by_query
- *
- */
 class UpdateByQuery extends AbstractEndpoint
 {
     public function getURI(): string

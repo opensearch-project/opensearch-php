@@ -40,7 +40,6 @@ class SqlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-rest-overview.html
      */
     public function query(array $params = [])
     {
@@ -58,7 +57,6 @@ class SqlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/sql-translate.html
      */
     public function translate(array $params = [])
     {

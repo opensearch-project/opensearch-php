@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Nodes;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Usage
- * Elasticsearch API name nodes.usage
- *
- */
 class Usage extends AbstractEndpoint
 {
     protected $node_id;

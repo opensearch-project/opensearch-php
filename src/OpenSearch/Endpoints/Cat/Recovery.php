@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Recovery
- * Elasticsearch API name cat.recovery
- *
- */
 class Recovery extends AbstractEndpoint
 {
     public function getURI(): string

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Transform;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteTransform
- * Elasticsearch API name transform.delete_transform
- *
- */
 class DeleteTransform extends AbstractEndpoint
 {
     protected $transform_id;

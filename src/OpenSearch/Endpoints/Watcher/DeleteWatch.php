@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Watcher;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteWatch
- * Elasticsearch API name watcher.delete_watch
- *
- */
 class DeleteWatch extends AbstractEndpoint
 {
     public function getURI(): string

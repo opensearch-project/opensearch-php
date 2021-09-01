@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Analyze
- * Elasticsearch API name indices.analyze
- *
- */
 class Analyze extends AbstractEndpoint
 {
     public function getURI(): string

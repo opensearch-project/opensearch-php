@@ -32,7 +32,7 @@ class MonitoringNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/monitor-elasticsearch-cluster.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *

@@ -30,7 +30,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/clean-up-snapshot-repo-api.html
      */
     public function cleanupRepository(array $params = [])
     {
@@ -52,7 +51,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function clone(array $params = [])
     {
@@ -80,7 +78,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function create(array $params = [])
     {
@@ -106,7 +103,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function createRepository(array $params = [])
     {
@@ -128,7 +124,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function delete(array $params = [])
     {
@@ -150,7 +145,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function deleteRepository(array $params = [])
     {
@@ -172,7 +166,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function get(array $params = [])
     {
@@ -194,7 +187,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function getRepository(array $params = [])
     {
@@ -216,7 +208,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function restore(array $params = [])
     {
@@ -241,7 +232,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function status(array $params = [])
     {
@@ -263,7 +253,6 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
      */
     public function verifyRepository(array $params = [])
     {

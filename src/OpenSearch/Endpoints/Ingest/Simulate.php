@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Ingest;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Simulate
- * Elasticsearch API name ingest.simulate
- *
- */
 class Simulate extends AbstractEndpoint
 {
     public function getURI(): string

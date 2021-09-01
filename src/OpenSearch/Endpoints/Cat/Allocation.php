@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Allocation
- * Elasticsearch API name cat.allocation
- *
- */
 class Allocation extends AbstractEndpoint
 {
     protected $node_id;

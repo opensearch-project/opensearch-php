@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Health
- * Elasticsearch API name cluster.health
- *
- */
 class Health extends AbstractEndpoint
 {
     public function getURI(): string

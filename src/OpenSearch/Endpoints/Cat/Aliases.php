@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Aliases
- * Elasticsearch API name cat.aliases
- *
- */
 class Aliases extends AbstractEndpoint
 {
     protected $name;

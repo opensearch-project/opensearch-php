@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ForceMerge
- * Elasticsearch API name indices.forcemerge
- *
- */
 class ForceMerge extends AbstractEndpoint
 {
     public function getURI(): string

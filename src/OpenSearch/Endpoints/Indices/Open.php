@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Open
- * Elasticsearch API name indices.open
- *
- */
 class Open extends AbstractEndpoint
 {
     public function getURI(): string

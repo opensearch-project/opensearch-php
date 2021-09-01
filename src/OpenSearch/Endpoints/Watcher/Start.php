@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Watcher;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Start
- * Elasticsearch API name watcher.start
- *
- */
 class Start extends AbstractEndpoint
 {
     public function getURI(): string

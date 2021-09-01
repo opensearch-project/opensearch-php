@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Delete
- * Elasticsearch API name indices.delete
- *
- */
 class Delete extends AbstractEndpoint
 {
     public function getURI(): string

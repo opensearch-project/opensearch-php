@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetRepository
- * Elasticsearch API name snapshot.get_repository
- *
- */
 class GetRepository extends AbstractEndpoint
 {
     protected $repository;

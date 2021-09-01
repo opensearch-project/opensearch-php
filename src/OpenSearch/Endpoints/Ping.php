@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Ping
- * Elasticsearch API name ping
- *
- */
 class Ping extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Enrich;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetPolicy
- * Elasticsearch API name enrich.get_policy
- *
- */
 class GetPolicy extends AbstractEndpoint
 {
     protected $name;

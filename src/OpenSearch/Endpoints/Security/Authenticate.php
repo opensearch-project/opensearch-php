@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Authenticate
- * Elasticsearch API name security.authenticate
- *
- */
 class Authenticate extends AbstractEndpoint
 {
     public function getURI(): string

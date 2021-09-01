@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Help
- * Elasticsearch API name cat.help
- *
- */
 class Help extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Watcher;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Stats
- * Elasticsearch API name watcher.stats
- *
- */
 class Stats extends AbstractEndpoint
 {
     protected $metric;

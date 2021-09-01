@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class HasPrivileges
- * Elasticsearch API name security.has_privileges
- *
- */
 class HasPrivileges extends AbstractEndpoint
 {
     protected $user;

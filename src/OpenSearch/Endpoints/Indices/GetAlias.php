@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetAlias
- * Elasticsearch API name indices.get_alias
- *
- */
 class GetAlias extends AbstractEndpoint
 {
     protected $name;

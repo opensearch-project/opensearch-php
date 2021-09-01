@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutUser
- * Elasticsearch API name security.put_user
- *
- */
 class PutUser extends AbstractEndpoint
 {
     protected $username;

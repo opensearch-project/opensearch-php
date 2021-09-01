@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutMapping
- * Elasticsearch API name indices.put_mapping
- *
- */
 class PutMapping extends AbstractEndpoint
 {
     public function getURI(): string

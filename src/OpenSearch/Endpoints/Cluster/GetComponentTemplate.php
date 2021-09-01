@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetComponentTemplate
- * Elasticsearch API name cluster.get_component_template
- *
- */
 class GetComponentTemplate extends AbstractEndpoint
 {
     protected $name;

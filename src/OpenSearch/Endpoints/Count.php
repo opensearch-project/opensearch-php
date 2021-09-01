@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Count
- * Elasticsearch API name count
- *
- */
 class Count extends AbstractEndpoint
 {
     public function getURI(): string

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\SearchableSnapshots;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class RepositoryStats
- * Elasticsearch API name searchable_snapshots.repository_stats
- *
- */
 class RepositoryStats extends AbstractEndpoint
 {
     protected $repository;

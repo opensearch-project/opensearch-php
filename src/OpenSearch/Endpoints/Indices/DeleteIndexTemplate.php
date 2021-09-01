@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteIndexTemplate
- * Elasticsearch API name indices.delete_index_template
- *
- */
 class DeleteIndexTemplate extends AbstractEndpoint
 {
     protected $name;

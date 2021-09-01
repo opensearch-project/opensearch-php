@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Migration;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Deprecations
- * Elasticsearch API name migration.deprecations
- *
- */
 class Deprecations extends AbstractEndpoint
 {
     public function getURI(): string

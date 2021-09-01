@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ChangePassword
- * Elasticsearch API name security.change_password
- *
- */
 class ChangePassword extends AbstractEndpoint
 {
     protected $username;

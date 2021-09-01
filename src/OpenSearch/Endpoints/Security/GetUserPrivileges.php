@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetUserPrivileges
- * Elasticsearch API name security.get_user_privileges
- *
- */
 class GetUserPrivileges extends AbstractEndpoint
 {
     public function getURI(): string

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class TermVectors
- * Elasticsearch API name termvectors
- *
- */
 class TermVectors extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Reroute
- * Elasticsearch API name cluster.reroute
- *
- */
 class Reroute extends AbstractEndpoint
 {
     public function getURI(): string

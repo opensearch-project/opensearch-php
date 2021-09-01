@@ -27,7 +27,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html
      */
     public function authenticate(array $params = [])
     {
@@ -44,7 +43,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html
      */
     public function changePassword(array $params = [])
     {
@@ -64,7 +62,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html
      */
     public function clearApiKeyCache(array $params = [])
     {
@@ -82,7 +79,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html
      */
     public function clearCachedPrivileges(array $params = [])
     {
@@ -101,7 +97,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html
      */
     public function clearCachedRealms(array $params = [])
     {
@@ -119,7 +114,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html
      */
     public function clearCachedRoles(array $params = [])
     {
@@ -138,7 +132,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html
      */
     public function createApiKey(array $params = [])
     {
@@ -158,7 +151,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html
      */
     public function deletePrivileges(array $params = [])
     {
@@ -179,7 +171,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html
      */
     public function deleteRole(array $params = [])
     {
@@ -198,7 +189,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html
      */
     public function deleteRoleMapping(array $params = [])
     {
@@ -217,7 +207,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html
      */
     public function deleteUser(array $params = [])
     {
@@ -236,7 +225,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html
      */
     public function disableUser(array $params = [])
     {
@@ -255,7 +243,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html
      */
     public function enableUser(array $params = [])
     {
@@ -277,7 +264,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html
      */
     public function getApiKey(array $params = [])
     {
@@ -291,7 +277,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html
      */
     public function getBuiltinPrivileges(array $params = [])
     {
@@ -307,7 +292,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html
      */
     public function getPrivileges(array $params = [])
     {
@@ -327,7 +311,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html
      */
     public function getRole(array $params = [])
     {
@@ -345,7 +328,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html
      */
     public function getRoleMapping(array $params = [])
     {
@@ -363,7 +345,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html
      */
     public function getToken(array $params = [])
     {
@@ -381,7 +362,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html
      */
     public function getUser(array $params = [])
     {
@@ -398,7 +378,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html
      */
     public function getUserPrivileges(array $params = [])
     {
@@ -414,7 +393,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html
      */
     public function grantApiKey(array $params = [])
     {
@@ -433,7 +411,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html
      */
     public function hasPrivileges(array $params = [])
     {
@@ -464,7 +441,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html
      */
     public function invalidateToken(array $params = [])
     {
@@ -483,7 +459,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html
      */
     public function putPrivileges(array $params = [])
     {
@@ -503,7 +478,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html
      */
     public function putRole(array $params = [])
     {
@@ -525,7 +499,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html
      */
     public function putRoleMapping(array $params = [])
     {
@@ -547,7 +520,6 @@ class SecurityNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html
      */
     public function putUser(array $params = [])
     {

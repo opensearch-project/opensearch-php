@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Split
- * Elasticsearch API name indices.split
- *
- */
 class Split extends AbstractEndpoint
 {
     protected $target;

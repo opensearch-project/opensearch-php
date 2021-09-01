@@ -28,7 +28,7 @@ class EqlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -51,7 +51,7 @@ class EqlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *
@@ -76,7 +76,7 @@ class EqlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html
+
      *
      * @note This API is BETA and may change in ways that are not backwards compatible
      *

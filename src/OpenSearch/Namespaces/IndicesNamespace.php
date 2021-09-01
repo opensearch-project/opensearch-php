@@ -34,7 +34,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html
      */
     public function addBlock(array $params = [])
     {
@@ -55,7 +54,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html
      */
     public function analyze(array $params = [])
     {
@@ -82,7 +80,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html
      */
     public function clearCache(array $params = [])
     {
@@ -105,7 +102,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html
      */
     public function clone(array $params = [])
     {
@@ -133,7 +129,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
      */
     public function close(array $params = [])
     {
@@ -156,7 +151,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html
      */
     public function create(array $params = [])
     {
@@ -181,7 +175,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html
      */
     public function delete(array $params = [])
     {
@@ -202,7 +195,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
      */
     public function deleteAlias(array $params = [])
     {
@@ -224,7 +216,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -247,7 +239,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
      */
     public function deleteTemplate(array $params = [])
     {
@@ -271,7 +262,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html
      */
     public function exists(array $params = []): bool
     {
@@ -297,7 +287,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
      */
     public function existsAlias(array $params = []): bool
     {
@@ -323,7 +312,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -350,7 +339,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
      */
     public function existsTemplate(array $params = []): bool
     {
@@ -376,7 +364,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html
      */
     public function existsType(array $params = []): bool
     {
@@ -404,7 +391,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
      */
     public function flush(array $params = [])
     {
@@ -425,7 +411,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush-api.html
      */
     public function flushSynced(array $params = [])
     {
@@ -449,7 +434,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html
      */
     public function forcemerge(array $params = [])
     {
@@ -475,7 +459,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html
      */
     public function get(array $params = [])
     {
@@ -498,7 +481,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
      */
     public function getAlias(array $params = [])
     {
@@ -526,7 +508,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html
      */
     public function getFieldMapping(array $params = [])
     {
@@ -551,7 +532,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -579,7 +560,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html
      */
     public function getMapping(array $params = [])
     {
@@ -607,7 +587,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html
      */
     public function getSettings(array $params = [])
     {
@@ -631,7 +610,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
      */
     public function getTemplate(array $params = [])
     {
@@ -652,7 +630,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
      */
     public function getUpgrade(array $params = [])
     {
@@ -676,7 +653,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
      */
     public function open(array $params = [])
     {
@@ -698,7 +674,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
      */
     public function putAlias(array $params = [])
     {
@@ -724,7 +699,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -756,7 +731,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html
      */
     public function putMapping(array $params = [])
     {
@@ -786,7 +760,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html
      */
     public function putSettings(array $params = [])
     {
@@ -811,7 +784,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
      */
     public function putTemplate(array $params = [])
     {
@@ -833,7 +805,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
      */
     public function recovery(array $params = [])
     {
@@ -854,7 +825,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html
      */
     public function refresh(array $params = [])
     {
@@ -873,7 +843,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-resolve-index-api.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -901,7 +871,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html
      */
     public function rollover(array $params = [])
     {
@@ -927,7 +896,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html
      */
     public function segments(array $params = [])
     {
@@ -949,7 +917,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html
      */
     public function shardStores(array $params = [])
     {
@@ -973,7 +940,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shrink-index.html
      */
     public function shrink(array $params = [])
     {
@@ -999,7 +965,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -1026,7 +992,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -1055,7 +1021,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-split-index.html
      */
     public function split(array $params = [])
     {
@@ -1088,7 +1053,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html
      */
     public function stats(array $params = [])
     {
@@ -1110,7 +1074,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
      */
     public function updateAliases(array $params = [])
     {
@@ -1133,7 +1096,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
      */
     public function upgrade(array $params = [])
     {
@@ -1165,7 +1127,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html
      */
     public function validateQuery(array $params = [])
     {
@@ -1187,7 +1148,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
      */
     public function createDataStream(array $params = [])
     {
@@ -1205,7 +1165,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
      */
     public function dataStreamsStats(array $params = [])
     {
@@ -1223,7 +1182,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
      */
     public function deleteDataStream(array $params = [])
     {
@@ -1247,7 +1205,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/freeze-index-api.html
      */
     public function freeze(array $params = [])
     {
@@ -1265,7 +1222,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html
      */
     public function getDataStream(array $params = [])
     {
@@ -1286,7 +1242,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-reload-analyzers.html
      */
     public function reloadSearchAnalyzers(array $params = [])
     {
@@ -1310,7 +1265,6 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/unfreeze-index-api.html
      */
     public function unfreeze(array $params = [])
     {

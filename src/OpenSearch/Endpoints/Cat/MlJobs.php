@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class MlJobs
- * Elasticsearch API name cat.ml_jobs
- *
- */
 class MlJobs extends AbstractEndpoint
 {
     protected $job_id;

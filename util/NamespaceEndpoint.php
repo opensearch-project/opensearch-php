@@ -29,8 +29,8 @@ class NamespaceEndpoint
     protected $name;
     protected $endpoints = [];
     protected $endpointNames = [];
-    protected $version; /* Elasticsearch version used to generate the class */
-    protected $buildhash; /* Elasticsearch build hash used to generate the class */
+    protected $version;
+    protected $buildhash;
 
     public function __construct(string $name, string $version, string $buildhash)
     {

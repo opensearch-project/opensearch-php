@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class State
- * Elasticsearch API name cluster.state
- *
- */
 class State extends AbstractEndpoint
 {
     protected $metric;

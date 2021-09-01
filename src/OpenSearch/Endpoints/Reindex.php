@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Reindex
- * Elasticsearch API name reindex
- *
- */
 class Reindex extends AbstractEndpoint
 {
     public function getURI(): string

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class AddBlock
- * Elasticsearch API name indices.add_block
- *
- */
 class AddBlock extends AbstractEndpoint
 {
     protected $block;

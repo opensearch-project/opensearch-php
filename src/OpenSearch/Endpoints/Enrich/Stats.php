@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Enrich;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Stats
- * Elasticsearch API name enrich.stats
- *
- */
 class Stats extends AbstractEndpoint
 {
     public function getURI(): string

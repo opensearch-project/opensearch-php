@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Ingest;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetPipeline
- * Elasticsearch API name ingest.get_pipeline
- *
- */
 class GetPipeline extends AbstractEndpoint
 {
     public function getURI(): string

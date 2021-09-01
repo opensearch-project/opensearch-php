@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class OpenPointInTime
- * Elasticsearch API name open_point_in_time
- *
- */
 class OpenPointInTime extends AbstractEndpoint
 {
     public function getURI(): string

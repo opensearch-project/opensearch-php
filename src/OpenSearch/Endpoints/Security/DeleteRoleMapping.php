@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteRoleMapping
- * Elasticsearch API name security.delete_role_mapping
- *
- */
 class DeleteRoleMapping extends AbstractEndpoint
 {
     protected $name;

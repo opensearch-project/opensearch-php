@@ -28,7 +28,7 @@ class AutoscalingNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-delete-autoscaling-policy.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -57,7 +57,7 @@ class AutoscalingNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-get-autoscaling-policy.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -79,7 +79,7 @@ class AutoscalingNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/autoscaling-put-autoscaling-policy.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Transform;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class StartTransform
- * Elasticsearch API name transform.start_transform
- *
- */
 class StartTransform extends AbstractEndpoint
 {
     protected $transform_id;

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Shards
- * Elasticsearch API name cat.shards
- *
- */
 class Shards extends AbstractEndpoint
 {
     public function getURI(): string

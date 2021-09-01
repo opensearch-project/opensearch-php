@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Plugins
- * Elasticsearch API name cat.plugins
- *
- */
 class Plugins extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Ingest;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ProcessorGrok
- * Elasticsearch API name ingest.processor_grok
- *
- */
 class ProcessorGrok extends AbstractEndpoint
 {
     public function getURI(): string

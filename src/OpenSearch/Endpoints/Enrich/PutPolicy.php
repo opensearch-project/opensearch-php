@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Enrich;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutPolicy
- * Elasticsearch API name enrich.put_policy
- *
- */
 class PutPolicy extends AbstractEndpoint
 {
     protected $name;

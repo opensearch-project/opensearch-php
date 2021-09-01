@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Ingest;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutPipeline
- * Elasticsearch API name ingest.put_pipeline
- *
- */
 class PutPipeline extends AbstractEndpoint
 {
     public function getURI(): string

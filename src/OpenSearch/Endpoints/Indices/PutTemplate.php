@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutTemplate
- * Elasticsearch API name indices.put_template
- *
- */
 class PutTemplate extends AbstractEndpoint
 {
     protected $name;

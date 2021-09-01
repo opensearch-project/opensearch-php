@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Slm;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ExecuteRetention
- * Elasticsearch API name slm.execute_retention
- *
- */
 class ExecuteRetention extends AbstractEndpoint
 {
     public function getURI(): string

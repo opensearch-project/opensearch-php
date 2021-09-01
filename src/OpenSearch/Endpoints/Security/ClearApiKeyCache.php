@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ClearApiKeyCache
- * Elasticsearch API name security.clear_api_key_cache
- *
- */
 class ClearApiKeyCache extends AbstractEndpoint
 {
     protected $ids;

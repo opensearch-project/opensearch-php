@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Indices
- * Elasticsearch API name cat.indices
- *
- */
 class Indices extends AbstractEndpoint
 {
     public function getURI(): string

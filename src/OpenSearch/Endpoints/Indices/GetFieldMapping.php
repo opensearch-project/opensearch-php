@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetFieldMapping
- * Elasticsearch API name indices.get_field_mapping
- *
- */
 class GetFieldMapping extends AbstractEndpoint
 {
     protected $fields;

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Mget
- * Elasticsearch API name mget
- *
- */
 class Mget extends AbstractEndpoint
 {
     public function getURI(): string

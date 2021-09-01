@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Transform;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class UpdateTransform
- * Elasticsearch API name transform.update_transform
- *
- */
 class UpdateTransform extends AbstractEndpoint
 {
     protected $transform_id;

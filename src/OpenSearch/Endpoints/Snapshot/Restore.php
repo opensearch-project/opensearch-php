@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Snapshot;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Restore
- * Elasticsearch API name snapshot.restore
- *
- */
 class Restore extends AbstractEndpoint
 {
     protected $repository;

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class SimulateTemplate
- * Elasticsearch API name indices.simulate_template
- *
- */
 class SimulateTemplate extends AbstractEndpoint
 {
     protected $name;

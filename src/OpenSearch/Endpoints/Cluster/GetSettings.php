@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetSettings
- * Elasticsearch API name cluster.get_settings
- *
- */
 class GetSettings extends AbstractEndpoint
 {
     public function getURI(): string

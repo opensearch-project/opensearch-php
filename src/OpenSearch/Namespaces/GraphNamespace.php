@@ -32,7 +32,6 @@ class GraphNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/graph-explore-api.html
      */
     public function explore(array $params = [])
     {

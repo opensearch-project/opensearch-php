@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Nodes;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class HotThreads
- * Elasticsearch API name nodes.hot_threads
- *
- */
 class HotThreads extends AbstractEndpoint
 {
     protected $node_id;

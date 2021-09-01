@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Transform;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetTransformStats
- * Elasticsearch API name transform.get_transform_stats
- *
- */
 class GetTransformStats extends AbstractEndpoint
 {
     protected $transform_id;

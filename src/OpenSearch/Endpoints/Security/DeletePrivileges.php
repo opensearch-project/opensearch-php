@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Security;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeletePrivileges
- * Elasticsearch API name security.delete_privileges
- *
- */
 class DeletePrivileges extends AbstractEndpoint
 {
     protected $application;

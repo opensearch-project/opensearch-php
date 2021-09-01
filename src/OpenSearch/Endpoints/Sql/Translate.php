@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Sql;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Translate
- * Elasticsearch API name sql.translate
- *
- */
 class Translate extends AbstractEndpoint
 {
     public function getURI(): string

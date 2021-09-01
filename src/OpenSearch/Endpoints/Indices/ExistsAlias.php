@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ExistsAlias
- * Elasticsearch API name indices.exists_alias
- *
- */
 class ExistsAlias extends AbstractEndpoint
 {
     protected $name;

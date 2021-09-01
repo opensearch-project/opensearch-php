@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Slm;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetStatus
- * Elasticsearch API name slm.get_status
- *
- */
 class GetStatus extends AbstractEndpoint
 {
     public function getURI(): string

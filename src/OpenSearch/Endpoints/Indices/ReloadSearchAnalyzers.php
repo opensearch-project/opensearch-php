@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ReloadSearchAnalyzers
- * Elasticsearch API name indices.reload_search_analyzers
- *
- */
 class ReloadSearchAnalyzers extends AbstractEndpoint
 {
     public function getURI(): string

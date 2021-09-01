@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Segments
- * Elasticsearch API name cat.segments
- *
- */
 class Segments extends AbstractEndpoint
 {
     public function getURI(): string

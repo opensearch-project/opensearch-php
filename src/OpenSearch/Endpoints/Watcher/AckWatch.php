@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Watcher;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class AckWatch
- * Elasticsearch API name watcher.ack_watch
- *
- */
 class AckWatch extends AbstractEndpoint
 {
     protected $watch_id;

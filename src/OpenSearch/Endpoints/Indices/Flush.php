@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Flush
- * Elasticsearch API name indices.flush
- *
- */
 class Flush extends AbstractEndpoint
 {
     public function getURI(): string

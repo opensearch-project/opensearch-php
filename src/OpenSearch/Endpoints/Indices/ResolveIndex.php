@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ResolveIndex
- * Elasticsearch API name indices.resolve_index
- *
- */
 class ResolveIndex extends AbstractEndpoint
 {
     protected $name;

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutAlias
- * Elasticsearch API name indices.put_alias
- *
- */
 class PutAlias extends AbstractEndpoint
 {
     protected $name;

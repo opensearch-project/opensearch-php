@@ -29,7 +29,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html
      */
     public function deleteTransform(array $params = [])
     {
@@ -50,7 +49,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html
      */
     public function getTransform(array $params = [])
     {
@@ -71,7 +69,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html
      */
     public function getTransformStats(array $params = [])
     {
@@ -102,7 +99,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html
      */
     public function putTransform(array $params = [])
     {
@@ -123,7 +119,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html
      */
     public function startTransform(array $params = [])
     {
@@ -146,7 +141,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html
      */
     public function stopTransform(array $params = [])
     {
@@ -166,7 +160,6 @@ class TransformNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html
      */
     public function updateTransform(array $params = [])
     {

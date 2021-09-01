@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Count
- * Elasticsearch API name cat.count
- *
- */
 class Count extends AbstractEndpoint
 {
     public function getURI(): string

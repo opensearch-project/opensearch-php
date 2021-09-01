@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetScriptContext
- * Elasticsearch API name get_script_context
- *
- */
 class GetScriptContext extends AbstractEndpoint
 {
     public function getURI(): string

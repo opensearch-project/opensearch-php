@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ReindexRethrottle
- * Elasticsearch API name reindex_rethrottle
- *
- */
 class ReindexRethrottle extends AbstractEndpoint
 {
     protected $task_id;

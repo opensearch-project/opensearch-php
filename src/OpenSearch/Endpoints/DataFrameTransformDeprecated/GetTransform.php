@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\DataFrameTransformDeprecated;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetTransform
- * Elasticsearch API name data_frame_transform_deprecated.get_transform
- *
- */
 class GetTransform extends AbstractEndpoint
 {
     protected $transform_id;

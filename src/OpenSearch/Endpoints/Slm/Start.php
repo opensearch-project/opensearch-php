@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Slm;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Start
- * Elasticsearch API name slm.start
- *
- */
 class Start extends AbstractEndpoint
 {
     public function getURI(): string

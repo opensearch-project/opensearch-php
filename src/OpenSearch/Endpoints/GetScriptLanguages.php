@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetScriptLanguages
- * Elasticsearch API name get_script_languages
- *
- */
 class GetScriptLanguages extends AbstractEndpoint
 {
     public function getURI(): string

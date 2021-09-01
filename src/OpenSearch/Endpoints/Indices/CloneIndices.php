@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Indices;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class CloneIndices
- * Elasticsearch API name indices.clone
- *
- */
 class CloneIndices extends AbstractEndpoint
 {
     protected $target;

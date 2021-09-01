@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Exists
- * Elasticsearch API name exists
- *
- */
 class Exists extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Search
- * Elasticsearch API name search
- *
- */
 class Search extends AbstractEndpoint
 {
     public function getURI(): string

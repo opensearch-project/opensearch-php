@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ScriptsPainlessExecute
- * Elasticsearch API name scripts_painless_execute
- *
- */
 class ScriptsPainlessExecute extends AbstractEndpoint
 {
     public function getURI(): string

@@ -30,7 +30,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html
      */
     public function allocationExplain(array $params = [])
     {
@@ -50,7 +49,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -71,7 +70,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
@@ -88,7 +86,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return bool
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -114,7 +112,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -138,7 +136,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
      */
     public function getSettings(array $params = [])
     {
@@ -164,7 +161,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html
      */
     public function health(array $params = [])
     {
@@ -183,7 +179,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html
      */
     public function pendingTasks(array $params = [])
     {
@@ -200,7 +195,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/voting-config-exclusions.html
      */
     public function postVotingConfigExclusions(array $params = [])
     {
@@ -219,7 +213,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-component-template.html
+
      *
      * @note This API is EXPERIMENTAL and may be changed or removed completely in a future release
      *
@@ -245,7 +239,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
      */
     public function putSettings(array $params = [])
     {
@@ -262,7 +255,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-remote-info.html
      */
     public function remoteInfo(array $params = [])
     {
@@ -283,7 +275,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html
      */
     public function reroute(array $params = [])
     {
@@ -310,7 +301,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html
      */
     public function state(array $params = [])
     {
@@ -332,7 +322,6 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html
      */
     public function stats(array $params = [])
     {

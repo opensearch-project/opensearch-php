@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ValidateQuery
- * Elasticsearch API name indices.validate_query
- *
- */
 class ValidateQuery extends AbstractEndpoint
 {
     public function getURI(): string

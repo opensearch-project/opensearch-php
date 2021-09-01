@@ -20,11 +20,6 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Serializers\SerializerInterface;
 use Traversable;
 
-/**
- * Class Bulk
- * Elasticsearch API name monitoring.bulk
- *
- */
 class Bulk extends AbstractEndpoint
 {
     public function __construct(SerializerInterface $serializer)

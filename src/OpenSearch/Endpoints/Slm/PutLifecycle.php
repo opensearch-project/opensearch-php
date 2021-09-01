@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Slm;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutLifecycle
- * Elasticsearch API name slm.put_lifecycle
- *
- */
 class PutLifecycle extends AbstractEndpoint
 {
     protected $policy_id;

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Rollup;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class StopJob
- * Elasticsearch API name rollup.stop_job
- *
- */
 class StopJob extends AbstractEndpoint
 {
     public function getURI(): string

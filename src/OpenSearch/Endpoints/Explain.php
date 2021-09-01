@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class Explain
- * Elasticsearch API name explain
- *
- */
 class Explain extends AbstractEndpoint
 {
     public function getURI(): string

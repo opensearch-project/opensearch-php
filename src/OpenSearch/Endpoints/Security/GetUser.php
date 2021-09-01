@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Security;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetUser
- * Elasticsearch API name security.get_user
- *
- */
 class GetUser extends AbstractEndpoint
 {
     protected $username;

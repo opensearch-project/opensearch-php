@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Tasks;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ListTasks
- * Elasticsearch API name tasks.list
- *
- */
 class ListTasks extends AbstractEndpoint
 {
     public function getURI(): string

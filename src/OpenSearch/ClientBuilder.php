@@ -228,7 +228,7 @@ class ClientBuilder
                 $default = new CurlMultiHandler($config);
             }
         } else {
-            throw new \RuntimeException('Elasticsearch-PHP requires cURL, or a custom HTTP handler.');
+            throw new \RuntimeException('OpenSearch-PHP requires cURL, or a custom HTTP handler.');
         }
 
         return $future ? Middleware::wrapFuture($default, $future) : $default;
@@ -243,9 +243,9 @@ class ClientBuilder
     {
         if (function_exists('curl_multi_init')) {
             return new CurlMultiHandler(array_merge([ 'mh' => curl_multi_init() ], $params));
-        } else {
-            throw new \RuntimeException('CurlMulti handler requires cURL.');
         }
+
+        throw new \RuntimeException('CurlMulti handler requires cURL.');
     }
 
     /**

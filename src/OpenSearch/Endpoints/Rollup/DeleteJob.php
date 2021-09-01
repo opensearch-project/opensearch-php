@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Rollup;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteJob
- * Elasticsearch API name rollup.delete_job
- *
- */
 class DeleteJob extends AbstractEndpoint
 {
     public function getURI(): string

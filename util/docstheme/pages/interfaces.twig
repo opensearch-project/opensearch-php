@@ -3,7 +3,7 @@
 {% from "macros.twig" import class_item, replace_backslash, back_to_forward, sanitize %}
 
 {% block title %}
-[[{{ sanitize(replace_backslash("ElasticsearchPHP_Interfaces")) }}]]
+[[{{ sanitize(replace_backslash("OpenSearch_Interfaces")) }}]]
 == {{ "Reference - Interfaces" }}
 {% endblock %}
 
@@ -11,11 +11,13 @@
 
 This is a complete list of available interfaces:
 
+{% apply spaceless %}
+{% set foundInterface = false %}
+
 {% for interface in classes %}
 {% if interface.interface %}
+    {% set foundInterface = true %}
 * <<{{ replace_backslash(interface) }}, {{ interface }}>>
-{% else %}
-* There are no interfaces available.
 {% endif %}
 {% endfor %}
 {% for interface in classes %}
@@ -24,4 +26,9 @@ include::{{ back_to_forward(interface) }}.asciidoc[]
 {% else %}
 {% endif %}
 {% endfor %}
+
+{% if not foundInterface %}
+    * There are no interfaces available.
+{% endif %}
+{%- endapply %}
 {% endblock %}

@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Slm;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeleteLifecycle
- * Elasticsearch API name slm.delete_lifecycle
- *
- */
 class DeleteLifecycle extends AbstractEndpoint
 {
     protected $policy_id;

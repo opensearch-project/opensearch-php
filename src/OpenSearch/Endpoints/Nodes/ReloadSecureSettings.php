@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Nodes;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class ReloadSecureSettings
- * Elasticsearch API name nodes.reload_secure_settings
- *
- */
 class ReloadSecureSettings extends AbstractEndpoint
 {
     protected $node_id;

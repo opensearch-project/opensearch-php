@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\DataFrameTransformDeprecated;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PreviewTransform
- * Elasticsearch API name data_frame_transform_deprecated.preview_transform
- *
- */
 class PreviewTransform extends AbstractEndpoint
 {
     public function getURI(): string

@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Slm;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class GetLifecycle
- * Elasticsearch API name slm.get_lifecycle
- *
- */
 class GetLifecycle extends AbstractEndpoint
 {
     protected $policy_id;

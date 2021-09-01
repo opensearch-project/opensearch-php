@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Cluster;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PendingTasks
- * Elasticsearch API name cluster.pending_tasks
- *
- */
 class PendingTasks extends AbstractEndpoint
 {
     public function getURI(): string

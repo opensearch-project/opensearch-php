@@ -18,11 +18,6 @@ namespace OpenSearch\Endpoints\Enrich;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class DeletePolicy
- * Elasticsearch API name enrich.delete_policy
- *
- */
 class DeletePolicy extends AbstractEndpoint
 {
     protected $name;

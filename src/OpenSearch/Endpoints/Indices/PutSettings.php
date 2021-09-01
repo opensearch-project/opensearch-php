@@ -17,11 +17,6 @@ namespace OpenSearch\Endpoints\Indices;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * Class PutSettings
- * Elasticsearch API name indices.put_settings
- *
- */
 class PutSettings extends AbstractEndpoint
 {
     public function getURI(): string
