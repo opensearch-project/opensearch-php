@@ -39,8 +39,6 @@ use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\EnrichNamespace;
 use OpenSearch\Namespaces\EqlNamespace;
 use OpenSearch\Namespaces\GraphNamespace;
-use OpenSearch\Namespaces\IlmNamespace;
-use OpenSearch\Namespaces\LicenseNamespace;
 use OpenSearch\Namespaces\MigrationNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\RollupNamespace;
@@ -151,16 +149,6 @@ class Client
     protected $graph;
 
     /**
-     * @var IlmNamespace
-     */
-    protected $ilm;
-
-    /**
-     * @var LicenseNamespace
-     */
-    protected $license;
-
-    /**
      * @var MigrationNamespace
      */
     protected $migration;
@@ -236,8 +224,6 @@ class Client
         $this->enrich = new EnrichNamespace($transport, $endpoint);
         $this->eql = new EqlNamespace($transport, $endpoint);
         $this->graph = new GraphNamespace($transport, $endpoint);
-        $this->ilm = new IlmNamespace($transport, $endpoint);
-        $this->license = new LicenseNamespace($transport, $endpoint);
         $this->migration = new MigrationNamespace($transport, $endpoint);
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
         $this->rollup = new RollupNamespace($transport, $endpoint);
@@ -1504,14 +1490,6 @@ class Client
     public function graph(): GraphNamespace
     {
         return $this->graph;
-    }
-    public function ilm(): IlmNamespace
-    {
-        return $this->ilm;
-    }
-    public function license(): LicenseNamespace
-    {
-        return $this->license;
     }
     public function migration(): MigrationNamespace
     {
