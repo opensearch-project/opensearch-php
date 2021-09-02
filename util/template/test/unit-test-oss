@@ -9,7 +9,7 @@ use OpenSearch\Tests\Utility;
 use stdClass;
 
 /**
- * YAML test for Elasticsearch
+ * YAML test for OpenSearch
  * @see :yamlfile
  * @group :group
  *

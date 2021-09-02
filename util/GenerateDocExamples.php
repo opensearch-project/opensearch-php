@@ -166,7 +166,7 @@ function normalizeApiName(string $api): string
 }
 
 /**
- * Check if the generated code has a valid PHP syntax using Elasticsearch\Client
+ * Check if the generated code has a valid PHP syntax using OpenSearch\Client
  */
 function checkIfCodeHasValidSyntax(string $code): void
 {
