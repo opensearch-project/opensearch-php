@@ -40,7 +40,7 @@ class Endpoint
         'protected', 'public', 'require', 'require_once', 'return', 'static',
         'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor'
     ];
-    // this is for backward compatibility with elasticsearch-php 7.x
+    // this is for backward compatibility
     public const BC_CLASS_NAME = [
         'Cat\Nodeattrs'      => 'NodeAttrs',
         'Indices\Forcemerge' => 'ForceMerge',
@@ -60,12 +60,6 @@ class Endpoint
     private $addedPartInDoc = [];
     private $properties = [];
 
-    /**
-     * @param $fileName name of the file with the API specification
-     * @param $content content of the API specification in JSON
-     * @param $version Elasticsearch version of the API specification
-     * @param $buildhash Elasticsearch build hash of the API specification
-     */
     public function __construct(
         string $fileName,
         string $content,

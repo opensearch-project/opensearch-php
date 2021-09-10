@@ -224,7 +224,6 @@ class ActionTest
     private function node_selector(array $actions)
     {
         // this is an empty function since we are using only 1 node
-        // @see https://github.com/elastic/elasticsearch/tree/master/rest-api-spec/src/main/resources/rest-api-spec/test#node_selector
     }
 
     private function match(array $actions)
