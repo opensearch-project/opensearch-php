@@ -36,7 +36,7 @@ class Utility
         if (false !== $url) {
             return $url;
         }
-        return 'http://elastic:changeme@localhost:9200';
+        return 'https://admin:admin@localhost:9200';
     }
 
     /**
@@ -46,6 +46,7 @@ class Utility
     {
         $clientBuilder = ClientBuilder::create()
             ->setHosts([self::getHost()]);
+
         $clientBuilder->setConnectionParams([
             'client' => [
                 'headers' => [
@@ -53,6 +54,7 @@ class Utility
                 ]
             ]
         ]);
+
         $clientBuilder->setSSLVerification(false);
         return $clientBuilder->build();
     }

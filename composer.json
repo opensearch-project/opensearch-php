@@ -50,6 +50,12 @@
     ],
     "phpstan": [
       "phpstan analyse --no-progress"
+    ],
+    "unit": [
+      "phpunit"
+    ],
+    "integration": [
+      "phpunit -c phpunit-integration-tests.xml"
     ]
   }
 }
