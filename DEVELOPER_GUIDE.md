@@ -1,6 +1,6 @@
 # Developer Guide
 
-So you want to contribute code to the OpenSearch Go Client? Excellent! We're glad you're here. Here's what you need to do:
+So you want to contribute code to the OpenSearch PHP Client? Excellent! We're glad you're here. Here's what you need to do:
 
 ## Getting Started
 
