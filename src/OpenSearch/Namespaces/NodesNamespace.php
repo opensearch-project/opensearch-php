@@ -71,7 +71,7 @@ class NodesNamespace extends AbstractNamespace
     /**
      * $params['node_id'] = (list) A comma-separated list of node IDs to span the reload/reinit call. Should stay empty because reloading usually involves all cluster nodes.
      * $params['timeout'] = (time) Explicit operation timeout
-     * $params['body']    = (array) An object containing the password for the elasticsearch keystore
+     * $params['body']    = (array) An object containing the password for the opensearch keystore
      *
      * @param array $params Associative array of parameters
      * @return array

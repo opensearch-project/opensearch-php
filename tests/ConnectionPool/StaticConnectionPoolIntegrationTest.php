@@ -42,6 +42,7 @@ class StaticConnectionPoolIntegrationTest extends \PHPUnit\Framework\TestCase
         $client = \OpenSearch\ClientBuilder::create()
             ->setHosts([$this->host])
             ->setConnectionPool(\OpenSearch\ConnectionPool\StaticConnectionPool::class)
+            ->setSSLVerification(false)
             ->build();
 
         $connection = $client->transport->getConnection();

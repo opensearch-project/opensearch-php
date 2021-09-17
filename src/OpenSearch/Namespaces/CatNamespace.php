@@ -491,7 +491,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see http://www.elastic.co/guide/en/elasticsearch/reference/current/cat-dfanalytics.html
      */
     public function mlDataFrameAnalytics(array $params = [])
     {
@@ -517,7 +516,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see http://www.elastic.co/guide/en/elasticsearch/reference/current/cat-datafeeds.html
      */
     public function mlDatafeeds(array $params = [])
     {
@@ -544,7 +542,6 @@ class CatNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      * @return array
-     * @see http://www.elastic.co/guide/en/elasticsearch/reference/current/cat-anomaly-detectors.html
      */
     public function mlJobs(array $params = [])
     {

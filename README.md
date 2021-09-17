@@ -14,6 +14,7 @@
 
 * [Project Website](https://opensearch.org/)
 * [User Guide](USER_GUIDE.md)
+* [Developer Guide](DEVELOPER_GUIDE.md)
 * [Downloads](https://opensearch.org/downloads.html).
 * [Documentation](https://docs-beta.opensearch.org/)
 * Need help? Try [Forums](https://discuss.opendistrocommunity.dev/)

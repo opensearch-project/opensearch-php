@@ -56,12 +56,12 @@ jobs:
 
     - name: Unit tests
       run: |
-        vendor/bin/phpunit -c phpunit.xml.dist
+        composer run unit
       env:
         TEST_SUITE: free
 
     - name: Integration tests
       run: |
-        vendor/bin/phpunit -c phpunit-integration-tests.xml
+        composer run integration
       env:
         OPENSEARCH_URL: 'http://localhost:9200'

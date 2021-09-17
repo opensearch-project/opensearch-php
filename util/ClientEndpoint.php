@@ -28,8 +28,8 @@ class ClientEndpoint extends NamespaceEndpoint
     protected $endpoints = [];
     protected $endpointNames = [];
     protected $namespace = [];
-    protected $version; /* Elasticsearch version used to generate the class */
-    protected $buildhash; /* Elasticsearch build hash used to generate the class */
+    protected $version;
+    protected $buildhash;
 
     public function __construct(array $namespace, string $version, string $buildhash)
     {

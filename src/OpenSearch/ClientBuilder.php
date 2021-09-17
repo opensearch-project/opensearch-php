@@ -17,18 +17,13 @@ namespace OpenSearch;
 
 use OpenSearch\Common\Exceptions\InvalidArgumentException;
 use OpenSearch\Common\Exceptions\RuntimeException;
-use OpenSearch\Common\Exceptions\ElasticCloudIdParseException;
 use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
-use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\ConnectionPool\StaticNoPingConnectionPool;
-use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactory;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
-use OpenSearch\Serializers\SerializerInterface;
-use OpenSearch\ConnectionPool\Selectors;
 use OpenSearch\Serializers\SmartSerializer;
 use GuzzleHttp\Ring\Client\CurlHandler;
 use GuzzleHttp\Ring\Client\CurlMultiHandler;
@@ -756,27 +751,5 @@ class ClientBuilder
         }
 
         return $host;
-    }
-
-    /**
-     * Parse the Elastic Cloud Params from the CloudId
-     *
-     * @param string $cloudId
-     *
-     * @return string
-     *
-     * @throws ElasticCloudIdParseException
-     */
-    private function parseElasticCloudId(string $cloudId): string
-    {
-        try {
-            list($name, $encoded) = explode(':', $cloudId);
-            list($uri, $uuids)    = explode('$', base64_decode($encoded));
-            list($es, )            = explode(':', $uuids);
-
-            return $es . '.' . $uri;
-        } catch (\Throwable $t) {
-            throw new ElasticCloudIdParseException('could not parse the Cloud ID:' . $cloudId);
-        }
     }
 }

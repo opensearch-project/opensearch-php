@@ -51,7 +51,8 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         $client = ClientBuilder::create()
             ->setHosts([$this->host])
-            ->setLogger($this->logger);
+            ->setLogger($this->logger)
+            ->setSSLVerification(false);
 
         return $client->build();
     }
