@@ -1,3 +1,15 @@
+This software is licensed under the Apache 2.0 by the OpenSearch Contributors.
+
+Election of Apache 2.0.
+
+For the avoidance of doubt, the OpenSearch Contributors
+(i) elect to use only the Apache License, Version 2.0 for all software where a
+    choice of Apache License, Version 2.0 and GNU Lesser General Public License, Version 2.1 is made available and
+(ii) elect to use only the Apache License, Version 2.0 on modifications of the software by OpenSearch Contributors.
+
+This software includes certain Elastic software that included the following in the NOTICE file
+located here: https://github.com/elastic/elasticsearch-php/blob/master/NOTICE
+
 Apache v2.0 Notice:
     Copyright 2013-2014 Elasticsearch
 
