@@ -1,6 +1,13 @@
-Copyright 2013-2020 Elasticsearch B.V.
+This software is licensed under the Apache License, version 2.0 by the OpenSearch Contributors.
 
-elasticsearch-php is licensed under the Apache License, Version 2.0
-(<LICENSE-APACHE> or <http://www.apache.org/licenses/LICENSE-2.0>) or the GNU
-Lesser General Public License, Version 2.1 (<LICENSE-LGPL> or
-<https://www.gnu.org/licenses/lgpl-2.1.html>) at your option.
+This software also includes certain Elastic software that can be used under the Apache License, Version 2.0
+(<LICENSE-APACHE> or <http://www.apache.org/licenses/LICENSE-2.0> (http://www.apache.org/licenses/LICENSE-2.0))
+or the GNU Lesser General Public License, Version 2.1
+(<LICENSE-LGPL> or <https://www.gnu.org/licenses/lgpl-2.1.html> (https://www.gnu.org/licenses/lgpl-2.1.html))
+
+Election of Apache 2.0.
+
+For the avoidance of doubt, the OpenSearch Contributors (i) elect to use only the Apache License, Version 2.0 for all
+software where a choice of Apache License, Version 2.0 and GNU Lesser General Public License, Version 2.1 is
+made available and (ii) elect to use only the Apache License, Version 2.0 on modifications of the software
+by OpenSearch Contributors.
