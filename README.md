@@ -31,8 +31,8 @@ This project has adopted the [Amazon Open Source Code of Conduct](CODE_OF_CONDUC
 
 ## License
 
-This project is licensed under the [Apache v2.0 License](LICENSE.txt).
+This project is licensed under the [Apache v2.0 License](LICENSE).
 
 ## Copyright
 
-Copyright OpenSearch Contributors. See [NOTICE](NOTICE.txt) for details.
+Copyright OpenSearch Contributors. See [NOTICE](NOTICE) for details.
