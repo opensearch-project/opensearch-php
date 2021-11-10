@@ -34,22 +34,10 @@ use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\AsyncSearchNamespace;
-use OpenSearch\Namespaces\AutoscalingNamespace;
 use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
-use OpenSearch\Namespaces\EnrichNamespace;
-use OpenSearch\Namespaces\EqlNamespace;
-use OpenSearch\Namespaces\GraphNamespace;
-use OpenSearch\Namespaces\MigrationNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
-use OpenSearch\Namespaces\RollupNamespace;
 use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
-use OpenSearch\Namespaces\SecurityNamespace;
-use OpenSearch\Namespaces\SlmNamespace;
-use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\SslNamespace;
-use OpenSearch\Namespaces\TransformNamespace;
-use OpenSearch\Namespaces\WatcherNamespace;
-
 /**
  * Class Client
  *
@@ -124,34 +112,9 @@ class Client
     protected $asyncSearch;
 
     /**
-     * @var AutoscalingNamespace
-     */
-    protected $autoscaling;
-
-    /**
      * @var DataFrameTransformDeprecatedNamespace
      */
     protected $dataFrameTransformDeprecated;
-
-    /**
-     * @var EnrichNamespace
-     */
-    protected $enrich;
-
-    /**
-     * @var EqlNamespace
-     */
-    protected $eql;
-
-    /**
-     * @var GraphNamespace
-     */
-    protected $graph;
-
-    /**
-     * @var MigrationNamespace
-     */
-    protected $migration;
 
     /**
      * @var MonitoringNamespace
@@ -159,44 +122,15 @@ class Client
     protected $monitoring;
 
     /**
-     * @var RollupNamespace
-     */
-    protected $rollup;
-
-    /**
      * @var SearchableSnapshotsNamespace
      */
     protected $searchableSnapshots;
-
-    /**
-     * @var SecurityNamespace
-     */
-    protected $security;
-
-    /**
-     * @var SlmNamespace
-     */
-    protected $slm;
-
-    /**
-     * @var SqlNamespace
-     */
-    protected $sql;
 
     /**
      * @var SslNamespace
      */
     protected $ssl;
 
-    /**
-     * @var TransformNamespace
-     */
-    protected $transform;
-
-    /**
-     * @var WatcherNamespace
-     */
-    protected $watcher;
 
 
     /**
@@ -219,21 +153,10 @@ class Client
         $this->snapshot = new SnapshotNamespace($transport, $endpoint);
         $this->tasks = new TasksNamespace($transport, $endpoint);
         $this->asyncSearch = new AsyncSearchNamespace($transport, $endpoint);
-        $this->autoscaling = new AutoscalingNamespace($transport, $endpoint);
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $endpoint);
-        $this->enrich = new EnrichNamespace($transport, $endpoint);
-        $this->eql = new EqlNamespace($transport, $endpoint);
-        $this->graph = new GraphNamespace($transport, $endpoint);
-        $this->migration = new MigrationNamespace($transport, $endpoint);
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
-        $this->rollup = new RollupNamespace($transport, $endpoint);
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $endpoint);
-        $this->security = new SecurityNamespace($transport, $endpoint);
-        $this->slm = new SlmNamespace($transport, $endpoint);
-        $this->sql = new SqlNamespace($transport, $endpoint);
         $this->ssl = new SslNamespace($transport, $endpoint);
-        $this->transform = new TransformNamespace($transport, $endpoint);
-        $this->watcher = new WatcherNamespace($transport, $endpoint);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -1435,65 +1358,21 @@ class Client
     {
         return $this->asyncSearch;
     }
-    public function autoscaling(): AutoscalingNamespace
-    {
-        return $this->autoscaling;
-    }
     public function dataFrameTransformDeprecated(): DataFrameTransformDeprecatedNamespace
     {
         return $this->dataFrameTransformDeprecated;
-    }
-    public function enrich(): EnrichNamespace
-    {
-        return $this->enrich;
-    }
-    public function eql(): EqlNamespace
-    {
-        return $this->eql;
-    }
-    public function graph(): GraphNamespace
-    {
-        return $this->graph;
-    }
-    public function migration(): MigrationNamespace
-    {
-        return $this->migration;
     }
     public function monitoring(): MonitoringNamespace
     {
         return $this->monitoring;
     }
-    public function rollup(): RollupNamespace
-    {
-        return $this->rollup;
-    }
     public function searchableSnapshots(): SearchableSnapshotsNamespace
     {
         return $this->searchableSnapshots;
     }
-    public function security(): SecurityNamespace
-    {
-        return $this->security;
-    }
-    public function slm(): SlmNamespace
-    {
-        return $this->slm;
-    }
-    public function sql(): SqlNamespace
-    {
-        return $this->sql;
-    }
     public function ssl(): SslNamespace
     {
         return $this->ssl;
-    }
-    public function transform(): TransformNamespace
-    {
-        return $this->transform;
-    }
-    public function watcher(): WatcherNamespace
-    {
-        return $this->watcher;
     }
 
     /**
