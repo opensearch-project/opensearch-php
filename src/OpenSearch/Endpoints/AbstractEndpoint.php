@@ -23,9 +23,7 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Common\Exceptions\UnexpectedValueException;
 use OpenSearch\Serializers\SerializerInterface;
-use OpenSearch\Transport;
-use Exception;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
+use function array_filter;
 
 abstract class AbstractEndpoint
 {
@@ -126,6 +124,7 @@ abstract class AbstractEndpoint
         }
 
         if (is_array($index) === true) {
+            $index = array_filter($index);
             $index = array_map('trim', $index);
             $index = implode(",", $index);
         }
