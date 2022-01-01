@@ -27,7 +27,7 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Transport;
 use GuzzleHttp\Ring\Future\FutureArrayInterface;
 
-trait BooleanRequestWrapper
+abstract class BooleanRequestWrapper
 {
     /**
      * Perform Request
