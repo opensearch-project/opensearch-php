@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace OpenSearch\Endpoints;
 
 use OpenSearch\Common\Exceptions\UnexpectedValueException;
+use OpenSearch\Endpoints\Cluster\AllocationExplain;
 use OpenSearch\Serializers\SerializerInterface;
 use function array_filter;
 
@@ -30,7 +31,7 @@ abstract class AbstractEndpoint
     /**
      * @var array
      */
-    protected $params =[];
+    protected $params = [];
 
     /**
      * @var string
@@ -86,7 +87,7 @@ abstract class AbstractEndpoint
     /**
      * Set the parameters for this endpoint
      *
-     * @param  string[] $params Array of parameters
+     * @param string[] $params Array of parameters
      * @return $this
      */
     public function setParams(array $params)
@@ -143,8 +144,8 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @deprecated
      * @return     $this
+     * @deprecated
      */
     public function setType(?string $type)
     {
@@ -174,7 +175,7 @@ abstract class AbstractEndpoint
         }
 
         if (is_int($docID)) {
-            $docID = (string) $docID;
+            $docID = (string)$docID;
         }
 
         $this->id = urlencode($docID);
@@ -190,13 +191,21 @@ abstract class AbstractEndpoint
         return $this->body;
     }
 
+
+    public function setBody(array $body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
     protected function getOptionalURI(string $endpoint): string
     {
         $uri = [];
         $uri[] = $this->getOptionalIndex();
         $uri[] = $this->getOptionalType();
         $uri[] = $endpoint;
-        $uri =  array_filter($uri);
+        $uri = array_filter($uri);
 
         return '/' . implode('/', $uri);
     }
@@ -232,7 +241,7 @@ abstract class AbstractEndpoint
 
         $whitelist = array_merge(
             $this->getParamWhitelist(),
-            [ 'pretty', 'human', 'error_trace', 'source', 'filter_path', 'opaqueId' ]
+            ['pretty', 'human', 'error_trace', 'source', 'filter_path', 'opaqueId']
         );
 
         $invalid = array_diff(array_keys($params), $whitelist);
@@ -241,7 +250,7 @@ abstract class AbstractEndpoint
             sort($whitelist);
             throw new UnexpectedValueException(
                 sprintf(
-                    (count($invalid) > 1 ? '"%s" are not valid parameters.' : '"%s" is not a valid parameter.').' Allowed parameters are "%s"',
+                    (count($invalid) > 1 ? '"%s" are not valid parameters.' : '"%s" is not a valid parameter.') . ' Allowed parameters are "%s"',
                     implode('", "', $invalid),
                     implode('", "', $whitelist)
                 )
