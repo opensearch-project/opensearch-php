@@ -38,12 +38,14 @@ use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
+use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\AsyncSearchNamespace;
 use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SslNamespace;
+
 /**
  * Class Client
  *
@@ -137,7 +139,10 @@ class Client
      */
     protected $ssl;
 
-
+    /**
+     * @var SqlNamespace
+     */
+    protected $sql;
 
     /**
      * Client constructor
@@ -163,6 +168,7 @@ class Client
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $endpoint);
         $this->ssl = new SslNamespace($transport, $endpoint);
+        $this->sql = new SqlNamespace($transport, $endpoint);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -1379,6 +1385,11 @@ class Client
     public function ssl(): SslNamespace
     {
         return $this->ssl;
+    }
+
+    public function sql(): SqlNamespace
+    {
+        return $this->sql;
     }
 
     /**
