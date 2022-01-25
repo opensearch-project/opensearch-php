@@ -22,7 +22,6 @@ declare(strict_types=1);
 namespace OpenSearch\Endpoints;
 
 use OpenSearch\Common\Exceptions\UnexpectedValueException;
-use OpenSearch\Endpoints\Cluster\AllocationExplain;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
 use Exception;
