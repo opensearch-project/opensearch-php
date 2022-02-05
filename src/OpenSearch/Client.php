@@ -37,6 +37,7 @@ use OpenSearch\Namespaces\DanglingIndicesNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
+use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
@@ -135,6 +136,11 @@ class Client
     protected $searchableSnapshots;
 
     /**
+     * @var SecurityNamespace
+     */
+    protected $security;
+
+    /**
      * @var SslNamespace
      */
     protected $ssl;
@@ -167,6 +173,7 @@ class Client
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $endpoint);
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $endpoint);
+        $this->security = new SecurityNamespace($transport, $endpoint);
         $this->ssl = new SslNamespace($transport, $endpoint);
         $this->sql = new SqlNamespace($transport, $endpoint);
 
@@ -1382,6 +1389,12 @@ class Client
     {
         return $this->searchableSnapshots;
     }
+
+    public function security(): SecurityNamespace
+    {
+        return $this->security;
+    }
+
     public function ssl(): SslNamespace
     {
         return $this->ssl;

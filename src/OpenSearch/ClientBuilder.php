@@ -620,8 +620,8 @@ class ClientBuilder
         $registeredNamespaces = [];
         foreach ($this->registeredNamespacesBuilders as $builder) {
             /**
- * @var NamespaceBuilderInterface $builder
-*/
+             * @var NamespaceBuilderInterface $builder
+             */
             $registeredNamespaces[$builder->getName()] = $builder->getObject($this->transport, $this->serializer);
         }
 
