@@ -70,11 +70,11 @@ class SecurityNamespace extends AbstractNamespace
     {
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\CreateRole');
-        $endpoint->setBody([
+        $endpoint->setBody(array_filter([
             'cluster_permissions' => $this->extractArgument($params, 'cluster_permissions'),
             'index_permissions' => $this->extractArgument($params, 'index_permissions'),
             'tenant_permissions' => $this->extractArgument($params, 'tenant_permissions'),
-        ]);
+        ]));
         $endpoint->setRole($this->extractArgument($params, 'role'));
         $endpoint->setParams($params);
 
@@ -94,11 +94,11 @@ class SecurityNamespace extends AbstractNamespace
     {
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\CreateRoleMapping');
-        $endpoint->setBody([
+        $endpoint->setBody(array_filter([
             'backend_roles' => $this->extractArgument($params, 'backend_roles'),
             'hosts' => $this->extractArgument($params, 'hosts'),
             'users' => $this->extractArgument($params, 'users'),
-        ]);
+        ]));
         $endpoint->setRole($this->extractArgument($params, 'role'));
         $endpoint->setParams($params);
 
@@ -139,12 +139,12 @@ class SecurityNamespace extends AbstractNamespace
     {
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Security\CreateUser');
-        $endpoint->setBody([
+        $endpoint->setBody(array_filter([
             'password' => $this->extractArgument($params, 'password'),
             'opendistro_security_roles' => $this->extractArgument($params, 'opendistro_security_roles'),
             'backend_roles' => $this->extractArgument($params, 'backend_roles'),
             'attributes' => $this->extractArgument($params, 'attributes'),
-        ]);
+        ]));
         $endpoint->setUsername($this->extractArgument($params, 'username'));
         $endpoint->setParams($params);
 
