@@ -19,7 +19,8 @@ jobs:
         search-server-image:
           - docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0
           - opensearchproject/opensearch:1.1.0
-          - opensearchproject/opensearch:1.2.3
+          - opensearchproject/opensearch:1.2.4
+          - opensearchproject/opensearch:1.3.1
     services:
       search-server:
         image: ${{ matrix.search-server-image }}
