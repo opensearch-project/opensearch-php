@@ -1,3 +1,11 @@
+- [Developer Guide](#developer-guide)
+  - [Getting Started](#getting-started)
+    - [Git Clone OpenSearch PHP Client Repository](#git-clone-opensearch-php-client-repository)
+    - [Install Prerequisites](#install-prerequisites)
+      - [PHP 7.3 or higher](#php-73-or-higher)
+    - [Unit Testing](#unit-testing)
+    - [Integration Testing](#integration-testing)
+    - [Static analyse and code style checker](#static-analyse-and-code-style-checker)
 # Developer Guide
 
 So you want to contribute code to the OpenSearch PHP Client? Excellent! We're glad you're here. Here's what you need to do:
