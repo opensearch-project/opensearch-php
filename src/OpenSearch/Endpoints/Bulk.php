@@ -50,7 +50,6 @@ class Bulk extends AbstractEndpoint
             'refresh',
             'routing',
             'timeout',
-            'type',
             '_source',
             '_source_excludes',
             '_source_includes',

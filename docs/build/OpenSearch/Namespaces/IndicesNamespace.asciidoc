@@ -163,7 +163,6 @@ $params['wait_for_active_shards'] = (string) Sets the number of active shards to
 ----
 /*
 $params['index']                  = (string) The name of the index
-$params['include_type_name']      = (boolean) Whether a type should be expected in the body of the mappings.
 */
 ----
 ****
@@ -346,7 +345,6 @@ $params['only_expunge_deletes'] = (boolean) Specify whether the operation should
 ----
 /*
 $params['index']              = (list) A comma-separated list of index names
-$params['include_type_name']  = (boolean) Whether to add the type name to the response (default: false)
 $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
 $params['ignore_unavailable'] = (boolean) Ignore unavailable indexes (default: false)
 $params['allow_no_indices']   = (boolean) Ignore if a wildcard expression resolves to no concrete indices (default: false)
@@ -386,7 +384,6 @@ $params['local']              = (boolean) Return local information, do not retri
 /*
 $params['fields']             = (list) A comma-separated list of fields (Required)
 $params['index']              = (list) A comma-separated list of index names
-$params['include_type_name']  = (boolean) Whether a type should be returned in the body of the mappings.
 */
 ----
 ****
@@ -417,7 +414,6 @@ $params['local']          = (boolean) Return local information, do not retrieve 
 ----
 /*
 $params['index']              = (list) A comma-separated list of index names
-$params['include_type_name']  = (boolean) Whether to add the type name to the response (default: false)
 $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
 $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
 $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
@@ -457,7 +453,6 @@ $params['include_defaults']   = (boolean) Whether to return all default setting 
 ----
 /*
 $params['name']              = (list) The comma separated names of the index templates
-$params['include_type_name'] = (boolean) Whether a type should be returned in the body of the mappings.
 */
 ----
 ****
@@ -575,7 +570,6 @@ $params['body']               = (array) The index settings to be updated (Requir
 ----
 /*
 $params['name']              = (string) The name of the template
-$params['include_type_name'] = (boolean) Whether a type should be returned in the body of the mappings.
 */
 ----
 ****
@@ -636,7 +630,6 @@ $params['expand_wildcards'] = (enum) Whether wildcard expressions should get exp
 /*
 $params['alias']                  = (string) The name of the alias to rollover (Required)
 $params['new_index']              = (string) The name of the rollover index
-$params['include_type_name']      = (boolean) Whether a type should be included in the body of the mappings.
 */
 ----
 ****

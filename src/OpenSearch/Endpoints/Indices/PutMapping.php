@@ -38,7 +38,6 @@ class PutMapping extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'include_type_name',
             'timeout',
             'master_timeout',
             'ignore_unavailable',

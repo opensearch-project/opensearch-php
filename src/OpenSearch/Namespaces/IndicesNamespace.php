@@ -149,7 +149,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']                  = (string) The name of the index
-     * $params['include_type_name']      = (boolean) Whether a type should be expected in the body of the mappings.
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for before the operation returns.
      * $params['timeout']                = (time) Explicit operation timeout
      * $params['master_timeout']         = (time) Specify timeout for connection to master
@@ -407,7 +406,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['include_type_name']  = (boolean) Whether to add the type name to the response (default: false)
      * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
      * $params['ignore_unavailable'] = (boolean) Ignore unavailable indexes (default: false)
      * $params['allow_no_indices']   = (boolean) Ignore if a wildcard expression resolves to no concrete indices (default: false)
@@ -457,7 +455,6 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['fields']             = (list) A comma-separated list of fields (Required)
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['include_type_name']  = (boolean) Whether a type should be returned in the body of the mappings.
      * $params['include_defaults']   = (boolean) Whether the default mapping values should be returned as well
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -506,7 +503,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['include_type_name']  = (boolean) Whether to add the type name to the response (default: false)
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
@@ -556,7 +552,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['name']              = (list) The comma separated names of the index templates
-     * $params['include_type_name'] = (boolean) Whether a type should be returned in the body of the mappings.
      * $params['flat_settings']     = (boolean) Return settings in flat format (default: false)
      * $params['master_timeout']    = (time) Explicit operation timeout for connection to master node
      * $params['local']             = (boolean) Return local information, do not retrieve the state from master node (default: false)
@@ -672,7 +667,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.
-     * $params['include_type_name']  = (boolean) Whether a type should be expected in the body of the mappings.
      * $params['timeout']            = (time) Explicit operation timeout
      * $params['master_timeout']     = (time) Specify timeout for connection to master
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
@@ -726,7 +720,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['name']              = (string) The name of the template
-     * $params['include_type_name'] = (boolean) Whether a type should be returned in the body of the mappings.
      * $params['order']             = (number) The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)
      * $params['create']            = (boolean) Whether the index template should only be added if new or can also replace an existing one (Default = false)
      * $params['master_timeout']    = (time) Specify timeout for connection to master
@@ -812,7 +805,6 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['alias']                  = (string) The name of the alias to rollover (Required)
      * $params['new_index']              = (string) The name of the rollover index
-     * $params['include_type_name']      = (boolean) Whether a type should be included in the body of the mappings.
      * $params['timeout']                = (time) Explicit operation timeout
      * $params['dry_run']                = (boolean) If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false
      * $params['master_timeout']         = (time) Specify timeout for connection to master
