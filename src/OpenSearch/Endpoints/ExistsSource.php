@@ -40,14 +40,6 @@ class ExistsSource extends AbstractEndpoint
             );
         }
         $index = $this->index;
-        $type = $this->type ?? null;
-        if (isset($type)) {
-            @trigger_error('Specifying types in urls has been deprecated', E_USER_DEPRECATED);
-        }
-
-        if (isset($type)) {
-            return "/$index/$type/$id/_source";
-        }
         return "/$index/_source/$id";
     }
 

@@ -23,7 +23,6 @@ The class defines the following methods:
 [source,php]
 ----
 /*
-$params['type']               = DEPRECATED (string) Default document type for items which don't provide one
 $params['system_id']          = (string) Identifier of the monitored system
 $params['system_api_version'] = (string) API Version of the monitored system
 $params['interval']           = (string) Collection interval (e.g., '10s' or '10000ms') of the payload

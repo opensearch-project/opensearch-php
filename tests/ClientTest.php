@@ -103,7 +103,6 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $client->delete(
             [
             'index' => null,
-            'type' => 'test',
             'id' => 'test'
             ]
         );

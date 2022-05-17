@@ -38,11 +38,6 @@ abstract class AbstractEndpoint
     protected $index = null;
 
     /**
-     * @var string
-     */
-    protected $type = null;
-
-    /**
      * @var string|int
      */
     protected $id = null;
@@ -135,34 +130,6 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @deprecated
-     */
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return     $this
-     * @deprecated
-     */
-    public function setType(?string $type)
-    {
-        if ($type === null) {
-            return $this;
-        }
-
-        if (is_array($type) === true) {
-            $type = array_map('trim', $type);
-            $type = implode(",", $type);
-        }
-
-        $this->type = urlencode($type);
-
-        return $this;
-    }
-
-    /**
      * @param int|string $docID
      *
      * @return $this
@@ -202,7 +169,6 @@ abstract class AbstractEndpoint
     {
         $uri = [];
         $uri[] = $this->getOptionalIndex();
-        $uri[] = $this->getOptionalType();
         $uri[] = $endpoint;
         $uri = array_filter($uri);
 
@@ -215,15 +181,6 @@ abstract class AbstractEndpoint
             return $this->index;
         } else {
             return '_all';
-        }
-    }
-
-    private function getOptionalType(): string
-    {
-        if (isset($this->type) === true) {
-            return $this->type;
-        } else {
-            return '';
         }
     }
 

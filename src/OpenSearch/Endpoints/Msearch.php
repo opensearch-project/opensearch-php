@@ -36,14 +36,6 @@ class Msearch extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
-        $type = $this->type ?? null;
-        if (isset($type)) {
-            @trigger_error('Specifying types in urls has been deprecated', E_USER_DEPRECATED);
-        }
-
-        if (isset($index) && isset($type)) {
-            return "/$index/$type/_msearch";
-        }
         if (isset($index)) {
             return "/$index/_msearch";
         }

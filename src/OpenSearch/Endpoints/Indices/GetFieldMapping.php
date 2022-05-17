@@ -37,19 +37,8 @@ class GetFieldMapping extends AbstractEndpoint
         }
         $fields = $this->fields;
         $index = $this->index ?? null;
-        $type = $this->type ?? null;
-        if (isset($type)) {
-            @trigger_error('Specifying types in urls has been deprecated', E_USER_DEPRECATED);
-        }
-
-        if (isset($index) && isset($type)) {
-            return "/$index/_mapping/$type/field/$fields";
-        }
         if (isset($index)) {
             return "/$index/_mapping/field/$fields";
-        }
-        if (isset($type)) {
-            return "/_mapping/$type/field/$fields";
         }
         return "/_mapping/field/$fields";
     }
