@@ -1,3 +1,5 @@
+- [User Guide](#user-guide)
+  - [Example usage](#example-usage)
 # User Guide
 
 Install this client using Composer into your project `composer req opensearch-project/opensearch-php`

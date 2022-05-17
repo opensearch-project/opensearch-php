@@ -3,10 +3,12 @@
 - [Ways to Contribute](#ways-to-contribute)
   - [Bug Reports](#bug-reports)
   - [Feature Requests](#feature-requests)
-  - [Documentation Changes](#documentation-changes)
   - [Contributing Code](#contributing-code)
 - [Developer Certificate of Origin](#developer-certificate-of-origin)
 - [License Headers](#license-headers)
+  - [Java](#java)
+  - [Python](#python)
+  - [Shell](#shell)
 - [Review Process](#review-process)
 
 ## Contributing to OpenSearch

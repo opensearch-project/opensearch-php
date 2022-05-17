@@ -1,9 +1,9 @@
 - [Overview](#overview)
 - [Branching](#branching)
-    - [OpenSearch Branching](#opensearch-branching)
-    - [Plugin Branching](#plugin-branching)
-    - [Versioning](#versioning)
-    - [Feature Branches](#feature-branches)
+  - [OpenSearch Branching](#opensearch-branching)
+  - [Plugin Branching](#plugin-branching)
+  - [Versioning](#versioning)
+  - [Feature Branches](#feature-branches)
 - [Release Labels](#release-labels)
 - [Releasing](#releasing)
 - [Backporting](#backporting)
@@ -57,7 +57,7 @@ The release process is standard across repositories in this org and is run by a 
 
 This project follows [semantic versioning](https://semver.org/spec/v2.0.0.html). Backwards-incompatible changes always result in a new major version and will __never__ be backported. Small improvements and features will be backported to a new minor version (e.g. `1.1`). Security fixes will be backported to a new patch version (e.g. `1.0.1`).
 
-Here are the commands we typically run to backport changes to release branches:
+To backport a change automatically, please refer to [backports](MAINTAINERS.md/#backports). To manually backport changes to release branches, here are the commands we typically run:
 
 1. Checkout the target release branch and pull the latest changes from `upstream`. In the examples below, our target release branch is `1.x`.
 
