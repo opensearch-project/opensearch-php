@@ -182,7 +182,6 @@ class Client
 
     /**
      * $params['index']                  = (string) Default index for items which don't provide one
-     * $params['type']                   = DEPRECATED (string) Default document type for items which don't provide one
      * $params['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the bulk operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      * $params['refresh']                = (enum) If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes. (Options = true,false,wait_for)
      * $params['routing']                = (string) Specific routing value
@@ -200,14 +199,12 @@ class Client
     public function bulk(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Bulk');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -234,7 +231,6 @@ class Client
     }
     /**
      * $params['index']              = (list) A comma-separated list of indices to restrict the results
-     * $params['type']               = DEPRECATED (list) A comma-separated list of types to restrict the results
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['ignore_throttled']   = (boolean) Whether specified concrete, expanded or aliased indices should be ignored when throttled
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -257,14 +253,12 @@ class Client
     public function count(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Count');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -272,7 +266,6 @@ class Client
     /**
      * $params['id']                     = (string) Document ID (Required)
      * $params['index']                  = (string) The name of the index (Required)
-     * $params['type']                   = DEPRECATED (string) The type of the document
      * $params['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      * $params['refresh']                = (enum) If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes. (Options = true,false,wait_for)
      * $params['routing']                = (string) Specific routing value
@@ -289,7 +282,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
@@ -297,7 +289,6 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -305,7 +296,6 @@ class Client
     /**
      * $params['id']                     = (string) The document ID (Required)
      * $params['index']                  = (string) The name of the index (Required)
-     * $params['type']                   = DEPRECATED (string) The type of the document
      * $params['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the delete operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      * $params['refresh']                = (enum) If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes. (Options = true,false,wait_for)
      * $params['routing']                = (string) Specific routing value
@@ -322,20 +312,17 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Delete');
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return $this->performRequest($endpoint);
     }
     /**
      * $params['index']                  = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices (Required)
-     * $params['type']                   = DEPRECATED (list) A comma-separated list of document types to search; leave empty to perform the operation on all types
      * $params['analyzer']               = (string) The analyzer to use for the query string
      * $params['analyze_wildcard']       = (boolean) Specify whether wildcard and prefix queries should be analyzed (default: false)
      * $params['default_operator']       = (enum) The default operator for query string query (AND or OR) (Options = AND,OR) (Default = OR)
@@ -377,14 +364,12 @@ class Client
     public function deleteByQuery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('DeleteByQuery');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -429,7 +414,6 @@ class Client
     /**
      * $params['id']               = (string) The document ID (Required)
      * $params['index']            = (string) The name of the index (Required)
-     * $params['type']             = DEPRECATED (string) The type of the document (use `_all` to fetch the first document matching the ID across all types)
      * $params['stored_fields']    = (list) A comma-separated list of stored fields to return in the response
      * $params['preference']       = (string) Specify the node or shard the operation should be performed on (default: random)
      * $params['realtime']         = (boolean) Specify whether to perform the operation in realtime or search mode
@@ -448,7 +432,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
@@ -458,14 +441,12 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
     /**
      * $params['id']               = (string) The document ID (Required)
      * $params['index']            = (string) The name of the index (Required)
-     * $params['type']             = DEPRECATED (string) The type of the document; deprecated and optional starting with 7.0
      * $params['preference']       = (string) Specify the node or shard the operation should be performed on (default: random)
      * $params['realtime']         = (boolean) Specify whether to perform the operation in realtime or search mode
      * $params['refresh']          = (boolean) Refresh the shard containing the document before performing the operation
@@ -483,7 +464,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
@@ -493,14 +473,12 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
     /**
      * $params['id']               = (string) The document ID (Required)
      * $params['index']            = (string) The name of the index (Required)
-     * $params['type']             = DEPRECATED (string) The type of the document
      * $params['analyze_wildcard'] = (boolean) Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)
      * $params['analyzer']         = (string) The analyzer for the query string query
      * $params['default_operator'] = (enum) The default operator for query string query (AND or OR) (Options = AND,OR) (Default = OR)
@@ -522,7 +500,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
@@ -530,7 +507,6 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -563,7 +539,6 @@ class Client
     /**
      * $params['id']               = (string) The document ID (Required)
      * $params['index']            = (string) The name of the index (Required)
-     * $params['type']             = DEPRECATED (string) The type of the document (use `_all` to fetch the first document matching the ID across all types)
      * $params['stored_fields']    = (list) A comma-separated list of stored fields to return in the response
      * $params['preference']       = (string) Specify the node or shard the operation should be performed on (default: random)
      * $params['realtime']         = (boolean) Specify whether to perform the operation in realtime or search mode
@@ -582,14 +557,12 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Get');
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return $this->performRequest($endpoint);
     }
@@ -648,7 +621,6 @@ class Client
     /**
      * $params['id']               = (string) The document ID (Required)
      * $params['index']            = (string) The name of the index (Required)
-     * $params['type']             = DEPRECATED (string) The type of the document; deprecated and optional starting with 7.0
      * $params['preference']       = (string) Specify the node or shard the operation should be performed on (default: random)
      * $params['realtime']         = (boolean) Specify whether to perform the operation in realtime or search mode
      * $params['refresh']          = (boolean) Refresh the shard containing the document before performing the operation
@@ -666,21 +638,18 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('GetSource');
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return $this->performRequest($endpoint);
     }
     /**
      * $params['id']                     = (string) Document ID
      * $params['index']                  = (string) The name of the index (Required)
-     * $params['type']                   = DEPRECATED (string) The type of the document
      * $params['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the index operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      * $params['op_type']                = (enum) Explicit operation type. Defaults to `index` for requests with an explicit document ID, and to `create`for requests without an explicit document ID (Options = index,create)
      * $params['refresh']                = (enum) If `true` then refresh the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` (the default) then do nothing with refreshes. (Options = true,false,wait_for)
@@ -701,7 +670,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
@@ -709,7 +677,6 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -729,7 +696,6 @@ class Client
     }
     /**
      * $params['index']            = (string) The name of the index
-     * $params['type']             = DEPRECATED (string) The type of the document
      * $params['stored_fields']    = (list) A comma-separated list of stored fields to return in the response
      * $params['preference']       = (string) Specify the node or shard the operation should be performed on (default: random)
      * $params['realtime']         = (boolean) Specify whether to perform the operation in realtime or search mode
@@ -746,21 +712,18 @@ class Client
     public function mget(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Mget');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
     /**
      * $params['index']                         = (list) A comma-separated list of index names to use as default
-     * $params['type']                          = DEPRECATED (list) A comma-separated list of document types to use as default
      * $params['search_type']                   = (enum) Search operation type (Options = query_then_fetch,query_and_fetch,dfs_query_then_fetch,dfs_query_and_fetch)
      * $params['max_concurrent_searches']       = (number) Controls the maximum number of concurrent searches the multi search api will execute
      * $params['typed_keys']                    = (boolean) Specify whether aggregation and suggester names should be prefixed by their respective types in the response
@@ -776,21 +739,18 @@ class Client
     public function msearch(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Msearch');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
     /**
      * $params['index']                   = (list) A comma-separated list of index names to use as default
-     * $params['type']                    = DEPRECATED (list) A comma-separated list of document types to use as default
      * $params['search_type']             = (enum) Search operation type (Options = query_then_fetch,query_and_fetch,dfs_query_then_fetch,dfs_query_and_fetch)
      * $params['typed_keys']              = (boolean) Specify whether aggregation and suggester names should be prefixed by their respective types in the response
      * $params['max_concurrent_searches'] = (number) Controls the maximum number of concurrent searches the multi search api will execute
@@ -804,21 +764,18 @@ class Client
     public function msearchTemplate(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('MsearchTemplate');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
     /**
      * $params['index']            = (string) The index in which the document resides.
-     * $params['type']             = DEPRECATED (string) The type of the document.
      * $params['ids']              = (list) A comma-separated list of documents ids. You must define ids as parameter or set "ids" or "docs" in the request body
      * $params['term_statistics']  = (boolean) Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs". (Default = false)
      * $params['field_statistics'] = (boolean) Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body "params" or "docs". (Default = true)
@@ -839,14 +796,12 @@ class Client
     public function mtermvectors(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('MTermVectors');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -1029,7 +984,6 @@ class Client
     }
     /**
      * $params['index']                         = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
-     * $params['type']                          = DEPRECATED (list) A comma-separated list of document types to search; leave empty to perform the operation on all types
      * $params['analyzer']                      = (string) The analyzer to use for the query string
      * $params['analyze_wildcard']              = (boolean) Specify whether wildcard and prefix queries should be analyzed (default: false)
      * $params['ccs_minimize_roundtrips']       = (boolean) Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution (Default = true)
@@ -1080,14 +1034,12 @@ class Client
     public function search(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Search');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -1117,7 +1069,6 @@ class Client
     }
     /**
      * $params['index']                   = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
-     * $params['type']                    = DEPRECATED (list) A comma-separated list of document types to search; leave empty to perform the operation on all types
      * $params['ignore_unavailable']      = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['ignore_throttled']        = (boolean) Whether specified concrete, expanded or aliased indices should be ignored when throttled
      * $params['allow_no_indices']        = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -1139,14 +1090,12 @@ class Client
     public function searchTemplate(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('SearchTemplate');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -1154,7 +1103,6 @@ class Client
     /**
      * $params['index']            = (string) The index in which the document resides. (Required)
      * $params['id']               = (string) The id of the document, when not specified a doc param should be supplied.
-     * $params['type']             = DEPRECATED (string) The type of the document.
      * $params['term_statistics']  = (boolean) Specifies if total term frequency and document frequency should be returned. (Default = false)
      * $params['field_statistics'] = (boolean) Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. (Default = true)
      * $params['fields']           = (list) A comma-separated list of fields to return.
@@ -1175,7 +1123,6 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
         $id = $this->extractArgument($params, 'id');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
@@ -1183,7 +1130,6 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -1191,7 +1137,6 @@ class Client
     /**
      * $params['id']                     = (string) Document ID (Required)
      * $params['index']                  = (string) The name of the index (Required)
-     * $params['type']                   = DEPRECATED (string) The type of the document
      * $params['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the update operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      * $params['_source']                = (list) True or false to return the _source field or not, or a list of fields to return
      * $params['_source_excludes']       = (list) A list of fields to exclude from the returned _source field
@@ -1213,7 +1158,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
@@ -1221,14 +1165,12 @@ class Client
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
     /**
      * $params['index']                  = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices (Required)
-     * $params['type']                   = DEPRECATED (list) A comma-separated list of document types to search; leave empty to perform the operation on all types
      * $params['analyzer']               = (string) The analyzer to use for the query string
      * $params['analyze_wildcard']       = (boolean) Specify whether wildcard and prefix queries should be analyzed (default: false)
      * $params['default_operator']       = (enum) The default operator for query string query (AND or OR) (Options = AND,OR) (Default = OR)
@@ -1272,14 +1214,12 @@ class Client
     public function updateByQuery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('UpdateByQuery');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);

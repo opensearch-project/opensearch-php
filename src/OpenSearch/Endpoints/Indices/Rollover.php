@@ -48,7 +48,6 @@ class Rollover extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'include_type_name',
             'timeout',
             'dry_run',
             'master_timeout',

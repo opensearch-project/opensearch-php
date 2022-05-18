@@ -40,7 +40,6 @@ class GetTemplate extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'include_type_name',
             'flat_settings',
             'master_timeout',
             'local'

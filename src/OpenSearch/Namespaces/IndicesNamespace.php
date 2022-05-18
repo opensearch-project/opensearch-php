@@ -149,7 +149,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']                  = (string) The name of the index
-     * $params['include_type_name']      = (boolean) Whether a type should be expected in the body of the mappings.
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for before the operation returns.
      * $params['timeout']                = (time) Explicit operation timeout
      * $params['master_timeout']         = (time) Specify timeout for connection to master
@@ -361,33 +360,6 @@ class IndicesNamespace extends AbstractNamespace
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
     /**
-     * $params['index']              = (list) A comma-separated list of index names; use `_all` to check the types across all indices
-     * $params['type']               = DEPRECATED (list) A comma-separated list of document types to check
-     * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-     * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
-     *
-     * @param array $params Associative array of parameters
-     * @return bool
-     */
-    public function existsType(array $params = []): bool
-    {
-        $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
-
-        // manually make this verbose so we can check status code
-        $params['client']['verbose'] = true;
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ExistsType');
-        $endpoint->setParams($params);
-        $endpoint->setIndex($index);
-        $endpoint->setType($type);
-
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
-    }
-    /**
      * $params['index']              = (list) A comma-separated list of index names; use `_all` or empty string for all indices
      * $params['force']              = (boolean) Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)
      * $params['wait_if_ongoing']    = (boolean) If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is true. If set to false the flush will be skipped iff if another flush operation is already running.
@@ -404,26 +376,6 @@ class IndicesNamespace extends AbstractNamespace
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\Flush');
-        $endpoint->setParams($params);
-        $endpoint->setIndex($index);
-
-        return $this->performRequest($endpoint);
-    }
-    /**
-     * $params['index']              = (list) A comma-separated list of index names; use `_all` or empty string for all indices
-     * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-     * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,none,all) (Default = open)
-     *
-     * @param array $params Associative array of parameters
-     * @return array
-     */
-    public function flushSynced(array $params = [])
-    {
-        $index = $this->extractArgument($params, 'index');
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\FlushSynced');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -454,7 +406,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['include_type_name']  = (boolean) Whether to add the type name to the response (default: false)
      * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
      * $params['ignore_unavailable'] = (boolean) Ignore unavailable indexes (default: false)
      * $params['allow_no_indices']   = (boolean) Ignore if a wildcard expression resolves to no concrete indices (default: false)
@@ -504,8 +455,6 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['fields']             = (list) A comma-separated list of fields (Required)
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['type']               = DEPRECATED (list) A comma-separated list of document types
-     * $params['include_type_name']  = (boolean) Whether a type should be returned in the body of the mappings.
      * $params['include_defaults']   = (boolean) Whether the default mapping values should be returned as well
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -519,14 +468,12 @@ class IndicesNamespace extends AbstractNamespace
     {
         $fields = $this->extractArgument($params, 'fields');
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\GetFieldMapping');
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return $this->performRequest($endpoint);
     }
@@ -556,8 +503,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['type']               = DEPRECATED (list) A comma-separated list of document types
-     * $params['include_type_name']  = (boolean) Whether to add the type name to the response (default: false)
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
@@ -570,13 +515,11 @@ class IndicesNamespace extends AbstractNamespace
     public function getMapping(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\GetMapping');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
 
         return $this->performRequest($endpoint);
     }
@@ -609,7 +552,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['name']              = (list) The comma separated names of the index templates
-     * $params['include_type_name'] = (boolean) Whether a type should be returned in the body of the mappings.
      * $params['flat_settings']     = (boolean) Return settings in flat format (default: false)
      * $params['master_timeout']    = (time) Explicit operation timeout for connection to master node
      * $params['local']             = (boolean) Return local information, do not retrieve the state from master node (default: false)
@@ -725,8 +667,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.
-     * $params['type']               = DEPRECATED (string) The name of the document type
-     * $params['include_type_name']  = (boolean) Whether a type should be expected in the body of the mappings.
      * $params['timeout']            = (time) Explicit operation timeout
      * $params['master_timeout']     = (time) Specify timeout for connection to master
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
@@ -741,14 +681,12 @@ class IndicesNamespace extends AbstractNamespace
     public function putMapping(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\PutMapping');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -782,7 +720,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['name']              = (string) The name of the template
-     * $params['include_type_name'] = (boolean) Whether a type should be returned in the body of the mappings.
      * $params['order']             = (number) The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)
      * $params['create']            = (boolean) Whether the index template should only be added if new or can also replace an existing one (Default = false)
      * $params['master_timeout']    = (time) Specify timeout for connection to master
@@ -868,7 +805,6 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['alias']                  = (string) The name of the alias to rollover (Required)
      * $params['new_index']              = (string) The name of the rollover index
-     * $params['include_type_name']      = (boolean) Whether a type should be included in the body of the mappings.
      * $params['timeout']                = (time) Explicit operation timeout
      * $params['dry_run']                = (boolean) If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false
      * $params['master_timeout']         = (time) Specify timeout for connection to master
@@ -1116,7 +1052,6 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices
-     * $params['type']               = DEPRECATED (list) A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types
      * $params['explain']            = (boolean) Return detailed information about the error
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
@@ -1137,14 +1072,12 @@ class IndicesNamespace extends AbstractNamespace
     public function validateQuery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\ValidateQuery');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);

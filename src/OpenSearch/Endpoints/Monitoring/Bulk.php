@@ -35,14 +35,6 @@ class Bulk extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $type = $this->type ?? null;
-        if (isset($type)) {
-            @trigger_error('Specifying types in urls has been deprecated', E_USER_DEPRECATED);
-        }
-
-        if (isset($type)) {
-            return "/_monitoring/$type/bulk";
-        }
         return "/_monitoring/bulk";
     }
 

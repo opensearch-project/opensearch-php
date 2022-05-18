@@ -35,19 +35,8 @@ class Index extends AbstractEndpoint
         }
         $index = $this->index;
         $id = $this->id ?? null;
-        $type = $this->type ?? null;
-        if (isset($type)) {
-            @trigger_error('Specifying types in urls has been deprecated', E_USER_DEPRECATED);
-        }
-
-        if (isset($type) && isset($id)) {
-            return "/$index/$type/$id";
-        }
         if (isset($id)) {
             return "/$index/_doc/$id";
-        }
-        if (isset($type)) {
-            return "/$index/$type";
         }
         return "/$index/_doc";
     }
