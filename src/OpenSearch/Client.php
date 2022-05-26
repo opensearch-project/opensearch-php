@@ -53,7 +53,7 @@ use OpenSearch\Namespaces\SslNamespace;
  */
 class Client
 {
-    public const VERSION = '7.10.0';
+    public const VERSION = '2.0.0';
 
     /**
      * @var Transport
