@@ -21,6 +21,7 @@
   },
   "require-dev": {
     "ext-zip": "*",
+    "aws/aws-sdk-php": "^3.0",
     "friendsofphp/php-cs-fixer": "^3.0",
     "mockery/mockery": "^1.2",
     "phpstan/phpstan": "^0.12",
@@ -29,7 +30,8 @@
     "symfony/finder": "~4.0"
   },
   "suggest": {
-    "monolog/monolog": "Allows for client-level logging and tracing"
+    "monolog/monolog": "Allows for client-level logging and tracing",
+    "aws/aws-sdk-php": "Required (^3.0.0) in order to use the SigV4 handler"
   },
   "autoload": {
     "psr-4": {
