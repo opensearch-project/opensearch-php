@@ -25,6 +25,7 @@ use Exception;
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\OpenSearchException;
+use RuntimeException;
 
 class Utility
 {
@@ -169,6 +170,10 @@ class Utility
      */
     private static function deleteAllSLMPolicies(Client $client): void
     {
+        if (! is_callable([$client, 'slm'])) {
+            throw new RuntimeException('Missing slm namespace');
+        }
+
         $policies = $client->slm()->getLifecycle();
         foreach ($policies as $policy) {
             $client->slm()->deleteLifecycle([
