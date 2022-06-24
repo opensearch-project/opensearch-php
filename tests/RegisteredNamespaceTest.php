@@ -44,6 +44,7 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
     {
         $builder = new FooNamespaceBuilder();
         $client = ClientBuilder::create()->registerNamespace($builder)->build();
+
         $this->assertSame("123", $client->foo()->fooMethod());
     }
 

@@ -28,13 +28,34 @@ use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
 use GuzzleHttp\Ring\Future\FutureArray;
 use GuzzleHttp\Ring\Future\FutureArrayInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use React\Promise\Deferred;
-use React\Promise\Promise;
 
 class TransportTest extends TestCase
 {
+    /**
+     * @var Connection|MockObject
+     */
+    private $connection;
+    /**
+     * @var AbstractConnectionPool|MockObject
+     */
+    private $connectionPool;
+    /**
+     * @var SerializerInterface|MockObject
+     */
+    private $serializer;
+    /**
+     * @var MockObject|LoggerInterface
+     */
+    private $trace;
+    /**
+     * @var MockObject|LoggerInterface
+     */
+    private $logger;
+
     public function setUp(): void
     {
         $this->logger = $this->createMock(LoggerInterface::class);

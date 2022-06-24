@@ -153,9 +153,9 @@ class Client
     /**
      * Client constructor
      *
-     * @param Transport           $transport
-     * @param callable            $endpoint
-     * @param AbstractNamespace[] $registeredNamespaces
+     * @param Transport                   $transport
+     * @param callable                    $endpoint
+     * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
     public function __construct(Transport $transport, callable $endpoint, array $registeredNamespaces)
     {

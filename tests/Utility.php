@@ -25,6 +25,7 @@ use Exception;
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\OpenSearchException;
+use RuntimeException;
 
 class Utility
 {

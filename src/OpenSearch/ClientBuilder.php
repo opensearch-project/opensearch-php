@@ -26,10 +26,13 @@ use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
+use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\ConnectionPool\StaticNoPingConnectionPool;
 use OpenSearch\Connections\ConnectionFactory;
 use OpenSearch\Connections\ConnectionFactoryInterface;
+use OpenSearch\Connections\ConnectionInterface;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
+use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
 use GuzzleHttp\Ring\Client\CurlHandler;
 use GuzzleHttp\Ring\Client\CurlMultiHandler;
@@ -76,17 +79,17 @@ class ClientBuilder
     private $tracer;
 
     /**
-     * @var string
+     * @var string|AbstractConnectionPool
      */
     private $connectionPool = StaticNoPingConnectionPool::class;
 
     /**
-     * @var string
+     * @var string|SerializerInterface
      */
     private $serializer = SmartSerializer::class;
 
     /**
-     * @var string
+     * @var string|SelectorInterface
      */
     private $selector = RoundRobinSelector::class;
 
@@ -142,11 +145,11 @@ class ClientBuilder
      */
     public static function create(): ClientBuilder
     {
-        return new static();
+        return new self();
     }
 
     /**
-     * Can supply first parm to Client::__construct() when invoking manually or with dependency injection
+     * Can supply first param to Client::__construct() when invoking manually or with dependency injection
      */
     public function getTransport(): Transport
     {
@@ -154,7 +157,7 @@ class ClientBuilder
     }
 
     /**
-     * Can supply second parm to Client::__construct() when invoking manually or with dependency injection
+     * Can supply second param to Client::__construct() when invoking manually or with dependency injection
      */
     public function getEndpoint(): callable
     {
@@ -162,7 +165,7 @@ class ClientBuilder
     }
 
     /**
-     * Can supply third parm to Client::__construct() when invoking manually or with dependency injection
+     * Can supply third param to Client::__construct() when invoking manually or with dependency injection
      *
      * @return NamespaceBuilderInterface[]
      */
@@ -188,7 +191,7 @@ class ClientBuilder
      */
     public static function fromConfig(array $config, bool $quiet = false): Client
     {
-        $builder = new static();
+        $builder = new self();
         foreach ($config as $key => $value) {
             $method = "set$key";
             $reflection = new ReflectionClass($builder);
@@ -690,7 +693,7 @@ class ClientBuilder
     }
 
     /**
-     * @return \OpenSearch\Connections\Connection[]
+     * @return ConnectionInterface[]
      * @throws RuntimeException
      */
     private function buildConnectionsFromHosts(array $hosts): array

@@ -32,7 +32,7 @@ use Mockery;
 class SearchHitIteratorTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var SearchResponseIterator
+     * @var SearchResponseIterator|Mockery\MockInterface
      */
     private $searchResponse;
 

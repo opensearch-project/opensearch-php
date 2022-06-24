@@ -32,6 +32,11 @@ use PHPUnit\Framework\TestCase;
  */
 class SmartSerializerTest extends TestCase
 {
+    /**
+     * @var SmartSerializer
+     */
+    private $serializer;
+
     public function setUp(): void
     {
         $this->serializer = new SmartSerializer();
@@ -46,6 +51,6 @@ class SmartSerializerTest extends TestCase
         $this->expectException(JsonErrorException::class);
         $this->expectExceptionCode(JSON_ERROR_SYNTAX);
 
-        $result = $this->serializer->deserialize('{ "foo" : bar" }', []);
+        $this->serializer->deserialize('{ "foo" : bar" }', []);
     }
 }

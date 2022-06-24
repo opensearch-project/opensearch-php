@@ -55,7 +55,7 @@ abstract class AbstractConnectionPool implements ConnectionPoolInterface
     protected $connectionPoolParams;
 
     /**
-     * @var \OpenSearch\Connections\ConnectionFactory
+     * @var ConnectionFactoryInterface
      */
     protected $connectionFactory;
 

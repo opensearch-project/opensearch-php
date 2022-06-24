@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-interface OpenSearchException
+use Throwable;
+
+interface OpenSearchException extends Throwable
 {
 }
