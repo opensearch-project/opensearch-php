@@ -31,7 +31,7 @@ class IngestNamespace extends AbstractNamespace
 {
     /**
      * $params['id']             = (string) Pipeline ID
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      *
      * @param array $params Associative array of parameters
@@ -50,7 +50,7 @@ class IngestNamespace extends AbstractNamespace
     }
     /**
      * $params['id']             = (string) Comma separated list of pipeline ids. Wildcards supported
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -81,7 +81,7 @@ class IngestNamespace extends AbstractNamespace
     }
     /**
      * $params['id']             = (string) Pipeline ID
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      * $params['body']           = (array) The ingest definition (Required)
      *

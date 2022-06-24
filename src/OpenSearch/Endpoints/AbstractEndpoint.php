@@ -307,10 +307,10 @@ abstract class AbstractEndpoint
             if (array_key_exists($key, $deprecations)) {
                 $val = $deprecations[$key];
 
-                $msg = sprintf('The parameter "%s" is deprecated and will be removed without replacement', $key);
+                $msg = sprintf('The parameter "%s" is deprecated and will be removed without replacement in the next major version', $key);
 
                 if ($val) {
-                    $msg = sprintf('The parameter "%s" is deprecated and will be replaced with parameter "%s"', $key, $val);
+                    $msg = sprintf('The parameter "%s" is deprecated and will be replaced with parameter "%s" in the next major version', $key, $val);
                 }
 
                 trigger_error($msg, E_USER_DEPRECATED);

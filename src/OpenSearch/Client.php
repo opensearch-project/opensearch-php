@@ -395,7 +395,7 @@ class Client
     /**
      * $params['id']             = (string) Script ID
      * $params['timeout']        = (time) Explicit operation timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -568,7 +568,7 @@ class Client
     }
     /**
      * $params['id']             = (string) Script ID
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -827,7 +827,7 @@ class Client
      * $params['id']             = (string) Script ID (Required)
      * $params['context']        = (string) Script context
      * $params['timeout']        = (time) Explicit operation timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) The document (Required)
      *
      * @param array $params Associative array of parameters
@@ -1048,7 +1048,7 @@ class Client
      * $params['index']              = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
      * $params['preference']         = (string) Specify the node or shard the operation should be performed on (default: random)
      * $params['routing']            = (string) Specific routing value
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster manager node (default: false)
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)

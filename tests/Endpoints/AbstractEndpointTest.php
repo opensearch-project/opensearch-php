@@ -81,49 +81,54 @@ class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider deprecationProvider
      */
-    public function testOldParameterTriggersDeprecation(array $input, bool $shouldThrow, ?string $message): void
+    public function testDeprecatedParameterTriggersError(array $input, string $message): void
     {
         $errorMessage = null;
-        set_error_handler(function ($errno, $error) use (&$errorMessage) {
+        set_error_handler(static function (int $errno, string $error) use (&$errorMessage): bool {
             $errorMessage = $error;
+
+            return true;
         });
 
         $endpoint = new TestEndpoint();
         $endpoint->setParams($input);
 
-        if (!$shouldThrow) {
-            static::assertNull($errorMessage);
-        } else {
-            static::assertSame($message, $errorMessage);
-        }
+        static::assertSame($message, $errorMessage);
+
+        restore_error_handler();
+    }
+
+    public function testNotDeprecatedParameterTriggersNoError(): void
+    {
+        $errorMessage = null;
+        set_error_handler(static function (int $errno, string $error) use (&$errorMessage): bool {
+            $errorMessage = $error;
+
+            return true;
+        });
+
+        $endpoint = new TestEndpoint();
+        $endpoint->setParams(['normal_one' => 1]);
+
+        static::assertNull($errorMessage);
 
         restore_error_handler();
     }
 
     public function deprecationProvider(): iterable
     {
-        yield 'normal field' => [
-            [
-                'normal_one' => 1,
-            ],
-            false,
-            null
-        ];
-
         yield 'replaced without replacement' => [
             [
                 'old_without_replacement' => 1,
             ],
-            true,
-            'The parameter "old_without_replacement" is deprecated and will be removed without replacement'
+            'The parameter "old_without_replacement" is deprecated and will be removed without replacement in the next major version'
         ];
 
         yield 'replaced with replacement' => [
             [
                 'old' => 1,
             ],
-            true,
-            'The parameter "old" is deprecated and will be replaced with parameter "new"'
+            'The parameter "old" is deprecated and will be replaced with parameter "new" in the next major version'
         ];
     }
 }

@@ -33,7 +33,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * $params['index_uuid']       = (string) The UUID of the dangling index
      * $params['accept_data_loss'] = (boolean) Must be set to true in order to delete the dangling index
      * $params['timeout']          = (time) Explicit operation timeout
-     * $params['master_timeout']   = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']   = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -53,7 +53,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * $params['index_uuid']       = (string) The UUID of the dangling index
      * $params['accept_data_loss'] = (boolean) Must be set to true in order to import the dangling index
      * $params['timeout']          = (time) Explicit operation timeout
-     * $params['master_timeout']   = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']   = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array

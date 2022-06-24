@@ -51,7 +51,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * $params['name']           = (string) The name of the template
      * $params['timeout']        = (time) Explicit operation timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -87,8 +87,8 @@ class ClusterNamespace extends AbstractNamespace
     }
     /**
      * $params['name']           = (string) The name of the template
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -113,8 +113,8 @@ class ClusterNamespace extends AbstractNamespace
     }
     /**
      * $params['name']           = (list) The comma separated names of the component templates
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -136,7 +136,7 @@ class ClusterNamespace extends AbstractNamespace
     }
     /**
      * $params['flat_settings']    = (boolean) Return settings in flat format (default: false)
-     * $params['master_timeout']   = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']   = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']          = (time) Explicit operation timeout
      * $params['include_defaults'] = (boolean) Whether to return all default clusters setting. (Default = false)
      *
@@ -155,8 +155,8 @@ class ClusterNamespace extends AbstractNamespace
      * $params['index']                           = (list) Limit the information returned to a specific index
      * $params['expand_wildcards']                = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = all)
      * $params['level']                           = (enum) Specify the level of detail for returned information (Options = cluster,indices,shards) (Default = cluster)
-     * $params['local']                           = (boolean) Return local information, do not retrieve the state from master node (default: false)
-     * $params['master_timeout']                  = (time) Explicit operation timeout for connection to master node
+     * $params['local']                           = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
+     * $params['cluster_manager_timeout']                  = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']                         = (time) Explicit operation timeout
      * $params['wait_for_active_shards']          = (string) Wait until the specified number of shards is active
      * $params['wait_for_nodes']                  = (string) Wait until the specified number of nodes is available
@@ -180,8 +180,8 @@ class ClusterNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -214,7 +214,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['name']           = (string) The name of the template
      * $params['create']         = (boolean) Whether the index template should only be added if new or can also replace an existing one (Default = false)
      * $params['timeout']        = (time) Explicit operation timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -239,7 +239,7 @@ class ClusterNamespace extends AbstractNamespace
     }
     /**
      * $params['flat_settings']  = (boolean) Return settings in flat format (default: false)
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      * $params['body']           = (array) The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart). (Required)
      *
@@ -275,7 +275,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['explain']        = (boolean) Return an explanation of why the commands can or cannot be executed
      * $params['retry_failed']   = (boolean) Retries allocation of shards that are blocked due to too many subsequent allocation failures
      * $params['metric']         = (list) Limit the information returned to the specified metrics. Defaults to all but metadata (Options = _all,blocks,metadata,nodes,routing_table,master_node,cluster_manager_node,version)
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      * $params['body']           = (array) The definition of `commands` to perform (`move`, `cancel`, `allocate`)
      *
@@ -296,8 +296,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * $params['metric']                    = (list) Limit the information returned to the specified metrics
      * $params['index']                     = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-     * $params['local']                     = (boolean) Return local information, do not retrieve the state from master node (default: false)
-     * $params['master_timeout']            = (time) Specify timeout for connection to master
+     * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
+     * $params['cluster_manager_timeout']            = (time) Specify timeout for connection to cluster_manager
      * $params['flat_settings']             = (boolean) Return settings in flat format (default: false)
      * $params['wait_for_metadata_version'] = (number) Wait for the metadata version to be equal or greater than the specified metadata version
      * $params['wait_for_timeout']          = (time) The maximum time to wait for wait_for_metadata_version before timing out
