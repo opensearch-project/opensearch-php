@@ -45,10 +45,6 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
         $builder = new FooNamespaceBuilder();
         $client = ClientBuilder::create()->registerNamespace($builder)->build();
 
-        if (! is_callable([$client, 'foo'])) {
-            $this->fail('Missing foo namespace');
-        }
-
         $this->assertSame("123", $client->foo()->fooMethod());
     }
 
@@ -59,10 +55,6 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
 
         $this->expectException(\OpenSearch\Common\Exceptions\BadMethodCallException::class);
         $this->expectExceptionMessage('Namespace [bar] not found');
-
-        if (is_callable([$client, 'foo'])) {
-            $this->fail('Missing foo namespace');
-        }
 
         $client->bar()->fooMethod();
     }

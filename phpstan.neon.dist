@@ -1,10 +1,12 @@
 includes:
     - vendor/phpstan/phpstan-mockery/extension.neon
 parameters:
-    level: 2
+    level: 3
     paths:
         - src
         - tests
     reportUnmatchedIgnoredErrors: true
     ignoreErrors:
         - '#Call to an undefined method OpenSearch\\Client::bar\(\).#'
+        - '#Call to an undefined method OpenSearch\\Client::foo\(\).#'
+        - '#Call to an undefined method OpenSearch\\Client::slm\(\).#'

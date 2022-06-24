@@ -26,10 +26,13 @@ use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
+use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\ConnectionPool\StaticNoPingConnectionPool;
 use OpenSearch\Connections\ConnectionFactory;
 use OpenSearch\Connections\ConnectionFactoryInterface;
+use OpenSearch\Connections\ConnectionInterface;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
+use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
 use GuzzleHttp\Ring\Client\CurlHandler;
 use GuzzleHttp\Ring\Client\CurlMultiHandler;
@@ -76,17 +79,17 @@ class ClientBuilder
     private $tracer;
 
     /**
-     * @var string
+     * @var string|AbstractConnectionPool
      */
     private $connectionPool = StaticNoPingConnectionPool::class;
 
     /**
-     * @var string
+     * @var string|SerializerInterface
      */
     private $serializer = SmartSerializer::class;
 
     /**
-     * @var string
+     * @var string|SelectorInterface
      */
     private $selector = RoundRobinSelector::class;
 
@@ -690,7 +693,7 @@ class ClientBuilder
     }
 
     /**
-     * @return \OpenSearch\Connections\Connection[]
+     * @return ConnectionInterface[]
      * @throws RuntimeException
      */
     private function buildConnectionsFromHosts(array $hosts): array

@@ -46,7 +46,7 @@ class Transport
     public $retryAttempts = 0;
 
     /**
-     * @var Connection
+     * @var ConnectionInterface
      */
     public $lastConnection;
 
