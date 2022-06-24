@@ -77,4 +77,84 @@ class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($options['client']['headers']['x-opaque-id']);
         $this->assertEquals($params['client']['opaqueId'], $options['client']['headers']['x-opaque-id'][0]);
     }
+
+    /**
+     * @dataProvider deprecationProvider
+     */
+    public function testOldParameterTriggersDeprecation(array $input, bool $shouldThrow, ?string $message): void
+    {
+        $errorMessage = null;
+        set_error_handler(function ($errno, $error) use (&$errorMessage) {
+            $errorMessage = $error;
+        });
+
+        $endpoint = new TestEndpoint();
+        $endpoint->setParams($input);
+
+        if (!$shouldThrow) {
+            static::assertNull($errorMessage);
+        } else {
+            static::assertSame($message, $errorMessage);
+        }
+
+        restore_error_handler();
+    }
+
+    public function deprecationProvider(): iterable
+    {
+        yield 'normal field' => [
+            [
+                'normal_one' => 1,
+            ],
+            false,
+            null
+        ];
+
+        yield 'replaced without replacement' => [
+            [
+                'old_without_replacement' => 1,
+            ],
+            true,
+            'The parameter "old_without_replacement" is deprecated and will be removed without replacement'
+        ];
+
+        yield 'replaced with replacement' => [
+            [
+                'old' => 1,
+            ],
+            true,
+            'The parameter "old" is deprecated and will be replaced with parameter "new"'
+        ];
+    }
+}
+
+class TestEndpoint extends AbstractEndpoint
+{
+    public function getParamWhitelist(): array
+    {
+        return [
+            'old',
+            'old_without_replacement',
+            'new',
+            'normal_one'
+        ];
+    }
+
+    public function getURI(): string
+    {
+        return '';
+    }
+
+    public function getMethod(): string
+    {
+        return 'GET';
+    }
+
+    protected function getParamDeprecation(): array
+    {
+        return [
+            'old' => 'new',
+            'old_without_replacement' => null,
+        ];
+    }
 }

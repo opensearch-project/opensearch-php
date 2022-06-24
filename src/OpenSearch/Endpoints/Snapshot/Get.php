@@ -45,7 +45,8 @@ class Get extends AbstractEndpoint
         return [
             'master_timeout',
             'ignore_unavailable',
-            'verbose'
+            'verbose',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -75,5 +76,9 @@ class Get extends AbstractEndpoint
         $this->snapshot = $snapshot;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

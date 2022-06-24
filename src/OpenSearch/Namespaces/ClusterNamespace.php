@@ -274,7 +274,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['dry_run']        = (boolean) Simulate the operation only and return the resulting state
      * $params['explain']        = (boolean) Return an explanation of why the commands can or cannot be executed
      * $params['retry_failed']   = (boolean) Retries allocation of shards that are blocked due to too many subsequent allocation failures
-     * $params['metric']         = (list) Limit the information returned to the specified metrics. Defaults to all but metadata (Options = _all,blocks,metadata,nodes,routing_table,master_node,version)
+     * $params['metric']         = (list) Limit the information returned to the specified metrics. Defaults to all but metadata (Options = _all,blocks,metadata,nodes,routing_table,master_node,cluster_manager_node,version)
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      * $params['timeout']        = (time) Explicit operation timeout
      * $params['body']           = (array) The definition of `commands` to perform (`move`, `cancel`, `allocate`)

@@ -42,7 +42,8 @@ class SimulateTemplate extends AbstractEndpoint
         return [
             'create',
             'cause',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -69,5 +70,9 @@ class SimulateTemplate extends AbstractEndpoint
         $this->name = $name;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

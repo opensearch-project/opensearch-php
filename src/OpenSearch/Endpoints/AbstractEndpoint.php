@@ -91,6 +91,8 @@ abstract class AbstractEndpoint
         $params = $this->convertCustom($params);
         $this->params = $this->convertArraysToStrings($params);
 
+        $this->checkForDeprecations();
+
         return $this;
     }
 
@@ -279,5 +281,40 @@ abstract class AbstractEndpoint
         }
 
         return false;
+    }
+
+    /**
+     * This function returns all param deprecations also optional with an replacement field
+     *
+     * @return array<string, string|null>
+     */
+    protected function getParamDeprecation(): array
+    {
+        return [];
+    }
+
+    private function checkForDeprecations(): void
+    {
+        $deprecations = $this->getParamDeprecation();
+
+        if ($deprecations === []) {
+            return;
+        }
+
+        $keys = array_keys($this->params);
+
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $deprecations)) {
+                $val = $deprecations[$key];
+
+                $msg = sprintf('The parameter "%s" is deprecated and will be removed without replacement', $key);
+
+                if ($val) {
+                    $msg = sprintf('The parameter "%s" is deprecated and will be replaced with parameter "%s"', $key, $val);
+                }
+
+                trigger_error($msg, E_USER_DEPRECATED);
+            }
+        }
     }
 }

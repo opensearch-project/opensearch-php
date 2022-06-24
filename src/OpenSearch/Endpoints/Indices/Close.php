@@ -44,12 +44,17 @@ class Close extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'wait_for_active_shards'
+            'wait_for_active_shards',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'POST';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

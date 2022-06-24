@@ -41,7 +41,8 @@ class Create extends AbstractEndpoint
         return [
             'wait_for_active_shards',
             'timeout',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -58,5 +59,9 @@ class Create extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

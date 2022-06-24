@@ -47,7 +47,8 @@ class Allocation extends AbstractEndpoint
             'h',
             'help',
             's',
-            'v'
+            'v',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -67,5 +68,9 @@ class Allocation extends AbstractEndpoint
         $this->node_id = $node_id;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }
