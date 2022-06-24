@@ -197,6 +197,8 @@ class CatNamespace extends AbstractNamespace
      * $params['s']              = (list) Comma-separated list of column names or column aliases to sort by
      * $params['v']              = (boolean) Verbose mode. Display column headers (Default = false)
      *
+     * @deprecated use clusterManager instead
+     *
      * @param array $params Associative array of parameters
      * @return array
      */
@@ -204,6 +206,26 @@ class CatNamespace extends AbstractNamespace
     {
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cat\Master');
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+    /**
+     * $params['format']         = (string) a short version of the Accept header, e.g. json, yaml
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['h']              = (list) Comma-separated list of column names to display
+     * $params['help']           = (boolean) Return help information (Default = false)
+     * $params['s']              = (list) Comma-separated list of column names or column aliases to sort by
+     * $params['v']              = (boolean) Verbose mode. Display column headers (Default = false)
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function clusterManager(array $params = [])
+    {
+        $endpointBuilder = $this->endpoints;
+        $endpoint = $endpointBuilder('Cat\ClusterManager');
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

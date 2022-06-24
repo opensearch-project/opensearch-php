@@ -23,14 +23,11 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * @deprecated use \OpenSearch\Endpoints\Cat\ClusterManager instead
- */
-class Master extends AbstractEndpoint
+class ClusterManager extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cat/master";
+        return "/_cat/cluster_manager";
     }
 
     public function getParamWhitelist(): array
@@ -38,7 +35,7 @@ class Master extends AbstractEndpoint
         return [
             'format',
             'local',
-            'master_timeout',
+            'cluster_manager_timeout',
             'h',
             'help',
             's',
