@@ -13,6 +13,28 @@ use PHPUnit\Framework\TestCase;
 
 class SigV4HandlerTest extends TestCase
 {
+    private const ENV_KEYS_USED = [CredentialProvider::ENV_KEY, CredentialProvider::ENV_SECRET];
+
+    private $envTemp = [];
+
+    protected function setUp(): void {
+        $this->envTemp = array_combine(self::ENV_KEYS_USED, array_map(
+            function ($envVarName) {
+                $current = getenv($envVarName);
+                putenv($envVarName);
+                return $current;
+            },
+            self::ENV_KEYS_USED
+        ));
+    }
+
+    protected function tearDown(): void {
+        foreach ($this->envTemp as $key => $value) {
+            putenv("$key=$value");
+        }
+        $this->envTemp = [];
+    }
+
     public function testSignsRequestsTheSdkDefaultCredentialProviderChain()
     {
         $key = 'foo';
@@ -54,7 +76,7 @@ class SigV4HandlerTest extends TestCase
             return $this->getGenericResponse();
         };
 
-        $client = $this->getClient(new SigV4Handler('us-west-2', $provider, $toWrap));
+        $client = $this->getClient(new SigV4Handler('us-west-2', $this->getCredentialProvider(), $toWrap));
 
         $client->search([
             'index' => 'index',
@@ -72,7 +94,7 @@ class SigV4HandlerTest extends TestCase
             return $this->getGenericResponse();
         };
 
-        $client = $this->getClient(new SigV4Handler('us-west-2', null, $toWrap));
+        $client = $this->getClient(new SigV4Handler('us-west-2', $this->getCredentialProvider(), $toWrap));
 
         $client->indices()->exists(['index' => 'index']);
     }
@@ -85,7 +107,7 @@ class SigV4HandlerTest extends TestCase
             return $this->getGenericResponse();
         };
 
-        $client = $this->getClient(new SigV4Handler('us-west-2', null, $toWrap));
+        $client = $this->getClient(new SigV4Handler('us-west-2', $this->getCredentialProvider(), $toWrap));
 
         $client->search([
             'index' => 'index',
@@ -97,14 +119,9 @@ class SigV4HandlerTest extends TestCase
 
     private function getClient(SigV4Handler $handler)
     {
-        $builder = ClientBuilder::create()
-            ->setHandler($handler);
-
-        if (method_exists($builder, 'allowBadJSONSerialization')) {
-            $builder = $builder->allowBadJSONSerialization();
-        }
-
-        return $builder->build();
+        return ClientBuilder::create()
+            ->setHandler($handler)
+            ->build();
     }
 
     private function getGenericResponse()
@@ -115,5 +132,12 @@ class SigV4HandlerTest extends TestCase
             'transfer_stats' => ['total_time' => 0],
             'effective_url' => 'https://www.example.com',
         ]);
+    }
+
+    private function getCredentialProvider()
+    {
+        return CredentialProvider::fromCredentials(
+            new Credentials('foo', 'bar', 'baz')
+        );
     }
 }
