@@ -50,7 +50,11 @@ class SigV4HandlerTest extends TestCase
         };
         putenv(CredentialProvider::ENV_KEY . "=$key");
         putenv(CredentialProvider::ENV_SECRET . '=bar');
-        $client = $this->getClient(new SigV4Handler('us-west-2', null, $toWrap));
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4CredentialProvider(true)
+            ->build();
 
         $client->search([
             'index' => 'index',
@@ -76,7 +80,11 @@ class SigV4HandlerTest extends TestCase
             return $this->getGenericResponse();
         };
 
-        $client = $this->getClient(new SigV4Handler('us-west-2', $this->getCredentialProvider(), $toWrap));
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
 
         $client->search([
             'index' => 'index',
@@ -94,7 +102,11 @@ class SigV4HandlerTest extends TestCase
             return $this->getGenericResponse();
         };
 
-        $client = $this->getClient(new SigV4Handler('us-west-2', $this->getCredentialProvider(), $toWrap));
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
 
         $client->indices()->exists(['index' => 'index']);
     }
@@ -107,7 +119,11 @@ class SigV4HandlerTest extends TestCase
             return $this->getGenericResponse();
         };
 
-        $client = $this->getClient(new SigV4Handler('us-west-2', $this->getCredentialProvider(), $toWrap));
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
 
         $client->search([
             'index' => 'index',
@@ -132,12 +148,5 @@ class SigV4HandlerTest extends TestCase
             'transfer_stats' => ['total_time' => 0],
             'effective_url' => 'https://www.example.com',
         ]);
-    }
-
-    private function getCredentialProvider()
-    {
-        return CredentialProvider::fromCredentials(
-            new Credentials('foo', 'bar', 'baz')
-        );
     }
 }

@@ -34,11 +34,7 @@ class SigV4Handler
         callable $credentialProvider = null,
         callable $wrappedHandler = null
     ) {
-        if (!class_exists(SignatureV4::class)) {
-            throw new RuntimeException(
-                'The AWS SDK for PHP must be installed in order to use the SigV4 signing handler'
-            );
-        }
+        self::assertDependenciesInstalled();
 
         $this->signer = new SignatureV4('es', $region);
         $this->wrappedHandler = $wrappedHandler
@@ -57,7 +53,16 @@ class SigV4Handler
         return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest));
     }
 
-    private function createPsr7Request(array $ringPhpRequest)
+    public static function assertDependenciesInstalled(): void
+    {
+        if (!class_exists(SignatureV4::class)) {
+            throw new RuntimeException(
+                'The AWS SDK for PHP must be installed in order to use the SigV4 signing handler'
+            );
+        }
+    }
+
+    private function createPsr7Request(array $ringPhpRequest): Request
     {
         // fix for uppercase 'Host' array key in elasticsearch-php 5.3.1 and backward compatible
         // https://github.com/aws/aws-sdk-php/issues/1225
@@ -87,7 +92,7 @@ class SigV4Handler
         );
     }
 
-    private function createRingRequest(RequestInterface $request)
+    private function createRingRequest(RequestInterface $request): array
     {
         $uri = $request->getUri();
         $body = (string) $request->getBody();
