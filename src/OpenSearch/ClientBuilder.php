@@ -476,8 +476,7 @@ class ClientBuilder
      */
     public function setSigV4CredentialProvider($credentialProvider): ClientBuilder
     {
-        if ($credentialProvider !== null && $credentialProvider !== false)
-        {
+        if ($credentialProvider !== null && $credentialProvider !== false) {
             $this->sigV4CredentialProvider = $this->normalizeCredentialProvider($credentialProvider);
         }
 
@@ -814,8 +813,7 @@ class ClientBuilder
 
     private function normalizeCredentialProvider($provider): ?callable
     {
-        if ($provider === null && $provider === false)
-        {
+        if ($provider === null && $provider === false) {
             return null;
         }
 
@@ -825,16 +823,13 @@ class ClientBuilder
 
         SigV4Handler::assertDependenciesInstalled();
 
-        if ($provider === true)
-        {
+        if ($provider === true) {
             return CredentialProvider::defaultProvider();
         }
 
-        if ($provider instanceof CredentialsInterface)
-        {
+        if ($provider instanceof CredentialsInterface) {
             return CredentialProvider::fromCredentials($provider);
-        } elseif (is_array($provider) && isset($provider['key']) && isset($provider['secret']))
-        {
+        } elseif (is_array($provider) && isset($provider['key']) && isset($provider['secret'])) {
             return CredentialProvider::fromCredentials(
                 new Credentials(
                     $provider['key'],

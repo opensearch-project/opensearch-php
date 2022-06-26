@@ -17,7 +17,8 @@ class SigV4HandlerTest extends TestCase
 
     private $envTemp = [];
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->envTemp = array_combine(self::ENV_KEYS_USED, array_map(
             function ($envVarName) {
                 $current = getenv($envVarName);
@@ -28,7 +29,8 @@ class SigV4HandlerTest extends TestCase
         ));
     }
 
-    protected function tearDown(): void {
+    protected function tearDown(): void
+    {
         foreach ($this->envTemp as $key => $value) {
             putenv("$key=$value");
         }
