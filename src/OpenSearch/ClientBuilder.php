@@ -486,7 +486,7 @@ class ClientBuilder
     /**
      * Set the region for SigV4 signing.
      *
-     * @param string|null $credentialProvider
+     * @param string|null $region
      */
     public function setSigV4Region($region): ClientBuilder
     {
