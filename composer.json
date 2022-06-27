@@ -23,8 +23,8 @@
     "ext-zip": "*",
     "friendsofphp/php-cs-fixer": "^3.0",
     "mockery/mockery": "^1.2",
-    "phpstan/phpstan": "^0.12",
-    "phpstan/phpstan-mockery": "^0.12",
+    "phpstan/phpstan": "^1.7.15",
+    "phpstan/phpstan-mockery": "^1.1.0",
     "phpunit/phpunit": "^9.3",
     "symfony/finder": "~4.0"
   },

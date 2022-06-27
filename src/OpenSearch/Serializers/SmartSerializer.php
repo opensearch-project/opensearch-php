@@ -70,8 +70,6 @@ class SmartSerializer implements SerializerInterface
     }
 
     /**
-     * @todo For 2.0, remove the E_NOTICE check before raising the exception.
-     *
      * @param string|null $data
      *
      * @return array
@@ -83,21 +81,10 @@ class SmartSerializer implements SerializerInterface
             return [];
         }
 
-        if (version_compare(PHP_VERSION, '7.3.0') >= 0) {
-            try {
-                $result = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
-                return $result;
-            } catch (\JsonException $e) {
-                $result = $result ?? [];
-                throw new JsonErrorException($e->getCode(), $data, $result);
-            }
+        try {
+            return json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new JsonErrorException($e->getCode(), $data, []);
         }
-
-        $result = @json_decode($data, true);
-        // Throw exception only if E_NOTICE is on to maintain backwards-compatibility on systems that silently ignore E_NOTICEs.
-        if (json_last_error() !== JSON_ERROR_NONE && (error_reporting() & E_NOTICE) === E_NOTICE) {
-            throw new JsonErrorException(json_last_error(), $data, $result);
-        }
-        return $result;
     }
 }
