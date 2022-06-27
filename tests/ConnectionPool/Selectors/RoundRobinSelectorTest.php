@@ -98,7 +98,6 @@ class RoundRobinSelectorTest extends \PHPUnit\Framework\TestCase
         // remove three
         unset($mockConnections[8]);
         unset($mockConnections[9]);
-        unset($mockConnections[10]);
 
         // select ten after removal
         $this->assertSame($mockConnections[5], $roundRobin->select($mockConnections));

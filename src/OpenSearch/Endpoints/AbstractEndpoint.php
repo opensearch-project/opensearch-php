@@ -33,22 +33,22 @@ abstract class AbstractEndpoint
     protected $params = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $index = null;
 
     /**
-     * @var string|int
+     * @var string|int|null
      */
     protected $id = null;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $method = null;
 
     /**
-     * @var string|array
+     * @var string|array|null
      */
     protected $body = null;
 
