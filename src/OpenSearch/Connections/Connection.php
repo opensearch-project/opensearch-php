@@ -193,7 +193,7 @@ class Connection implements ConnectionInterface
      * @param  string    $method
      * @param  string    $uri
      * @param  null|array   $params
-     * @param  null      $body
+     * @param  null|mixed   $body
      * @param  array     $options
      * @param  Transport $transport
      * @return mixed
@@ -631,17 +631,20 @@ class Connection implements ConnectionInterface
         return $curlCommand;
     }
 
-    private function process4xxError(array $request, array $response, array $ignore): ?OpenSearchException
+    /**
+     * @throws OpenSearchException
+     */
+    private function process4xxError(array $request, array $response, array $ignore): void
     {
         $statusCode = $response['status'];
 
         /**
- * @var \Exception $exception
-*/
+         * @var \Exception $exception
+        */
         $exception = $this->tryDeserialize400Error($response);
 
         if (array_search($response['status'], $ignore) !== false) {
-            return null;
+            return;
         }
 
         $responseBody = $this->convertBodyToString($response['body'], $statusCode, $exception);
@@ -666,14 +669,17 @@ class Connection implements ConnectionInterface
         throw $exception;
     }
 
-    private function process5xxError(array $request, array $response, array $ignore): ?OpenSearchException
+    /**
+     * @throws OpenSearchException
+     */
+    private function process5xxError(array $request, array $response, array $ignore): void
     {
         $statusCode = (int) $response['status'];
         $responseBody = $response['body'];
 
         /**
- * @var \Exception $exception
-*/
+         * @var \Exception $exception
+        */
         $exception = $this->tryDeserialize500Error($response);
 
         $exceptionText = "[$statusCode Server Exception] ".$exception->getMessage();
@@ -681,7 +687,7 @@ class Connection implements ConnectionInterface
         $this->log->error($exception->getTraceAsString());
 
         if (array_search($statusCode, $ignore) !== false) {
-            return null;
+            return;
         }
 
         if ($statusCode === 500 && strpos($responseBody, "RoutingMissingException") !== false) {

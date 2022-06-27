@@ -21,7 +21,7 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 class UpdateDistinguishedNames extends AbstractEndpoint
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $cluster_name;
 
