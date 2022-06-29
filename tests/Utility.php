@@ -25,12 +25,11 @@ use Exception;
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\OpenSearchException;
-use RuntimeException;
 
 class Utility
 {
     /**
-     * @var string
+     * @var string|null
      */
     private static $version;
 
@@ -252,23 +251,6 @@ class Utility
                 'body' => $newSettings
             ]);
         }
-    }
-
-    /**
-     * A set of ILM policies that should be preserved between runs.
-     *
-     * @see ESRestTestCase.java:preserveILMPolicyIds
-     */
-    private static function preserveILMPolicyIds(): array
-    {
-        return [
-            "ilm-history-ilm-policy",
-            "slm-history-ilm-policy",
-            "watch-history-ilm-policy",
-            "ml-size-based-ilm-policy",
-            "logs",
-            "metrics"
-        ];
     }
 
     /**

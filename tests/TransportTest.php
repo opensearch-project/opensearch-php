@@ -44,14 +44,6 @@ class TransportTest extends TestCase
      */
     private $connectionPool;
     /**
-     * @var SerializerInterface|MockObject
-     */
-    private $serializer;
-    /**
-     * @var MockObject|LoggerInterface
-     */
-    private $trace;
-    /**
      * @var MockObject|LoggerInterface
      */
     private $logger;
@@ -59,8 +51,6 @@ class TransportTest extends TestCase
     public function setUp(): void
     {
         $this->logger = $this->createMock(LoggerInterface::class);
-        $this->trace = $this->createMock(LoggerInterface::class);
-        $this->serializer = $this->createMock(SerializerInterface::class);
         $this->connectionPool = $this->createMock(AbstractConnectionPool::class);
         $this->connection = $this->createMock(Connection::class);
     }

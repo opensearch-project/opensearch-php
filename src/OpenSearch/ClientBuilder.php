@@ -44,12 +44,12 @@ use ReflectionClass;
 class ClientBuilder
 {
     /**
-     * @var Transport
+     * @var Transport|null
      */
     private $transport;
 
     /**
-     * @var callable
+     * @var callable|null
      */
     private $endpoint;
 
@@ -59,22 +59,22 @@ class ClientBuilder
     private $registeredNamespacesBuilders = [];
 
     /**
-     * @var ConnectionFactoryInterface
+     * @var ConnectionFactoryInterface|null
      */
     private $connectionFactory;
 
     /**
-     * @var callable
+     * @var callable|null
      */
     private $handler;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     private $logger;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     private $tracer;
 
@@ -84,12 +84,12 @@ class ClientBuilder
     private $connectionPool = StaticNoPingConnectionPool::class;
 
     /**
-     * @var string|SerializerInterface
+     * @var string|SerializerInterface|null
      */
     private $serializer = SmartSerializer::class;
 
     /**
-     * @var string|SelectorInterface
+     * @var string|SelectorInterface|null
      */
     private $selector = RoundRobinSelector::class;
 
@@ -101,7 +101,7 @@ class ClientBuilder
     ];
 
     /**
-     * @var array
+     * @var array|null
      */
     private $hosts;
 
@@ -111,7 +111,7 @@ class ClientBuilder
     private $connectionParams;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $retries;
 

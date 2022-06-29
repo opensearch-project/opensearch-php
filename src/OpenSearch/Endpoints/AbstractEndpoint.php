@@ -130,7 +130,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @param int|string $docID
+     * @param int|string|null $docID
      *
      * @return $this
      */
