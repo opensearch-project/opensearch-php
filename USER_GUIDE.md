@@ -14,6 +14,9 @@ require __DIR__ . '/vendor/autoload.php';
 $client = (new \OpenSearch\ClientBuilder())
     ->setHosts(['https://localhost:9200'])
     ->setBasicAuthentication('admin', 'admin') // For testing only. Don't store credentials in code.
+    // or, if using AWS SigV4 authentication:
+    ->setSigV4Region('us-east-2')
+    ->setSigV4CredentialProvider(true)
     ->setSSLVerification(false) // For testing only. Use certificate for validation
     ->build();
 
