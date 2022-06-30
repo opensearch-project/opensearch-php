@@ -135,13 +135,6 @@ class SigV4HandlerTest extends TestCase
         ]);
     }
 
-    private function getClient(SigV4Handler $handler)
-    {
-        return ClientBuilder::create()
-            ->setHandler($handler)
-            ->build();
-    }
-
     private function getGenericResponse()
     {
         return new CompletedFutureArray([

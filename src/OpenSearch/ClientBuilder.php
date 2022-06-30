@@ -813,7 +813,7 @@ class ClientBuilder
 
     private function normalizeCredentialProvider($provider): ?callable
     {
-        if ($provider === null && $provider === false) {
+        if ($provider === null || $provider === false) {
             return null;
         }
 
