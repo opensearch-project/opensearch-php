@@ -21,6 +21,9 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
+use Aws\Credentials\CredentialProvider;
+use Aws\Credentials\Credentials;
+use Aws\Credentials\CredentialsInterface;
 use OpenSearch\Common\Exceptions\InvalidArgumentException;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Common\Exceptions\AuthenticationConfigException;
@@ -31,6 +34,7 @@ use OpenSearch\ConnectionPool\StaticNoPingConnectionPool;
 use OpenSearch\Connections\ConnectionFactory;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 use OpenSearch\Connections\ConnectionInterface;
+use OpenSearch\Handlers\SigV4Handler;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
@@ -114,6 +118,16 @@ class ClientBuilder
      * @var int|null
      */
     private $retries;
+
+    /**
+     * @var null|callable
+     */
+    private $sigV4CredentialProvider;
+
+    /**
+     * @var null|string
+     */
+    private $sigV4Region;
 
     /**
      * @var bool
@@ -455,6 +469,33 @@ class ClientBuilder
     }
 
     /**
+     * Set the credential provider for SigV4 request signing. The value provider should be a
+     * callable object that will return
+     *
+     * @param callable|bool|array|CredentialsInterface|null $credentialProvider
+     */
+    public function setSigV4CredentialProvider($credentialProvider): ClientBuilder
+    {
+        if ($credentialProvider !== null && $credentialProvider !== false) {
+            $this->sigV4CredentialProvider = $this->normalizeCredentialProvider($credentialProvider);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set the region for SigV4 signing.
+     *
+     * @param string|null $region
+     */
+    public function setSigV4Region($region): ClientBuilder
+    {
+        $this->sigV4Region = $region;
+
+        return $this;
+    }
+
+    /**
      * Set sniff on start
      *
      * @param bool $sniffOnStart enable or disable sniff on start
@@ -526,6 +567,14 @@ class ClientBuilder
 
         if (is_null($this->handler)) {
             $this->handler = ClientBuilder::defaultHandler();
+        }
+
+        if (!is_null($this->sigV4CredentialProvider)) {
+            if (is_null($this->sigV4Region)) {
+                throw new RuntimeException("A region must be supplied for SigV4 request signing.");
+            }
+
+            $this->handler = new SigV4Handler($this->sigV4Region, $this->sigV4CredentialProvider, $this->handler);
         }
 
         $sslOptions = null;
@@ -760,5 +809,39 @@ class ClientBuilder
         }
 
         return $host;
+    }
+
+    private function normalizeCredentialProvider($provider): ?callable
+    {
+        if ($provider === null || $provider === false) {
+            return null;
+        }
+
+        if (is_callable($provider)) {
+            return $provider;
+        }
+
+        SigV4Handler::assertDependenciesInstalled();
+
+        if ($provider === true) {
+            return CredentialProvider::defaultProvider();
+        }
+
+        if ($provider instanceof CredentialsInterface) {
+            return CredentialProvider::fromCredentials($provider);
+        } elseif (is_array($provider) && isset($provider['key']) && isset($provider['secret'])) {
+            return CredentialProvider::fromCredentials(
+                new Credentials(
+                    $provider['key'],
+                    $provider['secret'],
+                    isset($provider['token']) ? $provider['token'] : null,
+                    isset($provider['expires']) ? $provider['expires'] : null
+                )
+            );
+        }
+
+        throw new InvalidArgumentException('Credentials must be an instance of Aws\Credentials\CredentialsInterface, an'
+            . ' associative array that contains "key", "secret", and an optional "token" key-value pairs, a credentials'
+            . ' provider function, or true.');
     }
 }
