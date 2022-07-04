@@ -36,8 +36,10 @@ class StickyRoundRobinSelectorTest extends \PHPUnit\Framework\TestCase
         $roundRobin = new OpenSearch\ConnectionPool\Selectors\StickyRoundRobinSelector();
 
         $mockConnections = [];
-        $mockConnections[] = m::mock(ConnectionInterface::class)
-            ->shouldReceive('isAlive')->times(16)->andReturn(true)->getMock();
+        $mockConnection = m::mock(ConnectionInterface::class);
+        $mockConnection->expects('isAlive')->times(16)->andReturns(true);
+
+        $mockConnections[] = $mockConnection;
 
         foreach (range(0, 9) as $index) {
             $mockConnections[] = m::mock(ConnectionInterface::class);
@@ -55,11 +57,15 @@ class StickyRoundRobinSelectorTest extends \PHPUnit\Framework\TestCase
         $roundRobin = new OpenSearch\ConnectionPool\Selectors\StickyRoundRobinSelector();
 
         $mockConnections = [];
-        $mockConnections[] = m::mock(ConnectionInterface::class)
-            ->shouldReceive('isAlive')->once()->andReturn(false)->getMock();
+        $mockConnectionNotAlive = m::mock(ConnectionInterface::class);
+        $mockConnectionNotAlive->expects('isAlive')->andReturns(false);
 
-        $mockConnections[] = m::mock(ConnectionInterface::class)
-            ->shouldReceive('isAlive')->times(15)->andReturn(true)->getMock();
+        $mockConnections[] = $mockConnectionNotAlive;
+
+        $mockConnectionAlive = m::mock(ConnectionInterface::class);
+        $mockConnectionAlive->expects('isAlive')->times(15)->andReturns(true);
+
+        $mockConnections[] = $mockConnectionAlive;
 
         foreach (range(0, 8) as $index) {
             $mockConnections[] = m::mock(ConnectionInterface::class);

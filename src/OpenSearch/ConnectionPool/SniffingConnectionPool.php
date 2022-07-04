@@ -58,8 +58,8 @@ class SniffingConnectionPool extends AbstractConnectionPool implements Connectio
         $size = count($this->connections);
         while ($size--) {
             /**
- * @var Connection $connection
-*/
+             * @var Connection $connection
+             */
             $connection = $this->selector->select($this->connections);
             if ($connection->isAlive() === true || $connection->ping() === true) {
                 return $connection;
@@ -88,8 +88,8 @@ class SniffingConnectionPool extends AbstractConnectionPool implements Connectio
 
         while ($total--) {
             /**
- * @var Connection $connection
-*/
+             * @var Connection $connection
+             */
             $connection = $this->selector->select($this->connections);
 
             if ($connection->isAlive() xor $force) {
@@ -106,6 +106,9 @@ class SniffingConnectionPool extends AbstractConnectionPool implements Connectio
         }
 
         foreach ($this->seedConnections as $connection) {
+            /**
+             * @var Connection $connection
+             */
             if ($this->sniffConnection($connection) === true) {
                 return;
             }
@@ -144,7 +147,6 @@ class SniffingConnectionPool extends AbstractConnectionPool implements Connectio
     private function parseClusterState(string $transportSchema, $nodeInfo): array
     {
         $pattern       = '/([^:]*):([0-9]+)/';
-        $schemaAddress = $transportSchema . '_address';
         $hosts         = [];
 
         foreach ($nodeInfo['nodes'] as $node) {

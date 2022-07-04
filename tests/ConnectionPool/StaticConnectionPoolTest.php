@@ -22,11 +22,16 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\ConnectionPool;
 
 use OpenSearch;
+use OpenSearch\ClientBuilder;
+use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
+use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\ConnectionPool\StaticConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactory;
 use Mockery as m;
+use OpenSearch\Connections\ConnectionFactoryInterface;
+use OpenSearch\Connections\ConnectionInterface;
 
 /**
  * Class StaticConnectionPoolTest
@@ -42,23 +47,18 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
 
     public function testAddOneHostThenGetConnection()
     {
-        $mockConnection = m::mock(Connection::class)
-            ->shouldReceive('ping')
-            ->andReturn(true)
-            ->getMock()
-            ->shouldReceive('isAlive')
-            ->andReturn(true)
-            ->getMock()
-            ->shouldReceive('markDead')->once()->getMock();
+        $mockConnection = m::mock(Connection::class);
+        $mockConnection->expects('isAlive')->andReturns(true);
+        $mockConnection->expects('markDead');
 
         /**
- * @var \OpenSearch\Connections\Connection[]&\Mockery\MockInterface[] $connections
-*/
+         * @var \OpenSearch\Connections\ConnectionInterface[]&\Mockery\MockInterface[] $connections
+        */
         $connections = [$mockConnection];
 
-        $selector = m::mock(RoundRobinSelector::class)
-            ->shouldReceive('select')
-            ->andReturn($connections[0])
+        $selector = m::mock(SelectorInterface::class);
+        $selector->allows('select')
+            ->andReturns($connections[0])
             ->getMock();
 
         $connectionFactory = m::mock(ConnectionFactory::class);
@@ -78,22 +78,16 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
         $connections = [];
 
         foreach (range(1, 10) as $index) {
-            $mockConnection = m::mock(Connection::class)
-                ->shouldReceive('ping')
-                ->andReturn(true)
-                ->getMock()
-                ->shouldReceive('isAlive')
-                ->andReturn(true)
-                ->getMock()
-                ->shouldReceive('markDead')->once()->getMock();
+            $mockConnection = m::mock(Connection::class);
+            $mockConnection->expects('isAlive')->between(0, 1)->andReturns(true);
+            $mockConnection->expects('markDead')->once();
 
             $connections[] = $mockConnection;
         }
 
-        $selector = m::mock(RoundRobinSelector::class)
-            ->shouldReceive('select')
-            ->andReturn($connections[0])
-            ->getMock();
+        $selector = m::mock(SelectorInterface::class);
+        $selector->allows('select')
+            ->andReturns($connections[0]);
 
         $connectionFactory = m::mock(ConnectionFactory::class);
 
@@ -112,24 +106,18 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
         $connections = [];
 
         foreach (range(1, 10) as $index) {
-            $mockConnection = m::mock(Connection::class)
-                ->shouldReceive('ping')
-                ->andReturn(false)
-                ->getMock()
-                ->shouldReceive('isAlive')
-                ->andReturn(false)
-                ->getMock()
-                ->shouldReceive('markDead')->once()->getMock()
-                ->shouldReceive('getPingFailures')->andReturn(0)->once()->getMock()
-                ->shouldReceive('getLastPing')->andReturn(time())->once()->getMock();
+            $mockConnection = m::mock(Connection::class);
+            $mockConnection->expects('ping')->andReturns(false);
+            $mockConnection->expects('isAlive')->andReturns(false);
+            $mockConnection->expects('markDead');
+            $mockConnection->expects('getPingFailures')->andReturns(0);
+            $mockConnection->expects('getLastPing')->andReturns(time());
 
             $connections[] = $mockConnection;
         }
 
-        $selector = m::mock(RoundRobinSelector::class)
-            ->shouldReceive('select')
-            ->andReturnValues($connections)
-            ->getMock();
+        $selector = m::mock(SelectorInterface::class);
+        $selector->allows('select')->andReturnValues($connections);
 
         $connectionFactory = m::mock(ConnectionFactory::class);
 
@@ -138,7 +126,7 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
         ];
         $connectionPool = new StaticConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
 
-        $this->expectException(\OpenSearch\Common\Exceptions\NoNodesAvailableException::class);
+        $this->expectException(NoNodesAvailableException::class);
         $this->expectExceptionMessage('No alive nodes found in your cluster');
 
         $connectionPool->nextConnection();
@@ -149,37 +137,27 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
         $connections = [];
 
         foreach (range(1, 9) as $index) {
-            $mockConnection = m::mock(Connection::class)
-                ->shouldReceive('ping')
-                ->andReturn(false)
-                ->getMock()
-                ->shouldReceive('isAlive')
-                ->andReturn(false)
-                ->getMock()
-                ->shouldReceive('markDead')->once()->getMock()
-                ->shouldReceive('getPingFailures')->andReturn(0)->once()->getMock()
-                ->shouldReceive('getLastPing')->andReturn(time())->once()->getMock();
+            $mockConnection = m::mock(Connection::class);
+            $mockConnection->expects('ping')->andReturns(false);
+            $mockConnection->expects('isAlive')->andReturns(false);
+            $mockConnection->expects('markDead');
+            $mockConnection->expects('getPingFailures')->andReturns(0);
+            $mockConnection->expects('getLastPing')->andReturns(time());
 
             $connections[] = $mockConnection;
         }
 
-        $goodConnection = m::mock(Connection::class)
-            ->shouldReceive('ping')->once()
-            ->andReturn(true)
-            ->getMock()
-            ->shouldReceive('isAlive')->once()
-            ->andReturn(false)
-            ->getMock()
-            ->shouldReceive('markDead')->once()->getMock()
-            ->shouldReceive('getPingFailures')->andReturn(0)->once()->getMock()
-            ->shouldReceive('getLastPing')->andReturn(time())->once()->getMock();
+        $goodConnection = m::mock(Connection::class);
+        $goodConnection->expects('ping')->andReturns(true);
+        $goodConnection->expects('isAlive')->andReturns(false);
+        $goodConnection->expects('markDead');
+        $goodConnection->expects('getPingFailures')->andReturns(0);
+        $goodConnection->expects('getLastPing')->andReturns(time());
 
         $connections[] = $goodConnection;
 
-        $selector = m::mock(RoundRobinSelector::class)
-            ->shouldReceive('select')
-            ->andReturnValues($connections)
-            ->getMock();
+        $selector = m::mock(SelectorInterface::class);
+        $selector->allows('select')->andReturnValues($connections);
 
         $connectionFactory = m::mock(ConnectionFactory::class);
 
@@ -197,37 +175,27 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
         $connections = [];
 
         foreach (range(1, 9) as $index) {
-            $mockConnection = m::mock(Connection::class)
-                ->shouldReceive('ping')
-                ->andReturn(false)
-                ->getMock()
-                ->shouldReceive('isAlive')
-                ->andReturn(false)
-                ->getMock()
-                ->shouldReceive('markDead')->once()->getMock()
-                ->shouldReceive('getPingFailures')->andReturn(0)->once()->getMock()
-                ->shouldReceive('getLastPing')->andReturn(time())->once()->getMock();
+            $mockConnection = m::mock(Connection::class);
+            $mockConnection->expects('ping')->between(0, 1)->andReturns(false);
+            $mockConnection->expects('isAlive')->andReturns(false);
+            $mockConnection->expects('markDead');
+            $mockConnection->expects('getPingFailures')->andReturns(0);
+            $mockConnection->expects('getLastPing')->andReturns(time());
 
             $connections[] = $mockConnection;
         }
 
-        $goodConnection = m::mock(Connection::class)
-            ->shouldReceive('ping')->once()
-            ->andReturn(true)
-            ->getMock()
-            ->shouldReceive('isAlive')->once()
-            ->andReturn(false)
-            ->getMock()
-            ->shouldReceive('markDead')->once()->getMock()
-            ->shouldReceive('getPingFailures')->andReturn(0)->once()->getMock()
-            ->shouldReceive('getLastPing')->andReturn(time()-10000)->once()->getMock();
+        $goodConnection = m::mock(Connection::class);
+        $goodConnection->expects('ping')->andReturns(true);
+        $goodConnection->expects('isAlive')->andReturns(false);
+        $goodConnection->expects('markDead');
+        $goodConnection->expects('getPingFailures')->andReturns(0);
+        $goodConnection->expects('getLastPing')->andReturns(time()-10000);
 
         $connections[] = $goodConnection;
 
-        $selector = m::mock(RoundRobinSelector::class)
-            ->shouldReceive('select')
-            ->andReturnValues($connections)
-            ->getMock();
+        $selector = m::mock(SelectorInterface::class);
+        $selector->allows('select')->andReturnValues($connections);
 
         $connectionFactory = m::mock(ConnectionFactory::class);
 
@@ -242,14 +210,14 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
 
     public function testCustomConnectionPoolIT()
     {
-        $clientBuilder = \OpenSearch\ClientBuilder::create();
+        $clientBuilder = ClientBuilder::create();
         $clientBuilder->setHosts(['localhost:1']);
         $client = $clientBuilder
             ->setRetries(0)
             ->setConnectionPool(StaticConnectionPool::class, [])
             ->build();
 
-        $this->expectException(OpenSearch\Common\Exceptions\NoNodesAvailableException::class);
+        $this->expectException(NoNodesAvailableException::class);
         $this->expectExceptionMessage('No alive nodes found in your cluster');
 
         $client->search([]);

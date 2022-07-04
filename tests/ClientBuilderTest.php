@@ -25,23 +25,10 @@ use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\RuntimeException;
-use OpenSearch\Tests\ClientBuilder\DummyLogger;
 use PHPUnit\Framework\TestCase;
 
 class ClientBuilderTest extends TestCase
 {
-    public function testClientBuilderThrowsExceptionForIncorrectLoggerClass()
-    {
-        $this->expectException(\TypeError::class);
-        ClientBuilder::create()->setLogger(new DummyLogger());
-    }
-
-    public function testClientBuilderThrowsExceptionForIncorrectTracerClass()
-    {
-        $this->expectException(\TypeError::class);
-        ClientBuilder::create()->setTracer(new DummyLogger());
-    }
-
     /**
      * @see https://github.com/elastic/elasticsearch-php/issues/993
      */

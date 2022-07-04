@@ -88,11 +88,11 @@ class Transport
     /**
      * Perform a request to the Cluster
      *
-     * @param string $method  HTTP method to use
-     * @param string $uri     HTTP URI to send request to
-     * @param array  $params  Optional query parameters
-     * @param null   $body    Optional query body
-     * @param array  $options
+     * @param string     $method  HTTP method to use
+     * @param string     $uri     HTTP URI to send request to
+     * @param array      $params  Optional query parameters
+     * @param mixed|null $body    Optional query body
+     * @param array      $options
      *
      * @throws Common\Exceptions\NoNodesAvailableException|\Exception
      */

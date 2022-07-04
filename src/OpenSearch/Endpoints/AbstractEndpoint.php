@@ -81,7 +81,7 @@ abstract class AbstractEndpoint
     /**
      * Set the parameters for this endpoint
      *
-     * @param string[] $params Array of parameters
+     * @param mixed[] $params Array of parameters
      * @return $this
      */
     public function setParams(array $params)

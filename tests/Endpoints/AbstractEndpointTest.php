@@ -22,11 +22,12 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var \OpenSearch\Endpoints\AbstractEndpoint&\PHPUnit\Framework\MockObject\MockObject
+     * @var AbstractEndpoint&MockObject
      */
     private $endpoint;
 
