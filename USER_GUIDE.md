@@ -75,3 +75,100 @@ $client->indices()->delete([
     'index' => $indexName
 ]);
 ```
+
+## ClientBuilder
+
+The `\OpenSearch\ClientBuilder` class is used to create a `\OpenSearch\Client` instance. It provides a fluent interface for configuring the client.
+
+### `setHosts`
+
+This method allows you to set the hosts to use for the client. By default, the `RoundRobinSelector` selector is active, which will select a host from the list of hosts in a round-robin fashion.
+
+```php
+<?php
+    $client = (new \OpenSearch\ClientBuilder())
+        ->setHosts(['https://localhost:9200'])
+        ->build();
+```
+
+### `setSelector`
+
+This method allows you to set the host selection mode to use for the client.
+
+```php
+<?php
+    $client = (new \OpenSearch\ClientBuilder())
+        // Class needs to implement \OpenSearch\ConnectionPool\Selectors\SelectorInterface
+        ->setSelector(new \OpenSearch\ConnectionPool\Selectors\RandomSelector())
+        ->build();
+```
+
+### `setBasicAuthentication`
+
+This method allows you to set the basic authentication credentials to use for the client.
+
+```php
+$client = (new \OpenSearch\ClientBuilder())
+    ->setBasicAuthentication('username', 'password')
+    ->build();
+```
+
+### `setSigV4CredentialProvider`
+
+This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
+
+```php
+$client = (new \OpenSearch\ClientBuilder())
+    ->setSigV4Region('us-east-2')
+    
+    // Default credential provider.
+    ->setSigV4CredentialProvider(true)
+    
+    ->setSigV4CredentialProvider([
+      'key' => 'awskeyid',
+      'secret' => 'awssecretkey',
+    ])
+    
+    ->build();
+```
+
+
+### `setConnectionParams`
+
+This method allows you to set custom curl options such as timeout/compression/etc.
+
+```php
+$client = (new \OpenSearch\ClientBuilder())
+    ->setConnectionParams([
+        'client' => [
+            'curl' => [
+                CURLOPT_TIMEOUT => 10,
+                CURLOPT_CONNECTTIMEOUT => 5,
+                CURLOPT_ENCODING => 'gzip',
+            ]
+        ]
+    ])
+    ->build();
+```
+
+### `setLogger`
+
+This method allows you to set a PSR-3 logger to use for the client. This will log all failing requests and responses. If you want to have more verbose logging, you can set also a tracer logger with `setTracer` method.
+
+```php
+<?php
+    $client = (new \OpenSearch\ClientBuilder())
+        ->setLogger($monologLogger)
+        ->build();
+```
+
+### `setRetries`
+
+This method allows you to set the number of retries to use for the client.
+
+```php
+
+$client = (new \OpenSearch\ClientBuilder())
+    ->setRetries(3)
+    ->build();
+```
