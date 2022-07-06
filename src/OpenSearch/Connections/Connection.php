@@ -427,11 +427,11 @@ class Connection implements ConnectionInterface
      *
      * @param array      $request
      * @param array      $response
-     * @param \Exception $exception
+     * @param \Throwable $exception
      *
      * @return void
      */
-    public function logRequestFail(array $request, array $response, \Exception $exception): void
+    public function logRequestFail(array $request, array $response, \Throwable $exception): void
     {
         $port = $request['client']['curl'][CURLOPT_PORT] ?? $response['transfer_stats']['primary_port'] ?? '';
         $uri = $this->addPortInUrl($response['effective_url'], (int) $port);
