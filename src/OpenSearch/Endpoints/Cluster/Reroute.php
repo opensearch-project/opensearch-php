@@ -38,7 +38,8 @@ class Reroute extends AbstractEndpoint
             'retry_failed',
             'metric',
             'master_timeout',
-            'timeout'
+            'timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -55,5 +56,9 @@ class Reroute extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

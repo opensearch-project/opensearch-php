@@ -77,4 +77,89 @@ class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEmpty($options['client']['headers']['x-opaque-id']);
         $this->assertEquals($params['client']['opaqueId'], $options['client']['headers']['x-opaque-id'][0]);
     }
+
+    /**
+     * @dataProvider deprecationProvider
+     */
+    public function testDeprecatedParameterTriggersError(array $input, string $message): void
+    {
+        $errorMessage = null;
+        set_error_handler(static function (int $errno, string $error) use (&$errorMessage): bool {
+            $errorMessage = $error;
+
+            return true;
+        });
+
+        $endpoint = new TestEndpoint();
+        $endpoint->setParams($input);
+
+        static::assertSame($message, $errorMessage);
+
+        restore_error_handler();
+    }
+
+    public function testNotDeprecatedParameterTriggersNoError(): void
+    {
+        $errorMessage = null;
+        set_error_handler(static function (int $errno, string $error) use (&$errorMessage): bool {
+            $errorMessage = $error;
+
+            return true;
+        });
+
+        $endpoint = new TestEndpoint();
+        $endpoint->setParams(['normal_one' => 1]);
+
+        static::assertNull($errorMessage);
+
+        restore_error_handler();
+    }
+
+    public function deprecationProvider(): iterable
+    {
+        yield 'replaced without replacement' => [
+            [
+                'old_without_replacement' => 1,
+            ],
+            'The parameter "old_without_replacement" is deprecated and will be removed without replacement in the next major version'
+        ];
+
+        yield 'replaced with replacement' => [
+            [
+                'old' => 1,
+            ],
+            'The parameter "old" is deprecated and will be replaced with parameter "new" in the next major version'
+        ];
+    }
+}
+
+class TestEndpoint extends AbstractEndpoint
+{
+    public function getParamWhitelist(): array
+    {
+        return [
+            'old',
+            'old_without_replacement',
+            'new',
+            'normal_one'
+        ];
+    }
+
+    public function getURI(): string
+    {
+        return '';
+    }
+
+    public function getMethod(): string
+    {
+        return 'GET';
+    }
+
+    protected function getParamDeprecation(): array
+    {
+        return [
+            'old' => 'new',
+            'old_without_replacement' => null,
+        ];
+    }
 }

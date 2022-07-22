@@ -33,7 +33,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']              = (list) A comma separated list of indices to add a block to
      * $params['block']              = (string) The block to add (one of read, write, read_only or metadata)
      * $params['timeout']            = (time) Explicit operation timeout
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
@@ -102,7 +102,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']                  = (string) The name of the source index to clone
      * $params['target']                 = (string) The name of the target index to clone into
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for on the cloned index before the operation returns.
      * $params['body']                   = (array) The configuration for the target index (`settings` and `aliases`)
      *
@@ -127,7 +127,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']                  = (list) A comma separated list of indices to close
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable']     = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']       = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']       = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
@@ -151,7 +151,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']                  = (string) The name of the index
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for before the operation returns.
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['body']                   = (array) The configuration for the index (`settings` and `mappings`)
      *
      * @param array $params Associative array of parameters
@@ -173,7 +173,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']              = (list) A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices
      * $params['timeout']            = (time) Explicit operation timeout
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable'] = (boolean) Ignore unavailable indexes (default: false)
      * $params['allow_no_indices']   = (boolean) Ignore if a wildcard expression resolves to no concrete indices (default: false)
      * $params['expand_wildcards']   = (enum) Whether wildcard expressions should get expanded to open or closed indices (default: open) (Options = open,closed,hidden,none,all) (Default = open)
@@ -196,7 +196,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']          = (list) A comma-separated list of index names (supports wildcards); use `_all` for all indices (Required)
      * $params['name']           = (list) A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices. (Required)
      * $params['timeout']        = (time) Explicit timestamp for the document
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -217,7 +217,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']           = (string) The name of the template
      * $params['timeout']        = (time) Explicit operation timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -240,7 +240,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']           = (string) The name of the template
      * $params['timeout']        = (time) Explicit operation timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -258,7 +258,7 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      * $params['ignore_unavailable'] = (boolean) Ignore unavailable indexes (default: false)
      * $params['allow_no_indices']   = (boolean) Ignore if a wildcard expression resolves to no concrete indices (default: false)
      * $params['expand_wildcards']   = (enum) Whether wildcard expressions should get expanded to open or closed indices (default: open) (Options = open,closed,hidden,none,all) (Default = open)
@@ -288,7 +288,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = all)
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -312,8 +312,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']           = (string) The name of the template
      * $params['flat_settings']  = (boolean) Return settings in flat format (default: false)
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -339,8 +339,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']           = (list) The comma separated names of the index templates
      * $params['flat_settings']  = (boolean) Return settings in flat format (default: false)
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -406,13 +406,13 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      * $params['ignore_unavailable'] = (boolean) Ignore unavailable indexes (default: false)
      * $params['allow_no_indices']   = (boolean) Ignore if a wildcard expression resolves to no concrete indices (default: false)
      * $params['expand_wildcards']   = (enum) Whether wildcard expressions should get expanded to open or closed indices (default: open) (Options = open,closed,hidden,none,all) (Default = open)
      * $params['flat_settings']      = (boolean) Return settings in flat format (default: false)
      * $params['include_defaults']   = (boolean) Whether to return all default setting for each of the indices. (Default = false)
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -434,7 +434,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = all)
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -459,7 +459,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -480,8 +480,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']           = (list) The comma separated names of the index templates
      * $params['flat_settings']  = (boolean) Return settings in flat format (default: false)
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -506,8 +506,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -526,12 +526,12 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']              = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
      * $params['name']               = (list) The name of the settings that should be included
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = all)
      * $params['flat_settings']      = (boolean) Return settings in flat format (default: false)
-     * $params['local']              = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['local']              = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      * $params['include_defaults']   = (boolean) Whether to return all default setting for each of the indices. (Default = false)
      *
      * @param array $params Associative array of parameters
@@ -553,8 +553,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']              = (list) The comma separated names of the index templates
      * $params['flat_settings']     = (boolean) Return settings in flat format (default: false)
-     * $params['master_timeout']    = (time) Explicit operation timeout for connection to master node
-     * $params['local']             = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout']    = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']             = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -593,7 +593,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']                  = (list) A comma separated list of indices to open
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable']     = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']       = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']       = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = closed)
@@ -617,7 +617,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']          = (list) A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices. (Required)
      * $params['name']           = (string) The name of the alias to be created or updated (Required)
      * $params['timeout']        = (time) Explicit timestamp for the document
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) The settings for the alias, such as `routing` or `filter`
      *
      * @param array $params Associative array of parameters
@@ -642,7 +642,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['name']           = (string) The name of the template
      * $params['create']         = (boolean) Whether the index template should only be added if new or can also replace an existing one (Default = false)
      * $params['cause']          = (string) User defined reason for creating/updating the index template (Default = )
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -668,7 +668,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']              = (list) A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.
      * $params['timeout']            = (time) Explicit operation timeout
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
@@ -693,7 +693,7 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-     * $params['master_timeout']     = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']     = (time) Specify timeout for connection to cluster_manager
      * $params['timeout']            = (time) Explicit operation timeout
      * $params['preserve_existing']  = (boolean) Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
@@ -722,7 +722,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['name']              = (string) The name of the template
      * $params['order']             = (number) The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)
      * $params['create']            = (boolean) Whether the index template should only be added if new or can also replace an existing one (Default = false)
-     * $params['master_timeout']    = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']    = (time) Specify timeout for connection to cluster_manager
      * $params['body']              = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -807,7 +807,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['new_index']              = (string) The name of the rollover index
      * $params['timeout']                = (time) Explicit operation timeout
      * $params['dry_run']                = (boolean) If set to true the rollover action will only be validated but not actually performed even if a condition matches. The default is false
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for on the newly created rollover index before the operation returns.
      * $params['body']                   = (array) The conditions that needs to be met for executing rollover
      *
@@ -876,7 +876,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['target']                 = (string) The name of the target index to shrink into
      * $params['copy_settings']          = (boolean) whether or not to copy settings from the source index (defaults to false)
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for on the shrunken index before the operation returns.
      * $params['body']                   = (array) The configuration for the target index (`settings` and `aliases`)
      *
@@ -902,7 +902,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['name']           = (string) The name of the index (it must be a concrete index name)
      * $params['create']         = (boolean) Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one (Default = false)
      * $params['cause']          = (string) User defined reason for dry-run creating the new template for simulation purposes (Default = )
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) New index template definition, which will be included in the simulation, as if it already exists in the system
      *
      * @param array $params Associative array of parameters
@@ -929,7 +929,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['name']           = (string) The name of the index template
      * $params['create']         = (boolean) Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one (Default = false)
      * $params['cause']          = (string) User defined reason for dry-run creating the new template for simulation purposes (Default = )
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) New index template definition to be simulated, if no index template name is specified
      *
      * @param array $params Associative array of parameters
@@ -957,7 +957,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['target']                 = (string) The name of the target index to split into
      * $params['copy_settings']          = (boolean) whether or not to copy settings from the source index (defaults to false)
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['wait_for_active_shards'] = (string) Set the number of active shards to wait for on the shrunken index before the operation returns.
      * $params['body']                   = (array) The configuration for the target index (`settings` and `aliases`)
      *
@@ -1011,7 +1011,7 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['timeout']        = (time) Request timeout
-     * $params['master_timeout'] = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout'] = (time) Specify timeout for connection to cluster_manager
      * $params['body']           = (array) The definition of `actions` to perform (Required)
      *
      * @param array $params Associative array of parameters
@@ -1136,7 +1136,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']                  = (string) The name of the index to freeze
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable']     = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']       = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']       = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = closed)
@@ -1196,7 +1196,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']                  = (string) The name of the index to unfreeze
      * $params['timeout']                = (time) Explicit operation timeout
-     * $params['master_timeout']         = (time) Specify timeout for connection to master
+     * $params['cluster_manager_timeout']         = (time) Specify timeout for connection to cluster_manager
      * $params['ignore_unavailable']     = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']       = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      * $params['expand_wildcards']       = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = closed)

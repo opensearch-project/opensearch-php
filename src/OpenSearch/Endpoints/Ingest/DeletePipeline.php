@@ -40,12 +40,17 @@ class DeletePipeline extends AbstractEndpoint
     {
         return [
             'master_timeout',
-            'timeout'
+            'timeout',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'DELETE';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

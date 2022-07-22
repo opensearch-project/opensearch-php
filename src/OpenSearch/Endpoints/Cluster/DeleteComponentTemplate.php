@@ -42,7 +42,8 @@ class DeleteComponentTemplate extends AbstractEndpoint
     {
         return [
             'timeout',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -59,5 +60,9 @@ class DeleteComponentTemplate extends AbstractEndpoint
         $this->name = $name;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

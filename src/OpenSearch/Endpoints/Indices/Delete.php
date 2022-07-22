@@ -43,12 +43,17 @@ class Delete extends AbstractEndpoint
             'master_timeout',
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards'
+            'expand_wildcards',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'DELETE';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

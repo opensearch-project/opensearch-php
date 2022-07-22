@@ -40,7 +40,8 @@ class PutPipeline extends AbstractEndpoint
     {
         return [
             'master_timeout',
-            'timeout'
+            'timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -57,5 +58,9 @@ class PutPipeline extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

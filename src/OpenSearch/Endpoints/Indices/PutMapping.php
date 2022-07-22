@@ -43,7 +43,8 @@ class PutMapping extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'write_index_only'
+            'write_index_only',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -60,5 +61,9 @@ class PutMapping extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

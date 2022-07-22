@@ -41,7 +41,8 @@ class GetComponentTemplate extends AbstractEndpoint
     {
         return [
             'master_timeout',
-            'local'
+            'local',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -61,5 +62,9 @@ class GetComponentTemplate extends AbstractEndpoint
         $this->name = $name;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

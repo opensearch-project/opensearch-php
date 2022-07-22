@@ -45,7 +45,8 @@ class Shrink extends AbstractEndpoint
             'copy_settings',
             'timeout',
             'master_timeout',
-            'wait_for_active_shards'
+            'wait_for_active_shards',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -72,5 +73,9 @@ class Shrink extends AbstractEndpoint
         $this->target = $target;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

@@ -45,7 +45,7 @@ class CloneSnapshot extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout'
+            'master_timeout', 'cluster_manager_timeout'
         ];
     }
 
@@ -92,5 +92,9 @@ class CloneSnapshot extends AbstractEndpoint
         $this->target_snapshot = $target_snapshot;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

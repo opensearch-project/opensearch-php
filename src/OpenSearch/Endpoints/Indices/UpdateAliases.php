@@ -34,7 +34,8 @@ class UpdateAliases extends AbstractEndpoint
     {
         return [
             'timeout',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -51,5 +52,9 @@ class UpdateAliases extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

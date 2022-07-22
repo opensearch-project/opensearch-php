@@ -56,7 +56,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
     /**
      * $params['repository']          = (string) The name of the repository containing the snapshot of the index to mount
      * $params['snapshot']            = (string) The name of the snapshot of the index to mount
-     * $params['master_timeout']      = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']      = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['wait_for_completion'] = (boolean) Should this request wait until the operation has completed before returning (Default = false)
      * $params['body']                = (array) The restore configuration for mounting the snapshot as searchable (Required)
      *

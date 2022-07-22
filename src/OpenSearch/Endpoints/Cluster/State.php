@@ -51,7 +51,8 @@ class State extends AbstractEndpoint
             'wait_for_timeout',
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards'
+            'expand_wildcards',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -71,5 +72,9 @@ class State extends AbstractEndpoint
         $this->metric = $metric;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

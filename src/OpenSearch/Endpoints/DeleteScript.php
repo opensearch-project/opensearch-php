@@ -40,12 +40,17 @@ class DeleteScript extends AbstractEndpoint
     {
         return [
             'timeout',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'DELETE';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

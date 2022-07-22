@@ -43,7 +43,8 @@ class ImportDanglingIndex extends AbstractEndpoint
         return [
             'accept_data_loss',
             'timeout',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -60,5 +61,9 @@ class ImportDanglingIndex extends AbstractEndpoint
         $this->index_uuid = $index_uuid;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

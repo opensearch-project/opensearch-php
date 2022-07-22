@@ -45,12 +45,17 @@ class Get extends AbstractEndpoint
             'expand_wildcards',
             'flat_settings',
             'include_defaults',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

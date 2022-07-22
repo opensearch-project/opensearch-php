@@ -43,7 +43,8 @@ class ExistsTemplate extends AbstractEndpoint
         return [
             'flat_settings',
             'master_timeout',
-            'local'
+            'local',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -63,5 +64,9 @@ class ExistsTemplate extends AbstractEndpoint
         $this->name = $name;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

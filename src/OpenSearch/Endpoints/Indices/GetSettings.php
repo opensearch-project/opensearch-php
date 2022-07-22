@@ -53,7 +53,8 @@ class GetSettings extends AbstractEndpoint
             'expand_wildcards',
             'flat_settings',
             'local',
-            'include_defaults'
+            'include_defaults',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -73,5 +74,9 @@ class GetSettings extends AbstractEndpoint
         $this->name = $name;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

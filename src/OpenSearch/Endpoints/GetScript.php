@@ -39,12 +39,16 @@ class GetScript extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout'
+            'master_timeout', 'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

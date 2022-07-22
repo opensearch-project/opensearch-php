@@ -47,7 +47,8 @@ class Snapshots extends AbstractEndpoint
             'help',
             's',
             'time',
-            'v'
+            'v',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -67,5 +68,9 @@ class Snapshots extends AbstractEndpoint
         $this->repository = $repository;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

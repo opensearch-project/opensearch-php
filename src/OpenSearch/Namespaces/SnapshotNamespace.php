@@ -31,7 +31,7 @@ class SnapshotNamespace extends AbstractNamespace
 {
     /**
      * $params['repository']     = (string) A repository name
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      *
      * @param array $params Associative array of parameters
@@ -52,7 +52,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['repository']      = (string) A repository name
      * $params['snapshot']        = (string) The name of the snapshot to clone from
      * $params['target_snapshot'] = (string) The name of the cloned snapshot to create
-     * $params['master_timeout']  = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']  = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['body']            = (array) The snapshot clone definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -78,7 +78,7 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['repository']          = (string) A repository name
      * $params['snapshot']            = (string) A snapshot name
-     * $params['master_timeout']      = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']      = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['wait_for_completion'] = (boolean) Should this request wait until the operation has completed before returning (Default = false)
      * $params['body']                = (array) The snapshot definition
      *
@@ -102,7 +102,7 @@ class SnapshotNamespace extends AbstractNamespace
     }
     /**
      * $params['repository']     = (string) A repository name
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      * $params['verify']         = (boolean) Whether to verify the repository after creation
      * $params['body']           = (array) The repository definition (Required)
@@ -126,7 +126,7 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['repository']     = (string) A repository name
      * $params['snapshot']       = (string) A snapshot name
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -146,7 +146,7 @@ class SnapshotNamespace extends AbstractNamespace
     }
     /**
      * $params['repository']     = (list) Name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      *
      * @param array $params Associative array of parameters
@@ -166,7 +166,7 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['repository']         = (string) A repository name
      * $params['snapshot']           = (list) A comma-separated list of snapshot names
-     * $params['master_timeout']     = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']     = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['ignore_unavailable'] = (boolean) Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
      * $params['verbose']            = (boolean) Whether to show verbose snapshot info or only show the basic info found in the repository index blob
      *
@@ -188,8 +188,8 @@ class SnapshotNamespace extends AbstractNamespace
     }
     /**
      * $params['repository']     = (list) A comma-separated list of repository names
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
-     * $params['local']          = (boolean) Return local information, do not retrieve the state from master node (default: false)
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
+     * $params['local']          = (boolean) Return local information, do not retrieve the state from cluster_manager node (default: false)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -208,7 +208,7 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['repository']          = (string) A repository name
      * $params['snapshot']            = (string) A snapshot name
-     * $params['master_timeout']      = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']      = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['wait_for_completion'] = (boolean) Should this request wait until the operation has completed before returning (Default = false)
      * $params['body']                = (array) Details of what to restore
      *
@@ -233,7 +233,7 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['repository']         = (string) A repository name
      * $params['snapshot']           = (list) A comma-separated list of snapshot names
-     * $params['master_timeout']     = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout']     = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['ignore_unavailable'] = (boolean) Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown
      *
      * @param array $params Associative array of parameters
@@ -254,7 +254,7 @@ class SnapshotNamespace extends AbstractNamespace
     }
     /**
      * $params['repository']     = (string) A repository name
-     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * $params['cluster_manager_timeout'] = (time) Explicit operation timeout for connection to cluster_manager node
      * $params['timeout']        = (time) Explicit operation timeout
      *
      * @param array $params Associative array of parameters

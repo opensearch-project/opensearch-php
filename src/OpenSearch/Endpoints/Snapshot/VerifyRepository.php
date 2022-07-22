@@ -42,7 +42,8 @@ class VerifyRepository extends AbstractEndpoint
     {
         return [
             'master_timeout',
-            'timeout'
+            'timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -59,5 +60,9 @@ class VerifyRepository extends AbstractEndpoint
         $this->repository = $repository;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }
