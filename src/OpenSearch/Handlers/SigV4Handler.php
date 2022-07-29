@@ -50,7 +50,7 @@ class SigV4Handler
         $signedRequest = $this->signer
             ->signRequest($psr7Request, $creds);
 
-        return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest));
+        return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest, $request));
     }
 
     public static function assertDependenciesInstalled(): void
@@ -92,7 +92,7 @@ class SigV4Handler
         );
     }
 
-    private function createRingRequest(RequestInterface $request): array
+    private function createRingRequest(RequestInterface $request, array $originalRequest): array
     {
         $uri = $request->getUri();
         $body = (string) $request->getBody();
@@ -109,6 +109,7 @@ class SigV4Handler
             'uri' => $uri->getPath(),
             'body' => $body,
             'headers' => $request->getHeaders(),
+            'client' => $originalRequest['client']
         ];
         if ($uri->getQuery()) {
             $ringRequest['query_string'] = $uri->getQuery();

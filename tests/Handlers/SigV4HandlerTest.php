@@ -135,6 +135,26 @@ class SigV4HandlerTest extends TestCase
         ]);
     }
 
+    public function testClientParametersShouldBePassedToHandler()
+    {
+        $toWrap = function (array $ringRequest) {
+            $this->assertArrayHasKey('client', $ringRequest);
+            $this->assertArrayHasKey('timeout', $ringRequest['client']);
+            $this->assertArrayHasKey('connect_timeout', $ringRequest['client']);
+            
+            return $this->getGenericResponse();
+        };
+
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->setConnectionParams(['client' => ['timeout' => 5, 'connect_timeout' => 5]])
+            ->build();
+
+        $client->indices()->exists(['index' => 'index']);
+    }
+
     private function getGenericResponse()
     {
         return new CompletedFutureArray([
