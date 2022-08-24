@@ -27,7 +27,7 @@
     "phpstan/phpstan": "^1.7.15",
     "phpstan/phpstan-mockery": "^1.1.0",
     "phpunit/phpunit": "^9.3",
-    "symfony/finder": "~4.0"
+    "symfony/finder": "~4.0 || ~5.0"
   },
   "suggest": {
     "monolog/monolog": "Allows for client-level logging and tracing",
