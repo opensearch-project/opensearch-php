@@ -68,9 +68,6 @@ class SigV4HandlerTest extends TestCase
 
     public function testSignsWithProvidedCredentials()
     {
-        $provider = CredentialProvider::fromCredentials(
-            new Credentials('foo', 'bar', 'baz')
-        );
         $toWrap = function (array $ringRequest) {
             $this->assertArrayHasKey('X-Amz-Security-Token', $ringRequest['headers']);
             $this->assertSame('baz', $ringRequest['headers']['X-Amz-Security-Token'][0]);
@@ -141,7 +138,7 @@ class SigV4HandlerTest extends TestCase
             $this->assertArrayHasKey('client', $ringRequest);
             $this->assertArrayHasKey('timeout', $ringRequest['client']);
             $this->assertArrayHasKey('connect_timeout', $ringRequest['client']);
-            
+
             return $this->getGenericResponse();
         };
 
@@ -155,7 +152,25 @@ class SigV4HandlerTest extends TestCase
         $client->indices()->exists(['index' => 'index']);
     }
 
-    private function getGenericResponse()
+    public function testClientPortDeterminedByURL()
+    {
+        $toWrap = function (array $ringRequest) {
+            $this->assertArrayNotHasKey(CURLOPT_PORT, $ringRequest['client']['curl']);
+
+            return $this->getGenericResponse();
+        };
+
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setHosts(['https://search--hgkaewb2ytci3t3y6yghh5m5vje.eu-central-1.es.amazonaws.com'])
+            ->setSigV4Region('us-west-2')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
+
+        $client->indices()->exists(['index' => 'index']);
+    }
+
+    private function getGenericResponse(): CompletedFutureArray
     {
         return new CompletedFutureArray([
             'status' => 200,

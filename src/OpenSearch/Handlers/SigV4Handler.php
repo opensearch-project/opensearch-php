@@ -103,13 +103,17 @@ class SigV4Handler
             $body = null;
         }
 
+        // Reset the explicit port in the URL
+        $client = $originalRequest['client'];
+        unset($client['curl'][CURLOPT_PORT]);
+
         $ringRequest = [
             'http_method' => $request->getMethod(),
             'scheme' => $uri->getScheme(),
             'uri' => $uri->getPath(),
             'body' => $body,
             'headers' => $request->getHeaders(),
-            'client' => $originalRequest['client']
+            'client' => $client
         ];
         if ($uri->getQuery()) {
             $ringRequest['query_string'] = $uri->getQuery();
