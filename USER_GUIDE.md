@@ -37,6 +37,7 @@ $client->indices()->create([
     ]
 ]);
 
+// Create a document passing the id
 $client->create([
     'index' => $indexName,
     'id' => 1,
@@ -44,6 +45,16 @@ $client->create([
         'title' => 'Moneyball',
         'director' => 'Bennett Miller',
         'year' => 2011
+    ]
+]);
+
+// Create a document without passing the id (will be generated automatically)
+$client->create([
+    'index' => $indexName,
+    'body' => [
+        'title' => 'Remember the Titans',
+        'director' => 'Boaz Yakin',
+        'year' => 2000
     ]
 ]);
 
