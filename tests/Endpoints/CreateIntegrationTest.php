@@ -35,7 +35,6 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         // Arrange
         $expectedIndex = 'movies';
-        $expectedType = '_doc';
         $expectedResult = 'created';
         $expectedId = 100;
 
@@ -54,7 +53,6 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
 
         // Assert
         $this->assertEquals($expectedIndex, $result['_index']);
-        $this->assertEquals($expectedType, $result['_type']);
         $this->assertEquals($expectedResult, $result['result']);
         $this->assertEquals($expectedId, $result['_id']);
     }
@@ -63,7 +61,6 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         // Arrange
         $expectedIndex = 'movies';
-        $expectedType = '_doc';
         $expectedResult = 'created';
 
         $client = Utility::getClient();
@@ -80,7 +77,6 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
 
         // Assert
         $this->assertEquals($expectedIndex, $result['_index']);
-        $this->assertEquals($expectedType, $result['_type']);
         $this->assertEquals($expectedResult, $result['result']);
         $this->assertNotEmpty($result['_id']);
     }
