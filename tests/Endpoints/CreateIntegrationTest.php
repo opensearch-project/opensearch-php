@@ -23,6 +23,12 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Tests\Utility;
 
+/**
+ * Class CreateIntegrationTest
+ *
+ * @subpackage Tests\Endpoints
+ * @group Integration
+ */
 class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
 {
     public function testCreatePassingId()
