@@ -46,12 +46,17 @@ class Shards extends AbstractEndpoint
             'help',
             's',
             'time',
-            'v'
+            'v',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

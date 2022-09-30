@@ -46,7 +46,8 @@ class AddBlock extends AbstractEndpoint
             'master_timeout',
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards'
+            'expand_wildcards',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -63,5 +64,9 @@ class AddBlock extends AbstractEndpoint
         $this->block = $block;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

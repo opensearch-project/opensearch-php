@@ -47,7 +47,8 @@ class ThreadPool extends AbstractEndpoint
             'h',
             'help',
             's',
-            'v'
+            'v',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -67,5 +68,9 @@ class ThreadPool extends AbstractEndpoint
         $this->thread_pool_patterns = $thread_pool_patterns;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

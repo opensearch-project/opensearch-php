@@ -19,42 +19,32 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Endpoints\Indices;
+namespace OpenSearch\Endpoints\Cat;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class Freeze extends AbstractEndpoint
+class ClusterManager extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-
-        if (isset($index)) {
-            return "/$index/_freeze";
-        }
-        throw new RuntimeException('Missing parameter for the endpoint indices.freeze');
+        return "/_cat/cluster_manager";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'timeout',
-            'master_timeout',
-            'ignore_unavailable',
-            'allow_no_indices',
-            'expand_wildcards',
-            'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'format',
+            'local',
+            'cluster_manager_timeout',
+            'h',
+            'help',
+            's',
+            'v'
         ];
     }
 
     public function getMethod(): string
     {
-        return 'POST';
-    }
-    protected function getParamDeprecation(): array
-    {
-        return ['master_timeout' => 'cluster_manager_timeout'];
+        return 'GET';
     }
 }

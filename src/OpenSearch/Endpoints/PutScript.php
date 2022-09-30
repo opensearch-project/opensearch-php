@@ -49,7 +49,8 @@ class PutScript extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
-            'context'
+            'context',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -76,5 +77,9 @@ class PutScript extends AbstractEndpoint
         $this->context = $context;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

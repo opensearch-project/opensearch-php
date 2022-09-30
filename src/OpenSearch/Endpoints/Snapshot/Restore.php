@@ -44,7 +44,8 @@ class Restore extends AbstractEndpoint
     {
         return [
             'master_timeout',
-            'wait_for_completion'
+            'wait_for_completion',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -81,5 +82,9 @@ class Restore extends AbstractEndpoint
         $this->snapshot = $snapshot;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

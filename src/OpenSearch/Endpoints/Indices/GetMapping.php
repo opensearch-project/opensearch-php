@@ -41,12 +41,17 @@ class GetMapping extends AbstractEndpoint
             'allow_no_indices',
             'expand_wildcards',
             'master_timeout',
-            'local'
+            'local',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

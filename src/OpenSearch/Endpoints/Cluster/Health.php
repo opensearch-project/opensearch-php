@@ -48,12 +48,17 @@ class Health extends AbstractEndpoint
             'wait_for_events',
             'wait_for_no_relocating_shards',
             'wait_for_no_initializing_shards',
-            'wait_for_status'
+            'wait_for_status',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

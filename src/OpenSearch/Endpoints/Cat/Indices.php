@@ -50,12 +50,17 @@ class Indices extends AbstractEndpoint
             'time',
             'v',
             'include_unloaded_segments',
-            'expand_wildcards'
+            'expand_wildcards',
+            'cluster_manager_timeout'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

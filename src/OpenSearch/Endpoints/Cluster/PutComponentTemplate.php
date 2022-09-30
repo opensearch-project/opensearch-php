@@ -43,7 +43,8 @@ class PutComponentTemplate extends AbstractEndpoint
         return [
             'create',
             'timeout',
-            'master_timeout'
+            'master_timeout',
+            'cluster_manager_timeout'
         ];
     }
 
@@ -70,5 +71,9 @@ class PutComponentTemplate extends AbstractEndpoint
         $this->name = $name;
 
         return $this;
+    }
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }
