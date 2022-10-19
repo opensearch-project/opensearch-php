@@ -1,5 +1,6 @@
 - [Overview](#overview)
 - [Current Maintainers](#current-maintainers)
+- [Emeritus](#emeritus)
   
 ## Overview
 
@@ -13,5 +14,10 @@
 | Vacha Shah           | [VachaShah](https://github.com/VachaShah)     | Amazon      |
 | Daniel Doubrovkine   | [dblock](https://github.com/dblock)           | Amazon      |
 | Harsha Vamsi Kalluri | [harshavamsi](https://github.com/harshavamsi) | Amazon      |
+
+## Emeritus
+| Maintainer      | GitHub ID                                           | Affiliation |
+| --------------- | --------------------------------------------------- | ----------- |
+| Paul Borgermans | [paulborgermans](https://github.com/paulborgermans) | External    |
 
 
