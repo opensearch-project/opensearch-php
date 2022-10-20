@@ -7,8 +7,9 @@
 - [Developer Certificate of Origin](#developer-certificate-of-origin)
 - [License Headers](#license-headers)
   - [Java](#java)
-  - [Python](#python)
-  - [Shell](#shell)
+  - [Python, Ruby, Shell](#python-ruby-shell)
+- [Changelog](#changelog)
+  - [Adding Changes](#adding-changes)
 - [Review Process](#review-process)
 
 ## Contributing to OpenSearch
@@ -98,20 +99,39 @@ New files in your code contributions should contain the following license header
 /*
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
- */
+ *
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
+ *
+*/
 ```
 
-### Python
+### Python, Ruby, Shell
 ```
 # Copyright OpenSearch Contributors
 # SPDX-License-Identifier: Apache-2.0
+#
+# The OpenSearch Contributors require contributions made to
+# this file be licensed under the Apache-2.0 license or a
+# compatible open source license.
 ```
 
-### Shell
-```
-# Copyright OpenSearch Contributors
-# SPDX-License-Identifier: Apache-2.0
-```
+## Changelog
+
+OpenSearch-php maintains a version specific changelog by enforcing a change to the ongoing [CHANGELOG](CHANGELOG.md) file adhering to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+
+The changes are curated by version, with the changes to the main branch added chronologically to the `Unreleased` version. Each version has corresponding sections which list out the category of the change - `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
+
+
+### Adding Changes
+
+As a contributor, you must ensure that every pull request has its changes listed out within the corresponding version and appropriate section of the [CHANGELOG](CHANGELOG.md) file.
+
+Adding in the change is a two step process -
+1. Add your changes to the corresponding section within the CHANGELOG file with dummy pull request information, publish the PR.
+
+2. Update the entry for your change in [`CHANGELOG.md`](CHANGELOG.md) and make sure that you reference the pull request there.
 
 ## Review Process
 
