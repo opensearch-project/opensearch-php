@@ -59,10 +59,12 @@ jobs:
         composer install --prefer-dist
 
     - name: PHP CS Fixer
+      if: matrix.php-version == '8.1'
       run: |
         composer run-script php-cs
 
     - name: PHP Static Analysis Tool
+      if: matrix.php-version == '8.1'
       run: |
         composer run-script phpstan
 
