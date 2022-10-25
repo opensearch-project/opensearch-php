@@ -55,6 +55,10 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIndex, $result['_index']);
         $this->assertEquals($expectedResult, $result['result']);
         $this->assertEquals($expectedId, $result['_id']);
+
+        $client->indices()->delete([
+            'index' => $expectedIndex,
+        ]);
     }
 
     public function testCreateWithoutPassId()
@@ -79,5 +83,9 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedIndex, $result['_index']);
         $this->assertEquals($expectedResult, $result['result']);
         $this->assertNotEmpty($result['_id']);
+
+        $client->indices()->delete([
+            'index' => $expectedIndex,
+        ]);
     }
 }
