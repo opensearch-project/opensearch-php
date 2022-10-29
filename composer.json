@@ -55,10 +55,13 @@
       "phpstan analyse --no-progress"
     ],
     "unit": [
-      "phpunit"
+      "phpunit --exclude-group Integration"
     ],
     "integration": [
-      "phpunit -c phpunit-integration-tests.xml"
+      "phpunit --group Integration"
+    ],
+    "phpunit": [
+      "phpunit"
     ]
   }
 }

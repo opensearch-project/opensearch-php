@@ -53,14 +53,6 @@ jobs:
         run: |
           composer install --prefer-dist
 
-      - name: PHP CS Fixer
-        run: |
-          composer run-script php-cs
-
-      - name: PHP Static Analysis Tool
-        run: |
-          composer run-script phpstan
-
       - name: Wait for Search server
         run: php ./.github/wait_for_es.php
 
