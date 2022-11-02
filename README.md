@@ -3,6 +3,7 @@
 - [Welcome!](#welcome)
 - [Project Resources](#project-resources)
 - [Code of Conduct](#code-of-conduct)
+- [Sample code](#sample-code)
 - [Compatibility with OpenSearch](#compatibility-with-opensearch)
 - [License](#license)
 - [Copyright](#copyright)
@@ -14,7 +15,7 @@
 ## Project Resources
 
 * [Project Website](https://opensearch.org/)
-* [User Guide](https://github.com/opensearch-project/opensearch-php/blob/main/USER_GUIDE.md)
+* [User Guide And Sample Code](https://github.com/opensearch-project/opensearch-php/blob/main/USER_GUIDE.md)
 * [Developer Guide](https://github.com/opensearch-project/opensearch-php/blob/main/DEVELOPER_GUIDE.md)
 * [Downloads](https://opensearch.org/downloads.html).
 * [Documentation](https://opensearch.org/docs/latest/)
@@ -29,6 +30,10 @@
 ## Code of Conduct
 
 This project has adopted the [Amazon Open Source Code of Conduct](https://github.com/opensearch-project/opensearch-php/blob/main/CODE_OF_CONDUCT.md). For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq), or contact [opensource-codeofconduct@amazon.com](mailto:opensource-codeofconduct@amazon.com) with any additional questions or comments.
+
+## Sample code
+
+See [Sample Code](https://github.com/opensearch-project/opensearch-php/blob/main/USER_GUIDE.md).
 
 ## Compatibility with OpenSearch
 

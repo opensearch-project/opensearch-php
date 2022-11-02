@@ -35,7 +35,8 @@ util/doctum.phar
 .phpunit.result.cache
 
 # Code coverage
-build
+/clover.xml
+
 # Do not ignore Doctum docs built files
 !/docs/build
 
