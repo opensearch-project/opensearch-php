@@ -8,6 +8,9 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 
+- Added Windows and macOS jobs to CI
+- Added Coverage reporting to Codecov
+
 ### Deprecated
 
 ### Removed
