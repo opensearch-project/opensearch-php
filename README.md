@@ -15,7 +15,7 @@
 ## Project Resources
 
 * [Project Website](https://opensearch.org/)
-* [User Guide](https://github.com/opensearch-project/opensearch-php/blob/main/USER_GUIDE.md)
+* [User Guide And Sample Code](https://github.com/opensearch-project/opensearch-php/blob/main/USER_GUIDE.md)
 * [Developer Guide](https://github.com/opensearch-project/opensearch-php/blob/main/DEVELOPER_GUIDE.md)
 * [Downloads](https://opensearch.org/downloads.html).
 * [Documentation](https://opensearch.org/docs/latest/)
