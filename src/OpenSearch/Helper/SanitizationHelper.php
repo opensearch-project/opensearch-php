@@ -14,7 +14,7 @@ class SanitizationHelper
     public static function escapeReservedChars(string $string): string
     {
         return preg_replace(
-            "/[\\+\\-\\=\\&\\|\\!\\(\\)\\{\\}\\[\\]\\^\\\"\\~\\*\\<\\>\\?\\:\\\\\\/]/",
+            "/[\\+\\-\\|\\(\\)\\\"\\~\\*\\<\\>\\\\]/",
             addslashes('\\$0'),
             $string
         );
