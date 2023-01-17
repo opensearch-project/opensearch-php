@@ -131,6 +131,8 @@ This method allows you to enable AWS SigV4 authentication for the client. The AW
 ```php
 $client = (new \OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
+
+    ->setSigV4Service('aoss') // defaults to 'es'
     
     // Default credential provider.
     ->setSigV4CredentialProvider(true)

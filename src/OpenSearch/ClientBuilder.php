@@ -130,6 +130,11 @@ class ClientBuilder
     private $sigV4Region;
 
     /**
+     * @var null|string
+     */
+    private $sigV4Service;
+
+    /**
      * @var bool
      */
     private $sniffOnStart = false;
@@ -496,6 +501,18 @@ class ClientBuilder
     }
 
     /**
+     * Set the service for SigV4 signing.
+     *
+     * @param string|null $service
+     */
+    public function setSigV4Service($service): ClientBuilder
+    {
+        $this->sigV4Service = $service;
+
+        return $this;
+    }
+
+    /**
      * Set sniff on start
      *
      * @param bool $sniffOnStart enable or disable sniff on start
@@ -574,7 +591,11 @@ class ClientBuilder
                 throw new RuntimeException("A region must be supplied for SigV4 request signing.");
             }
 
-            $this->handler = new SigV4Handler($this->sigV4Region, $this->sigV4CredentialProvider, $this->handler);
+            if (is_null($this->sigV4Service)) {
+                $this->setSigV4Service("es");
+            }
+
+            $this->handler = new SigV4Handler($this->sigV4Region,$this->sigV4Service, $this->sigV4CredentialProvider, $this->handler);
         }
 
         $sslOptions = null;

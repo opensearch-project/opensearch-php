@@ -22,7 +22,9 @@ class SigV4Handler
      * A handler that applies an AWS V4 signature before dispatching requests.
      *
      * @param string        $region                 The region of your Amazon
-     *                                              Elasticsearch Service domain
+     *                                              OpenSearch Service domain
+     * @param string        $service                The Service of your Amazon
+     *                                              OpenSearch Service domain
      * @param callable|null $credentialProvider     A callable that returns a
      *                                              promise that is fulfilled
      *                                              with an instance of
@@ -31,12 +33,13 @@ class SigV4Handler
      */
     public function __construct(
         string $region,
+        string $service,
         callable $credentialProvider = null,
         callable $wrappedHandler = null
     ) {
         self::assertDependenciesInstalled();
 
-        $this->signer = new SignatureV4('es', $region);
+        $this->signer = new SignatureV4($service, $region);
         $this->wrappedHandler = $wrappedHandler
             ?: ClientBuilder::defaultHandler();
         $this->credentialProvider = $credentialProvider
@@ -46,11 +49,15 @@ class SigV4Handler
     public function __invoke(array $request)
     {
         $creds = call_user_func($this->credentialProvider)->wait();
+
+        // remove body before signing request
+        $temp_body = $request['body'];
+        $request['body'] = null;
+
         $psr7Request = $this->createPsr7Request($request);
         $signedRequest = $this->signer
             ->signRequest($psr7Request, $creds);
-
-        return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest, $request));
+        return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest, $request, $temp_body));
     }
 
     public static function assertDependenciesInstalled(): void
@@ -92,10 +99,12 @@ class SigV4Handler
         );
     }
 
-    private function createRingRequest(RequestInterface $request, array $originalRequest): array
+    private function createRingRequest(RequestInterface $request, array $originalRequest, $temp_body): array
     {
         $uri = $request->getUri();
-        $body = (string) $request->getBody();
+
+        // replace body after signing request
+        $body = $temp_body;
 
         // RingPHP currently expects empty message bodies to be null:
         // https://github.com/guzzle/RingPHP/blob/4c8fe4c48a0fb7cc5e41ef529e43fecd6da4d539/src/Client/CurlFactory.php#L202
