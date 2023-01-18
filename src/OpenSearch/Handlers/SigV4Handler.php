@@ -21,9 +21,9 @@ class SigV4Handler
     /**
      * A handler that applies an AWS V4 signature before dispatching requests.
      *
-     * @param string        $service                The Service of your Amazon
-     *                                              OpenSearch Service domain
      * @param string        $region                 The region of your Amazon
+     *                                              OpenSearch Service domain
+     * @param string        $service                The Service of your Amazon
      *                                              OpenSearch Service domain
      * @param callable|null $credentialProvider     A callable that returns a
      *                                              promise that is fulfilled
@@ -32,8 +32,8 @@ class SigV4Handler
      * @param callable|null $wrappedHandler         A RingPHP handler
      */
     public function __construct(
-        string $service,
         string $region,
+        string $service,
         callable $credentialProvider = null,
         callable $wrappedHandler = null
     ) {
@@ -98,6 +98,7 @@ class SigV4Handler
     private function createRingRequest(RequestInterface $request, array $originalRequest): array
     {
         $uri = $request->getUri();
+        $body = (string) $request->getBody();
 
         // RingPHP currently expects empty message bodies to be null:
         // https://github.com/guzzle/RingPHP/blob/4c8fe4c48a0fb7cc5e41ef529e43fecd6da4d539/src/Client/CurlFactory.php#L202
