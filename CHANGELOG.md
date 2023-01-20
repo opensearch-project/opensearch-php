@@ -11,6 +11,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 - Added Windows and macOS jobs to CI
 - Added Coverage reporting to Codecov
+- Support a custom signing service name for AWS SigV4 ([#117](https://github.com/opensearch-project/opensearch-php/pull/117))
 
 ### Deprecated
 

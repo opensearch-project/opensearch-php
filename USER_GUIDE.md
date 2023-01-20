@@ -124,13 +124,36 @@ $client = (new \OpenSearch\ClientBuilder())
     ->build();
 ```
 
-### `setSigV4CredentialProvider`
+### `setSigV4CredentialProvider` for AWS OpenSearch Service
 
 This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
 
 ```php
 $client = (new \OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
+
+    ->setSigV4Service('es')
+    
+    // Default credential provider.
+    ->setSigV4CredentialProvider(true)
+    
+    ->setSigV4CredentialProvider([
+      'key' => 'awskeyid',
+      'secret' => 'awssecretkey',
+    ])
+    
+    ->build();
+```
+
+### `setSigV4CredentialProvider` for AWS OpenSearch Serverlss Service
+
+This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
+
+```php
+$client = (new \OpenSearch\ClientBuilder())
+    ->setSigV4Region('us-east-2')
+
+    ->setSigV4Service('aoss')
     
     // Default credential provider.
     ->setSigV4CredentialProvider(true)

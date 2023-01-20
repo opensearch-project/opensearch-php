@@ -93,6 +93,34 @@ class SigV4HandlerTest extends TestCase
         ]);
     }
 
+    public function testSignsWithProvidedCredentialsAndService()
+    {
+        $toWrap = function (array $ringRequest) {
+            $this->assertArrayHasKey('X-Amz-Security-Token', $ringRequest['headers']);
+            $this->assertSame('baz', $ringRequest['headers']['X-Amz-Security-Token'][0]);
+            $this->assertMatchesRegularExpression(
+                '~^AWS4-HMAC-SHA256 Credential=foo/\d{8}/us-west-2/aoss/aws4_request~',
+                $ringRequest['headers']['Authorization'][0]
+            );
+
+            return $this->getGenericResponse();
+        };
+
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4Service('aoss')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
+
+        $client->search([
+            'index' => 'index',
+            'body' => [
+                'query' => ['match_all' => (object)[]],
+            ],
+        ]);
+    }
+
     public function testEmptyRequestBodiesShouldBeNull()
     {
         $toWrap = function (array $ringRequest) {
