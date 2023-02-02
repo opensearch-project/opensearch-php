@@ -206,3 +206,26 @@ $client = (new \OpenSearch\ClientBuilder())
     ->setRetries(3)
     ->build();
 ```
+## Disabling Port Modification
+
+To prevent port modifications, pass an `includePortInHostHeader` option into `ClientBuilder::fromConfig`.
+This will ensure that the port from the supplied URL is unchanged. 
+
+The following example will force port `9100` usage.
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$config = [
+    'Hosts' => ['https://localhost:9100'],
+    'BasicAuthentication' => [username: 'admin', password: 'admin'],
+    'SSLVerification' => false,
+    'includePortInHostHeader' => true, // forces port from Hosts URL
+];
+
+$client = \OpenSearch\ClientBuilder::fromConfig($config);
+
+...
+```
