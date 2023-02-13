@@ -208,7 +208,7 @@ $client = (new \OpenSearch\ClientBuilder())
 ```
 ## Disabling Port Modification
 
-To prevent port modifications, pass an `includePortInHostHeader` option into `ClientBuilder::fromConfig`.
+To prevent port modifications, include the `includePortInHostHeader` option into `ClientBuilder::fromConfig`.
 This will ensure that the port from the supplied URL is unchanged. 
 
 The following example will force port `9100` usage.
