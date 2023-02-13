@@ -8,6 +8,7 @@ use Aws\Credentials\CredentialProvider;
 use Aws\Signature\SignatureV4;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Utils;
 use OpenSearch\ClientBuilder;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
@@ -38,7 +39,6 @@ class SigV4Handler
         callable $wrappedHandler = null
     ) {
         self::assertDependenciesInstalled();
-
         $this->signer = new SignatureV4($service, $region);
         $this->wrappedHandler = $wrappedHandler
             ?: ClientBuilder::defaultHandler();
@@ -51,6 +51,7 @@ class SigV4Handler
         $creds = call_user_func($this->credentialProvider)->wait();
 
         $psr7Request = $this->createPsr7Request($request);
+        $psr7Request = $psr7Request->withHeader('x-amz-content-sha256', Utils::hash($psr7Request->getBody(), 'sha256'));
         $signedRequest = $this->signer
             ->signRequest($psr7Request, $creds);
         return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest, $request));

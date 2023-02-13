@@ -6,6 +6,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added PHP 8.2 to the CI
 - Github workflow for changelog verification ([#92](https://github.com/opensearch-project/opensearch-php/pull/92))
 - Added class docs generator ([#96](https://github.com/opensearch-project/opensearch-php/pull/96))
+- Added support for Amazon OpenSearch Serverless SigV4 signing ([#119](https://github.com/opensearch-project/opensearch-php/pull/119))
 - Added `includePortInHostHeader` option to `ClientBuilder::fromConfig` ([#118](https://github.com/opensearch-project/opensearch-php/pull/118))
 
 ### Changed

@@ -145,7 +145,7 @@ $client = (new \OpenSearch\ClientBuilder())
     ->build();
 ```
 
-### `setSigV4CredentialProvider` for AWS OpenSearch Serverlss Service
+### `setSigV4CredentialProvider` for AWS OpenSearch Serverless Service
 
 This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
 
