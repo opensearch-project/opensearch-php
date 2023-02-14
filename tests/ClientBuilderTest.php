@@ -208,4 +208,31 @@ class ClientBuilderTest extends TestCase
             $this->assertNotContains('application/vnd.elasticsearch+json;compatible-with=7', $request['request']['headers']['Accept']);
         }
     }
+
+    public function testFromConfigWithIncludePortInHostHeader()
+    {
+        $url = 'localhost:1234';
+        $config = [
+            'hosts' => [$url],
+            'includePortInHostHeader' => true,
+            'connectionParams' => [
+                'client' => [
+                    'verbose' => true
+                ]
+            ],
+        ];
+
+        $client = ClientBuilder::fromConfig($config);
+
+        $this->assertInstanceOf(Client::class, $client);
+
+        try {
+            $client->info();
+            $this->assertTrue(false, 'Exception was not thrown!');
+        } catch (OpenSearchException $e) {
+            $request = $client->transport->getLastConnection()->getLastRequestInfo();
+            $this->assertTrue(isset($request['request']['headers']['Host'][0]));
+            $this->assertEquals($url, $request['request']['headers']['Host'][0]);
+        }
+    }
 }
