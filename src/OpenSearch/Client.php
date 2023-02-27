@@ -53,6 +53,9 @@ use OpenSearch\Namespaces\SslNamespace;
  */
 class Client
 {
+    /**
+     * @deprecated since version is pulled from InstalledVersions::getVersion('opensearch-project/opensearch-php')
+     */
     public const VERSION = '2.1.0';
 
     /**
