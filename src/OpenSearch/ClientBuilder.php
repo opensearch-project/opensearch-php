@@ -635,10 +635,6 @@ class ClientBuilder
         $this->connectionParams['client']['port_in_header'] = $this->includePortInHostHeader;
 
         if (is_null($this->connectionFactory)) {
-            if (is_null($this->connectionParams)) {
-                $this->connectionParams = [];
-            }
-
             // Make sure we are setting Content-Type and Accept (unless the user has explicitly
             // overridden it
             if (! isset($this->connectionParams['client']['headers'])) {
@@ -725,13 +721,6 @@ class ClientBuilder
 
         if (is_string($this->connectionPool)) {
             $this->connectionPool = new $this->connectionPool(
-                $connections,
-                $this->selector,
-                $this->connectionFactory,
-                $this->connectionPoolArgs
-            );
-        } elseif (is_null($this->connectionPool)) {
-            $this->connectionPool = new StaticNoPingConnectionPool(
                 $connections,
                 $this->selector,
                 $this->connectionFactory,
