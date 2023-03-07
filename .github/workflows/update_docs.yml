@@ -1,0 +1,48 @@
+name: Update docs content
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**/*.php'
+
+jobs:
+  docs-update:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Use PHP 8.1
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Generate
+        run: composer run apigen
+        
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v1.0.7
+        with:
+          path: 'docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

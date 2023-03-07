@@ -331,13 +331,36 @@ $client = (new \OpenSearch\ClientBuilder())
     ->build();
 ```
 
-### `setSigV4CredentialProvider`
+### `setSigV4CredentialProvider` for AWS OpenSearch Service
 
 This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
 
 ```php
 $client = (new \OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
+
+    ->setSigV4Service('es')
+    
+    // Default credential provider.
+    ->setSigV4CredentialProvider(true)
+    
+    ->setSigV4CredentialProvider([
+      'key' => 'awskeyid',
+      'secret' => 'awssecretkey',
+    ])
+    
+    ->build();
+```
+
+### `setSigV4CredentialProvider` for AWS OpenSearch Serverless Service
+
+This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
+
+```php
+$client = (new \OpenSearch\ClientBuilder())
+    ->setSigV4Region('us-east-2')
+
+    ->setSigV4Service('aoss')
     
     // Default credential provider.
     ->setSigV4CredentialProvider(true)
@@ -389,4 +412,27 @@ This method allows you to set the number of retries to use for the client.
 $client = (new \OpenSearch\ClientBuilder())
     ->setRetries(3)
     ->build();
+```
+## Disabling Port Modification
+
+To prevent port modifications, include the `includePortInHostHeader` option into `ClientBuilder::fromConfig`.
+This will ensure that the port from the supplied URL is unchanged. 
+
+The following example will force port `9100` usage.
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$config = [
+    'Hosts' => ['https://localhost:9100'],
+    'BasicAuthentication' => [username: 'admin', password: 'admin'],
+    'SSLVerification' => false,
+    'includePortInHostHeader' => true, // forces port from Hosts URL
+];
+
+$client = \OpenSearch\ClientBuilder::fromConfig($config);
+
+...
 ```

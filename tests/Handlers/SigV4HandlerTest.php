@@ -43,6 +43,7 @@ class SigV4HandlerTest extends TestCase
         $toWrap = function (array $ringRequest) use ($key) {
             $this->assertArrayHasKey('X-Amz-Date', $ringRequest['headers']);
             $this->assertArrayHasKey('Authorization', $ringRequest['headers']);
+            $this->assertArrayHasKey('x-amz-content-sha256', $ringRequest['headers']);
             $this->assertMatchesRegularExpression(
                 "~^AWS4-HMAC-SHA256 Credential=$key/\\d{8}/us-west-2/es/aws4_request~",
                 $ringRequest['headers']['Authorization'][0]
@@ -71,6 +72,7 @@ class SigV4HandlerTest extends TestCase
         $toWrap = function (array $ringRequest) {
             $this->assertArrayHasKey('X-Amz-Security-Token', $ringRequest['headers']);
             $this->assertSame('baz', $ringRequest['headers']['X-Amz-Security-Token'][0]);
+            $this->assertArrayHasKey('x-amz-content-sha256', $ringRequest['headers']);
             $this->assertMatchesRegularExpression(
                 '~^AWS4-HMAC-SHA256 Credential=foo/\d{8}/us-west-2/es/aws4_request~',
                 $ringRequest['headers']['Authorization'][0]
@@ -91,6 +93,60 @@ class SigV4HandlerTest extends TestCase
                 'query' => [ 'match_all' => (object)[] ],
             ],
         ]);
+    }
+
+    public function testSignsWithProvidedCredentialsAndService()
+    {
+        $toWrap = function (array $ringRequest) {
+            $this->assertArrayHasKey('X-Amz-Security-Token', $ringRequest['headers']);
+            $this->assertSame('baz', $ringRequest['headers']['X-Amz-Security-Token'][0]);
+            $this->assertArrayHasKey('x-amz-content-sha256', $ringRequest['headers']);
+            $this->assertMatchesRegularExpression(
+                '~^AWS4-HMAC-SHA256 Credential=foo/\d{8}/us-west-2/aoss/aws4_request~',
+                $ringRequest['headers']['Authorization'][0]
+            );
+
+            return $this->getGenericResponse();
+        };
+
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4Service('aoss')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
+
+        $client->search([
+            'index' => 'index',
+            'body' => [
+                'query' => ['match_all' => (object)[]],
+            ],
+        ]);
+    }
+
+    public function testEmptyBodyProducesCorrectSha256()
+    {
+        $toWrap = function (array $ringRequest) {
+            $this->assertArrayHasKey('X-Amz-Security-Token', $ringRequest['headers']);
+            $this->assertSame('baz', $ringRequest['headers']['X-Amz-Security-Token'][0]);
+            $this->assertArrayHasKey('x-amz-content-sha256', $ringRequest['headers']);
+            $this->assertSame($ringRequest['headers']['x-amz-content-sha256'][0], 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+            $this->assertMatchesRegularExpression(
+                '~^AWS4-HMAC-SHA256 Credential=foo/\d{8}/us-west-2/aoss/aws4_request~',
+                $ringRequest['headers']['Authorization'][0]
+            );
+
+            return $this->getGenericResponse();
+        };
+
+        $client = ClientBuilder::create()
+            ->setHandler($toWrap)
+            ->setSigV4Region('us-west-2')
+            ->setSigV4Service('aoss')
+            ->setSigV4CredentialProvider(new Credentials('foo', 'bar', 'baz'))
+            ->build();
+
+        $client->indices()->exists(['index' => 'index']);
     }
 
     public function testEmptyRequestBodiesShouldBeNull()

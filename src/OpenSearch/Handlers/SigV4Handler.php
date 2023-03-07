@@ -8,6 +8,7 @@ use Aws\Credentials\CredentialProvider;
 use Aws\Signature\SignatureV4;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Utils;
 use OpenSearch\ClientBuilder;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
@@ -22,7 +23,9 @@ class SigV4Handler
      * A handler that applies an AWS V4 signature before dispatching requests.
      *
      * @param string        $region                 The region of your Amazon
-     *                                              Elasticsearch Service domain
+     *                                              OpenSearch Service domain
+     * @param string        $service                The Service of your Amazon
+     *                                              OpenSearch Service domain
      * @param callable|null $credentialProvider     A callable that returns a
      *                                              promise that is fulfilled
      *                                              with an instance of
@@ -31,12 +34,12 @@ class SigV4Handler
      */
     public function __construct(
         string $region,
+        string $service,
         callable $credentialProvider = null,
         callable $wrappedHandler = null
     ) {
         self::assertDependenciesInstalled();
-
-        $this->signer = new SignatureV4('es', $region);
+        $this->signer = new SignatureV4($service, $region);
         $this->wrappedHandler = $wrappedHandler
             ?: ClientBuilder::defaultHandler();
         $this->credentialProvider = $credentialProvider
@@ -46,10 +49,11 @@ class SigV4Handler
     public function __invoke(array $request)
     {
         $creds = call_user_func($this->credentialProvider)->wait();
+
         $psr7Request = $this->createPsr7Request($request);
+        $psr7Request = $psr7Request->withHeader('x-amz-content-sha256', Utils::hash($psr7Request->getBody(), 'sha256'));
         $signedRequest = $this->signer
             ->signRequest($psr7Request, $creds);
-
         return call_user_func($this->wrappedHandler, $this->createRingRequest($signedRequest, $request));
     }
 

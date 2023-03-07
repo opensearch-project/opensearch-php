@@ -48,3 +48,6 @@ tests/OpenSearch/Tests/Yaml
 
 # Exclude .ci/make.sh artifcats
 .ci/output
+
+# Generated docs
+/docs

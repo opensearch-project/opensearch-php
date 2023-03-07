@@ -47,6 +47,8 @@ use ReflectionClass;
 
 class ClientBuilder
 {
+    public const ALLOWED_METHODS_FROM_CONFIG = ['includePortInHostHeader'];
+
     /**
      * @var Transport|null
      */
@@ -130,6 +132,11 @@ class ClientBuilder
     private $sigV4Region;
 
     /**
+     * @var null|string
+     */
+    private $sigV4Service;
+
+    /**
      * @var bool
      */
     private $sniffOnStart = false;
@@ -207,7 +214,7 @@ class ClientBuilder
     {
         $builder = new self();
         foreach ($config as $key => $value) {
-            $method = "set$key";
+            $method = in_array($key, self::ALLOWED_METHODS_FROM_CONFIG, true) ? $key : "set$key";
             $reflection = new ReflectionClass($builder);
             if ($reflection->hasMethod($method)) {
                 $func = $reflection->getMethod($method);
@@ -496,6 +503,18 @@ class ClientBuilder
     }
 
     /**
+     * Set the service for SigV4 signing.
+     *
+     * @param string|null $service
+     */
+    public function setSigV4Service($service): ClientBuilder
+    {
+        $this->sigV4Service = $service;
+
+        return $this;
+    }
+
+    /**
      * Set sniff on start
      *
      * @param bool $sniffOnStart enable or disable sniff on start
@@ -574,7 +593,11 @@ class ClientBuilder
                 throw new RuntimeException("A region must be supplied for SigV4 request signing.");
             }
 
-            $this->handler = new SigV4Handler($this->sigV4Region, $this->sigV4CredentialProvider, $this->handler);
+            if (is_null($this->sigV4Service)) {
+                $this->setSigV4Service("es");
+            }
+
+            $this->handler = new SigV4Handler($this->sigV4Region,$this->sigV4Service, $this->sigV4CredentialProvider, $this->handler);
         }
 
         $sslOptions = null;
@@ -612,10 +635,6 @@ class ClientBuilder
         $this->connectionParams['client']['port_in_header'] = $this->includePortInHostHeader;
 
         if (is_null($this->connectionFactory)) {
-            if (is_null($this->connectionParams)) {
-                $this->connectionParams = [];
-            }
-
             // Make sure we are setting Content-Type and Accept (unless the user has explicitly
             // overridden it
             if (! isset($this->connectionParams['client']['headers'])) {
@@ -702,13 +721,6 @@ class ClientBuilder
 
         if (is_string($this->connectionPool)) {
             $this->connectionPool = new $this->connectionPool(
-                $connections,
-                $this->selector,
-                $this->connectionFactory,
-                $this->connectionPoolArgs
-            );
-        } elseif (is_null($this->connectionPool)) {
-            $this->connectionPool = new StaticNoPingConnectionPool(
                 $connections,
                 $this->selector,
                 $this->connectionFactory,
