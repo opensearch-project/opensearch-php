@@ -7,84 +7,291 @@ Install this client using Composer into your project `composer req opensearch-pr
 ## Example usage
 
 ```php
-<?php
 
+<?php
 require __DIR__ . '/vendor/autoload.php';
 
-$client = (new \OpenSearch\ClientBuilder())
-    ->setHosts(['https://localhost:9200'])
-    ->setBasicAuthentication('admin', 'admin') // For testing only. Don't store credentials in code.
-    // or, if using AWS SigV4 authentication:
-    ->setSigV4Region('us-east-2')
-    ->setSigV4CredentialProvider(true)
-    ->setSSLVerification(false) // For testing only. Use certificate for validation
-    ->build();
+define('INDEX_NAME', 'test_elastic_index_name2');
 
-$indexName = 'test-index-name';
+class MyOpenSearchClass
+{
 
-// Print OpenSearch version information on console.
-var_dump($client->info());
+    protected ?\OpenSearch\Client $client;
+    protected $existingID = 1668504743;
+    protected $deleteID = 1668504743;
+    protected $bulkIds = [];
 
-// Create an index with non-default settings.
-$client->indices()->create([
-    'index' => $indexName,
-    'body' => [
-        'settings' => [
-            'index' => [
-                'number_of_shards' => 4
-            ]
-        ]
-    ]
-]);
 
-// Create a document passing the id
-$client->create([
-    'index' => $indexName,
-    'id' => 1,
-    'body' => [
-        'title' => 'Moneyball',
-        'director' => 'Bennett Miller',
-        'year' => 2011
-    ]
-]);
+    public function __construct()
+    {
+        //simple Setup 
+        $this->client = OpenSearch\ClientBuilder::fromConfig([
+            'hosts' => [
+                'https://localhost:9200'
+            ],
+            'retries' => 2,
+            'handler' => OpenSearch\ClientBuilder::multiHandler()
+        ]);
 
-// Create a document without passing the id (will be generated automatically)
-$client->create([
-    'index' => $indexName,
-    'body' => [
-        'title' => 'Remember the Titans',
-        'director' => 'Boaz Yakin',
-        'year' => 2000
-    ]
-]);
+        // OR via Builder
+        // $this->client = (new \OpenSearch\ClientBuilder())
+        //     ->setHosts(['https://localhost:9200'])
+        //     ->setBasicAuthentication('admin', 'admin') // For testing only. Don't store credentials in code.
+        //     // or, if using AWS SigV4 authentication:
+        //     ->setSigV4Region('us-east-2')
+        //     ->setSigV4CredentialProvider(true)
+        //     ->setSSLVerification(false) // For testing only. Use certificate for validation
+        //     ->build();
+    }
 
-// Search for it
-var_dump(
-    $client->search([
-        'index' => $indexName,
-        'body' => [
-            'size' => 5,
-            'query' => [
-                'multi_match' => [
-                    'query' => 'miller',
-                    'fields' => ['title^2', 'director']
+
+    // Create an index with non-default settings.
+    public function createIndex()
+    {
+        $this->client->indices()->create([
+            'index' => INDEX_NAME,
+            'body' => [
+                'settings' => [
+                    'index' => [
+                        'number_of_shards' => 4
+                    ]
                 ]
             ]
-        ]
-    ])
-);
+        ]);
+    }
 
-// Delete a single document
-$client->delete([
-    'index' => $indexName,
-    'id' => 1,
-]);
+    public function info()
+    {
+        // Print OpenSearch version information on console.
+        var_dump($this->client->info());
+    }
+
+    // Create a document 
+    public function create()
+    {
+        $time = time();
+        $this->existingID = $time;
+        $this->deleteID = $time . '_uniq';
 
 
-// Delete index
-$client->indices()->delete([
-    'index' => $indexName
-]);
+        // Create a document passing the id
+        $this->client->create([
+            'id' => $time,
+            'index' => INDEX_NAME,
+            'body' => $this->getData($time)
+        ]);
+
+        // Create a document passing the id
+        $this->client->create([
+            'id' => $this->deleteID,
+            'index' => INDEX_NAME,
+            'body' => $this->getData($time)
+        ]);
+
+        // Create a document without passing the id (will be generated automatically)
+        $this->client->create([
+            'index' => INDEX_NAME,
+            'body' => $this->getData($time + 1)
+        ]);
+
+        //This should throw an exception because ID already exists
+        // $this->client->create([
+        //     'id' => $this->existingID,
+        //     'index' => INDEX_NAME,
+        //     'body' => $this->getData($this->existingID)
+        // ]);
+    }
+
+    public function update()
+    {
+        $this->client->update([
+            'id' => $this->existingID,
+            'index' => INDEX_NAME,
+            'body' => [
+                //data must be wrapped in 'doc' object
+                'doc' => ['name' => 'updated']
+            ]
+        ]);
+    }
+
+    public function bulk()
+    {
+        $bulkData = [];
+        $time = time();
+        for ($i = 0; $i < 20; $i++) {
+            $id = ($time + $i) . rand(10, 200);
+            $bulkData[] = [
+                'index' => [
+                    '_index' => INDEX_NAME,
+                    '_id' => $id,
+                ]
+            ];
+            $this->bulkIds[] = $id;
+            $bulkData[] = $this->getData($time + $i);
+        }
+        //will not throw exception! check $response for error
+        $response = $this->client->bulk([
+            //default index
+            'index' => INDEX_NAME,
+            'body' => $bulkData
+        ]);
+
+        //give elastic a little time to create before update
+        sleep(2);
+
+        // bulk update
+        for ($i = 0; $i < 15; $i++) {
+            $bulkData[] = [
+                'update' => [
+                    '_index' => INDEX_NAME,
+                    '_id' => $this->bulkIds[$i],
+                ]
+            ];
+            $bulkData[] = [
+                'doc' => [
+                    'name' => 'bulk updated'
+                ]
+            ];
+        }
+
+        //will not throw exception! check $response for error
+        $response = $this->client->bulk([
+            //default index
+            'index' => INDEX_NAME,
+            'body' => $bulkData
+        ]);
+    }
+    public function deleteByQuery(string $query)
+    {
+        if ($query == '') {
+            return;
+        }
+        $this->client->deleteByQuery([
+            'index' => INDEX_NAME,
+            'q' => $query
+        ]);
+    }
+
+    // Delete a single document
+    public function deleteByID()
+    {
+        $this->client->delete([
+            'id' => $this->deleteID,
+            'index' => INDEX_NAME,
+        ]);
+    }
+
+    public function search()
+    {
+        $docs = $this->client->search([
+            //index to search in or '_all' for all indices
+            'index' => INDEX_NAME,
+            'size' => 1000,
+            'body' => [
+                'query' => [
+                    'prefix' => [
+                        'name' => 'wrecking'
+                    ]
+                ]
+            ]
+        ]);
+        var_dump($docs['hits']['total']['value'] > 0);
+
+        // Search for it
+        $docs = $this->client->search([
+            'index' => INDEX_NAME,
+            'body' => [
+                'size' => 5,
+                'query' => [
+                    'multi_match' => [
+                        'query' => 'miller',
+                        'fields' => ['title^2', 'director']
+                    ]
+                ]
+            ]
+        ]);
+        var_dump($docs['hits']['total']['value'] > 0);
+    }
+
+    public function getMultipleDocsByIDs()
+    {
+        $docs = $this->client->search([
+            //index to search in or '_all' for all indices
+            'index' => INDEX_NAME,
+            'body' => [
+                'query' => [
+                    'ids' => [
+                        'values' => $this->bulkIds
+                    ]
+                ]
+            ]
+        ]);
+        var_dump($docs['hits']['total']['value'] > 0);
+    }
+
+    public function getOneByID()
+    {
+        $docs = $this->client->search([
+            //index to search in or '_all' for all indices
+            'index' => INDEX_NAME,
+            'size' => 1,
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'filter' => [
+                            'term' => [
+                                '_id' => $this->existingID
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+        var_dump($docs['hits']['total']['value'] > 0);
+    }
+
+    // Delete index
+    public function deleteByIndex()
+    {
+        $this->client->indices()->delete([
+            'index' => INDEX_NAME
+        ]);
+    }
+
+    //simple data to index
+    public function getData($time = -1)
+    {
+        if ($time == -1) {
+            $time = time();
+        }
+        return [
+            'name' => date('c', $time) . " - i came in like a wrecking ball",
+            'time' => $time,
+            'date' => date('c', $time)
+        ];
+    }
+}
+
+try {
+
+    $e = new MyOpenSearchClass();
+    $e->info();
+    $e->createIndex();
+    $e->create();
+    //give elastic a little time to create before update
+    sleep(2);
+    $e->update();
+    $e->bulk();
+    $e->getOneByID();
+    $e->getMultipleDocsByIDs();
+    $e->search();
+    $e->deleteByQuery('');
+    $e->deleteByID();
+    $e->deleteByIndex();
+} catch (\Throwable $th) {
+    echo 'uncaught error ' . $th->getMessage() . "\n";
+}
+
 ```
 
 ## ClientBuilder
