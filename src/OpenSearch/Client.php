@@ -1242,45 +1242,6 @@ class Client
 
         return $this->performRequest($endpoint);
     }
-    /**
-     * $params['body'] = (array) a point-in-time id to close
-     *
-     * @param array $params Associative array of parameters
-     * @return array
-     */
-    public function closePointInTime(array $params = [])
-    {
-        $body = $this->extractArgument($params, 'body');
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ClosePointInTime');
-        $endpoint->setParams($params);
-        $endpoint->setBody($body);
-
-        return $this->performRequest($endpoint);
-    }
-    /**
-     * $params['index']              = (list) A comma-separated list of index names to open point in time; use `_all` or empty string to perform the operation on all indices
-     * $params['preference']         = (string) Specify the node or shard the operation should be performed on (default: random)
-     * $params['routing']            = (string) Specific routing value
-     * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     * $params['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both. (Options = open,closed,hidden,none,all) (Default = open)
-     * $params['keep_alive']         = (string) Specific the time to live for the point in time
-     *
-     * @param array $params Associative array of parameters
-     * @return array
-     */
-    public function openPointInTime(array $params = [])
-    {
-        $index = $this->extractArgument($params, 'index');
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('OpenPointInTime');
-        $endpoint->setParams($params);
-        $endpoint->setIndex($index);
-
-        return $this->performRequest($endpoint);
-    }
     public function cat(): CatNamespace
     {
         return $this->cat;
