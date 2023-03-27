@@ -597,7 +597,7 @@ class ClientBuilder
                 $this->setSigV4Service("es");
             }
 
-            $this->handler = new SigV4Handler($this->sigV4Region,$this->sigV4Service, $this->sigV4CredentialProvider, $this->handler);
+            $this->handler = new SigV4Handler($this->sigV4Region, $this->sigV4Service, $this->sigV4CredentialProvider, $this->handler);
         }
 
         $sslOptions = null;
@@ -640,20 +640,11 @@ class ClientBuilder
             if (! isset($this->connectionParams['client']['headers'])) {
                 $this->connectionParams['client']['headers'] = [];
             }
-            $apiVersioning = getenv('ELASTIC_CLIENT_APIVERSIONING');
             if (! isset($this->connectionParams['client']['headers']['Content-Type'])) {
-                if ($apiVersioning === 'true' || $apiVersioning === '1') {
-                    $this->connectionParams['client']['headers']['Content-Type'] = ['application/vnd.elasticsearch+json;compatible-with=7'];
-                } else {
-                    $this->connectionParams['client']['headers']['Content-Type'] = ['application/json'];
-                }
+                $this->connectionParams['client']['headers']['Content-Type'] = ['application/json'];
             }
             if (! isset($this->connectionParams['client']['headers']['Accept'])) {
-                if ($apiVersioning === 'true' || $apiVersioning === '1') {
-                    $this->connectionParams['client']['headers']['Accept'] = ['application/vnd.elasticsearch+json;compatible-with=7'];
-                } else {
-                    $this->connectionParams['client']['headers']['Accept'] = ['application/json'];
-                }
+                $this->connectionParams['client']['headers']['Accept'] = ['application/json'];
             }
 
             $this->connectionFactory = new ConnectionFactory($this->handler, $this->connectionParams, $this->serializer, $this->logger, $this->tracer);

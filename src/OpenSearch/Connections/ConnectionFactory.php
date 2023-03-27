@@ -62,6 +62,10 @@ class ConnectionFactory implements ConnectionFactoryInterface
 
     public function create(array $hostDetails): ConnectionInterface
     {
+        if (isset($hostDetails['path'])) {
+            $hostDetails['path'] = rtrim($hostDetails['path'], '/');
+        }
+
         return new Connection(
             $this->handler,
             $hostDetails,
