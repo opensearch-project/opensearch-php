@@ -34,6 +34,9 @@ use ReflectionClass;
 use function base64_encode;
 use function random_bytes;
 
+/**
+ * @covers \OpenSearch\Connections\Connection
+ */
 class ConnectionTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -56,9 +59,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
         $this->serializer = $this->createMock(SerializerInterface::class);
     }
 
-    /**
-     * @covers \Connection
-     */
     public function testConstructor()
     {
         $host = [
@@ -80,8 +80,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @covers \Connection::getHeaders
      */
     public function testGetHeadersContainUserAgent()
     {
@@ -108,10 +106,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testGetHeadersContainUserAgent
-     *
-     * @covers \Connection::getHeaders
-     * @covers \Connection::performRequest
-     * @covers \Connection::getLastRequestInfo
      */
     public function testUserAgentHeaderIsSent()
     {
@@ -137,10 +131,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @covers \Connection::getHeaders
-     * @covers \Connection::performRequest
-     * @covers \Connection::getLastRequestInfo
      */
     public function testGetHeadersContainsHostArrayConfig()
     {
@@ -169,10 +159,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testGetHeadersContainsHostArrayConfig
-     *
-     * @covers \Connection::getHeaders
-     * @covers \Connection::performRequest
-     * @covers \Connection::getLastRequestInfo
      */
     public function testGetHeadersContainApiKeyAuth()
     {
@@ -203,10 +189,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testGetHeadersContainApiKeyAuth
-     *
-     * @covers \Connection::getHeaders
-     * @covers \Connection::performRequest
-     * @covers \Connection::getLastRequestInfo
      */
     public function testGetHeadersContainApiKeyAuthOverHostArrayConfig()
     {
@@ -239,10 +221,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testGetHeadersContainsHostArrayConfig
-     *
-     * @covers \Connection::getHeaders
-     * @covers \Connection::performRequest
-     * @covers \Connection::getLastRequestInfo
      */
     public function testGetHeadersContainBasicAuth()
     {
@@ -273,10 +251,6 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @depends testGetHeadersContainBasicAuth
-     *
-     * @covers \Connection::getHeaders
-     * @covers \Connection::performRequest
-     * @covers \Connection::getLastRequestInfo
      */
     public function testGetHeadersContainBasicAuthOverHostArrayConfig()
     {
@@ -298,7 +272,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             $this->logger,
             $this->trace
         );
-        $result  = $connection->performRequest('GET', '/');
+        $connection->performRequest('GET', '/');
         $request = $connection->getLastRequestInfo()['request'];
 
         $this->assertArrayHasKey(CURLOPT_HTTPAUTH, $request['client']['curl']);
@@ -366,7 +340,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
         ];
 
         $headersBefore = $connection->getHeaders();
-        $result = $connection->performRequest('GET', '/', null, null, $options);
+        $connection->performRequest('GET', '/', null, null, $options);
         $headersAfter = $connection->getHeaders();
         $this->assertEquals($headersBefore, $headersAfter);
     }
@@ -391,7 +365,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             $this->logger,
             $this->trace
         );
-        $result  = $connection->performRequest('GET', '/', $requestParams);
+        $connection->performRequest('GET', '/', $requestParams);
         $request = $connection->getLastRequestInfo()['request'];
 
         $this->assertEquals('/?foo=true&baz=false&bar=baz', $request['uri']);

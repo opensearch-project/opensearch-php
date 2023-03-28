@@ -24,6 +24,9 @@ namespace OpenSearch\Tests\Endpoints;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use PHPUnit\Framework\MockObject\MockObject;
 
+/**
+ * @covers \OpenSearch\Endpoints\AbstractEndpoint
+ */
 class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -46,8 +49,6 @@ class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider invalidParameters
-     *
-     * @covers AbstractEndpoint::setParams
      */
     public function testInvalidParamsCauseErrorsWhenProvidedToSetParams(array $params)
     {
@@ -60,11 +61,6 @@ class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
         $this->endpoint->setParams($params);
     }
 
-    /**
-     * @covers AbstractEndpoint::setParams
-     * @covers AbstractEndpoint::extractOptions
-     * @covers AbstractEndpoint::getOptions
-     */
     public function testOpaqueIdInHeaders()
     {
         $params = ['client' => ['opaqueId' => 'test_id_' . rand(1000, 9999)]];
