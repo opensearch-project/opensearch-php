@@ -19,6 +19,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ### Removed
 
+- Removed Elasticsearch X-Pack ClosePointInTime and OpenPointInTime APIs ([#139](https://github.com/opensearch-project/opensearch-php/pull/139))
+
 ### Fixed
 - Updated backport helper version and add fix to backport workflow when tag is applied before closing PR ([#131](https://github.com/opensearch-project/opensearch-php/pull/131))
 
