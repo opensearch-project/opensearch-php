@@ -22,6 +22,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - Updated backport helper version and add fix to backport workflow when tag is applied before closing PR ([#131](https://github.com/opensearch-project/opensearch-php/pull/131))
 - Fixed host urls with trailing slash in the url ([#130](https://github.com/opensearch-project/opensearch-php/pull/140))
+- Fixed point-in-time APIs ([#142](https://github.com/opensearch-project/opensearch-php/pull/142))
 
 ### Security
 
