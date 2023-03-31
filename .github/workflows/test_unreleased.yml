@@ -74,9 +74,6 @@ jobs:
         run: |
           composer install --prefer-dist
 
-      - name: Wait for Search server
-        run: php ./.github/wait_for_opensearch.php
-
       - name: Integration tests
         run: |
           composer run integration
