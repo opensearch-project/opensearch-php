@@ -249,6 +249,59 @@ class MyOpenSearchClass
         ]);
         var_dump($docs['hits']['total']['value'] > 0);
     }
+    
+    public function searchByPointInTime()
+    {
+        $result = $this->client->openPointInTime([
+            'index' => INDEX_NAME,
+            'keep_alive' => '10m'
+        ]);
+        $pitId = $result['pit_id'];
+    
+        // Get first page of results in Point-in-Time
+        $result = $this->client->search([
+            'body' => [
+                'pit' => [
+                    'id' => $pitId,
+                    'keep_alive' => '10m',
+                ],
+                'size' => 10, // normally you would do 10000
+                'query' => [
+                    'match_all' => (object)[]
+                ],
+                'sort' => '_id',
+            ]
+        ]);
+        var_dump($result['hits']['total']['value'] > 0);
+        
+        $last = end($result['hits']['hits']);
+        $lastSort = $last['sort'] ?? null;
+
+        // Get next page of results in Point-in-Time
+        $result = $this->client->search([
+            'body' => [
+                'pit' => [
+                    'id' => $pitId,
+                    'keep_alive' => '10m',
+                ],
+                'search_after' => $lastSort,
+                'size' => 10, // normally you would do 10000
+                'query' => [
+                    'match_all' => (object)[]
+                ],
+                'sort' => '_id',
+            ]
+        ]);
+        var_dump($result['hits']['total']['value'] > 0);
+        
+        // Close Point-in-Time
+        $result = $this->client->closePointInTime([
+            'body' => [
+              'pit_id' => $pitId,
+            ]
+        ]);
+        var_dump($result['pits'][0]['successful']);
+    }
 
     // Delete index
     public function deleteByIndex()
@@ -285,6 +338,7 @@ try {
     $e->getOneByID();
     $e->getMultipleDocsByIDs();
     $e->search();
+    $e->searchByPointInTime();
     $e->deleteByQuery('');
     $e->deleteByID();
     $e->deleteByIndex();
