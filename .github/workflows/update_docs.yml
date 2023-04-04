@@ -25,10 +25,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Use PHP 8.1
+      - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
