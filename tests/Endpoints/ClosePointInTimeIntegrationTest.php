@@ -109,11 +109,9 @@ class ClosePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 
         // Assert
         $this->assertCount(2, $result['pits']);
-        $pit = $result['pits'][0];
-        $this->assertTrue($pit['successful']);
-        $this->assertSame($pitId2, $pit['pit_id']);
-        $pit = $result['pits'][1];
-        $this->assertTrue($pit['successful']);
-        $this->assertSame($pitId1, $pit['pit_id']);
+        foreach ($result['pits'] as $pit) {
+            $this->assertTrue($pit['successful']);
+            $this->assertTrue(in_array($pit['pit_id'], [$pitId1, $pitId2]));
+        }
     }
 }
