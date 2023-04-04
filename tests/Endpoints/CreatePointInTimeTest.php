@@ -21,11 +21,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\Endpoints\ClosePointInTime;
+use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\Endpoints\CreatePointInTime;
 
-class ClosePointInTimeTest extends \PHPUnit\Framework\TestCase
+class CreatePointInTimeTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var ClosePointInTime */
+    /** @var CreatePointInTime */
     private $instance;
 
     /**
@@ -34,13 +35,13 @@ class ClosePointInTimeTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         // Instance
-        $this->instance = new ClosePointInTime();
+        $this->instance = new CreatePointInTime();
     }
 
     public function testGetURIWhenIndexAndIdAreDefined(): void
     {
         // Arrange
-        $expected = '/_search/point_in_time';
+        $expected = '/index/_search/point_in_time';
 
         $this->instance->setIndex('index');
         $this->instance->setId(10);
@@ -55,7 +56,7 @@ class ClosePointInTimeTest extends \PHPUnit\Framework\TestCase
     public function testGetURIWhenIndexIsDefinedAndIdIsNotDefined(): void
     {
         // Arrange
-        $expected = '/_search/point_in_time';
+        $expected = '/index/_search/point_in_time';
 
         $this->instance->setIndex('index');
 
@@ -69,19 +70,21 @@ class ClosePointInTimeTest extends \PHPUnit\Framework\TestCase
     public function testGetURIWhenIndexIsNotDefined(): void
     {
         // Arrange
-        $expected = '/_search/point_in_time';
-
-        // Act
-        $result = $this->instance->getURI();
+        $expected = RuntimeException::class;
+        $expectedMessage = 'index is required for creating point-in-time';
 
         // Assert
-        $this->assertEquals($expected, $result);
+        $this->expectException($expected);
+        $this->expectExceptionMessage($expectedMessage);
+
+        // Act
+        $this->instance->getURI();
     }
 
     public function testGetMethodWhenIdIsDefined(): void
     {
         // Arrange
-        $expected = 'DELETE';
+        $expected = 'POST';
 
         $this->instance->setId(10);
 
@@ -95,7 +98,7 @@ class ClosePointInTimeTest extends \PHPUnit\Framework\TestCase
     public function testGetMethodWhenIdIsNotDefined(): void
     {
         // Arrange
-        $expected = 'DELETE';
+        $expected = 'POST';
 
         // Act
         $result = $this->instance->getMethod();

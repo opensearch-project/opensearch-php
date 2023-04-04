@@ -21,12 +21,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
-use OpenSearch\Endpoints\OpenPointInTime;
+use OpenSearch\Endpoints\DeletePointInTime;
 
-class OpenPointInTimeTest extends \PHPUnit\Framework\TestCase
+class DeletePointInTimeTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var OpenPointInTime */
+    /** @var DeletePointInTime */
     private $instance;
 
     /**
@@ -35,13 +34,13 @@ class OpenPointInTimeTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         // Instance
-        $this->instance = new OpenPointInTime();
+        $this->instance = new DeletePointInTime();
     }
 
     public function testGetURIWhenIndexAndIdAreDefined(): void
     {
         // Arrange
-        $expected = '/index/_search/point_in_time';
+        $expected = '/_search/point_in_time';
 
         $this->instance->setIndex('index');
         $this->instance->setId(10);
@@ -56,7 +55,7 @@ class OpenPointInTimeTest extends \PHPUnit\Framework\TestCase
     public function testGetURIWhenIndexIsDefinedAndIdIsNotDefined(): void
     {
         // Arrange
-        $expected = '/index/_search/point_in_time';
+        $expected = '/_search/point_in_time';
 
         $this->instance->setIndex('index');
 
@@ -70,21 +69,19 @@ class OpenPointInTimeTest extends \PHPUnit\Framework\TestCase
     public function testGetURIWhenIndexIsNotDefined(): void
     {
         // Arrange
-        $expected = RuntimeException::class;
-        $expectedMessage = 'index is required for opening point-in-time';
-
-        // Assert
-        $this->expectException($expected);
-        $this->expectExceptionMessage($expectedMessage);
+        $expected = '/_search/point_in_time';
 
         // Act
-        $this->instance->getURI();
+        $result = $this->instance->getURI();
+
+        // Assert
+        $this->assertEquals($expected, $result);
     }
 
     public function testGetMethodWhenIdIsDefined(): void
     {
         // Arrange
-        $expected = 'POST';
+        $expected = 'DELETE';
 
         $this->instance->setId(10);
 
@@ -98,7 +95,7 @@ class OpenPointInTimeTest extends \PHPUnit\Framework\TestCase
     public function testGetMethodWhenIdIsNotDefined(): void
     {
         // Arrange
-        $expected = 'POST';
+        $expected = 'DELETE';
 
         // Act
         $result = $this->instance->getMethod();

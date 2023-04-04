@@ -252,7 +252,7 @@ class MyOpenSearchClass
     
     public function searchByPointInTime()
     {
-        $result = $this->client->openPointInTime([
+        $result = $this->client->createPointInTime([
             'index' => INDEX_NAME,
             'keep_alive' => '10m'
         ]);
@@ -295,7 +295,7 @@ class MyOpenSearchClass
         var_dump($result['hits']['total']['value'] > 0);
         
         // Close Point-in-Time
-        $result = $this->client->closePointInTime([
+        $result = $this->client->deletePointInTime([
             'body' => [
               'pit_id' => $pitId,
             ]

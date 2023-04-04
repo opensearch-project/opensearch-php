@@ -25,12 +25,12 @@ use OpenSearch\Client;
 use OpenSearch\Tests\Utility;
 
 /**
- * Class OpenPointInTimeIntegrationTest
+ * Class ClosePointInTimeIntegrationTest
  *
  * @subpackage Tests\Endpoints
  * @group Integration
  */
-class OpenPointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
+class DeletePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 {
     private const INDEX = 'movies';
 
@@ -63,17 +63,55 @@ class OpenPointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testOpenPointInTime()
+    public function testClosePointInTimeSingle()
     {
-        // Act
-        $result = $this->client->openPointInTime([
+        // Arrange
+        $result = $this->client->createPointInTime([
             'index' => self::INDEX,
             'keep_alive' => '10m',
         ]);
+        $pitId = $result['pit_id'];
+
+        // Act
+        $result = $this->client->deletePointInTime([
+            'body' => [
+                'pit_id' => $pitId,
+            ],
+        ]);
 
         // Assert
-        $this->assertNotEmpty($result['pit_id']);
-        $this->assertGreaterThanOrEqual(time() * 1000, $result['creation_time']);
-        $this->assertLessThan((time() + 10) * 1000, $result['creation_time']);
+        $this->assertCount(1, $result['pits']);
+        $pit = $result['pits'][0];
+        $this->assertTrue($pit['successful']);
+        $this->assertSame($pitId, $pit['pit_id']);
+    }
+
+    public function testClosePointInTimeMultiple()
+    {
+        // Arrange
+        $result = $this->client->createPointInTime([
+            'index' => self::INDEX,
+            'keep_alive' => '10m',
+        ]);
+        $pitId1 = $result['pit_id'];
+        $result = $this->client->createPointInTime([
+            'index' => self::INDEX,
+            'keep_alive' => '1h',
+        ]);
+        $pitId2 = $result['pit_id'];
+
+        // Act
+        $result = $this->client->deletePointInTime([
+            'body' => [
+                'pit_id' => [$pitId1, $pitId2],
+            ],
+        ]);
+
+        // Assert
+        $this->assertCount(2, $result['pits']);
+        foreach ($result['pits'] as $pit) {
+            $this->assertTrue($pit['successful']);
+            $this->assertTrue(in_array($pit['pit_id'], [$pitId1, $pitId2]));
+        }
     }
 }

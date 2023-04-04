@@ -21,33 +21,36 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints;
 
+use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class ClosePointInTime extends AbstractEndpoint
+class CreatePointInTime extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_search/point_in_time";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for creating point-in-time'
+            );
+        }
+        $index = $this->index ?? null;
+
+        return "/$index/_search/point_in_time";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'preference',
+            'routing',
+            'ignore_unavailable',
+            'expand_wildcards',
+            'keep_alive'
         ];
     }
 
     public function getMethod(): string
     {
-        return 'DELETE';
-    }
-
-    public function setBody($body): ClosePointInTime
-    {
-        if (isset($body) !== true) {
-            return $this;
-        }
-        $this->body = $body;
-
-        return $this;
+        return 'POST';
     }
 }

@@ -21,36 +21,33 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class OpenPointInTime extends AbstractEndpoint
+class DeletePointInTime extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->index) !== true) {
-            throw new RuntimeException(
-                'index is required for opening point-in-time'
-            );
-        }
-        $index = $this->index ?? null;
-
-        return "/$index/_search/point_in_time";
+        return "/_search/point_in_time";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'preference',
-            'routing',
-            'ignore_unavailable',
-            'expand_wildcards',
-            'keep_alive'
         ];
     }
 
     public function getMethod(): string
     {
-        return 'POST';
+        return 'DELETE';
+    }
+
+    public function setBody($body): DeletePointInTime
+    {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
     }
 }
