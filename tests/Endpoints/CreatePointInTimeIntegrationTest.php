@@ -43,7 +43,7 @@ class CreatePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $this->client = Utility::getClient();
 
-        if (Utility::isVersionAtLeast($this->client, '2.4.0')) {
+        if (Utility::isOpenSearchVersionAtLeast($this->client, '2.4.0')) {
             $this->markTestSkipped('Point-in-time tests require OpenSearch >= 2.4.0');
         }
 
@@ -67,7 +67,7 @@ class CreatePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testOpenPointInTime()
+    public function testCreatePointInTime()
     {
         // Act
         $result = $this->client->createPointInTime([

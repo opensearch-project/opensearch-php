@@ -43,7 +43,7 @@ class DeletePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $this->client = Utility::getClient();
 
-        if (Utility::isVersionAtLeast($this->client, '2.4.0')) {
+        if (Utility::isOpenSearchVersionAtLeast($this->client, '2.4.0')) {
             $this->markTestSkipped('Point-in-time tests require OpenSearch >= 2.4.0');
         }
 
@@ -67,7 +67,7 @@ class DeletePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
         ]);
     }
 
-    public function testClosePointInTimeSingle()
+    public function testDeletePointInTimeSingle()
     {
         // Arrange
         $result = $this->client->createPointInTime([
@@ -90,7 +90,7 @@ class DeletePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($pitId, $pit['pit_id']);
     }
 
-    public function testClosePointInTimeMultiple()
+    public function testDeletePointInTimeMultiple()
     {
         // Arrange
         $result = $this->client->createPointInTime([
