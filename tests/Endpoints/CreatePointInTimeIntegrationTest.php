@@ -43,6 +43,10 @@ class CreatePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $this->client = Utility::getClient();
 
+        if (Utility::isVersionAtLeast($this->client, '2.4.0')) {
+            $this->markTestSkipped('Point-in-time tests require OpenSearch >= 2.4.0');
+        }
+
         $this->client->create([
             'index' => self::INDEX,
             'id' => 100,

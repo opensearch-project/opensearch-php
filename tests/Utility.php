@@ -65,6 +65,13 @@ class Utility
         return $clientBuilder->build();
     }
 
+    /**
+     * Check if OpenSearch cluster version is greater than or equal to specified version.
+     */
+    public static function isVersionAtLeast(Client $client, string $version): bool
+    {
+        return version_compare(self::getVersion($client), $version) < 0;
+    }
 
     private static function getVersion(Client $client): string
     {
