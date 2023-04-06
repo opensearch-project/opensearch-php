@@ -76,7 +76,7 @@ class Utility
             return false;
         }
         $versionNumber = $versionInfo['number'];
-        return version_compare($versionNumber, $version) < 0;
+        return version_compare($versionNumber, $version) >= 0;
     }
 
     /**
@@ -90,7 +90,7 @@ class Utility
             return false;
         }
         $versionNumber = $versionInfo['number'];
-        return version_compare($versionNumber, $version) < 0;
+        return version_compare($versionNumber, $version) >= 0;
     }
 
     private static function getVersion(Client $client): array
@@ -120,7 +120,7 @@ class Utility
     */
     private static function wipeCluster(Client $client): void
     {
-        if (self::isElasticSearchVersionAtLeast($client, '7.3.99') > 0) {
+        if (self::isElasticSearchVersionAtLeast($client, '7.4.0')) {
             self::deleteAllSLMPolicies($client);
         }
 
@@ -212,7 +212,7 @@ class Utility
     private static function wipeDataStreams(Client $client): void
     {
         try {
-            if (self::isElasticSearchVersionAtLeast($client, '7.8.99')) {
+            if (self::isElasticSearchVersionAtLeast($client, '7.9.0')) {
                 $client->indices()->deleteDataStream([
                     'name' => '*',
                     'expand_wildcards' => 'all'
@@ -239,7 +239,7 @@ class Utility
     private static function wipeAllIndices(Client $client): void
     {
         $expand = 'open,closed';
-        if (self::isElasticSearchVersionAtLeast($client, '7.6.99')) {
+        if (self::isElasticSearchVersionAtLeast($client, '7.7.0')) {
             $expand .= ',hidden';
         }
         try {

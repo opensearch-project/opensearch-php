@@ -43,7 +43,7 @@ class DeletePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $this->client = Utility::getClient();
 
-        if (Utility::isOpenSearchVersionAtLeast($this->client, '2.4.0')) {
+        if (!Utility::isOpenSearchVersionAtLeast($this->client, '2.4.0')) {
             $this->markTestSkipped('Point-in-time tests require OpenSearch >= 2.4.0');
         }
 
