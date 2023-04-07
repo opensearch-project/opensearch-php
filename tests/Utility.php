@@ -29,7 +29,7 @@ use OpenSearch\Common\Exceptions\OpenSearchException;
 class Utility
 {
     /**
-     * @var string|null
+     * @var array|null
      */
     private static $version;
 
@@ -65,12 +65,39 @@ class Utility
         return $clientBuilder->build();
     }
 
+    /**
+     * Check if cluster is OpenSearch and version is greater than or equal to specified version.
+     */
+    public static function isOpenSearchVersionAtLeast(Client $client, string $version): bool
+    {
+        $versionInfo = self::getVersion($client);
+        $distribution = $versionInfo['distribution'] ?? null;
+        if ($distribution !== 'opensearch') {
+            return false;
+        }
+        $versionNumber = $versionInfo['number'];
+        return version_compare($versionNumber, $version) >= 0;
+    }
 
-    private static function getVersion(Client $client): string
+    /**
+     * Check if cluster is Elasticsearch and version is greater than or equal to specified version.
+     */
+    public static function isElasticSearchVersionAtLeast(Client $client, string $version): bool
+    {
+        $versionInfo = self::getVersion($client);
+        $distribution = $versionInfo['distribution'] ?? null;
+        if ($distribution === 'opensearch') {
+            return false;
+        }
+        $versionNumber = $versionInfo['number'];
+        return version_compare($versionNumber, $version) >= 0;
+    }
+
+    private static function getVersion(Client $client): array
     {
         if (!isset(self::$version)) {
             $result = $client->info();
-            self::$version = $result['version']['number'];
+            self::$version = $result['version'];
         }
         return self::$version;
     }
@@ -93,7 +120,7 @@ class Utility
     */
     private static function wipeCluster(Client $client): void
     {
-        if (version_compare(self::getVersion($client), '7.3.99') > 0) {
+        if (self::isElasticSearchVersionAtLeast($client, '7.4.0')) {
             self::deleteAllSLMPolicies($client);
         }
 
@@ -185,7 +212,7 @@ class Utility
     private static function wipeDataStreams(Client $client): void
     {
         try {
-            if (version_compare(self::getVersion($client), '7.8.99') > 0) {
+            if (self::isElasticSearchVersionAtLeast($client, '7.9.0')) {
                 $client->indices()->deleteDataStream([
                     'name' => '*',
                     'expand_wildcards' => 'all'
@@ -212,7 +239,7 @@ class Utility
     private static function wipeAllIndices(Client $client): void
     {
         $expand = 'open,closed';
-        if (version_compare(self::getVersion($client), '7.6.99') > 0) {
+        if (self::isElasticSearchVersionAtLeast($client, '7.7.0')) {
             $expand .= ',hidden';
         }
         try {

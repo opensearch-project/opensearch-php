@@ -145,6 +145,7 @@ jobs:
           - opensearchproject/opensearch:1.3.6
           - opensearchproject/opensearch:2.1.0
           - opensearchproject/opensearch:2.2.1
+          - opensearchproject/opensearch:2.5.0
     services:
       search-server:
         image: ${{ matrix.search-server-image }}
