@@ -33,7 +33,7 @@ class RefreshSearchAnalyzers extends AbstractEndpoint
         if (isset($index)) {
             return "/_plugins/_refresh_search_analyzers/$index";
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.refresh_search_analyzers');
+        throw new RuntimeException('Missing index parameter for the endpoint indices.refresh_search_analyzers');
     }
 
     public function getParamWhitelist(): array
