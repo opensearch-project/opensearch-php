@@ -1174,6 +1174,23 @@ class IndicesNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
+     * $params['index']              = (list) A comma-separated list of index names to refresh analyzers for
+     * 
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function refreshSearchAnalyzers(array $params = [])
+    {
+        $index = $this->extractArgument($params, 'index');
+
+        $endpointBuilder = $this-endpoints;
+        $endpoint = $endpointBuilder('Indices\RefreshSearchAnalyzers');
+        $endpoint->setParams($params);
+        $endpoint->setIndex($index);
+
+        return $this->performRequest($endpoint);
+    }
+    /**
      * $params['index']              = (list) A comma-separated list of index names to reload analyzers for
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
