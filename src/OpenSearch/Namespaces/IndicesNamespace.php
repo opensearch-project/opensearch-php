@@ -1183,7 +1183,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this-endpoints;
+        $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\RefreshSearchAnalyzers');
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
