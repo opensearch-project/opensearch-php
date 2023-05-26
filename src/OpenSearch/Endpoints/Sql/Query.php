@@ -19,7 +19,7 @@ class Query extends AbstractEndpoint
 {
     public function getParamWhitelist(): array
     {
-        return [];
+        return ['format'];
     }
 
     public function getURI(): string
