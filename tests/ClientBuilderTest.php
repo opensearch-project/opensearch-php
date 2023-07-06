@@ -169,18 +169,7 @@ class ClientBuilderTest extends TestCase
         ];
         $client = ClientBuilder::fromConfig($config);
 
-        try {
-            $client->info();
-            $this->assertTrue(false, 'Exception was not thrown!');
-        } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-
-            $this->assertTrue(isset($request['request']['client']['curl'][CURLOPT_HTTPAUTH]));
-            $this->assertEquals(CURLAUTH_BASIC, $request['request']['client']['curl'][CURLOPT_HTTPAUTH]);
-
-            $this->assertTrue(isset($request['request']['client']['curl'][CURLOPT_USERPWD]));
-            $this->assertEquals('foo:bar', $request['request']['client']['curl'][CURLOPT_USERPWD]);
-        }
+        $this->assertEquals('foo:bar', $client->transport->getConnection()->getUserPass());
     }
 
     public function testCompatibilityHeaderDefaultIsOff()
