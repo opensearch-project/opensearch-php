@@ -161,6 +161,28 @@ class ClientBuilderTest extends TestCase
         );
     }
 
+    public function testFromConfigUsingBasicAuthentication()
+    {
+        $config = [
+            'basicAuthentication' => ["admin", "admin"],
+            'connectionParams' => [],
+        ];
+        $client = ClientBuilder::fromConfig($config);
+
+        try {
+            $client->info();
+            $this->assertTrue(false, 'Exception was not thrown!');
+        } catch (OpenSearchException $e) {
+            $request = $client->transport->getLastConnection()->getLastRequestInfo();
+
+            $this->assertTrue(isset($request['request']['client']['curl'][CURLOPT_HTTPAUTH]));
+            $this->assertEquals(CURLAUTH_BASIC, $request['request']['client']['curl'][CURLOPT_HTTPAUTH]);
+
+            $this->assertTrue(isset($request['request']['client']['curl'][CURLOPT_USERPWD]));
+            $this->assertEquals('admin:admin', $request['request']['client']['curl'][CURLOPT_USERPWD]);
+        }
+    }
+
     public function testCompatibilityHeaderDefaultIsOff()
     {
         $client = ClientBuilder::create()
