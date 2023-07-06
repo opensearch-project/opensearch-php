@@ -164,7 +164,7 @@ class ClientBuilderTest extends TestCase
     public function testFromConfigUsingBasicAuthentication()
     {
         $config = [
-            'basicAuthentication' => ["admin", "admin"],
+            'basicAuthentication' => ["foo", "bar"],
             'connectionParams' => [],
         ];
         $client = ClientBuilder::fromConfig($config);
@@ -179,7 +179,7 @@ class ClientBuilderTest extends TestCase
             $this->assertEquals(CURLAUTH_BASIC, $request['request']['client']['curl'][CURLOPT_HTTPAUTH]);
 
             $this->assertTrue(isset($request['request']['client']['curl'][CURLOPT_USERPWD]));
-            $this->assertEquals('admin:admin', $request['request']['client']['curl'][CURLOPT_USERPWD]);
+            $this->assertEquals('foo:bar', $request['request']['client']['curl'][CURLOPT_USERPWD]);
         }
     }
 
