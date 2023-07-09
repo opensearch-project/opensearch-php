@@ -62,7 +62,7 @@ class SqlQueryEndpointTest extends TestCase
                 'format' => 'json',
             ]);
         } catch (UnexpectedValueException $e) {
-            $this->fail('The format param should be allowed to set');
+            $this->fail('The format param should be allowed to set but it was not. Format is may not whitelisted.');
         }
     }
 
