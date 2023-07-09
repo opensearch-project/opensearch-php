@@ -20,6 +20,7 @@ class SqlNamespace extends AbstractNamespace
 {
     /**
      * $params['query'] = (string) The SQL Query
+     * $params['format'] = (string) The response format
      * $params['cursor'] = (string) The cursor given by the server
      * $params['fetch_size'] = (int) The fetch size
      *
