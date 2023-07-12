@@ -213,6 +213,16 @@ class MyOpenSearchClass
         var_dump($docs['hits']['total']['value'] > 0);
     }
 
+    // Write queries in SQL
+    public function searchUsingSQL()
+    {
+        $docs = $this->client->sql()->query([
+          'query' => "SELECT * FROM INDEX_NAME WHERE name = 'wrecking'",
+          'format' => 'json'
+        ]);
+        var_dump($docs['hits']['total']['value'] > 0);
+    }
+
     public function getMultipleDocsByIDs()
     {
         $docs = $this->client->search([
@@ -338,6 +348,7 @@ try {
     $e->getOneByID();
     $e->getMultipleDocsByIDs();
     $e->search();
+    $e->searchUsingSQL();
     $e->searchByPointInTime();
     $e->deleteByQuery('');
     $e->deleteByID();
