@@ -161,6 +161,17 @@ class ClientBuilderTest extends TestCase
         );
     }
 
+    public function testFromConfigUsingBasicAuthentication()
+    {
+        $config = [
+            'basicAuthentication' => ["foo", "bar"],
+            'connectionParams' => [],
+        ];
+        $client = ClientBuilder::fromConfig($config);
+
+        $this->assertEquals('foo:bar', $client->transport->getConnection()->getUserPass());
+    }
+
     public function testCompatibilityHeaderDefaultIsOff()
     {
         $client = ClientBuilder::create()

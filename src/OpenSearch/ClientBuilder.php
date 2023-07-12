@@ -162,6 +162,11 @@ class ClientBuilder
     private $includePortInHostHeader = false;
 
     /**
+     * @var string|null
+     */
+    private $basicAuthentication = null;
+
+    /**
      * Create an instance of ClientBuilder
      */
     public static function create(): ClientBuilder
@@ -427,14 +432,7 @@ class ClientBuilder
      */
     public function setBasicAuthentication(string $username, string $password): ClientBuilder
     {
-        if (isset($this->connectionParams['client']['curl']) === false) {
-            $this->connectionParams['client']['curl'] = [];
-        }
-
-        $this->connectionParams['client']['curl'] += [
-            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-            CURLOPT_USERPWD  => $username.':'.$password
-        ];
+        $this->basicAuthentication = $username.':'.$password;
 
         return $this;
     }
@@ -633,6 +631,17 @@ class ClientBuilder
         }
 
         $this->connectionParams['client']['port_in_header'] = $this->includePortInHostHeader;
+
+        if (! is_null($this->basicAuthentication)) {
+            if (isset($this->connectionParams['client']['curl']) === false) {
+                $this->connectionParams['client']['curl'] = [];
+            }
+
+            $this->connectionParams['client']['curl'] += [
+                CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+                CURLOPT_USERPWD  => $this->basicAuthentication
+            ];
+        }
 
         if (is_null($this->connectionFactory)) {
             // Make sure we are setting Content-Type and Accept (unless the user has explicitly
