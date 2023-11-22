@@ -26,6 +26,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fixed host urls with trailing slash in the url ([#130](https://github.com/opensearch-project/opensearch-php/pull/140))
 - Fixed point-in-time APIs ([#142](https://github.com/opensearch-project/opensearch-php/pull/142))
 - Fixed bug in ClientBuilder where basic authentication is overridden by connection params ([#160](https://github.com/opensearch-project/opensearch-php/pull/160))
+- Fixed PHP warning in `Connection::tryDeserializeError()` for some error responses ([#167](https://github.com/opensearch-project/opensearch-php/issues/167))
 
 ### Security
 
