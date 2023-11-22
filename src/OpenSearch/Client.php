@@ -29,6 +29,7 @@ use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\TransportException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Namespaces\AbstractNamespace;
+use OpenSearch\Namespaces\MachineLearningNamespace;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
 use OpenSearch\Namespaces\CatNamespace;
@@ -154,6 +155,11 @@ class Client
     protected $sql;
 
     /**
+     * @var MachineLearningNamespace
+     */
+    protected $ml;
+
+    /**
      * Client constructor
      *
      * @param Transport                   $transport
@@ -179,6 +185,7 @@ class Client
         $this->security = new SecurityNamespace($transport, $endpoint);
         $this->ssl = new SslNamespace($transport, $endpoint);
         $this->sql = new SqlNamespace($transport, $endpoint);
+        $this->ml = new MachineLearningNamespace($transport, $endpoint);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -1346,6 +1353,11 @@ class Client
     public function sql(): SqlNamespace
     {
         return $this->sql;
+    }
+
+    public function ml(): MachineLearningNamespace
+    {
+      return $this->ml;
     }
 
     /**
