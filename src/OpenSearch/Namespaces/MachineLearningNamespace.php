@@ -29,19 +29,84 @@ use OpenSearch\Namespaces\AbstractNamespace;
 class MachineLearningNamespace extends AbstractNamespace {
 
   /**
-   * $params['body']             = (string) The connector configuration (Required)
+   * $params['body']             = (string) The body of the request (Required)
    *
    * @param array $params Associative array of parameters
    *
-   * @return string
-   *   The connector id.
+   * @return array
+   *   The response.
    */
-  public function createConnector(array $params = []): string {
+  public function createConnector(array $params = []): array
+  {
     $body = $this->extractArgument($params, 'body');
     $endpointBuilder = $this->endpoints;
-    $endpoint = $endpointBuilder('MachineLearning\CreateConnector');
+    $endpoint = $endpointBuilder('MachineLearning\Connectors\CreateConnector');
     $endpoint->setParams($params);
     $endpoint->setBody($body);
+
+    return $this->performRequest($endpoint);
+  }
+
+  /**
+   * $params['id']             = (string) The id of the connector (Required)
+   *
+   * @param array $params Associative array of parameters
+   *
+   * @return array
+   *   The response.
+   */
+  public function getConnector(array $params = []): array
+  {
+    $id = $this->extractArgument($params, 'id');
+    $endpointBuilder = $this->endpoints;
+    $endpoint = $endpointBuilder('MachineLearning\Connectors\GetConnector');
+    $endpoint->setParams($params);
+    $endpoint->setId($id);
+
+    return $this->performRequest($endpoint);
+  }
+
+  /**
+   * $params['body']             = (string) The body of the request
+   *
+   * @param array $params Associative array of parameters
+   *
+   * @return array
+   *   The response.
+   */
+  public function getConnectors(array $params = []): array
+  {
+    if (!isset($params['body'])) {
+      $params['body'] = [
+        'query' => [
+          'match_all' => new \StdClass(),
+        ],
+        'size' => 1000,
+      ];
+    }
+    $body = $this->extractArgument($params, 'body');
+    $endpointBuilder = $this->endpoints;
+    $endpoint = $endpointBuilder('MachineLearning\Connectors\GetConnectors');
+    $endpoint->setBody($body);
+
+    return $this->performRequest($endpoint);
+  }
+
+  /**
+   * $params['id']             = (string) The id of the connector (Required)
+   *
+   * @param array $params Associative array of parameters
+   *
+   * @return array
+   *   The response.
+   */
+  public function deleteConnector(array $params = []): array
+  {
+    $id = $this->extractArgument($params, 'id');
+    $endpointBuilder = $this->endpoints;
+    $endpoint = $endpointBuilder('MachineLearning\Connectors\DeleteConnector');
+    $endpoint->setParams($params);
+    $endpoint->setId($id);
 
     return $this->performRequest($endpoint);
   }

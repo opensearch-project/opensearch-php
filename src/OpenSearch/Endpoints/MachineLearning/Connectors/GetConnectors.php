@@ -19,31 +19,35 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning;
+namespace OpenSearch\Endpoints\MachineLearning\Connectors;
 
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class CreateConnector extends AbstractEndpoint
+class GetConnectors extends AbstractEndpoint
 {
+
   /**
    * @return string[]
    */
-  public function getParamWhitelist(): array {
-    return [];
+  public function getParamWhitelist(): array
+  {
+    return ['query', 'size'];
   }
 
   /**
    * @return string
    */
-  public function getURI(): string {
-    return "/_plugins/_ml/connectors/_create";
+  public function getURI(): string
+  {
+    return '/_plugins/_ml/connectors/_search';
   }
 
   /**
    * @return string
    */
-  public function getMethod(): string {
+  public function getMethod(): string
+  {
     return 'POST';
   }
 }
