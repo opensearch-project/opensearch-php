@@ -343,4 +343,23 @@ class MachineLearningNamespace extends AbstractNamespace {
     return $this->performRequest($endpoint);
   }
 
+  /**
+   * $params['id']             = (string) The id of the task (Required)
+   *
+   * @param array $params Associative array of parameters
+   *
+   * @return array
+   *   The response.
+   */
+  public function getTask(array $params = []): array
+  {
+    $id = $this->extractArgument($params, 'id');
+    $endpointBuilder = $this->endpoints;
+    $endpoint = $endpointBuilder('MachineLearning\Tasks\GetTask');
+    $endpoint->setParams($params);
+    $endpoint->setId($id);
+
+    return $this->performRequest($endpoint);
+  }
+
 }
