@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints\MachineLearning\Connectors;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 class CreateConnector extends AbstractEndpoint

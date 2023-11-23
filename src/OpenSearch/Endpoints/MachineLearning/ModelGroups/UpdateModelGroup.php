@@ -19,11 +19,12 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Connectors;
+namespace OpenSearch\Endpoints\MachineLearning\ModelGroups;
 
+use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class GetConnectors extends AbstractEndpoint
+class UpdateModelGroup extends AbstractEndpoint
 {
 
   /**
@@ -39,7 +40,13 @@ class GetConnectors extends AbstractEndpoint
    */
   public function getURI(): string
   {
-    return '/_plugins/_ml/connectors/_search';
+    if ($this->id) {
+      return "/_plugins/_ml/model_groups/$this->id";
+    }
+
+    throw new RuntimeException(
+      'id is required for update'
+    );
   }
 
   /**
@@ -47,6 +54,6 @@ class GetConnectors extends AbstractEndpoint
    */
   public function getMethod(): string
   {
-    return 'POST';
+    return 'PUT';
   }
 }

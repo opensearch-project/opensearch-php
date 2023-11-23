@@ -19,11 +19,11 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Connectors;
+namespace OpenSearch\Endpoints\MachineLearning\ModelGroups;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class GetConnectors extends AbstractEndpoint
+class RegisterModelGroup extends AbstractEndpoint
 {
 
   /**
@@ -39,7 +39,7 @@ class GetConnectors extends AbstractEndpoint
    */
   public function getURI(): string
   {
-    return '/_plugins/_ml/connectors/_search';
+    return "/_plugins/_ml/model_groups/_register";
   }
 
   /**
