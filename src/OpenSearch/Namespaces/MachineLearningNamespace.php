@@ -227,6 +227,32 @@ class MachineLearningNamespace extends AbstractNamespace {
     return $this->performRequest($endpoint);
   }
 
+  /**
+   * $params['body']             = (array) The body of the request
+   *
+   * @param array $params Associative array of parameters
+   *
+   * @return array
+   *   The response.
+   */
+  public function getModels(array $params = []): array
+  {
+    if (!isset($params['body'])) {
+      $params['body'] = [
+        'query' => [
+          'match_all' => new \StdClass(),
+        ],
+        'size' => 1000,
+      ];
+    }
+    $body = $this->extractArgument($params, 'body');
+    $endpointBuilder = $this->endpoints;
+    $endpoint = $endpointBuilder('MachineLearning\Models\GetModels');
+    $endpoint->setParams($params);
+    $endpoint->setBody($body);
+
+    return $this->performRequest($endpoint);
+  }
 
   /**
    * $params['id']             = (string) The id of the model (Required)
