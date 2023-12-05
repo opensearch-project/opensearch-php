@@ -24,7 +24,7 @@ class MyOpenSearchClass
 
     public function __construct()
     {
-        //simple Setup 
+        //simple Setup
         $this->client = OpenSearch\ClientBuilder::fromConfig([
             'hosts' => [
                 'https://localhost:9200'
@@ -66,7 +66,7 @@ class MyOpenSearchClass
         var_dump($this->client->info());
     }
 
-    // Create a document 
+    // Create a document
     public function create()
     {
         $time = time();
@@ -259,7 +259,7 @@ class MyOpenSearchClass
         ]);
         var_dump($docs['hits']['total']['value'] > 0);
     }
-    
+
     public function searchByPointInTime()
     {
         $result = $this->client->createPointInTime([
@@ -267,7 +267,7 @@ class MyOpenSearchClass
             'keep_alive' => '10m'
         ]);
         $pitId = $result['pit_id'];
-    
+
         // Get first page of results in Point-in-Time
         $result = $this->client->search([
             'body' => [
@@ -283,7 +283,7 @@ class MyOpenSearchClass
             ]
         ]);
         var_dump($result['hits']['total']['value'] > 0);
-        
+
         $last = end($result['hits']['hits']);
         $lastSort = $last['sort'] ?? null;
 
@@ -303,7 +303,7 @@ class MyOpenSearchClass
             ]
         ]);
         var_dump($result['hits']['total']['value'] > 0);
-        
+
         // Close Point-in-Time
         $result = $this->client->deletePointInTime([
             'body' => [
@@ -405,15 +405,15 @@ $client = (new \OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
 
     ->setSigV4Service('es')
-    
+
     // Default credential provider.
     ->setSigV4CredentialProvider(true)
-    
+
     ->setSigV4CredentialProvider([
       'key' => 'awskeyid',
       'secret' => 'awssecretkey',
     ])
-    
+
     ->build();
 ```
 
@@ -426,15 +426,15 @@ $client = (new \OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
 
     ->setSigV4Service('aoss')
-    
+
     // Default credential provider.
     ->setSigV4CredentialProvider(true)
-    
+
     ->setSigV4CredentialProvider([
       'key' => 'awskeyid',
       'secret' => 'awssecretkey',
     ])
-    
+
     ->build();
 ```
 
@@ -481,7 +481,7 @@ $client = (new \OpenSearch\ClientBuilder())
 ## Disabling Port Modification
 
 To prevent port modifications, include the `includePortInHostHeader` option into `ClientBuilder::fromConfig`.
-This will ensure that the port from the supplied URL is unchanged. 
+This will ensure that the port from the supplied URL is unchanged.
 
 The following example will force port `9100` usage.
 
@@ -500,4 +500,70 @@ $config = [
 $client = \OpenSearch\ClientBuilder::fromConfig($config);
 
 ...
+```
+## Machine Learning Example Usage
+
+This example assumes you are using the AWS managed OpenSearch
+service. See [The ML Commons documentation for more examples and further information.](https://github.com/opensearch-project/ml-commons/blob/main/docs/remote_inference_blueprints/openai_connector_embedding_blueprint.md)
+
+It walks through the process of setting up a model to generate
+vector embeddings from OpenAI.
+```php
+<?php
+
+# Register a model group.
+$modelGroupResponse = $client->ml()->registerModelGroup([
+  'body' => [
+    'name' => 'openai_model_group',
+    'description' => 'Group containing models for OpenAI',
+  ],
+]);
+
+# Create the connector.
+$connectorResponse = $client->ml()->createConnector([
+  'body' => [
+    'name' => "Open AI Embedding Connector",
+    'description' => "Creates a connector to Open AI's embedding endpoint",
+    'version' => 1,
+    'protocol' => 'http',
+    'parameters' => ['model' => 'text-embedding-ada-002'],
+    'credential' => [
+      "secretArn" => '<Your Secret ARN from AWS Secrets Manager>',
+      "roleArn" => '<Your IAM role ARN>',
+    ]
+    'actions' => [
+      [
+        'action_type' => 'predict',
+        'method' => 'POST',
+        'url' => 'https://api.openai.com/v1/embeddings',
+        'headers' => [
+          'Authorization': 'Bearer ${credential.secretArn.<Your Open AI Secret in Secrets Manager>}'
+        ],
+        'request_body' => "{ \"input\": \${parameters.input}, \"model\": \"\${parameters.model}\" }",
+        'pre_process_function' => "connector.pre_process.openai.embedding",
+        'post_process_function' => "connector.post_process.openai.embedding",
+      ],
+    ],
+  ],
+]);
+
+# Register the model.
+$registerModelResponse = $client->ml()->registerModel([
+  'body' => [
+    'name' => 'OpenAI embedding model',
+    'function_name' => 'remote',
+    'model_group_id' => $modelGroupResponse['model_group_id'],
+    'description' => 'Model for retrieving vector embeddings from OpenAI',
+    'connector_id' => $connectorResponse['connector_id'],
+  ],
+]);
+
+# Monitor the state of the register model task.
+$taskResponse = $client->ml()->getTask(['id' => $registerModelResponse['task_id']]);
+
+assert($taskResponse['state'] === 'COMPLETED');
+
+# Finally deploy the model. You will now be able to generate vector
+# embeddings from OpenSearch (via OpenAI).
+$client->ml()->deployModel(['id' => $taskResponse['model_id']]);
 ```
