@@ -18,34 +18,33 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class UpdateModelGroup extends AbstractEndpoint
 {
-
-  /**
-   * @return string[]
-   */
-  public function getParamWhitelist(): array
-  {
-    return [];
-  }
-
-  /**
-   * @return string
-   */
-  public function getURI(): string
-  {
-    if ($this->id) {
-      return "/_plugins/_ml/model_groups/$this->id";
+    /**
+     * @return string[]
+     */
+    public function getParamWhitelist(): array
+    {
+        return [];
     }
 
-    throw new RuntimeException(
-      'id is required for update'
-    );
-  }
+    /**
+     * @return string
+     */
+    public function getURI(): string
+    {
+        if ($this->id) {
+            return "/_plugins/_ml/model_groups/$this->id";
+        }
 
-  /**
-   * @return string
-   */
-  public function getMethod(): string
-  {
-    return 'PUT';
-  }
+        throw new RuntimeException(
+            'id is required for update'
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return 'PUT';
+    }
 }

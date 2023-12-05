@@ -18,35 +18,34 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class DeleteModelGroup extends AbstractEndpoint
 {
-
-  /**
-   * @return string[]
-   */
-  public function getParamWhitelist(): array
-  {
-    return [];
-  }
-
-  /**
-   * @return string
-   */
-  public function getURI(): string
-  {
-    if ($this->id) {
-      return "/_plugins/_ml/model_groups/$this->id";
+    /**
+     * @return string[]
+     */
+    public function getParamWhitelist(): array
+    {
+        return [];
     }
 
-    throw new RuntimeException(
-      'id is required for delete'
-    );
+    /**
+     * @return string
+     */
+    public function getURI(): string
+    {
+        if ($this->id) {
+            return "/_plugins/_ml/model_groups/$this->id";
+        }
 
-  }
+        throw new RuntimeException(
+            'id is required for delete'
+        );
 
-  /**
-   * @return string
-   */
-  public function getMethod(): string
-  {
-    return 'DELETE';
-  }
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return 'DELETE';
+    }
 }

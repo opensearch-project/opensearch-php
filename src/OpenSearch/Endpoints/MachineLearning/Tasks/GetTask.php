@@ -18,35 +18,34 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class GetTask extends AbstractEndpoint
 {
-
-  /**
-   * @return string[]
-   */
-  public function getParamWhitelist(): array
-  {
-    return [];
-  }
-
-  /**
-   * @return string
-   */
-  public function getURI(): string
-  {
-    if ($this->id) {
-      return "/_plugins/_ml/tasks/$this->id";
+    /**
+     * @return string[]
+     */
+    public function getParamWhitelist(): array
+    {
+        return [];
     }
 
-    throw new RuntimeException(
-      'id is required for get'
-    );
+    /**
+     * @return string
+     */
+    public function getURI(): string
+    {
+        if ($this->id) {
+            return "/_plugins/_ml/tasks/$this->id";
+        }
 
-  }
+        throw new RuntimeException(
+            'id is required for get'
+        );
 
-  /**
-   * @return string
-   */
-  public function getMethod(): string
-  {
-    return 'GET';
-  }
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return 'GET';
+    }
 }

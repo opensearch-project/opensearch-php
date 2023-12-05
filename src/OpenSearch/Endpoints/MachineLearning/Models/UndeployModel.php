@@ -18,35 +18,34 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class UndeployModel extends AbstractEndpoint
 {
-
-  /**
-   * @return string[]
-   */
-  public function getParamWhitelist(): array
-  {
-    return [];
-  }
-
-  /**
-   * @return string
-   */
-  public function getURI(): string
-  {
-    if ($this->id) {
-      return "/_plugins/_ml/models/$this->id/_undeploy";
+    /**
+     * @return string[]
+     */
+    public function getParamWhitelist(): array
+    {
+        return [];
     }
 
-    throw new RuntimeException(
-      'id is required for undeploy'
-    );
+    /**
+     * @return string
+     */
+    public function getURI(): string
+    {
+        if ($this->id) {
+            return "/_plugins/_ml/models/$this->id/_undeploy";
+        }
 
-  }
+        throw new RuntimeException(
+            'id is required for undeploy'
+        );
 
-  /**
-   * @return string
-   */
-  public function getMethod(): string
-  {
-    return 'POST';
-  }
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return 'POST';
+    }
 }

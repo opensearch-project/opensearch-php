@@ -10,34 +10,34 @@ declare(strict_types=1);
  *   this file be licensed under the Apache-2.0 license or a
  *   compatible open source license.
  */
+
 namespace OpenSearch\Endpoints\MachineLearning\Models;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 class RegisterModel extends AbstractEndpoint
 {
+    /**
+     * @return string[]
+     */
+    public function getParamWhitelist(): array
+    {
+        return [];
+    }
 
-  /**
-   * @return string[]
-   */
-  public function getParamWhitelist(): array
-  {
-    return [];
-  }
+    /**
+     * @return string
+     */
+    public function getURI(): string
+    {
+        return "/_plugins/_ml/models/_register";
+    }
 
-  /**
-   * @return string
-   */
-  public function getURI(): string
-  {
-    return "/_plugins/_ml/models/_register";
-  }
-
-  /**
-   * @return string
-   */
-  public function getMethod(): string
-  {
-    return 'POST';
-  }
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return 'POST';
+    }
 }

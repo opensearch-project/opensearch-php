@@ -17,28 +17,27 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class RegisterModelGroup extends AbstractEndpoint
 {
+    /**
+     * @return string[]
+     */
+    public function getParamWhitelist(): array
+    {
+        return [];
+    }
 
-  /**
-   * @return string[]
-   */
-  public function getParamWhitelist(): array
-  {
-    return [];
-  }
+    /**
+     * @return string
+     */
+    public function getURI(): string
+    {
+        return "/_plugins/_ml/model_groups/_register";
+    }
 
-  /**
-   * @return string
-   */
-  public function getURI(): string
-  {
-    return "/_plugins/_ml/model_groups/_register";
-  }
-
-  /**
-   * @return string
-   */
-  public function getMethod(): string
-  {
-    return 'POST';
-  }
+    /**
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return 'POST';
+    }
 }
