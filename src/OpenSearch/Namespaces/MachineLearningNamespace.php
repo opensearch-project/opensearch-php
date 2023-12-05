@@ -16,7 +16,13 @@ namespace OpenSearch\Namespaces;
 use OpenSearch\Namespaces\AbstractNamespace;
 
 /**
- * Class ConnectorsNamespace
+ * Class MachineLearningNamespace
+ *
+ * This class implements common functionality from the
+ * ML Commons API. Please refer to that documentation
+ * for more details about each API operation.
+ *
+ * @link https://opensearch.org/docs/latest/ml-commons-plugin/api/index/
  */
 class MachineLearningNamespace extends AbstractNamespace
 {
