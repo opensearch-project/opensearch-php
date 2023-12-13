@@ -10,7 +10,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added `includePortInHostHeader` option to `ClientBuilder::fromConfig` ([#118](https://github.com/opensearch-project/opensearch-php/pull/118))
 - Added the `RefreshSearchAnalyzers` endpoint ([[#152](https://github.com/opensearch-project/opensearch-php/issues/152))
 - Added support for `format` parameter to specify the sql response format ([#161](https://github.com/opensearch-project/opensearch-php/pull/161))
-- Implemented the Model, Model Group and Connector apis ([#170](https://github.com/opensearch-project/opensearch-php/pull/170))
+- Added ml commons model, model group and connector APIs ([#170](https://github.com/opensearch-project/opensearch-php/pull/170))
 
 ### Changed
 
