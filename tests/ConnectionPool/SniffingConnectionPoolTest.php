@@ -36,7 +36,7 @@ class SniffingConnectionPoolTest extends TestCase
         m::close();
     }
 
-    public function testAddOneHostThenGetConnection()
+    public function testAddOneHostThenGetConnection(): void
     {
         $mockConnection = m::mock(Connection::class);
         $mockConnection->allows('ping')->andReturns(true);
@@ -57,7 +57,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($mockConnection, $retConnection);
     }
 
-    public function testAddOneHostAndTriggerSniff()
+    public function testAddOneHostAndTriggerSniff(): void
     {
         $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"Bl2ihSr7TcuUHxhu1GA_YQ":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}}}', true);
 
@@ -88,7 +88,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($mockNewConnection, $retConnection);
     }
 
-    public function testAddOneHostAndForceNext()
+    public function testAddOneHostAndForceNext(): void
     {
         $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"Bl2ihSr7TcuUHxhu1GA_YQ":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}}}', true);
 
@@ -119,7 +119,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($mockNewConnection, $retConnection);
     }
 
-    public function testAddTenNodesThenGetConnection()
+    public function testAddTenNodesThenGetConnection(): void
     {
         $connections = [];
 
@@ -144,7 +144,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($connections[0], $retConnection);
     }
 
-    public function testAddTenNodesTimeoutAllButLast()
+    public function testAddTenNodesTimeoutAllButLast(): void
     {
         $connections = [];
 
@@ -175,7 +175,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($connections[9], $retConnection);
     }
 
-    public function testAddTenNodesAllTimeout()
+    public function testAddTenNodesAllTimeout(): void
     {
         $connections = [];
 
@@ -201,7 +201,7 @@ class SniffingConnectionPoolTest extends TestCase
         $connectionPool->nextConnection();
     }
 
-    public function testAddOneHostSniffTwo()
+    public function testAddOneHostSniffTwo(): void
     {
         $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
 
@@ -245,7 +245,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($newConnections[1], $retConnection);
     }
 
-    public function testAddSeedSniffTwoTimeoutTwo()
+    public function testAddSeedSniffTwoTimeoutTwo(): void
     {
         $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
 
@@ -288,7 +288,7 @@ class SniffingConnectionPoolTest extends TestCase
         $retConnection = $connectionPool->nextConnection();
     }
 
-    public function testTenTimeoutNineSniffTenthAddTwoAlive()
+    public function testTenTimeoutNineSniffTenthAddTwoAlive(): void
     {
         $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
 
@@ -339,7 +339,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($newConnections[12], $retConnection);
     }
 
-    public function testTenTimeoutNineSniffTenthAddTwoDeadTimeoutEveryone()
+    public function testTenTimeoutNineSniffTenthAddTwoDeadTimeoutEveryone(): void
     {
         $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
 
