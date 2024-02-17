@@ -147,7 +147,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
 
     private function parseClusterState(string $transportSchema, $nodeInfo): array
     {
-        $pattern       = '/([^:]*):([0-9]+)/';
+        $pattern       = '/([^:]*):(\d+)/';
         $hosts         = [];
 
         foreach ($nodeInfo['nodes'] as $node) {
