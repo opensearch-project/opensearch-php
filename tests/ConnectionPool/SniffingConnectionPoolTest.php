@@ -22,20 +22,15 @@ use OpenSearch\Connections\Connection;
 use Mockery as m;
 use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Connections\ConnectionFactoryInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SniffingConnectionPoolTest
  *
  * @subpackage Tests/SniffingConnectionPoolTest
  */
-class SniffingConnectionPoolTest extends \PHPUnit\Framework\TestCase
+class SniffingConnectionPoolTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        static::markTestSkipped("All of Sniffing unit tests use outdated cluster state format, need to redo");
-    }
-
-
     public function tearDown(): void
     {
         m::close();
