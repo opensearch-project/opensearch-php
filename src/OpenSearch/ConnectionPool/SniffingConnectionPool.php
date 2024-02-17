@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\ConnectionPool;
 
+use InvalidArgumentException;
 use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
@@ -33,7 +34,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
     /**
      * @var int
      */
-    private $sniffingInterval = 300;
+    private $sniffingInterval;
 
     /**
      * @var int
@@ -165,8 +166,10 @@ class SniffingConnectionPool extends AbstractConnectionPool
 
     private function setConnectionPoolParams(array $connectionPoolParams): void
     {
-        if (isset($connectionPoolParams['sniffingInterval']) === true) {
-            $this->sniffingInterval = $connectionPoolParams['sniffingInterval'];
+        $this->sniffingInterval = (int)($connectionPoolParams['sniffingInterval'] ?? 300);
+
+        if($this->sniffingInterval < 0) {
+            throw new InvalidArgumentException('sniffingInterval must be greater than or equal to 0');
         }
     }
 }
