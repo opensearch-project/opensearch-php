@@ -38,7 +38,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
     /**
      * @var int
      */
-    private $nextSniff = -1;
+    private $nextSniff;
 
     /**
      * {@inheritdoc}
