@@ -28,7 +28,7 @@ use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionInterface;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 
-class SniffingConnectionPool extends AbstractConnectionPool implements ConnectionPoolInterface
+class SniffingConnectionPool extends AbstractConnectionPool
 {
     /**
      * @var int
