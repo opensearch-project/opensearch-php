@@ -78,7 +78,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
         $this->nextSniff = -1;
     }
 
-    private function sniff(bool $force = false)
+    private function sniff(bool $force = false): void
     {
         if ($force === false && $this->nextSniff >= time()) {
             return;
@@ -163,7 +163,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
         return $hosts;
     }
 
-    private function setConnectionPoolParams(array $connectionPoolParams)
+    private function setConnectionPoolParams(array $connectionPoolParams): void
     {
         if (isset($connectionPoolParams['sniffingInterval']) === true) {
             $this->sniffingInterval = $connectionPoolParams['sniffingInterval'];
