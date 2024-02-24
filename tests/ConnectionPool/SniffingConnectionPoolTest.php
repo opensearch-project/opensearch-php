@@ -15,12 +15,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\ConnectionPool;
 
+use Mockery as m;
+use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\ConnectionPool\SniffingConnectionPool;
 use OpenSearch\Connections\Connection;
-use Mockery as m;
-use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -50,150 +50,176 @@ class SniffingConnectionPoolTest extends TestCase
         $connectionFactory = m::mock(ConnectionFactoryInterface::class);
 
         $connectionPoolParams = ['randomizeHosts' => false];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            $connectionPoolParams
+        );
 
         $retConnection = $connectionPool->nextConnection();
 
         $this->assertSame($mockConnection, $retConnection);
     }
 
-    public function testAddOneHostAndTriggerSniff(): void
+    public function testItShouldDiscoverLiveConnections(): void
     {
-        $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"Bl2ihSr7TcuUHxhu1GA_YQ":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}}}', true);
+        $downConnection = $this->createMock(Connection::class);
+        $downConnection->method('isAlive')->willReturn(false);
+        $downConnection->method('ping')->willReturn(false);
+        $liveConnection = $this->createMock(Connection::class);
+        $liveConnection->method('isAlive')->willReturn(true);
+        $connections = [$downConnection, $liveConnection];
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturnOnConsecutiveCalls($downConnection, $liveConnection);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+        $connectionFactory->method('create')->willReturnOnConsecutiveCalls($downConnection, $liveConnection);
 
-        $mockConnection = m::mock(Connection::class);
-        $mockConnection->expects('ping')->andReturns(true);
-        $mockConnection->expects('isAlive')->andReturns(true);
-        $mockConnection->expects('getTransportSchema')->andReturns('http');
-        $mockConnection->expects('sniff')->andReturns($clusterState);
+        $sut = new SniffingConnectionPool($connections, $selector, $connectionFactory, []);
 
-        $connections = [$mockConnection];
-        $mockNewConnection = m::mock(Connection::class);
-        $mockNewConnection->allows('isAlive')->andReturns(true);
+        $this->assertSame($liveConnection, $sut->nextConnection());
+    }
 
-        $selector = m::mock(SelectorInterface::class);
-        $selector->expects('select')->twice()->andReturns($mockNewConnection);
+    public function testItShouldReturnTheFirstLiveConnection(): void
+    {
+        $firstConnection = $this->createMock(Connection::class);
+        $firstConnection->method('isAlive')->willReturn(true);
+        $secondConnection = $this->createMock(Connection::class);
+        $secondConnection->method('isAlive')->willReturn(true);
+        $connections = [$firstConnection, $secondConnection];
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturnOnConsecutiveCalls($firstConnection, $secondConnection);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+        $connectionFactory->method('create')->willReturnOnConsecutiveCalls($firstConnection, $secondConnection);
 
-        $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns($mockNewConnection);
+        $sut = new SniffingConnectionPool($connections, $selector, $connectionFactory, []);
 
-        $connectionPoolParams = [
-            'randomizeHosts' => false,
-            'sniffingInterval'  => -1
-        ];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $this->assertSame($firstConnection, $sut->nextConnection());
+    }
 
-        $retConnection = $connectionPool->nextConnection();
+    public function testForcingNextConnectionSelection(): void
+    {
+        $clusterState = json_decode(
+            file_get_contents(__DIR__.'/../fixtures/cluster-state.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $firstConnection = $this->createMock(Connection::class);
+        $firstConnection->method('isAlive')->willReturn(true);
+        $firstConnection->method('sniff')->willReturn($clusterState);
+        $secondConnection = $this->createMock(Connection::class);
+        $secondConnection->method('isAlive')->willReturn(true);
+        $connections = [$firstConnection, $secondConnection];
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturnOnConsecutiveCalls($firstConnection, $secondConnection);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+        $connectionFactory->method('create')->willReturnOnConsecutiveCalls($firstConnection, $secondConnection);
 
-        $this->assertSame($mockNewConnection, $retConnection);
+        $sut = new SniffingConnectionPool($connections, $selector, $connectionFactory, []);
+
+        $this->assertSame($secondConnection, $sut->nextConnection(true));
     }
 
     public function testAddOneHostAndForceNext(): void
     {
-        $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"Bl2ihSr7TcuUHxhu1GA_YQ":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}}}', true);
+        $firstConnection = $this->createMock(Connection::class);
+        $secondConnection = m::mock(Connection::class);
+        $secondConnection->allows('isAlive')->andReturns(true);
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturnOnConsecutiveCalls($firstConnection, $secondConnection);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+        $connectionFactory->method('create')->willReturn($secondConnection);
+        $connectionPool = new SniffingConnectionPool(
+            [$firstConnection],
+            $selector,
+            $connectionFactory,
+            ['randomizeHosts' => false]
+        );
 
-        $mockConnection = m::mock(Connection::class);
-        $mockConnection->expects('ping')->andReturns(true);
-        $mockConnection->expects('isAlive')->andReturns(true);
-        $mockConnection->expects('getTransportSchema')->andReturns('http');
-        $mockConnection->expects('sniff')->andReturns($clusterState);
+        $actualConnection = $connectionPool->nextConnection(true);
 
-        $connections = [$mockConnection];
-        $mockNewConnection = m::mock(Connection::class);
-        $mockNewConnection->allows('isAlive')->andReturns(true);
-
-        $selector = m::mock(SelectorInterface::class);
-        $selector->expects('select')->andReturns($mockConnection);
-        $selector->expects('select')->andReturns($mockNewConnection);
-
-        $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns($mockNewConnection);
-
-        $connectionPoolParams = [
-            'randomizeHosts' => false
-        ];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
-
-        $retConnection = $connectionPool->nextConnection(true);
-
-        $this->assertSame($mockNewConnection, $retConnection);
+        $this->assertSame($secondConnection, $actualConnection);
     }
 
-    public function testAddTenNodesThenGetConnection(): void
+    public function testAddMultipleNodesThenGetConnection(): void
     {
         $connections = [];
-
-        foreach (range(1, 10) as $index) {
-            $mockConnection = m::mock(Connection::class);
-            $mockConnection->allows('ping')->andReturns(true);
-            $mockConnection->allows('isAlive')->andReturns(true);
-
+        foreach (range(1, 10) as $ignored) {
+            $mockConnection = $this->createMock(Connection::class);
+            $mockConnection->method('ping')->willReturn(true);
+            $mockConnection->method('isAlive')->willReturn(true);
             $connections[] = $mockConnection;
         }
-
-        $selector = m::mock(SelectorInterface::class);
-        $selector->allows('select')->andReturns($connections[0]);
-
-        $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturn($connections[0]);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
         $connectionPoolParams = ['randomizeHosts' => false];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            $connectionPoolParams
+        );
 
         $retConnection = $connectionPool->nextConnection();
 
         $this->assertSame($connections[0], $retConnection);
     }
 
-    public function testAddTenNodesTimeoutAllButLast(): void
+    public function testAddMultipleNodesTimeoutAllButLast(): void
     {
         $connections = [];
-
-        foreach (range(1, 9) as $index) {
-            $mockConnection = m::mock(Connection::class);
-            $mockConnection->allows('ping')->andReturns(false);
-            $mockConnection->allows('isAlive')->andReturns(false);
-
+        foreach (range(1, 10) as $ignored) {
+            $mockConnection = $this->createMock(Connection::class);
+            $mockConnection->method('ping')->willReturn(false);
+            $mockConnection->method('isAlive')->willReturn(false);
             $connections[] = $mockConnection;
         }
+        $liveConnection = $this->createMock(Connection::class);
+        $liveConnection->method('ping')->willReturn(true);
+        $liveConnection->method('isAlive')->willReturn(true);
+        $connections[] = $liveConnection;
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturnOnConsecutiveCalls(...$connections);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
 
-        $mockConnection = m::mock(Connection::class);
-        $mockConnection->allows('ping')->andReturns(true);
-        $mockConnection->allows('isAlive')->andReturns(true);
-
-        $connections[] = $mockConnection;
-
-        $selector = m::mock(SelectorInterface::class);
-        $selector->allows('select')->andReturnValues($connections);
-
-        $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-
-        $connectionPoolParams = ['randomizeHosts' => false];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            ['randomizeHosts' => false]
+        );
 
         $retConnection = $connectionPool->nextConnection();
 
-        $this->assertSame($connections[9], $retConnection);
+        $this->assertSame($liveConnection, $retConnection);
     }
 
     public function testAddTenNodesAllTimeout(): void
     {
         $connections = [];
-
-        foreach (range(1, 10) as $index) {
-            $mockConnection = m::mock(Connection::class);
-            $mockConnection->allows('ping')->andReturns(false);
-            $mockConnection->allows('isAlive')->andReturns(false);
-
+        foreach (range(1, 10) as $ignored) {
+            $mockConnection = $this->createMock(Connection::class);
+            $mockConnection->method('ping')->willReturn(false);
+            $mockConnection->method('isAlive')->willReturn(false);
             $connections[] = $mockConnection;
         }
 
-        $selector = m::mock(SelectorInterface::class);
-        $selector->allows('select')->andReturnValues($connections);
+        $selector = $this->createMock(SelectorInterface::class);
+        $selector->method('select')->willReturnCallback(
+            function () use ($connections) {
+                return array_shift($connections);
+            }
+        );
 
-        $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-
-        $connectionPoolParams = ['randomizeHosts' => false];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            ['randomizeHosts' => false]
+        );
 
         $this->expectException(NoNodesAvailableException::class);
         $this->expectExceptionMessage('No alive nodes found in your cluster');
@@ -203,8 +229,12 @@ class SniffingConnectionPoolTest extends TestCase
 
     public function testAddOneHostSniffTwo(): void
     {
-        $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
-
+        $clusterState = json_decode(
+            file_get_contents(__DIR__.'/../fixtures/cluster-state.json'),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
         $mockConnection = m::mock(Connection::class);
         $mockConnection->expects('ping')->andReturns(true);
         $mockConnection->expects('isAlive')->andReturns(true);
@@ -229,14 +259,23 @@ class SniffingConnectionPoolTest extends TestCase
         ]);
 
         $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns($newConnections[0]);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns($newConnections[1]);
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns(
+            $newConnections[0]
+        );
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns(
+            $newConnections[1]
+        );
 
         $connectionPoolParams = [
             'randomizeHosts' => false,
-            'sniffingInterval'  => -1
+            'sniffingInterval' => 0,
         ];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            $connectionPoolParams
+        );
 
         $retConnection = $connectionPool->nextConnection();
         $this->assertSame($newConnections[0], $retConnection);
@@ -247,7 +286,12 @@ class SniffingConnectionPoolTest extends TestCase
 
     public function testAddSeedSniffTwoTimeoutTwo(): void
     {
-        $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
+        $clusterState = json_decode(
+            '{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}',
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         $mockConnection = m::mock(Connection::class);
         $mockConnection->expects('ping')->andReturns(true);
@@ -273,14 +317,23 @@ class SniffingConnectionPoolTest extends TestCase
         ]);
 
         $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns($newConnections[0]);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns($newConnections[1]);
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns(
+            $newConnections[0]
+        );
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns(
+            $newConnections[1]
+        );
 
         $connectionPoolParams = [
             'randomizeHosts' => false,
-            'sniffingInterval'  => -1
+            'sniffingInterval' => -1,
         ];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            $connectionPoolParams
+        );
 
         $this->expectException(NoNodesAvailableException::class);
         $this->expectExceptionMessage('No alive nodes found in your cluster');
@@ -290,7 +343,12 @@ class SniffingConnectionPoolTest extends TestCase
 
     public function testTenTimeoutNineSniffTenthAddTwoAlive(): void
     {
-        $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
+        $clusterState = json_decode(
+            '{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}',
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         $connections = [];
 
@@ -323,14 +381,23 @@ class SniffingConnectionPoolTest extends TestCase
         $selector->allows('select')->andReturnValues($newConnections);
 
         $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns($newConnections[10]);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns($newConnections[11]);
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns(
+            $newConnections[10]
+        );
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns(
+            $newConnections[11]
+        );
 
         $connectionPoolParams = [
             'randomizeHosts' => false,
-            'sniffingInterval'  => -1
+            'sniffingInterval' => -1,
         ];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            $connectionPoolParams
+        );
 
         $retConnection = $connectionPool->nextConnection();
         $this->assertSame($newConnections[11], $retConnection);
@@ -341,7 +408,12 @@ class SniffingConnectionPoolTest extends TestCase
 
     public function testTenTimeoutNineSniffTenthAddTwoDeadTimeoutEveryone(): void
     {
-        $clusterState = json_decode('{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}', true);
+        $clusterState = json_decode(
+            '{"ok":true,"cluster_name":"opensearch","nodes":{"node1":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9300]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9200]"}, "node2":{"name":"Vesta","transport_address":"inet[/192.168.1.119:9301]","hostname":"zach-ThinkPad-W530","version":"0.90.5","http_address":"inet[/192.168.1.119:9201]"}}}',
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         $connections = [];
 
@@ -377,14 +449,23 @@ class SniffingConnectionPoolTest extends TestCase
         $selector->allows('select')->andReturnValues($newConnections);
 
         $connectionFactory = m::mock(ConnectionFactoryInterface::class);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns($newConnections[10]);
-        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns($newConnections[11]);
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9200])->andReturns(
+            $newConnections[10]
+        );
+        $connectionFactory->allows('create')->with(['host' => '192.168.1.119', 'port' => 9201])->andReturns(
+            $newConnections[11]
+        );
 
         $connectionPoolParams = [
             'randomizeHosts' => false,
-            'sniffingInterval'  => -1
+            'sniffingInterval' => -1,
         ];
-        $connectionPool = new SniffingConnectionPool($connections, $selector, $connectionFactory, $connectionPoolParams);
+        $connectionPool = new SniffingConnectionPool(
+            $connections,
+            $selector,
+            $connectionFactory,
+            $connectionPoolParams
+        );
 
         $this->expectException(NoNodesAvailableException::class);
         $this->expectExceptionMessage('No alive nodes found in your cluster');

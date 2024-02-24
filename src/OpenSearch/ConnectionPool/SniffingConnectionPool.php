@@ -21,13 +21,13 @@ declare(strict_types=1);
 
 namespace OpenSearch\ConnectionPool;
 
+use Exception;
 use InvalidArgumentException;
-use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\Connections\Connection;
-use OpenSearch\Connections\ConnectionInterface;
 use OpenSearch\Connections\ConnectionFactoryInterface;
+use OpenSearch\Connections\ConnectionInterface;
 
 class SniffingConnectionPool extends AbstractConnectionPool
 {
@@ -44,8 +44,12 @@ class SniffingConnectionPool extends AbstractConnectionPool
     /**
      * {@inheritdoc}
      */
-    public function __construct($connections, SelectorInterface $selector, ConnectionFactoryInterface $factory, $connectionPoolParams)
-    {
+    public function __construct(
+        $connections,
+        SelectorInterface $selector,
+        ConnectionFactoryInterface $factory,
+        $connectionPoolParams
+    ) {
         parent::__construct($connections, $selector, $factory, $connectionPoolParams);
 
         $this->setConnectionPoolParams($connectionPoolParams);
@@ -120,23 +124,23 @@ class SniffingConnectionPool extends AbstractConnectionPool
     {
         try {
             $response = $connection->sniff();
-        } catch (OperationTimeoutException $exception) {
+        } catch (Exception $exception) {
             return false;
         }
 
-        $nodes = $this->parseClusterState($connection->getTransportSchema(), $response);
+        $nodes = $this->parseClusterState($response);
 
         if (count($nodes) === 0) {
             return false;
         }
 
-        $this->connections = array();
+        $this->connections = [];
 
         foreach ($nodes as $node) {
-            $nodeDetails = array(
+            $nodeDetails = [
                 'host' => $node['host'],
-                'port' => $node['port']
-            );
+                'port' => $node['port'],
+            ];
             $this->connections[] = $this->connectionFactory->create($nodeDetails);
         }
 
@@ -145,18 +149,18 @@ class SniffingConnectionPool extends AbstractConnectionPool
         return true;
     }
 
-    private function parseClusterState(string $transportSchema, $nodeInfo): array
+    private function parseClusterState($nodeInfo): array
     {
-        $pattern       = '/([^:]*):(\d+)/';
-        $hosts         = [];
+        $pattern = '/([^:]*):(\d+)/';
+        $hosts = [];
 
         foreach ($nodeInfo['nodes'] as $node) {
             if (isset($node['http']) === true && isset($node['http']['publish_address']) === true) {
                 if (preg_match($pattern, $node['http']['publish_address'], $match) === 1) {
-                    $hosts[] = array(
+                    $hosts[] = [
                         'host' => $match[1],
-                        'port' => (int) $match[2],
-                    );
+                        'port' => (int)$match[2],
+                    ];
                 }
             }
         }
@@ -168,7 +172,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
     {
         $this->sniffingInterval = (int)($connectionPoolParams['sniffingInterval'] ?? 300);
 
-        if($this->sniffingInterval < 0) {
+        if ($this->sniffingInterval < 0) {
             throw new InvalidArgumentException('sniffingInterval must be greater than or equal to 0');
         }
     }
