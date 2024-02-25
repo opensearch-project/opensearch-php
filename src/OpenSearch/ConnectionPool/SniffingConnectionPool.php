@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\ConnectionPool;
 
-use Exception;
+use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\Connections\Connection;
@@ -123,7 +123,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
     {
         try {
             $response = $connection->sniff();
-        } catch (Exception $exception) {
+        } catch (OperationTimeoutException $exception) {
             return false;
         }
 

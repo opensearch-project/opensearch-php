@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\ConnectionPool;
 
+use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
 use OpenSearch\ConnectionPool\SniffingConnectionPool;
@@ -177,6 +178,102 @@ class SniffingConnectionPoolTest extends TestCase
         $this->expectException(NoNodesAvailableException::class);
 
         $connectionPool->nextConnection();
+    }
+
+    /** @test */
+    public function sniffShouldStopIfAllSniffRequestsFail(): void
+    {
+        $connection = $this->createMock(Connection::class);
+        $connection->method('isAlive')->willReturn(false);
+        $connection->method('sniff')->willThrowException(new OperationTimeoutException());
+        $selector = new RoundRobinSelector();
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+
+        $connectionPool = new SniffingConnectionPool(
+            [$connection],
+            $selector,
+            $connectionFactory,
+            ['sniffingInterval' => 0]
+        );
+
+        $this->expectException(NoNodesAvailableException::class);
+        $connectionFactory->expects($this->never())->method('create');
+
+        $connectionPool->nextConnection();
+    }
+
+    /** @test */
+    public function sniffShouldStopIfNodesAreEmpty(): void
+    {
+        $clusterState = $this->clusterState(0);
+        $connection = $this->createMock(Connection::class);
+        $connection->method('isAlive')->willReturn(false);
+        $connection->method('sniff')->willReturn($clusterState);
+        $selector = new RoundRobinSelector();
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+
+        $connectionPool = new SniffingConnectionPool(
+            [$connection],
+            $selector,
+            $connectionFactory,
+            ['sniffingInterval' => 0]
+        );
+
+        $this->expectException(NoNodesAvailableException::class);
+        $connectionFactory->expects($this->never())->method('create');
+
+        $connectionPool->nextConnection();
+    }
+
+    /** @test */
+    public function itShouldNotSniffBeforeScheduledSniffTime(): void
+    {
+        $connection = $this->createMock(Connection::class);
+        $connection->method('isAlive')->willReturn(false);
+        $connection->method('sniff')->willReturn($this->clusterState(2));
+        $selector = new RoundRobinSelector();
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+
+        $connectionPool = new SniffingConnectionPool(
+            [$connection],
+            $selector,
+            $connectionFactory,
+            ['sniffingInterval' => 300]
+        );
+
+        $connectionFactory->expects($this->never())->method('create');
+        $this->expectException(NoNodesAvailableException::class);
+
+        $connectionPool->nextConnection();
+    }
+
+    /** @test */
+    public function scheduleCheck(): void
+    {
+        $clusterState = $this->clusterState(2);
+        $firstConnection = $this->createMock(Connection::class);
+        $firstConnection->method('isAlive')->willReturn(true);
+        $firstConnection->method('sniff')->willReturn($clusterState);
+        $secondConnection = $this->createMock(Connection::class);
+        $secondConnection->method('isAlive')->willReturn(true);
+        $selector = $this->createMock(RoundRobinSelector::class);
+        $selector->expects($this->exactly(2))->method('select')->willReturnOnConsecutiveCalls(
+            $firstConnection,
+            $secondConnection
+        );
+        $connectionFactory = $this->createMock(ConnectionFactoryInterface::class);
+        $connectionFactory->method('create')->willReturnOnConsecutiveCalls($firstConnection, $secondConnection);
+
+        $connectionPool = new SniffingConnectionPool(
+            [$firstConnection],
+            $selector,
+            $connectionFactory,
+            ['sniffingInterval' => 300]
+        );
+
+        $connectionPool->scheduleCheck();
+
+        $this->assertSame($secondConnection, $connectionPool->nextConnection());
     }
 
     private function clusterState(int $numberOfNodes): array
