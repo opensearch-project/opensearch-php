@@ -23,7 +23,9 @@ namespace OpenSearch\Tests\ConnectionPool;
 
 use OpenSearch\ClientBuilder;
 use OpenSearch\ConnectionPool\SniffingConnectionPool;
+use OpenSearch\ConnectionPool\StaticConnectionPool;
 use OpenSearch\Tests\Utility;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SniffingConnectionPoolIntegrationTest
@@ -31,18 +33,14 @@ use OpenSearch\Tests\Utility;
  * @subpackage Tests/SniffingConnectionPoolTest
  * @group Integration
  */
-class SniffingConnectionPoolIntegrationTest extends \PHPUnit\Framework\TestCase
+class SniffingConnectionPoolIntegrationTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        static::markTestSkipped("All of Sniffing unit tests use outdated cluster state format, need to redo");
-    }
-
-    public function testSniff()
+    public function testSniff(): void
     {
         $client = ClientBuilder::create()
             ->setHosts([Utility::getHost()])
-            ->setConnectionPool(SniffingConnectionPool::class, ['sniffingInterval' => -10])
+            ->setConnectionPool(SniffingConnectionPool::class, ['sniffingInterval' => 10])
+            ->setSSLVerification(false)
             ->build();
 
         $pinged = $client->ping();
