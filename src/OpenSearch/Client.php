@@ -1394,10 +1394,12 @@ class Client
     public function request(
         string $method,
         string $uri,
-        array $params = [],
-        $body = null,
-        array $options = []
+        array $attributes = []
     ) {
+        $params = $attributes['params'] ?? [];
+        $body = $attributes['body'] ?? null;
+        $options = $attributes['options'] ?? [];
+
         $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
 
         return $this->transport->resultOrFuture($promise, $options);

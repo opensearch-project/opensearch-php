@@ -171,7 +171,7 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
         $index = 'test_index_' . time();
         $client->indices()->create(['index' => $index]);
 
-        $response = $client->request('POST', "/$index/_doc", [], ['foo' => 'bar']);
+        $response = $client->request('POST', "/$index/_doc", ['body' => ['foo' => 'bar']]);
 
         $this->assertIsArray($response);
         $this->assertArrayHasKey('_index', $response);
@@ -189,7 +189,7 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
         $index = 'test_index_' . time();
         $client->indices()->create(['index' => $index]);
 
-        $response = $client->request('PUT', "/$index/_settings", [], ['index' => ['number_of_replicas' => 2]]);
+        $response = $client->request('PUT', "/$index/_settings", ['body' => ['index' => ['number_of_replicas' => 2]]]);
 
         $this->assertIsArray($response);
         $this->assertArrayHasKey('acknowledged', $response);
