@@ -21,13 +21,13 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests;
 
+use GuzzleHttp\Ring\Client\MockHandler;
+use GuzzleHttp\Ring\Future\FutureArray;
+use Mockery as m;
 use OpenSearch;
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\MaxRetriesException;
-use GuzzleHttp\Ring\Client\MockHandler;
-use GuzzleHttp\Ring\Future\FutureArray;
-use Mockery as m;
 
 /**
  * Class ClientTest
@@ -408,5 +408,56 @@ class ClientTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($body, $argument);
         $this->assertCount(0, $params);
         $this->assertInstanceOf(\IteratorIterator::class, $argument);
+    }
+
+    /** @test */
+    public function sendRawRequest(): void
+    {
+        $callable = function () {};
+        $transport = $this->createMock(OpenSearch\Transport::class);
+        $client = new OpenSearch\Client($transport, $callable, []);
+
+        $transport->expects($this->once())->method('performRequest')->with('GET', '/', [], null, []);
+
+        $client->request('GET', '/');
+    }
+
+    /** @test */
+    public function sendRawRequestWithBody(): void
+    {
+        $callable = function () {};
+        $transport = $this->createMock(OpenSearch\Transport::class);
+        $client = new OpenSearch\Client($transport, $callable, []);
+        $body = ['query' => ['match' => ['text_entry' => 'long live king']]];
+
+        $transport->expects($this->once())->method('performRequest')->with('GET', '/shakespeare/_search', [], $body, []);
+
+        $client->request('GET', '/shakespeare/_search', compact('body'));
+    }
+
+    /** @test */
+    public function sendRawRequestWithParams(): void
+    {
+        $callable = function () {};
+        $transport = $this->createMock(OpenSearch\Transport::class);
+        $client = new OpenSearch\Client($transport, $callable, []);
+        $params = ['foo' => 'bar'];
+
+        $transport->expects($this->once())->method('performRequest')->with('GET', '/_search', $params, null, []);
+
+        $client->request('GET', '/_search', compact('params'));
+    }
+
+    /** @test */
+    public function sendRawRequestWithOptions(): void
+    {
+        $callable = function () {};
+        $transport = $this->createMock(OpenSearch\Transport::class);
+        $client = new OpenSearch\Client($transport, $callable, []);
+        $options = ['client' => ['future' => 'lazy']];
+
+        $transport->expects($this->once())->method('performRequest')->with('GET', '/', [], null, $options);
+
+        $client->request('GET', '/', compact('options'));
     }
 }

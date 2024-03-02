@@ -151,7 +151,7 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
     }
 
     /** @test */
-    public function sendRawGetRequest(): void
+    public function sendRawRequest(): void
     {
         $client = $this->getClient();
 
@@ -165,56 +165,19 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
     }
 
     /** @test */
-    public function sendRawPostRequest(): void
+    public function insertDocumentUsingRawRequest(): void
     {
         $client = $this->getClient();
-        $index = 'test_index_' . time();
-        $client->indices()->create(['index' => $index]);
+        $randomIndex = 'test_index_' .time();
 
-        $response = $client->request('POST', "/$index/_doc", ['body' => ['foo' => 'bar']]);
+        $response = $client->request('POST', "/$randomIndex/_doc", ['body' => ['field' => 'value']]);
 
         $this->assertIsArray($response);
         $this->assertArrayHasKey('_index', $response);
-        $this->assertEquals($index, $response['_index']);
+        $this->assertSame($randomIndex, $response['_index']);
+        $this->assertArrayHasKey('_id', $response);
         $this->assertArrayHasKey('result', $response);
-        $this->assertEquals('created', $response['result']);
-
-        $client->indices()->delete(['index' => $index]);
-    }
-
-    /** @test */
-    public function sendRawPutRequest(): void
-    {
-        $client = $this->getClient();
-        $index = 'test_index_' . time();
-        $client->indices()->create(['index' => $index]);
-
-        $response = $client->request('PUT', "/$index/_settings", ['body' => ['index' => ['number_of_replicas' => 2]]]);
-
-        $this->assertIsArray($response);
-        $this->assertArrayHasKey('acknowledged', $response);
-        $this->assertTrue($response['acknowledged']);
-
-        $client->indices()->delete(['index' => $index]);
-    }
-
-    /** @test */
-    public function sendRawDeleteRequest(): void
-    {
-        $client = $this->getClient();
-        $index = 'test_index_' . time();
-        $client->indices()->create(['index' => $index]);
-        $client->index(['index' => $index, 'id' => 1, 'body' => ['foo' => 'bar']]);
-
-        $response = $client->request('DELETE', "/$index/_doc/1");
-
-        $this->assertIsArray($response);
-        $this->assertArrayHasKey('_index', $response);
-        $this->assertEquals($index, $response['_index']);
-        $this->assertArrayHasKey('result', $response);
-        $this->assertEquals('deleted', $response['result']);
-
-        $client->indices()->delete(['index' => $index]);
+        $this->assertSame('created', $response['result']);
     }
 
     private function getLevelOutput(string $level, array $output): string
