@@ -1391,11 +1391,8 @@ class Client
      * @return callable|array
      * @throws NoNodesAvailableException
      */
-    public function request(
-        string $method,
-        string $uri,
-        array $attributes = []
-    ) {
+    public function request(string $method, string $uri, array $attributes = [])
+    {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
