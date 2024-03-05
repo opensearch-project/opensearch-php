@@ -11,6 +11,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added the `RefreshSearchAnalyzers` endpoint ([[#152](https://github.com/opensearch-project/opensearch-php/issues/152))
 - Added support for `format` parameter to specify the sql response format ([#161](https://github.com/opensearch-project/opensearch-php/pull/161))
 - Added ml commons model, model group and connector APIs ([#170](https://github.com/opensearch-project/opensearch-php/pull/170))
+- [Feature] Send raw json request ([#171](https://github.com/opensearch-project/opensearch-php/pull/177))
 
 ### Changed
 

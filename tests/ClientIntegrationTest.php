@@ -24,7 +24,6 @@ namespace OpenSearch\Tests;
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\BadRequest400Exception;
-use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Tests\ClientBuilder\ArrayLogger;
 use Psr\Log\LogLevel;
@@ -33,7 +32,7 @@ use Psr\Log\LogLevel;
  * Class ClientTest
  *
  * @subpackage Tests
- * @group Integration
+ * @group      Integration
  */
 class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 {
@@ -88,7 +87,7 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
         try {
             $result = $client->get([
                 'index' => 'foo',
-                'id' => 'bar'
+                'id' => 'bar',
             ]);
         } catch (Missing404Exception $e) {
             $this->assertNotEmpty($this->getLevelOutput(LogLevel::WARNING, $this->logger->output));
@@ -103,8 +102,8 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $client->delete(
             [
-            'index' => '',
-            'id' => 'test'
+                'index' => '',
+                'id' => 'test',
             ]
         );
     }
@@ -117,8 +116,8 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $client->delete(
             [
-            'index' => 'test',
-            'id' => ''
+                'index' => 'test',
+                'id' => '',
             ]
         );
     }
@@ -131,8 +130,8 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $client->delete(
             [
-            'index' => ['', '', ''],
-            'id' => 'test'
+                'index' => ['', '', ''],
+                'id' => 'test',
             ]
         );
     }
@@ -145,10 +144,40 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
         $client->delete(
             [
-            'index' => [null, null, null],
-            'id' => 'test'
+                'index' => [null, null, null],
+                'id' => 'test',
             ]
         );
+    }
+
+    /** @test */
+    public function sendRawRequest(): void
+    {
+        $client = $this->getClient();
+
+        $response = $client->request('GET', '/');
+
+        $this->assertIsArray($response);
+        $expectedKeys = ['name', 'cluster_name', 'cluster_uuid', 'version', 'tagline'];
+        foreach ($expectedKeys as $key) {
+            $this->assertArrayHasKey($key, $response);
+        }
+    }
+
+    /** @test */
+    public function insertDocumentUsingRawRequest(): void
+    {
+        $client = $this->getClient();
+        $randomIndex = 'test_index_' .time();
+
+        $response = $client->request('POST', "/$randomIndex/_doc", ['body' => ['field' => 'value']]);
+
+        $this->assertIsArray($response);
+        $this->assertArrayHasKey('_index', $response);
+        $this->assertSame($randomIndex, $response['_index']);
+        $this->assertArrayHasKey('_id', $response);
+        $this->assertArrayHasKey('result', $response);
+        $this->assertSame('created', $response['result']);
     }
 
     private function getLevelOutput(string $level, array $output): string
@@ -158,6 +187,7 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
                 return $out;
             }
         }
+
         return '';
     }
 }

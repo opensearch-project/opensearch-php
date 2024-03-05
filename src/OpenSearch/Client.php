@@ -22,31 +22,26 @@ declare(strict_types=1);
 namespace OpenSearch;
 
 use OpenSearch\Common\Exceptions\BadMethodCallException;
-use OpenSearch\Common\Exceptions\InvalidArgumentException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
-use OpenSearch\Common\Exceptions\BadRequest400Exception;
-use OpenSearch\Common\Exceptions\Missing404Exception;
-use OpenSearch\Common\Exceptions\TransportException;
 use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\Namespaces\AbstractNamespace;
-use OpenSearch\Namespaces\MachineLearningNamespace;
-use OpenSearch\Namespaces\NamespaceBuilderInterface;
+use OpenSearch\Namespaces\AsyncSearchNamespace;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
 use OpenSearch\Namespaces\CatNamespace;
 use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
+use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
+use OpenSearch\Namespaces\MachineLearningNamespace;
+use OpenSearch\Namespaces\MonitoringNamespace;
+use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\NodesNamespace;
+use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
-use OpenSearch\Namespaces\TasksNamespace;
-use OpenSearch\Namespaces\AsyncSearchNamespace;
-use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
-use OpenSearch\Namespaces\MonitoringNamespace;
-use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SslNamespace;
+use OpenSearch\Namespaces\TasksNamespace;
 
 /**
  * Class Client
@@ -1357,7 +1352,7 @@ class Client
 
     public function ml(): MachineLearningNamespace
     {
-      return $this->ml;
+        return $this->ml;
     }
 
     /**
@@ -1389,6 +1384,22 @@ class Client
         } else {
             return null;
         }
+    }
+
+    /**
+     * Sends a raw request to the cluster
+     * @return callable|array
+     * @throws NoNodesAvailableException
+     */
+    public function request(string $method, string $uri, array $attributes = [])
+    {
+        $params = $attributes['params'] ?? [];
+        $body = $attributes['body'] ?? null;
+        $options = $attributes['options'] ?? [];
+
+        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
+
+        return $this->transport->resultOrFuture($promise, $options);
     }
 
     /**
