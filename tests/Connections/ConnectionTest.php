@@ -316,6 +316,41 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
         $this->assertStringContainsString('master_not_discovered_exception', $result->getMessage());
     }
 
+    /**
+     * @see https://github.com/opensearch-project/opensearch-php/issues/167
+     */
+    public function testTryDeserializeErrorWith403Error()
+    {
+        $host = [
+            'host' => 'localhost'
+        ];
+
+        $connection = new Connection(
+            function () {
+            },
+            $host,
+            [],
+            new SmartSerializer(),
+            $this->logger,
+            $this->trace
+        );
+
+        $reflection = new ReflectionClass(Connection::class);
+        $tryDeserializeError = $reflection->getMethod('tryDeserializeError');
+        $tryDeserializeError->setAccessible(true);
+
+        $body = '{"status":403,"error":{"reason":"403 Forbidden","type":"Forbidden"}}';
+        $response = [
+            'transfer_stats' => [],
+            'status' => 403,
+            'body' => $body
+        ];
+
+        $result = $tryDeserializeError->invoke($connection, $response, ServerErrorResponseException::class);
+        $this->assertInstanceOf(ServerErrorResponseException::class, $result);
+        $this->assertStringContainsString('403 Forbidden', $result->getMessage());
+    }
+
     public function testHeaderClientParamIsResetAfterSent()
     {
         $host = [

@@ -748,14 +748,9 @@ class Connection implements ConnectionInterface
             // 2.0 structured exceptions
             if (is_array($error['error']) && array_key_exists('reason', $error['error']) === true) {
                 // Try to use root cause first (only grabs the first root cause)
-                $root = $error['error']['root_cause'];
-                if (isset($root) && isset($root[0])) {
-                    $cause = $root[0]['reason'];
-                    $type = $root[0]['type'];
-                } else {
-                    $cause = $error['error']['reason'];
-                    $type = $error['error']['type'];
-                }
+                $info = $error['error']['root_cause'][0] ?? $error['error'];
+                $cause = $info['reason'];
+                $type = $info['type'];
                 // added json_encode to convert into a string
                 $original = new $errorClass(json_encode($response['body']), $response['status']);
 
