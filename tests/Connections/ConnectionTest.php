@@ -31,6 +31,7 @@ use OpenSearch\Tests\ClientBuilder\ArrayLogger;
 use Exception;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
+
 use function base64_encode;
 use function random_bytes;
 

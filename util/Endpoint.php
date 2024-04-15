@@ -291,7 +291,7 @@ class Endpoint
                 $check = sprintf("isset(\$%s)", $parts[0]);
             }
             $url = str_replace('{' . $parts[0] .'}', '$' . $parts[0], $path);
-            for ($i=1; $i<count($parts); $i++) {
+            for ($i = 1; $i < count($parts); $i++) {
                 $url = str_replace('{' . $parts[$i] .'}', '$' . $parts[$i], $url);
                 if (in_array($parts[$i], $this->requiredParts)) {
                     continue;
@@ -351,7 +351,7 @@ class Endpoint
         $urls = $this->removePathWithSameParts($paths);
         // Order the url based on descendant length
         usort($urls, function ($a, $b) {
-            return strlen($b)-strlen($a);
+            return strlen($b) - strlen($a);
         });
 
         return $urls;
@@ -494,7 +494,7 @@ class Endpoint
                 "     * \$params['%s']%s = %s(%s) %s%s\n",
                 $part,
                 str_repeat(' ', $space - strlen($part)),
-                $part ==='type' || (isset($values['deprecated']) && $values['deprecated']) ? 'DEPRECATED ' : '',
+                $part === 'type' || (isset($values['deprecated']) && $values['deprecated']) ? 'DEPRECATED ' : '',
                 $values['type'],
                 $values['description'] ?? '',
                 in_array($part, $this->requiredParts) ? ' (Required)' : ''
