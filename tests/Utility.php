@@ -42,7 +42,10 @@ class Utility
         if (false !== $url) {
             return $url;
         }
-        return 'https://admin:admin@localhost:9200';
+
+        $password = getenv('OPENSEARCH_INITIAL_ADMIN_PASSWORD') ?: 'admin';
+
+        return 'https://admin:' . $password . '@localhost:9200';
     }
 
     /**
