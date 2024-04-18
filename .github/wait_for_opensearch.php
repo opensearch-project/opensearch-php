@@ -11,7 +11,8 @@ while (true) {
     try {
         $client = ClientBuilder::create()->build();
         $client->ping();
-        echo 'Is up and running' . PHP_EOL;
+        $info = $client->info();
+        echo 'OpenSearch ' . $info['version']['number'] . ' is up and running' . PHP_EOL;
         exit(0);
     } catch (Throwable $e) {
         if ($retries === $maxRetries) {
