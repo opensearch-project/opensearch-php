@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Use PHP 8.1
+      - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           extensions: yaml, zip, curl
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,12 +35,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Use PHP 8.1
+      - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           extensions: yaml, zip, curl
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -58,21 +58,22 @@ jobs:
     runs-on: ubuntu-latest
     services:
       search-server:
-        image: opensearchproject/opensearch:2.2.1
+        image: opensearchproject/opensearch:2.13.0
         ports:
           - 9200:9200
         env:
           discovery.type: single-node
-          plugins.security.disabled: 'true'
+          plugins.security.disabled: true
+          OPENSEARCH_INITIAL_ADMIN_PASSWORD: myStrongPassword123!
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Use PHP 8.1
+      - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           extensions: yaml, zip, curl, pcov
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -82,7 +83,7 @@ jobs:
           composer install --prefer-dist
 
       - name: Wait for Search server
-        run: php ./.github/wait_for_es.php
+        run: php ./.github/wait_for_opensearch.php
 
       - name: PHPUnit
         run: |
@@ -112,7 +113,7 @@ jobs:
           - windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Use PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
@@ -130,8 +131,8 @@ jobs:
       run: |
         composer run unit
 
-  integration-test:
-    name: Tntegration Test
+  integration-test-elasticsearch:
+    name: Tntegration Test (Elasticsearch)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -140,12 +141,6 @@ jobs:
           - ubuntu-latest
         search-server-image:
           - docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.0
-          - opensearchproject/opensearch:1.1.0
-          - opensearchproject/opensearch:1.2.4
-          - opensearchproject/opensearch:1.3.6
-          - opensearchproject/opensearch:2.1.0
-          - opensearchproject/opensearch:2.2.1
-          - opensearchproject/opensearch:2.5.0
     services:
       search-server:
         image: ${{ matrix.search-server-image }}
@@ -153,16 +148,15 @@ jobs:
           - 9200:9200
         env:
           discovery.type: single-node
-          plugins.security.disabled: '${{ contains(matrix.search-server-image, ''opensearch'') && ''true'' || '''' }}'
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Use PHP 8.1
+    - name: Use PHP 8.2
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.1
+        php-version: 8.2
         extensions: yaml, zip, curl
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -172,7 +166,112 @@ jobs:
         composer install --prefer-dist
 
     - name: Wait for Search server
-      run: php ./.github/wait_for_es.php
+      run: php ./.github/wait_for_opensearch.php
+
+    - name: Integration tests
+      run: |
+        composer run integration
+      env:
+        OPENSEARCH_URL: 'http://localhost:9200'
+
+  integration-test-opensearch:
+    name: Tntegration Test (OpenSearch)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        search-server-image:
+          - opensearchproject/opensearch:1.1.0
+          - opensearchproject/opensearch:1.2.4
+          - opensearchproject/opensearch:1.3.15
+          - opensearchproject/opensearch:2.0.1
+          - opensearchproject/opensearch:2.1.0
+          - opensearchproject/opensearch:2.2.1
+          - opensearchproject/opensearch:2.5.0
+          - opensearchproject/opensearch:2.3.0
+          - opensearchproject/opensearch:2.4.1
+          - opensearchproject/opensearch:2.5.0
+          - opensearchproject/opensearch:2.6.0
+          - opensearchproject/opensearch:2.7.0
+          - opensearchproject/opensearch:2.8.0
+          - opensearchproject/opensearch:2.9.0
+          - opensearchproject/opensearch:2.10.0
+          - opensearchproject/opensearch:2.11.1
+    services:
+      search-server:
+        image: ${{ matrix.search-server-image }}
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          plugins.security.disabled: true
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+        extensions: yaml, zip, curl
+      env:
+        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   
+    - name: Install dependencies
+      run: |
+        composer install --prefer-dist
+
+    - name: Wait for Search server
+      run: php ./.github/wait_for_opensearch.php
+
+    - name: Integration tests
+      run: |
+        composer run integration
+      env:
+        OPENSEARCH_URL: 'http://localhost:9200'
+
+  integration-test-opensearch-strong-password:
+    name: Tntegration Test (OpenSearch w/Strong Password)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        search-server-image:
+          - opensearchproject/opensearch:2.12.0
+          - opensearchproject/opensearch:2.13.0
+    services:
+      search-server:
+        image: ${{ matrix.search-server-image }}
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+          plugins.security.disabled: true
+          OPENSEARCH_INITIAL_ADMIN_PASSWORD: myStrongPassword123!
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use PHP 8.2
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+        extensions: yaml, zip, curl
+      env:
+        COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   
+    - name: Install dependencies
+      run: |
+        composer install --prefer-dist
+
+    - name: Wait for Search server
+      run: php ./.github/wait_for_opensearch.php
 
     - name: Integration tests
       run: |
