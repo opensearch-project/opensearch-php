@@ -16,6 +16,21 @@ jobs:
       matrix:
         opensearch_ref: [ '1.x', '2.x', '2.0', 'main' ]
     steps:
+      - name: Checkout PHP Client
+        uses: actions/checkout@v2
+
+      - name: Use PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: yaml, zip, curl
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Install dependencies
+        run: |
+          composer install --prefer-dist
+
       - name: Checkout OpenSearch
         uses: actions/checkout@v3
         with:
@@ -51,28 +66,10 @@ jobs:
         working-directory: opensearch/distribution/archives/linux-tar/build/distributions
         run: |
           tar xf opensearch-min-*
-          echo "discovery.type: single-node" >> ./opensearch-*/config/opensearch.yml
-          ./opensearch-*/bin/opensearch &
-          for attempt in {1..20}; do sleep 5; if curl -s localhost:9200; then echo '=====> ready'; break; fi; echo '=====> waiting...'; done
+          ./opensearch-*/bin/opensearch -d
       
-      - name: Checkout PHP Client
-        uses: actions/checkout@v2
-
-      - name: Use PHP 8.2
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
-          extensions: yaml, zip, curl
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-      - name: Install dependencies
-        run: |
-          composer install --prefer-dist
-
       - name: Wait for Search server
         run: php ./.github/wait_for_opensearch.php
-
 
       - name: Integration tests
         run: |
