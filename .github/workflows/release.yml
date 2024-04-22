@@ -1,0 +1,35 @@
+name: Release to packagist
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+        id-token: write
+        issues: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: get_data
+        run: echo "approvers=$(cat .github/CODEOWNERS | grep @ | tr -d '* ' | sed 's/@/,/g' | sed 's/,//1')" >> $GITHUB_OUTPUT
+
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: ${{ steps.get_data.outputs.approvers }}
+          minimum-approvals: 2
+          issue-title: 'Release opensearch-PHP'
+          issue-body: "Please approve or deny the release of opensearch-PHP client on packagist. **TAG**: ${{ github.ref_name }}  **COMMIT**: ${{ github.sha }}"
+          exclude-workflow-initiator-as-approver: true
+
+      - name: Release to Packagist
+        run: curl -XPOST -f -H 'content-type:application/json' 'https://packagist.org/api/update-package?username=opensearch&apiToken=${{secrets.PACKAGIST_PUBLISHING_API_TOKEN}}' -d'{"repository":{"url":"https://github.com/opensearch-project/opensearch-php"}}'
+
+      - name: Release on GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true

@@ -18,6 +18,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added code coverage reporting ([#100](https://github.com/opensearch-project/opensearch-php/pull/100))
 - Added support for a custom signing service name for AWS SigV4 ([#117](https://github.com/opensearch-project/opensearch-php/pull/117))
 - Added support for OpenSearch 2.12 and 2.13 ([#180](https://github.com/opensearch-project/opensearch-php/pull/180))
+- Added release automation to publish to packagist ([#183](https://github.com/opensearch-project/opensearch-php/pull/183))
 
 ### Changed
 
