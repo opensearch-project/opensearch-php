@@ -8,7 +8,7 @@ The below matrix shows the compatibility of the [`opensearch-project/opensearch-
 | Client Version | OpenSearch Version |
 | --- | --- |
 | 1.0.0 | 1.0.0-2.1.0 |
-| 2.0.0 | 1.0.0-2.1.0 |
+| 2.x.x | 1.0.0-2.x.x |
 
 ## Upgrading
 
