@@ -53,6 +53,8 @@ Repositories create consistent release labels, such as `v1.0.0`, `v1.1.0` and `v
 
 The release process is standard across repositories in this org and is run by a release manager volunteering from amongst [MAINTAINERS](MAINTAINERS.md).
 
+Push a tag to this repository aganist the right commit. This triggers [release.yml](.github/workflows/release.yml) workflow which is responsible to get approval from the maintainers in the form of comments on the GitHub issue, release the client to packagist using manual webhook and finally publishing a release on the GitHub.
+
 ## Backporting
 
 This project follows [semantic versioning](https://semver.org/spec/v2.0.0.html). Backwards-incompatible changes always result in a new major version and will __never__ be backported. Small improvements and features will be backported to a new minor version (e.g. `1.1`). Security fixes will be backported to a new patch version (e.g. `1.0.1`).
