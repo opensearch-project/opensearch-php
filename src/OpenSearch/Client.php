@@ -52,7 +52,7 @@ class Client
     /**
      * @deprecated since version is pulled from InstalledVersions::getVersion('opensearch-project/opensearch-php')
      */
-    public const VERSION = '2.3.0';
+    public const VERSION = '2.3.1';
 
     /**
      * @var Transport
