@@ -4,9 +4,9 @@
   - [Plugin Branching](#plugin-branching)
   - [Versioning](#versioning)
   - [Feature Branches](#feature-branches)
+- [Backporting](#backporting)
 - [Release Labels](#release-labels)
 - [Releasing](#releasing)
-- [Backporting](#backporting)
 
 ## Overview
 
@@ -45,16 +45,6 @@ Versions are incremented as soon as development starts on a given version to avo
 
 Do not creating branches in the upstream repo, use your fork, for the exception of long lasting feature branches that require active collaboration from multiple developers. Name feature branches `feature/<thing>`. Once the work is merged to `main`, please make sure to delete the feature branch.
 
-## Release Labels
-
-Repositories create consistent release labels, such as `v1.0.0`, `v1.1.0` and `v2.0.0`, as well as `patch` and `backport`. Use release labels to target an issue or a PR for a given release. See [MAINTAINERS](MAINTAINERS.md#triage-open-issues) for more information on triaging issues.
-
-## Releasing
-
-The release process is standard across repositories in this org and is run by a release manager volunteering from amongst [MAINTAINERS](MAINTAINERS.md).
-
-Push a tag to this repository aganist the right commit. This triggers [release.yml](.github/workflows/release.yml) workflow which is responsible to get approval from the maintainers in the form of comments on the GitHub issue, release the client to packagist using manual webhook and finally publishing a release on the GitHub.
-
 ## Backporting
 
 This project follows [semantic versioning](https://semver.org/spec/v2.0.0.html). Backwards-incompatible changes always result in a new major version and will __never__ be backported. Small improvements and features will be backported to a new minor version (e.g. `1.1`). Security fixes will be backported to a new patch version (e.g. `1.0.1`).
@@ -87,3 +77,15 @@ git push origin backport-pr-xyz-1.x
 ```
 
 5. Create a pull request for the change.
+
+## Release Labels
+
+Repositories create consistent release labels, such as `v1.0.0`, `v1.1.0` and `v2.0.0`, as well as `patch` and `backport`. Use release labels to target an issue or a PR for a given release. See [MAINTAINERS](MAINTAINERS.md#triage-open-issues) for more information on triaging issues.
+
+## Releasing
+
+The release process is standard across repositories in this org and is run by a release manager volunteering from amongst [MAINTAINERS](MAINTAINERS.md).
+
+1. Update CHANGELOG with the version number, and make a pull request (e.g. [#184](https://github.com/opensearch-project/opensearch-php/pull/184)).
+2. Push a tag to this repository against the right commit. This triggers the [release.yml](.github/workflows/release.yml) workflow which is responsible to get approval from the maintainers in the form of comments on the GitHub issue, release the client to [packagist](https://packagist.org/packages/opensearch-project/opensearch-php) using a manual webhook, and finally publishing a [release on GitHub](https://github.com/opensearch-project/opensearch-php/releases).
+3. Increment the version in [Client.php](https://github.com/opensearch-project/opensearch-php/blob/main/src/OpenSearch/Client.php#L55) for the next developer iteration, add an `[Unreleased]` section to [CHANGELOG](CHANGELOG.md), and make a pull request.
