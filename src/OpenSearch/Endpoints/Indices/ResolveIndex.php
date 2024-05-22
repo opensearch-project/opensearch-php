@@ -41,7 +41,12 @@ class ResolveIndex extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'expand_wildcards'
+            'expand_wildcards',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

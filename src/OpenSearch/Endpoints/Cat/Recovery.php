@@ -47,7 +47,12 @@ class Recovery extends AbstractEndpoint
             'index',
             's',
             'time',
-            'v'
+            'v',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

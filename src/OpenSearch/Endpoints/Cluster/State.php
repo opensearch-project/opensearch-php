@@ -46,13 +46,18 @@ class State extends AbstractEndpoint
         return [
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'flat_settings',
             'wait_for_metadata_version',
             'wait_for_timeout',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -73,6 +78,7 @@ class State extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -43,7 +43,13 @@ class Delete extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout', 'cluster_manager_timeout'
+            'master_timeout',
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -71,6 +77,7 @@ class Delete extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -35,6 +35,7 @@ class Endpoint
     public const CHECK_OPTIONS_TEMPLATE       = __DIR__ . '/template/check-options';
     public const SET_BULK_BODY_TEMPLATE       = __DIR__ . '/template/set-bulk-body';
     public const DEPRECATED_PART              = __DIR__ . '/template/deprecated';
+    public const DEPRECATED_PARAM             = __DIR__ . '/template/deprecated-param-master-timeout';
     public const PHP_RESERVED_WORDS = [
         'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch',
         'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do',
@@ -58,8 +59,6 @@ class Endpoint
     public $name;
     public $apiName;
     protected $content;
-    protected $version;
-    protected $buildhash;
     protected $parts = [];
     protected $requiredParts = [];
     protected $useNamespace = [];
@@ -69,8 +68,6 @@ class Endpoint
     public function __construct(
         string $fileName,
         string $content,
-        string $version,
-        string $buildhash
     ) {
         $this->apiName = basename($fileName, '.json');
         $parts = explode('.', $this->apiName);
@@ -95,8 +92,6 @@ class Endpoint
             ));
         }
         $this->content = $this->content[$this->apiName];
-        $this->version = $version;
-        $this->buildhash = $buildhash;
 
         $this->parts = $this->getPartsFromContent($this->content);
         $this->requiredParts = $this->getRequiredParts($this->content);
@@ -127,6 +122,8 @@ class Endpoint
         }
         if (count($required) > 1) {
             return call_user_func_array('array_intersect', $required);
+        } elseif (count($required) === 1) {
+            return $required[0];
         }
         return $required;
     }
@@ -146,7 +143,7 @@ class Endpoint
         }
         $class = str_replace(
             ':uri',
-            $this->extractUrl($this->content['url']['paths']),
+            trim($this->extractUrl($this->content['url']['paths'])),
             $class
         );
         $class = str_replace(
@@ -164,11 +161,15 @@ class Endpoint
 
         // Set the HTTP method
         $action = $this->getMethod();
-        if (!empty($this->content['body']) &&
-            ($action === ['GET', 'POST'] || $action === ['POST', 'GET'])) {
-            $method = 'isset($this->body) ? \'POST\' : \'GET\'';
+        if ($action === ['POST', 'PUT'] && $this->getClassName() !== 'Bulk') {
+            $method = "'PUT'";
         } else {
-            $method = sprintf("'%s'", reset($action));
+            if (!empty($this->content['body']) &&
+                ($action === ['GET', 'POST'] || $action === ['POST', 'GET'])) {
+                $method = 'isset($this->body) ? \'POST\' : \'GET\'';
+            } else {
+                $method = sprintf("'%s'", reset($action));
+            }
         }
         $class = str_replace(':method', $method, $class);
 
@@ -186,7 +187,7 @@ class Endpoint
             if (in_array($part, ['type', 'index', 'id'])) {
                 continue;
             }
-            if (isset($value['type']) && $value['type'] === 'list') {
+            if (isset($value['type']) && $value['type'] === 'array') {
                 $parts .= $this->getSetPartList($part);
             } else {
                 $parts .= $this->getSetPart($part);
@@ -194,11 +195,36 @@ class Endpoint
         }
         $class = str_replace(':set-parts', $parts, $class);
         $class = str_replace(':endpoint', $this->getClassName(), $class);
-        $class = str_replace(':version', $this->version, $class);
-        $class = str_replace(':buildhash', $this->buildhash, $class);
         $class = str_replace(':use-namespace', $this->getNamespaces(), $class);
         $class = str_replace(':properties', $this->getProperties(), $class);
+        if (isset($this->content['params']['master_timeout'])) {
+            $deprecatedContent = file_get_contents(self::DEPRECATED_PARAM);
+            $class = str_replace(':master_timeout_ParamDeprecation', $deprecatedContent, $class);
+        } else {
+            $class = preg_replace('/\s*:master_timeout_ParamDeprecation\s*\}/', '}', $class);
+        }
 
+        // Adding licence header
+        $currentDir = dirname(__FILE__);
+        $baseDir = dirname($currentDir);
+        $EndpointName = $this->getClassName();
+
+        if (!empty($this->namespace)) {
+            $filePath = $baseDir . "/src/OpenSearch/Endpoints/$this->namespace/$EndpointName.php";
+        } else {
+            $filePath = $baseDir . "/src/OpenSearch/Endpoints/$EndpointName.php";
+        }
+
+        if (file_exists($filePath)) {
+            $content = file_get_contents($filePath);
+
+            if (strpos($content, 'Copyright OpenSearch') !== false) {
+                $pattern = '/\/\*\*.*?\*\//s';
+                if (preg_match($pattern, $content, $matches)) {
+                    $class = str_replace('declare(strict_types=1);', 'declare(strict_types=1);' . PHP_EOL . PHP_EOL . $matches[0], $class);
+                }
+            }
+        }
         return str_replace(':apiname', $this->apiName, $class);
     }
 
@@ -495,7 +521,7 @@ class Endpoint
                 $part,
                 str_repeat(' ', $space - strlen($part)),
                 $part === 'type' || (isset($values['deprecated']) && $values['deprecated']) ? 'DEPRECATED ' : '',
-                $values['type'],
+                $values['type'] ?? 'any',
                 $values['description'] ?? '',
                 in_array($part, $this->requiredParts) ? ' (Required)' : ''
             );
@@ -518,11 +544,11 @@ class Endpoint
                 "     * \$params['%s']%s = (%s) %s%s%s%s\n",
                 $param,
                 str_repeat(' ', $space - strlen($param)),
-                $values['type'],
+                $values['type'] ?? 'any',
                 $values['description'] ?? '',
                 isset($values['required']) && $values['required'] ? ' (Required)' : '',
                 isset($values['options']) ? sprintf(" (Options = %s)", implode(',', $values['options'])) : '',
-                isset($values['default']) ? sprintf(" (Default = %s)", $values['type'] === 'boolean' ? ($values['default'] ? 'true' : 'false') : (is_array($values['default']) ? implode(',', $values['default']) : $values['default'])) : ''
+                isset($values['default']) ? sprintf(" (Default = %s)", $values['type'] ?? 'any' === 'boolean' ? ($values['default'] ? 'true' : 'false') : (is_array($values['default']) ? implode(',', $values['default']) : $values['default'])) : ''
             );
         }
         return $result;

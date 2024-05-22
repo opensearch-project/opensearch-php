@@ -54,7 +54,12 @@ class Bulk extends AbstractEndpoint
             '_source_excludes',
             '_source_includes',
             'pipeline',
-            'require_alias'
+            'require_alias',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -28,6 +28,7 @@ class Search extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_search";
         }
@@ -78,7 +79,14 @@ class Search extends AbstractEndpoint
             'batched_reduce_size',
             'max_concurrent_shard_requests',
             'pre_filter_shard_size',
-            'rest_total_hits_as_int'
+            'rest_total_hits_as_int',
+            'search_pipeline',
+            'include_named_queries_score',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

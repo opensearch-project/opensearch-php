@@ -45,8 +45,15 @@ class Split extends AbstractEndpoint
             'copy_settings',
             'timeout',
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'wait_for_completion',
+            'task_execution_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -74,6 +81,7 @@ class Split extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -19,14 +19,21 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class Health extends AbstractEndpoint
 {
-    public function getParamWhitelist(): array
-    {
-        return [];
-    }
-
     public function getURI(): string
     {
         return "/_plugins/_security/health";
+    }
+
+    public function getParamWhitelist(): array
+    {
+        return [
+            'mode',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string

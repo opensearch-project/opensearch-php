@@ -19,14 +19,20 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class FlushCache extends AbstractEndpoint
 {
-    public function getParamWhitelist(): array
-    {
-        return [];
-    }
-
     public function getURI(): string
     {
         return "/_plugins/_security/api/cache";
+    }
+
+    public function getParamWhitelist(): array
+    {
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string

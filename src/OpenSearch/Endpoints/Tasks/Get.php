@@ -42,7 +42,12 @@ class Get extends AbstractEndpoint
     {
         return [
             'wait_for_completion',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -41,8 +41,13 @@ class GetRepository extends AbstractEndpoint
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'local',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -63,6 +68,7 @@ class GetRepository extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

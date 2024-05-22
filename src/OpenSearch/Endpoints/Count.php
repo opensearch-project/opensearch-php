@@ -28,6 +28,7 @@ class Count extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_count";
         }
@@ -50,7 +51,12 @@ class Count extends AbstractEndpoint
             'default_operator',
             'df',
             'lenient',
-            'terminate_after'
+            'terminate_after',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

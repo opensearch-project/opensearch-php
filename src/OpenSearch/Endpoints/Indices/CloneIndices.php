@@ -44,8 +44,15 @@ class CloneIndices extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'wait_for_completion',
+            'task_execution_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -73,6 +80,7 @@ class CloneIndices extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

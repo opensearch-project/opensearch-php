@@ -45,7 +45,12 @@ class ClearCache extends AbstractEndpoint
             'allow_no_indices',
             'expand_wildcards',
             'index',
-            'request'
+            'request',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

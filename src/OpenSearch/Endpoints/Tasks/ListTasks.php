@@ -39,7 +39,12 @@ class ListTasks extends AbstractEndpoint
             'parent_task_id',
             'wait_for_completion',
             'group_by',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

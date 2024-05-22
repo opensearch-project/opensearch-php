@@ -41,7 +41,12 @@ class Stats extends AbstractEndpoint
     {
         return [
             'flat_settings',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

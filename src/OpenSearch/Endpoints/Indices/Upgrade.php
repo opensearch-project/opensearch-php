@@ -42,7 +42,12 @@ class Upgrade extends AbstractEndpoint
             'expand_wildcards',
             'ignore_unavailable',
             'wait_for_completion',
-            'only_ancient_segments'
+            'only_ancient_segments',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

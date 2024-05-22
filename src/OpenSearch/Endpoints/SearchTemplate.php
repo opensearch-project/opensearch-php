@@ -28,6 +28,7 @@ class SearchTemplate extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_search/template";
         }
@@ -49,7 +50,12 @@ class SearchTemplate extends AbstractEndpoint
             'profile',
             'typed_keys',
             'rest_total_hits_as_int',
-            'ccs_minimize_roundtrips'
+            'ccs_minimize_roundtrips',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

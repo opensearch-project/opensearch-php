@@ -29,6 +29,7 @@ class PutMapping extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_mapping";
         }
@@ -40,11 +41,16 @@ class PutMapping extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
+            'cluster_manager_timeout',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'write_index_only',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -62,6 +68,7 @@ class PutMapping extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -44,7 +44,12 @@ class Exists extends AbstractEndpoint
             'allow_no_indices',
             'expand_wildcards',
             'flat_settings',
-            'include_defaults'
+            'include_defaults',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

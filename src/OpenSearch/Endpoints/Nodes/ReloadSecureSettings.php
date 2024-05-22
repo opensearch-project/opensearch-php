@@ -40,7 +40,12 @@ class ReloadSecureSettings extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

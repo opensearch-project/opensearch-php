@@ -36,6 +36,7 @@ class Msearch extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_msearch";
         }
@@ -51,7 +52,12 @@ class Msearch extends AbstractEndpoint
             'pre_filter_shard_size',
             'max_concurrent_shard_requests',
             'rest_total_hits_as_int',
-            'ccs_minimize_roundtrips'
+            'ccs_minimize_roundtrips',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

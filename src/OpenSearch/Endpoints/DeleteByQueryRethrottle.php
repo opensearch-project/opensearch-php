@@ -41,7 +41,12 @@ class DeleteByQueryRethrottle extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'requests_per_second'
+            'requests_per_second',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

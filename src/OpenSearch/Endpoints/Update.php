@@ -40,6 +40,7 @@ class Update extends AbstractEndpoint
             );
         }
         $index = $this->index;
+
         return "/$index/_update/$id";
     }
 
@@ -57,7 +58,12 @@ class Update extends AbstractEndpoint
             'timeout',
             'if_seq_no',
             'if_primary_term',
-            'require_alias'
+            'require_alias',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

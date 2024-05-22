@@ -18,7 +18,7 @@
     "ext-json": ">=1.3.7",
     "ezimuel/ringphp": "^1.1.2",
     "psr/log": "^1|^2|^3",
-    "symfony/yaml": "^7.0"
+    "symfony/yaml": "*"
   },
   "require-dev": {
     "ext-zip": "*",
