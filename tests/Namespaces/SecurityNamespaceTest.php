@@ -576,7 +576,7 @@ class SecurityNamespaceTest extends TestCase
     public function testGetCertificates(): void
     {
         $this->transport->method('performRequest')
-            ->with('GET', '/_opendistro/_security/api/ssl/certs', [], null);
+            ->with('GET', '/_plugins/_security/api/ssl/certs', [], null);
         $this->transport->method('resultOrFuture')
             ->willReturn([
                 'resource' => ['test_resource'],
