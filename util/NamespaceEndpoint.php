@@ -35,14 +35,10 @@ class NamespaceEndpoint
     protected $name;
     protected $endpoints = [];
     protected $endpointNames = [];
-    protected $version;
-    protected $buildhash;
 
-    public function __construct(string $name, string $version, string $buildhash)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->version = $version;
-        $this->buildhash = $buildhash;
     }
 
     public function renderClass(): string
@@ -51,7 +47,24 @@ class NamespaceEndpoint
             throw new Exception("No endpoints has been added. I cannot render the class");
         }
         $class = file_get_contents(static::NAMESPACE_CLASS_TEMPLATE);
-        $class = str_replace(':namespace', $this->getNamespaceName() . 'Namespace', $class);
+        $namespaceName = $this->getNamespaceName(). 'Namespace';
+        $class = str_replace(':namespace', $namespaceName, $class);
+
+        # Add license header
+        $currentDir = dirname(__FILE__);
+        $baseDir = dirname($currentDir);
+        $filePath = $baseDir . "/src/OpenSearch/Namespaces/$namespaceName.php";
+
+        if (file_exists($filePath)) {
+            $content = file_get_contents($filePath);
+            if (strpos($content, 'Copyright OpenSearch') !== false) {
+                $pattern = '/\/\*\*.*?\*\//s';
+                if (preg_match($pattern, $content, $matches)) {
+                    $class = str_replace('declare(strict_types=1);', 'declare(strict_types=1);' . PHP_EOL . PHP_EOL . $matches[0], $class);
+
+                }
+            }
+        }
 
         $endpoints = '';
         foreach ($this->endpoints as $endpoint) {
@@ -67,8 +80,6 @@ class NamespaceEndpoint
                 break;
         }
         $class = str_replace(':endpoints', $endpoints, $class);
-        $class = str_replace(':version', $this->version, $class);
-        $class = str_replace(':buildhash', $this->buildhash, $class);
 
         return $class;
     }
@@ -113,7 +124,11 @@ class NamespaceEndpoint
             $param = str_replace(':param', 'body', file_get_contents(self::SET_PARAM_TEMPLATE));
             $setParams .= str_replace(':Param', 'Body', $param);
         }
-        $code = str_replace(':extract', $extract, $code);
+        if (!empty($extract)) {
+            $code = str_replace(':extract', $extract, $code);
+        } else {
+            $code = str_replace("\n" . ':extract', '', $code);
+        }
         $code = str_replace(':setparam', $setParams, $code);
 
         if (empty($endpoint->namespace)) {
