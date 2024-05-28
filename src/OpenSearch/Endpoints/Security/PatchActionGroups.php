@@ -19,19 +19,20 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class PatchActionGroups extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $action_group;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/actiongroups";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/actiongroups' . ($this->action_group ? "/{$this->action_group}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -39,13 +40,13 @@ class PatchActionGroups extends AbstractEndpoint
         return 'PATCH';
     }
 
-    /**
-     * @param string|null $action_group
-     * @return PatchActionGroups
-     */
-    public function setActionGroup(?string $action_group): PatchActionGroups
+    public function setBody($body): PatchActionGroups
     {
-        $this->action_group = $action_group;
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
         return $this;
     }
 }

@@ -35,6 +35,7 @@ class Index extends AbstractEndpoint
         }
         $index = $this->index;
         $id = $this->id ?? null;
+
         if (isset($id)) {
             return "/$index/_doc/$id";
         }
@@ -54,7 +55,12 @@ class Index extends AbstractEndpoint
             'if_seq_no',
             'if_primary_term',
             'pipeline',
-            'require_alias'
+            'require_alias',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -34,6 +34,7 @@ class DeleteByQuery extends AbstractEndpoint
             );
         }
         $index = $this->index;
+
         return "/$index/_delete_by_query";
     }
 
@@ -72,7 +73,12 @@ class DeleteByQuery extends AbstractEndpoint
             'scroll_size',
             'wait_for_completion',
             'requests_per_second',
-            'slices'
+            'slices',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

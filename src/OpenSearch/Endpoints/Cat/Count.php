@@ -42,7 +42,12 @@ class Count extends AbstractEndpoint
             'h',
             'help',
             's',
-            'v'
+            'v',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

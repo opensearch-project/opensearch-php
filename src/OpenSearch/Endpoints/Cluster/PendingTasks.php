@@ -35,7 +35,12 @@ class PendingTasks extends AbstractEndpoint
         return [
             'local',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -43,6 +48,7 @@ class PendingTasks extends AbstractEndpoint
     {
         return 'GET';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

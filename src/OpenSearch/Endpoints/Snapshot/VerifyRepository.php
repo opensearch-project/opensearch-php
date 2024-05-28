@@ -30,20 +30,27 @@ class VerifyRepository extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-
-        if (isset($repository)) {
-            return "/_snapshot/$repository/_verify";
+        if (isset($this->repository) !== true) {
+            throw new RuntimeException(
+                'repository is required for verify_repository'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint snapshot.verify_repository');
+        $repository = $this->repository;
+
+        return "/_snapshot/$repository/_verify";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'timeout',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -61,6 +68,7 @@ class VerifyRepository extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -45,7 +45,12 @@ class Scroll extends AbstractEndpoint
         return [
             'scroll',
             'scroll_id',
-            'rest_total_hits_as_int'
+            'rest_total_hits_as_int',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -52,11 +52,15 @@ class Stats extends AbstractEndpoint
             'fields',
             'groups',
             'level',
-            'types',
             'include_segment_file_sizes',
             'include_unloaded_segments',
             'expand_wildcards',
-            'forbid_closed_indices'
+            'forbid_closed_indices',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -69,9 +73,6 @@ class Stats extends AbstractEndpoint
     {
         if (isset($metric) !== true) {
             return $this;
-        }
-        if (is_array($metric) === true) {
-            $metric = implode(",", $metric);
         }
         $this->metric = $metric;
 

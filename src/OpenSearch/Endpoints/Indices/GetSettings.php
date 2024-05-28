@@ -29,8 +29,8 @@ class GetSettings extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
         $name = $this->name ?? null;
+        $index = $this->index ?? null;
 
         if (isset($index) && isset($name)) {
             return "/$index/_settings/$name";
@@ -48,13 +48,18 @@ class GetSettings extends AbstractEndpoint
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'flat_settings',
             'local',
             'include_defaults',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -75,6 +80,7 @@ class GetSettings extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

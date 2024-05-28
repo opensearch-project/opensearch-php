@@ -34,14 +34,10 @@ class ClientEndpoint extends NamespaceEndpoint
     protected $endpoints = [];
     protected $endpointNames = [];
     protected $namespace = [];
-    protected $version;
-    protected $buildhash;
 
-    public function __construct(array $namespace, string $version, string $buildhash)
+    public function __construct(array $namespace)
     {
         $this->namespace = $namespace;
-        $this->version = $version;
-        $this->buildhash = $buildhash;
     }
 
     public function renderClass(): string
@@ -108,8 +104,6 @@ class ClientEndpoint extends NamespaceEndpoint
             $functions .= $func;
         }
         $class = str_replace(':functions', $functions, $class);
-        $class = str_replace(':version', $this->version, $class);
-        $class = str_replace(':buildhash', $this->buildhash, $class);
 
         return $class;
     }

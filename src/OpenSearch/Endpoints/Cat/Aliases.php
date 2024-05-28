@@ -46,7 +46,12 @@ class Aliases extends AbstractEndpoint
             'help',
             's',
             'v',
-            'expand_wildcards'
+            'expand_wildcards',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

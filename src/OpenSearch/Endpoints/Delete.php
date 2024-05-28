@@ -40,6 +40,7 @@ class Delete extends AbstractEndpoint
             );
         }
         $index = $this->index;
+
         return "/$index/_doc/$id";
     }
 
@@ -53,7 +54,12 @@ class Delete extends AbstractEndpoint
             'if_seq_no',
             'if_primary_term',
             'version',
-            'version_type'
+            'version_type',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

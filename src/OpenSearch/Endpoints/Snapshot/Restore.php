@@ -31,21 +31,33 @@ class Restore extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-        $snapshot = $this->snapshot ?? null;
-
-        if (isset($repository) && isset($snapshot)) {
-            return "/_snapshot/$repository/$snapshot/_restore";
+        if (isset($this->repository) !== true) {
+            throw new RuntimeException(
+                'repository is required for restore'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint snapshot.restore');
+        $repository = $this->repository;
+        if (isset($this->snapshot) !== true) {
+            throw new RuntimeException(
+                'snapshot is required for restore'
+            );
+        }
+        $snapshot = $this->snapshot;
+
+        return "/_snapshot/$repository/$snapshot/_restore";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_completion',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -83,6 +95,7 @@ class Restore extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

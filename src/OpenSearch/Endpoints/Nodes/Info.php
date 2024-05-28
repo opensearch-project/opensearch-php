@@ -25,13 +25,13 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class Info extends AbstractEndpoint
 {
-    protected $node_id;
     protected $metric;
+    protected $node_id;
 
     public function getURI(): string
     {
-        $node_id = $this->node_id ?? null;
         $metric = $this->metric ?? null;
+        $node_id = $this->node_id ?? null;
 
         if (isset($node_id) && isset($metric)) {
             return "/_nodes/$node_id/$metric";
@@ -49,26 +49,18 @@ class Info extends AbstractEndpoint
     {
         return [
             'flat_settings',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    public function setNodeId($node_id): Info
-    {
-        if (isset($node_id) !== true) {
-            return $this;
-        }
-        if (is_array($node_id) === true) {
-            $node_id = implode(",", $node_id);
-        }
-        $this->node_id = $node_id;
-
-        return $this;
     }
 
     public function setMetric($metric): Info
@@ -80,6 +72,19 @@ class Info extends AbstractEndpoint
             $metric = implode(",", $metric);
         }
         $this->metric = $metric;
+
+        return $this;
+    }
+
+    public function setNodeId($node_id): Info
+    {
+        if (isset($node_id) !== true) {
+            return $this;
+        }
+        if (is_array($node_id) === true) {
+            $node_id = implode(",", $node_id);
+        }
+        $this->node_id = $node_id;
 
         return $this;
     }

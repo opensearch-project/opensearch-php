@@ -51,8 +51,13 @@ class Rollover extends AbstractEndpoint
             'timeout',
             'dry_run',
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -90,6 +95,7 @@ class Rollover extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

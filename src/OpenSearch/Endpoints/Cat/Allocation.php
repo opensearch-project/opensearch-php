@@ -44,11 +44,16 @@ class Allocation extends AbstractEndpoint
             'bytes',
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'h',
             'help',
             's',
             'v',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

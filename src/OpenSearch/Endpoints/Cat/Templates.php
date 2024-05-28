@@ -43,11 +43,16 @@ class Templates extends AbstractEndpoint
             'format',
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'h',
             'help',
             's',
             'v',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -65,6 +70,7 @@ class Templates extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

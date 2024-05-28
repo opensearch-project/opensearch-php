@@ -51,7 +51,12 @@ class PutAlias extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -79,6 +84,7 @@ class PutAlias extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

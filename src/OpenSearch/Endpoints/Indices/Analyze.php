@@ -38,7 +38,12 @@ class Analyze extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'index'
+            'index',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

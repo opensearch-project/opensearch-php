@@ -28,6 +28,7 @@ class ValidateQuery extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_validate/query";
         }
@@ -48,7 +49,12 @@ class ValidateQuery extends AbstractEndpoint
             'df',
             'lenient',
             'rewrite',
-            'all_shards'
+            'all_shards',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

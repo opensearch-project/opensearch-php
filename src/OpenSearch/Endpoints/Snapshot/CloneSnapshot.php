@@ -32,20 +32,38 @@ class CloneSnapshot extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-        $snapshot = $this->snapshot ?? null;
-        $target_snapshot = $this->target_snapshot ?? null;
-
-        if (isset($repository) && isset($snapshot) && isset($target_snapshot)) {
-            return "/_snapshot/$repository/$snapshot/_clone/$target_snapshot";
+        if (isset($this->repository) !== true) {
+            throw new RuntimeException(
+                'repository is required for clone'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint snapshot.clone');
+        $repository = $this->repository;
+        if (isset($this->snapshot) !== true) {
+            throw new RuntimeException(
+                'snapshot is required for clone'
+            );
+        }
+        $snapshot = $this->snapshot;
+        if (isset($this->target_snapshot) !== true) {
+            throw new RuntimeException(
+                'target_snapshot is required for clone'
+            );
+        }
+        $target_snapshot = $this->target_snapshot;
+
+        return "/_snapshot/$repository/$snapshot/_clone/$target_snapshot";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout', 'cluster_manager_timeout'
+            'master_timeout',
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -93,6 +111,7 @@ class CloneSnapshot extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

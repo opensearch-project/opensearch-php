@@ -19,33 +19,24 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class GetTenants extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $tenant;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/tenants";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/tenants' . ($this->tenant ? "/{$this->tenant}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    /**
-     * @param string|null $tenant
-     * @return GetTenants
-     */
-    public function setTenant(?string $tenant): GetTenants
-    {
-        $this->tenant = $tenant;
-        return $this;
     }
 }

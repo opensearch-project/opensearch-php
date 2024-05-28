@@ -30,9 +30,6 @@ class ClearScroll extends AbstractEndpoint
     public function getURI(): string
     {
         $scroll_id = $this->scroll_id ?? null;
-        if (isset($scroll_id)) {
-            @trigger_error('A scroll id can be quite large and should be specified as part of the body', E_USER_DEPRECATED);
-        }
 
         if (isset($scroll_id)) {
             return "/_search/scroll/$scroll_id";
@@ -43,7 +40,11 @@ class ClearScroll extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

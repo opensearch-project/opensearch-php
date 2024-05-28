@@ -37,6 +37,7 @@ class GetFieldMapping extends AbstractEndpoint
         }
         $fields = $this->fields;
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_mapping/field/$fields";
         }
@@ -50,7 +51,12 @@ class GetFieldMapping extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'local'
+            'local',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

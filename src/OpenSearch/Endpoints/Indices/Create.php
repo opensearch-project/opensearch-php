@@ -28,12 +28,14 @@ class Create extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-
-        if (isset($index)) {
-            return "/$index";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for create'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.create');
+        $index = $this->index;
+
+        return "/$index";
     }
 
     public function getParamWhitelist(): array
@@ -42,7 +44,12 @@ class Create extends AbstractEndpoint
             'wait_for_active_shards',
             'timeout',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -60,6 +67,7 @@ class Create extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

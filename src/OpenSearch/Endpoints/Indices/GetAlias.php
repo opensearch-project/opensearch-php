@@ -50,7 +50,12 @@ class GetAlias extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'local'
+            'local',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

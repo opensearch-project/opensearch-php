@@ -40,6 +40,7 @@ class ExistsSource extends AbstractEndpoint
             );
         }
         $index = $this->index;
+
         return "/$index/_source/$id";
     }
 
@@ -54,7 +55,12 @@ class ExistsSource extends AbstractEndpoint
             '_source_excludes',
             '_source_includes',
             'version',
-            'version_type'
+            'version_type',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

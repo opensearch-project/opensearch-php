@@ -122,7 +122,7 @@ class Transport
             //onSuccess
             function ($response) {
                 $this->retryAttempts = 0;
-            // Note, this could be a 4xx or 5xx error
+                // Note, this could be a 4xx or 5xx error
             },
             //onFailure
             function ($response) {

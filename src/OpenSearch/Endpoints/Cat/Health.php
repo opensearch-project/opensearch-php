@@ -39,7 +39,12 @@ class Health extends AbstractEndpoint
             's',
             'time',
             'ts',
-            'v'
+            'v',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

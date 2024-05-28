@@ -39,13 +39,18 @@ class PutSettings extends AbstractEndpoint
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'timeout',
             'preserve_existing',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'flat_settings',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -63,6 +68,7 @@ class PutSettings extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

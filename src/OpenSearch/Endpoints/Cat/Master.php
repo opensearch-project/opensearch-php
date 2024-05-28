@@ -23,9 +23,6 @@ namespace OpenSearch\Endpoints\Cat;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-/**
- * @deprecated use \OpenSearch\Endpoints\Cat\ClusterManager instead
- */
 class Master extends AbstractEndpoint
 {
     public function getURI(): string
@@ -39,11 +36,16 @@ class Master extends AbstractEndpoint
             'format',
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'h',
             'help',
             's',
             'v',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -51,6 +53,7 @@ class Master extends AbstractEndpoint
     {
         return 'GET';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

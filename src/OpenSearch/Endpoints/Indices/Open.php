@@ -28,12 +28,14 @@ class Open extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-
-        if (isset($index)) {
-            return "/$index/_open";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for open'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.open');
+        $index = $this->index;
+
+        return "/$index/_open";
     }
 
     public function getParamWhitelist(): array
@@ -44,8 +46,15 @@ class Open extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'cluster_manager_timeout',
             'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'wait_for_completion',
+            'task_execution_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -53,6 +62,7 @@ class Open extends AbstractEndpoint
     {
         return 'POST';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -38,7 +38,12 @@ class Simulate extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'verbose'
+            'verbose',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

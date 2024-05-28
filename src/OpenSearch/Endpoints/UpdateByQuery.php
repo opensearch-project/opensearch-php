@@ -34,6 +34,7 @@ class UpdateByQuery extends AbstractEndpoint
             );
         }
         $index = $this->index;
+
         return "/$index/_update_by_query";
     }
 
@@ -66,7 +67,6 @@ class UpdateByQuery extends AbstractEndpoint
             'terminate_after',
             'stats',
             'version',
-            'version_type',
             'request_cache',
             'refresh',
             'timeout',
@@ -74,7 +74,12 @@ class UpdateByQuery extends AbstractEndpoint
             'scroll_size',
             'wait_for_completion',
             'requests_per_second',
-            'slices'
+            'slices',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

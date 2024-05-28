@@ -20,23 +20,29 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class DeleteRole extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
     protected $role;
-
-    public function getParamWhitelist(): array
-    {
-        return [];
-    }
 
     public function getURI(): string
     {
-        if (!isset($this->role)) {
-            throw new RuntimeException('Missing parameter for the endpoint security.delete_role');
+        if (isset($this->role) !== true) {
+            throw new RuntimeException(
+                'role is required for delete_role'
+            );
         }
+        $role = $this->role;
 
-        return "/_plugins/_security/api/roles/$this->role";
+        return "/_plugins/_security/api/roles/$role";
+    }
+
+    public function getParamWhitelist(): array
+    {
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -44,13 +50,13 @@ class DeleteRole extends AbstractEndpoint
         return 'DELETE';
     }
 
-    /**
-     * @param string|null $role
-     * @return DeleteRole
-     */
-    public function setRole(?string $role): DeleteRole
+    public function setRole($role): DeleteRole
     {
+        if (isset($role) !== true) {
+            return $this;
+        }
         $this->role = $role;
+
         return $this;
     }
 }

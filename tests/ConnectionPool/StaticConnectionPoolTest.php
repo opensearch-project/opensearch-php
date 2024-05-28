@@ -190,7 +190,7 @@ class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
         $goodConnection->expects('isAlive')->andReturns(false);
         $goodConnection->expects('markDead');
         $goodConnection->expects('getPingFailures')->andReturns(0);
-        $goodConnection->expects('getLastPing')->andReturns(time()-10000);
+        $goodConnection->expects('getLastPing')->andReturns(time() - 10000);
 
         $connections[] = $goodConnection;
 

@@ -20,23 +20,29 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class DeleteUser extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
     protected $username;
-
-    public function getParamWhitelist(): array
-    {
-        return [];
-    }
 
     public function getURI(): string
     {
-        if (!isset($this->username)) {
-            throw new RuntimeException('Missing parameter for the endpoint security.delete_user');
+        if (isset($this->username) !== true) {
+            throw new RuntimeException(
+                'username is required for delete_user'
+            );
         }
+        $username = $this->username;
 
-        return "/_plugins/_security/api/internalusers/$this->username";
+        return "/_plugins/_security/api/internalusers/$username";
+    }
+
+    public function getParamWhitelist(): array
+    {
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -44,13 +50,13 @@ class DeleteUser extends AbstractEndpoint
         return 'DELETE';
     }
 
-    /**
-     * @param string|null $username
-     * @return DeleteUser
-     */
-    public function setUsername(?string $username): DeleteUser
+    public function setUsername($username): DeleteUser
     {
+        if (isset($username) !== true) {
+            return $this;
+        }
         $this->username = $username;
+
         return $this;
     }
 }

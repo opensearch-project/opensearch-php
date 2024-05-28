@@ -28,12 +28,14 @@ class DeleteScript extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
-
-        if (isset($id)) {
-            return "/_scripts/$id";
+        if (isset($this->id) !== true) {
+            throw new RuntimeException(
+                'id is required for delete_script'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint delete_script');
+        $id = $this->id;
+
+        return "/_scripts/$id";
     }
 
     public function getParamWhitelist(): array
@@ -41,7 +43,12 @@ class DeleteScript extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -49,6 +56,7 @@ class DeleteScript extends AbstractEndpoint
     {
         return 'DELETE';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

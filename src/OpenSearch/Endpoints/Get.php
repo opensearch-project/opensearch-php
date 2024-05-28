@@ -40,6 +40,7 @@ class Get extends AbstractEndpoint
             );
         }
         $index = $this->index;
+
         return "/$index/_doc/$id";
     }
 
@@ -55,7 +56,12 @@ class Get extends AbstractEndpoint
             '_source_excludes',
             '_source_includes',
             'version',
-            'version_type'
+            'version_type',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

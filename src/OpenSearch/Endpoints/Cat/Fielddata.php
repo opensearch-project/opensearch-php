@@ -46,7 +46,12 @@ class Fielddata extends AbstractEndpoint
             'help',
             's',
             'v',
-            'fields'
+            'fields',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -35,7 +35,12 @@ class PostVotingConfigExclusions extends AbstractEndpoint
         return [
             'node_ids',
             'node_names',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

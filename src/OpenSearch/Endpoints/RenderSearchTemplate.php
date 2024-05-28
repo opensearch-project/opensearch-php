@@ -37,7 +37,13 @@ class RenderSearchTemplate extends AbstractEndpoint
 
     public function getParamWhitelist(): array
     {
-        return [];
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string

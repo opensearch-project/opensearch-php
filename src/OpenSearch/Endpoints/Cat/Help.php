@@ -34,7 +34,12 @@ class Help extends AbstractEndpoint
     {
         return [
             'help',
-            's'
+            's',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

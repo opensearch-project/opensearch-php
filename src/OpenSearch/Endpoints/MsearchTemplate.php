@@ -36,6 +36,7 @@ class MsearchTemplate extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_msearch/template";
         }
@@ -49,7 +50,12 @@ class MsearchTemplate extends AbstractEndpoint
             'typed_keys',
             'max_concurrent_searches',
             'rest_total_hits_as_int',
-            'ccs_minimize_roundtrips'
+            'ccs_minimize_roundtrips',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

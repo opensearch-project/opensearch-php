@@ -244,7 +244,7 @@ class ActionTest
         if (is_string($actions[$key]) && substr($actions[$key], 0, 1) !== '$') {
             $expected = sprintf("'%s'", addslashes($actions[$key]));
         } elseif (is_string($actions[$key]) && substr($actions[$key], 0, 2) === '${') {
-            $expected = sprintf("\$%s", substr($actions[$key], 2, strlen($actions[$key])-3));
+            $expected = sprintf("\$%s", substr($actions[$key], 2, strlen($actions[$key]) - 3));
         } elseif (is_bool($actions[$key])) {
             $expected = $actions[$key] ? 'true' : 'false';
         } elseif (is_array($actions[$key])) {
@@ -422,8 +422,8 @@ class ActionTest
         $result = str_replace('.', '()->', $dot);
         $tot = strlen($result);
         for ($i = 0; $i < $tot; $i++) {
-            if ($result[$i] === '_' && ($i+1) < $tot) {
-                $result[$i+1] = strtoupper($result[$i+1]);
+            if ($result[$i] === '_' && ($i + 1) < $tot) {
+                $result[$i + 1] = strtoupper($result[$i + 1]);
             }
         }
         return str_replace('_', '', $result);

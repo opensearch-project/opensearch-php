@@ -28,6 +28,7 @@ class GetMapping extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_mapping";
         }
@@ -41,8 +42,13 @@ class GetMapping extends AbstractEndpoint
             'allow_no_indices',
             'expand_wildcards',
             'master_timeout',
+            'cluster_manager_timeout',
             'local',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -50,6 +56,7 @@ class GetMapping extends AbstractEndpoint
     {
         return 'GET';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

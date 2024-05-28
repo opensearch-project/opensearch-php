@@ -97,7 +97,7 @@ $tot = count($digests);
 
 printf("\nLanguage statistics:\n");
 foreach ($langs as $lang => $num) {
-    printf("%-8s: %4d (%.2f%% completed)\n", $lang, $num, (100/$tot)*$num);
+    printf("%-8s: %4d (%.2f%% completed)\n", $lang, $num, (100 / $tot) * $num);
 }
 printf("\n");
 

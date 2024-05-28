@@ -30,18 +30,25 @@ class DeleteByQueryRethrottle extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $task_id = $this->task_id ?? null;
-
-        if (isset($task_id)) {
-            return "/_delete_by_query/$task_id/_rethrottle";
+        if (isset($this->task_id) !== true) {
+            throw new RuntimeException(
+                'task_id is required for delete_by_query_rethrottle'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint delete_by_query_rethrottle');
+        $task_id = $this->task_id;
+
+        return "/_delete_by_query/$task_id/_rethrottle";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'requests_per_second'
+            'requests_per_second',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -43,7 +43,12 @@ class Cancel extends AbstractEndpoint
             'nodes',
             'actions',
             'parent_task_id',
-            'wait_for_completion'
+            'wait_for_completion',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

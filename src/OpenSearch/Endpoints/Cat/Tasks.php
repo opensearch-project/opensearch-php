@@ -34,15 +34,20 @@ class Tasks extends AbstractEndpoint
     {
         return [
             'format',
-            'node_id',
+            'nodes',
             'actions',
             'detailed',
-            'parent_task',
+            'parent_task_id',
             'h',
             'help',
             's',
             'time',
-            'v'
+            'v',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

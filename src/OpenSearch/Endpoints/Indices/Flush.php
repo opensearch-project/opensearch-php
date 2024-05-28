@@ -42,12 +42,17 @@ class Flush extends AbstractEndpoint
             'wait_if_ongoing',
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards'
+            'expand_wildcards',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
     public function getMethod(): string
     {
-        return 'POST';
+        return 'GET';
     }
 }

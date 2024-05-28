@@ -63,7 +63,12 @@ class Stats extends AbstractEndpoint
             'level',
             'types',
             'timeout',
-            'include_segment_file_sizes'
+            'include_segment_file_sizes',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

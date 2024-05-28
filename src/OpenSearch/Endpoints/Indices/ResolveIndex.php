@@ -30,18 +30,25 @@ class ResolveIndex extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
-
-        if (isset($name)) {
-            return "/_resolve/index/$name";
+        if (isset($this->name) !== true) {
+            throw new RuntimeException(
+                'name is required for resolve_index'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.resolve_index');
+        $name = $this->name;
+
+        return "/_resolve/index/$name";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'expand_wildcards'
+            'expand_wildcards',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

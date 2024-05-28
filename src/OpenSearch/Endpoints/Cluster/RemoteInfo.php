@@ -33,7 +33,11 @@ class RemoteInfo extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

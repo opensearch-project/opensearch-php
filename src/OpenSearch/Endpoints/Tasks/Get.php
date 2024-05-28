@@ -30,19 +30,26 @@ class Get extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $task_id = $this->task_id ?? null;
-
-        if (isset($task_id)) {
-            return "/_tasks/$task_id";
+        if (isset($this->task_id) !== true) {
+            throw new RuntimeException(
+                'task_id is required for get'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint tasks.get');
+        $task_id = $this->task_id;
+
+        return "/_tasks/$task_id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'wait_for_completion',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

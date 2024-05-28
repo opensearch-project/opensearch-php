@@ -19,33 +19,24 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class GetUsers extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $username;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/internalusers";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/internalusers' . ($this->username ? "/{$this->username}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    /**
-     * @param string|null $username
-     * @return GetUsers
-     */
-    public function setUsername(?string $username): GetUsers
-    {
-        $this->username = $username;
-        return $this;
     }
 }
