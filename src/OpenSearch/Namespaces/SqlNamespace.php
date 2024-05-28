@@ -14,6 +14,7 @@
 namespace OpenSearch\Namespaces;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
+
 use function array_filter;
 
 class SqlNamespace extends AbstractNamespace
