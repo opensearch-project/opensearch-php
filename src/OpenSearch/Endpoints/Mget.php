@@ -28,6 +28,7 @@ class Mget extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_mget";
         }
@@ -44,7 +45,12 @@ class Mget extends AbstractEndpoint
             'routing',
             '_source',
             '_source_excludes',
-            '_source_includes'
+            '_source_includes',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

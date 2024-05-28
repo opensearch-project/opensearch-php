@@ -20,27 +20,29 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class CreateRoleMapping extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
     protected $role;
+
+    public function getURI(): string
+    {
+        if (isset($this->role) !== true) {
+            throw new RuntimeException(
+                'role is required for create_role_mapping'
+            );
+        }
+        $role = $this->role;
+
+        return "/_plugins/_security/api/rolesmapping/$role";
+    }
 
     public function getParamWhitelist(): array
     {
         return [
-            'backend_roles',
-            'hosts',
-            'users',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
-    }
-
-    public function getURI(): string
-    {
-        if (!isset($this->role)) {
-            throw new RuntimeException('Missing parameter for the endpoint security.create_role_mapping');
-        }
-
-        return "/_plugins/_security/api/rolesmapping/$this->role";
     }
 
     public function getMethod(): string
@@ -48,13 +50,23 @@ class CreateRoleMapping extends AbstractEndpoint
         return 'PUT';
     }
 
-    /**
-     * @param string|null $role
-     * @return CreateRoleMapping
-     */
-    public function setRole(?string $role): CreateRoleMapping
+    public function setBody($body): CreateRoleMapping
     {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
+    }
+
+    public function setRole($role): CreateRoleMapping
+    {
+        if (isset($role) !== true) {
+            return $this;
+        }
         $this->role = $role;
+
         return $this;
     }
 }

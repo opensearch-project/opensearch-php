@@ -15,24 +15,24 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints\Security;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 class PatchUsers extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $username;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/internalusers";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/internalusers' . ($this->username ? "/{$this->username}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -40,13 +40,13 @@ class PatchUsers extends AbstractEndpoint
         return 'PATCH';
     }
 
-    /**
-     * @param string|null $username
-     * @return PatchUsers
-     */
-    public function setUsername(?string $username): PatchUsers
+    public function setBody($body): PatchUsers
     {
-        $this->username = $username;
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
         return $this;
     }
 }

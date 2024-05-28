@@ -46,8 +46,13 @@ class Status extends AbstractEndpoint
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'ignore_unavailable',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -78,6 +83,7 @@ class Status extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

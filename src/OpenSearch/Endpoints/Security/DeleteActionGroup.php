@@ -20,23 +20,29 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class DeleteActionGroup extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
     protected $action_group;
-
-    public function getParamWhitelist(): array
-    {
-        return [];
-    }
 
     public function getURI(): string
     {
-        if (!isset($this->action_group)) {
-            throw new RuntimeException('Missing parameter for the endpoint security.delete_action_group');
+        if (isset($this->action_group) !== true) {
+            throw new RuntimeException(
+                'action_group is required for delete_action_group'
+            );
         }
+        $action_group = $this->action_group;
 
-        return "/_plugins/_security/api/actiongroups/$this->action_group";
+        return "/_plugins/_security/api/actiongroups/$action_group";
+    }
+
+    public function getParamWhitelist(): array
+    {
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -44,13 +50,13 @@ class DeleteActionGroup extends AbstractEndpoint
         return 'DELETE';
     }
 
-    /**
-     * @param string|null $action_group
-     * @return DeleteActionGroup
-     */
-    public function setActionGroup(?string $action_group): DeleteActionGroup
+    public function setActionGroup($action_group): DeleteActionGroup
     {
+        if (isset($action_group) !== true) {
+            return $this;
+        }
         $this->action_group = $action_group;
+
         return $this;
     }
 }

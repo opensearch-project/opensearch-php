@@ -31,21 +31,33 @@ class Create extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-        $snapshot = $this->snapshot ?? null;
-
-        if (isset($repository) && isset($snapshot)) {
-            return "/_snapshot/$repository/$snapshot";
+        if (isset($this->repository) !== true) {
+            throw new RuntimeException(
+                'repository is required for create'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint snapshot.create');
+        $repository = $this->repository;
+        if (isset($this->snapshot) !== true) {
+            throw new RuntimeException(
+                'snapshot is required for create'
+            );
+        }
+        $snapshot = $this->snapshot;
+
+        return "/_snapshot/$repository/$snapshot";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_completion',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -83,6 +95,7 @@ class Create extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

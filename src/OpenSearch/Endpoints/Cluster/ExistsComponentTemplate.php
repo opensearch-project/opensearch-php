@@ -30,20 +30,27 @@ class ExistsComponentTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
-
-        if (isset($name)) {
-            return "/_component_template/$name";
+        if (isset($this->name) !== true) {
+            throw new RuntimeException(
+                'name is required for exists_component_template'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint cluster.exists_component_template');
+        $name = $this->name;
+
+        return "/_component_template/$name";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'local',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -61,6 +68,7 @@ class ExistsComponentTemplate extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

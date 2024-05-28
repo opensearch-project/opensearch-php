@@ -35,16 +35,27 @@ class ClusterManager extends AbstractEndpoint
         return [
             'format',
             'local',
+            'master_timeout',
             'cluster_manager_timeout',
             'h',
             'help',
             's',
-            'v'
+            'v',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
+    }
+
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

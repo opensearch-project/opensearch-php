@@ -39,7 +39,13 @@ class DataStreamsStats extends AbstractEndpoint
 
     public function getParamWhitelist(): array
     {
-        return [];
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -51,9 +57,6 @@ class DataStreamsStats extends AbstractEndpoint
     {
         if (isset($name) !== true) {
             return $this;
-        }
-        if (is_array($name) === true) {
-            $name = implode(",", $name);
         }
         $this->name = $name;
 

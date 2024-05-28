@@ -30,13 +30,20 @@ class CloneIndices extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-        $target = $this->target ?? null;
-
-        if (isset($index) && isset($target)) {
-            return "/$index/_clone/$target";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for clone'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.clone');
+        $index = $this->index;
+        if (isset($this->target) !== true) {
+            throw new RuntimeException(
+                'target is required for clone'
+            );
+        }
+        $target = $this->target;
+
+        return "/$index/_clone/$target";
     }
 
     public function getParamWhitelist(): array
@@ -44,8 +51,15 @@ class CloneIndices extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'wait_for_completion',
+            'task_execution_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -73,6 +87,7 @@ class CloneIndices extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

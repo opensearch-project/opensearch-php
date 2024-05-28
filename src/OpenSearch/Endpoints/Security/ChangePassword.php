@@ -19,21 +19,34 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class ChangePassword extends AbstractEndpoint
 {
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/account";
+    }
+
     public function getParamWhitelist(): array
     {
         return [
-            'current_password',
-            'password',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/account';
     }
 
     public function getMethod(): string
     {
         return 'PUT';
+    }
+
+    public function setBody($body): ChangePassword
+    {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
     }
 }

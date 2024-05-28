@@ -30,13 +30,20 @@ class Shrink extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-        $target = $this->target ?? null;
-
-        if (isset($index) && isset($target)) {
-            return "/$index/_shrink/$target";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for shrink'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.shrink');
+        $index = $this->index;
+        if (isset($this->target) !== true) {
+            throw new RuntimeException(
+                'target is required for shrink'
+            );
+        }
+        $target = $this->target;
+
+        return "/$index/_shrink/$target";
     }
 
     public function getParamWhitelist(): array
@@ -45,8 +52,15 @@ class Shrink extends AbstractEndpoint
             'copy_settings',
             'timeout',
             'master_timeout',
+            'cluster_manager_timeout',
             'wait_for_active_shards',
-            'cluster_manager_timeout'
+            'wait_for_completion',
+            'task_execution_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -74,6 +88,7 @@ class Shrink extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

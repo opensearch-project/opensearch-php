@@ -28,12 +28,14 @@ class Exists extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-
-        if (isset($index)) {
-            return "/$index";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for exists'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.exists');
+        $index = $this->index;
+
+        return "/$index";
     }
 
     public function getParamWhitelist(): array
@@ -44,7 +46,12 @@ class Exists extends AbstractEndpoint
             'allow_no_indices',
             'expand_wildcards',
             'flat_settings',
-            'include_defaults'
+            'include_defaults',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

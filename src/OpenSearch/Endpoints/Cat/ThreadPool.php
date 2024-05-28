@@ -44,11 +44,16 @@ class ThreadPool extends AbstractEndpoint
             'size',
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'h',
             'help',
             's',
             'v',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -69,6 +74,7 @@ class ThreadPool extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

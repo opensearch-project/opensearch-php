@@ -30,12 +30,14 @@ class DeleteComponentTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
-
-        if (isset($name)) {
-            return "/_component_template/$name";
+        if (isset($this->name) !== true) {
+            throw new RuntimeException(
+                'name is required for delete_component_template'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint cluster.delete_component_template');
+        $name = $this->name;
+
+        return "/_component_template/$name";
     }
 
     public function getParamWhitelist(): array
@@ -43,7 +45,12 @@ class DeleteComponentTemplate extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -61,6 +68,7 @@ class DeleteComponentTemplate extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

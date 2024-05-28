@@ -42,8 +42,13 @@ class GetTemplate extends AbstractEndpoint
         return [
             'flat_settings',
             'master_timeout',
+            'cluster_manager_timeout',
             'local',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -64,6 +69,7 @@ class GetTemplate extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

@@ -28,20 +28,27 @@ class PutPipeline extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
-
-        if (isset($id)) {
-            return "/_ingest/pipeline/$id";
+        if (isset($this->id) !== true) {
+            throw new RuntimeException(
+                'id is required for put_pipeline'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint ingest.put_pipeline');
+        $id = $this->id;
+
+        return "/_ingest/pipeline/$id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'timeout',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -59,6 +66,7 @@ class PutPipeline extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

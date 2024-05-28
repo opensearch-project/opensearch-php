@@ -28,6 +28,7 @@ class MTermVectors extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+
         if (isset($index)) {
             return "/$index/_mtermvectors";
         }
@@ -48,7 +49,12 @@ class MTermVectors extends AbstractEndpoint
             'routing',
             'realtime',
             'version',
-            'version_type'
+            'version_type',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

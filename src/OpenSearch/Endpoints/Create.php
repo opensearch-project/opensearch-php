@@ -28,6 +28,12 @@ class Create extends AbstractEndpoint
 {
     public function getURI(): string
     {
+        if (isset($this->id) !== true) {
+            throw new RuntimeException(
+                'id is required for create'
+            );
+        }
+        $id = $this->id;
         if (isset($this->index) !== true) {
             throw new RuntimeException(
                 'index is required for create'
@@ -35,11 +41,7 @@ class Create extends AbstractEndpoint
         }
         $index = $this->index;
 
-        if (isset($this->id) !== true) {
-            return "/$index/_doc";
-        }
-
-        return "/$index/_create/$this->id";
+        return "/$index/_create/$id";
     }
 
     public function getParamWhitelist(): array
@@ -51,13 +53,18 @@ class Create extends AbstractEndpoint
             'timeout',
             'version',
             'version_type',
-            'pipeline'
+            'pipeline',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
     public function getMethod(): string
     {
-        return isset($this->id) ? 'PUT' : 'POST';
+        return 'PUT';
     }
 
     public function setBody($body): Create

@@ -42,6 +42,7 @@ class Health extends AbstractEndpoint
             'level',
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'timeout',
             'wait_for_active_shards',
             'wait_for_nodes',
@@ -49,7 +50,12 @@ class Health extends AbstractEndpoint
             'wait_for_no_relocating_shards',
             'wait_for_no_initializing_shards',
             'wait_for_status',
-            'cluster_manager_timeout'
+            'awareness_attribute',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -57,6 +63,7 @@ class Health extends AbstractEndpoint
     {
         return 'GET';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

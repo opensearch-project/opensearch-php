@@ -19,33 +19,25 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class GetDistinguishedNames extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $cluster_name;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/nodesdn";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/nodesdn' . ($this->cluster_name ? "/{$this->cluster_name}" : '');
+        return [
+            'show_all',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    /**
-     * @param string|null $cluster_name
-     * @return GetDistinguishedNames
-     */
-    public function setClusterName(?string $cluster_name): GetDistinguishedNames
-    {
-        $this->cluster_name = $cluster_name;
-        return $this;
     }
 }

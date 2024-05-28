@@ -19,19 +19,20 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class PatchRoleMappings extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $role;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/rolesmapping";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/rolesmapping' . ($this->role ? "/{$this->role}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -39,13 +40,13 @@ class PatchRoleMappings extends AbstractEndpoint
         return 'PATCH';
     }
 
-    /**
-     * @param string|null $role
-     * @return PatchRoleMappings
-     */
-    public function setRole(?string $role): PatchRoleMappings
+    public function setBody($body): PatchRoleMappings
     {
-        $this->role = $role;
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
         return $this;
     }
 }

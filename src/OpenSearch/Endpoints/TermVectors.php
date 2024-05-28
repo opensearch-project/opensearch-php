@@ -35,6 +35,7 @@ class TermVectors extends AbstractEndpoint
         }
         $index = $this->index;
         $id = $this->id ?? null;
+
         if (isset($id)) {
             return "/$index/_termvectors/$id";
         }
@@ -54,7 +55,12 @@ class TermVectors extends AbstractEndpoint
             'routing',
             'realtime',
             'version',
-            'version_type'
+            'version_type',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

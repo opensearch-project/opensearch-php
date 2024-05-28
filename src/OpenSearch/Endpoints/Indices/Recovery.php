@@ -39,7 +39,12 @@ class Recovery extends AbstractEndpoint
     {
         return [
             'detailed',
-            'active_only'
+            'active_only',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

@@ -20,28 +20,29 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class CreateUser extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
     protected $username;
+
+    public function getURI(): string
+    {
+        if (isset($this->username) !== true) {
+            throw new RuntimeException(
+                'username is required for create_user'
+            );
+        }
+        $username = $this->username;
+
+        return "/_plugins/_security/api/internalusers/$username";
+    }
 
     public function getParamWhitelist(): array
     {
         return [
-            'password',
-            'opendistro_security_roles',
-            'backend_roles',
-            'attributes',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
-    }
-
-    public function getURI(): string
-    {
-        if (!isset($this->username)) {
-            throw new RuntimeException('Missing parameter for the endpoint security.create_user');
-        }
-
-        return "/_plugins/_security/api/internalusers/$this->username";
     }
 
     public function getMethod(): string
@@ -49,13 +50,23 @@ class CreateUser extends AbstractEndpoint
         return 'PUT';
     }
 
-    /**
-     * @param string|null $username
-     * @return CreateUser
-     */
-    public function setUsername(?string $username): CreateUser
+    public function setBody($body): CreateUser
     {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
+    }
+
+    public function setUsername($username): CreateUser
+    {
+        if (isset($username) !== true) {
+            return $this;
+        }
         $this->username = $username;
+
         return $this;
     }
 }

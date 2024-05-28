@@ -30,13 +30,20 @@ class AddBlock extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-        $block = $this->block ?? null;
-
-        if (isset($index) && isset($block)) {
-            return "/$index/_block/$block";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for add_block'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.add_block');
+        $index = $this->index;
+        if (isset($this->block) !== true) {
+            throw new RuntimeException(
+                'block is required for add_block'
+            );
+        }
+        $block = $this->block;
+
+        return "/$index/_block/$block";
     }
 
     public function getParamWhitelist(): array
@@ -44,10 +51,15 @@ class AddBlock extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
+            'cluster_manager_timeout',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -65,6 +77,7 @@ class AddBlock extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

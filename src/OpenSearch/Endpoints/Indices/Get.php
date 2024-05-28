@@ -28,12 +28,14 @@ class Get extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
-
-        if (isset($index)) {
-            return "/$index";
+        if (isset($this->index) !== true) {
+            throw new RuntimeException(
+                'index is required for get'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.get');
+        $index = $this->index;
+
+        return "/$index";
     }
 
     public function getParamWhitelist(): array
@@ -46,7 +48,12 @@ class Get extends AbstractEndpoint
             'flat_settings',
             'include_defaults',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -54,6 +61,7 @@ class Get extends AbstractEndpoint
     {
         return 'GET';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

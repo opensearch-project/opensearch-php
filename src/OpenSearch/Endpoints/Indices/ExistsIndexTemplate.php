@@ -30,12 +30,14 @@ class ExistsIndexTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
-
-        if (isset($name)) {
-            return "/_index_template/$name";
+        if (isset($this->name) !== true) {
+            throw new RuntimeException(
+                'name is required for exists_index_template'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.exists_index_template');
+        $name = $this->name;
+
+        return "/_index_template/$name";
     }
 
     public function getParamWhitelist(): array
@@ -43,8 +45,13 @@ class ExistsIndexTemplate extends AbstractEndpoint
         return [
             'flat_settings',
             'master_timeout',
+            'cluster_manager_timeout',
             'local',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -62,6 +69,7 @@ class ExistsIndexTemplate extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

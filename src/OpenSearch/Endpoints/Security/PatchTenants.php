@@ -19,19 +19,20 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class PatchTenants extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $tenant;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/tenants";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/tenants' . ($this->tenant ? "/{$this->tenant}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -39,13 +40,13 @@ class PatchTenants extends AbstractEndpoint
         return 'PATCH';
     }
 
-    /**
-     * @param string|null $tenant
-     * @return PatchTenants
-     */
-    public function setTenant(?string $tenant): PatchTenants
+    public function setBody($body): PatchTenants
     {
-        $this->tenant = $tenant;
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
         return $this;
     }
 }

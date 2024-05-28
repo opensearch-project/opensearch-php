@@ -30,20 +30,27 @@ class DeleteRepository extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-
-        if (isset($repository)) {
-            return "/_snapshot/$repository";
+        if (isset($this->repository) !== true) {
+            throw new RuntimeException(
+                'repository is required for delete_repository'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint snapshot.delete_repository');
+        $repository = $this->repository;
+
+        return "/_snapshot/$repository";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'cluster_manager_timeout',
             'timeout',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -64,6 +71,7 @@ class DeleteRepository extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

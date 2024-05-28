@@ -20,23 +20,29 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class DeleteTenant extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
     protected $tenant;
-
-    public function getParamWhitelist(): array
-    {
-        return [];
-    }
 
     public function getURI(): string
     {
-        if (!isset($this->tenant)) {
-            throw new RuntimeException('Missing parameter for the endpoint security.delete_tenant');
+        if (isset($this->tenant) !== true) {
+            throw new RuntimeException(
+                'tenant is required for delete_tenant'
+            );
         }
+        $tenant = $this->tenant;
 
-        return "/_plugins/_security/api/tenants/$this->tenant";
+        return "/_plugins/_security/api/tenants/$tenant";
+    }
+
+    public function getParamWhitelist(): array
+    {
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
@@ -44,13 +50,13 @@ class DeleteTenant extends AbstractEndpoint
         return 'DELETE';
     }
 
-    /**
-     * @param string|null $tenant
-     * @return DeleteTenant
-     */
-    public function setTenant(?string $tenant): DeleteTenant
+    public function setTenant($tenant): DeleteTenant
     {
+        if (isset($tenant) !== true) {
+            return $this;
+        }
         $this->tenant = $tenant;
+
         return $this;
     }
 }

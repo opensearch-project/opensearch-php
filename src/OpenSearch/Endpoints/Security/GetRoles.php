@@ -19,33 +19,24 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 
 class GetRoles extends AbstractEndpoint
 {
-    /**
-     * @var string|null
-     */
-    protected $role;
+    public function getURI(): string
+    {
+        return "/_plugins/_security/api/roles";
+    }
 
     public function getParamWhitelist(): array
     {
-        return [];
-    }
-
-    public function getURI(): string
-    {
-        return '/_plugins/_security/api/roles' . ($this->role ? "/{$this->role}" : '');
+        return [
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
+        ];
     }
 
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    /**
-     * @param string|null $role
-     * @return GetRoles
-     */
-    public function setRole(?string $role): GetRoles
-    {
-        $this->role = $role;
-        return $this;
     }
 }

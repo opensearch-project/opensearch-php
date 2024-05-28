@@ -32,9 +32,9 @@ class HotThreads extends AbstractEndpoint
         $node_id = $this->node_id ?? null;
 
         if (isset($node_id)) {
-            return "/_nodes/$node_id/hot_threads";
+            return "/_cluster/nodes/$node_id/hot_threads";
         }
-        return "/_nodes/hot_threads";
+        return "/_nodes/hotthreads";
     }
 
     public function getParamWhitelist(): array
@@ -45,7 +45,12 @@ class HotThreads extends AbstractEndpoint
             'threads',
             'ignore_idle_threads',
             'type',
-            'timeout'
+            'timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

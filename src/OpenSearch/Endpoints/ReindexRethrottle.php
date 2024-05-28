@@ -30,18 +30,25 @@ class ReindexRethrottle extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $task_id = $this->task_id ?? null;
-
-        if (isset($task_id)) {
-            return "/_reindex/$task_id/_rethrottle";
+        if (isset($this->task_id) !== true) {
+            throw new RuntimeException(
+                'task_id is required for reindex_rethrottle'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint reindex_rethrottle');
+        $task_id = $this->task_id;
+
+        return "/_reindex/$task_id/_rethrottle";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'requests_per_second'
+            'requests_per_second',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 

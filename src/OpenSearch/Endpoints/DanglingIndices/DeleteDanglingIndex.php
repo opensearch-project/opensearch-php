@@ -3,20 +3,14 @@
 declare(strict_types=1);
 
 /**
- * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
  *
- * Elasticsearch PHP client
+ * The OpenSearch Contributors require contributions made to
+ * this file be licensed under the Apache-2.0 license or a
+ * compatible open source license.
  *
- * @link      https://github.com/elastic/elasticsearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
- *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
+ * Modifications Copyright OpenSearch Contributors. See
+ * GitHub history for details.
  */
 
 namespace OpenSearch\Endpoints\DanglingIndices;
@@ -30,12 +24,14 @@ class DeleteDanglingIndex extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index_uuid = $this->index_uuid ?? null;
-
-        if (isset($index_uuid)) {
-            return "/_dangling/$index_uuid";
+        if (isset($this->index_uuid) !== true) {
+            throw new RuntimeException(
+                'index_uuid is required for delete_dangling_index'
+            );
         }
-        throw new RuntimeException('Missing parameter for the endpoint dangling_indices.delete_dangling_index');
+        $index_uuid = $this->index_uuid;
+
+        return "/_dangling/$index_uuid";
     }
 
     public function getParamWhitelist(): array
@@ -44,7 +40,12 @@ class DeleteDanglingIndex extends AbstractEndpoint
             'accept_data_loss',
             'timeout',
             'master_timeout',
-            'cluster_manager_timeout'
+            'cluster_manager_timeout',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -62,6 +63,7 @@ class DeleteDanglingIndex extends AbstractEndpoint
 
         return $this;
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

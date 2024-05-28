@@ -42,6 +42,7 @@ class Indices extends AbstractEndpoint
             'bytes',
             'local',
             'master_timeout',
+            'cluster_manager_timeout',
             'h',
             'health',
             'help',
@@ -51,7 +52,11 @@ class Indices extends AbstractEndpoint
             'v',
             'include_unloaded_segments',
             'expand_wildcards',
-            'cluster_manager_timeout'
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
@@ -59,6 +64,7 @@ class Indices extends AbstractEndpoint
     {
         return 'GET';
     }
+
     protected function getParamDeprecation(): array
     {
         return ['master_timeout' => 'cluster_manager_timeout'];

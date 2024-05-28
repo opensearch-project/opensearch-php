@@ -39,11 +39,18 @@ class ForceMerge extends AbstractEndpoint
     {
         return [
             'flush',
+            'primary_only',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'max_num_segments',
-            'only_expunge_deletes'
+            'only_expunge_deletes',
+            'wait_for_completion',
+            'pretty',
+            'human',
+            'error_trace',
+            'source',
+            'filter_path'
         ];
     }
 
