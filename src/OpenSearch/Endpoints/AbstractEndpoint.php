@@ -23,6 +23,7 @@ namespace OpenSearch\Endpoints;
 
 use OpenSearch\Common\Exceptions\UnexpectedValueException;
 use OpenSearch\Serializers\SerializerInterface;
+
 use function array_filter;
 
 abstract class AbstractEndpoint

@@ -1175,7 +1175,7 @@ class IndicesNamespace extends AbstractNamespace
     }
     /**
      * $params['index']              = (list) A comma-separated list of index names to refresh analyzers for
-     * 
+     *
      * @param array $params Associative array of parameters
      * @return array
      */
