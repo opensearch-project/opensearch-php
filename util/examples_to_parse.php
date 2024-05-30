@@ -6,7 +6,7 @@
  *
  * OpenSearch PHP client
  *
- * @link      https://github.com/elastic/elasticsearch-php/
+ * @link      https://github.com/opensearch-project/opensearch-php/
  * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
  * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
