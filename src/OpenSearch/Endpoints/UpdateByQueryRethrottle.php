@@ -6,7 +6,7 @@ declare(strict_types=1);
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
  *
- * Elasticsearch PHP client
+ * OpenSearch PHP client
  *
  * @link      https://github.com/elastic/elasticsearch-php/
  * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
