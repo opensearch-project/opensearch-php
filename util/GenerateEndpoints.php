@@ -37,7 +37,7 @@ printf("Generating endpoints for OpenSearch\n");
 $success = true;
 
 // Load the OpenAPI specification file
-$url = "https://github.com/opensearch-project/opensearch-api-specification/releases/download/main/opensearch-openapi.yaml";
+$url = "https://github.com/opensearch-project/opensearch-api-specification/releases/download/main-latest/opensearch-openapi.yaml";
 $yamlContent = file_get_contents($url);
 $data = Yaml::parse($yamlContent);
 
