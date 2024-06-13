@@ -217,7 +217,7 @@ class MyOpenSearchClass
     public function searchUsingSQL()
     {
         $docs = $this->client->sql()->query([
-          'query' => "SELECT * FROM INDEX_NAME WHERE name = 'wrecking'",
+          'query' => "SELECT * FROM " . INDEX_NAME . " WHERE name = 'wrecking'",
           'format' => 'json'
         ]);
         var_dump($docs['hits']['total']['value'] > 0);
