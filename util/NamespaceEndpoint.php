@@ -70,14 +70,13 @@ class NamespaceEndpoint
         foreach ($this->endpoints as $endpoint) {
             $endpoints .= $this->renderEndpoint($endpoint);
         }
-        // Fix for BC in 7.2.0
-        switch ($this->name) {
-            case 'indices':
-                $endpoints .= $this->getAliasesProxy();
-                break;
-            case 'tasks':
-                $endpoints .= $this->tasksListProxy();
-                break;
+
+        $proxyFolder = 'util/endpointproxies/' . $this->name;
+        if (is_dir($proxyFolder)) {
+            $proxyFiles = glob($proxyFolder . '/*.php');
+            foreach ($proxyFiles as $file) {
+                $endpoints .= require $file;
+            }
         }
         $class = str_replace(':endpoints', $endpoints, $class);
 
@@ -158,36 +157,5 @@ class NamespaceEndpoint
             },
             $name
         );
-    }
-
-    protected function getAliasesProxy(): string
-    {
-        return <<<'EOD'
-    
-    /**
-     * Alias function to getAlias()
-     *
-     * @deprecated added to prevent BC break introduced in 7.2.0
-     * @see https://github.com/elastic/elasticsearch-php/issues/940
-     */
-    public function getAliases(array $params = [])
-    {
-        return $this->getAlias($params);
-    }
-EOD;
-    }
-
-    protected function tasksListProxy(): string
-    {
-        return <<<'EOD'
-
-    /**
-     * Proxy function to list() to prevent BC break since 7.4.0
-     */
-    public function tasksList(array $params = [])
-    {
-        return $this->list($params);
-    }
-EOD;
     }
 }
