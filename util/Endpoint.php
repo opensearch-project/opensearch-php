@@ -282,7 +282,7 @@ class Endpoint
                     );
                     $this->addNamespace('OpenSearch\Common\Exceptions\RuntimeException');
                 } else {
-                    $params .= sprintf("%s\$%s = \$this->%s ?? null;\n", $tab8, $part, $part);
+                    $params .= sprintf("%s\$%s = \$this->%s ?? null;", $tab8, $part, $part);
                 }
                 if ($part === 'type') {
                     $deprecated .= str_replace(
