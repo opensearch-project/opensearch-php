@@ -15,10 +15,11 @@ use OpenSearch\Endpoints\MachineLearning\Models\DeployModel;
 use OpenSearch\Endpoints\MachineLearning\Models\GetModel;
 use OpenSearch\Endpoints\MachineLearning\Models\GetModels;
 use OpenSearch\Endpoints\MachineLearning\Models\Predict;
-use OpenSearch\Endpoints\MachineLearning\Models\RegisterModel;
+use OpenSearch\Endpoints\Ml\RegisterModel;
 use OpenSearch\Endpoints\MachineLearning\Models\UndeployModel;
 use OpenSearch\Endpoints\MachineLearning\Tasks\GetTask;
 use OpenSearch\Endpoints\Sql\Query;
+use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MachineLearningNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Transport;
@@ -145,7 +146,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->registerModelGroup([
+        (new MlNamespace($transport, $func))->registerModelGroup([
           'body' => [
             'foo' => 'bar',
           ],

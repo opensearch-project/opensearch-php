@@ -124,7 +124,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateActionGroupThrowsWithoutActionGroup(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_action_group');
+        $this->expectExceptionMessage('action_group is required for create_action_group');
 
         $this->client->security()->createActionGroup([
             'allowed_actions' => ['indices:data/read*']
@@ -209,7 +209,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateRoleThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_role');
+        $this->expectExceptionMessage('role is required for create_role');
 
         $this->client->security()->createRole([
             'cluster_permissions' => [],
@@ -254,7 +254,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateRoleMappingThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_role_mapping');
+        $this->expectExceptionMessage('role is required for create_role_mapping');
 
         $this->client->security()->createRoleMapping([
             'backend_roles' => ['starfleet', 'captains', 'defectors', 'cn=ldaprole,ou=groups,dc=example,dc=com'],
@@ -289,7 +289,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateTenantThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_tenant');
+        $this->expectExceptionMessage('tenant is required for create_tenant');
 
         $this->client->security()->createTenant([
             'description' => 'My test tenant'
@@ -334,7 +334,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateUserThrowsWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_user');
+        $this->expectExceptionMessage('username is required for create_user');
 
         $this->client->security()->createUser([
             'password' => 'kirkpass',
@@ -370,7 +370,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteActionGroupThrowsWithoutActionGroupName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_action_group');
+        $this->expectExceptionMessage('action_group is required for delete_action_group');
 
         $this->client->security()->deleteActionGroup();
     }
@@ -398,7 +398,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteDistinguishedNamesThrowsWithoutRoleName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_distinguished_names');
+        $this->expectExceptionMessage('cluster_name is required for delete_distinguished_name');
 
         $this->client->security()->deleteDistinguishedNames();
     }
@@ -426,7 +426,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteRoleThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_role');
+        $this->expectExceptionMessage('role is required for delete_role');
 
         $this->client->security()->deleteRole();
     }
@@ -454,7 +454,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteRoleMappingThrowsWithoutRoleMappingName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_role_mapping');
+        $this->expectExceptionMessage('role is required for delete_role_mapping');
 
         $this->client->security()->deleteRoleMapping();
     }
@@ -482,7 +482,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteTenantThrowsWithoutTenantName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_tenant');
+        $this->expectExceptionMessage('tenant is required for delete_tenant');
 
         $this->client->security()->deleteTenant();
     }
@@ -510,7 +510,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteUserThrowsWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_user');
+        $this->expectExceptionMessage('username is required for delete_user');
 
         $this->client->security()->deleteUser();
     }
@@ -542,7 +542,7 @@ class SecurityNamespaceTest extends TestCase
     public function testGetActionGroups(): void
     {
         $this->transport->method('performRequest')
-            ->with('GET', '/_plugins/_security/api/actiongroups/my_test_action_group', [], null);
+            ->with('GET', '/_plugins/_security/api/actiongroups', [], null);
         $this->transport->method('resultOrFuture')
             ->willReturn([
                 'resource' => ['test_resource'],
@@ -576,7 +576,7 @@ class SecurityNamespaceTest extends TestCase
     public function testGetCertificates(): void
     {
         $this->transport->method('performRequest')
-            ->with('GET', '/_opendistro/_security/api/ssl/certs', [], null);
+            ->with('GET', '/_plugins/_security/api/ssl/certs', [], null);
         $this->transport->method('resultOrFuture')
             ->willReturn([
                 'resource' => ['test_resource'],

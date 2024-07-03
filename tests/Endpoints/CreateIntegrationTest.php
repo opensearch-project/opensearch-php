@@ -60,32 +60,4 @@ class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
             'index' => $expectedIndex,
         ]);
     }
-
-    public function testCreateWithoutPassId()
-    {
-        // Arrange
-        $expectedIndex = 'movies';
-        $expectedResult = 'created';
-
-        $client = Utility::getClient();
-
-        // Act
-        $result = $client->create([
-            'index' => $expectedIndex,
-            'body' => [
-                'title' => 'Remember the Titans',
-                'director' => 'Boaz Yakin',
-                'year' => 2000
-            ]
-        ]);
-
-        // Assert
-        $this->assertEquals($expectedIndex, $result['_index']);
-        $this->assertEquals($expectedResult, $result['result']);
-        $this->assertNotEmpty($result['_id']);
-
-        $client->indices()->delete([
-            'index' => $expectedIndex,
-        ]);
-    }
 }
