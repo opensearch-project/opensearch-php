@@ -45,6 +45,11 @@ $list_of_dicts = [];
 foreach ($data["paths"] as $path => $pathDetails) {
 
     foreach ($pathDetails as $method => $methodDetails) {
+        if (isset($methodDetails["x-operation-group"]) && $methodDetails["x-operation-group"] == "nodes.hot_threads") {
+            if (isset($methodDetails["deprecated"]) && $methodDetails["deprecated"]) {
+                continue;
+            }
+        }
         $methodDetails["path"] = $path;
         $methodDetails["method"] = $method;
         $list_of_dicts[] = $methodDetails;
@@ -132,6 +137,13 @@ foreach ($list_of_dicts as $index => $endpoint) {
         if ($endpoint['x-operation-group'] !== 'nodes.hot_threads' && isset($params_new['type'])) {
             unset($params_new['type']);
         }
+        if ($endpoint['x-operation-group'] === 'cat.tasks') {
+            $params_new['node_id'] = $params_new['nodes'] ?? $params_new['node_id'];
+            unset($params_new['nodes']);
+
+            $params_new['parent_task'] = $params_new['parent_task_id'] ?? $params_new['parent_task'];
+            unset($params_new['parent_task_id']);
+        }
         if (!empty($params_new)) {
             $endpoint['params'] = $params_new;
         }
@@ -145,9 +157,15 @@ foreach ($list_of_dicts as $index => $endpoint) {
                 foreach ($part['schema']['oneOf'] as $item) {
                     if (isset($item['type'])) {
                         $parts_dict['type'] = $item['type'];
-                        break;
+                        if ($item['type'] == "array") {
+                            break;
+                        }
                     }
                 }
+            }
+            if ($endpoint['x-operation-group'] === 'cluster.get_component_template' || $endpoint['x-operation-group'] === 'indices.get_index_template') {
+                $part['name'] = "name";
+                $parts_dict['type'] = 'array';
             }
 
             if (isset($part['description'])) {
@@ -285,6 +303,9 @@ foreach ($grouped as $key => $value) {
     }
 
     $api['url'] = ['paths' => $paths];
+    if ($all_paths_have_deprecation && $deprecated_path_dict !== null) {
+        $api['deprecation_message'] = $deprecated_path_dict['description'];
+    }
     $files[] = [$key => $api];
 }
 // Generate endpoints
@@ -358,6 +379,7 @@ foreach ($namespaces as $name => $endpoints) {
 $destDir = __DIR__ . "/../src/OpenSearch";
 
 printf("Copying the generated files to %s\n", $destDir);
+Patch_Endpoints();
 cleanFolders();
 fix_license_header($outputDir . "/Namespaces");
 fix_license_header($outputDir . "/Endpoints");
@@ -478,4 +500,45 @@ function isValidPhpSyntax(string $filename): bool
         return false !== strpos($result, "No syntax errors");
     }
     return false;
+}
+
+/**
+ * Patching Endpoints that do not have OpenSearch API specifications
+ */
+function Patch_Endpoints()
+{
+    $patchEndpoints = ['AsyncSearch', 'SearchableSnapshots', 'Ssl', 'Sql',
+    'DataFrameTransformDeprecated', 'Monitoring' ];
+    $outputDir = __DIR__ . "/output";
+    $destDir = __DIR__ . "/../src/OpenSearch";
+
+    $foldersToCheck = ['Endpoints', 'Namespaces'];
+
+    foreach ($foldersToCheck as $folder) {
+        $dirPath = "$destDir/$folder";
+        if (!is_dir($dirPath)) {
+            continue;
+        }
+
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($dirPath, RecursiveDirectoryIterator::SKIP_DOTS)
+        );
+
+        foreach ($iterator as $file) {
+            if ($file->isFile()) {
+                $filePath = $file->getPathname();
+                foreach ($patchEndpoints as $endpoint) {
+                    if (strpos($filePath, $endpoint) !== false) {
+                        $relativePath = str_replace($destDir, '', $filePath);
+                        $targetPath = $outputDir . $relativePath;
+
+                        if (!file_exists($targetPath)) {
+                            is_dir(dirname($targetPath)) || mkdir(dirname($targetPath), 0777, true);
+                            copy($filePath, $targetPath);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

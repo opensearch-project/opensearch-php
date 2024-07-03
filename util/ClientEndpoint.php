@@ -48,6 +48,12 @@ class ClientEndpoint extends NamespaceEndpoint
         $class = file_get_contents(self::CLIENT_CLASS_TEMPLATE);
         // use Namespace
         $useNamespace = '';
+        
+        // The following namespaces do not have OpenSearch API specifications
+        $patchnamespaces = ['async_search', 'searchable_snapshots', 'ssl', 'sql', 'data_frame_transform_deprecated', 'monitoring'];
+        $this->namespace = array_unique(array_merge($this->namespace, $patchnamespaces));
+        sort($this->namespace);
+
         foreach ($this->namespace as $name) {
             if (empty($name)) {
                 continue;
@@ -88,6 +94,13 @@ class ClientEndpoint extends NamespaceEndpoint
         $endpoints = '';
         foreach ($this->endpoints as $endpoint) {
             $endpoints .= $this->renderEndpoint($endpoint);
+        }
+        $proxyFolder = 'util/endpointproxies/';
+        if (is_dir($proxyFolder)) {
+            $proxyFiles = glob($proxyFolder . '/*.php');
+            foreach ($proxyFiles as $file) {
+                $endpoints .= require $file;
+            }
         }
         $class = str_replace(':endpoints', $endpoints, $class);
 

@@ -94,7 +94,7 @@ class Endpoint
         $this->content = $this->content[$this->apiName];
 
         $this->parts = $this->getPartsFromContent($this->content);
-        $this->requiredParts = $this->getRequiredParts($this->content);
+        $this->requiredParts = $this->getRequiredParts($this->content, $this->namespace);
     }
 
     public function getParts(): array
@@ -113,7 +113,7 @@ class Endpoint
         return $parts;
     }
 
-    private function getRequiredParts(array $content): array
+    private function getRequiredParts(array $content, string $namespace): array
     {
         $required = [];
         // Get the list of required parts
@@ -122,7 +122,8 @@ class Endpoint
         }
         if (count($required) > 1) {
             return call_user_func_array('array_intersect', $required);
-        } elseif (count($required) === 1) {
+        }
+        if (empty($namespace) && !empty($required)) {
             return $required[0];
         }
         return $required;
@@ -158,18 +159,20 @@ class Endpoint
                 : '\\' . $this->normalizeName($this->namespace),
             $class
         );
+        $class = isset($this->content['deprecation_message'])
+            ? str_replace(':deprecation-message', $this->content['deprecation_message'], $class)
+            : preg_replace('/\s*\/\*\*\s+\*\s+@deprecated :deprecation-message\s+\*\//', '', $class);
 
         // Set the HTTP method
         $action = $this->getMethod();
         if ($action === ['POST', 'PUT'] && $this->getClassName() !== 'Bulk') {
             $method = "'PUT'";
+        } elseif (!empty($this->content['body']) && ($action === ['GET', 'POST'] || $action === ['POST', 'GET'])) {
+            $method = 'isset($this->body) ? \'POST\' : \'GET\'';
+        } elseif ($this->getClassName() == "Refresh" || $this->getClassName() == "Flush") {
+            $method = "'POST'";
         } else {
-            if (!empty($this->content['body']) &&
-                ($action === ['GET', 'POST'] || $action === ['POST', 'GET'])) {
-                $method = 'isset($this->body) ? \'POST\' : \'GET\'';
-            } else {
-                $method = sprintf("'%s'", reset($action));
-            }
+            $method = sprintf("'%s'", reset($action));
         }
         $class = str_replace(':method', $method, $class);
 
@@ -210,7 +213,8 @@ class Endpoint
         $EndpointName = $this->getClassName();
 
         if (!empty($this->namespace)) {
-            $filePath = $baseDir . "/src/OpenSearch/Endpoints/$this->namespace/$EndpointName.php";
+            $namespace = str_replace('_', '', ucwords($this->namespace, '_'));
+            $filePath = $baseDir . "/src/OpenSearch/Endpoints/$namespace/$EndpointName.php";
         } else {
             $filePath = $baseDir . "/src/OpenSearch/Endpoints/$EndpointName.php";
         }
@@ -282,7 +286,7 @@ class Endpoint
                     );
                     $this->addNamespace('OpenSearch\Common\Exceptions\RuntimeException');
                 } else {
-                    $params .= sprintf("%s\$%s = \$this->%s ?? null;\n", $tab8, $part, $part);
+                    $params .= sprintf("%s\$%s = \$this->%s ?? null;", $tab8, $part, $part);
                 }
                 if ($part === 'type') {
                     $deprecated .= str_replace(
