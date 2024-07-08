@@ -49,10 +49,10 @@ class GetFieldMapping extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'include_defaults',
-            'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'ignore_unavailable',
+            'include_defaults',
             'local',
             'pretty',
             'human',

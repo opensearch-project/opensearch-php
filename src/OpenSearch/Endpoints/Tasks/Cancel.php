@@ -42,8 +42,8 @@ class Cancel extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'nodes',
             'actions',
+            'nodes',
             'parent_task_id',
             'wait_for_completion',
             'pretty',

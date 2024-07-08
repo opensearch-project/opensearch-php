@@ -49,18 +49,18 @@ class Update extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'wait_for_active_shards',
             '_source',
             '_source_excludes',
             '_source_includes',
+            'if_primary_term',
+            'if_seq_no',
             'lang',
             'refresh',
+            'require_alias',
             'retry_on_conflict',
             'routing',
             'timeout',
-            'if_seq_no',
-            'if_primary_term',
-            'require_alias',
+            'wait_for_active_shards',
             'pretty',
             'human',
             'error_trace',

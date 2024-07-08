@@ -508,7 +508,7 @@ function isValidPhpSyntax(string $filename): bool
 function Patch_Endpoints()
 {
     $patchEndpoints = ['AsyncSearch', 'SearchableSnapshots', 'Ssl', 'Sql',
-    'DataFrameTransformDeprecated', 'Monitoring' ];
+    'DataFrameTransformDeprecated', 'Monitoring', 'Indices/RefreshSearchAnalyzers' ];
     $outputDir = __DIR__ . "/output";
     $destDir = __DIR__ . "/../src/OpenSearch";
 

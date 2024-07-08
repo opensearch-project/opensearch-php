@@ -40,13 +40,13 @@ class ClearCache extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'fielddata',
-            'fields',
-            'query',
-            'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'fielddata',
+            'fields',
+            'ignore_unavailable',
             'index',
+            'query',
             'request',
             'pretty',
             'human',

@@ -42,12 +42,12 @@ class Snapshots extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'format',
-            'ignore_unavailable',
-            'master_timeout',
             'cluster_manager_timeout',
+            'format',
             'h',
             'help',
+            'ignore_unavailable',
+            'master_timeout',
             's',
             'time',
             'v',

@@ -49,14 +49,14 @@ class GetSettings extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout',
-            'cluster_manager_timeout',
-            'ignore_unavailable',
             'allow_no_indices',
+            'cluster_manager_timeout',
             'expand_wildcards',
             'flat_settings',
-            'local',
+            'ignore_unavailable',
             'include_defaults',
+            'local',
+            'master_timeout',
             'pretty',
             'human',
             'error_trace',

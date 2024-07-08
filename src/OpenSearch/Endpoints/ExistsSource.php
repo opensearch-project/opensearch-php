@@ -49,13 +49,13 @@ class ExistsSource extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'preference',
             'realtime',
             'refresh',
             'routing',
-            '_source',
-            '_source_excludes',
-            '_source_includes',
             'version',
             'version_type',
             'pretty',

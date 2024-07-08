@@ -40,12 +40,12 @@ class SearchShards extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'preference',
-            'routing',
-            'local',
-            'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'ignore_unavailable',
+            'local',
+            'preference',
+            'routing',
             'pretty',
             'human',
             'error_trace',

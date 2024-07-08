@@ -42,10 +42,10 @@ class GetTemplate extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'flat_settings',
-            'master_timeout',
             'cluster_manager_timeout',
+            'flat_settings',
             'local',
+            'master_timeout',
             'pretty',
             'human',
             'error_trace',

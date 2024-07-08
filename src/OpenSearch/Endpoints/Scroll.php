@@ -46,9 +46,9 @@ class Scroll extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'rest_total_hits_as_int',
             'scroll',
             'scroll_id',
-            'rest_total_hits_as_int',
             'pretty',
             'human',
             'error_trace',

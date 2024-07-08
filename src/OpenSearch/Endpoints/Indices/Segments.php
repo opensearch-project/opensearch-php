@@ -40,9 +40,9 @@ class Segments extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'ignore_unavailable',
             'verbose',
             'pretty',
             'human',

@@ -49,18 +49,18 @@ class Explain extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'analyze_wildcard',
             'analyzer',
             'default_operator',
             'df',
-            'stored_fields',
             'lenient',
             'preference',
             'q',
             'routing',
-            '_source',
-            '_source_excludes',
-            '_source_includes',
+            'stored_fields',
             'pretty',
             'human',
             'error_trace',

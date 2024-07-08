@@ -36,12 +36,12 @@ class Reroute extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'cluster_manager_timeout',
             'dry_run',
             'explain',
-            'retry_failed',
-            'metric',
             'master_timeout',
-            'cluster_manager_timeout',
+            'metric',
+            'retry_failed',
             'timeout',
             'pretty',
             'human',

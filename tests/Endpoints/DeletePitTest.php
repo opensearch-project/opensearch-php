@@ -21,11 +21,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\Endpoints\DeletePointInTime;
+use OpenSearch\Endpoints\DeletePit;
 
-class DeletePointInTimeTest extends \PHPUnit\Framework\TestCase
+class DeletePitTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var DeletePointInTime */
+    /** @var DeletePit */
     private $instance;
 
     /**
@@ -34,7 +34,7 @@ class DeletePointInTimeTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         // Instance
-        $this->instance = new DeletePointInTime();
+        $this->instance = new DeletePit();
     }
 
     public function testGetURIWhenIndexAndIdAreDefined(): void

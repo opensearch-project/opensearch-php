@@ -40,12 +40,12 @@ class GetMapping extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards',
-            'master_timeout',
             'cluster_manager_timeout',
+            'expand_wildcards',
+            'ignore_unavailable',
             'local',
+            'master_timeout',
             'pretty',
             'human',
             'error_trace',
