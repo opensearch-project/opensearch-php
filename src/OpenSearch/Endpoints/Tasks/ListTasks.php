@@ -36,13 +36,13 @@ class ListTasks extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'nodes',
             'actions',
             'detailed',
-            'parent_task_id',
-            'wait_for_completion',
             'group_by',
+            'nodes',
+            'parent_task_id',
             'timeout',
+            'wait_for_completion',
             'pretty',
             'human',
             'error_trace',

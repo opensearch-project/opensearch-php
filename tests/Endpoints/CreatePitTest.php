@@ -22,11 +22,11 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Common\Exceptions\RuntimeException;
-use OpenSearch\Endpoints\CreatePointInTime;
+use OpenSearch\Endpoints\CreatePit;
 
-class CreatePointInTimeTest extends \PHPUnit\Framework\TestCase
+class CreatePitTest extends \PHPUnit\Framework\TestCase
 {
-    /** @var CreatePointInTime */
+    /** @var CreatePit */
     private $instance;
 
     /**
@@ -35,7 +35,7 @@ class CreatePointInTimeTest extends \PHPUnit\Framework\TestCase
     protected function setUp(): void
     {
         // Instance
-        $this->instance = new CreatePointInTime();
+        $this->instance = new CreatePit();
     }
 
     public function testGetURIWhenIndexAndIdAreDefined(): void
@@ -71,7 +71,7 @@ class CreatePointInTimeTest extends \PHPUnit\Framework\TestCase
     {
         // Arrange
         $expected = RuntimeException::class;
-        $expectedMessage = 'index is required for creating point-in-time';
+        $expectedMessage = 'index is required for create_pit';
 
         // Assert
         $this->expectException($expected);

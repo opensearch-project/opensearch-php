@@ -36,8 +36,8 @@ class AllocationExplain extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'include_yes_decisions',
             'include_disk_info',
+            'include_yes_decisions',
             'pretty',
             'human',
             'error_trace',

@@ -49,14 +49,14 @@ class Exists extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'stored_fields',
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'preference',
             'realtime',
             'refresh',
             'routing',
-            '_source',
-            '_source_excludes',
-            '_source_includes',
+            'stored_fields',
             'version',
             'version_type',
             'pretty',

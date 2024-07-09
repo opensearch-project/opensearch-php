@@ -37,13 +37,13 @@ class Nodes extends AbstractEndpoint
     {
         return [
             'bytes',
+            'cluster_manager_timeout',
             'format',
             'full_id',
-            'local',
-            'master_timeout',
-            'cluster_manager_timeout',
             'h',
             'help',
+            'local',
+            'master_timeout',
             's',
             'time',
             'v',

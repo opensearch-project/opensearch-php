@@ -42,13 +42,13 @@ class Fielddata extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'format',
             'bytes',
+            'fields',
+            'format',
             'h',
             'help',
             's',
             'v',
-            'fields',
             'pretty',
             'human',
             'error_trace',

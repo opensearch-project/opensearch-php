@@ -40,14 +40,14 @@ class Mget extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'stored_fields',
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'preference',
             'realtime',
             'refresh',
             'routing',
-            '_source',
-            '_source_excludes',
-            '_source_includes',
+            'stored_fields',
             'pretty',
             'human',
             'error_trace',
