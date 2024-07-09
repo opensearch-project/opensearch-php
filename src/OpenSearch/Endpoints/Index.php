@@ -47,17 +47,17 @@ class Index extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'wait_for_active_shards',
+            'if_primary_term',
+            'if_seq_no',
             'op_type',
+            'pipeline',
             'refresh',
+            'require_alias',
             'routing',
             'timeout',
             'version',
             'version_type',
-            'if_seq_no',
-            'if_primary_term',
-            'pipeline',
-            'require_alias',
+            'wait_for_active_shards',
             'pretty',
             'human',
             'error_trace',

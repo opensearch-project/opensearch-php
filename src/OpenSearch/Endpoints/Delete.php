@@ -49,14 +49,14 @@ class Delete extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'wait_for_active_shards',
+            'if_primary_term',
+            'if_seq_no',
             'refresh',
             'routing',
             'timeout',
-            'if_seq_no',
-            'if_primary_term',
             'version',
             'version_type',
+            'wait_for_active_shards',
             'pretty',
             'human',
             'error_trace',

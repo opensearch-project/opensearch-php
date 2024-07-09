@@ -42,13 +42,13 @@ class Allocation extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'format',
             'bytes',
-            'local',
-            'master_timeout',
             'cluster_manager_timeout',
+            'format',
             'h',
             'help',
+            'local',
+            'master_timeout',
             's',
             'v',
             'pretty',

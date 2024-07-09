@@ -40,14 +40,14 @@ class PutSettings extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout',
-            'cluster_manager_timeout',
-            'timeout',
-            'preserve_existing',
-            'ignore_unavailable',
             'allow_no_indices',
+            'cluster_manager_timeout',
             'expand_wildcards',
             'flat_settings',
+            'ignore_unavailable',
+            'master_timeout',
+            'preserve_existing',
+            'timeout',
             'pretty',
             'human',
             'error_trace',

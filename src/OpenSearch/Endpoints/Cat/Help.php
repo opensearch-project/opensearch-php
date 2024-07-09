@@ -36,8 +36,6 @@ class Help extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'help',
-            's',
             'pretty',
             'human',
             'error_trace',

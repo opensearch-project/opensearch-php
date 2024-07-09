@@ -56,22 +56,26 @@ class CreateTest extends \PHPUnit\Framework\TestCase
     public function testGetURIWhenIndexIsDefinedAndIdIsNotDefined(): void
     {
         // Arrange
-        $expected = '/index/_doc';
+        $expected = RuntimeException::class;
+        $expectedMessage = 'id is required for create';
 
         $this->instance->setIndex('index');
 
-        // Act
-        $result = $this->instance->getURI();
-
         // Assert
-        $this->assertEquals($expected, $result);
+        $this->expectException($expected);
+        $this->expectExceptionMessage($expectedMessage);
+
+        // Act
+        $this->instance->getURI();
     }
 
-    public function testGetURIWhenIndexIsNotDefined(): void
+    public function testGetURIWhenIdIsDefinedAndIndexIsNotDefined(): void
     {
         // Arrange
         $expected = RuntimeException::class;
         $expectedMessage = 'index is required for create';
+
+        $this->instance->setId('1');
 
         // Assert
         $this->expectException($expected);
@@ -95,15 +99,4 @@ class CreateTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testGetMethodWhenIdIsNotDefined(): void
-    {
-        // Arrange
-        $expected = 'POST';
-
-        // Act
-        $result = $this->instance->getMethod();
-
-        // Assert
-        $this->assertEquals($expected, $result);
-    }
 }

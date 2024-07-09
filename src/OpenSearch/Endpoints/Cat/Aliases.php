@@ -42,13 +42,13 @@ class Aliases extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'expand_wildcards',
             'format',
-            'local',
             'h',
             'help',
+            'local',
             's',
             'v',
-            'expand_wildcards',
             'pretty',
             'human',
             'error_trace',

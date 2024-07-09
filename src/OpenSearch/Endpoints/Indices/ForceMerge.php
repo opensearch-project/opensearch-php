@@ -40,13 +40,13 @@ class ForceMerge extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'flush',
-            'primary_only',
-            'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'flush',
+            'ignore_unavailable',
             'max_num_segments',
             'only_expunge_deletes',
+            'primary_only',
             'wait_for_completion',
             'pretty',
             'human',

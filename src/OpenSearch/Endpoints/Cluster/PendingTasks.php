@@ -36,9 +36,9 @@ class PendingTasks extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'cluster_manager_timeout',
             'local',
             'master_timeout',
-            'cluster_manager_timeout',
             'pretty',
             'human',
             'error_trace',

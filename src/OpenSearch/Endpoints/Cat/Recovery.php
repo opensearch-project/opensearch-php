@@ -40,10 +40,10 @@ class Recovery extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'format',
             'active_only',
             'bytes',
             'detailed',
+            'format',
             'h',
             'help',
             'index',

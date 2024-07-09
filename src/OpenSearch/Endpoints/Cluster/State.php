@@ -46,15 +46,15 @@ class State extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'allow_no_indices',
+            'cluster_manager_timeout',
+            'expand_wildcards',
+            'flat_settings',
+            'ignore_unavailable',
             'local',
             'master_timeout',
-            'cluster_manager_timeout',
-            'flat_settings',
             'wait_for_metadata_version',
             'wait_for_timeout',
-            'ignore_unavailable',
-            'allow_no_indices',
-            'expand_wildcards',
             'pretty',
             'human',
             'error_trace',

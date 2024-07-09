@@ -47,15 +47,15 @@ class TermVectors extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'term_statistics',
             'field_statistics',
             'fields',
             'offsets',
-            'positions',
             'payloads',
+            'positions',
             'preference',
-            'routing',
             'realtime',
+            'routing',
+            'term_statistics',
             'version',
             'version_type',
             'pretty',
