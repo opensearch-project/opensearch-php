@@ -25,8 +25,8 @@ return <<<'EOD'
         $endpointBuilder = $this->endpoints;
         if (isset($params['tenant'])) {
             $endpoint = $endpointBuilder('Security\PatchTenant');
-            $endpoint->setTenant($params['tenant']);
-            unset($params['tenant']);
+            $tenant = $this->extractArgument($params, 'tenant');
+            $endpoint->setTenant($tenant);
         } else { 
             $endpoint = $endpointBuilder('Security\PatchTenants');
         }

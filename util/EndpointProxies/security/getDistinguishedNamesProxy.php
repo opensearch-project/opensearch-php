@@ -22,8 +22,8 @@ return <<<'EOD'
         $endpointBuilder = $this->endpoints;
         if (isset($params['cluster_name'])) {
             $endpoint = $endpointBuilder('Security\GetDistinguishedName');
-            $endpoint->setClusterName($params['cluster_name']);
-            unset($params['cluster_name']);
+            $cluster_name = $this->extractArgument($params, 'cluster_name');
+            $endpoint->setClusterName($cluster_name);
         } else {
             $endpoint = $endpointBuilder('Security\GetDistinguishedNames');
         }

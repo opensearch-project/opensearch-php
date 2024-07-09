@@ -1,6 +1,7 @@
 <?php
 
 return <<<'EOD'
+
     /**
      * Creates, updates, or deletes multiple action groups in a single call.
      * If 'action_group' is provided in $params, calls patchActionGroup.
@@ -25,8 +26,8 @@ return <<<'EOD'
         $endpointBuilder = $this->endpoints;
         if (isset($params['action_group'])) {
             $endpoint = $endpointBuilder('Security\PatchActionGroup');
-            $endpoint->setActionGroup($params['action_group']);
-            unset($params['action_group']);
+            $action_group = $this->extractArgument($params, 'action_group');
+            $endpoint->setActionGroup($action_group);
         } else { 
             $endpoint = $endpointBuilder('Security\PatchActionGroups');
         }
@@ -35,5 +36,4 @@ return <<<'EOD'
 
         return $this->performRequest($endpoint);
     }
-
 EOD;

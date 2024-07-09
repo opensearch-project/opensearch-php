@@ -22,8 +22,8 @@ return <<<'EOD'
 
         if (isset($params['username'])) {
             $endpoint = $endpointBuilder('Security\GetUser');
-            $endpoint->setUsername($params['username']);
-            unset($params['username']);
+            $username = $this->extractArgument($params, 'username');
+            $endpoint->setUsername($username);
         } else {
             $endpoint = $endpointBuilder('Security\GetUsers');
         }
