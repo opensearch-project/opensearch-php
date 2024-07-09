@@ -124,7 +124,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateActionGroupThrowsWithoutActionGroup(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_action_group');
+        $this->expectExceptionMessage('action_group is required for create_action_group');
 
         $this->client->security()->createActionGroup([
             'allowed_actions' => ['indices:data/read*']
@@ -209,7 +209,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateRoleThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_role');
+        $this->expectExceptionMessage('role is required for create_role');
 
         $this->client->security()->createRole([
             'cluster_permissions' => [],
@@ -254,7 +254,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateRoleMappingThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_role_mapping');
+        $this->expectExceptionMessage('role is required for create_role_mapping');
 
         $this->client->security()->createRoleMapping([
             'backend_roles' => ['starfleet', 'captains', 'defectors', 'cn=ldaprole,ou=groups,dc=example,dc=com'],
@@ -289,7 +289,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateTenantThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_tenant');
+        $this->expectExceptionMessage('tenant is required for create_tenant');
 
         $this->client->security()->createTenant([
             'description' => 'My test tenant'
@@ -334,7 +334,7 @@ class SecurityNamespaceTest extends TestCase
     public function testCreateUserThrowsWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.create_user');
+        $this->expectExceptionMessage('username is required for create_user');
 
         $this->client->security()->createUser([
             'password' => 'kirkpass',
@@ -370,7 +370,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteActionGroupThrowsWithoutActionGroupName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_action_group');
+        $this->expectExceptionMessage('action_group is required for delete_action_group');
 
         $this->client->security()->deleteActionGroup();
     }
@@ -395,10 +395,30 @@ class SecurityNamespaceTest extends TestCase
         ], $result);
     }
 
+    public function testDeleteDistinguishedName(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('DELETE', '/_plugins/_security/api/nodesdn/my_test_cluster', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $result = $this->client->security()->deleteDistinguishedName([
+            'cluster_name' => 'my_test_cluster',
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $result);
+    }
+
     public function testDeleteDistinguishedNamesThrowsWithoutRoleName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_distinguished_names');
+        $this->expectExceptionMessage('cluster_name is required for delete_distinguished_name');
 
         $this->client->security()->deleteDistinguishedNames();
     }
@@ -426,7 +446,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteRoleThrowsWithoutRole(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_role');
+        $this->expectExceptionMessage('role is required for delete_role');
 
         $this->client->security()->deleteRole();
     }
@@ -454,7 +474,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteRoleMappingThrowsWithoutRoleMappingName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_role_mapping');
+        $this->expectExceptionMessage('role is required for delete_role_mapping');
 
         $this->client->security()->deleteRoleMapping();
     }
@@ -482,7 +502,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteTenantThrowsWithoutTenantName(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_tenant');
+        $this->expectExceptionMessage('tenant is required for delete_tenant');
 
         $this->client->security()->deleteTenant();
     }
@@ -510,7 +530,7 @@ class SecurityNamespaceTest extends TestCase
     public function testDeleteUserThrowsWithoutUsername(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Missing parameter for the endpoint security.delete_user');
+        $this->expectExceptionMessage('username is required for delete_user');
 
         $this->client->security()->deleteUser();
     }
@@ -533,6 +553,22 @@ class SecurityNamespaceTest extends TestCase
             ]);
 
         $response = $this->client->security()->getAccount();
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
+    public function testGetAccountDetails(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/account', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getAccountDetails();
 
         static::assertSame([
             'resource' => ['test_resource']
@@ -573,10 +609,28 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testGetActionGroup(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/actiongroups/my_test_action_group', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getActionGroup([
+            'action_group' => 'my_test_action_group',
+        ]);
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
     public function testGetCertificates(): void
     {
         $this->transport->method('performRequest')
-            ->with('GET', '/_opendistro/_security/api/ssl/certs', [], null);
+            ->with('GET', '/_plugins/_security/api/ssl/certs', [], null);
         $this->transport->method('resultOrFuture')
             ->willReturn([
                 'resource' => ['test_resource'],
@@ -599,6 +653,22 @@ class SecurityNamespaceTest extends TestCase
             ]);
 
         $response = $this->client->security()->getConfig();
+
+        static::assertSame([
+            'resource' => ['test_resource'],
+        ], $response);
+    }
+
+    public function testGetConfiguration(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/securityconfig', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getConfiguration();
 
         static::assertSame([
             'resource' => ['test_resource'],
@@ -639,6 +709,24 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testGetDistinguishedName(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/nodesdn/my_test_cluster', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getDistinguishedName([
+            'cluster_name' => 'my_test_cluster',
+        ]);
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
     public function testGetRoleMappings(): void
     {
         $this->transport->method('performRequest')
@@ -667,6 +755,24 @@ class SecurityNamespaceTest extends TestCase
             ]);
 
         $response = $this->client->security()->getRoleMappings();
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
+    public function testGetRoleMapping(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/rolesmapping/my_test_role', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getRoleMapping([
+            'role' => 'my_test_role',
+        ]);
 
         static::assertSame([
             'resource' => ['test_resource']
@@ -707,6 +813,24 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testGetRole(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/roles/my_test_role', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getRole([
+            'role' => 'my_test_role',
+        ]);
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
     public function testGetTenants(): void
     {
         $this->transport->method('performRequest')
@@ -741,6 +865,24 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testGetTenant(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/tenants/my_test_tenant', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getTenant([
+            'tenant' => 'my_test_tenant',
+        ]);
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
     public function testGetUsers(): void
     {
         $this->transport->method('performRequest')
@@ -769,6 +911,24 @@ class SecurityNamespaceTest extends TestCase
             ]);
 
         $response = $this->client->security()->getUsers();
+
+        static::assertSame([
+            'resource' => ['test_resource']
+        ], $response);
+    }
+
+    public function testGetUser(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('GET', '/_plugins/_security/api/internalusers/my_test_user', [], null);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'resource' => ['test_resource'],
+            ]);
+
+        $response = $this->client->security()->getUser([
+            'username' => 'my_test_user',
+        ]);
 
         static::assertSame([
             'resource' => ['test_resource']
@@ -842,6 +1002,31 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testPatchActionGroup(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PATCH', '/_plugins/_security/api/actiongroups/my_test_action_group', [], [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->patchActionGroup([
+            'action_group' => 'my_test_action_group',
+            'body' => [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
     public function testPatchConfig(): void
     {
         $this->transport->method('performRequest')
@@ -856,6 +1041,30 @@ class SecurityNamespaceTest extends TestCase
 
         $response = $this->client->security()->patchConfig([
             'ops' => [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
+    public function testPatchConfiguration(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PATCH', '/_plugins/_security/api/securityconfig', [], [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->patchConfiguration([
+            'body' => [
                 ['op' => 'remove', 'path' => '/index_permissions/0/dls']
             ]
         ]);
@@ -915,6 +1124,31 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testPatchRoleMapping(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PATCH', '/_plugins/_security/api/rolesmapping/my_test_role_mapping', [], [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->patchRoleMapping([
+            'role' => 'my_test_role_mapping',
+            'body' => [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
     public function testPatchRoles(): void
     {
         $this->transport->method('performRequest')
@@ -954,6 +1188,31 @@ class SecurityNamespaceTest extends TestCase
 
         $response = $this->client->security()->patchRoles([
             'ops' => [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
+    public function testPatchRole(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PATCH', '/_plugins/_security/api/roles/my_test_role', [], [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->patchRole([
+            'role' => 'my_test_role',
+            'body' => [
                 ['op' => 'remove', 'path' => '/index_permissions/0/dls']
             ]
         ]);
@@ -1013,6 +1272,31 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testPatchTenant(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PATCH', '/_plugins/_security/api/tenants/my_test_tenant', [], [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->patchTenant([
+            'tenant' => 'my_test_tenant',
+            'body' => [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
     public function testPatchUsers(): void
     {
         $this->transport->method('performRequest')
@@ -1062,6 +1346,31 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
+    public function testPatchUser(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PATCH', '/_plugins/_security/api/internalusers/my_test_user', [], [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->patchUser([
+            'username' => 'my_test_user',
+            'body' => [
+                ['op' => 'remove', 'path' => '/index_permissions/0/dls']
+            ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
     public function testUpdateConfig(): void
     {
         $this->transport->method('performRequest')
@@ -1088,7 +1397,7 @@ class SecurityNamespaceTest extends TestCase
         ], $response);
     }
 
-    public function testUpdateDistinguishedNames(): void
+    public function testUpdateConfiguration(): void
     {
         $this->transport->method('performRequest')
             ->with('PUT', '/_plugins/_security/api/securityconfig/config', [], [
@@ -1102,10 +1411,58 @@ class SecurityNamespaceTest extends TestCase
                 'message' => 'Stubbed response'
             ]);
 
-        $response = $this->client->security()->updateConfig([
-            'dynamic' => [
-                'filtered_alias_mode' => 'warn',
+        $response = $this->client->security()->updateConfiguration([
+            'body' => [
+                'dynamic' => ['filtered_alias_mode' => 'warn',]
             ]
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
+    public function testUpdateDistinguishedNames(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PUT', '/_plugins/_security/api/nodesdn/my_test_cluster', [], [
+                'nodes_dn' => ['CN=cluster3.example.com']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->updateDistinguishedNames([
+            'cluster_name' => 'my_test_cluster',
+            'nodes_dn' => ['CN=cluster3.example.com']
+        ]);
+
+        static::assertSame([
+            'status' => 'OK',
+            'message' => 'Stubbed response'
+        ], $response);
+    }
+
+    public function testUpdateDistinguishedName(): void
+    {
+        $this->transport->method('performRequest')
+            ->with('PUT', '/_plugins/_security/api/nodesdn/my_test_cluster', [], [
+                'nodes_dn' => ['CN=cluster3.example.com']
+            ]);
+        $this->transport->method('resultOrFuture')
+            ->willReturn([
+                'status' => 'OK',
+                'message' => 'Stubbed response'
+            ]);
+
+        $response = $this->client->security()->updateDistinguishedName([
+            'cluster_name' => 'my_test_cluster',
+            'body' => [
+                'nodes_dn' => ['CN=cluster3.example.com']
+        ]
         ]);
 
         static::assertSame([

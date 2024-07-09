@@ -25,8 +25,8 @@ return <<<'EOD'
         $endpointBuilder = $this->endpoints;
         if (isset($params['username'])) {
             $endpoint = $endpointBuilder('Security\PatchUser');
-            $endpoint->setUsername($params['username']);
-            unset($params['username']);
+            $username = $this->extractArgument($params, 'username');
+            $endpoint->setUsername($username);
         } else { 
             $endpoint = $endpointBuilder('Security\PatchUsers');
         }

@@ -2,7 +2,7 @@
 
 return <<<'EOD'
 
-/**
+    /**
      * Creates or replaces the specified user.
      *
      * $params['username']    = (string)  (Required)
