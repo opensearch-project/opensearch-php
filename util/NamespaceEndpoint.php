@@ -69,13 +69,13 @@ class NamespaceEndpoint
         $endpoints = '';
         foreach ($this->endpoints as $endpoint) {
             $endpointName = $this->getEndpointName($endpoint->name);
-            $proxyFilePath = 'util/endpointproxies/' . $this->name . '/' . $endpointName . 'Proxy.php';
+            $proxyFilePath = __DIR__ . '/EndpointProxies/' . $this->name . '/' . $endpointName . 'Proxy.php';
             if (!file_exists($proxyFilePath)) {
                 $endpoints .= $this->renderEndpoint($endpoint);
             }
         }
 
-        $proxyFolder = 'util/endpointproxies/' . $this->name;
+        $proxyFolder = __DIR__ . '/EndpointProxies/' . $this->name;
         if (is_dir($proxyFolder)) {
             foreach (glob($proxyFolder . '/*Proxy.php') as $file) {
                 $endpoints .= require $file;
