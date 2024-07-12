@@ -70,6 +70,11 @@
       "chmod +x apigen",
       "./apigen src --output docs",
       "rm -f apigen"
+    ],
+    "generate-api": [
+      "php util/GenerateEndpoints.php",
+      "composer run php-cs",
+      "php util/changelog_updater.php"
     ]
   }
 }

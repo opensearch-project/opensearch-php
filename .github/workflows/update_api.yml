@@ -26,9 +26,7 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist
       - name: Generate API
-        run: php util/GenerateEndpoints.php
-      - name: Format generated code
-        run: composer run php-cs 
+        run: composer run generate-api 
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
