@@ -94,12 +94,12 @@ class ClientEndpoint extends NamespaceEndpoint
         $endpoints = '';
         foreach ($this->endpoints as $endpoint) {
             $endpointName = $this->getEndpointName($endpoint->name);
-            $proxyFilePath = 'util/endpointproxies/' . $this->name . '/' . $endpointName . 'Proxy.php';
+            $proxyFilePath = __DIR__ . '/EndpointProxies/' . $this->name . '/' . $endpointName . 'Proxy.php';
             if (!file_exists($proxyFilePath)) {
                 $endpoints .= $this->renderEndpoint($endpoint);
             }
         }
-        $proxyFolder = 'util/endpointproxies/';
+        $proxyFolder = __DIR__. '/EndpointProxies/';
         if (is_dir($proxyFolder)) {
             $proxyFiles = glob($proxyFolder . '/*.php');
             foreach ($proxyFiles as $file) {
