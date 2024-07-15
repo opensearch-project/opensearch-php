@@ -83,6 +83,20 @@ class Utility
     }
 
     /**
+     * Check if cluster is OpenSearch and version is less than the specified version.
+     */
+    public static function isOpenSearchVersionAtMost(Client $client, string $version): bool
+    {
+        $versionInfo = self::getVersion($client);
+        $distribution = $versionInfo['distribution'] ?? null;
+        if ($distribution !== 'opensearch') {
+            return false;
+        }
+        $versionNumber = $versionInfo['number'];
+        return version_compare($versionNumber, $version, '<');
+    }
+
+    /**
      * Check if cluster is Elasticsearch and version is greater than or equal to specified version.
      */
     public static function isElasticSearchVersionAtLeast(Client $client, string $version): bool
