@@ -64,7 +64,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists all active point-in-time segments.
      *
-     * $params['bytes']       = (enum) The unit in which to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']       = (enum) The unit in which to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
@@ -91,7 +91,7 @@ class CatNamespace extends AbstractNamespace
      * Provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
      *
      * $params['node_id']                 = (array) Comma-separated list of node identifiers or names used to limit the returned information.
-     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                       = (array) Comma-separated list of column names to display.
@@ -181,7 +181,7 @@ class CatNamespace extends AbstractNamespace
      * Shows how much heap memory is currently being used by fielddata on every data node in the cluster.
      *
      * $params['fields']      = (array) Comma-separated list of fields used to limit returned information. To retrieve all fields, omit this parameter.
-     * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
@@ -214,7 +214,7 @@ class CatNamespace extends AbstractNamespace
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']        = (enum) The unit used to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']        = (enum) The unit used to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['ts']          = (boolean) If true, returns `HH:MM:SS` and Unix epoch timestamps. (Default = true)
      * $params['v']           = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
@@ -258,19 +258,19 @@ class CatNamespace extends AbstractNamespace
      * Returns information about indices: number of primaries and replicas, document counts, disk size, ...
      *
      * $params['index']                     = (array) Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                     = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']                     = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout']   = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.
      * $params['format']                    = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                         = (array) Comma-separated list of column names to display.
-     * $params['health']                    = (enum) The health status used to limit returned indices. By default, the response includes indices of any health status. (Options = green,yellow,red)
+     * $params['health']                    = (enum) The health status used to limit returned indices. By default, the response includes indices of any health status. (Options = green,red,yellow)
      * $params['help']                      = (boolean) Return help information. (Default = false)
      * $params['include_unloaded_segments'] = (boolean) If true, the response includes information from segments that are not loaded into memory. (Default = false)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']            = (string) Operation timeout for connection to master node.
      * $params['pri']                       = (boolean) If true, the response only includes information from primary shards. (Default = false)
      * $params['s']                         = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']                      = (enum) The unit used to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']                      = (enum) The unit used to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                         = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                     = (boolean) Whether to return human readable values for statistics.
@@ -351,7 +351,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns basic statistics about performance of cluster nodes.
      *
-     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['full_id']                 = (any) If `true`, return the full node ID. If `false`, return the shortened node ID. (Default = )
@@ -360,7 +360,7 @@ class CatNamespace extends AbstractNamespace
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']          = (string) Operation timeout for connection to master node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']                    = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
@@ -389,7 +389,7 @@ class CatNamespace extends AbstractNamespace
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']          = (string) Operation timeout for connection to master node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']                    = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
@@ -411,7 +411,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * List segments for one or several PITs.
      *
-     * $params['bytes']       = (enum) The unit in which to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']       = (enum) The unit in which to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
@@ -470,13 +470,13 @@ class CatNamespace extends AbstractNamespace
      *
      * $params['index']       = (array) A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
      * $params['active_only'] = (boolean) If `true`, the response only includes ongoing shard recoveries. (Default = false)
-     * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['detailed']    = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
      * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']        = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']        = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']           = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
@@ -532,7 +532,7 @@ class CatNamespace extends AbstractNamespace
      * $params['index']              = (array) Comma-separated list or wildcard expression of index names to limit the returned information.
      * $params['active_only']        = (boolean) If `true`, the response only includes ongoing segment replication events. (Default = false)
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified).
-     * $params['bytes']              = (enum) The unit in which to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']              = (enum) The unit in which to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['completed_only']     = (boolean) If `true`, the response only includes latest completed segment replication events. (Default = false)
      * $params['detailed']           = (boolean) If `true`, the response includes detailed information about segment replications. (Default = false)
      * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
@@ -543,7 +543,7 @@ class CatNamespace extends AbstractNamespace
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed).
      * $params['s']                  = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['shards']             = (array) Comma-separated list of shards to display.
-     * $params['time']               = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']               = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['timeout']            = (string) Operation timeout.
      * $params['v']                  = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response.
@@ -570,7 +570,7 @@ class CatNamespace extends AbstractNamespace
      * Provides low-level information about the segments in the shards of an index.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                       = (array) Comma-separated list of column names to display.
@@ -602,7 +602,7 @@ class CatNamespace extends AbstractNamespace
      * Provides a detailed view of shard allocation on nodes.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,k,kb,m,mb,g,gb,t,tb,p,pb)
+     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                       = (array) Comma-separated list of column names to display.
@@ -610,7 +610,7 @@ class CatNamespace extends AbstractNamespace
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']          = (string) Operation timeout for connection to master node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']                    = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
@@ -643,7 +643,7 @@ class CatNamespace extends AbstractNamespace
      * $params['ignore_unavailable']      = (boolean) If `true`, the response does not include information from unavailable snapshots. (Default = false)
      * $params['master_timeout']          = (string) Operation timeout for connection to master node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']                    = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
@@ -674,7 +674,7 @@ class CatNamespace extends AbstractNamespace
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['time']        = (enum) The unit in which to display time values. (Options = nanos,micros,ms,s,m,h,d)
+     * $params['time']        = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']           = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.

@@ -11,11 +11,12 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\ModelGroups;
+namespace OpenSearch\Endpoints\Ml;
 
+use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class RegisterModelGroup extends AbstractEndpoint
+class DeployModel extends AbstractEndpoint
 {
     /**
      * @return string[]
@@ -30,7 +31,14 @@ class RegisterModelGroup extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        return "/_plugins/_ml/model_groups/_register";
+        if ($this->id) {
+            return "/_plugins/_ml/models/$this->id/_deploy";
+        }
+
+        throw new RuntimeException(
+            'id is required for deploy'
+        );
+
     }
 
     /**

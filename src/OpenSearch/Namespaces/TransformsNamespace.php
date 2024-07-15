@@ -147,10 +147,10 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Returns the details of all transform jobs.
      *
-     * $params['from']          = (number) The starting transform to return. Default is 0.
+     * $params['from']          = (number) The starting transform to return. Default is `0`.
      * $params['search']        = (string) The search term to use to filter results.
-     * $params['size']          = (number) Specifies the number of transforms to return. Default is 10.
-     * $params['sortDirection'] = (string) Specifies the direction to sort results in. Can be ASC or DESC. Default is ASC.
+     * $params['size']          = (number) Specifies the number of transforms to return. Default is `10`.
+     * $params['sortDirection'] = (string) Specifies the direction to sort results in. Can be `ASC` or `DESC`. Default is `ASC`.
      * $params['sortField']     = (string) The field to sort results with.
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']         = (boolean) Whether to return human readable values for statistics.

@@ -2,24 +2,24 @@
 
 namespace OpenSearch\Tests\Namespaces;
 
-use OpenSearch\Endpoints\MachineLearning\Connectors\CreateConnector;
-use OpenSearch\Endpoints\MachineLearning\Connectors\DeleteConnector;
-use OpenSearch\Endpoints\MachineLearning\Connectors\GetConnector;
-use OpenSearch\Endpoints\MachineLearning\Connectors\GetConnectors;
-use OpenSearch\Endpoints\MachineLearning\ModelGroups\DeleteModelGroup;
-use OpenSearch\Endpoints\MachineLearning\ModelGroups\GetModelGroups;
-use OpenSearch\Endpoints\MachineLearning\ModelGroups\RegisterModelGroup;
-use OpenSearch\Endpoints\MachineLearning\ModelGroups\UpdateModelGroup;
-use OpenSearch\Endpoints\MachineLearning\Models\DeleteModel;
-use OpenSearch\Endpoints\MachineLearning\Models\DeployModel;
-use OpenSearch\Endpoints\MachineLearning\Models\GetModel;
-use OpenSearch\Endpoints\MachineLearning\Models\GetModels;
-use OpenSearch\Endpoints\MachineLearning\Models\Predict;
-use OpenSearch\Endpoints\MachineLearning\Models\RegisterModel;
-use OpenSearch\Endpoints\MachineLearning\Models\UndeployModel;
-use OpenSearch\Endpoints\MachineLearning\Tasks\GetTask;
+use OpenSearch\Endpoints\Ml\CreateConnector;
+use OpenSearch\Endpoints\Ml\DeleteConnector;
+use OpenSearch\Endpoints\Ml\GetConnector;
+use OpenSearch\Endpoints\Ml\GetConnectors;
+use OpenSearch\Endpoints\Ml\DeleteModelGroup;
+use OpenSearch\Endpoints\Ml\GetModelGroups;
+use OpenSearch\Endpoints\Ml\RegisterModelGroup;
+use OpenSearch\Endpoints\Ml\UpdateModelGroup;
+use OpenSearch\Endpoints\Ml\DeleteModel;
+use OpenSearch\Endpoints\Ml\DeployModel;
+use OpenSearch\Endpoints\Ml\GetModel;
+use OpenSearch\Endpoints\Ml\SearchModels;
+use OpenSearch\Endpoints\Ml\Predict;
+use OpenSearch\Endpoints\Ml\RegisterModel;
+use OpenSearch\Endpoints\Ml\UndeployModel;
+use OpenSearch\Endpoints\Ml\GetTask;
 use OpenSearch\Endpoints\Sql\Query;
-use OpenSearch\Namespaces\MachineLearningNamespace;
+use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Transport;
 use PHPUnit\Framework\TestCase;
@@ -32,7 +32,7 @@ use PHPUnit\Framework\TestCase;
  *  this file be licensed under the Apache-2.0 license or a
  *  compatible open source license.
  */
-class MachineLearningNamespaceTest extends TestCase
+class MlNamespaceTest extends TestCase
 {
     public function testCreatingConnector(): void
     {
@@ -51,7 +51,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->createConnector([
+        (new MlNamespace($transport, $func))->createConnector([
           'body' => [
             'foo' => 'bar',
           ],
@@ -73,7 +73,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->getConnector([
+        (new MlNamespace($transport, $func))->getConnector([
           'id' => 'foobar'
         ]);
     }
@@ -98,7 +98,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->getConnectors([
+        (new MlNamespace($transport, $func))->getConnectors([
           'body' => [
             'query' => [
               'match_all' => new \StdClass(),
@@ -123,7 +123,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->deleteConnector([
+        (new MlNamespace($transport, $func))->deleteConnector([
           'id' => 'foobar'
         ]);
     }
@@ -145,7 +145,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->registerModelGroup([
+        (new MlNamespace($transport, $func))->registerModelGroup([
           'body' => [
             'foo' => 'bar',
           ],
@@ -172,7 +172,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->getModelGroups([
+        (new MlNamespace($transport, $func))->getModelGroups([
           'body' => [
             'query' => [
               'match_all' => new \StdClass(),
@@ -202,7 +202,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->updateModelGroup([
+        (new MlNamespace($transport, $func))->updateModelGroup([
           'id' => 'foobar',
           'body' => [
             'query' => [
@@ -228,7 +228,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->deleteModelGroup([
+        (new MlNamespace($transport, $func))->deleteModelGroup([
           'id' => 'foobar'
         ]);
     }
@@ -250,7 +250,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->registerModel([
+        (new MlNamespace($transport, $func))->registerModel([
           'body' => [
             'foo' => 'bar',
           ],
@@ -272,22 +272,22 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->getModel([
+        (new MlNamespace($transport, $func))->getModel([
           'id' => 'foobar',
         ]);
     }
 
-    public function testGetModels(): void
+    public function testSearchModels(): void
     {
 
         $func = static function () {
-            return new GetModels();
+            return new SearchModels();
         };
 
         $transport = $this->createMock(Transport::class);
 
         $transport->method('performRequest')
-          ->with('POST', '/_plugins/_ml/models/_search', [], [
+          ->with('GET', '/_plugins/_ml/models/_search', [], [
             'query' => [
               'match_all' => new \StdClass(),
             ],
@@ -297,7 +297,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->getModels([
+        (new MlNamespace($transport, $func))->searchModels([
           'body' => [
             'query' => [
               'match_all' => new \StdClass(),
@@ -322,7 +322,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->deployModel([
+        (new MlNamespace($transport, $func))->deployModel([
           'id' => 'foobar',
         ]);
     }
@@ -342,7 +342,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->undeployModel([
+        (new MlNamespace($transport, $func))->undeployModel([
           'id' => 'foobar',
         ]);
     }
@@ -362,7 +362,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->deleteModel([
+        (new MlNamespace($transport, $func))->deleteModel([
           'id' => 'foobar',
         ]);
     }
@@ -384,7 +384,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->predict([
+        (new MlNamespace($transport, $func))->predict([
           'id' => 'foobar',
           'body' => [
             'foo' => 'bar',
@@ -407,7 +407,7 @@ class MachineLearningNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
           ->willReturn([]);
 
-        (new MachineLearningNamespace($transport, $func))->getTask([
+        (new MlNamespace($transport, $func))->getTask([
           'id' => 'foobar',
         ]);
     }

@@ -281,16 +281,16 @@ class ClusterNamespace extends AbstractNamespace
      * $params['awareness_attribute']             = (string) The awareness attribute for which the health is required.
      * $params['cluster_manager_timeout']         = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']                = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     * $params['level']                           = (enum) Can be one of cluster, indices or shards. Controls the details level of the health information returned. (Options = cluster,indices,shards,awareness_attributes)
+     * $params['level']                           = (enum) Can be one of cluster, indices or shards. Controls the details level of the health information returned. (Options = awareness_attributes,cluster,indices,shards)
      * $params['local']                           = (boolean) If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node. (Default = false)
      * $params['master_timeout']                  = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                         = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['wait_for_active_shards']          = (any) A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
-     * $params['wait_for_events']                 = (enum) Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed. (Options = immediate,urgent,high,normal,low,languid)
+     * $params['wait_for_events']                 = (enum) Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed. (Options = high,immediate,languid,low,normal,urgent)
      * $params['wait_for_no_initializing_shards'] = (boolean) A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
      * $params['wait_for_no_relocating_shards']   = (boolean) A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
      * $params['wait_for_nodes']                  = (any) The request waits until the specified number N of nodes is available. It also accepts >=N, <=N, >N and <N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
-     * $params['wait_for_status']                 = (enum) One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status. (Options = green,yellow,red)
+     * $params['wait_for_status']                 = (enum) One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status. (Options = green,red,yellow)
      * $params['pretty']                          = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                           = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                     = (boolean) Whether to include the stack trace of returned errors.
@@ -360,7 +360,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Creates or updates a component template.
      *
-     * $params['name']                    = (string) Name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; 'logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-mapping`; `synthetics-settings`. OpenSearch Agent uses these templates to configure backing indices for its data streams. If you use OpenSearch Agent and want to overwrite one of these templates, set the `version` for your replacement template higher than the current version. If you don’t use OpenSearch Agent and want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the cluster update settings API.
+     * $params['name']                    = (string) Name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; 'logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-mapping`; `synthetics-settings`. OpenSearch Agent uses these templates to configure backing indices for its data streams. If you use OpenSearch Agent and want to overwrite one of these templates, set the `version` for your replacement template higher than the current version. If you don't use OpenSearch Agent and want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the cluster update settings API.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing component templates. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
@@ -559,7 +559,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['node_id']       = (array) Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
      * $params['flat_settings'] = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['timeout']       = (string) Period to wait for each node to respond.If a node does not respond before its timeout expires, the response does not include its stats.However, timed out nodes are included in the response’s `_nodes.failed` property. Defaults to no timeout.
+     * $params['timeout']       = (string) Period to wait for each node to respond.If a node does not respond before its timeout expires, the response does not include its stats.However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']         = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.

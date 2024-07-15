@@ -11,7 +11,7 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\ModelGroups;
+namespace OpenSearch\Endpoints\Ml;
 
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;

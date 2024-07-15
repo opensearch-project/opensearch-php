@@ -98,6 +98,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['fielddata']          = (boolean) If `true`, clears the fields cache.Use the `fields` parameter to clear the cache of specific fields only.
      * $params['fields']             = (any) Comma-separated list of field names used to limit the `fielddata` parameter.
+     * $params['file']               = (boolean) If true, clears the unused entries from the file cache on nodes with the Search role. (Default = false)
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['query']              = (boolean) If `true`, clears the query cache.
      * $params['request']            = (boolean) If `true`, clears the request cache.
@@ -902,7 +903,7 @@ class IndicesNamespace extends AbstractNamespace
      * Creates or updates an alias.
      *
      * $params['index']                   = (array) Comma-separated list of data streams or indices to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indices return an error. (Required)
-     * $params['name']                    = (string) Alias to update. If the alias doesn’t exist, the request creates it. Index alias names support date math. (Required)
+     * $params['name']                    = (string) Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math. (Required)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.

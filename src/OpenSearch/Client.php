@@ -34,7 +34,7 @@ use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
 use OpenSearch\Namespaces\KnnNamespace;
-use OpenSearch\Namespaces\MachineLearningNamespace;
+use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\NotificationsNamespace;
@@ -119,6 +119,11 @@ class Client
     protected $knn;
 
     /**
+     * @var MlNamespace
+     */
+    protected $ml;
+
+    /**
      * @var MonitoringNamespace
      */
     protected $monitoring;
@@ -183,10 +188,6 @@ class Client
      */
     protected $transforms;
 
-    /**
-     * @var MachineLearningNamespace
-     */
-    protected $ml;
 
     /**
      * Client constructor
@@ -207,6 +208,7 @@ class Client
         $this->indices = new IndicesNamespace($transport, $endpoint);
         $this->ingest = new IngestNamespace($transport, $endpoint);
         $this->knn = new KnnNamespace($transport, $endpoint);
+        $this->ml = new MlNamespace($transport, $endpoint);
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
         $this->nodes = new NodesNamespace($transport, $endpoint);
         $this->notifications = new NotificationsNamespace($transport, $endpoint);
@@ -218,7 +220,6 @@ class Client
         $this->snapshot = new SnapshotNamespace($transport, $endpoint);
         $this->sql = new SqlNamespace($transport, $endpoint);
         $this->ssl = new SslNamespace($transport, $endpoint);
-        $this->ml = new MachineLearningNamespace($transport, $endpoint);
         $this->tasks = new TasksNamespace($transport, $endpoint);
         $this->transforms = new TransformsNamespace($transport, $endpoint);
 
@@ -233,8 +234,8 @@ class Client
      * $params['_source_excludes']       = (any) A comma-separated list of source fields to exclude from the response.
      * $params['_source_includes']       = (any) A comma-separated list of source fields to include in the response.
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = true,false,wait_for)
-     * $params['require_alias']          = (boolean) If `true`, the request’s actions must target an index alias. (Default = false)
+     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
+     * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
      * $params['routing']                = (string) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
@@ -365,11 +366,11 @@ class Client
      * $params['index']                  = (string) Name of the target index. (Required)
      * $params['if_primary_term']        = (number) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (number) Only perform the operation if the document has this sequence number.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = true,false,wait_for)
+     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
      * $params['routing']                = (string) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for active shards.
      * $params['version']                = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = internal,external,external_gte,force)
+     * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
@@ -440,7 +441,7 @@ class Client
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['scroll_size']            = (number) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.Defaults to no timeout.
-     * $params['search_type']            = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']            = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['size']                   = (integer) Deprecated, please use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
@@ -563,7 +564,7 @@ class Client
      * $params['routing']          = (string) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = internal,external,external_gte,force)
+     * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
@@ -602,7 +603,7 @@ class Client
      * $params['refresh']          = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (string) Target the specified primary shard.
      * $params['version']          = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = internal,external,external_gte,force)
+     * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
@@ -716,7 +717,7 @@ class Client
      * $params['routing']          = (string) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (number) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = internal,external,external_gte,force)
+     * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
@@ -838,7 +839,7 @@ class Client
      * $params['refresh']          = (boolean) If true, OpenSearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
      * $params['routing']          = (string) Target the specified primary shard.
      * $params['version']          = (number) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = internal,external,external_gte,force)
+     * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
@@ -868,14 +869,14 @@ class Client
      * $params['id']                     = (string) Unique identifier for the document.
      * $params['if_primary_term']        = (number) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (number) Only perform the operation if the document has this sequence number.
-     * $params['op_type']                = (enum) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`. (Options = index,create)
+     * $params['op_type']                = (enum) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`. (Options = create,index)
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = true,false,wait_for)
+     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
      * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
      * $params['routing']                = (string) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['version']                = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = internal,external,external_gte,force)
+     * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
@@ -966,7 +967,7 @@ class Client
      * $params['max_concurrent_shard_requests'] = (number) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
      * $params['pre_filter_shard_size']         = (number) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
      * $params['rest_total_hits_as_int']        = (boolean) If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object. (Default = false)
-     * $params['search_type']                   = (enum) Indicates whether global term and document frequencies should be used when scoring returned documents. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']                   = (enum) Indicates whether global term and document frequencies should be used when scoring returned documents. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']                    = (boolean) Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
      * $params['pretty']                        = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                         = (boolean) Whether to return human readable values for statistics.
@@ -998,7 +999,7 @@ class Client
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches'] = (number) Maximum number of concurrent searches the API can run.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, the response returns `hits.total` as an integer.If `false`, it returns `hits.total` as an object. (Default = false)
-     * $params['search_type']             = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']             = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
@@ -1038,7 +1039,7 @@ class Client
      * $params['routing']          = (string) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If true, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (number) If `true`, returns the document version as part of a hit.
-     * $params['version_type']     = (enum) Specific version type. (Options = internal,external,external_gte,force)
+     * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
@@ -1156,7 +1157,7 @@ class Client
      * $params['refresh']                = (boolean) If `true`, the request refreshes affected shards to make this operation visible to search.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second.Defaults to no throttle. (Default = 0)
      * $params['scroll']                 = (string) Specifies how long a consistent view of the index should be maintained for scrolled search.
-     * $params['slices']                 = (any) The number of slices this task should be divided into.Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+     * $params['slices']                 = (any) The number of slices this task should be divided into.Defaults to 1 slice, meaning the task isn't sliced into subtasks.
      * $params['timeout']                = (string) Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['wait_for_completion']    = (boolean) If `true`, the request blocks until the operation is complete. (Default = true)
@@ -1261,7 +1262,7 @@ class Client
      * Allows to retrieve a large numbers of results from a single search request.
      *
      * $params['scroll_id']              = DEPRECATED (string) The scroll ID
-     * $params['rest_total_hits_as_int'] = (boolean) If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object. (Default = false)
+     * $params['rest_total_hits_as_int'] = (boolean) If true, the API response's hit.total property is returned as an integer. If false, the API response's hit.total property is returned as an object. (Default = false)
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
@@ -1320,14 +1321,14 @@ class Client
      * $params['routing']                       = (string) Custom value used to route operations to a specific shard.
      * $params['scroll']                        = (string) Period to retain the search context for scrolling. See Scroll search results.By default, this value cannot exceed `1d` (24 hours).You can change this limit using the `search.max_keep_alive` cluster-level setting.
      * $params['search_pipeline']               = (string) Customizable sequence of processing stages applied to search queries.
-     * $params['search_type']                   = (enum) How distributed term frequencies are calculated for relevance scoring. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']                   = (enum) How distributed term frequencies are calculated for relevance scoring. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['seq_no_primary_term']           = (boolean) If `true`, returns sequence number and primary term of the last modification of each hit.
      * $params['size']                          = (number) Defines the number of hits to return.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 10)
      * $params['sort']                          = (any) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                         = (array) Specific `tag` of the request for logging and statistical purposes.
      * $params['stored_fields']                 = (any) A comma-separated list of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to `false`.You can pass `_source: true` to return both source fields and stored fields in the search response.
      * $params['suggest_field']                 = (string) Specifies which field to use for suggestions.
-     * $params['suggest_mode']                  = (enum) Specifies the suggest mode.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified. (Options = missing,popular,always)
+     * $params['suggest_mode']                  = (enum) Specifies the suggest mode.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified. (Options = always,missing,popular)
      * $params['suggest_size']                  = (number) Number of suggestions to return.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
      * $params['suggest_text']                  = (string) The source text for which the suggestions should be returned.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
      * $params['terminate_after']               = (number) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.If set to `0` (default), the query does not terminate early.
@@ -1404,7 +1405,7 @@ class Client
      * $params['rest_total_hits_as_int']  = (boolean) If true, hits.total are rendered as an integer in the response. (Default = false)
      * $params['routing']                 = (string) Custom value used to route operations to a specific shard.
      * $params['scroll']                  = (string) Specifies how long a consistent view of the indexshould be maintained for scrolled search.
-     * $params['search_type']             = (enum) The type of the search operation. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']             = (enum) The type of the search operation. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
@@ -1444,7 +1445,7 @@ class Client
      * $params['routing']          = (string) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (number) If `true`, returns the document version as part of a hit.
-     * $params['version_type']     = (enum) Specific version type. (Options = internal,external,external_gte,force)
+     * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
@@ -1481,7 +1482,7 @@ class Client
      * $params['if_primary_term']        = (number) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (number) Only perform the operation if the document has this sequence number.
      * $params['lang']                   = (string) The script language. (Default = painless)
-     * $params['refresh']                = (enum) If 'true', OpenSearch refreshes the affected shards to make this operationvisible to search, if 'wait_for' then wait for a refresh to make this operationvisible to search, if 'false' do nothing with refreshes. (Options = true,false,wait_for)
+     * $params['refresh']                = (enum) If 'true', OpenSearch refreshes the affected shards to make this operationvisible to search, if 'wait_for' then wait for a refresh to make this operationvisible to search, if 'false' do nothing with refreshes. (Options = false,true,wait_for)
      * $params['require_alias']          = (boolean) If true, the destination must be an index alias. (Default = false)
      * $params['retry_on_conflict']      = (number) Specify how many times should the operation be retried when a conflict occurs. (Default = 0)
      * $params['routing']                = (string) Custom value used to route operations to a specific shard.
@@ -1540,7 +1541,7 @@ class Client
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['scroll_size']            = (number) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.
-     * $params['search_type']            = (enum) The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']            = (enum) The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['size']                   = (integer) Deprecated, please use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
@@ -1708,6 +1709,13 @@ class Client
         return $this->knn;
     }
     /**
+     * Returns the ml namespace
+     */
+    public function ml(): MlNamespace
+    {
+        return $this->ml;
+    }
+    /**
      * Returns the monitoring namespace
      */
     public function monitoring(): MonitoringNamespace
@@ -1797,10 +1805,6 @@ class Client
     public function transforms(): TransformsNamespace
     {
         return $this->transforms;
-    }
-    public function ml(): MachineLearningNamespace
-    {
-        return $this->ml;
     }
 
     /**

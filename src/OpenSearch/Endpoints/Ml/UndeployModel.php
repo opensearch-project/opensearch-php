@@ -11,12 +11,12 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Models;
+namespace OpenSearch\Endpoints\Ml;
 
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class DeployModel extends AbstractEndpoint
+class UndeployModel extends AbstractEndpoint
 {
     /**
      * @return string[]
@@ -32,11 +32,11 @@ class DeployModel extends AbstractEndpoint
     public function getURI(): string
     {
         if ($this->id) {
-            return "/_plugins/_ml/models/$this->id/_deploy";
+            return "/_plugins/_ml/models/$this->id/_undeploy";
         }
 
         throw new RuntimeException(
-            'id is required for deploy'
+            'id is required for undeploy'
         );
 
     }

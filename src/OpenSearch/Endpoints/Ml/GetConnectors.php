@@ -11,12 +11,11 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Tasks;
+namespace OpenSearch\Endpoints\Ml;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class GetTask extends AbstractEndpoint
+class GetConnectors extends AbstractEndpoint
 {
     /**
      * @return string[]
@@ -31,14 +30,7 @@ class GetTask extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        if ($this->id) {
-            return "/_plugins/_ml/tasks/$this->id";
-        }
-
-        throw new RuntimeException(
-            'id is required for get'
-        );
-
+        return '/_plugins/_ml/connectors/_search';
     }
 
     /**
@@ -46,6 +38,6 @@ class GetTask extends AbstractEndpoint
      */
     public function getMethod(): string
     {
-        return 'GET';
+        return 'POST';
     }
 }
