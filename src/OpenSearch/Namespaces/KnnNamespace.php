@@ -101,14 +101,14 @@ class KnnNamespace extends AbstractNamespace
      * $params['rest_total_hits_as_int']        = (boolean) Indicates whether hits.total should be rendered as an integer or an object in the rest search response. (Default = false)
      * $params['routing']                       = (array) Comma-separated list of specific routing values.
      * $params['scroll']                        = (string) Specify how long a consistent view of the index should be maintained for scrolled search.
-     * $params['search_type']                   = (enum) Search operation type. (Options = query_then_fetch,dfs_query_then_fetch)
+     * $params['search_type']                   = (enum) Search operation type. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['seq_no_primary_term']           = (boolean) Specify whether to return sequence number and primary term of the last modification of each hit.
      * $params['size']                          = (integer) Number of hits to return. (Default = 10)
      * $params['sort']                          = (array) Comma-separated list of <field>:<direction> pairs.
      * $params['stats']                         = (array) Specific 'tag' of the request for logging and statistical purposes.
      * $params['stored_fields']                 = (array) Comma-separated list of stored fields to return.
      * $params['suggest_field']                 = (string) Specify which field to use for suggestions.
-     * $params['suggest_mode']                  = (enum) Specify suggest mode. (Options = missing,popular,always)
+     * $params['suggest_mode']                  = (enum) Specify suggest mode. (Options = always,missing,popular)
      * $params['suggest_size']                  = (integer) How many suggestions to return in response.
      * $params['suggest_text']                  = (string) The source text for which the suggestions should be returned.
      * $params['terminate_after']               = (integer) The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.

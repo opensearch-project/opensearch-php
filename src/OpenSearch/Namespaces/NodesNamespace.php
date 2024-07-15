@@ -39,7 +39,7 @@ class NodesNamespace extends AbstractNamespace
      * $params['snapshots']           = (integer) Number of samples of thread stacktrace. (Default = 10)
      * $params['threads']             = (integer) Specify the number of threads to provide information for. (Default = 3)
      * $params['timeout']             = (string) Operation timeout.
-     * $params['type']                = (enum) The type to sample. (Options = cpu,wait,block)
+     * $params['type']                = (enum) The type to sample. (Options = block,cpu,wait)
      * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.

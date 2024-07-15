@@ -89,7 +89,7 @@ class TasksNamespace extends AbstractNamespace
      *
      * $params['actions']             = (any) Comma-separated list or wildcard expression of actions used to limit the request.
      * $params['detailed']            = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
-     * $params['group_by']            = (enum) Key used to group tasks in the response. (Options = nodes,parents,none)
+     * $params['group_by']            = (enum) Key used to group tasks in the response. (Options = nodes,none,parents)
      * $params['nodes']               = (array) Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
      * $params['parent_task_id']      = (string) Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of `-1`.
      * $params['timeout']             = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.

@@ -11,11 +11,11 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Connectors;
+namespace OpenSearch\Endpoints\Ml;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class CreateConnector extends AbstractEndpoint
+class GetModelGroups extends AbstractEndpoint
 {
     /**
      * @return string[]
@@ -30,7 +30,7 @@ class CreateConnector extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        return "/_plugins/_ml/connectors/_create";
+        return '/_plugins/_ml/model_groups/_search';
     }
 
     /**

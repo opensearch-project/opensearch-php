@@ -44,6 +44,7 @@ class ClearCache extends AbstractEndpoint
             'expand_wildcards',
             'fielddata',
             'fields',
+            'file',
             'ignore_unavailable',
             'index',
             'query',

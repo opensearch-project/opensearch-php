@@ -180,6 +180,21 @@ foreach ($list_of_dicts as $index => $endpoint) {
                 $parts_dict['deprecated'] = $part['deprecated'];
             }
 
+            # To prevent breaking change, replaced below path parameter to 'id'
+
+            $operationGroups = [
+                'ml.delete_model' => 'model_id',
+                'ml.delete_model_group' => 'model_group_id',
+                'ml.get_task' => 'task_id'
+            ];
+
+            foreach ($operationGroups as $group => $name) {
+                if ($endpoint['x-operation-group'] === $group && $part['name'] === $name) {
+                    $part['name'] = 'id';
+                    break;
+                }
+            }
+
             $parts_new[$part['name']] = $parts_dict;
         }
         if (!empty($parts_new)) {
@@ -287,6 +302,12 @@ foreach ($grouped as $key => $value) {
             $api['stability'] = 'stable';
             $api['visibility'] = 'public';
             $api['headers'] = ['accept' => ['application/json']];
+        }
+
+        foreach ($operationGroups as $group => $name) {
+            if ($key === $group) {
+                $path = str_replace($name, 'id', $path);
+            }
         }
 
         $path_data = ['path' => $path, 'methods' => $methods];
@@ -508,7 +529,10 @@ function isValidPhpSyntax(string $filename): bool
 function Patch_Endpoints()
 {
     $patchEndpoints = ['AsyncSearch', 'SearchableSnapshots', 'Ssl', 'Sql',
-    'DataFrameTransformDeprecated', 'Monitoring', 'Indices/RefreshSearchAnalyzers' ];
+    'DataFrameTransformDeprecated', 'Monitoring', 'Indices/RefreshSearchAnalyzers',
+    'Ml/CreateConnector', 'Ml/DeleteConnector', 'Ml/GetConnector', 'Ml/GetConnectors',
+    'Ml/GetModelGroups', 'Ml/UpdateModelGroup', 'Ml/DeployModel', 'Ml/GetModel', 'Ml/Predict',
+    'Ml/UndeployModel'];
     $outputDir = __DIR__ . "/output";
     $destDir = __DIR__ . "/../src/OpenSearch";
 

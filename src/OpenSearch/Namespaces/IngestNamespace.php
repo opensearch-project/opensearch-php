@@ -136,7 +136,7 @@ class IngestNamespace extends AbstractNamespace
     /**
      * Allows to simulate a pipeline with example documents.
      *
-     * $params['id']          = (string) Pipeline to test. If you don’t specify a `pipeline` in the request body, this parameter is required.
+     * $params['id']          = (string) Pipeline to test. If you don't specify a `pipeline` in the request body, this parameter is required.
      * $params['verbose']     = (boolean) If `true`, the response includes output data for each processor in the executed pipeline. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.

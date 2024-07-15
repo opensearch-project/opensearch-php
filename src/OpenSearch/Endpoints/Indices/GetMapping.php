@@ -44,6 +44,7 @@ class GetMapping extends AbstractEndpoint
             'cluster_manager_timeout',
             'expand_wildcards',
             'ignore_unavailable',
+            'index',
             'local',
             'master_timeout',
             'pretty',

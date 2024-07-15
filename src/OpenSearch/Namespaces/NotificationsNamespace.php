@@ -122,7 +122,7 @@ class NotificationsNamespace extends AbstractNamespace
      *
      * $params['chime.url']                                    = (string)
      * $params['chime.url.keyword']                            = (string)
-     * $params['config_type']                                  = (enum) Type of notification configuration. (Options = slack,chime,microsoft_teams,webhook,email,sns,ses_account,smtp_account,email_group)
+     * $params['config_type']                                  = (enum) Type of notification configuration. (Options = chime,email,email_group,microsoft_teams,ses_account,slack,smtp_account,sns,webhook)
      * $params['created_time_ms']                              = (integer)
      * $params['description']                                  = (string)
      * $params['description.keyword']                          = (string)

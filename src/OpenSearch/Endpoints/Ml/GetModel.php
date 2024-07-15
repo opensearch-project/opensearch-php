@@ -11,12 +11,12 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Connectors;
+namespace OpenSearch\Endpoints\Ml;
 
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class DeleteConnector extends AbstractEndpoint
+class GetModel extends AbstractEndpoint
 {
     /**
      * @return string[]
@@ -32,11 +32,11 @@ class DeleteConnector extends AbstractEndpoint
     public function getURI(): string
     {
         if ($this->id) {
-            return "/_plugins/_ml/connectors/$this->id";
+            return "/_plugins/_ml/models/$this->id";
         }
 
         throw new RuntimeException(
-            'id is required for delete'
+            'id is required for get'
         );
 
     }
@@ -46,6 +46,6 @@ class DeleteConnector extends AbstractEndpoint
      */
     public function getMethod(): string
     {
-        return 'DELETE';
+        return 'GET';
     }
 }

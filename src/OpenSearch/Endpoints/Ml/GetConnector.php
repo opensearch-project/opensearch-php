@@ -11,11 +11,12 @@ declare(strict_types=1);
  *   compatible open source license.
  */
 
-namespace OpenSearch\Endpoints\MachineLearning\Models;
+namespace OpenSearch\Endpoints\Ml;
 
+use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
-class RegisterModel extends AbstractEndpoint
+class GetConnector extends AbstractEndpoint
 {
     /**
      * @return string[]
@@ -30,7 +31,14 @@ class RegisterModel extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        return "/_plugins/_ml/models/_register";
+        if ($this->id) {
+            return "/_plugins/_ml/connectors/$this->id";
+        }
+
+        throw new RuntimeException(
+            'id is required for get'
+        );
+
     }
 
     /**
@@ -38,6 +46,6 @@ class RegisterModel extends AbstractEndpoint
      */
     public function getMethod(): string
     {
-        return 'POST';
+        return 'GET';
     }
 }
