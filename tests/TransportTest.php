@@ -26,8 +26,6 @@ use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
-use GuzzleHttp\Ring\Future\FutureArray;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;

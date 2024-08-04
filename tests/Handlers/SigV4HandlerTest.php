@@ -6,7 +6,6 @@ namespace OpenSearch\Tests\Handlers;
 
 use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
-use GuzzleHttp\Ring\Future\CompletedFutureArray;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Handlers\SigV4Handler;
 use PHPUnit\Framework\TestCase;

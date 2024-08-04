@@ -38,12 +38,14 @@ use OpenSearch\Handlers\SigV4Handler;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
-use GuzzleHttp\Ring\Client\CurlHandler;
-use GuzzleHttp\Ring\Client\CurlMultiHandler;
-use GuzzleHttp\Ring\Client\Middleware;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionClass;
+use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\Handler\CurlMultiHandler;
+use GuzzleHttp\Handler\Proxy;
+use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Utils;
 
 class ClientBuilder
 {
@@ -239,30 +241,30 @@ class ClientBuilder
         return $builder->build();
     }
 
-    /**
-     * Get the default handler
-     *
-     * @param array $multiParams
-     * @param array $singleParams
-     * @throws \RuntimeException
-     */
-    public static function defaultHandler(array $multiParams = [], array $singleParams = []): callable
-    {
-        $future = null;
-        if (extension_loaded('curl')) {
-            $config = array_merge([ 'mh' => curl_multi_init() ], $multiParams);
-            if (function_exists('curl_reset')) {
-                $default = new CurlHandler($singleParams);
-                $future = new CurlMultiHandler($config);
-            } else {
-                $default = new CurlMultiHandler($config);
-            }
-        } else {
-            throw new \RuntimeException('OpenSearch-PHP requires cURL, or a custom HTTP handler.');
-        }
+    // /**
+    //  * Get the default handler
+    //  *
+    //  * @param array $multiParams
+    //  * @param array $singleParams
+    //  * @throws \RuntimeException
+    //  */
+    // public static function defaultHandler(array $multiParams = [], array $singleParams = []): callable
+    // {
+    //     $future = null;
+    //     if (extension_loaded('curl')) {
+    //         $config = array_merge([ 'mh' => curl_multi_init() ], $multiParams);
+    //         if (function_exists('curl_reset')) {
+    //             $default = new CurlHandler($singleParams);
+    //             $future = new CurlMultiHandler($config);
+    //         } else {
+    //             $default = new CurlMultiHandler($config);
+    //         }
+    //     } else {
+    //         throw new \RuntimeException('OpenSearch-PHP requires cURL, or a custom HTTP handler.');
+    //     }
 
-        return $future ? Middleware::wrapFuture($default, $future) : $default;
-    }
+    //     return $future ? Proxy::wrapSync($default, $future) : $default;
+    // }
 
     /**
      * Get the multi handler for async (CurlMultiHandler)
@@ -583,7 +585,7 @@ class ClientBuilder
         $this->buildLoggers();
 
         if (is_null($this->handler)) {
-            $this->handler = ClientBuilder::defaultHandler();
+            $this->handler = Utils::chooseHandler(); // ClientBuilder::defaultHandler();
         }
 
         if (!is_null($this->sigV4CredentialProvider)) {
@@ -610,18 +612,21 @@ class ClientBuilder
         }
 
         if (!is_null($sslOptions)) {
-            $sslHandler = function (callable $handler, array $sslOptions) {
-                return function (array $request) use ($handler, $sslOptions) {
-                    // Add our custom headers
-                    foreach ($sslOptions as $key => $value) {
-                        $request['client'][$key] = $value;
-                    }
+            // $sslHandler = function (callable $handler, array $sslOptions) {
+            //     return function (RequestInterface $request, array $options) use ($handler, $sslOptions) {
+            //         // Add our custom headers
+            //         foreach ($sslOptions as $key => $value) {
+            //             $request['client'][$key] = $value;
+            //         }
 
-                    // Send the request using the handler and return the response.
-                    return $handler($request);
-                };
-            };
-            $this->handler = $sslHandler($this->handler, $sslOptions);
+            //         // Send the request using the handler and return the response.
+            //         return $handler($request);
+            //     };
+            // };
+            // $this->handler = $sslHandler($this->handler, $sslOptions);
+            foreach ($sslOptions as $key => $value) {
+                $this->connectionParams['client'][$key] = $value;
+            }
         }
 
         if (is_null($this->serializer)) {

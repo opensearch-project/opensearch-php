@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests;
 
-use GuzzleHttp\Ring\Client\MockHandler;
-use GuzzleHttp\Ring\Future\FutureArray;
 use Mockery as m;
 use OpenSearch;
 use OpenSearch\Client;

@@ -25,8 +25,8 @@ use OpenSearch\Common\Exceptions;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionInterface;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use Psr\Log\LoggerInterface;
+use GuzzleHttp\Promise\Promise;
 
 class Transport
 {
@@ -96,7 +96,7 @@ class Transport
      *
      * @throws Common\Exceptions\NoNodesAvailableException|\Exception
      */
-    public function performRequest(string $method, string $uri, array $params = [], $body = null, array $options = []): FutureArrayInterface
+    public function performRequest(string $method, string $uri, array $params = [], $body = null, array $options = []): Promise
     {
         try {
             $connection  = $this->getConnection();
@@ -118,7 +118,7 @@ class Transport
             $this
         );
 
-        $future->promise()->then(
+        $future->then(
             //onSuccess
             function ($response) {
                 $this->retryAttempts = 0;
@@ -144,19 +144,19 @@ class Transport
      *
      * @return callable|array
      */
-    public function resultOrFuture(FutureArrayInterface $result, array $options = [])
+    public function resultOrFuture(Promise $result, array $options = [])
     {
         $response = null;
         $async = isset($options['client']['future']) ? $options['client']['future'] : null;
         if (is_null($async) || $async === false) {
             do {
                 $result = $result->wait();
-            } while ($result instanceof FutureArrayInterface);
+            } while ($result instanceof Promise);
         }
         return $result;
     }
 
-    public function shouldRetry(array $request): bool
+    public function shouldRetry(RequestInterface $request): bool
     {
         if ($this->retryAttempts < $this->retries) {
             $this->retryAttempts += 1;
