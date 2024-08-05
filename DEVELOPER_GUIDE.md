@@ -36,6 +36,14 @@ The integration tests are using by default following address `https://admin:admi
 
 To run the integration tests, you can use `composer run integration`
 
+```bash
+export OPENSEARCH_PASSWORD=myStrongPassword123!
+export OPENSEARCH_URL=https://admin:$OPENSEARCH_PASSWORD@localhost:9200
+
+composer run integration
+```
+
+
 ### Static analyse and code style checker
 
 The project uses PhpStan for static analyse and php-cs-fixer for code style checker. You can use both tools with following codes
