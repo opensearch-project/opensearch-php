@@ -33,6 +33,7 @@ use Psr\Log\LogLevel;
  *
  * @subpackage Tests
  * @group      Integration
+ * @group      Integration-Min
  */
 class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 {
