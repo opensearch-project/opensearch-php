@@ -32,6 +32,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @subpackage Tests/SniffingConnectionPoolTest
  * @group Integration
+ * @group Integration-Min
  */
 class SniffingConnectionPoolIntegrationTest extends TestCase
 {

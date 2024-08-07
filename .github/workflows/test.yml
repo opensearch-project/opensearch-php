@@ -132,7 +132,7 @@ jobs:
         composer run unit
 
   integration-test-elasticsearch:
-    name: Tntegration Test (Elasticsearch)
+    name: Integration Test (Elasticsearch)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -175,7 +175,7 @@ jobs:
         OPENSEARCH_URL: 'http://localhost:9200'
 
   integration-test-opensearch:
-    name: Tntegration Test (OpenSearch)
+    name: Integration Test (OpenSearch)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -234,7 +234,7 @@ jobs:
         OPENSEARCH_URL: 'http://localhost:9200'
 
   integration-test-opensearch-strong-password:
-    name: Tntegration Test (OpenSearch w/Strong Password)
+    name: Integration Test (OpenSearch w/Strong Password)
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -244,6 +244,8 @@ jobs:
         search-server-image:
           - opensearchproject/opensearch:2.12.0
           - opensearchproject/opensearch:2.13.0
+          - opensearchproject/opensearch:2.14.0
+          - opensearchproject/opensearch:2.15.0
     services:
       search-server:
         image: ${{ matrix.search-server-image }}

@@ -25,7 +25,6 @@ use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Transport;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 
 abstract class BooleanRequestWrapper
 {

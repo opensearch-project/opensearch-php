@@ -46,7 +46,7 @@ class SigV4Handler
             ?: CredentialProvider::defaultProvider();
     }
 
-    public function __invoke(array $request)
+    public function __invoke(RequestInterface $request)
     {
         $creds = call_user_func($this->credentialProvider)->wait();
 

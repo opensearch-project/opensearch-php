@@ -30,7 +30,7 @@ class MlNamespaceIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         $client = Utility::getClient();
 
-        if (!Utility::isOpenSearchVersionAtLeast($client, '2.8.0') || !Utility::isOpenSearchVersionAtmost($client, '2.x')) {
+        if (!Utility::isOpenSearchVersionAtLeast($client, '2.8.0')) {
             $this->markTestSkipped('Ml plugin tests require OpenSearch >= 2.8.0');
         }
 
@@ -47,7 +47,7 @@ class MlNamespaceIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         $client = Utility::getClient();
 
-        if (!Utility::isOpenSearchVersionAtLeast($client, '2.12.0') || !Utility::isOpenSearchVersionAtmost($client, '2.x')) {
+        if (!Utility::isOpenSearchVersionAtLeast($client, '2.12.0')) {
             $this->markTestSkipped('Ml plugin tests require OpenSearch >= 2.12.0');
         }
 
@@ -59,7 +59,7 @@ class MlNamespaceIntegrationTest extends \PHPUnit\Framework\TestCase
     {
         $client = Utility::getClient();
 
-        if (!Utility::isOpenSearchVersionAtLeast($client, '2.12.0') || !Utility::isOpenSearchVersionAtmost($client, '2.x')) {
+        if (!Utility::isOpenSearchVersionAtLeast($client, '2.12.0')) {
             $this->markTestSkipped('Ml plugin tests require OpenSearch >= 2.12.0');
         }
 

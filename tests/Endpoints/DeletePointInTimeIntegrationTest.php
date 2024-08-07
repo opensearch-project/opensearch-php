@@ -29,6 +29,7 @@ use OpenSearch\Tests\Utility;
  *
  * @subpackage Tests\Endpoints
  * @group Integration
+ * @group Integration-Min
  */
 class DeletePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
 {

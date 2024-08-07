@@ -1,0 +1,18 @@
+{
+    "name": "opensearch-php/samples",
+    "description": "OpenSearch PHP client samples.",
+    "type": "project",
+    "authors": [],
+    "scripts": {
+      "index": ["php index.php"]
+    },
+    "repositories": [
+      {
+        "type": "path",
+        "url": "../" 
+      }
+    ],
+    "require": {
+      "opensearch-project/opensearch-php": "dev-main"
+    }
+  }

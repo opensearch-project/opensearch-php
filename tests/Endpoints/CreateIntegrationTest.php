@@ -28,6 +28,7 @@ use OpenSearch\Tests\Utility;
  *
  * @subpackage Tests\Endpoints
  * @group Integration
+ * @group Integration-Min
  */
 class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
 {
