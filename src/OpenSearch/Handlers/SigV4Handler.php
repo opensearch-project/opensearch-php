@@ -13,10 +13,22 @@ use OpenSearch\ClientBuilder;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 
+/**
+ * @phpstan-type RingPhpRequest array{http_method: string, scheme: string, uri: string, query_string?: string, version?: string, headers: array<string, list<string>>, body: string|resource|null, client?: array<string, mixed>}
+ */
 class SigV4Handler
 {
+    /**
+     * @var SignatureV4
+     */
     private $signer;
+    /**
+     * @var callable
+     */
     private $credentialProvider;
+    /**
+     * @var callable
+     */
     private $wrappedHandler;
 
     /**
@@ -46,6 +58,9 @@ class SigV4Handler
             ?: CredentialProvider::defaultProvider();
     }
 
+    /**
+     * @phpstan-param RingPhpRequest $request
+     */
     public function __invoke(array $request)
     {
         $creds = call_user_func($this->credentialProvider)->wait();
@@ -66,6 +81,9 @@ class SigV4Handler
         }
     }
 
+    /**
+     * @phpstan-param RingPhpRequest $ringPhpRequest
+     */
     private function createPsr7Request(array $ringPhpRequest): Request
     {
         // fix for uppercase 'Host' array key in elasticsearch-php 5.3.1 and backward compatible
@@ -96,6 +114,11 @@ class SigV4Handler
         );
     }
 
+    /**
+     * @phpstan-param RingPhpRequest $originalRequest
+     *
+     * @phpstan-return RingPhpRequest
+     */
     private function createRingRequest(RequestInterface $request, array $originalRequest): array
     {
         $uri = $request->getUri();

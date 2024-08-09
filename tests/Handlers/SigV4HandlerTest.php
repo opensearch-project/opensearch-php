@@ -15,6 +15,9 @@ class SigV4HandlerTest extends TestCase
 {
     private const ENV_KEYS_USED = [CredentialProvider::ENV_KEY, CredentialProvider::ENV_SECRET];
 
+    /**
+     * @var array<string, string|false>
+     */
     private $envTemp = [];
 
     protected function setUp(): void

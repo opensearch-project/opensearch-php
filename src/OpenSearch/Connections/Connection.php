@@ -95,7 +95,7 @@ class Connection implements ConnectionInterface
     protected $connectionParams;
 
     /**
-     * @var array
+     * @var array<string, list<string>>
      */
     protected $headers = [];
 
@@ -129,6 +129,10 @@ class Connection implements ConnectionInterface
      */
     private $OSVersion = null;
 
+    /**
+     * @param array{host: string, port?: int, scheme?: string, user?: string, pass?: string, path?: string} $hostDetails
+     * @param array{client?: array{headers?: array<string, list<string>>, curl?: array<int, mixed>}} $connectionParams
+     */
     public function __construct(
         callable $handler,
         array $hostDetails,
@@ -192,10 +196,10 @@ class Connection implements ConnectionInterface
     /**
      * @param  string    $method
      * @param  string    $uri
-     * @param  null|array   $params
-     * @param  null|mixed   $body
+     * @param  null|array<string, mixed> $params
+     * @param  mixed     $body
      * @param  array     $options
-     * @param  Transport $transport
+     * @param  Transport|null $transport
      * @return mixed
      */
     public function performRequest(string $method, string $uri, ?array $params = [], $body = null, array $options = [], Transport $transport = null)
@@ -344,6 +348,9 @@ class Connection implements ConnectionInterface
         };
     }
 
+    /**
+     * @param array<string, string|int|bool>|null $params
+     */
     private function getURI(string $uri, ?array $params): string
     {
         if (isset($params) === true && !empty($params)) {
@@ -370,6 +377,9 @@ class Connection implements ConnectionInterface
         return $uri;
     }
 
+    /**
+     * @return array<string, list<string>>
+     */
     public function getHeaders(): array
     {
         return $this->headers;
