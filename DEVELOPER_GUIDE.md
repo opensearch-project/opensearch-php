@@ -34,7 +34,15 @@ If you don't have a running server, you can start one with Docker using `docker 
 
 The integration tests are using by default following address `https://admin:admin@localhost:9200`. This can be changed by setting the environment variable `OPENSEARCH_URL` to a different url.
 
-To run the integration tests, you can use `composer run integration`
+To run the integration tests, you can use `composer run integration-min` for just OpenSearch or `composer run integration` for OpenSearch and its plugins.
+
+```bash
+export OPENSEARCH_PASSWORD=myStrongPassword123!
+export OPENSEARCH_URL=https://admin:$OPENSEARCH_PASSWORD@localhost:9200
+
+composer run integration
+```
+
 
 ### Static analyse and code style checker
 

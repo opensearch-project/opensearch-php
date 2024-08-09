@@ -79,35 +79,7 @@ class Utility
             return false;
         }
         $versionNumber = $versionInfo['number'];
-        return version_compare($versionNumber, $version) >= 0;
-    }
-
-    /**
-     * Check if cluster is OpenSearch and version is less than the specified version.
-     */
-    public static function isOpenSearchVersionAtMost(Client $client, string $version): bool
-    {
-        $versionInfo = self::getVersion($client);
-        $distribution = $versionInfo['distribution'] ?? null;
-        if ($distribution !== 'opensearch') {
-            return false;
-        }
-        $versionNumber = $versionInfo['number'];
-        return version_compare($versionNumber, $version, '<');
-    }
-
-    /**
-     * Check if cluster is Elasticsearch and version is greater than or equal to specified version.
-     */
-    public static function isElasticSearchVersionAtLeast(Client $client, string $version): bool
-    {
-        $versionInfo = self::getVersion($client);
-        $distribution = $versionInfo['distribution'] ?? null;
-        if ($distribution === 'opensearch') {
-            return false;
-        }
-        $versionNumber = $versionInfo['number'];
-        return version_compare($versionNumber, $version) >= 0;
+        return version_compare($versionNumber, $version, '>=');
     }
 
     private static function getVersion(Client $client): array
@@ -137,10 +109,7 @@ class Utility
     */
     private static function wipeCluster(Client $client): void
     {
-        if (self::isElasticSearchVersionAtLeast($client, '7.4.0')) {
-            self::deleteAllSLMPolicies($client);
-        }
-
+        self::deleteAllSLMPolicies($client);
         self::wipeSnapshots($client);
         self::wipeDataStreams($client);
         self::wipeAllIndices($client);
@@ -229,12 +198,10 @@ class Utility
     private static function wipeDataStreams(Client $client): void
     {
         try {
-            if (self::isElasticSearchVersionAtLeast($client, '7.9.0')) {
-                $client->indices()->deleteDataStream([
-                    'name' => '*',
-                    'expand_wildcards' => 'all'
-                ]);
-            }
+            $client->indices()->deleteDataStream([
+                'name' => '*',
+                'expand_wildcards' => 'all'
+            ]);
         } catch (OpenSearchException $e) {
             // We hit a version of ES that doesn't understand expand_wildcards, try again without it
             try {
@@ -255,14 +222,10 @@ class Utility
      */
     private static function wipeAllIndices(Client $client): void
     {
-        $expand = 'open,closed';
-        if (self::isElasticSearchVersionAtLeast($client, '7.7.0')) {
-            $expand .= ',hidden';
-        }
         try {
             $client->indices()->delete([
                 'index' => '*,-.ds-ilm-history-*',
-                'expand_wildcards' => $expand
+                'expand_wildcards' => 'open,closed,hidden'
             ]);
         } catch (Exception $e) {
             if ($e->getCode() != '404') {

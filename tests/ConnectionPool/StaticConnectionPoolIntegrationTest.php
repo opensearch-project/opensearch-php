@@ -29,6 +29,7 @@ use OpenSearch\Tests\Utility;
  *
  * @subpackage Tests/StaticConnectionPoolTest
  * @group Integration
+ * @group Integration-Min
  */
 class StaticConnectionPoolIntegrationTest extends \PHPUnit\Framework\TestCase
 {
