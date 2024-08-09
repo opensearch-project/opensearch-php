@@ -23,5 +23,8 @@ namespace OpenSearch\Connections;
 
 interface ConnectionFactoryInterface
 {
+    /**
+     * @param array{host: string, port?: int, scheme?: string, user?: string, pass?: string, path?: string} $hostDetails
+     */
     public function create(array $hostDetails): ConnectionInterface;
 }

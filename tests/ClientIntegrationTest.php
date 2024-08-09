@@ -38,7 +38,7 @@ use Psr\Log\LogLevel;
 class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * ArrayLogger
+     * @var ArrayLogger
      */
     private $logger;
 

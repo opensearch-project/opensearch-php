@@ -41,7 +41,8 @@ class SniffingConnectionPool extends AbstractConnectionPool
     private $nextSniff;
 
     /**
-     * {@inheritdoc}
+     * @param ConnectionInterface[] $connections
+     * @param array<string, mixed>  $connectionPoolParams
      */
     public function __construct(
         $connections,
@@ -148,6 +149,9 @@ class SniffingConnectionPool extends AbstractConnectionPool
         return true;
     }
 
+    /**
+     * @return list<array{host: string, port: int}>
+     */
     private function parseClusterState($nodeInfo): array
     {
         $pattern = '/([^:]*):(\d+)/';
@@ -167,6 +171,9 @@ class SniffingConnectionPool extends AbstractConnectionPool
         return $hosts;
     }
 
+    /**
+     * @param array<string, mixed> $connectionPoolParams
+     */
     private function setConnectionPoolParams(array $connectionPoolParams): void
     {
         $this->sniffingInterval = (int)($connectionPoolParams['sniffingInterval'] ?? 300);

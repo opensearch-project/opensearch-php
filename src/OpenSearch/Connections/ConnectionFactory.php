@@ -51,6 +51,9 @@ class ConnectionFactory implements ConnectionFactoryInterface
      */
     private $handler;
 
+    /**
+     * @param array{client?: array{headers?: array<string, list<string>>, curl?: array<int, mixed>}} $connectionParams
+     */
     public function __construct(callable $handler, array $connectionParams, SerializerInterface $serializer, LoggerInterface $logger, LoggerInterface $tracer)
     {
         $this->handler          = $handler;

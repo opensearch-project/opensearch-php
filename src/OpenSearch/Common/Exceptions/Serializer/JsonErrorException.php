@@ -56,7 +56,11 @@ class JsonErrorException extends \Exception implements OpenSearchException
         10 => 'Attempted to decode nonexistent UTF-16 code-point' //JSON_ERROR_UTF16
     );
 
-    public function __construct($code, $input, $result, $previous = null)
+    /**
+     * @param mixed $input
+     * @param mixed $result
+     */
+    public function __construct(int $code, $input, $result, \Throwable $previous = null)
     {
         if (isset(self::$messages[$code]) !== true) {
             throw new \InvalidArgumentException(sprintf('Encountered unknown JSON error code: [%d]', $code));

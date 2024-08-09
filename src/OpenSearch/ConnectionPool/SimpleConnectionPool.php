@@ -29,7 +29,8 @@ use OpenSearch\Connections\ConnectionInterface;
 class SimpleConnectionPool extends AbstractConnectionPool implements ConnectionPoolInterface
 {
     /**
-     * {@inheritdoc}
+     * @param ConnectionInterface[] $connections
+     * @param array<string, mixed>  $connectionPoolParams
      */
     public function __construct($connections, SelectorInterface $selector, ConnectionFactoryInterface $factory, $connectionPoolParams)
     {

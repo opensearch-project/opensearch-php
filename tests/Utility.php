@@ -29,7 +29,7 @@ use OpenSearch\Common\Exceptions\OpenSearchException;
 class Utility
 {
     /**
-     * @var array|null
+     * @var array{number: string, distribution?: string, build_flavor: string, build_date: string, build_hash: string, build_snapshot: bool, build_type: string, lucene_version: string, minimum_index_compatibility_version: string, minimum_wire_compatibility_version: string}|null
      */
     private static $version;
 
@@ -82,6 +82,9 @@ class Utility
         return version_compare($versionNumber, $version, '>=');
     }
 
+    /**
+     * @return array{number: string, distribution?: string, build_flavor: string, build_date: string, build_hash: string, build_snapshot: bool, build_type: string, lucene_version: string, minimum_index_compatibility_version: string, minimum_wire_compatibility_version: string}
+     */
     private static function getVersion(Client $client): array
     {
         if (!isset(self::$version)) {

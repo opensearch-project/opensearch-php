@@ -40,7 +40,8 @@ class StaticNoPingConnectionPool extends AbstractConnectionPool implements Conne
     private $maxPingTimeout = 3600;
 
     /**
-     * {@inheritdoc}
+     * @param ConnectionInterface[] $connections
+     * @param array<string, mixed>  $connectionPoolParams
      */
     public function __construct($connections, SelectorInterface $selector, ConnectionFactoryInterface $factory, $connectionPoolParams)
     {
