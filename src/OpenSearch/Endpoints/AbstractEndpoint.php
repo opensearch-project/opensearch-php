@@ -113,6 +113,8 @@ abstract class AbstractEndpoint
     }
 
     /**
+     * @param string|string[]|null $index
+     *
      * @return $this
      */
     public function setIndex($index)
@@ -188,7 +190,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @param array $params
+     * @param array<string, mixed> $params
      *
      * @throws UnexpectedValueException
      */
@@ -218,7 +220,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @param array $params Note: this is passed by-reference!
+     * @param array<string, mixed> $params Note: this is passed by-reference!
      */
     private function extractOptions(&$params)
     {
@@ -248,6 +250,11 @@ abstract class AbstractEndpoint
         }
     }
 
+    /**
+     * @param array<string, mixed> $params
+     *
+     * @return array<string, mixed>
+     */
     private function convertCustom(array $params): array
     {
         if (isset($params['custom']) === true) {
@@ -285,7 +292,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * This function returns all param deprecations also optional with an replacement field
+     * This function returns all param deprecations also optional with a replacement field
      *
      * @return array<string, string|null>
      */

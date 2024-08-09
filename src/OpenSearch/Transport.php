@@ -90,7 +90,7 @@ class Transport
      *
      * @param string     $method  HTTP method to use
      * @param string     $uri     HTTP URI to send request to
-     * @param array      $params  Optional query parameters
+     * @param array<string, mixed> $params  Optional query parameters
      * @param mixed|null $body    Optional query body
      * @param array      $options
      *
