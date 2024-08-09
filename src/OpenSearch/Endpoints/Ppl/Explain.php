@@ -13,7 +13,7 @@ declare(strict_types=1);
  * GitHub history for details.
  */
 
-namespace OpenSearch\Endpoints\Sql;
+namespace OpenSearch\Endpoints\Ppl;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
@@ -24,7 +24,7 @@ class Explain extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_sql/_explain";
+        return "/_plugins/_ppl/_explain";
     }
 
     public function getParamWhitelist(): array

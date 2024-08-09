@@ -42,6 +42,7 @@ class Exists extends AbstractEndpoint
     {
         return [
             'allow_no_indices',
+            'cluster_manager_timeout',
             'expand_wildcards',
             'flat_settings',
             'ignore_unavailable',

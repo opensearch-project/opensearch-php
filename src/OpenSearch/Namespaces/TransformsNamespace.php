@@ -194,7 +194,7 @@ class TransformsNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
-     * stop transform.
+     * Stop transform.
      *
      * $params['id']          = (string) Transform to stop
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
