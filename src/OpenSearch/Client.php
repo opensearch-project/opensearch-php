@@ -38,6 +38,7 @@ use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\NotificationsNamespace;
+use OpenSearch\Namespaces\PplNamespace;
 use OpenSearch\Namespaces\RemoteStoreNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
@@ -139,6 +140,11 @@ class Client
     protected $notifications;
 
     /**
+     * @var PplNamespace
+     */
+    protected $ppl;
+
+    /**
      * @var RemoteStoreNamespace
      */
     protected $remoteStore;
@@ -212,6 +218,7 @@ class Client
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
         $this->nodes = new NodesNamespace($transport, $endpoint);
         $this->notifications = new NotificationsNamespace($transport, $endpoint);
+        $this->ppl = new PplNamespace($transport, $endpoint);
         $this->remoteStore = new RemoteStoreNamespace($transport, $endpoint);
         $this->rollups = new RollupsNamespace($transport, $endpoint);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $endpoint);
@@ -1735,6 +1742,13 @@ class Client
     public function notifications(): NotificationsNamespace
     {
         return $this->notifications;
+    }
+    /**
+     * Returns the ppl namespace
+     */
+    public function ppl(): PplNamespace
+    {
+        return $this->ppl;
     }
     /**
      * Returns the remoteStore namespace

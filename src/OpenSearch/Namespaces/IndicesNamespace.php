@@ -412,18 +412,19 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular index exists.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices. (Default = false)
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['flat_settings']      = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index. (Default = false)
-     * $params['include_defaults']   = (boolean) If `true`, return all default settings in the response. (Default = false)
-     * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']              = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['index']                   = (array) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices. (Default = false)
+     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
+     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index. (Default = false)
+     * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
+     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -902,8 +903,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates or updates an alias.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams or indices to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indices return an error. (Required)
-     * $params['name']                    = (string) Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math. (Required)
+     * $params['name']                    = (string) Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
+     * $params['index']                   = (array) Comma-separated list of data streams or indices to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indices return an error.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
@@ -919,15 +920,15 @@ class IndicesNamespace extends AbstractNamespace
      */
     public function putAlias(array $params = [])
     {
-        $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
+        $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Indices\PutAlias');
         $endpoint->setParams($params);
-        $endpoint->setIndex($index);
         $endpoint->setName($name);
+        $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
