@@ -38,6 +38,9 @@ use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\NotificationsNamespace;
+use OpenSearch\Namespaces\ObservabilityNamespace;
+use OpenSearch\Namespaces\PplNamespace;
+use OpenSearch\Namespaces\QueryNamespace;
 use OpenSearch\Namespaces\RemoteStoreNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
@@ -139,6 +142,21 @@ class Client
     protected $notifications;
 
     /**
+     * @var ObservabilityNamespace
+     */
+    protected $observability;
+
+    /**
+     * @var PplNamespace
+     */
+    protected $ppl;
+
+    /**
+     * @var QueryNamespace
+     */
+    protected $query;
+
+    /**
      * @var RemoteStoreNamespace
      */
     protected $remoteStore;
@@ -212,6 +230,9 @@ class Client
         $this->monitoring = new MonitoringNamespace($transport, $endpoint);
         $this->nodes = new NodesNamespace($transport, $endpoint);
         $this->notifications = new NotificationsNamespace($transport, $endpoint);
+        $this->observability = new ObservabilityNamespace($transport, $endpoint);
+        $this->ppl = new PplNamespace($transport, $endpoint);
+        $this->query = new QueryNamespace($transport, $endpoint);
         $this->remoteStore = new RemoteStoreNamespace($transport, $endpoint);
         $this->rollups = new RollupsNamespace($transport, $endpoint);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $endpoint);
@@ -1735,6 +1756,27 @@ class Client
     public function notifications(): NotificationsNamespace
     {
         return $this->notifications;
+    }
+    /**
+     * Returns the observability namespace
+     */
+    public function observability(): ObservabilityNamespace
+    {
+        return $this->observability;
+    }
+    /**
+     * Returns the ppl namespace
+     */
+    public function ppl(): PplNamespace
+    {
+        return $this->ppl;
+    }
+    /**
+     * Returns the query namespace
+     */
+    public function query(): QueryNamespace
+    {
+        return $this->query;
     }
     /**
      * Returns the remoteStore namespace

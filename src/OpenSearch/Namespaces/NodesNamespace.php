@@ -63,27 +63,30 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns information about nodes in the cluster.
      *
-     * $params['metric']        = (array) Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
-     * $params['node_id']       = (array) Comma-separated list of node IDs or names used to limit returned information.
-     * $params['flat_settings'] = (boolean) If true, returns settings in flat format. (Default = false)
-     * $params['timeout']       = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']         = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) Comma-separated list of filters used to reduce the response.
+     * $params['node_id_or_metric'] = (any) Limits the information returned to a list of node IDs or specific metrics. Supports a comma-separated list, such as node1,node2 or http,ingest.
+     * $params['metric']            = (array) Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+     * $params['node_id']           = (array) Comma-separated list of node IDs or names used to limit returned information.
+     * $params['flat_settings']     = (boolean) If true, returns settings in flat format. (Default = false)
+     * $params['timeout']           = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['pretty']            = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']             = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace']       = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']            = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']       = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function info(array $params = [])
     {
+        $node_id_or_metric = $this->extractArgument($params, 'node_id_or_metric');
         $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Nodes\Info');
         $endpoint->setParams($params);
+        $endpoint->setNodeIdOrMetric($node_id_or_metric);
         $endpoint->setMetric($metric);
         $endpoint->setNodeId($node_id);
 
