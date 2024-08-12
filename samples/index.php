@@ -19,5 +19,3 @@ $client = OpenSearch\ClientBuilder::fromConfig([
 $info = $client->info();
 
 echo "{$info['version']['distribution']}: {$info['version']['number']}\n";
-
-?>

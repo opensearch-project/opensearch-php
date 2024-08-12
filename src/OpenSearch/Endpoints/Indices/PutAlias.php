@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints\Indices;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 /**
@@ -33,19 +32,18 @@ class PutAlias extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->index) !== true) {
-            throw new RuntimeException(
-                'index is required for put_alias'
-            );
+        $name = $this->name ?? null;
+        $index = $this->index ?? null;
+        if (isset($index) && isset($name)) {
+            return "/$index/_alias/$name";
         }
-        $index = $this->index;
-        if (isset($this->name) !== true) {
-            throw new RuntimeException(
-                'name is required for put_alias'
-            );
+        if (isset($index)) {
+            return "/$index/_alias";
         }
-        $name = $this->name;
-        return "/$index/_alias/$name";
+        if (isset($name)) {
+            return "/_alias/$name";
+        }
+        return "/_alias";
     }
 
     public function getParamWhitelist(): array
