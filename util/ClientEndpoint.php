@@ -50,7 +50,7 @@ class ClientEndpoint extends NamespaceEndpoint
         $useNamespace = '';
 
         // The following namespaces do not have OpenSearch API specifications
-        $patchnamespaces = ['async_search', 'searchable_snapshots', 'ssl', 'sql', 'data_frame_transform_deprecated', 'monitoring'];
+        $patchnamespaces = ['async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'];
         $this->namespace = array_unique(array_merge($this->namespace, $patchnamespaces));
         sort($this->namespace);
 
