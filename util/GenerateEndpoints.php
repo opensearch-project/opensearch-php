@@ -76,6 +76,7 @@ foreach ($list_of_dicts as $index => $endpoint) {
 
         $params = [];
         $parts = [];
+
         // Iterate over the list of parameters and update them
         foreach ($endpoint["parameters"] as $param_ref) {
             $param_ref_value = substr($param_ref["$"."ref"], strrpos($param_ref["$"."ref"], '/') + 1);
@@ -137,6 +138,7 @@ foreach ($list_of_dicts as $index => $endpoint) {
         if ($endpoint['x-operation-group'] !== 'nodes.hot_threads' && isset($params_new['type'])) {
             unset($params_new['type']);
         }
+
         if ($endpoint['x-operation-group'] === 'cat.tasks') {
             $params_new['node_id'] = $params_new['nodes'] ?? $params_new['node_id'];
             unset($params_new['nodes']);
@@ -144,6 +146,7 @@ foreach ($list_of_dicts as $index => $endpoint) {
             $params_new['parent_task'] = $params_new['parent_task_id'] ?? $params_new['parent_task'];
             unset($params_new['parent_task_id']);
         }
+
         if (!empty($params_new)) {
             $endpoint['params'] = $params_new;
         }
@@ -197,9 +200,26 @@ foreach ($list_of_dicts as $index => $endpoint) {
 
             $parts_new[$part['name']] = $parts_dict;
         }
+
         if (!empty($parts_new)) {
             $endpoint['parts'] = $parts_new;
         }
+
+        if ($endpoint['x-operation-group'] === 'nodes.info' && $endpoint['path'] == '/_nodes/{node_id_or_metric}') {
+            # add two more endpoints, one for just node id and another for just metric for backwards compatibility
+            # https://github.com/opensearch-project/opensearch-api-specification/pull/416
+            foreach ([
+                'metric' => 'Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.',
+                'node_id' => 'Comma-separated list of node IDs or names used to limit returned information.'
+            ] as $param => $desc) {
+                $endpoint_new = $endpoint;
+                $endpoint_new['path'] = '/_nodes/{'.$param.'}';
+                $endpoint_new['parameters'][0] = ['$'.'ref' => '#/components/parameters/nodes.info::path.'.$param];
+                $endpoint_new['parts'] = [$param => [ 'type' => 'array', 'description' => $desc]];
+                $list_of_dicts[] = $endpoint_new;
+            }
+        }
+
         $list_of_dicts[$index] = $endpoint;
     }
 }
