@@ -1,22 +1,30 @@
 {
   "name": "opensearch-project/opensearch-php",
   "description": "PHP Client for OpenSearch",
-  "keywords": ["search","client", "opensearch","elasticsearch"],
+  "keywords": [
+    "search",
+    "client",
+    "opensearch",
+    "elasticsearch"
+  ],
   "type": "library",
-  "license": ["Apache-2.0", "LGPL-2.1-only"],
+  "license": [
+    "Apache-2.0",
+    "LGPL-2.1-only"
+  ],
   "authors": [
     {
-        "name": "Elastic"
+      "name": "Elastic"
     },
     {
-        "name": "OpenSearch Contributors"
+      "name": "OpenSearch Contributors"
     }
   ],
   "require": {
     "php": "^7.3 || ^8.0",
     "ext-json": ">=1.3.7",
     "ext-curl": "*",
-    "ezimuel/ringphp": "^1.1.2",
+    "ezimuel/ringphp": "^1.2.2",
     "psr/log": "^1|^2|^3",
     "symfony/yaml": "*"
   },
