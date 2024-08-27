@@ -47,8 +47,8 @@ class SigV4Handler
     public function __construct(
         string $region,
         string $service,
-        callable $credentialProvider = null,
-        callable $wrappedHandler = null
+        ?callable $credentialProvider = null,
+        ?callable $wrappedHandler = null
     ) {
         self::assertDependenciesInstalled();
         $this->signer = new SignatureV4($service, $region);

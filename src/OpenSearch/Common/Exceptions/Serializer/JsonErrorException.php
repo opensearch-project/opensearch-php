@@ -60,7 +60,7 @@ class JsonErrorException extends \Exception implements OpenSearchException
      * @param mixed $input
      * @param mixed $result
      */
-    public function __construct(int $code, $input, $result, \Throwable $previous = null)
+    public function __construct(int $code, $input, $result, ?\Throwable $previous = null)
     {
         if (isset(self::$messages[$code]) !== true) {
             throw new \InvalidArgumentException(sprintf('Encountered unknown JSON error code: [%d]', $code));
