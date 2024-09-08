@@ -23,10 +23,9 @@ namespace OpenSearch\Tests;
 
 use OpenSearch;
 use OpenSearch\ClientBuilder;
-use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Serializers\SerializerInterface;
-use OpenSearch\Transport;
 use Mockery as m;
+use OpenSearch\Transport;
 
 /**
  * Class RegisteredNamespaceTest

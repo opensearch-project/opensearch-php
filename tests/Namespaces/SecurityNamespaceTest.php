@@ -41,7 +41,6 @@ class SecurityNamespaceTest extends TestCase
     {
         $this->transport = $this->createMock(Transport::class);
         $this->client = ClientBuilder::create()
-            ->setTransport($this->transport)
             ->setSSLVerification(false)
             ->build();
     }

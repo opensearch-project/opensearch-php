@@ -1891,11 +1891,10 @@ class Client
     {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
-        $options = $attributes['options'] ?? [];
 
-        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
+        $promise = $this->transport->performRequest($method, $uri, $params, $body);
 
-        return $this->transport->resultOrFuture($promise, $options);
+        return $this->transport->resultOrFuture($promise);
     }
 
     /**
@@ -1911,6 +1910,6 @@ class Client
             $endpoint->getOptions()
         );
 
-        return $this->transport->resultOrFuture($promise, $endpoint->getOptions());
+        return $this->transport->resultOrFuture($promise);
     }
 }

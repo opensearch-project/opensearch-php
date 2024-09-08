@@ -22,14 +22,12 @@ declare(strict_types=1);
 namespace OpenSearch\Namespaces;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\Helper\RequestHelper;
 use OpenSearch\Transport;
 
 abstract class AbstractNamespace
 {
-    /**
-     * @var \OpenSearch\Transport
-     */
-    protected $transport;
+    protected Transport $transport;
 
     /**
      * @var callable
@@ -51,9 +49,9 @@ abstract class AbstractNamespace
             $val = $params[$arg];
             unset($params[$arg]);
             return $val;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     protected function performRequest(AbstractEndpoint $endpoint)
@@ -66,6 +64,6 @@ abstract class AbstractNamespace
             $endpoint->getOptions()
         );
 
-        return $this->transport->resultOrFuture($response, $endpoint->getOptions());
+        return $this->transport->resultOrFuture($response);
     }
 }
