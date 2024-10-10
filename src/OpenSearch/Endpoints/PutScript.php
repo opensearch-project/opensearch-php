@@ -50,6 +50,7 @@ class PutScript extends AbstractEndpoint
     {
         return [
             'cluster_manager_timeout',
+            'context',
             'master_timeout',
             'timeout',
             'pretty',
