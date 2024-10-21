@@ -21,13 +21,14 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
+use Http\Promise\Promise;
 use OpenSearch\Common\Exceptions\BadMethodCallException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
+use OpenSearch\Namespaces\NamespaceBuilderInterface;
 :use-namespaces
-use OpenSearch\Traits\DeprecatedPropertyTrait;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Client
@@ -63,9 +64,12 @@ class Client
      */
     protected $registeredNamespaces = [];
 
+    protected bool $isAsync = false;
+
+
 :namespace_properties
     /**
-     * Client constructor
+     * Creates a new client instance.
      *
      * @param Transport $transport
      * @param callable|EndpointFactoryInterface $endpointFactory
@@ -133,34 +137,57 @@ class Client
     }
 
     /**
-     * Sends a raw request to the cluster
-     * @return callable|array
-     * @throws NoNodesAvailableException
+     * Check if the client is running in async mode.
      */
-    public function request(string $method, string $uri, array $attributes = [])
+    public function isAsync(): bool
     {
-        $params = $attributes['params'] ?? [];
-        $body = $attributes['body'] ?? null;
-        $options = $attributes['options'] ?? [];
-
-        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
-
-        return $this->transport->resultOrFuture($promise, $options);
+        return $this->isAsync;
     }
 
     /**
-     * @return callable|array
+     * Set the client to run in async mode.
      */
-    private function performRequest(AbstractEndpoint $endpoint)
+    public function setAsync(bool $isAsync): static
     {
-        $promise =  $this->transport->performRequest(
+        $this->isAsync = $isAsync;
+        return $this;
+    }
+
+    /**
+     * Sends a raw request to the cluster.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface|\Exception
+     */
+    public function sendRawRequest(string $method, string $uri, array $params = [], ?string $body = null): Promise|ResponseInterface
+    {
+        $params = $attributes['params'] ?? [];
+        $body = $attributes['body'] ?? null;
+
+        $request = $this->transport->createRequest($method, $uri, $params, $body);
+
+        if ($this->isAsync()) {
+            return $this->transport->sendAsyncRequest($request);
+        }
+        return $this->transport->sendRequest($request);
+    }
+
+    /**
+     * Perform the request.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface|\Exception
+     */
+    private function performRequest(EndpointInterface $endpoint): Promise|ResponseInterface
+    {
+        $request = $this->transport->createRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
-            $endpoint->getOptions()
         );
-
-        return $this->transport->resultOrFuture($promise, $endpoint->getOptions());
+        if ($this->isAsync()) {
+            return $this->transport->sendAsyncRequest($request);
+        }
+        return $this->transport->sendRequest($request);
     }
+
 }

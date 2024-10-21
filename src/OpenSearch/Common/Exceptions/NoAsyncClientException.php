@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -19,28 +17,8 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\ConnectionPool\Selectors;
+namespace OpenSearch\Common\Exceptions;
 
-use OpenSearch\Connections\ConnectionInterface;
-
-class RoundRobinSelector implements SelectorInterface
+class NoAsyncClientException extends \Exception implements OpenSearchException
 {
-    /**
-     * @var int
-     */
-    private $current = 0;
-
-    /**
-     * Select the next connection in the sequence
-     *
-     * @param ConnectionInterface[] $connections an array of ConnectionInterface instances to choose from
-     */
-    public function select(array $connections): ConnectionInterface
-    {
-        $returnConnection = $connections[$this->current % count($connections)];
-
-        $this->current += 1;
-
-        return $returnConnection;
-    }
 }

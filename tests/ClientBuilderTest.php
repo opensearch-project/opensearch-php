@@ -25,37 +25,23 @@ use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\TransportInterface;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @coversDefaultClass \OpenSearch\ClientBuilder
+ */
 class ClientBuilderTest extends TestCase
 {
     /**
-     * @see https://github.com/elastic/elasticsearch-php/issues/993
+     * @covers ::create
      */
-    public function testIncludePortInHostHeader()
+    public function testCreate()
     {
-        $host = "localhost";
-        $url = "$host:1234";
-        $params = [
-            'client' => [
-                'verbose' => true
-            ]
-        ];
-        $client = ClientBuilder::create()
-            ->setConnectionParams($params)
-            ->setHosts([$url])
-            ->includePortInHostHeader(true)
-            ->build();
+        $transport = $this->createMock(TransportInterface::class);
+        $client = (new ClientBuilder($transport))->build();
 
         $this->assertInstanceOf(Client::class, $client);
-
-        try {
-            $result = $client->info();
-        } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-            $this->assertTrue(isset($request['request']['headers']['Host'][0]));
-            $this->assertEquals($url, $request['request']['headers']['Host'][0]);
-        }
     }
 
     /**
