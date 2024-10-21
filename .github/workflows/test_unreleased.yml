@@ -17,7 +17,7 @@ jobs:
         opensearch_ref: [ '1.x', '2.x', 'main' ]
     steps:
       - name: Checkout PHP Client
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
@@ -32,7 +32,7 @@ jobs:
           composer install --prefer-dist
 
       - name: Checkout OpenSearch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: opensearch-project/OpenSearch
           ref: ${{ matrix.opensearch_ref }}

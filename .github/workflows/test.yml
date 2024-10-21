@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use PHP 8.2
         uses: shivammathur/setup-php@v2
@@ -113,7 +113,7 @@ jobs:
           - windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Use PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
@@ -151,7 +151,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Use PHP 8.2
       uses: shivammathur/setup-php@v2
@@ -210,7 +210,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Use PHP 8.2
       uses: shivammathur/setup-php@v2
@@ -258,7 +258,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Use PHP 8.2
       uses: shivammathur/setup-php@v2
