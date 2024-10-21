@@ -21,10 +21,14 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use Http\Promise\Promise;
 use OpenSearch\EndpointFactoryInterface;
+use OpenSearch\EndpointInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\LegacyEndpointFactory;
 use OpenSearch\Transport;
+use OpenSearch\TransportInterface;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractNamespace
 {
@@ -34,6 +38,8 @@ abstract class AbstractNamespace
     protected $transport;
 
     protected EndpointFactoryInterface $endpointFactory;
+
+    protected bool $isAsync = false;
 
     /**
      * @var callable
@@ -59,6 +65,20 @@ abstract class AbstractNamespace
         $this->endpointFactory = $endpointFactory;
     }
 
+    public function isAsync(): bool
+    {
+        return $this->isAsync;
+    }
+
+    /**
+     * Set the client to run in async mode.
+     */
+    public function setAsync(bool $isAsync): static
+    {
+        $this->isAsync = $isAsync;
+        return $this;
+    }
+
     /**
      * @return null|mixed
      */
@@ -73,16 +93,18 @@ abstract class AbstractNamespace
         }
     }
 
-    protected function performRequest(AbstractEndpoint $endpoint)
+    protected function performRequest(AbstractEndpoint $endpoint): Promise|ResponseInterface
     {
-        $response = $this->transport->performRequest(
+        $request = $this->transport->createRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
-            $endpoint->getOptions()
         );
-
-        return $this->transport->resultOrFuture($response, $endpoint->getOptions());
+        if ($this->isAsync()) {
+            return $this->transport->sendAsyncRequest($request);
+        }
+        return $this->transport->sendRequest($request);
     }
+
 }

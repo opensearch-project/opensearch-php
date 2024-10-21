@@ -68,7 +68,7 @@ class FooNamespaceBuilder implements OpenSearch\Namespaces\NamespaceBuilderInter
         return "foo";
     }
 
-    public function getObject(Transport $transport, SerializerInterface $serializer)
+    public function getObject(OpenSearch\TransportInterface $transport, SerializerInterface $serializer)
     {
         return new FooNamespace();
     }
