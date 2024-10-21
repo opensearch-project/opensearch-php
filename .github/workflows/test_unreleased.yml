@@ -19,10 +19,10 @@ jobs:
       - name: Checkout PHP Client
         uses: actions/checkout@v2
 
-      - name: Use PHP 8.2
+      - name: Use PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           extensions: yaml, zip, curl
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
