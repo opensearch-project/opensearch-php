@@ -66,7 +66,7 @@ class ExistsAlias extends AbstractEndpoint
         return 'HEAD';
     }
 
-    public function setName($name): ExistsAlias
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

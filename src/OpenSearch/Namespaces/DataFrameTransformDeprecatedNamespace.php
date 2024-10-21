@@ -44,8 +44,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
     {
         $transform_id = $this->extractArgument($params, 'transform_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\DeleteTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\DeleteTransform::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
 
@@ -68,8 +67,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
     {
         $transform_id = $this->extractArgument($params, 'transform_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\GetTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\GetTransform::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
 
@@ -92,8 +90,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
     {
         $transform_id = $this->extractArgument($params, 'transform_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\GetTransformStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\GetTransformStats::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
 
@@ -103,8 +100,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\PreviewTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\PreviewTransform::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -127,8 +123,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
         $transform_id = $this->extractArgument($params, 'transform_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\PutTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\PutTransform::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
         $endpoint->setBody($body);
@@ -150,8 +145,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
     {
         $transform_id = $this->extractArgument($params, 'transform_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\StartTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\StartTransform::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
 
@@ -174,8 +168,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
     {
         $transform_id = $this->extractArgument($params, 'transform_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\StopTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\StopTransform::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
 
@@ -198,8 +191,7 @@ class DataFrameTransformDeprecatedNamespace extends AbstractNamespace
         $transform_id = $this->extractArgument($params, 'transform_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DataFrameTransformDeprecated\UpdateTransform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DataFrameTransformDeprecated\UpdateTransform::class);
         $endpoint->setParams($params);
         $endpoint->setTransformId($transform_id);
         $endpoint->setBody($body);

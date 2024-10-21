@@ -21,25 +21,37 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\Transport;
+use Http\Promise\Promise;
+use OpenSearch\EndpointFactoryInterface;
+use OpenSearch\EndpointInterface;
+use OpenSearch\TransportInterface;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractNamespace
 {
-    /**
-     * @var \OpenSearch\Transport
-     */
-    protected $transport;
+    public function __construct(
+        protected readonly TransportInterface $transport,
+        protected readonly EndpointFactoryInterface $endpointFactory,
+    ) {
+    }
+
+    protected bool $isAsync = false;
 
     /**
-     * @var callable
+     * Check if the client is running in async mode.
      */
-    protected $endpoints;
-
-    public function __construct(Transport $transport, callable $endpoints)
+    public function isAsync(): bool
     {
-        $this->transport = $transport;
-        $this->endpoints = $endpoints;
+        return $this->isAsync;
+    }
+
+    /**
+     * Set the client to run in async mode.
+     */
+    public function setAsync(bool $isAsync): static
+    {
+        $this->isAsync = $isAsync;
+        return $this;
     }
 
     /**
@@ -56,16 +68,23 @@ abstract class AbstractNamespace
         }
     }
 
-    protected function performRequest(AbstractEndpoint $endpoint)
+    /**
+     * Perform the request.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface|\Exception
+     */
+    protected function performRequest(EndpointInterface $endpoint): Promise|ResponseInterface
     {
-        $response = $this->transport->performRequest(
+        $request = $this->transport->createRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
-            $endpoint->getOptions()
         );
-
-        return $this->transport->resultOrFuture($response, $endpoint->getOptions());
+        if ($this->isAsync()) {
+            return $this->transport->sendAsyncRequest($request);
+        }
+        return $this->transport->sendRequest($request);
     }
+
 }

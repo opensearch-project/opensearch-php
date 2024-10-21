@@ -24,6 +24,7 @@ namespace OpenSearch\Namespaces;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\Endpoints\EndpointInterface;
 use OpenSearch\Transport;
 use GuzzleHttp\Ring\Future\FutureArrayInterface;
 
@@ -35,7 +36,7 @@ abstract class BooleanRequestWrapper
      * @throws Missing404Exception
      * @throws RoutingMissingException
      */
-    public static function performRequest(AbstractEndpoint $endpoint, Transport $transport)
+    public static function performRequest(EndpointInterface $endpoint, Transport $transport)
     {
         try {
             $response = $transport->performRequest(

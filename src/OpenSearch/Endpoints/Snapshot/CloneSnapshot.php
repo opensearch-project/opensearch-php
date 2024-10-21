@@ -62,7 +62,7 @@ class CloneSnapshot extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): CloneSnapshot
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -72,7 +72,7 @@ class CloneSnapshot extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository($repository): CloneSnapshot
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;
@@ -82,7 +82,7 @@ class CloneSnapshot extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot($snapshot): CloneSnapshot
+    public function setSnapshot($snapshot): static
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -92,7 +92,7 @@ class CloneSnapshot extends AbstractEndpoint
         return $this;
     }
 
-    public function setTargetSnapshot($target_snapshot): CloneSnapshot
+    public function setTargetSnapshot($target_snapshot): static
     {
         if (isset($target_snapshot) !== true) {
             return $this;

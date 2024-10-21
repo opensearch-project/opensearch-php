@@ -59,7 +59,7 @@ class VerifyRepository extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setRepository($repository): VerifyRepository
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;

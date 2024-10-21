@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -19,13 +17,8 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\ConnectionPool;
+namespace OpenSearch\Common\Exceptions;
 
-use OpenSearch\Connections\ConnectionInterface;
-
-interface ConnectionPoolInterface
+class NoAsyncClientException extends \Exception implements OpenSearchException
 {
-    public function nextConnection(bool $force = false): ConnectionInterface;
-
-    public function scheduleCheck(): void;
 }

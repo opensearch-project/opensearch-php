@@ -24,7 +24,7 @@ class ConfigUpgradePerform extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/_upgrade_perform";
+        return "/_plugins/_security/api/_upgrade_perform";
     }
 
     public function getParamWhitelist(): array
@@ -43,7 +43,7 @@ class ConfigUpgradePerform extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): ConfigUpgradePerform
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

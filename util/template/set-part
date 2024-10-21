@@ -1,5 +1,5 @@
 
-    public function set:Part($:part): :endpoint
+    public function set:Part($:part): static
     {
         if (isset($:part) !== true) {
             return $this;

@@ -52,7 +52,7 @@ class GenerateUserToken extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setUsername($username): GenerateUserToken
+    public function setUsername($username): static
     {
         if (isset($username) !== true) {
             return $this;

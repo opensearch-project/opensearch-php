@@ -544,15 +544,18 @@ class Endpoint
             if (in_array($param, $this->addedPartInDoc)) {
                 continue;
             }
+            $type = $values['type'] ?? 'any';
+            //            var_dump($type);
+            //            var_dump($values);
             $result .= sprintf(
                 "     * \$params['%s']%s = (%s) %s%s%s%s\n",
                 $param,
                 str_repeat(' ', $space - strlen($param)),
-                $values['type'] ?? 'any',
+                $type,
                 $values['description'] ?? '',
                 isset($values['required']) && $values['required'] ? ' (Required)' : '',
                 isset($values['options']) ? sprintf(" (Options = %s)", implode(',', $values['options'])) : '',
-                isset($values['default']) ? sprintf(" (Default = %s)", $values['type'] === 'boolean' ? ($values['default'] ? 'true' : 'false') : (is_array($values['default']) ? implode(',', $values['default']) : $values['default'])) : ''
+                isset($values['default']) ? sprintf(" (Default = %s)", ($type === 'boolean') ? ($values['default'] ? 'true' : 'false') : (is_array($values['default']) ? implode(',', $values['default']) : $values['default'])) : ''
             );
         }
         return $result;

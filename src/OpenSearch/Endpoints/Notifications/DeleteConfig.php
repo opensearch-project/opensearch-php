@@ -50,7 +50,7 @@ class DeleteConfig extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setConfigId($config_id): DeleteConfig
+    public function setConfigId($config_id): static
     {
         if (isset($config_id) !== true) {
             return $this;

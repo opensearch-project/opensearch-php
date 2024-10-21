@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class TasksNamespace
  *
@@ -42,7 +40,7 @@ class TasksNamespace extends AbstractNamespace
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -51,13 +49,13 @@ class TasksNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Tasks\Cancel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\Cancel::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about a task.
      *
@@ -68,7 +66,7 @@ class TasksNamespace extends AbstractNamespace
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -77,13 +75,13 @@ class TasksNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Tasks\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\Get::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a list of tasks.
      *
@@ -98,19 +96,19 @@ class TasksNamespace extends AbstractNamespace
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function list(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Tasks\ListTasks');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\ListTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Proxy function to list() to prevent BC break since 7.4.0
      */

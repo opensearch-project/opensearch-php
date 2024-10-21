@@ -59,7 +59,7 @@ class DeleteRepository extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setRepository($repository): DeleteRepository
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;

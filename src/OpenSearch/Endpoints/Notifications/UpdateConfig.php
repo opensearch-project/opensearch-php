@@ -50,7 +50,7 @@ class UpdateConfig extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): UpdateConfig
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class UpdateConfig extends AbstractEndpoint
         return $this;
     }
 
-    public function setConfigId($config_id): UpdateConfig
+    public function setConfigId($config_id): static
     {
         if (isset($config_id) !== true) {
             return $this;

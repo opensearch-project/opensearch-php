@@ -39,8 +39,7 @@ class AsyncSearchNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsyncSearch\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsyncSearch\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -59,8 +58,7 @@ class AsyncSearchNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsyncSearch\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsyncSearch\Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -119,8 +117,7 @@ class AsyncSearchNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsyncSearch\Submit');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsyncSearch\Submit::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);

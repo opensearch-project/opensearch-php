@@ -57,7 +57,7 @@ class ResolveIndex extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): ResolveIndex
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

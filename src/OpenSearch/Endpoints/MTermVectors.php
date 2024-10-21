@@ -65,7 +65,7 @@ class MTermVectors extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): MTermVectors
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

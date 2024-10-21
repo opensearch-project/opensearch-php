@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class SecurityNamespace
  *
@@ -33,19 +31,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function authinfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Authinfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Authinfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the authorization token.
      *
@@ -53,19 +51,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function authtoken(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Authtoken');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Authtoken::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Not supported for cache API.
      *
@@ -73,19 +71,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function cache(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Cache');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Cache::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Check whether or not an upgrade can be performed and what resources can be updated.
      *
@@ -93,19 +91,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function configUpgradeCheck(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ConfigUpgradeCheck');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ConfigUpgradeCheck::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Helps cluster operator upgrade missing defaults and stale default definitions.
      *
@@ -113,7 +111,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -122,13 +120,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ConfigUpgradePerform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ConfigUpgradePerform::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or replaces the allowlisted APIs. Accessible via Super Admin certificate or REST API permission.
      *
@@ -136,7 +134,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -145,13 +143,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateAllowlist');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateAllowlist::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or replaces the multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
      *
@@ -159,7 +157,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -168,22 +166,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateUpdateTenancyConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateUpdateTenancyConfig::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or replaces the specified user. Legacy API.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user to be created. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -193,23 +191,23 @@ class SecurityNamespace extends AbstractNamespace
         $username = $this->extractArgument($params, 'username');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateUserLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateUserLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete a specified action group.
      *
-     * $params['action_group'] = (string) Action group to delete. (Required)
+     * $params['action_group'] = (string) The name of the action group to delete. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -218,22 +216,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $action_group = $this->extractArgument($params, 'action_group');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes all distinguished names in the specified cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['cluster_name'] = (string)  (Required)
+     * $params['cluster_name'] = (string) The cluster-name to delete from list of distinguished names. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -242,22 +240,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified role.
      *
-     * $params['role']        = (string)  (Required)
+     * $params['role']        = (string) The name of the role to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -266,22 +264,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes the specified role mapping.
      *
-     * $params['role']        = (string)  (Required)
+     * $params['role']        = (string) The name of the role whose mapping needs to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -290,22 +288,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified tenant.
      *
-     * $params['tenant']      = (string)  (Required)
+     * $params['tenant']      = (string) The name of the tenant to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -314,22 +312,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $tenant = $this->extractArgument($params, 'tenant');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified user.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -338,22 +336,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified user. Legacy API.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -362,13 +360,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteUserLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteUserLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Flushes the Security plugin user, authentication, and authorization cache.
      *
@@ -376,19 +374,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function flushCache(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\FlushCache');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\FlushCache::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Generates On-Behalf-Of token for the current user.
      *
@@ -396,7 +394,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -405,22 +403,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GenerateOboToken');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GenerateOboToken::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Generates authorization token for the given user.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -429,22 +427,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GenerateUserToken');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GenerateUserToken::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Generates authorization token for the given user. Legacy API.
+     * Generates authorization token for the given user. Legacy API.  Not Implemented.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -453,13 +451,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GenerateUserTokenLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GenerateUserTokenLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns account details for the current user.
      *
@@ -467,28 +465,28 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getAccountDetails(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAccountDetails');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAccountDetails::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one action group.
      *
-     * $params['action_group'] = (string) Action group to retrieve. (Required)
+     * $params['action_group'] = (string) The name of the action group to retrieve. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -497,13 +495,35 @@ class SecurityNamespace extends AbstractNamespace
     {
         $action_group = $this->extractArgument($params, 'action_group');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
 
         return $this->performRequest($endpoint);
     }
+
+    /**
+     * Retrieves the cluster security certificates.
+     *
+     * $params['cert_type']   = (string) The type of certificates (HTTP, TRANSPORT, ALL) to retrieve from all nodes.
+     * $params['timeout']     = (string) The maximum duration, in seconds, to be spent to retrieve certificates from all nodes.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']       = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getAllCertificates(array $params = [])
+    {
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAllCertificates::class);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
     /**
      * Retrieves the current list of allowed API accessible to normal user.
      *
@@ -511,19 +531,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getAllowlist(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAllowlist');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAllowlist::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the audit configuration.
      *
@@ -531,19 +551,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getAuditConfiguration(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAuditConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAuditConfiguration::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the cluster security certificates.
      *
@@ -551,19 +571,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the current Security plugin configuration in JSON format.
      *
@@ -571,19 +591,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getConfiguration(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetConfiguration::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the current security-dashboards plugin configuration.
      *
@@ -591,29 +611,29 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getDashboardsInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetDashboardsInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDashboardsInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['cluster_name'] = (string)  (Required)
-     * $params['show_all']     = (boolean)
+     * $params['cluster_name'] = (string) The cluster-name to retrieve nodes DN setting for. (Required)
+     * $params['show_all']     = (boolean) A boolean flag to include/exclude static nodes DN from final result.
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -622,13 +642,39 @@ class SecurityNamespace extends AbstractNamespace
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
 
         return $this->performRequest($endpoint);
     }
+
+    /**
+     * Retrieves the given node's security certificates.
+     *
+     * $params['node_id']     = (string) The full-id of the node to retrieve certificates.
+     * $params['cert_type']   = (string) The type of certificates (HTTP, TRANSPORT, ALL) to retrieve for a node.
+     * $params['timeout']     = (string) The maximum duration, in seconds, to be spent to retrieve a node's certificates.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']       = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getNodeCertificates(array $params = [])
+    {
+        $node_id = $this->extractArgument($params, 'node_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetNodeCertificates::class);
+        $endpoint->setParams($params);
+        $endpoint->setNodeId($node_id);
+
+        return $this->performRequest($endpoint);
+    }
+
     /**
      * Gets the evaluated REST API permissions for the currently logged in user.
      *
@@ -636,19 +682,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getPermissionsInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetPermissionsInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetPermissionsInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one role.
      *
@@ -657,7 +703,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -666,13 +712,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one role mapping.
      *
@@ -681,7 +727,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -690,34 +736,34 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the SSL configuration information.
      *
-     * $params['show_dn']     = (string) The domain names from all certificates.
+     * $params['show_dn']     = (Array) A boolean flag to indicate whether all domain names should be returned.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getSslinfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetSslinfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetSslinfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
      *
@@ -725,28 +771,28 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getTenancyConfig(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetTenancyConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenancyConfig::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one tenant.
      *
-     * $params['tenant']      = (string)  (Required)
+     * $params['tenant']      = (string) The name of the tenant to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -755,22 +801,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $tenant = $this->extractArgument($params, 'tenant');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieve one internal user.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -779,22 +825,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieve one user. Legacy API.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -803,13 +849,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetUserLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUserLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieve all internal users. Legacy API.
      *
@@ -817,40 +863,40 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getUsersLegacy(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetUsersLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUsersLegacy::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Checks to see if the Security plugin is up and running.
      *
-     * $params['mode']        = (string)
+     * $params['mode']        = (string) A flag to indicate whether service should consider security-plugin's status before returning health response. `strict` mode indicates service should check security plugin status.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function health(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Health');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Health::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Migrates security configuration from v6 to v7.
      *
@@ -858,28 +904,28 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function migrate(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Migrate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Migrate::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of an action group.
      *
-     * $params['action_group'] = (string)  (Required)
+     * $params['action_group'] = (string) The name of the action group to update. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -889,14 +935,14 @@ class SecurityNamespace extends AbstractNamespace
         $action_group = $this->extractArgument($params, 'action_group');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the current list of allowed API accessible to normal user.
      *
@@ -904,7 +950,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -913,13 +959,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchAllowlist');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchAllowlist::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * A PATCH call is used to update specified fields in the audit configuration.
      *
@@ -927,7 +973,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -936,13 +982,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchAuditConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchAuditConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * A PATCH call is used to update the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
      *
@@ -950,7 +996,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -959,22 +1005,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['cluster_name'] = (string)  (Required)
+     * $params['cluster_name'] = (string) The cluster-name to update nodesDn value. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -984,14 +1030,14 @@ class SecurityNamespace extends AbstractNamespace
         $cluster_name = $this->extractArgument($params, 'cluster_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Bulk update of distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
      *
@@ -999,7 +1045,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1008,22 +1054,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchDistinguishedNames');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchDistinguishedNames::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of a role.
      *
-     * $params['role']        = (string)  (Required)
+     * $params['role']        = (string) The name of the role to update. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1033,23 +1079,23 @@ class SecurityNamespace extends AbstractNamespace
         $role = $this->extractArgument($params, 'role');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of a role mapping.
      *
-     * $params['role']        = (string)  (Required)
+     * $params['role']        = (string) The name of the role to update role-mapping for. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1059,23 +1105,23 @@ class SecurityNamespace extends AbstractNamespace
         $role = $this->extractArgument($params, 'role');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Add, delete, or modify a single tenant.
      *
-     * $params['tenant']      = (string)  (Required)
+     * $params['tenant']      = (string) The name of the tenant to update. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1085,23 +1131,23 @@ class SecurityNamespace extends AbstractNamespace
         $tenant = $this->extractArgument($params, 'tenant');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of an internal user.
      *
-     * $params['username']    = (string)  (Required)
+     * $params['username']    = (string) The name of the user to update. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1111,14 +1157,14 @@ class SecurityNamespace extends AbstractNamespace
         $username = $this->extractArgument($params, 'username');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the current security-dashboards plugin configuration.
      *
@@ -1126,22 +1172,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function postDashboardsInfo(array $params = [])
     {
-        $body = $this->extractArgument($params, 'body');
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PostDashboardsInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PostDashboardsInfo::class);
         $endpoint->setParams($params);
-        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Reload HTTP layer communication certificates.
      *
@@ -1149,19 +1192,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function reloadHttpCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ReloadHttpCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ReloadHttpCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Reload Transport layer communication certificates.
      *
@@ -1169,19 +1212,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function reloadTransportCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ReloadTransportCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ReloadTransportCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the tenant names if any exist. Only accessible to super admins or kibanaserver user.
      *
@@ -1189,19 +1232,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function tenantInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\TenantInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\TenantInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the audit configuration.
      *
@@ -1209,7 +1252,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1218,13 +1261,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\UpdateAuditConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\UpdateAuditConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Adds or updates the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
      *
@@ -1232,7 +1275,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1241,22 +1284,22 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\UpdateConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\UpdateConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Adds or updates the specified distinguished names in the cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['cluster_name'] = (string)  (Required)
+     * $params['cluster_name'] = (string) The cluster-name to create/update nodesDn value for. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']        = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1266,35 +1309,35 @@ class SecurityNamespace extends AbstractNamespace
         $cluster_name = $this->extractArgument($params, 'cluster_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\UpdateDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\UpdateDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
      *
-     * $params['accept_invalid'] = (boolean)
+     * $params['accept_invalid'] = (boolean) A boolean flag to indicate whether invalid v6 configuration should be allowed.
      * $params['pretty']         = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']          = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']         = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']    = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function validate(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Validate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Validate::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the user identity related information for currently logged in user.
      *
@@ -1302,19 +1345,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function whoAmI(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\WhoAmI');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\WhoAmI::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the user identity related information for currently logged in user. User needs to have access to this endpoint when authorization at REST layer is enabled.
      *
@@ -1322,19 +1365,19 @@ class SecurityNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function whoAmIProtected(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\WhoAmIProtected');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\WhoAmIProtected::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the password for the current user.
      *

@@ -89,7 +89,7 @@ class DeleteByQuery extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): DeleteByQuery
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

@@ -50,6 +50,7 @@ class PutScript extends AbstractEndpoint
     {
         return [
             'cluster_manager_timeout',
+            'context',
             'master_timeout',
             'timeout',
             'pretty',
@@ -65,7 +66,7 @@ class PutScript extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): PutScript
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -75,7 +76,7 @@ class PutScript extends AbstractEndpoint
         return $this;
     }
 
-    public function setContext($context): PutScript
+    public function setContext($context): static
     {
         if (isset($context) !== true) {
             return $this;

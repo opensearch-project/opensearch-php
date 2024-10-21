@@ -67,7 +67,7 @@ class GetFieldMapping extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setFields($fields): GetFieldMapping
+    public function setFields($fields): static
     {
         if (isset($fields) !== true) {
             return $this;

@@ -58,7 +58,7 @@ class GetComponentTemplate extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): GetComponentTemplate
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

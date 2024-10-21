@@ -43,7 +43,7 @@ class DatasourcesCreate extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): DatasourcesCreate
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
