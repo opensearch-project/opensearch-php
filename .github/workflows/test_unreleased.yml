@@ -53,7 +53,7 @@ jobs:
       - name: Assemble OpenSearch
         if: steps.cache-restore.outputs.cache-hit != 'true'
         working-directory: opensearch
-        run: ./gradlew :distribution:archives:linux-tar:assemble
+        run: ./gradlew :distribution:archives:linux-tar:assemble --warning-mode none
 
       - name: Save cached build
         if: steps.cache-restore.outputs.cache-hit != 'true'
