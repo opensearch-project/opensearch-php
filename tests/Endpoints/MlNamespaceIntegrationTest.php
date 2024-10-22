@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\Client;
 use OpenSearch\Tests\Utility;
 
 /**

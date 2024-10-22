@@ -21,12 +21,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests;
 
+use Mockery as m;
 use OpenSearch;
 use OpenSearch\ClientBuilder;
-use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
-use Mockery as m;
 
 /**
  * Class RegisteredNamespaceTest
@@ -53,7 +52,7 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
         $builder = new FooNamespaceBuilder();
         $client = ClientBuilder::create()->registerNamespace($builder)->build();
 
-        $this->expectException(\OpenSearch\Common\Exceptions\BadMethodCallException::class);
+        $this->expectException(OpenSearch\Common\Exceptions\BadMethodCallException::class);
         $this->expectExceptionMessage('Namespace [bar] not found');
 
         $client->bar()->fooMethod();

@@ -19,13 +19,10 @@ declare(strict_types=1);
  * the GNU Lesser General Public License, Version 2.1, at your option.
  * See the LICENSE file in the project root for more information.
  */
-use OpenSearch\Client;
-use OpenSearch\Common\Exceptions\NoNodesAvailableException;
-use OpenSearch\Common\Exceptions\RuntimeException;
+
 use OpenSearch\Util\ClientEndpoint;
 use OpenSearch\Util\Endpoint;
 use OpenSearch\Util\NamespaceEndpoint;
-use OpenSearch\Tests\Utility;
 use Symfony\Component\Yaml\Yaml;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';

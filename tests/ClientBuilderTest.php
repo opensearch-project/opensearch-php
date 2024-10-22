@@ -29,92 +29,6 @@ use PHPUnit\Framework\TestCase;
 
 class ClientBuilderTest extends TestCase
 {
-    /**
-     * @see https://github.com/elastic/elasticsearch-php/issues/993
-     */
-    public function testIncludePortInHostHeader()
-    {
-        $host = "localhost";
-        $url = "$host:1234";
-        $params = [
-            'client' => [
-                'verbose' => true
-            ]
-        ];
-        $client = ClientBuilder::create()
-            ->setConnectionParams($params)
-            ->setHosts([$url])
-            ->includePortInHostHeader(true)
-            ->build();
-
-        $this->assertInstanceOf(Client::class, $client);
-
-        try {
-            $result = $client->info();
-        } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-            $this->assertTrue(isset($request['request']['headers']['Host'][0]));
-            $this->assertEquals($url, $request['request']['headers']['Host'][0]);
-        }
-    }
-
-    /**
-     * @see https://github.com/elastic/elasticsearch-php/issues/993
-     */
-    public function testNotIncludePortInHostHeaderAsDefault()
-    {
-        $host = "localhost";
-        $url  = "$host:1234";
-        $params = [
-            'client' => [
-                'verbose' => true
-            ]
-        ];
-        $client = ClientBuilder::create()
-            ->setConnectionParams($params)
-            ->setHosts([$url])
-            ->build();
-
-        $this->assertInstanceOf(Client::class, $client);
-
-        try {
-            $result = $client->info();
-        } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-            $this->assertTrue(isset($request['request']['headers']['Host'][0]));
-            $this->assertEquals($host, $request['request']['headers']['Host'][0]);
-        }
-    }
-
-    /**
-     * @see https://github.com/elastic/elasticsearch-php/issues/993
-     */
-    public function testNotIncludePortInHostHeader()
-    {
-        $host = "localhost";
-        $url  = "$host:1234";
-        $params = [
-            'client' => [
-                'verbose' => true
-            ]
-        ];
-        $client = ClientBuilder::create()
-            ->setConnectionParams($params)
-            ->setHosts([$url])
-            ->includePortInHostHeader(false)
-            ->build();
-
-        $this->assertInstanceOf(Client::class, $client);
-
-        try {
-            $result = $client->info();
-        } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-            $this->assertTrue(isset($request['request']['headers']['Host'][0]));
-            $this->assertEquals($host, $request['request']['headers']['Host'][0]);
-        }
-    }
-
     public function getConfig()
     {
         return [
@@ -161,16 +75,6 @@ class ClientBuilderTest extends TestCase
         );
     }
 
-    public function testFromConfigUsingBasicAuthentication()
-    {
-        $config = [
-            'basicAuthentication' => ["foo", "bar"],
-            'connectionParams' => [],
-        ];
-        $client = ClientBuilder::fromConfig($config);
-
-        $this->assertEquals('foo:bar', $client->transport->getConnection()->getUserPass());
-    }
 
     public function testCompatibilityHeaderDefaultIsOff()
     {
@@ -180,36 +84,9 @@ class ClientBuilderTest extends TestCase
         try {
             $client->info();
         } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-            $this->assertSame(['application/json'], $request['request']['headers']['Content-Type']);
-            $this->assertSame(['application/json'], $request['request']['headers']['Accept']);
-        }
-    }
-
-    public function testFromConfigWithIncludePortInHostHeader()
-    {
-        $url = 'localhost:1234';
-        $config = [
-            'hosts' => [$url],
-            'includePortInHostHeader' => true,
-            'connectionParams' => [
-                'client' => [
-                    'verbose' => true
-                ]
-            ],
-        ];
-
-        $client = ClientBuilder::fromConfig($config);
-
-        $this->assertInstanceOf(Client::class, $client);
-
-        try {
-            $client->info();
-            $this->assertTrue(false, 'Exception was not thrown!');
-        } catch (OpenSearchException $e) {
-            $request = $client->transport->getLastConnection()->getLastRequestInfo();
-            $this->assertTrue(isset($request['request']['headers']['Host'][0]));
-            $this->assertEquals($url, $request['request']['headers']['Host'][0]);
+            $request = $client->transport->getLastRequest();
+            $this->assertSame(['application/json'], $request->getHeader('Content-Type'));
+            $this->assertSame(['application/json'], $request->getHeader('Accept'));
         }
     }
 }

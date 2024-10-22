@@ -56,14 +56,6 @@ class Utility
         $clientBuilder = ClientBuilder::create()
             ->setHosts([self::getHost()]);
 
-        $clientBuilder->setConnectionParams([
-            'client' => [
-                'headers' => [
-                    'Accept' => []
-                ]
-            ]
-        ]);
-
         $clientBuilder->setSSLVerification(false);
         return $clientBuilder->build();
     }

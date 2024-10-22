@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Serializers;
 
-use OpenSearch\Serializers\EverythingToJSONSerializer;
 use Mockery as m;
+use OpenSearch\Serializers\EverythingToJSONSerializer;
 
 /**
  * Class EverythingToJSONSerializerTest

@@ -21,9 +21,9 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Helper\Iterators;
 
+use Mockery;
 use OpenSearch\Helper\Iterators\SearchHitIterator;
 use OpenSearch\Helper\Iterators\SearchResponseIterator;
-use Mockery;
 
 /**
  * Class SearchResponseIteratorTest

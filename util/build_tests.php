@@ -20,8 +20,8 @@ declare(strict_types=1);
  */
 
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
-use OpenSearch\Util\YamlTests;
 use OpenSearch\Tests\Utility;
+use OpenSearch\Util\YamlTests;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
