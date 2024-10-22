@@ -14,10 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use PHP 8.2
+      - name: Use PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           extensions: yaml, zip, curl
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,10 +37,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use PHP 8.2
+      - name: Use PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           extensions: yaml, zip, curl
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -70,10 +70,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Use PHP 8.2
+      - name: Use PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           extensions: yaml, zip, curl, pcov
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -107,6 +107,8 @@ jobs:
           - '8.0'
           - '8.1'
           - '8.2'
+          - '8.3'
+          - '8.4'
         os:
           - ubuntu-latest
           - macos-latest
@@ -153,10 +155,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Use PHP 8.2
+    - name: Use PHP 8.3
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.2
+        php-version: 8.3
         extensions: yaml, zip, curl
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -212,10 +214,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Use PHP 8.2
+    - name: Use PHP 8.3
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.2
+        php-version: 8.3
         extensions: yaml, zip, curl
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -260,10 +262,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Use PHP 8.2
+    - name: Use PHP 8.3
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.2
+        php-version: 8.3
         extensions: yaml, zip, curl
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -7,12 +7,13 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Generate endpoints from OpenSearch API Specification ([#194](https://github.com/opensearch-project/opensearch-php/pull/194))
 - Added workflow for automated API update using OpenSearch API specification ([#209](https://github.com/opensearch-project/opensearch-php/pull/209))
 - Added samples ([#218](https://github.com/opensearch-project/opensearch-php/pull/218))
+- Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
 ### Changed
 - Increased min version of `ezimuel/ringphp` to `^1.2.2`
 ### Deprecated
 ### Removed
 ### Fixed
-- Fixed upcomming PHP 8.4 deprecations
+- Fixed PHP 8.4 deprecations
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@cb320b5](https://github.com/opensearch-project/opensearch-api-specification/commit/cb320b5482551c4f28afa26ff0d1653332699722)
 ### Security
