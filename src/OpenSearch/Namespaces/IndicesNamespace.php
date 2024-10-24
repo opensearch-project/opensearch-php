@@ -45,7 +45,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -71,7 +71,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) Define analyzer/tokenizer parameters and the text on which the analysis should be performed
      *
      * @param array $params Associative array of parameters
@@ -106,7 +106,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -137,7 +137,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
@@ -173,7 +173,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -201,7 +201,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the index (`settings` and `mappings`)
      *
      * @param array $params Associative array of parameters
@@ -228,7 +228,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) The data stream definition
      *
      * @param array $params Associative array of parameters
@@ -255,7 +255,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -285,7 +285,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -313,7 +313,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -339,7 +339,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -366,7 +366,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -393,7 +393,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -424,7 +424,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -456,7 +456,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -489,7 +489,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -520,7 +520,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -552,7 +552,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -584,7 +584,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']          = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']               = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']          = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']          = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -616,7 +616,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -645,7 +645,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -671,7 +671,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -701,7 +701,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -731,7 +731,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -761,7 +761,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -794,7 +794,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -824,7 +824,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -851,7 +851,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -884,7 +884,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -912,7 +912,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The settings for the alias, such as `routing` or `filter`
      *
      * @param array $params Associative array of parameters
@@ -945,7 +945,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -979,7 +979,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The mapping definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -1014,7 +1014,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1044,7 +1044,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -1073,7 +1073,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1100,7 +1100,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1125,7 +1125,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1155,7 +1155,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The conditions that needs to be met for executing rollover
      *
      * @param array $params Associative array of parameters
@@ -1188,7 +1188,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1216,7 +1216,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1248,7 +1248,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
@@ -1281,7 +1281,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) New index template definition, which will be included in the simulation, as if it already exists in the system
      *
      * @param array $params Associative array of parameters
@@ -1312,7 +1312,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1346,7 +1346,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
@@ -1385,7 +1385,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                      = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                     = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1413,7 +1413,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The definition of `actions` to perform (Required)
      *
      * @param array $params Associative array of parameters
@@ -1443,7 +1443,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                 = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']           = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']           = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1479,7 +1479,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']               = (array) The query definition specified with the Query DSL
      *
      * @param array $params Associative array of parameters

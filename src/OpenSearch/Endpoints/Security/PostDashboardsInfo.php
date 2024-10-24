@@ -42,14 +42,4 @@ class PostDashboardsInfo extends AbstractEndpoint
     {
         return 'POST';
     }
-
-    public function setBody($body): PostDashboardsInfo
-    {
-        if (isset($body) !== true) {
-            return $this;
-        }
-        $this->body = $body;
-
-        return $this;
-    }
 }
