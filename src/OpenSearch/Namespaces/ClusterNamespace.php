@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class ClusterNamespace
  *
@@ -39,7 +37,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                 = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']           = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']           = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                  = (array) The index, shard, and primary flag to explain. Empty means 'explain the first unassigned shard'
      *
      * @param array $params Associative array of parameters
@@ -49,13 +47,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\AllocationExplain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\AllocationExplain::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a component template.
      *
@@ -67,7 +65,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -76,13 +74,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete any existing decommission.
      *
@@ -90,19 +88,19 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function deleteDecommissionAwareness(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteDecommissionAwareness');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteDecommissionAwareness::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Clears cluster voting config exclusions.
      *
@@ -111,19 +109,19 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteVotingConfigExclusions');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete weighted shard routing weights.
      *
@@ -131,19 +129,22 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function deleteWeightedRouting(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteWeightedRouting');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteWeightedRouting::class);
         $endpoint->setParams($params);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about whether a particular component template exist.
      *
@@ -155,7 +156,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -167,13 +168,13 @@ class ClusterNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\ExistsComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\ExistsComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns one or more component templates.
      *
@@ -185,7 +186,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -194,13 +195,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get details and status of decommissioned attribute.
      *
@@ -209,7 +210,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                    = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']              = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']              = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -218,13 +219,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetDecommissionAwareness');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetDecommissionAwareness::class);
         $endpoint->setParams($params);
         $endpoint->setAwarenessAttributeName($awareness_attribute_name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns cluster settings.
      *
@@ -237,19 +238,19 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getSettings(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetSettings::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Fetches weighted shard routing weights.
      *
@@ -258,7 +259,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -267,13 +268,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $attribute = $this->extractArgument($params, 'attribute');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetWeightedRouting');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setAttribute($attribute);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns basic information about the health of the cluster.
      *
@@ -295,7 +296,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                           = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                     = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                     = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -304,13 +305,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\Health');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\Health::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a list of any cluster-level changes (e.g. create index, update mapping,allocate or fail shard) which have not yet been executed.
      *
@@ -321,19 +322,19 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function pendingTasks(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PendingTasks');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PendingTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the cluster voting config exclusions by node ids or node names.
      *
@@ -344,19 +345,19 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function postVotingConfigExclusions(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PostVotingConfigExclusions');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PostVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a component template.
      *
@@ -369,7 +370,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -380,14 +381,14 @@ class ClusterNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Decommissions an awareness attribute.
      *
@@ -397,7 +398,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                     = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                    = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']               = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -407,14 +408,14 @@ class ClusterNamespace extends AbstractNamespace
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
         $awareness_attribute_value = $this->extractArgument($params, 'awareness_attribute_value');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutDecommissionAwareness');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutDecommissionAwareness::class);
         $endpoint->setParams($params);
         $endpoint->setAwarenessAttributeName($awareness_attribute_name);
         $endpoint->setAwarenessAttributeValue($awareness_attribute_value);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the cluster settings.
      *
@@ -426,7 +427,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart). (Required)
      *
      * @param array $params Associative array of parameters
@@ -436,13 +437,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutSettings::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates weighted shard routing weights.
      *
@@ -451,7 +452,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -459,14 +460,16 @@ class ClusterNamespace extends AbstractNamespace
     public function putWeightedRouting(array $params = [])
     {
         $attribute = $this->extractArgument($params, 'attribute');
+        $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutWeightedRouting');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setAttribute($attribute);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the information about configured remote clusters.
      *
@@ -474,19 +477,19 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function remoteInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\RemoteInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\RemoteInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to manually change the allocation of individual shards in the cluster.
      *
@@ -501,7 +504,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The definition of `commands` to perform (`move`, `cancel`, `allocate`)
      *
      * @param array $params Associative array of parameters
@@ -511,13 +514,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\Reroute');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\Reroute::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a comprehensive information about the state of the cluster.
      *
@@ -530,13 +533,13 @@ class ClusterNamespace extends AbstractNamespace
      * $params['ignore_unavailable']        = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']            = (string) Specify timeout for connection to master
-     * $params['wait_for_metadata_version'] = (number) Wait for the metadata version to be equal or greater than the specified metadata version
+     * $params['wait_for_metadata_version'] = (integer) Wait for the metadata version to be equal or greater than the specified metadata version
      * $params['wait_for_timeout']          = (string) The maximum time to wait for wait_for_metadata_version before timing out
      * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                     = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                    = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']               = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -546,14 +549,14 @@ class ClusterNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\State');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\State::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns high-level overview of cluster statistics.
      *
@@ -564,7 +567,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['human']         = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -573,11 +576,11 @@ class ClusterNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
 
         return $this->performRequest($endpoint);
     }
+
 }

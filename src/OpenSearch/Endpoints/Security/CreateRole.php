@@ -52,7 +52,7 @@ class CreateRole extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): CreateRole
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class CreateRole extends AbstractEndpoint
         return $this;
     }
 
-    public function setRole($role): CreateRole
+    public function setRole($role): static
     {
         if (isset($role) !== true) {
             return $this;

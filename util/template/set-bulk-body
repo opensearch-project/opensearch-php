@@ -1,5 +1,5 @@
 
-    public function setBody($body): :endpoint
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

@@ -61,7 +61,7 @@ class Mget extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): Mget
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

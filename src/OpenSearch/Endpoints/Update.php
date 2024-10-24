@@ -74,7 +74,7 @@ class Update extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): Update
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

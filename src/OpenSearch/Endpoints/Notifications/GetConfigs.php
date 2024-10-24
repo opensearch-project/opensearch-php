@@ -32,6 +32,8 @@ class GetConfigs extends AbstractEndpoint
         return [
             'chime.url',
             'chime.url.keyword',
+            'config_id',
+            'config_id_list',
             'config_type',
             'created_time_ms',
             'description',
@@ -81,7 +83,7 @@ class GetConfigs extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setBody($body): GetConfigs
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

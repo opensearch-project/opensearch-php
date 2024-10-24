@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
+use OpenSearch\Endpoints\Monitoring\Bulk;
 
 /**
  * Class MonitoringNamespace
@@ -45,13 +45,10 @@ class MonitoringNamespace extends AbstractNamespace
      */
     public function bulk(array $params = [])
     {
-        $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Monitoring\Bulk');
+        $endpoint = $this->endpointFactory->getEndpoint(Bulk::class);
         $endpoint->setParams($params);
-        $endpoint->setType($type);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);

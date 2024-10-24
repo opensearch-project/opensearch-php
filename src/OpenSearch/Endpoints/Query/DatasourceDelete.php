@@ -50,7 +50,7 @@ class DatasourceDelete extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setDatasourceName($datasource_name): DatasourceDelete
+    public function setDatasourceName($datasource_name): static
     {
         if (isset($datasource_name) !== true) {
             return $this;

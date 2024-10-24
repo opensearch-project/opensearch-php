@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class IndicesNamespace
  *
@@ -45,7 +43,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -55,14 +53,14 @@ class IndicesNamespace extends AbstractNamespace
         $block = $this->extractArgument($params, 'block');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\AddBlock');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\AddBlock::class);
         $endpoint->setParams($params);
         $endpoint->setBlock($block);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Performs the analysis process on a text and return the tokens breakdown of the text.
      *
@@ -71,7 +69,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) Define analyzer/tokenizer parameters and the text on which the analysis should be performed
      *
      * @param array $params Associative array of parameters
@@ -82,14 +80,14 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Analyze');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Analyze::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Clears all or specific caches for one or more indices.
      *
@@ -106,7 +104,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -115,13 +113,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ClearCache');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ClearCache::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Clones an index.
      *
@@ -137,7 +135,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
@@ -149,8 +147,7 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\CloneIndices');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\CloneIndices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setTarget($target);
@@ -158,6 +155,7 @@ class IndicesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Closes an index.
      *
@@ -173,7 +171,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -182,13 +180,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Close');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Close::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates an index with optional settings and mappings.
      *
@@ -201,7 +199,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the index (`settings` and `mappings`)
      *
      * @param array $params Associative array of parameters
@@ -212,14 +210,14 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Create');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Create::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a data stream.
      *
@@ -228,7 +226,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) The data stream definition
      *
      * @param array $params Associative array of parameters
@@ -239,14 +237,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\CreateDataStream');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\CreateDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides statistics on operations happening in a data stream.
      *
@@ -255,7 +253,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -264,13 +262,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\DataStreamsStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DataStreamsStats::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes an index.
      *
@@ -285,7 +283,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -294,13 +292,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes an alias.
      *
@@ -313,7 +311,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -323,14 +321,14 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\DeleteAlias');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteAlias::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a data stream.
      *
@@ -339,7 +337,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -348,13 +346,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\DeleteDataStream');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes an index template.
      *
@@ -366,7 +364,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -375,13 +373,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\DeleteIndexTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes an index template.
      *
@@ -393,7 +391,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -402,13 +400,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\DeleteTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about whether a particular index exists.
      *
@@ -424,7 +422,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -436,13 +434,13 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Exists');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Exists::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about whether a particular alias exists.
      *
@@ -456,7 +454,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -469,14 +467,14 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ExistsAlias');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ExistsAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about whether a particular index template exists.
      *
@@ -489,7 +487,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -501,13 +499,13 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ExistsIndexTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ExistsIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about whether a particular index template exists.
      *
@@ -520,7 +518,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -532,13 +530,13 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ExistsTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ExistsTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Performs the flush operation on one or more indices.
      *
@@ -552,7 +550,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -561,13 +559,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Flush');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Flush::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Performs the force merge operation on one or more indices.
      *
@@ -584,7 +582,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']          = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']               = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']          = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']          = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -593,13 +591,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ForceMerge');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ForceMerge::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about one or more indices.
      *
@@ -616,7 +614,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -625,13 +623,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Get::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns an alias.
      *
@@ -645,7 +643,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -655,14 +653,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetAlias');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns data streams.
      *
@@ -671,7 +669,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -680,13 +678,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetDataStream');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns mapping for one or more fields.
      *
@@ -701,7 +699,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -711,14 +709,14 @@ class IndicesNamespace extends AbstractNamespace
         $fields = $this->extractArgument($params, 'fields');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetFieldMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetFieldMapping::class);
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns an index template.
      *
@@ -731,7 +729,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -740,13 +738,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetIndexTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns mappings for one or more indices.
      *
@@ -761,7 +759,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -770,13 +768,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetMapping::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns settings for one or more indices.
      *
@@ -794,7 +792,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -804,14 +802,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetSettings::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns an index template.
      *
@@ -824,7 +822,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -833,13 +831,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * The _upgrade API is no longer useful and will be removed.
      *
@@ -851,7 +849,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -860,13 +858,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\GetUpgrade');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetUpgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Opens an index.
      *
@@ -884,7 +882,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -893,13 +891,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Open');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Open::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates an alias.
      *
@@ -912,7 +910,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The settings for the alias, such as `routing` or `filter`
      *
      * @param array $params Associative array of parameters
@@ -924,8 +922,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\PutAlias');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
@@ -933,6 +930,7 @@ class IndicesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates an index template.
      *
@@ -945,7 +943,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -956,14 +954,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\PutIndexTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the index mappings.
      *
@@ -979,7 +977,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The mapping definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -990,14 +988,14 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\PutMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutMapping::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the index settings.
      *
@@ -1014,7 +1012,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1024,14 +1022,14 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\PutSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutSettings::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates an index template.
      *
@@ -1044,7 +1042,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -1055,14 +1053,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\PutTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about ongoing index shard recoveries.
      *
@@ -1073,7 +1071,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1082,13 +1080,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Recovery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Recovery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Performs the refresh operation in one or more indices.
      *
@@ -1100,7 +1098,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1109,13 +1107,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Refresh');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Refresh::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about any matching indices, aliases, and data streams.
      *
@@ -1125,7 +1123,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1134,13 +1132,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ResolveIndex');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ResolveIndex::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates an alias to point to a new index when the existing indexis considered to be too large or too old.
      *
@@ -1155,7 +1153,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The conditions that needs to be met for executing rollover
      *
      * @param array $params Associative array of parameters
@@ -1167,8 +1165,7 @@ class IndicesNamespace extends AbstractNamespace
         $new_index = $this->extractArgument($params, 'new_index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Rollover');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Rollover::class);
         $endpoint->setParams($params);
         $endpoint->setAlias($alias);
         $endpoint->setNewIndex($new_index);
@@ -1176,6 +1173,7 @@ class IndicesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides low-level information about segments in a Lucene index.
      *
@@ -1188,7 +1186,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1197,13 +1195,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Segments');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Segments::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides store information for shard copies of indices.
      *
@@ -1216,7 +1214,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1225,13 +1223,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ShardStores');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ShardStores::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allow to shrink an existing index into a new index with fewer primary shards.
      *
@@ -1248,7 +1246,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
@@ -1260,8 +1258,7 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Shrink');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Shrink::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setTarget($target);
@@ -1269,6 +1266,7 @@ class IndicesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Simulate matching the given index name against the index templates in the system.
      *
@@ -1281,7 +1279,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) New index template definition, which will be included in the simulation, as if it already exists in the system
      *
      * @param array $params Associative array of parameters
@@ -1292,14 +1290,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\SimulateIndexTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\SimulateIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Simulate resolving the given template name or body.
      *
@@ -1312,7 +1310,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1322,14 +1320,14 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\SimulateTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\SimulateTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows you to split an existing index into a new index with more primary shards.
      *
@@ -1346,7 +1344,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
@@ -1358,8 +1356,7 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Split');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Split::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setTarget($target);
@@ -1367,6 +1364,7 @@ class IndicesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides statistics on operations happening in an index.
      *
@@ -1385,7 +1383,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                      = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                     = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1395,14 +1393,14 @@ class IndicesNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates index aliases.
      *
@@ -1413,7 +1411,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The definition of `actions` to perform (Required)
      *
      * @param array $params Associative array of parameters
@@ -1423,13 +1421,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\UpdateAliases');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\UpdateAliases::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * The _upgrade API is no longer useful and will be removed.
      *
@@ -1443,7 +1441,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']                 = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']           = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']           = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1452,13 +1450,13 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\Upgrade');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Upgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows a user to validate a potentially expensive query without executing it.
      *
@@ -1479,7 +1477,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']               = (array) The query definition specified with the Query DSL
      *
      * @param array $params Associative array of parameters
@@ -1490,14 +1488,14 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Indices\ValidateQuery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ValidateQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Alias function to getAlias()
      *

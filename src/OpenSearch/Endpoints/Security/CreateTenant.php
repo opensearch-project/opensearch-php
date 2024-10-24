@@ -52,7 +52,7 @@ class CreateTenant extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): CreateTenant
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class CreateTenant extends AbstractEndpoint
         return $this;
     }
 
-    public function setTenant($tenant): CreateTenant
+    public function setTenant($tenant): static
     {
         if (isset($tenant) !== true) {
             return $this;

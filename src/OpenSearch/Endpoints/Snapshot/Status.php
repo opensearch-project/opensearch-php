@@ -63,7 +63,7 @@ class Status extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setRepository($repository): Status
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;
@@ -73,7 +73,7 @@ class Status extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot($snapshot): Status
+    public function setSnapshot($snapshot): static
     {
         if (isset($snapshot) !== true) {
             return $this;

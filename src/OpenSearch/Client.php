@@ -21,18 +21,23 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
+use Http\Promise\Promise;
 use OpenSearch\Common\Exceptions\BadMethodCallException;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
+use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\AsyncSearchNamespace;
+use OpenSearch\Namespaces\AsynchronousSearchNamespace;
 use OpenSearch\Namespaces\CatNamespace;
 use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
 use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
+use OpenSearch\Namespaces\FlowFrameworkNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
+use OpenSearch\Namespaces\InsightsNamespace;
+use OpenSearch\Namespaces\IsmNamespace;
 use OpenSearch\Namespaces\KnnNamespace;
 use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
@@ -51,6 +56,7 @@ use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class Client
@@ -61,190 +67,107 @@ class Client
 {
     public const VERSION = '2.3.1';
 
-    /**
-     * @var Transport
-     */
-    public $transport;
+    protected bool $isAsync = false;
 
-    /**
-     * @var array
-     */
-    protected $params;
+    protected AsyncSearchNamespace $asyncSearch;
 
-    /**
-     * @var callable
-     */
-    protected $endpoints;
+    protected AsynchronousSearchNamespace $asynchronousSearch;
 
-    /**
-     * @var NamespaceBuilderInterface[]
-     */
-    protected $registeredNamespaces = [];
+    protected CatNamespace $cat;
 
-    /**
-     * @var AsyncSearchNamespace
-     */
-    protected $asyncSearch;
+    protected ClusterNamespace $cluster;
 
-    /**
-     * @var CatNamespace
-     */
-    protected $cat;
+    protected DanglingIndicesNamespace $danglingIndices;
 
-    /**
-     * @var ClusterNamespace
-     */
-    protected $cluster;
+    protected DataFrameTransformDeprecatedNamespace $dataFrameTransformDeprecated;
 
-    /**
-     * @var DanglingIndicesNamespace
-     */
-    protected $danglingIndices;
+    protected FlowFrameworkNamespace $flowFramework;
 
-    /**
-     * @var DataFrameTransformDeprecatedNamespace
-     */
-    protected $dataFrameTransformDeprecated;
+    protected IndicesNamespace $indices;
 
-    /**
-     * @var IndicesNamespace
-     */
-    protected $indices;
+    protected IngestNamespace $ingest;
 
-    /**
-     * @var IngestNamespace
-     */
-    protected $ingest;
+    protected InsightsNamespace $insights;
 
-    /**
-     * @var KnnNamespace
-     */
-    protected $knn;
+    protected IsmNamespace $ism;
 
-    /**
-     * @var MlNamespace
-     */
-    protected $ml;
+    protected KnnNamespace $knn;
 
-    /**
-     * @var MonitoringNamespace
-     */
-    protected $monitoring;
+    protected MlNamespace $ml;
 
-    /**
-     * @var NodesNamespace
-     */
-    protected $nodes;
+    protected MonitoringNamespace $monitoring;
 
-    /**
-     * @var NotificationsNamespace
-     */
-    protected $notifications;
+    protected NodesNamespace $nodes;
 
-    /**
-     * @var ObservabilityNamespace
-     */
-    protected $observability;
+    protected NotificationsNamespace $notifications;
 
-    /**
-     * @var PplNamespace
-     */
-    protected $ppl;
+    protected ObservabilityNamespace $observability;
 
-    /**
-     * @var QueryNamespace
-     */
-    protected $query;
+    protected PplNamespace $ppl;
 
-    /**
-     * @var RemoteStoreNamespace
-     */
-    protected $remoteStore;
+    protected QueryNamespace $query;
 
-    /**
-     * @var RollupsNamespace
-     */
-    protected $rollups;
+    protected RemoteStoreNamespace $remoteStore;
 
-    /**
-     * @var SearchPipelineNamespace
-     */
-    protected $searchPipeline;
+    protected RollupsNamespace $rollups;
 
-    /**
-     * @var SearchableSnapshotsNamespace
-     */
-    protected $searchableSnapshots;
+    protected SearchPipelineNamespace $searchPipeline;
 
-    /**
-     * @var SecurityNamespace
-     */
-    protected $security;
+    protected SearchableSnapshotsNamespace $searchableSnapshots;
 
-    /**
-     * @var SnapshotNamespace
-     */
-    protected $snapshot;
+    protected SecurityNamespace $security;
 
-    /**
-     * @var SqlNamespace
-     */
-    protected $sql;
+    protected SnapshotNamespace $snapshot;
 
-    /**
-     * @var SslNamespace
-     */
-    protected $ssl;
+    protected SqlNamespace $sql;
 
-    /**
-     * @var TasksNamespace
-     */
-    protected $tasks;
+    protected SslNamespace $ssl;
 
-    /**
-     * @var TransformsNamespace
-     */
-    protected $transforms;
+    protected TasksNamespace $tasks;
+
+    protected TransformsNamespace $transforms;
 
 
     /**
-     * Client constructor
+     * Creates a new client instance.
      *
-     * @param Transport                   $transport
-     * @param callable                    $endpoint
-     * @param NamespaceBuilderInterface[] $registeredNamespaces
+     * @param TransportInterface $transport
+     * @param EndpointFactoryInterface $endpointFactory
      */
-    public function __construct(Transport $transport, callable $endpoint, array $registeredNamespaces)
-    {
-        $this->transport = $transport;
-        $this->endpoints = $endpoint;
-        $this->asyncSearch = new AsyncSearchNamespace($transport, $endpoint);
-        $this->cat = new CatNamespace($transport, $endpoint);
-        $this->cluster = new ClusterNamespace($transport, $endpoint);
-        $this->danglingIndices = new DanglingIndicesNamespace($transport, $endpoint);
-        $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $endpoint);
-        $this->indices = new IndicesNamespace($transport, $endpoint);
-        $this->ingest = new IngestNamespace($transport, $endpoint);
-        $this->knn = new KnnNamespace($transport, $endpoint);
-        $this->ml = new MlNamespace($transport, $endpoint);
-        $this->monitoring = new MonitoringNamespace($transport, $endpoint);
-        $this->nodes = new NodesNamespace($transport, $endpoint);
-        $this->notifications = new NotificationsNamespace($transport, $endpoint);
-        $this->observability = new ObservabilityNamespace($transport, $endpoint);
-        $this->ppl = new PplNamespace($transport, $endpoint);
-        $this->query = new QueryNamespace($transport, $endpoint);
-        $this->remoteStore = new RemoteStoreNamespace($transport, $endpoint);
-        $this->rollups = new RollupsNamespace($transport, $endpoint);
-        $this->searchPipeline = new SearchPipelineNamespace($transport, $endpoint);
-        $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $endpoint);
-        $this->security = new SecurityNamespace($transport, $endpoint);
-        $this->snapshot = new SnapshotNamespace($transport, $endpoint);
-        $this->sql = new SqlNamespace($transport, $endpoint);
-        $this->ssl = new SslNamespace($transport, $endpoint);
-        $this->tasks = new TasksNamespace($transport, $endpoint);
-        $this->transforms = new TransformsNamespace($transport, $endpoint);
+    public function __construct(
+        protected TransportInterface $transport,
+        protected EndpointFactoryInterface $endpointFactory,
+    ) {
+        $this->asyncSearch = new AsyncSearchNamespace($this->transport, $this->endpointFactory);
+        $this->asynchronousSearch = new AsynchronousSearchNamespace($this->transport, $this->endpointFactory);
+        $this->cat = new CatNamespace($this->transport, $this->endpointFactory);
+        $this->cluster = new ClusterNamespace($this->transport, $this->endpointFactory);
+        $this->danglingIndices = new DanglingIndicesNamespace($this->transport, $this->endpointFactory);
+        $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($this->transport, $this->endpointFactory);
+        $this->flowFramework = new FlowFrameworkNamespace($this->transport, $this->endpointFactory);
+        $this->indices = new IndicesNamespace($this->transport, $this->endpointFactory);
+        $this->ingest = new IngestNamespace($this->transport, $this->endpointFactory);
+        $this->insights = new InsightsNamespace($this->transport, $this->endpointFactory);
+        $this->ism = new IsmNamespace($this->transport, $this->endpointFactory);
+        $this->knn = new KnnNamespace($this->transport, $this->endpointFactory);
+        $this->ml = new MlNamespace($this->transport, $this->endpointFactory);
+        $this->monitoring = new MonitoringNamespace($this->transport, $this->endpointFactory);
+        $this->nodes = new NodesNamespace($this->transport, $this->endpointFactory);
+        $this->notifications = new NotificationsNamespace($this->transport, $this->endpointFactory);
+        $this->observability = new ObservabilityNamespace($this->transport, $this->endpointFactory);
+        $this->ppl = new PplNamespace($this->transport, $this->endpointFactory);
+        $this->query = new QueryNamespace($this->transport, $this->endpointFactory);
+        $this->remoteStore = new RemoteStoreNamespace($this->transport, $this->endpointFactory);
+        $this->rollups = new RollupsNamespace($this->transport, $this->endpointFactory);
+        $this->searchPipeline = new SearchPipelineNamespace($this->transport, $this->endpointFactory);
+        $this->searchableSnapshots = new SearchableSnapshotsNamespace($this->transport, $this->endpointFactory);
+        $this->security = new SecurityNamespace($this->transport, $this->endpointFactory);
+        $this->snapshot = new SnapshotNamespace($this->transport, $this->endpointFactory);
+        $this->sql = new SqlNamespace($this->transport, $this->endpointFactory);
+        $this->ssl = new SslNamespace($this->transport, $this->endpointFactory);
+        $this->tasks = new TasksNamespace($this->transport, $this->endpointFactory);
+        $this->transforms = new TransformsNamespace($this->transport, $this->endpointFactory);
 
-        $this->registeredNamespaces = $registeredNamespaces;
     }
 
     /**
@@ -257,14 +180,14 @@ class Client
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
      * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The operation definition and data (action-data pairs), separated by newlines (Required)
      *
      * @param array $params Associative array of parameters
@@ -275,14 +198,52 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Bulk');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Bulk::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
+    /**
+     * Allows to perform multiple index/update/delete operations using request response streaming.
+     *
+     * $params['index']                  = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['_source']                = (any) `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * $params['_source_excludes']       = (any) A comma-separated list of source fields to exclude from the response.
+     * $params['_source_includes']       = (any) A comma-separated list of source fields to include in the response.
+     * $params['batch_interval']         = (string) Specifies for how long bulk operations should be accumulated into a batch before sending the batch to data nodes.
+     * $params['batch_size']             = (integer) Specifies how many bulk operations should be accumulated into a batch before sending the batch to data nodes.
+     * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
+     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
+     * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
+     * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']                  = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['body']                   = (array) The operation definition and data (action-data pairs), separated by newlines (Required)
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function bulkStream(array $params = [])
+    {
+        $index = $this->extractArgument($params, 'index');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\BulkStream::class);
+        $endpoint->setParams($params);
+        $endpoint->setIndex($index);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
     /**
      * Explicitly clears the search context for a scroll.
      *
@@ -291,7 +252,7 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) Comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter
      *
      * @param array $params Associative array of parameters
@@ -302,14 +263,14 @@ class Client
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ClearScroll');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ClearScroll::class);
         $endpoint->setParams($params);
         $endpoint->setScrollId($scroll_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns number of documents matching a query.
      *
@@ -326,13 +287,13 @@ class Client
      * $params['min_score']          = (number) Sets the minimum `_score` value that documents must have to be included in the result.
      * $params['preference']         = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                  = (string) Query in the Lucene query string syntax.
-     * $params['routing']            = (string) Custom value used to route operations to a specific shard.
-     * $params['terminate_after']    = (number) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.
+     * $params['routing']            = (any) Custom value used to route operations to a specific shard.
+     * $params['terminate_after']    = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']               = (array) Query to restrict the results specified with the Query DSL (optional)
      *
      * @param array $params Associative array of parameters
@@ -343,14 +304,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Count');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Count::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates point in time context.
      *
@@ -359,12 +320,12 @@ class Client
      * $params['expand_wildcards']           = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      * $params['keep_alive']                 = (string) Specify the keep alive for point in time.
      * $params['preference']                 = (string) Specify the node or shard the operation should be performed on. (Default = random)
-     * $params['routing']                    = (array) Comma-separated list of specific routing values.
+     * $params['routing']                    = (any) Comma-separated list of specific routing values.
      * $params['pretty']                     = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                      = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                     = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -373,31 +334,31 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('CreatePit');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\CreatePit::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Removes a document from the index.
      *
      * $params['id']                     = (string) Unique identifier for the document. (Required)
      * $params['index']                  = (string) Name of the target index. (Required)
-     * $params['if_primary_term']        = (number) Only perform the operation if the document has this primary term.
-     * $params['if_seq_no']              = (number) Only perform the operation if the document has this sequence number.
+     * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
+     * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for active shards.
-     * $params['version']                = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
+     * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -407,14 +368,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes all active point in time searches.
      *
@@ -422,19 +383,19 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function deleteAllPits(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteAllPits');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteAllPits::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes documents matching the provided query.
      *
@@ -449,25 +410,25 @@ class Client
      * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,or)
      * $params['df']                     = (string) Field to use as default where no field prefix is given in the query string.
      * $params['expand_wildcards']       = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['from']                   = (number) Starting offset. (Default = 0)
+     * $params['from']                   = (integer) Starting offset. (Default = 0)
      * $params['ignore_unavailable']     = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['lenient']                = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-     * $params['max_docs']               = (number) Maximum number of documents to process.Defaults to all documents.
+     * $params['max_docs']               = (integer) Maximum number of documents to process.Defaults to all documents.
      * $params['preference']             = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                      = (string) Query in the Lucene query string syntax.
      * $params['refresh']                = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['request_cache']          = (boolean) If `true`, the request cache is used for this request.Defaults to the index-level setting.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second. (Default = 0)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
-     * $params['scroll_size']            = (number) Size of the scroll request that powers the operation. (Default = 100)
+     * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.Defaults to no timeout.
      * $params['search_type']            = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['size']                   = (integer) Deprecated, please use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                  = (array) Specific `tag` of the request for logging and statistical purposes.
-     * $params['terminate_after']        = (number) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+     * $params['terminate_after']        = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
      * $params['timeout']                = (string) Period each deletion request waits for active shards.
      * $params['version']                = (boolean) If `true`, returns the document version as part of a hit.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
@@ -476,7 +437,7 @@ class Client
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The search definition using the Query DSL (Required)
      *
      * @param array $params Associative array of parameters
@@ -487,14 +448,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteByQuery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the number of requests per second for a particular Delete By Query operation.
      *
@@ -504,7 +465,7 @@ class Client
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -513,13 +474,13 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteByQueryRethrottle');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteByQueryRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes one or more point in time searches based on the IDs passed.
      *
@@ -527,7 +488,7 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) The point-in-time ids to be deleted
      *
      * @param array $params Associative array of parameters
@@ -537,13 +498,13 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeletePit');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeletePit::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a script.
      *
@@ -555,7 +516,7 @@ class Client
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -564,13 +525,13 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteScript');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about whether a document exists in an index.
      *
@@ -582,15 +543,15 @@ class Client
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
      * $params['refresh']          = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
-     * $params['routing']          = (string) Target the specified primary shard.
+     * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
-     * $params['version']          = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
+     * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -603,14 +564,14 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Exists');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Exists::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about whether a document source exists in an index.
      *
@@ -622,14 +583,14 @@ class Client
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['realtime']         = (boolean) If true, the request is real-time as opposed to near-real-time.
      * $params['refresh']          = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
-     * $params['routing']          = (string) Target the specified primary shard.
-     * $params['version']          = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
+     * $params['routing']          = (any) Target the specified primary shard.
+     * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -642,14 +603,14 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ExistsSource');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ExistsSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about why a specific matches (or doesn't match) a query.
      *
@@ -665,13 +626,13 @@ class Client
      * $params['lenient']          = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                = (string) Query in the Lucene query string syntax.
-     * $params['routing']          = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['stored_fields']    = (any) A comma-separated list of stored fields to return in the response.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']             = (array) The query definition using the Query DSL
      *
      * @param array $params Associative array of parameters
@@ -683,8 +644,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Explain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -692,6 +652,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the information about the capabilities of fields among multiple indices.
      *
@@ -705,7 +666,7 @@ class Client
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']               = (array) An index filter specified with the Query DSL
      *
      * @param array $params Associative array of parameters
@@ -716,14 +677,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FieldCaps');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FieldCaps::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a document.
      *
@@ -735,15 +696,15 @@ class Client
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
      * $params['refresh']          = (boolean) If true, OpenSearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
-     * $params['routing']          = (string) Target the specified primary shard.
+     * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
-     * $params['version']          = (number) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+     * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -753,14 +714,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Lists all active point in time searches.
      *
@@ -768,19 +729,19 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getAllPits(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetAllPits');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetAllPits::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a script.
      *
@@ -791,7 +752,7 @@ class Client
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -800,13 +761,13 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetScript');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns all script contexts.
      *
@@ -814,19 +775,19 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getScriptContext(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetScriptContext');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScriptContext::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns available script types, languages and contexts.
      *
@@ -834,19 +795,19 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function getScriptLanguages(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetScriptLanguages');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScriptLanguages::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the source of a document.
      *
@@ -858,14 +819,14 @@ class Client
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
      * $params['realtime']         = (boolean) Boolean) If true, the request is real-time as opposed to near-real-time.
      * $params['refresh']          = (boolean) If true, OpenSearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
-     * $params['routing']          = (string) Target the specified primary shard.
-     * $params['version']          = (number) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
+     * $params['routing']          = (any) Target the specified primary shard.
+     * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -875,35 +836,35 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetSource');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a document in an index.
      *
      * $params['index']                  = (string) Name of the data stream or index to target. (Required)
      * $params['id']                     = (string) Unique identifier for the document.
-     * $params['if_primary_term']        = (number) Only perform the operation if the document has this primary term.
-     * $params['if_seq_no']              = (number) Only perform the operation if the document has this sequence number.
+     * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
+     * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['op_type']                = (enum) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`. (Options = create,index)
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
      * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
-     * $params['version']                = (number) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
+     * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The document (Required)
      *
      * @param array $params Associative array of parameters
@@ -915,8 +876,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Index');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
@@ -924,6 +884,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns basic information about the cluster.
      *
@@ -931,19 +892,19 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
      */
     public function info(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Info');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Info::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to get multiple documents in one request.
      *
@@ -954,13 +915,13 @@ class Client
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
      * $params['refresh']          = (boolean) If `true`, the request refreshes relevant shards before retrieving documents.
-     * $params['routing']          = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['stored_fields']    = (any) If `true`, retrieves the document fields stored in the index rather than the document `_source`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']             = (array) Document identifiers; can be either `docs` (containing full document information) or `ids` (when index is provided in the URL. (Required)
      *
      * @param array $params Associative array of parameters
@@ -971,22 +932,22 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Mget');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Mget::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to execute several search operations in one request.
      *
      * $params['index']                         = (array) Comma-separated list of data streams, indices, and index aliases to search.
      * $params['ccs_minimize_roundtrips']       = (boolean) If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests. (Default = true)
-     * $params['max_concurrent_searches']       = (number) Maximum number of concurrent searches the multi search API can execute.
-     * $params['max_concurrent_shard_requests'] = (number) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
-     * $params['pre_filter_shard_size']         = (number) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
+     * $params['max_concurrent_searches']       = (integer) Maximum number of concurrent searches the multi search API can execute.
+     * $params['max_concurrent_shard_requests'] = (integer) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
+     * $params['pre_filter_shard_size']         = (integer) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
      * $params['rest_total_hits_as_int']        = (boolean) If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object. (Default = false)
      * $params['search_type']                   = (enum) Indicates whether global term and document frequencies should be used when scoring returned documents. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']                    = (boolean) Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
@@ -994,7 +955,7 @@ class Client
      * $params['human']                         = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                   = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                   = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                          = (array) The request definitions (metadata-search request definition pairs), separated by newlines (Required)
      *
      * @param array $params Associative array of parameters
@@ -1005,20 +966,20 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Msearch');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Msearch::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to execute several search template operations in one request.
      *
      * $params['index']                   = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (`*`). To search all data streams and indices, omit this parameter or use `*`.
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
-     * $params['max_concurrent_searches'] = (number) Maximum number of concurrent searches the API can run.
+     * $params['max_concurrent_searches'] = (integer) Maximum number of concurrent searches the API can run.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, the response returns `hits.total` as an integer.If `false`, it returns `hits.total` as an object. (Default = false)
      * $params['search_type']             = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
@@ -1026,7 +987,7 @@ class Client
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The request definitions (metadata-search request definition pairs), separated by newlines (Required)
      *
      * @param array $params Associative array of parameters
@@ -1037,14 +998,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('MsearchTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\MsearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns multiple termvectors in one request.
      *
@@ -1057,15 +1018,15 @@ class Client
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['realtime']         = (boolean) If true, the request is real-time as opposed to near-real-time. (Default = true)
-     * $params['routing']          = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If true, the response includes term frequency and document frequency. (Default = false)
-     * $params['version']          = (number) If `true`, returns the document version as part of a hit.
+     * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
      * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']             = (array) Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.
      *
      * @param array $params Associative array of parameters
@@ -1076,14 +1037,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('MTermVectors');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\MTermVectors::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns whether the cluster is running.
      *
@@ -1091,7 +1052,7 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return bool
@@ -1101,12 +1062,12 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ping::class);
         $endpoint->setParams($params);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Creates or updates a script.
      *
@@ -1119,7 +1080,7 @@ class Client
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The document (Required)
      *
      * @param array $params Associative array of parameters
@@ -1131,8 +1092,7 @@ class Client
         $context = $this->extractArgument($params, 'context');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('PutScript');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\PutScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setContext($context);
@@ -1140,6 +1100,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
      *
@@ -1147,12 +1108,12 @@ class Client
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indices are not included in the response.
-     * $params['search_type']        = (string) Search operation type
+     * $params['search_type']        = (enum) Search operation type (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']               = (array) The ranking evaluation search definition, including search requests, document ratings and ranking metric definition. (Required)
      *
      * @param array $params Associative array of parameters
@@ -1163,14 +1124,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('RankEval');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RankEval::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to copy documents from one index to another, optionally filtering the sourcedocuments by a query, changing the destination index settings, or fetching thedocuments from a remote cluster.
      *
@@ -1186,7 +1147,7 @@ class Client
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The search definition using the Query DSL and the prototype for the index request. (Required)
      *
      * @param array $params Associative array of parameters
@@ -1196,13 +1157,13 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Reindex');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Reindex::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the number of requests per second for a particular Reindex operation.
      *
@@ -1212,7 +1173,7 @@ class Client
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1221,13 +1182,13 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ReindexRethrottle');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ReindexRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to use the Mustache language to pre-render a search definition.
      *
@@ -1236,7 +1197,7 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) The search definition template and its params
      *
      * @param array $params Associative array of parameters
@@ -1247,14 +1208,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('RenderSearchTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RenderSearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows an arbitrary script to be executed and a result to be returned.
      *
@@ -1262,7 +1223,7 @@ class Client
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']        = (array) The script to execute
      *
      * @param array $params Associative array of parameters
@@ -1272,13 +1233,13 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ScriptsPainlessExecute');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ScriptsPainlessExecute::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to retrieve a large numbers of results from a single search request.
      *
@@ -1289,7 +1250,7 @@ class Client
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The scroll ID if not passed by URL or query parameter.
      *
      * @param array $params Associative array of parameters
@@ -1300,14 +1261,14 @@ class Client
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Scroll');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Scroll::class);
         $endpoint->setParams($params);
         $endpoint->setScrollId($scroll_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns results matching a query.
      *
@@ -1319,7 +1280,7 @@ class Client
      * $params['allow_partial_search_results']  = (boolean) If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results. (Default = true)
      * $params['analyze_wildcard']              = (boolean) If true, wildcard and prefix queries are analyzed.This parameter can only be used when the q query string parameter is specified. (Default = false)
      * $params['analyzer']                      = (string) Analyzer to use for the query string.This parameter can only be used when the q query string parameter is specified.
-     * $params['batched_reduce_size']           = (number) The number of shard results that should be reduced at once on the coordinating node.This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large. (Default = 512)
+     * $params['batched_reduce_size']           = (integer) The number of shard results that should be reduced at once on the coordinating node.This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large. (Default = 512)
      * $params['cancel_after_time_interval']    = (string) The time after which the search request will be canceled.Request-level parameter takes precedence over `cancel_after_time_interval` cluster setting.
      * $params['ccs_minimize_roundtrips']       = (boolean) If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests. (Default = true)
      * $params['default_operator']              = (enum) The default operator for query string query: AND or OR.This parameter can only be used when the `q` query string parameter is specified. (Options = and,or)
@@ -1327,32 +1288,32 @@ class Client
      * $params['docvalue_fields']               = (any) A comma-separated list of fields to return as the docvalue representation for each hit.
      * $params['expand_wildcards']              = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
      * $params['explain']                       = (boolean) If `true`, returns detailed information about score computation as part of a hit.
-     * $params['from']                          = (number) Starting document offset.Needs to be non-negative.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 0)
+     * $params['from']                          = (integer) Starting document offset.Needs to be non-negative.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 0)
      * $params['ignore_throttled']              = (boolean) If `true`, concrete, expanded or aliased indices will be ignored when frozen.
      * $params['ignore_unavailable']            = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['include_named_queries_score']   = (boolean) Indicates whether hit.matched_queries should be rendered as a map that includes the name of the matched query associated with its score (true) or as an array containing the name of the matched queries (false) (Default = false)
      * $params['lenient']                       = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.This parameter can only be used when the `q` query string parameter is specified.
-     * $params['max_concurrent_shard_requests'] = (number) Defines the number of concurrent shard requests per node this search executes concurrently.This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default = 5)
+     * $params['max_concurrent_shard_requests'] = (integer) Defines the number of concurrent shard requests per node this search executes concurrently.This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default = 5)
      * $params['phase_took']                    = (boolean) Indicates whether to return phase-level `took` time values in the response. (Default = false)
-     * $params['pre_filter_shard_size']         = (number) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).When unspecified, the pre-filter phase is executed if any of these conditions is met:the request targets more than 128 shards;the request targets one or more read-only index;the primary sort of the query targets an indexed field.
+     * $params['pre_filter_shard_size']         = (integer) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold.This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method (if date filters are mandatory to match but the shard bounds and the query are disjoint).When unspecified, the pre-filter phase is executed if any of these conditions is met:the request targets more than 128 shards;the request targets one or more read-only index;the primary sort of the query targets an indexed field.
      * $params['preference']                    = (string) Nodes and shards used for the search.By default, OpenSearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:`_only_local` to run the search only on shards on the local node;`_local` to, if possible, run the search on shards on the local node, or if not, select shards using the default method;`_only_nodes:<node-id>,<node-id>` to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;`_prefer_nodes:<node-id>,<node-id>` to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;`_shards:<shard>,<shard>` to run the search only on the specified shards;`<custom-string>` (any string that does not start with `_`) to route searches with the same `<custom-string>` to the same shards in the same order. (Default = random)
      * $params['q']                             = (string) Query in the Lucene query string syntax using query parameter search.Query parameter searches do not support the full OpenSearch Query DSL but are handy for testing.
      * $params['request_cache']                 = (boolean) If `true`, the caching of search results is enabled for requests where `size` is `0`.Defaults to index level settings.
      * $params['rest_total_hits_as_int']        = (boolean) Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default = false)
-     * $params['routing']                       = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                       = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                        = (string) Period to retain the search context for scrolling. See Scroll search results.By default, this value cannot exceed `1d` (24 hours).You can change this limit using the `search.max_keep_alive` cluster-level setting.
      * $params['search_pipeline']               = (string) Customizable sequence of processing stages applied to search queries.
      * $params['search_type']                   = (enum) How distributed term frequencies are calculated for relevance scoring. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['seq_no_primary_term']           = (boolean) If `true`, returns sequence number and primary term of the last modification of each hit.
-     * $params['size']                          = (number) Defines the number of hits to return.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 10)
+     * $params['size']                          = (integer) Defines the number of hits to return.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 10)
      * $params['sort']                          = (any) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                         = (array) Specific `tag` of the request for logging and statistical purposes.
      * $params['stored_fields']                 = (any) A comma-separated list of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to `false`.You can pass `_source: true` to return both source fields and stored fields in the search response.
      * $params['suggest_field']                 = (string) Specifies which field to use for suggestions.
      * $params['suggest_mode']                  = (enum) Specifies the suggest mode.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified. (Options = always,missing,popular)
-     * $params['suggest_size']                  = (number) Number of suggestions to return.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
+     * $params['suggest_size']                  = (integer) Number of suggestions to return.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
      * $params['suggest_text']                  = (string) The source text for which the suggestions should be returned.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
-     * $params['terminate_after']               = (number) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.If set to `0` (default), the query does not terminate early.
+     * $params['terminate_after']               = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.If set to `0` (default), the query does not terminate early.
      * $params['timeout']                       = (string) Specifies the period of time to wait for a response from each shard.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['track_scores']                  = (boolean) If `true`, calculate and return document scores, even if the scores are not used for sorting.
      * $params['track_total_hits']              = (any) Number of hits matching the query to count accurately.If `true`, the exact number of hits is returned at the cost of some performance.If `false`, the response does not include the total number of hits matching the query.
@@ -1362,7 +1323,7 @@ class Client
      * $params['human']                         = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                   = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                   = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                          = (array) The search definition using the Query DSL
      *
      * @param array $params Associative array of parameters
@@ -1373,14 +1334,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Search');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Search::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about the indices and shards that a search request would be executed against.
      *
@@ -1390,12 +1351,12 @@ class Client
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
      * $params['preference']         = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['routing']            = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']            = (any) Custom value used to route operations to a specific shard.
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']              = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1404,13 +1365,13 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchShards');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchShards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to use the Mustache language to pre-render a search definition.
      *
@@ -1424,7 +1385,7 @@ class Client
      * $params['preference']              = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['profile']                 = (boolean) If `true`, the query execution is profiled.
      * $params['rest_total_hits_as_int']  = (boolean) If true, hits.total are rendered as an integer in the response. (Default = false)
-     * $params['routing']                 = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                 = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                  = (string) Specifies how long a consistent view of the indexshould be maintained for scrolled search.
      * $params['search_type']             = (enum) The type of the search operation. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
@@ -1432,7 +1393,7 @@ class Client
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The search definition template and its params (Required)
      *
      * @param array $params Associative array of parameters
@@ -1443,14 +1404,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information and statistics about terms in the fields of a particular document.
      *
@@ -1463,15 +1424,15 @@ class Client
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['realtime']         = (boolean) If true, the request is real-time as opposed to near-real-time. (Default = true)
-     * $params['routing']          = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
-     * $params['version']          = (number) If `true`, returns the document version as part of a hit.
+     * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
      * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']            = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']             = (array) Define parameters and or supply a document to get termvectors for. See documentation.
      *
      * @param array $params Associative array of parameters
@@ -1483,8 +1444,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('TermVectors');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\TermVectors::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
@@ -1492,6 +1452,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates a document with a script or partial document.
      *
@@ -1500,20 +1461,20 @@ class Client
      * $params['_source']                = (any) Set to false to disable source retrieval. You can also specify a comma-separatedlist of the fields you want to retrieve.
      * $params['_source_excludes']       = (any) Specify the source fields you want to exclude.
      * $params['_source_includes']       = (any) Specify the source fields you want to retrieve.
-     * $params['if_primary_term']        = (number) Only perform the operation if the document has this primary term.
-     * $params['if_seq_no']              = (number) Only perform the operation if the document has this sequence number.
+     * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
+     * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['lang']                   = (string) The script language. (Default = painless)
      * $params['refresh']                = (enum) If 'true', OpenSearch refreshes the affected shards to make this operationvisible to search, if 'wait_for' then wait for a refresh to make this operationvisible to search, if 'false' do nothing with refreshes. (Options = false,true,wait_for)
      * $params['require_alias']          = (boolean) If true, the destination must be an index alias. (Default = false)
-     * $params['retry_on_conflict']      = (number) Specify how many times should the operation be retried when a conflict occurs. (Default = 0)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['retry_on_conflict']      = (integer) Specify how many times should the operation be retried when a conflict occurs. (Default = 0)
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for dynamic mapping updates and active shards.This guarantees OpenSearch waits for at least the timeout before failing.The actual wait time could be longer, particularly when multiple waits occur.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operations.Set to 'all' or any positive integer up to the total number of shards in the index(number_of_replicas+1). Defaults to 1 meaning the primary shard.
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The request definition requires either `script` or partial `doc` (Required)
      *
      * @param array $params Associative array of parameters
@@ -1525,8 +1486,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Update');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Update::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -1534,6 +1494,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Performs an update on every document in the index without changing the source,for example to pick up a mapping change.
      *
@@ -1548,26 +1509,26 @@ class Client
      * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,or)
      * $params['df']                     = (string) Field to use as default where no field prefix is given in the query string.
      * $params['expand_wildcards']       = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['from']                   = (number) Starting offset. (Default = 0)
+     * $params['from']                   = (integer) Starting offset. (Default = 0)
      * $params['ignore_unavailable']     = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['lenient']                = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-     * $params['max_docs']               = (number) Maximum number of documents to process.Defaults to all documents.
+     * $params['max_docs']               = (integer) Maximum number of documents to process.Defaults to all documents.
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['preference']             = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                      = (string) Query in the Lucene query string syntax.
      * $params['refresh']                = (boolean) If `true`, OpenSearch refreshes affected shards to make the operation visible to search.
      * $params['request_cache']          = (boolean) If `true`, the request cache is used for this request.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second. (Default = 0)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
-     * $params['scroll_size']            = (number) Size of the scroll request that powers the operation. (Default = 100)
+     * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.
      * $params['search_type']            = (enum) The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['size']                   = (integer) Deprecated, please use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                  = (array) Specific `tag` of the request for logging and statistical purposes.
-     * $params['terminate_after']        = (number) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+     * $params['terminate_after']        = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
      * $params['timeout']                = (string) Period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
      * $params['version']                = (boolean) If `true`, returns the document version as part of a hit.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
@@ -1576,7 +1537,7 @@ class Client
      * $params['human']                  = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']            = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                   = (array) The search definition using the Query DSL
      *
      * @param array $params Associative array of parameters
@@ -1587,14 +1548,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('UpdateByQuery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\UpdateByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the number of requests per second for a particular Update By Query operation.
      *
@@ -1604,7 +1565,7 @@ class Client
      * $params['human']               = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1613,13 +1574,13 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('UpdateByQueryRethrottle');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\UpdateByQueryRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Proxy function to createPointInTime() to prevent BC break.
      * This API will be removed in a future version. Use 'createPit' API instead.
@@ -1648,7 +1609,7 @@ class Client
          * $params['body']                   = (array) The document (Required)
          *
          * @param array $params Associative array of parameters
-         * @return array
+         * @return \Http\Promise\Promise|\Psr\Http\Message\ResponseInterface
          */
     public function create(array $params = [])
     {
@@ -1656,8 +1617,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $id ? $endpointBuilder('Create') : $endpointBuilder('Index');
+        $endpoint = $id ? $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Create::class) : $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -1679,6 +1639,13 @@ class Client
     public function asyncSearch(): AsyncSearchNamespace
     {
         return $this->asyncSearch;
+    }
+    /**
+     * Returns the asynchronousSearch namespace
+     */
+    public function asynchronousSearch(): AsynchronousSearchNamespace
+    {
+        return $this->asynchronousSearch;
     }
     /**
      * Returns the cat namespace
@@ -1709,6 +1676,13 @@ class Client
         return $this->dataFrameTransformDeprecated;
     }
     /**
+     * Returns the flowFramework namespace
+     */
+    public function flowFramework(): FlowFrameworkNamespace
+    {
+        return $this->flowFramework;
+    }
+    /**
      * Returns the indices namespace
      */
     public function indices(): IndicesNamespace
@@ -1721,6 +1695,20 @@ class Client
     public function ingest(): IngestNamespace
     {
         return $this->ingest;
+    }
+    /**
+     * Returns the insights namespace
+     */
+    public function insights(): InsightsNamespace
+    {
+        return $this->insights;
+    }
+    /**
+     * Returns the ism namespace
+     */
+    public function ism(): IsmNamespace
+    {
+        return $this->ism;
     }
     /**
      * Returns the knn namespace
@@ -1850,20 +1838,6 @@ class Client
     }
 
     /**
-     * Catchall for registered namespaces
-     *
-     * @return object
-     * @throws BadMethodCallException if the namespace cannot be found
-     */
-    public function __call(string $name, array $arguments)
-    {
-        if (isset($this->registeredNamespaces[$name])) {
-            return $this->registeredNamespaces[$name];
-        }
-        throw new BadMethodCallException("Namespace [$name] not found");
-    }
-
-    /**
      * Extract an argument from the array of parameters
      *
      * @return null|mixed
@@ -1883,34 +1857,57 @@ class Client
     }
 
     /**
-     * Sends a raw request to the cluster
-     * @return callable|array
-     * @throws NoNodesAvailableException
+     * Check if the client is running in async mode.
      */
-    public function request(string $method, string $uri, array $attributes = [])
+    public function isAsync(): bool
     {
-        $params = $attributes['params'] ?? [];
-        $body = $attributes['body'] ?? null;
-        $options = $attributes['options'] ?? [];
-
-        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
-
-        return $this->transport->resultOrFuture($promise, $options);
+        return $this->isAsync;
     }
 
     /**
-     * @return callable|array
+     * Set the client to run in async mode.
      */
-    private function performRequest(AbstractEndpoint $endpoint)
+    public function setAsync(bool $isAsync): static
     {
-        $promise =  $this->transport->performRequest(
+        $this->isAsync = $isAsync;
+        return $this;
+    }
+
+    /**
+     * Sends a raw request to the cluster.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface|\Exception
+     */
+    public function sendRawRequest(string $method, string $uri, array $params = [], ?string $body = null): Promise|ResponseInterface
+    {
+        $params = $attributes['params'] ?? [];
+        $body = $attributes['body'] ?? null;
+
+        $request = $this->transport->createRequest($method, $uri, $params, $body);
+
+        if ($this->isAsync()) {
+            return $this->transport->sendAsyncRequest($request);
+        }
+        return $this->transport->sendRequest($request);
+    }
+
+    /**
+     * Perform the request.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface|\Exception
+     */
+    private function performRequest(EndpointInterface $endpoint): Promise|ResponseInterface
+    {
+        $request = $this->transport->createRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
-            $endpoint->getOptions()
         );
-
-        return $this->transport->resultOrFuture($promise, $endpoint->getOptions());
+        if ($this->isAsync()) {
+            return $this->transport->sendAsyncRequest($request);
+        }
+        return $this->transport->sendRequest($request);
     }
+
 }

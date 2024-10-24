@@ -52,7 +52,7 @@ class DeleteRoleMapping extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setRole($role): DeleteRoleMapping
+    public function setRole($role): static
     {
         if (isset($role) !== true) {
             return $this;

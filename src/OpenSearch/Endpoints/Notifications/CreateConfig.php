@@ -43,7 +43,7 @@ class CreateConfig extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): CreateConfig
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

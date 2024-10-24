@@ -52,7 +52,7 @@ class GetUserLegacy extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setUsername($username): GetUserLegacy
+    public function setUsername($username): static
     {
         if (isset($username) !== true) {
             return $this;

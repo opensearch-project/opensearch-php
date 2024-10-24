@@ -36,8 +36,7 @@ class SslNamespace extends AbstractNamespace
      */
     public function certificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ssl\Certificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ssl\Certificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class SnapshotNamespace
  *
@@ -41,7 +39,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -50,13 +48,13 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\CleanupRepository');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\CleanupRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Clones indices from one snapshot into another snapshot in the same repository.
      *
@@ -69,7 +67,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The snapshot clone definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -82,8 +80,7 @@ class SnapshotNamespace extends AbstractNamespace
         $target_snapshot = $this->extractArgument($params, 'target_snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\CloneSnapshot');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\CloneSnapshot::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -92,6 +89,7 @@ class SnapshotNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates a snapshot in a repository.
      *
@@ -104,7 +102,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The snapshot definition
      *
      * @param array $params Associative array of parameters
@@ -116,8 +114,7 @@ class SnapshotNamespace extends AbstractNamespace
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\Create');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Create::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -125,6 +122,7 @@ class SnapshotNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates a repository.
      *
@@ -137,7 +135,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The repository definition (Required)
      *
      * @param array $params Associative array of parameters
@@ -148,14 +146,14 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\CreateRepository');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\CreateRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a snapshot.
      *
@@ -167,7 +165,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -177,14 +175,14 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a repository.
      *
@@ -196,7 +194,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -205,13 +203,13 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\DeleteRepository');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\DeleteRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about a snapshot.
      *
@@ -225,7 +223,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -235,14 +233,14 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Get::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about a repository.
      *
@@ -254,7 +252,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -263,13 +261,13 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\GetRepository');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\GetRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Restores a snapshot.
      *
@@ -282,7 +280,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) Details of what to restore
      *
      * @param array $params Associative array of parameters
@@ -294,8 +292,7 @@ class SnapshotNamespace extends AbstractNamespace
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\Restore');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Restore::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -303,6 +300,7 @@ class SnapshotNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about the status of a snapshot.
      *
@@ -315,7 +313,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -325,14 +323,14 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\Status');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Status::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Verifies a repository.
      *
@@ -344,7 +342,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['human']                   = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -353,11 +351,11 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Snapshot\VerifyRepository');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\VerifyRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
         return $this->performRequest($endpoint);
     }
+
 }

@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class KnnNamespace
  *
@@ -32,7 +30,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -41,13 +39,13 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\DeleteModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Used to retrieve information about models present in the cluster.
      *
@@ -56,7 +54,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -65,13 +63,13 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\GetModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Use an OpenSearch query to search for models in the index.
      *
@@ -99,7 +97,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['q']                             = (string) Query in the Lucene query string syntax.
      * $params['request_cache']                 = (boolean) Specify if request cache should be used for this request or not, defaults to index level setting.
      * $params['rest_total_hits_as_int']        = (boolean) Indicates whether hits.total should be rendered as an integer or an object in the rest search response. (Default = false)
-     * $params['routing']                       = (array) Comma-separated list of specific routing values.
+     * $params['routing']                       = (any) Comma-separated list of specific routing values.
      * $params['scroll']                        = (string) Specify how long a consistent view of the index should be maintained for scrolled search.
      * $params['search_type']                   = (enum) Search operation type. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['seq_no_primary_term']           = (boolean) Specify whether to return sequence number and primary term of the last modification of each hit.
@@ -121,7 +119,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['human']                         = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']                   = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']                        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                   = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']                   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -130,13 +128,13 @@ class KnnNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\SearchModels');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides information about the current status of the k-NN plugin.
      *
@@ -147,7 +145,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -157,14 +155,14 @@ class KnnNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setStat($stat);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
      *
@@ -174,7 +172,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -184,14 +182,14 @@ class KnnNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\TrainModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\TrainModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
      *
@@ -200,7 +198,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -209,11 +207,11 @@ class KnnNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\Warmup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\Warmup::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
 }

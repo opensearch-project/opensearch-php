@@ -57,7 +57,7 @@ class Reindex extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): Reindex
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

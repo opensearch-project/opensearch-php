@@ -5,8 +5,7 @@
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder(':EndpointClass');
+        $endpoint = $this->endpointFactory->getEndpoint(:EndpointClass::class);
         $endpoint->setParams($params);
 :setparam
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);

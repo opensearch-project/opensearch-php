@@ -52,7 +52,7 @@ class Put extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): Put
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

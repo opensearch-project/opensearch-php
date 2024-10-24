@@ -46,8 +46,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchableSnapshots\ClearCache');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchableSnapshots\ClearCache::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -73,8 +72,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchableSnapshots\Mount');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchableSnapshots\Mount::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -96,8 +94,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchableSnapshots\RepositoryStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchableSnapshots\RepositoryStats::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
@@ -117,8 +114,7 @@ class SearchableSnapshotsNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchableSnapshots\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchableSnapshots\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 

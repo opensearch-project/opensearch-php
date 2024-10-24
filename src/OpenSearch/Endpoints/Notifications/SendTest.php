@@ -50,7 +50,7 @@ class SendTest extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setConfigId($config_id): SendTest
+    public function setConfigId($config_id): static
     {
         if (isset($config_id) !== true) {
             return $this;

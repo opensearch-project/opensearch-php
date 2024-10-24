@@ -52,7 +52,7 @@ class PutDecommissionAwareness extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setAwarenessAttributeName($awareness_attribute_name): PutDecommissionAwareness
+    public function setAwarenessAttributeName($awareness_attribute_name): static
     {
         if (isset($awareness_attribute_name) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class PutDecommissionAwareness extends AbstractEndpoint
         return $this;
     }
 
-    public function setAwarenessAttributeValue($awareness_attribute_value): PutDecommissionAwareness
+    public function setAwarenessAttributeValue($awareness_attribute_value): static
     {
         if (isset($awareness_attribute_value) !== true) {
             return $this;
