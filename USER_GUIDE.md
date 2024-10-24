@@ -16,7 +16,7 @@ define('INDEX_NAME', 'test_elastic_index_name2');
 class MyOpenSearchClass
 {
 
-    protected ?\OpenSearch\Client $client;
+    protected ?OpenSearch\Client $client;
     protected $existingID = 1668504743;
     protected $deleteID = 1668504743;
     protected $bulkIds = [];
@@ -369,7 +369,7 @@ This method allows you to set the hosts to use for the client. By default, the `
 
 ```php
 <?php
-    $client = (new \OpenSearch\ClientBuilder())
+    $client = (new OpenSearch\ClientBuilder())
         ->setHosts(['https://localhost:9200'])
         ->build();
 ```
@@ -380,7 +380,7 @@ This method allows you to set the host selection mode to use for the client.
 
 ```php
 <?php
-    $client = (new \OpenSearch\ClientBuilder())
+    $client = (new OpenSearch\ClientBuilder())
         // Class needs to implement \OpenSearch\ConnectionPool\Selectors\SelectorInterface
         ->setSelector(new \OpenSearch\ConnectionPool\Selectors\RandomSelector())
         ->build();
@@ -391,7 +391,7 @@ This method allows you to set the host selection mode to use for the client.
 This method allows you to set the basic authentication credentials to use for the client.
 
 ```php
-$client = (new \OpenSearch\ClientBuilder())
+$client = (new OpenSearch\ClientBuilder())
     ->setBasicAuthentication('username', 'password')
     ->build();
 ```
@@ -401,7 +401,7 @@ $client = (new \OpenSearch\ClientBuilder())
 This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
 
 ```php
-$client = (new \OpenSearch\ClientBuilder())
+$client = (new OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
 
     ->setSigV4Service('es')
@@ -422,7 +422,7 @@ $client = (new \OpenSearch\ClientBuilder())
 This method allows you to enable AWS SigV4 authentication for the client. The AWS SDK is required for this to work.
 
 ```php
-$client = (new \OpenSearch\ClientBuilder())
+$client = (new OpenSearch\ClientBuilder())
     ->setSigV4Region('us-east-2')
 
     ->setSigV4Service('aoss')
@@ -444,7 +444,7 @@ $client = (new \OpenSearch\ClientBuilder())
 This method allows you to set custom curl options such as timeout/compression/etc.
 
 ```php
-$client = (new \OpenSearch\ClientBuilder())
+$client = (new OpenSearch\ClientBuilder())
     ->setConnectionParams([
         'client' => [
             'curl' => [
@@ -463,7 +463,7 @@ This method allows you to set a PSR-3 logger to use for the client. This will lo
 
 ```php
 <?php
-    $client = (new \OpenSearch\ClientBuilder())
+    $client = (new OpenSearch\ClientBuilder())
         ->setLogger($monologLogger)
         ->build();
 ```
@@ -474,7 +474,7 @@ This method allows you to set the number of retries to use for the client.
 
 ```php
 
-$client = (new \OpenSearch\ClientBuilder())
+$client = (new OpenSearch\ClientBuilder())
     ->setRetries(3)
     ->build();
 ```
@@ -497,7 +497,7 @@ $config = [
     'includePortInHostHeader' => true, // forces port from Hosts URL
 ];
 
-$client = \OpenSearch\ClientBuilder::fromConfig($config);
+$client = OpenSearch\ClientBuilder::fromConfig($config);
 
 ...
 ```

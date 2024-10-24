@@ -23,7 +23,6 @@ namespace OpenSearch\Tests\Serializers;
 
 use OpenSearch\Common\Exceptions\Serializer\JsonErrorException;
 use OpenSearch\Serializers\SmartSerializer;
-use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 /**
