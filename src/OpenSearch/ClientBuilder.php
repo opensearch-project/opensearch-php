@@ -21,39 +21,18 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
-use Aws\Credentials\CredentialProvider;
-use Aws\Credentials\Credentials;
 use Aws\Credentials\CredentialsInterface;
-use OpenSearch\Common\Exceptions\InvalidArgumentException;
+use Elastic\Transport\TransportBuilder;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Common\Exceptions\AuthenticationConfigException;
-use OpenSearch\ConnectionPool\AbstractConnectionPool;
-use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
-use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
-use OpenSearch\ConnectionPool\StaticNoPingConnectionPool;
-use OpenSearch\Connections\ConnectionFactory;
-use OpenSearch\Connections\ConnectionFactoryInterface;
-use OpenSearch\Connections\ConnectionInterface;
-use OpenSearch\Handlers\SigV4Handler;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
-use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
-use GuzzleHttp\Ring\Client\CurlHandler;
-use GuzzleHttp\Ring\Client\CurlMultiHandler;
-use GuzzleHttp\Ring\Client\Middleware;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionClass;
 
 class ClientBuilder
 {
-    public const ALLOWED_METHODS_FROM_CONFIG = ['includePortInHostHeader'];
-
-    /**
-     * @var Transport|null
-     */
-    private $transport;
-
     /**
      * @var callable|null
      */
@@ -62,109 +41,39 @@ class ClientBuilder
     /**
      * @var NamespaceBuilderInterface[]
      */
-    private $registeredNamespacesBuilders = [];
+    private array $registeredNamespacesBuilders = [];
 
-    /**
-     * @var ConnectionFactoryInterface|null
-     */
-    private $connectionFactory;
-
-    /**
-     * @var callable|null
-     */
-    private $handler;
-
-    /**
-     * @var LoggerInterface|null
-     */
-    private $logger;
-
-    /**
-     * @var LoggerInterface|null
-     */
-    private $tracer;
-
-    /**
-     * @var string|AbstractConnectionPool
-     */
-    private $connectionPool = StaticNoPingConnectionPool::class;
-
-    /**
-     * @var string|SerializerInterface|null
-     */
-    private $serializer = SmartSerializer::class;
-
-    /**
-     * @var string|SelectorInterface|null
-     */
-    private $selector = RoundRobinSelector::class;
-
-    /**
-     * @var array
-     */
-    private $connectionPoolArgs = [
-        'randomizeHosts' => true
-    ];
+    private LoggerInterface $logger;
 
     /**
      * @var array|null
      */
-    private $hosts;
+    private $hosts = ['localhost:9200'];
 
-    /**
-     * @var array
-     */
-    private $connectionParams;
-
-    /**
-     * @var int|null
-     */
-    private $retries;
-
-    /**
-     * @var null|callable
-     */
-    private $sigV4CredentialProvider;
-
-    /**
-     * @var null|string
-     */
-    private $sigV4Region;
-
-    /**
-     * @var null|string
-     */
-    private $sigV4Service;
-
-    /**
-     * @var bool
-     */
-    private $sniffOnStart = false;
+    private ?int $retries = null;
 
     /**
      * @var null|array
      */
-    private $sslCert;
+    private ?array $sslCert = null
+    ;
 
     /**
      * @var null|array
      */
     private $sslKey;
 
-    /**
-     * @var null|bool|string
-     */
-    private $sslVerification;
+    private bool $sslVerification = true;
 
     /**
-     * @var bool
+     * @var array<string>
      */
-    private $includePortInHostHeader = false;
+    private array $basicAuthentication = [];
 
-    /**
-     * @var string|null
-     */
-    private $basicAuthentication = null;
+    public function __construct()
+    {
+        $this->logger = new NullLogger();
+    }
 
     /**
      * Create an instance of ClientBuilder
@@ -172,14 +81,6 @@ class ClientBuilder
     public static function create(): ClientBuilder
     {
         return new self();
-    }
-
-    /**
-     * Can supply first param to Client::__construct() when invoking manually or with dependency injection
-     */
-    public function getTransport(): Transport
-    {
-        return $this->transport;
     }
 
     /**
@@ -219,7 +120,7 @@ class ClientBuilder
     {
         $builder = new self();
         foreach ($config as $key => $value) {
-            $method = in_array($key, self::ALLOWED_METHODS_FROM_CONFIG, true) ? $key : "set$key";
+            $method = "set$key";
             $reflection = new ReflectionClass($builder);
             if ($reflection->hasMethod($method)) {
                 $func = $reflection->getMethod($method);
@@ -237,92 +138,6 @@ class ClientBuilder
             throw new RuntimeException("Unknown parameters provided: $unknown");
         }
         return $builder->build();
-    }
-
-    /**
-     * Get the default handler
-     *
-     * @param array $multiParams
-     * @param array $singleParams
-     * @throws \RuntimeException
-     */
-    public static function defaultHandler(array $multiParams = [], array $singleParams = []): callable
-    {
-        $future = null;
-        if (extension_loaded('curl')) {
-            $config = array_merge([ 'mh' => curl_multi_init() ], $multiParams);
-            if (function_exists('curl_reset')) {
-                $default = new CurlHandler($singleParams);
-                $future = new CurlMultiHandler($config);
-            } else {
-                $default = new CurlMultiHandler($config);
-            }
-        } else {
-            throw new \RuntimeException('OpenSearch-PHP requires cURL, or a custom HTTP handler.');
-        }
-
-        return $future ? Middleware::wrapFuture($default, $future) : $default;
-    }
-
-    /**
-     * Get the multi handler for async (CurlMultiHandler)
-     *
-     * @throws \RuntimeException
-     */
-    public static function multiHandler(array $params = []): CurlMultiHandler
-    {
-        if (function_exists('curl_multi_init')) {
-            return new CurlMultiHandler(array_merge([ 'mh' => curl_multi_init() ], $params));
-        }
-
-        throw new \RuntimeException('CurlMulti handler requires cURL.');
-    }
-
-    /**
-     * Get the handler instance (CurlHandler)
-     *
-     * @throws \RuntimeException
-     */
-    public static function singleHandler(): CurlHandler
-    {
-        if (function_exists('curl_reset')) {
-            return new CurlHandler();
-        }
-
-        throw new \RuntimeException('CurlSingle handler requires cURL.');
-    }
-
-    /**
-     * Set connection Factory
-     *
-     * @param ConnectionFactoryInterface $connectionFactory
-     */
-    public function setConnectionFactory(ConnectionFactoryInterface $connectionFactory): ClientBuilder
-    {
-        $this->connectionFactory = $connectionFactory;
-
-        return $this;
-    }
-
-    /**
-     * Set the connection pool (default is StaticNoPingConnectionPool)
-     *
-     * @param  AbstractConnectionPool|string $connectionPool
-     * @param array $args
-     * @throws \InvalidArgumentException
-     */
-    public function setConnectionPool($connectionPool, array $args = []): ClientBuilder
-    {
-        if (is_string($connectionPool)) {
-            $this->connectionPool = $connectionPool;
-            $this->connectionPoolArgs = $args;
-        } elseif (is_object($connectionPool)) {
-            $this->connectionPool = $connectionPool;
-        } else {
-            throw new InvalidArgumentException("Serializer must be a class path or instantiated object extending AbstractConnectionPool");
-        }
-
-        return $this;
     }
 
     /**
@@ -350,30 +165,6 @@ class ClientBuilder
     }
 
     /**
-     * Set the transport
-     *
-     * @param Transport $transport
-     */
-    public function setTransport(Transport $transport): ClientBuilder
-    {
-        $this->transport = $transport;
-
-        return $this;
-    }
-
-    /**
-     * Set the HTTP handler (cURL is default)
-     *
-     * @param  mixed $handler
-     */
-    public function setHandler($handler): ClientBuilder
-    {
-        $this->handler = $handler;
-
-        return $this;
-    }
-
-    /**
      * Set the PSR-3 Logger
      *
      * @param LoggerInterface $logger
@@ -384,31 +175,6 @@ class ClientBuilder
 
         return $this;
     }
-
-    /**
-     * Set the PSR-3 tracer
-     *
-     * @param LoggerInterface $tracer
-     */
-    public function setTracer(LoggerInterface $tracer): ClientBuilder
-    {
-        $this->tracer = $tracer;
-
-        return $this;
-    }
-
-    /**
-     * Set the serializer
-     *
-     * @param \OpenSearch\Serializers\SerializerInterface|string $serializer
-     */
-    public function setSerializer($serializer): ClientBuilder
-    {
-        $this->parseStringOrObject($serializer, $this->serializer, 'SerializerInterface');
-
-        return $this;
-    }
-
     /**
      * Set the hosts (nodes)
      *
@@ -430,21 +196,9 @@ class ClientBuilder
      *
      * @throws AuthenticationConfigException
      */
-    public function setBasicAuthentication(string $username, string $password): ClientBuilder
+    public function setBasicAuthentication(string $username, ?string $password = null): ClientBuilder
     {
-        $this->basicAuthentication = $username.':'.$password;
-
-        return $this;
-    }
-
-    /**
-     * Set connection parameters
-     *
-     * @param array $params
-     */
-    public function setConnectionParams(array $params): ClientBuilder
-    {
-        $this->connectionParams = $params;
+        $this->basicAuthentication = array_filter([$username, $password]);
 
         return $this;
     }
@@ -457,70 +211,6 @@ class ClientBuilder
     public function setRetries(int $retries): ClientBuilder
     {
         $this->retries = $retries;
-
-        return $this;
-    }
-
-    /**
-     * Set the selector algorithm
-     *
-     * @param \OpenSearch\ConnectionPool\Selectors\SelectorInterface|string $selector
-     */
-    public function setSelector($selector): ClientBuilder
-    {
-        $this->parseStringOrObject($selector, $this->selector, 'SelectorInterface');
-
-        return $this;
-    }
-
-    /**
-     * Set the credential provider for SigV4 request signing. The value provider should be a
-     * callable object that will return
-     *
-     * @param callable|bool|array|CredentialsInterface|null $credentialProvider
-     */
-    public function setSigV4CredentialProvider($credentialProvider): ClientBuilder
-    {
-        if ($credentialProvider !== null && $credentialProvider !== false) {
-            $this->sigV4CredentialProvider = $this->normalizeCredentialProvider($credentialProvider);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the region for SigV4 signing.
-     *
-     * @param string|null $region
-     */
-    public function setSigV4Region($region): ClientBuilder
-    {
-        $this->sigV4Region = $region;
-
-        return $this;
-    }
-
-    /**
-     * Set the service for SigV4 signing.
-     *
-     * @param string|null $service
-     */
-    public function setSigV4Service($service): ClientBuilder
-    {
-        $this->sigV4Service = $service;
-
-        return $this;
-    }
-
-    /**
-     * Set sniff on start
-     *
-     * @param bool $sniffOnStart enable or disable sniff on start
-     */
-
-    public function setSniffOnStart(bool $sniffOnStart): ClientBuilder
-    {
-        $this->sniffOnStart = $sniffOnStart;
 
         return $this;
     }
@@ -553,51 +243,18 @@ class ClientBuilder
 
     /**
      * Set SSL verification
-     *
-     * @param bool|string $value
      */
-    public function setSSLVerification($value = true): ClientBuilder
+    public function setSSLVerification(bool $value = true): ClientBuilder
     {
         $this->sslVerification = $value;
 
         return $this;
     }
-
-    /**
-     * Include the port in Host header
-     *
-     * @see https://github.com/elastic/elasticsearch-php/issues/993
-     */
-    public function includePortInHostHeader(bool $enable): ClientBuilder
-    {
-        $this->includePortInHostHeader = $enable;
-
-        return $this;
-    }
-
     /**
      * Build and returns the Client object
      */
     public function build(): Client
     {
-        $this->buildLoggers();
-
-        if (is_null($this->handler)) {
-            $this->handler = ClientBuilder::defaultHandler();
-        }
-
-        if (!is_null($this->sigV4CredentialProvider)) {
-            if (is_null($this->sigV4Region)) {
-                throw new RuntimeException("A region must be supplied for SigV4 request signing.");
-            }
-
-            if (is_null($this->sigV4Service)) {
-                $this->setSigV4Service("es");
-            }
-
-            $this->handler = new SigV4Handler($this->sigV4Region, $this->sigV4Service, $this->sigV4CredentialProvider, $this->handler);
-        }
-
         $sslOptions = null;
         if (isset($this->sslKey)) {
             $sslOptions['ssl_key'] = $this->sslKey;
@@ -621,70 +278,22 @@ class ClientBuilder
                     return $handler($request);
                 };
             };
-            $this->handler = $sslHandler($this->handler, $sslOptions);
         }
 
-        if (is_null($this->serializer)) {
-            $this->serializer = new SmartSerializer();
-        } elseif (is_string($this->serializer)) {
-            $this->serializer = new $this->serializer();
-        }
-
-        $this->connectionParams['client']['port_in_header'] = $this->includePortInHostHeader;
-
-        if (! is_null($this->basicAuthentication)) {
-            if (isset($this->connectionParams['client']['curl']) === false) {
-                $this->connectionParams['client']['curl'] = [];
-            }
-
-            $this->connectionParams['client']['curl'] += [
-                CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
-                CURLOPT_USERPWD  => $this->basicAuthentication
-            ];
-        }
-
-        if (is_null($this->connectionFactory)) {
-            // Make sure we are setting Content-Type and Accept (unless the user has explicitly
-            // overridden it
-            if (! isset($this->connectionParams['client']['headers'])) {
-                $this->connectionParams['client']['headers'] = [];
-            }
-            if (! isset($this->connectionParams['client']['headers']['Content-Type'])) {
-                $this->connectionParams['client']['headers']['Content-Type'] = ['application/json'];
-            }
-            if (! isset($this->connectionParams['client']['headers']['Accept'])) {
-                $this->connectionParams['client']['headers']['Accept'] = ['application/json'];
-            }
-
-            $this->connectionFactory = new ConnectionFactory($this->handler, $this->connectionParams, $this->serializer, $this->logger, $this->tracer);
-        }
-
-        if (is_null($this->hosts)) {
-            $this->hosts = $this->getDefaultHost();
-        }
-
-        if (is_null($this->selector)) {
-            $this->selector = new RoundRobinSelector();
-        } elseif (is_string($this->selector)) {
-            $this->selector = new $this->selector();
-        }
-
-        $this->buildTransport();
+        $transport = $this->buildTransport();
 
         if (is_null($this->endpoint)) {
-            $serializer = $this->serializer;
-
-            $this->endpoint = function ($class) use ($serializer) {
+            $this->endpoint = function ($class) {
                 $fullPath = '\\OpenSearch\\Endpoints\\' . $class;
 
                 $reflection = new ReflectionClass($fullPath);
                 $constructor = $reflection->getConstructor();
 
                 if ($constructor && $constructor->getParameters()) {
-                    return new $fullPath($serializer);
-                } else {
-                    return new $fullPath();
+                    return new $fullPath(new SmartSerializer());
                 }
+
+                return new $fullPath();
             };
         }
 
@@ -693,10 +302,10 @@ class ClientBuilder
             /**
              * @var NamespaceBuilderInterface $builder
              */
-            $registeredNamespaces[$builder->getName()] = $builder->getObject($this->transport, $this->serializer);
+            $registeredNamespaces[$builder->getName()] = $builder->getObject($transport, new SmartSerializer());
         }
 
-        return $this->instantiate($this->transport, $this->endpoint, $registeredNamespaces);
+        return $this->instantiate($transport, $this->endpoint, $registeredNamespaces);
     }
 
     protected function instantiate(Transport $transport, callable $endpoint, array $registeredNamespaces): Client
@@ -704,156 +313,24 @@ class ClientBuilder
         return new Client($transport, $endpoint, $registeredNamespaces);
     }
 
-    private function buildLoggers(): void
+    private function buildTransport(): Transport
     {
-        if (is_null($this->logger)) {
-            $this->logger = new NullLogger();
+        $transport = TransportBuilder::create()
+            ->setHosts($this->hosts)
+            ->setLogger($this->logger)
+            ->build();
+
+        $transport->setUserAgent('opensearch-php', Client::VERSION);
+
+        if ($this->basicAuthentication) {
+            $transport->setUserInfo(...$this->basicAuthentication);
         }
 
-        if (is_null($this->tracer)) {
-            $this->tracer = new NullLogger();
-        }
-    }
-
-    private function buildTransport(): void
-    {
-        $connections = $this->buildConnectionsFromHosts($this->hosts);
-
-        if (is_string($this->connectionPool)) {
-            $this->connectionPool = new $this->connectionPool(
-                $connections,
-                $this->selector,
-                $this->connectionFactory,
-                $this->connectionPoolArgs
-            );
+        if ($this->retries) {
+            $transport->setRetries($this->retries);
         }
 
-        if (is_null($this->retries)) {
-            $this->retries = count($connections);
-        }
 
-        if (is_null($this->transport)) {
-            $this->transport = new Transport($this->retries, $this->connectionPool, $this->logger, $this->sniffOnStart);
-        }
-    }
-
-    private function parseStringOrObject($arg, &$destination, $interface): void
-    {
-        if (is_string($arg)) {
-            $destination = new $arg();
-        } elseif (is_object($arg)) {
-            $destination = $arg;
-        } else {
-            throw new InvalidArgumentException("Serializer must be a class path or instantiated object implementing $interface");
-        }
-    }
-
-    private function getDefaultHost(): array
-    {
-        return ['localhost:9200'];
-    }
-
-    /**
-     * @return ConnectionInterface[]
-     * @throws RuntimeException
-     */
-    private function buildConnectionsFromHosts(array $hosts): array
-    {
-        $connections = [];
-        foreach ($hosts as $host) {
-            if (is_string($host)) {
-                $host = $this->prependMissingScheme($host);
-                $host = $this->extractURIParts($host);
-            } elseif (is_array($host)) {
-                $host = $this->normalizeExtendedHost($host);
-            } else {
-                $this->logger->error("Could not parse host: ".print_r($host, true));
-                throw new RuntimeException("Could not parse host: ".print_r($host, true));
-            }
-
-            $connections[] = $this->connectionFactory->create($host);
-        }
-
-        return $connections;
-    }
-
-    /**
-     * @throws RuntimeException
-     */
-    private function normalizeExtendedHost(array $host): array
-    {
-        if (isset($host['host']) === false) {
-            $this->logger->error("Required 'host' was not defined in extended format: ".print_r($host, true));
-            throw new RuntimeException("Required 'host' was not defined in extended format: ".print_r($host, true));
-        }
-
-        if (isset($host['scheme']) === false) {
-            $host['scheme'] = 'http';
-        }
-        if (isset($host['port']) === false) {
-            $host['port'] = 9200;
-        }
-        return $host;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    private function extractURIParts(string $host): array
-    {
-        $parts = parse_url($host);
-
-        if ($parts === false) {
-            throw new InvalidArgumentException(sprintf('Could not parse URI: "%s"', $host));
-        }
-
-        if (isset($parts['port']) !== true) {
-            $parts['port'] = 9200;
-        }
-
-        return $parts;
-    }
-
-    private function prependMissingScheme(string $host): string
-    {
-        if (!preg_match("/^https?:\/\//", $host)) {
-            $host = 'http://' . $host;
-        }
-
-        return $host;
-    }
-
-    private function normalizeCredentialProvider($provider): ?callable
-    {
-        if ($provider === null || $provider === false) {
-            return null;
-        }
-
-        if (is_callable($provider)) {
-            return $provider;
-        }
-
-        SigV4Handler::assertDependenciesInstalled();
-
-        if ($provider === true) {
-            return CredentialProvider::defaultProvider();
-        }
-
-        if ($provider instanceof CredentialsInterface) {
-            return CredentialProvider::fromCredentials($provider);
-        } elseif (is_array($provider) && isset($provider['key']) && isset($provider['secret'])) {
-            return CredentialProvider::fromCredentials(
-                new Credentials(
-                    $provider['key'],
-                    $provider['secret'],
-                    isset($provider['token']) ? $provider['token'] : null,
-                    isset($provider['expires']) ? $provider['expires'] : null
-                )
-            );
-        }
-
-        throw new InvalidArgumentException('Credentials must be an instance of Aws\Credentials\CredentialsInterface, an'
-            . ' associative array that contains "key", "secret", and an optional "token" key-value pairs, a credentials'
-            . ' provider function, or true.');
+        return new Transport($transport);
     }
 }

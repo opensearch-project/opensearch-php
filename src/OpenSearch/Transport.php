@@ -1,178 +1,123 @@
 <?php
 
-declare(strict_types=1);
-
-/**
- * Copyright OpenSearch Contributors
- * SPDX-License-Identifier: Apache-2.0
- *
- * OpenSearch PHP client
- *
- * @link      https://github.com/opensearch-project/opensearch-php/
- * @copyright Copyright (c) Elasticsearch B.V (https://www.elastic.co)
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
- * @license   https://www.gnu.org/licenses/lgpl-2.1.html GNU Lesser General Public License, Version 2.1
- *
- * Licensed to Elasticsearch B.V under one or more agreements.
- * Elasticsearch B.V licenses this file to you under the Apache 2.0 License or
- * the GNU Lesser General Public License, Version 2.1, at your option.
- * See the LICENSE file in the project root for more information.
- */
-
 namespace OpenSearch;
 
-use OpenSearch\Common\Exceptions;
-use OpenSearch\ConnectionPool\AbstractConnectionPool;
-use OpenSearch\Connections\Connection;
-use OpenSearch\Connections\ConnectionInterface;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
-use Psr\Log\LoggerInterface;
+use Http\Discovery\Psr17FactoryDiscovery;
+use OpenSearch\Common\Exceptions\BadRequest400Exception;
+use OpenSearch\Common\Exceptions\ClientErrorResponseException;
+use OpenSearch\Common\Exceptions\Conflict409Exception;
+use OpenSearch\Common\Exceptions\Forbidden403Exception;
+use OpenSearch\Common\Exceptions\Missing404Exception;
+use OpenSearch\Common\Exceptions\NoDocumentsToGetException;
+use OpenSearch\Common\Exceptions\NoShardAvailableException;
+use OpenSearch\Common\Exceptions\RequestTimeout408Exception;
+use OpenSearch\Common\Exceptions\RoutingMissingException;
+use OpenSearch\Common\Exceptions\ScriptLangNotSupportedException;
+use OpenSearch\Common\Exceptions\ServerErrorResponseException;
+use OpenSearch\Common\Exceptions\Unauthorized401Exception;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Transport
 {
-    /**
-     * @var AbstractConnectionPool
-     */
-    public $connectionPool;
+    private \Elastic\Transport\Transport $transport;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $log;
-
-    /**
-     * @var int
-     */
-    public $retryAttempts = 0;
-
-    /**
-     * @var ConnectionInterface
-     */
-    public $lastConnection;
-
-    /**
-     * @var int
-     */
-    public $retries;
-
-    /**
-     * Transport class is responsible for dispatching requests to the
-     * underlying cluster connections
-     *
-     * @param int                                   $retries
-     * @param bool                                  $sniffOnStart
-     * @param ConnectionPool\AbstractConnectionPool $connectionPool
-     * @param \Psr\Log\LoggerInterface              $log            Monolog logger object
-     */
-    public function __construct(int $retries, AbstractConnectionPool $connectionPool, LoggerInterface $log, bool $sniffOnStart = false)
+    public function __construct(\Elastic\Transport\Transport $transport)
     {
-        $this->log            = $log;
-        $this->connectionPool = $connectionPool;
-        $this->retries        = $retries;
-
-        if ($sniffOnStart === true) {
-            $this->log->notice('Sniff on Start.');
-            $this->connectionPool->scheduleCheck();
-        }
+        $this->transport = $transport;
     }
 
-    /**
-     * Returns a single connection from the connection pool
-     * Potentially performs a sniffing step before returning
-     */
-    public function getConnection(): ConnectionInterface
+    public function performRequest(string $method, string $uri, array $params = [], $body = null, array $options = []): ResponseInterface
     {
-        return $this->connectionPool->nextConnection();
-    }
-
-    /**
-     * Perform a request to the Cluster
-     *
-     * @param string     $method  HTTP method to use
-     * @param string     $uri     HTTP URI to send request to
-     * @param array<string, mixed> $params  Optional query parameters
-     * @param mixed|null $body    Optional query body
-     * @param array      $options
-     *
-     * @throws Common\Exceptions\NoNodesAvailableException|\Exception
-     */
-    public function performRequest(string $method, string $uri, array $params = [], $body = null, array $options = []): FutureArrayInterface
-    {
-        try {
-            $connection  = $this->getConnection();
-        } catch (Exceptions\NoNodesAvailableException $exception) {
-            $this->log->critical('No alive nodes found in cluster');
-            throw $exception;
+        if (!empty($params)) {
+            $uri .= '?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
         }
 
-        $response             = [];
-        $caughtException      = null;
-        $this->lastConnection = $connection;
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
 
-        $future = $connection->performRequest(
+        $request = $requestFactory->createRequest(
             $method,
-            $uri,
-            $params,
-            $body,
-            $options,
-            $this
+            $uri
         );
 
-        $future->promise()->then(
-            //onSuccess
-            function ($response) {
-                $this->retryAttempts = 0;
-                // Note, this could be a 4xx or 5xx error
-            },
-            //onFailure
-            function ($response) {
-                $code = $response->getCode();
-                // Ignore 400 level errors, as that means the server responded just fine
-                if ($code < 400 || $code >= 500) {
-                    // Otherwise schedule a check
-                    $this->connectionPool->scheduleCheck();
+        if ($body) {
+            $request = $request->withHeader('Content-Type', 'application/json');
+            $request = $request->withBody($requestFactory->createStream(json_encode($body, JSON_THROW_ON_ERROR)));
+        }
+
+        return $this->transport->sendRequest($request->withHeader('Accept', 'application/json'));
+    }
+
+    public function resultOrFuture(ResponseInterface $response): ?array
+    {
+        if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 500) {
+            $this->handleClientErrorResponse($response);
+        }
+
+        if ($response->getStatusCode() >= 500) {
+            $this->handleServerErrorResponse($response);
+        }
+
+        if (str_starts_with($response->getHeader('Content-Type')[0], 'application/json')) {
+            return json_decode($response->getBody()->getContents(), true);
+        }
+
+        throw new ClientErrorResponseException(
+            $response->getBody()->getContents(),
+            $response->getStatusCode(),
+        );
+    }
+
+    private function handleClientErrorResponse(ResponseInterface $response): void
+    {
+        $body = $response->getBody();
+
+        switch ($response->getStatusCode()) {
+            case 401:
+                throw new Unauthorized401Exception($body, $response->getStatusCode());
+            case 403:
+                throw new Forbidden403Exception($body, $response->getStatusCode());
+            case 404:
+                throw new Missing404Exception($body, $response->getStatusCode());
+            case 409:
+                throw new Conflict409Exception($body, $response->getStatusCode());
+            case 408:
+                throw new RequestTimeout408Exception($body, $response->getStatusCode());
+            default:
+                if ($response->getStatusCode() === 400 && str_contains($body, 'script_lang not supported')) {
+                    throw new ScriptLangNotSupportedException($body, $response->getStatusCode());
                 }
-            }
-        );
 
-        return $future;
-    }
-
-    /**
-     * @param FutureArrayInterface $result  Response of a request (promise)
-     * @param array                $options Options for transport
-     *
-     * @return callable|array
-     */
-    public function resultOrFuture(FutureArrayInterface $result, array $options = [])
-    {
-        $response = null;
-        $async = isset($options['client']['future']) ? $options['client']['future'] : null;
-        if (is_null($async) || $async === false) {
-            do {
-                $result = $result->wait();
-            } while ($result instanceof FutureArrayInterface);
+                throw new BadRequest400Exception($body, $response->getStatusCode());
         }
-        return $result;
     }
 
-    public function shouldRetry(array $request): bool
+    private function handleServerErrorResponse(ResponseInterface $response): void
     {
-        if ($this->retryAttempts < $this->retries) {
-            $this->retryAttempts += 1;
+        $responseBody = $response->getBody();
+        $statusCode = $response->getStatusCode();
 
-            return true;
+        if ($statusCode === 500 && str_contains($responseBody, "RoutingMissingException")) {
+            throw new RoutingMissingException($responseBody, $statusCode);
+        } elseif ($statusCode === 500 && preg_match('/ActionRequestValidationException.+ no documents to get/', $responseBody) === 1) {
+            throw new NoDocumentsToGetException($responseBody, $statusCode);
+        } elseif ($statusCode === 500 && str_contains($responseBody, 'NoShardAvailableActionException')) {
+            throw new NoShardAvailableException($responseBody, $statusCode);
+        } else {
+            throw new ServerErrorResponseException(
+                $responseBody,
+                $statusCode
+            );
         }
-
-        return false;
     }
 
-    /**
-     * Returns the last used connection so that it may be inspected.  Mainly
-     * for debugging/testing purposes.
-     */
-    public function getLastConnection(): ConnectionInterface
+    public function getLastResponse(): ResponseInterface
     {
-        return $this->lastConnection;
+        return $this->transport->getLastResponse();
+    }
+
+    public function getLastRequest(): RequestInterface
+    {
+        return $this->transport->getLastRequest();
     }
 }
