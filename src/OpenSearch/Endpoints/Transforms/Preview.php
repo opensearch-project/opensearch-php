@@ -40,6 +40,16 @@ class Preview extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'GET';
+        return 'POST';
+    }
+
+    public function setBody($body): Preview
+    {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
     }
 }

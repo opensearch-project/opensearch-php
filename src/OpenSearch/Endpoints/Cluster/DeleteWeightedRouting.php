@@ -42,4 +42,14 @@ class DeleteWeightedRouting extends AbstractEndpoint
     {
         return 'DELETE';
     }
+
+    public function setBody($body): DeleteWeightedRouting
+    {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
+    }
 }
