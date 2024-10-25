@@ -45,7 +45,7 @@ class MlNamespaceTest extends TestCase
 
         $transport->method('performRequest')
           ->with('POST', '/_plugins/_ml/connectors/_create', [], [
-              'foo' => 'bar',
+            'foo' => 'bar',
           ]);
 
         $transport->method('resultOrFuture')
@@ -124,7 +124,7 @@ class MlNamespaceTest extends TestCase
           ->willReturn([]);
 
         (new MlNamespace($transport, $func))->deleteConnector([
-          'id' => 'foobar'
+          'connector_id' => 'foobar'
         ]);
     }
 
@@ -323,7 +323,7 @@ class MlNamespaceTest extends TestCase
           ->willReturn([]);
 
         (new MlNamespace($transport, $func))->deployModel([
-          'id' => 'foobar',
+          'model_id' => 'foobar',
         ]);
     }
 
@@ -343,7 +343,7 @@ class MlNamespaceTest extends TestCase
           ->willReturn([]);
 
         (new MlNamespace($transport, $func))->undeployModel([
-          'id' => 'foobar',
+          'model_id' => 'foobar',
         ]);
     }
 
