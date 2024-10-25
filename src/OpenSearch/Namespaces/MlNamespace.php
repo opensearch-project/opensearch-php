@@ -25,6 +25,30 @@ use OpenSearch\Namespaces\AbstractNamespace;
 class MlNamespace extends AbstractNamespace
 {
     /**
+     * Delete an agent.
+     *
+     * $params['agent_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']       = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function deleteAgent(array $params = [])
+    {
+        $agent_id = $this->extractArgument($params, 'agent_id');
+
+        $endpointBuilder = $this->endpoints;
+        $endpoint = $endpointBuilder('Ml\DeleteAgent');
+        $endpoint->setParams($params);
+        $endpoint->setAgentId($agent_id);
+
+        return $this->performRequest($endpoint);
+    }
+    /**
      * Deletes a model.
      *
      * $params['id']          = (string)
@@ -32,7 +56,7 @@ class MlNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -56,7 +80,7 @@ class MlNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -73,6 +97,30 @@ class MlNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
+     * Deletes a task.
+     *
+     * $params['task_id']     = (string)
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']       = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function deleteTask(array $params = [])
+    {
+        $task_id = $this->extractArgument($params, 'task_id');
+
+        $endpointBuilder = $this->endpoints;
+        $endpoint = $endpointBuilder('Ml\DeleteTask');
+        $endpoint->setParams($params);
+        $endpoint->setTaskId($task_id);
+
+        return $this->performRequest($endpoint);
+    }
+    /**
      * Retrieves a model group.
      *
      * $params['model_group_id'] = (string)
@@ -80,7 +128,7 @@ class MlNamespace extends AbstractNamespace
      * $params['human']          = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']         = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']    = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -104,7 +152,7 @@ class MlNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -121,13 +169,36 @@ class MlNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
+     * Register an agent.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
+     * $params['human']       = (boolean) Whether to return human readable values for statistics.
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function registerAgents(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpointBuilder = $this->endpoints;
+        $endpoint = $endpointBuilder('Ml\RegisterAgents');
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+    /**
      * Registers a model.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -150,7 +221,7 @@ class MlNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -173,7 +244,7 @@ class MlNamespace extends AbstractNamespace
      * $params['human']       = (boolean) Whether to return human readable values for statistics.
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -208,7 +279,7 @@ class MlNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
-     * $params['id']             = (string) The id of the connector (Required)
+     * $params['connector_id'] = (string) The id of the connector (Required)
      *
      * @param array $params Associative array of parameters
      *
@@ -217,16 +288,16 @@ class MlNamespace extends AbstractNamespace
      */
     public function deleteConnector(array $params = []): array
     {
-        $id = $this->extractArgument($params, 'id');
+        $connectorId = $this->extractArgument($params, 'connector_id');
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Ml\DeleteConnector');
         $endpoint->setParams($params);
-        $endpoint->setId($id);
+        $endpoint->setConnectorId($connectorId);
 
         return $this->performRequest($endpoint);
     }
     /**
-     * $params['id']             = (string) The id of the model (Required)
+     * $params['model_id']       = (string) The id of the model (Required)
      * $params['body']           = (string) The body of the request
      *
      * @param array $params Associative array of parameters
@@ -236,12 +307,12 @@ class MlNamespace extends AbstractNamespace
      */
     public function deployModel(array $params = []): array
     {
-        $id = $this->extractArgument($params, 'id');
+        $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Ml\DeployModel');
         $endpoint->setParams($params);
-        $endpoint->setId($id);
+        $endpoint->setModelId($modelId);
         if ($body) {
             $endpoint->setBody($body);
         }
@@ -373,7 +444,7 @@ class MlNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
     /**
-     * $params['id']             = (string) The id of the model (Required)
+     * $params['model_id']       = (string) The id of the model (Required)
      * $params['body']           = (string) The body of the request
      *
      * @param array $params Associative array of parameters
@@ -383,12 +454,12 @@ class MlNamespace extends AbstractNamespace
      */
     public function undeployModel(array $params = []): array
     {
-        $id = $this->extractArgument($params, 'id');
+        $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Ml\UndeployModel');
         $endpoint->setParams($params);
-        $endpoint->setId($id);
+        $endpoint->setModelId($modelId);
         if ($body) {
             $endpoint->setBody($body);
         }

@@ -3,7 +3,7 @@
 return <<<'EOD'
 
     /**
-     * $params['id']             = (string) The id of the connector (Required)
+     * $params['connector_id'] = (string) The id of the connector (Required)
      *
      * @param array $params Associative array of parameters
      *
@@ -12,11 +12,11 @@ return <<<'EOD'
      */
     public function deleteConnector(array $params = []): array
     {
-        $id = $this->extractArgument($params, 'id');
+        $connectorId = $this->extractArgument($params, 'connector_id');
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Ml\DeleteConnector');
         $endpoint->setParams($params);
-        $endpoint->setId($id);
+        $endpoint->setConnectorId($connectorId);
 
         return $this->performRequest($endpoint);
     }

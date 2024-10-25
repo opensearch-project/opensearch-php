@@ -50,6 +50,16 @@ class PutWeightedRouting extends AbstractEndpoint
         return 'PUT';
     }
 
+    public function setBody($body): PutWeightedRouting
+    {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
+    }
+
     public function setAttribute($attribute): PutWeightedRouting
     {
         if (isset($attribute) !== true) {
