@@ -48,7 +48,7 @@ class ChangePolicy extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): ChangePolicy
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

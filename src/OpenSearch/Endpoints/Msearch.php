@@ -68,7 +68,7 @@ class Msearch extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): Msearch
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -87,4 +87,5 @@ class Msearch extends AbstractEndpoint
         }
         return $this;
     }
+
 }

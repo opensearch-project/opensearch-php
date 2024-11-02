@@ -43,7 +43,7 @@ class ChangePassword extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): ChangePassword
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

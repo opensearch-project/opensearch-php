@@ -65,7 +65,7 @@ class PutAlias extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): PutAlias
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -75,7 +75,7 @@ class PutAlias extends AbstractEndpoint
         return $this;
     }
 
-    public function setName($name): PutAlias
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

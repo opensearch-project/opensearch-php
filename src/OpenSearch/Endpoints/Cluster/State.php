@@ -68,7 +68,7 @@ class State extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setMetric($metric): State
+    public function setMetric($metric): static
     {
         if (isset($metric) !== true) {
             return $this;

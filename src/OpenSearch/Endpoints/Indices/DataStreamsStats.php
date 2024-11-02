@@ -55,7 +55,7 @@ class DataStreamsStats extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): DataStreamsStats
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

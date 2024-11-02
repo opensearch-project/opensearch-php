@@ -51,7 +51,7 @@ class Delete extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setWorkflowId($workflow_id): Delete
+    public function setWorkflowId($workflow_id): static
     {
         if (isset($workflow_id) !== true) {
             return $this;

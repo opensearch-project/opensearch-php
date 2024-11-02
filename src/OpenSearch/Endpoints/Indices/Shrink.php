@@ -64,7 +64,7 @@ class Shrink extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): Shrink
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -74,7 +74,7 @@ class Shrink extends AbstractEndpoint
         return $this;
     }
 
-    public function setTarget($target): Shrink
+    public function setTarget($target): static
     {
         if (isset($target) !== true) {
             return $this;

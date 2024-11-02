@@ -50,7 +50,7 @@ class PutWeightedRouting extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): PutWeightedRouting
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class PutWeightedRouting extends AbstractEndpoint
         return $this;
     }
 
-    public function setAttribute($attribute): PutWeightedRouting
+    public function setAttribute($attribute): static
     {
         if (isset($attribute) !== true) {
             return $this;

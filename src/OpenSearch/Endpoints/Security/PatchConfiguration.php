@@ -43,7 +43,7 @@ class PatchConfiguration extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): PatchConfiguration
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

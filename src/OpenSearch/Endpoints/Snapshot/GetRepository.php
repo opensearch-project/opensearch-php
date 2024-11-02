@@ -58,7 +58,7 @@ class GetRepository extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setRepository($repository): GetRepository
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;

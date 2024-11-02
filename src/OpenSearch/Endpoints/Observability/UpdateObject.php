@@ -50,7 +50,7 @@ class UpdateObject extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): UpdateObject
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class UpdateObject extends AbstractEndpoint
         return $this;
     }
 
-    public function setObjectId($object_id): UpdateObject
+    public function setObjectId($object_id): static
     {
         if (isset($object_id) !== true) {
             return $this;

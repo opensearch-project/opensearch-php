@@ -58,7 +58,7 @@ class FieldCaps extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): FieldCaps
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
