@@ -54,10 +54,7 @@ class ClientBuilder
      */
     private $transport;
 
-    /**
-     * @var callable|null
-     */
-    private $endpoint;
+    private ?EndpointFactoryInterface $endpointFactory = null;
 
     /**
      * @var NamespaceBuilderInterface[]
@@ -180,14 +177,6 @@ class ClientBuilder
     public function getTransport(): Transport
     {
         return $this->transport;
-    }
-
-    /**
-     * Can supply second param to Client::__construct() when invoking manually or with dependency injection
-     */
-    public function getEndpoint(): callable
-    {
-        return $this->endpoint;
     }
 
     /**
@@ -325,15 +314,9 @@ class ClientBuilder
         return $this;
     }
 
-    /**
-     * Set the endpoint
-     *
-     * @param callable $endpoint
-     */
-    public function setEndpoint(callable $endpoint): ClientBuilder
+    public function setEndpointFactory(EndpointFactoryInterface $endpointFactory): ClientBuilder
     {
-        $this->endpoint = $endpoint;
-
+        $this->endpointFactory = $endpointFactory;
         return $this;
     }
 
@@ -671,21 +654,8 @@ class ClientBuilder
 
         $this->buildTransport();
 
-        if (is_null($this->endpoint)) {
-            $serializer = $this->serializer;
-
-            $this->endpoint = function ($class) use ($serializer) {
-                $fullPath = '\\OpenSearch\\Endpoints\\' . $class;
-
-                $reflection = new ReflectionClass($fullPath);
-                $constructor = $reflection->getConstructor();
-
-                if ($constructor && $constructor->getParameters()) {
-                    return new $fullPath($serializer);
-                } else {
-                    return new $fullPath();
-                }
-            };
+        if (is_null($this->endpointFactory)) {
+            $this->endpointFactory = new EndpointFactory($this->serializer);
         }
 
         $registeredNamespaces = [];
@@ -696,12 +666,12 @@ class ClientBuilder
             $registeredNamespaces[$builder->getName()] = $builder->getObject($this->transport, $this->serializer);
         }
 
-        return $this->instantiate($this->transport, $this->endpoint, $registeredNamespaces);
+        return $this->instantiate($this->transport, $this->endpointFactory, $registeredNamespaces);
     }
 
-    protected function instantiate(Transport $transport, callable $endpoint, array $registeredNamespaces): Client
+    protected function instantiate(Transport $transport, EndpointFactoryInterface $endpointFactory, array $registeredNamespaces): Client
     {
-        return new Client($transport, $endpoint, $registeredNamespaces);
+        return new Client($transport, $endpointFactory, $registeredNamespaces);
     }
 
     private function buildLoggers(): void

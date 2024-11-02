@@ -21,11 +21,11 @@ return <<<'EOD'
         $endpointBuilder = $this->endpoints;
 
         if (isset($params['username'])) {
-            $endpoint = $endpointBuilder('Security\GetUser');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUser::class);
             $username = $this->extractArgument($params, 'username');
             $endpoint->setUsername($username);
         } else {
-            $endpoint = $endpointBuilder('Security\GetUsers');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUsers::class);
         }
 
         $endpoint->setParams($params);

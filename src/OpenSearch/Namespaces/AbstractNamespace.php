@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Transport;
 
@@ -36,10 +37,9 @@ abstract class AbstractNamespace
      */
     protected $endpoints;
 
-    public function __construct(Transport $transport, callable $endpoints)
+    public function __construct(Transport $transport, protected readonly EndpointFactoryInterface $endpointFactory)
     {
         $this->transport = $transport;
-        $this->endpoints = $endpoints;
     }
 
     /**

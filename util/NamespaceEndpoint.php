@@ -138,7 +138,8 @@ class NamespaceEndpoint
         } else {
             $endpointClass = NamespaceEndpoint::normalizeName($endpoint->namespace) . '\\' . $endpoint->getClassName();
         }
-        return str_replace(':EndpointClass', $endpointClass, $code);
+        $fullClass = '\\OpenSearch\\Endpoints\\' . $endpointClass;
+        return str_replace(':EndpointClass', $fullClass, $code);
     }
 
     public static function normalizeName(string $name): string

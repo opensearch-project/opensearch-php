@@ -15,8 +15,7 @@ return <<<'EOD'
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeployModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeployModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($modelId);
         if ($body) {

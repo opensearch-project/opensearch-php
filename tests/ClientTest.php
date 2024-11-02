@@ -413,9 +413,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function sendRawRequest(): void
     {
-        $callable = function () {};
         $transport = $this->createMock(OpenSearch\Transport::class);
-        $client = new OpenSearch\Client($transport, $callable, []);
+        $endpointFactory = $this->createMock(OpenSearch\EndpointFactoryInterface::class);
+        $client = new OpenSearch\Client($transport, $endpointFactory, []);
 
         $transport->expects($this->once())->method('performRequest')->with('GET', '/', [], null, []);
 
@@ -425,9 +425,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function sendRawRequestWithBody(): void
     {
-        $callable = function () {};
         $transport = $this->createMock(OpenSearch\Transport::class);
-        $client = new OpenSearch\Client($transport, $callable, []);
+        $endpointFactory = $this->createMock(OpenSearch\EndpointFactoryInterface::class);
+        $client = new OpenSearch\Client($transport, $endpointFactory, []);
         $body = ['query' => ['match' => ['text_entry' => 'long live king']]];
 
         $transport->expects($this->once())->method('performRequest')->with('GET', '/shakespeare/_search', [], $body, []);
@@ -438,9 +438,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function sendRawRequestWithParams(): void
     {
-        $callable = function () {};
         $transport = $this->createMock(OpenSearch\Transport::class);
-        $client = new OpenSearch\Client($transport, $callable, []);
+        $endpointFactory = $this->createMock(OpenSearch\EndpointFactoryInterface::class);
+        $client = new OpenSearch\Client($transport, $endpointFactory, []);
         $params = ['foo' => 'bar'];
 
         $transport->expects($this->once())->method('performRequest')->with('GET', '/_search', $params, null, []);
@@ -451,9 +451,9 @@ class ClientTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function sendRawRequestWithOptions(): void
     {
-        $callable = function () {};
         $transport = $this->createMock(OpenSearch\Transport::class);
-        $client = new OpenSearch\Client($transport, $callable, []);
+        $endpointFactory = $this->createMock(OpenSearch\EndpointFactoryInterface::class);
+        $client = new OpenSearch\Client($transport, $endpointFactory, []);
         $options = ['client' => ['future' => 'lazy']];
 
         $transport->expects($this->once())->method('performRequest')->with('GET', '/', [], null, $options);

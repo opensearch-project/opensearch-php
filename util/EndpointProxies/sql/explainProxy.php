@@ -11,12 +11,10 @@ return <<<'EOD'
      */
     public function explain(array $params): array
     {
-        $endpointBuilder = $this->endpoints;
-
         $body = $this->extractArgument($params, 'body') ?? [];
         $query = $this->extractArgument($params, 'query');
 
-        $endpoint = $endpointBuilder('Sql\Explain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Explain::class);
         $endpoint->setBody(array_merge($body, [
             'query' => $query,
         ]));

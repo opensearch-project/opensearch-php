@@ -30,8 +30,9 @@ return <<<'EOD'
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $id ? $endpointBuilder('Create') : $endpointBuilder('Index');
+        $endpoint = $id ?
+            $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Create::class)
+            : $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);

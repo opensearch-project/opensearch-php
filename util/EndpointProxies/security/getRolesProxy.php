@@ -18,13 +18,12 @@ return <<<'EOD'
      */
     public function getRoles(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['role'])) {
-            $endpoint = $endpointBuilder('Security\GetRole');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRole::class);
             $role = $this->extractArgument($params, 'role');
             $endpoint->setRole($role);
         } else {
-            $endpoint = $endpointBuilder('Security\GetRoles');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRoles::class);
         }
         $endpoint->setParams($params);
 

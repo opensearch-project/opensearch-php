@@ -26,8 +26,7 @@ return <<<'EOD'
             ];
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ChangePassword');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ChangePassword::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 

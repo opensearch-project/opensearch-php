@@ -13,8 +13,7 @@ return <<<'EOD'
     public function getModel(array $params = []): array
     {
         $id = $this->extractArgument($params, 'id');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 

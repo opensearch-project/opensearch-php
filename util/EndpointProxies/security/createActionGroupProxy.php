@@ -25,9 +25,8 @@ return <<<'EOD'
                 'allowed_actions' => $this->extractArgument($params, 'allowed_actions'),
             ];
         }
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateActionGroup');
+        
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
         $endpoint->setBody($body);

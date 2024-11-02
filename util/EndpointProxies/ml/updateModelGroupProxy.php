@@ -15,8 +15,7 @@ return <<<'EOD'
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\UpdateModelGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
         $endpoint->setId($id);

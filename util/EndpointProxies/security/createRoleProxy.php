@@ -30,8 +30,7 @@ return <<<'EOD'
             ]);
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);

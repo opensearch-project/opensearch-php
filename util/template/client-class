@@ -46,10 +46,7 @@ class Client
      */
     protected $params;
 
-    /**
-     * @var callable
-     */
-    protected $endpoints;
+    protected EndpointFactoryInterface $endpointFactory;
 
     /**
      * @var NamespaceBuilderInterface[]
@@ -61,13 +58,13 @@ class Client
      * Client constructor
      *
      * @param Transport                   $transport
-     * @param callable                    $endpoint
+     * @param EndpointFactoryInterface    $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
-    public function __construct(Transport $transport, callable $endpoint, array $registeredNamespaces)
+    public function __construct(Transport $transport, EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
     {
         $this->transport = $transport;
-        $this->endpoints = $endpoint;
+        $this->endpointFactory = $endpointFactory;
 :new-namespaces
         $this->registeredNamespaces = $registeredNamespaces;
     }

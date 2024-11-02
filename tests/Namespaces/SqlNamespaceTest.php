@@ -13,6 +13,8 @@
 
 namespace OpenSearch\Tests\Namespaces;
 
+use OpenSearch\EndpointFactoryInterface;
+use OpenSearch\Endpoints\Ml\CreateConnector;
 use OpenSearch\Endpoints\Sql\CursorClose;
 use OpenSearch\Endpoints\Sql\Explain;
 use OpenSearch\Endpoints\Sql\Query;
@@ -36,11 +38,11 @@ class SqlNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
             ->willReturn([]);
 
-        $func = static function () {
-            return new Query();
-        };
+        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
+        $endpointFactory->method('getEndpoint')
+            ->willReturn(new Query());
 
-        (new SqlNamespace($transport, $func))->query([
+        (new SqlNamespace($transport, $endpointFactory))->query([
             'query' => 'select * from test',
         ]);
     }
@@ -56,11 +58,11 @@ class SqlNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
             ->willReturn([]);
 
-        $func = static function () {
-            return new Explain();
-        };
+        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
+        $endpointFactory->method('getEndpoint')
+            ->willReturn(new Explain());
 
-        (new SqlNamespace($transport, $func))->explain([
+        (new SqlNamespace($transport, $endpointFactory))->explain([
             'query' => 'select * from test',
         ]);
     }
@@ -76,11 +78,11 @@ class SqlNamespaceTest extends TestCase
         $transport->method('resultOrFuture')
             ->willReturn([]);
 
-        $func = static function () {
-            return new CursorClose();
-        };
+        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
+        $endpointFactory->method('getEndpoint')
+            ->willReturn(new CursorClose());
 
-        (new SqlNamespace($transport, $func))->closeCursor([
+        (new SqlNamespace($transport, $endpointFactory))->closeCursor([
             'cursor' => 'fooo',
         ]);
     }

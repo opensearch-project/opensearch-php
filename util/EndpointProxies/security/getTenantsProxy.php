@@ -18,13 +18,12 @@ return <<<'EOD'
      */
     public function getTenants(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['tenant'])) {
-            $endpoint = $endpointBuilder('Security\GetTenant');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenant::class);
             $tenant = $this->extractArgument($params, 'tenant');
             $endpoint->setTenant($tenant);
         } else {
-            $endpoint = $endpointBuilder('Security\GetTenants');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenants::class);
         }
         $endpoint->setParams($params);
 
