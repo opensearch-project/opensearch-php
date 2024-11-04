@@ -61,7 +61,7 @@ class PutMapping extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PutMapping
     {
         if (isset($body) !== true) {
             return $this;

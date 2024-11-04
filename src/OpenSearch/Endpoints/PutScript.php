@@ -66,7 +66,7 @@ class PutScript extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PutScript
     {
         if (isset($body) !== true) {
             return $this;
@@ -76,7 +76,7 @@ class PutScript extends AbstractEndpoint
         return $this;
     }
 
-    public function setContext($context): static
+    public function setContext($context): PutScript
     {
         if (isset($context) !== true) {
             return $this;

@@ -61,7 +61,7 @@ class Create extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Create
     {
         if (isset($body) !== true) {
             return $this;
@@ -71,7 +71,7 @@ class Create extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository($repository): static
+    public function setRepository($repository): Create
     {
         if (isset($repository) !== true) {
             return $this;
@@ -81,7 +81,7 @@ class Create extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot($snapshot): static
+    public function setSnapshot($snapshot): Create
     {
         if (isset($snapshot) !== true) {
             return $this;

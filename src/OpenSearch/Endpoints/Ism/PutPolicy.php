@@ -54,7 +54,7 @@ class PutPolicy extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PutPolicy
     {
         if (isset($body) !== true) {
             return $this;
@@ -64,7 +64,7 @@ class PutPolicy extends AbstractEndpoint
         return $this;
     }
 
-    public function setPolicyId($policy_id): static
+    public function setPolicyId($policy_id): PutPolicy
     {
         if (isset($policy_id) !== true) {
             return $this;

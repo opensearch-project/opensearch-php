@@ -52,7 +52,7 @@ class UpdateDistinguishedName extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): UpdateDistinguishedName
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class UpdateDistinguishedName extends AbstractEndpoint
         return $this;
     }
 
-    public function setClusterName($cluster_name): static
+    public function setClusterName($cluster_name): UpdateDistinguishedName
     {
         if (isset($cluster_name) !== true) {
             return $this;

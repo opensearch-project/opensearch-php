@@ -56,7 +56,7 @@ class CreateDataStream extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateDataStream
     {
         if (isset($body) !== true) {
             return $this;
@@ -66,7 +66,7 @@ class CreateDataStream extends AbstractEndpoint
         return $this;
     }
 
-    public function setName($name): static
+    public function setName($name): CreateDataStream
     {
         if (isset($name) !== true) {
             return $this;

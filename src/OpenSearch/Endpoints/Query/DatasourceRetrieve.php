@@ -50,7 +50,7 @@ class DatasourceRetrieve extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setDatasourceName($datasource_name): static
+    public function setDatasourceName($datasource_name): DatasourceRetrieve
     {
         if (isset($datasource_name) !== true) {
             return $this;

@@ -61,7 +61,7 @@ class Restore extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Restore
     {
         if (isset($body) !== true) {
             return $this;
@@ -71,7 +71,7 @@ class Restore extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository($repository): static
+    public function setRepository($repository): Restore
     {
         if (isset($repository) !== true) {
             return $this;
@@ -81,7 +81,7 @@ class Restore extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot($snapshot): static
+    public function setSnapshot($snapshot): Restore
     {
         if (isset($snapshot) !== true) {
             return $this;

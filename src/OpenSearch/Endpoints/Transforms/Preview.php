@@ -43,7 +43,7 @@ class Preview extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Preview
     {
         if (isset($body) !== true) {
             return $this;

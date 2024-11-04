@@ -66,7 +66,7 @@ class GetAlias extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): static
+    public function setName($name): GetAlias
     {
         if (isset($name) !== true) {
             return $this;

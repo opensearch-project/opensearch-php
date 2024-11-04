@@ -70,7 +70,7 @@ class Bulk extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Bulk
     {
         if (isset($body) !== true) {
             return $this;
@@ -89,5 +89,4 @@ class Bulk extends AbstractEndpoint
         }
         return $this;
     }
-
 }

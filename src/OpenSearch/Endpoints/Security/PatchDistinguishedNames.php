@@ -43,7 +43,7 @@ class PatchDistinguishedNames extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchDistinguishedNames
     {
         if (isset($body) !== true) {
             return $this;

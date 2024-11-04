@@ -43,7 +43,7 @@ class RegisterAgents extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): RegisterAgents
     {
         if (isset($body) !== true) {
             return $this;

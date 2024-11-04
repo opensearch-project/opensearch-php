@@ -52,7 +52,7 @@ class GetActionGroup extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setActionGroup($action_group): static
+    public function setActionGroup($action_group): GetActionGroup
     {
         if (isset($action_group) !== true) {
             return $this;

@@ -60,7 +60,7 @@ class ExistsTemplate extends AbstractEndpoint
         return 'HEAD';
     }
 
-    public function setName($name): static
+    public function setName($name): ExistsTemplate
     {
         if (isset($name) !== true) {
             return $this;

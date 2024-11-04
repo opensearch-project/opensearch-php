@@ -52,7 +52,7 @@ class CreateActionGroup extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateActionGroup
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class CreateActionGroup extends AbstractEndpoint
         return $this;
     }
 
-    public function setActionGroup($action_group): static
+    public function setActionGroup($action_group): CreateActionGroup
     {
         if (isset($action_group) !== true) {
             return $this;

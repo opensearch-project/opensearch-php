@@ -59,7 +59,7 @@ class DeleteComponentTemplate extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setName($name): static
+    public function setName($name): DeleteComponentTemplate
     {
         if (isset($name) !== true) {
             return $this;

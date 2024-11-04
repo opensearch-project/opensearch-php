@@ -58,7 +58,7 @@ class Get extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setTaskId($task_id): static
+    public function setTaskId($task_id): Get
     {
         if (isset($task_id) !== true) {
             return $this;

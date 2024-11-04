@@ -52,7 +52,7 @@ class GenerateUserTokenLegacy extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setUsername($username): static
+    public function setUsername($username): GenerateUserTokenLegacy
     {
         if (isset($username) !== true) {
             return $this;

@@ -52,7 +52,7 @@ class GetNodeCertificates extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setNodeId($node_id): static
+    public function setNodeId($node_id): GetNodeCertificates
     {
         if (isset($node_id) !== true) {
             return $this;

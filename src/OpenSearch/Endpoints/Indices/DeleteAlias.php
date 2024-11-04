@@ -67,7 +67,7 @@ class DeleteAlias extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setName($name): static
+    public function setName($name): DeleteAlias
     {
         if (isset($name) !== true) {
             return $this;

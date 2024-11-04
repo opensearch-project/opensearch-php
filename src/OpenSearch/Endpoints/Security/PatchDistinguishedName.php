@@ -52,7 +52,7 @@ class PatchDistinguishedName extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchDistinguishedName
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class PatchDistinguishedName extends AbstractEndpoint
         return $this;
     }
 
-    public function setClusterName($cluster_name): static
+    public function setClusterName($cluster_name): PatchDistinguishedName
     {
         if (isset($cluster_name) !== true) {
             return $this;

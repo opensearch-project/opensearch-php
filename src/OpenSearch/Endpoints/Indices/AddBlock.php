@@ -63,7 +63,7 @@ class AddBlock extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBlock($block): static
+    public function setBlock($block): AddBlock
     {
         if (isset($block) !== true) {
             return $this;

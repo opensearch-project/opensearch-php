@@ -71,7 +71,7 @@ class Stats extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setMetric($metric): static
+    public function setMetric($metric): Stats
     {
         if (isset($metric) !== true) {
             return $this;

@@ -43,7 +43,7 @@ class PatchAllowlist extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchAllowlist
     {
         if (isset($body) !== true) {
             return $this;

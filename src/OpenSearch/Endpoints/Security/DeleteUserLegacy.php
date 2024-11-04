@@ -52,7 +52,7 @@ class DeleteUserLegacy extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setUsername($username): static
+    public function setUsername($username): DeleteUserLegacy
     {
         if (isset($username) !== true) {
             return $this;

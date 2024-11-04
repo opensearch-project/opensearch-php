@@ -64,7 +64,7 @@ class Snapshots extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setRepository($repository): static
+    public function setRepository($repository): Snapshots
     {
         if (isset($repository) !== true) {
             return $this;

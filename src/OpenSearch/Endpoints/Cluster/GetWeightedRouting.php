@@ -50,7 +50,7 @@ class GetWeightedRouting extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setAttribute($attribute): static
+    public function setAttribute($attribute): GetWeightedRouting
     {
         if (isset($attribute) !== true) {
             return $this;

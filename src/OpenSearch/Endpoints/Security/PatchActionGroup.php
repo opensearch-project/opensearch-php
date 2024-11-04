@@ -52,7 +52,7 @@ class PatchActionGroup extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchActionGroup
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class PatchActionGroup extends AbstractEndpoint
         return $this;
     }
 
-    public function setActionGroup($action_group): static
+    public function setActionGroup($action_group): PatchActionGroup
     {
         if (isset($action_group) !== true) {
             return $this;

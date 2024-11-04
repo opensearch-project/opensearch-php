@@ -44,7 +44,7 @@ class Settings extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Settings
     {
         if (isset($body) !== true) {
             return $this;

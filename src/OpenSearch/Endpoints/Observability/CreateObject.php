@@ -43,7 +43,7 @@ class CreateObject extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateObject
     {
         if (isset($body) !== true) {
             return $this;

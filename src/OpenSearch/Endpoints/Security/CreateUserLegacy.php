@@ -52,7 +52,7 @@ class CreateUserLegacy extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateUserLegacy
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class CreateUserLegacy extends AbstractEndpoint
         return $this;
     }
 
-    public function setUsername($username): static
+    public function setUsername($username): CreateUserLegacy
     {
         if (isset($username) !== true) {
             return $this;

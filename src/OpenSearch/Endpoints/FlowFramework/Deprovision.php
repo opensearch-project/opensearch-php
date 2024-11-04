@@ -51,7 +51,7 @@ class Deprovision extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setWorkflowId($workflow_id): static
+    public function setWorkflowId($workflow_id): Deprovision
     {
         if (isset($workflow_id) !== true) {
             return $this;

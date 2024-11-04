@@ -52,7 +52,7 @@ class UpdateAliases extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): UpdateAliases
     {
         if (isset($body) !== true) {
             return $this;

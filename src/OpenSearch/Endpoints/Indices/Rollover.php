@@ -68,7 +68,7 @@ class Rollover extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Rollover
     {
         if (isset($body) !== true) {
             return $this;
@@ -78,7 +78,7 @@ class Rollover extends AbstractEndpoint
         return $this;
     }
 
-    public function setAlias($alias): static
+    public function setAlias($alias): Rollover
     {
         if (isset($alias) !== true) {
             return $this;
@@ -88,7 +88,7 @@ class Rollover extends AbstractEndpoint
         return $this;
     }
 
-    public function setNewIndex($new_index): static
+    public function setNewIndex($new_index): Rollover
     {
         if (isset($new_index) !== true) {
             return $this;

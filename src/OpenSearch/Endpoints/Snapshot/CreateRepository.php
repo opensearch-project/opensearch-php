@@ -60,7 +60,7 @@ class CreateRepository extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateRepository
     {
         if (isset($body) !== true) {
             return $this;
@@ -70,7 +70,7 @@ class CreateRepository extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository($repository): static
+    public function setRepository($repository): CreateRepository
     {
         if (isset($repository) !== true) {
             return $this;

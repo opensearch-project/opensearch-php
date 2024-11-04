@@ -71,7 +71,7 @@ class Index extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Index
     {
         if (isset($body) !== true) {
             return $this;

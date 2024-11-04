@@ -52,7 +52,7 @@ class DeleteActionGroup extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setActionGroup($action_group): static
+    public function setActionGroup($action_group): DeleteActionGroup
     {
         if (isset($action_group) !== true) {
             return $this;

@@ -52,7 +52,7 @@ class PatchRole extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchRole
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class PatchRole extends AbstractEndpoint
         return $this;
     }
 
-    public function setRole($role): static
+    public function setRole($role): PatchRole
     {
         if (isset($role) !== true) {
             return $this;

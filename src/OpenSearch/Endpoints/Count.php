@@ -67,7 +67,7 @@ class Count extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Count
     {
         if (isset($body) !== true) {
             return $this;

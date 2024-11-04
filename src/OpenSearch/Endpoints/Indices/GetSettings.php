@@ -70,7 +70,7 @@ class GetSettings extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): static
+    public function setName($name): GetSettings
     {
         if (isset($name) !== true) {
             return $this;

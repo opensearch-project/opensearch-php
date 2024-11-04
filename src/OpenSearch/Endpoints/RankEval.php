@@ -57,7 +57,7 @@ class RankEval extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): static
+    public function setBody($body): RankEval
     {
         if (isset($body) !== true) {
             return $this;

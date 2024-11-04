@@ -60,7 +60,7 @@ class ExistsIndexTemplate extends AbstractEndpoint
         return 'HEAD';
     }
 
-    public function setName($name): static
+    public function setName($name): ExistsIndexTemplate
     {
         if (isset($name) !== true) {
             return $this;

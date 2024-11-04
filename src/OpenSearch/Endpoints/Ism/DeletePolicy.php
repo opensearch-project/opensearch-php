@@ -52,7 +52,7 @@ class DeletePolicy extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setPolicyId($policy_id): static
+    public function setPolicyId($policy_id): DeletePolicy
     {
         if (isset($policy_id) !== true) {
             return $this;

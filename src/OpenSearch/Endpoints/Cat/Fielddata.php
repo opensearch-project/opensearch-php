@@ -62,7 +62,7 @@ class Fielddata extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setFields($fields): static
+    public function setFields($fields): Fielddata
     {
         if (isset($fields) !== true) {
             return $this;

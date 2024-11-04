@@ -43,7 +43,7 @@ class GenerateOboToken extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): GenerateOboToken
     {
         if (isset($body) !== true) {
             return $this;

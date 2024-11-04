@@ -55,7 +55,6 @@ use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
-use OpenSearch\Namespaces\WlmNamespace;
 
 /**
  * Class Client
@@ -231,11 +230,6 @@ class Client
      */
     protected $transforms;
 
-    /**
-     * @var WlmNamespace
-     */
-    protected $wlm;
-
 
     /**
      * Client constructor
@@ -277,7 +271,6 @@ class Client
         $this->ssl = new SslNamespace($transport, $endpoint);
         $this->tasks = new TasksNamespace($transport, $endpoint);
         $this->transforms = new TransformsNamespace($transport, $endpoint);
-        $this->wlm = new WlmNamespace($transport, $endpoint);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -1948,13 +1941,6 @@ class Client
     public function transforms(): TransformsNamespace
     {
         return $this->transforms;
-    }
-    /**
-     * Returns the wlm namespace
-     */
-    public function wlm(): WlmNamespace
-    {
-        return $this->wlm;
     }
 
     /**

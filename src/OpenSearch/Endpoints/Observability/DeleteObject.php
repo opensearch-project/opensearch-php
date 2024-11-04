@@ -50,7 +50,7 @@ class DeleteObject extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setObjectId($object_id): static
+    public function setObjectId($object_id): DeleteObject
     {
         if (isset($object_id) !== true) {
             return $this;

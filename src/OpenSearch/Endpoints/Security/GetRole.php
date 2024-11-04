@@ -52,7 +52,7 @@ class GetRole extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setRole($role): static
+    public function setRole($role): GetRole
     {
         if (isset($role) !== true) {
             return $this;

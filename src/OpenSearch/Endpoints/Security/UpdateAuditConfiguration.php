@@ -43,7 +43,7 @@ class UpdateAuditConfiguration extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): UpdateAuditConfiguration
     {
         if (isset($body) !== true) {
             return $this;

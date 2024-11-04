@@ -66,7 +66,7 @@ class BulkStream extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): BulkStream
     {
         if (isset($body) !== true) {
             return $this;
@@ -85,5 +85,4 @@ class BulkStream extends AbstractEndpoint
         }
         return $this;
     }
-
 }

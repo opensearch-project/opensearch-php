@@ -41,7 +41,7 @@ class CreateConnector extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateConnector
     {
         if (isset($body) !== true) {
             return $this;

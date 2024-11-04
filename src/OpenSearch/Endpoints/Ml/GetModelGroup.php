@@ -50,7 +50,7 @@ class GetModelGroup extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setModelGroupId($model_group_id): static
+    public function setModelGroupId($model_group_id): GetModelGroup
     {
         if (isset($model_group_id) !== true) {
             return $this;

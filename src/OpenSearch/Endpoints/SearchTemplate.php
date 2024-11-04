@@ -66,7 +66,7 @@ class SearchTemplate extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): static
+    public function setBody($body): SearchTemplate
     {
         if (isset($body) !== true) {
             return $this;

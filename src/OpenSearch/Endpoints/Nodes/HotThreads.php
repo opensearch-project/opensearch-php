@@ -61,7 +61,7 @@ class HotThreads extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setNodeId($node_id): static
+    public function setNodeId($node_id): HotThreads
     {
         if (isset($node_id) !== true) {
             return $this;

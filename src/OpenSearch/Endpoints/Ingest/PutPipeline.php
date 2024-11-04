@@ -57,7 +57,7 @@ class PutPipeline extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PutPipeline
     {
         if (isset($body) !== true) {
             return $this;

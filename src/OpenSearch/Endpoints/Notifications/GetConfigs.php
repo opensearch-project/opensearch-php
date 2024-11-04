@@ -83,7 +83,7 @@ class GetConfigs extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setBody($body): static
+    public function setBody($body): GetConfigs
     {
         if (isset($body) !== true) {
             return $this;

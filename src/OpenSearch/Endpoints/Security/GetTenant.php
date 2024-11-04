@@ -52,7 +52,7 @@ class GetTenant extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setTenant($tenant): static
+    public function setTenant($tenant): GetTenant
     {
         if (isset($tenant) !== true) {
             return $this;

@@ -43,7 +43,7 @@ class CreateUpdateTenancyConfig extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CreateUpdateTenancyConfig
     {
         if (isset($body) !== true) {
             return $this;

@@ -59,7 +59,7 @@ class SimulateTemplate extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): SimulateTemplate
     {
         if (isset($body) !== true) {
             return $this;
@@ -69,7 +69,7 @@ class SimulateTemplate extends AbstractEndpoint
         return $this;
     }
 
-    public function setName($name): static
+    public function setName($name): SimulateTemplate
     {
         if (isset($name) !== true) {
             return $this;

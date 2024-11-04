@@ -59,7 +59,7 @@ class GetTemplate extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): static
+    public function setName($name): GetTemplate
     {
         if (isset($name) !== true) {
             return $this;

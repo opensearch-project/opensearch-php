@@ -46,7 +46,7 @@ class PutPolicies extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PutPolicies
     {
         if (isset($body) !== true) {
             return $this;

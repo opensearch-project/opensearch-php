@@ -55,7 +55,7 @@ class Update extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Update
     {
         if (isset($body) !== true) {
             return $this;
@@ -65,7 +65,7 @@ class Update extends AbstractEndpoint
         return $this;
     }
 
-    public function setWorkflowId($workflow_id): static
+    public function setWorkflowId($workflow_id): Update
     {
         if (isset($workflow_id) !== true) {
             return $this;

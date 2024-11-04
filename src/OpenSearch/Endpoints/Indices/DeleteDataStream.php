@@ -56,7 +56,7 @@ class DeleteDataStream extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setName($name): static
+    public function setName($name): DeleteDataStream
     {
         if (isset($name) !== true) {
             return $this;

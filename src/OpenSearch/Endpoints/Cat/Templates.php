@@ -63,7 +63,7 @@ class Templates extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): static
+    public function setName($name): Templates
     {
         if (isset($name) !== true) {
             return $this;

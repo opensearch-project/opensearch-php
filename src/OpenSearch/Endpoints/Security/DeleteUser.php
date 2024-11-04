@@ -52,7 +52,7 @@ class DeleteUser extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setUsername($username): static
+    public function setUsername($username): DeleteUser
     {
         if (isset($username) !== true) {
             return $this;

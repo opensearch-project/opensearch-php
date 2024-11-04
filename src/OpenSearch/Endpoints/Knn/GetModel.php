@@ -50,7 +50,7 @@ class GetModel extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setModelId($model_id): static
+    public function setModelId($model_id): GetModel
     {
         if (isset($model_id) !== true) {
             return $this;

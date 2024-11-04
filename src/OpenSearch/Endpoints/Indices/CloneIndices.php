@@ -63,7 +63,7 @@ class CloneIndices extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): CloneIndices
     {
         if (isset($body) !== true) {
             return $this;
@@ -73,7 +73,7 @@ class CloneIndices extends AbstractEndpoint
         return $this;
     }
 
-    public function setTarget($target): static
+    public function setTarget($target): CloneIndices
     {
         if (isset($target) !== true) {
             return $this;

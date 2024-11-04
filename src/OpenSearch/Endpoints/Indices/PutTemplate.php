@@ -60,7 +60,7 @@ class PutTemplate extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PutTemplate
     {
         if (isset($body) !== true) {
             return $this;
@@ -70,7 +70,7 @@ class PutTemplate extends AbstractEndpoint
         return $this;
     }
 
-    public function setName($name): static
+    public function setName($name): PutTemplate
     {
         if (isset($name) !== true) {
             return $this;

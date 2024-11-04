@@ -45,7 +45,7 @@ class Restore extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Restore
     {
         if (isset($body) !== true) {
             return $this;

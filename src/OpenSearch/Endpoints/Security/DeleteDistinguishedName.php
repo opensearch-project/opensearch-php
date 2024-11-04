@@ -52,7 +52,7 @@ class DeleteDistinguishedName extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setClusterName($cluster_name): static
+    public function setClusterName($cluster_name): DeleteDistinguishedName
     {
         if (isset($cluster_name) !== true) {
             return $this;

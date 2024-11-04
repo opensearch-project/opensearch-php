@@ -50,7 +50,7 @@ class DeleteModel extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setModelId($model_id): static
+    public function setModelId($model_id): DeleteModel
     {
         if (isset($model_id) !== true) {
             return $this;

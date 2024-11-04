@@ -45,7 +45,7 @@ class PostStats extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PostStats
     {
         if (isset($body) !== true) {
             return $this;

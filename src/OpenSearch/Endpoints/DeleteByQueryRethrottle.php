@@ -59,7 +59,7 @@ class DeleteByQueryRethrottle extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setTaskId($task_id): static
+    public function setTaskId($task_id): DeleteByQueryRethrottle
     {
         if (isset($task_id) !== true) {
             return $this;

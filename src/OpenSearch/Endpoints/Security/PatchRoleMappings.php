@@ -43,7 +43,7 @@ class PatchRoleMappings extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchRoleMappings
     {
         if (isset($body) !== true) {
             return $this;

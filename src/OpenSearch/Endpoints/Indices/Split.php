@@ -64,7 +64,7 @@ class Split extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Split
     {
         if (isset($body) !== true) {
             return $this;
@@ -74,7 +74,7 @@ class Split extends AbstractEndpoint
         return $this;
     }
 
-    public function setTarget($target): static
+    public function setTarget($target): Split
     {
         if (isset($target) !== true) {
             return $this;

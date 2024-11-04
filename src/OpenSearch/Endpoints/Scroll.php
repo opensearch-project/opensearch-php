@@ -62,7 +62,7 @@ class Scroll extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Scroll
     {
         if (isset($body) !== true) {
             return $this;
@@ -72,7 +72,7 @@ class Scroll extends AbstractEndpoint
         return $this;
     }
 
-    public function setScrollId($scroll_id): static
+    public function setScrollId($scroll_id): Scroll
     {
         if (isset($scroll_id) !== true) {
             return $this;

@@ -50,7 +50,7 @@ class DeleteTask extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setTaskId($task_id): static
+    public function setTaskId($task_id): DeleteTask
     {
         if (isset($task_id) !== true) {
             return $this;

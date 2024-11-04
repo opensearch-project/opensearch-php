@@ -56,7 +56,7 @@ class ReloadSecureSettings extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): ReloadSecureSettings
     {
         if (isset($body) !== true) {
             return $this;
@@ -66,7 +66,7 @@ class ReloadSecureSettings extends AbstractEndpoint
         return $this;
     }
 
-    public function setNodeId($node_id): static
+    public function setNodeId($node_id): ReloadSecureSettings
     {
         if (isset($node_id) !== true) {
             return $this;

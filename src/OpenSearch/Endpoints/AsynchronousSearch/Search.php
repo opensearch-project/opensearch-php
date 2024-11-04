@@ -47,7 +47,7 @@ class Search extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): Search
     {
         if (isset($body) !== true) {
             return $this;

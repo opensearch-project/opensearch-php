@@ -52,7 +52,7 @@ class DeleteTenant extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setTenant($tenant): static
+    public function setTenant($tenant): DeleteTenant
     {
         if (isset($tenant) !== true) {
             return $this;

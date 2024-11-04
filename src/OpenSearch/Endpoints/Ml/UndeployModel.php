@@ -48,7 +48,7 @@ class UndeployModel extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setModelId($model_id): static
+    public function setModelId($model_id): UndeployModel
     {
         if (isset($model_id) !== true) {
             return $this;

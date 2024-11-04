@@ -50,7 +50,7 @@ class Get extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setWorkflowId($workflow_id): static
+    public function setWorkflowId($workflow_id): Get
     {
         if (isset($workflow_id) !== true) {
             return $this;

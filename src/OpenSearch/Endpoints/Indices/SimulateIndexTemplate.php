@@ -60,7 +60,7 @@ class SimulateIndexTemplate extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): static
+    public function setBody($body): SimulateIndexTemplate
     {
         if (isset($body) !== true) {
             return $this;
@@ -70,7 +70,7 @@ class SimulateIndexTemplate extends AbstractEndpoint
         return $this;
     }
 
-    public function setName($name): static
+    public function setName($name): SimulateIndexTemplate
     {
         if (isset($name) !== true) {
             return $this;

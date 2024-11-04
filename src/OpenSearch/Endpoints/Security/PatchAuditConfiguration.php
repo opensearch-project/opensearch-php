@@ -43,7 +43,7 @@ class PatchAuditConfiguration extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): static
+    public function setBody($body): PatchAuditConfiguration
     {
         if (isset($body) !== true) {
             return $this;
