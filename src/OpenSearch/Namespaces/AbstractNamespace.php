@@ -23,23 +23,36 @@ namespace OpenSearch\Namespaces;
 
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\LegacyEndpointFactory;
+use OpenSearch\Traits\DeprecatedPropertyTrait;
 use OpenSearch\Transport;
 
 abstract class AbstractNamespace
 {
+
+    use DeprecatedPropertyTrait;
+
     /**
      * @var \OpenSearch\Transport
      */
     protected $transport;
+
+    protected EndpointFactoryInterface $endpointFactory;
 
     /**
      * @var callable
      */
     protected $endpoints;
 
-    public function __construct(Transport $transport, protected readonly EndpointFactoryInterface $endpointFactory)
+    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory)
     {
         $this->transport = $transport;
+        if (is_callable($endpointFactory)) {
+            @trigger_error('Passing a callable to AbstractNamespace is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
+            $this->endpoints = $endpointFactory;
+            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
+        }
+        $this->endpointFactory = $endpointFactory;
     }
 
     /**

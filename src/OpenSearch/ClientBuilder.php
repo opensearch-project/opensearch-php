@@ -41,12 +41,16 @@ use OpenSearch\Serializers\SmartSerializer;
 use GuzzleHttp\Ring\Client\CurlHandler;
 use GuzzleHttp\Ring\Client\CurlMultiHandler;
 use GuzzleHttp\Ring\Client\Middleware;
+use OpenSearch\Traits\DeprecatedPropertyTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionClass;
 
 class ClientBuilder
 {
+
+    use DeprecatedPropertyTrait;
+
     public const ALLOWED_METHODS_FROM_CONFIG = ['includePortInHostHeader'];
 
     /**
@@ -55,6 +59,11 @@ class ClientBuilder
     private $transport;
 
     private ?EndpointFactoryInterface $endpointFactory = null;
+
+    /**
+     * @var callable|null
+     */
+    private $endpoint;
 
     /**
      * @var NamespaceBuilderInterface[]
@@ -177,6 +186,14 @@ class ClientBuilder
     public function getTransport(): Transport
     {
         return $this->transport;
+    }
+
+    /**
+     * Can supply second param to Client::__construct() when invoking manually or with dependency injection
+     */
+    public function getEndpoint(): callable
+    {
+        return $this->endpoint;
     }
 
     /**
@@ -310,6 +327,20 @@ class ClientBuilder
         } else {
             throw new InvalidArgumentException("Serializer must be a class path or instantiated object extending AbstractConnectionPool");
         }
+
+        return $this;
+    }
+
+    /**
+     * Set the endpoint
+     *
+     * @param callable $endpoint
+     */
+    public function setEndpoint(callable $endpoint): ClientBuilder
+    {
+        @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.', E_USER_DEPRECATED);
+        $this->endpoint = $endpoint;
+        $this->endpointFactory = new LegacyEndpointFactory($endpoint);
 
         return $this;
     }

@@ -27,6 +27,8 @@ use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
 :use-namespaces
+use OpenSearch\Traits\DeprecatedPropertyTrait;
+
 /**
  * Class Client
  *
@@ -34,6 +36,9 @@ use OpenSearch\Namespaces\BooleanRequestWrapper;
  */
 class Client
 {
+
+    use DeprecatedPropertyTrait;
+
     const VERSION = '2.3.1';
 
     /**
@@ -49,6 +54,11 @@ class Client
     protected EndpointFactoryInterface $endpointFactory;
 
     /**
+     * @var callable
+     */
+    protected $endpoints;
+
+    /**
      * @var NamespaceBuilderInterface[]
      */
     protected $registeredNamespaces = [];
@@ -57,19 +67,37 @@ class Client
     /**
      * Client constructor
      *
-     * @param Transport                   $transport
-     * @param EndpointFactoryInterface    $endpointFactory
+     * @param Transport $transport
+     * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
-    public function __construct(Transport $transport, EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
+    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
     {
         $this->transport = $transport;
+        if (is_callable($endpointFactory)) {
+            @trigger_error('Passing a callable to AbstractNamespace is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
+            $this->endpoints = $endpointFactory;
+            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
+        }
         $this->endpointFactory = $endpointFactory;
 :new-namespaces
         $this->registeredNamespaces = $registeredNamespaces;
     }
 :endpoints
 :functions
+
+    /**
+     * Checks for access to deprecated properties.
+     */
+    public function __get(string $name): mixed
+    {
+        if ($name === 'endpoints') {
+            @trigger_error('The $callable property is deprecated in 2.3.2 and will be removed in 3.0.0. Use $endpointFactory instead.', E_USER_DEPRECATED);
+            return $this->endpoints;
+        }
+        return null;
+    }
+
     /**
      * Catchall for registered namespaces
      *
