@@ -36,6 +36,8 @@ interface EndpointInterface
 
     /**
      * Get the options.
+     *
+     * @return array<string, mixed>
      */
     public function getOptions(): array;
 
@@ -71,6 +73,8 @@ interface EndpointInterface
 
     /**
      * Set the body of the request.
+     *
+     * @param array<string,mixed> $body
      */
     public function setBody(array $body): static;
 

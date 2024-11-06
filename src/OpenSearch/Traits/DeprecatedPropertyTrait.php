@@ -4,6 +4,8 @@ namespace OpenSearch\Traits;
 
 /**
  * Provides a standard way to announce deprecated properties.
+ *
+ * @internal
  */
 trait DeprecatedPropertyTrait
 {

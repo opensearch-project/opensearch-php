@@ -24,9 +24,12 @@ namespace OpenSearch;
 use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Aws\Credentials\CredentialsInterface;
+use GuzzleHttp\Ring\Client\CurlHandler;
+use GuzzleHttp\Ring\Client\CurlMultiHandler;
+use GuzzleHttp\Ring\Client\Middleware;
+use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\Common\Exceptions\InvalidArgumentException;
 use OpenSearch\Common\Exceptions\RuntimeException;
-use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
@@ -38,9 +41,6 @@ use OpenSearch\Handlers\SigV4Handler;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
-use GuzzleHttp\Ring\Client\CurlHandler;
-use GuzzleHttp\Ring\Client\CurlMultiHandler;
-use GuzzleHttp\Ring\Client\Middleware;
 use OpenSearch\Traits\DeprecatedPropertyTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -59,11 +59,6 @@ class ClientBuilder
     private $transport;
 
     private ?EndpointFactoryInterface $endpointFactory = null;
-
-    /**
-     * @var callable|null
-     */
-    private $endpoint;
 
     /**
      * @var NamespaceBuilderInterface[]
@@ -335,11 +330,12 @@ class ClientBuilder
      * Set the endpoint
      *
      * @param callable $endpoint
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.
      */
     public function setEndpoint(callable $endpoint): ClientBuilder
     {
         @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.', E_USER_DEPRECATED);
-        $this->endpoint = $endpoint;
         $this->endpointFactory = new LegacyEndpointFactory($endpoint);
 
         return $this;

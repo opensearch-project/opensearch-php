@@ -30,6 +30,8 @@ class LegacyEndpointFactory implements EndpointFactoryInterface
      */
     public function getEndpoint(string $class): AbstractEndpoint
     {
+        // We need to strip the base namespace from the class name for BC.
+        $class = str_replace('OpenSearch\\Endpoints\\', '', $class);
         $endpointBuilder = $this->endpoints;
         return $endpointBuilder($class);
     }
