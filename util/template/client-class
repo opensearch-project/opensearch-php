@@ -79,7 +79,7 @@ class Client
             $endpoints = $endpointFactory;
             $endpointFactory = new LegacyEndpointFactory($endpointFactory);
         } else {
-            $endpoints = $endpointFactory->getEndpoint(...);
+            $endpoints = fn ($c) => $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
         }
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
@@ -95,7 +95,7 @@ class Client
     public function __get(string $name): mixed
     {
         if ($name === 'endpoints') {
-            @trigger_error('The $callable property is deprecated in 2.3.2 and will be removed in 3.0.0. Use $endpointFactory instead.', E_USER_DEPRECATED);
+            @trigger_error('The $endpoints property is deprecated in 2.3.2 and will be removed in 3.0.0. Use $endpointFactory instead.', E_USER_DEPRECATED);
             return $this->endpoints;
         }
         return null;

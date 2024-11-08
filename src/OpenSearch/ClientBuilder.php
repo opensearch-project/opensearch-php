@@ -41,16 +41,12 @@ use OpenSearch\Handlers\SigV4Handler;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
-use OpenSearch\Traits\DeprecatedPropertyTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionClass;
 
 class ClientBuilder
 {
-
-    use DeprecatedPropertyTrait;
-
     public const ALLOWED_METHODS_FROM_CONFIG = ['includePortInHostHeader'];
 
     /**
@@ -185,10 +181,12 @@ class ClientBuilder
 
     /**
      * Can supply second param to Client::__construct() when invoking manually or with dependency injection
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.
      */
     public function getEndpoint(): callable
     {
-        return $this->endpoint;
+        return fn ($c) => $this->endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
     }
 
     /**
