@@ -24,39 +24,19 @@ namespace OpenSearch\Namespaces;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\Helper\RequestHelper;
 use OpenSearch\Transport;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 
 abstract class BooleanRequestWrapper
 {
-    /**
-     * Perform Request
-     *
-     * @throws Missing404Exception
-     * @throws RoutingMissingException
-     */
-    public static function performRequest(AbstractEndpoint $endpoint, Transport $transport)
+    public static function performRequest(AbstractEndpoint $endpoint, Transport $transport): bool
     {
         try {
-            $response = $transport->performRequest(
-                $endpoint->getMethod(),
-                $endpoint->getURI(),
-                $endpoint->getParams(),
-                $endpoint->getBody(),
-                $endpoint->getOptions()
-            );
+            $response = $transport->performRequest($endpoint->getMethod(), $endpoint->getURI(), $endpoint->getParams(), $endpoint->getBody());
 
-            $response = $transport->resultOrFuture($response, $endpoint->getOptions());
-            if (!($response instanceof FutureArrayInterface)) {
-                if ($response['status'] === 200) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                // async mode, can't easily resolve this...punt to user
-                return $response;
-            }
+            $transport->resultOrFuture($response);
+
+            return true;
         } catch (Missing404Exception $exception) {
             return false;
         } catch (RoutingMissingException $exception) {
