@@ -13,6 +13,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Changed fluent setters to return static
 ### Deprecated
 ### Removed
+- Removed support for PHP 7.3 and 7.4
 ### Fixed
 - Fixed PHP 8.4 deprecations
 ### Updated APIs
