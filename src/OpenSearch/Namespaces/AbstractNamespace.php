@@ -50,7 +50,10 @@ abstract class AbstractNamespace
             $endpoints = $endpointFactory;
             $endpointFactory = new LegacyEndpointFactory($endpointFactory);
         } else {
-            $endpoints = fn ($c) => $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
+            $endpoints = function ($c) use ($endpointFactory) {
+                @trigger_error('The $endpoints property is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+                return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
+            };
         }
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
