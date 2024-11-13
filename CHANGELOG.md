@@ -12,6 +12,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Increased min version of `ezimuel/ringphp` to `^1.2.2`
 - Changed fluent setters to return static
 ### Deprecated
+- Passing a callable to for retrieving endpoints is deprecated and replaced with passing an EndpointFactory ([#237](https://github.com/opensearch-project/opensearch-php/pull/237))
 ### Removed
 - Removed support for PHP 7.3 and 7.4
 ### Fixed

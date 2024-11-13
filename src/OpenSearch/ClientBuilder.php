@@ -186,6 +186,7 @@ class ClientBuilder
      */
     public function getEndpoint(): callable
     {
+        @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.', E_USER_DEPRECATED);
         return fn ($c) => $this->endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
     }
 
