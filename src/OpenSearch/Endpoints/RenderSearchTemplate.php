@@ -53,7 +53,7 @@ class RenderSearchTemplate extends AbstractEndpoint
         return isset($this->body) ? 'POST' : 'GET';
     }
 
-    public function setBody($body): RenderSearchTemplate
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

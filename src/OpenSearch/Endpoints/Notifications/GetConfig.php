@@ -50,7 +50,7 @@ class GetConfig extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setConfigId($config_id): GetConfig
+    public function setConfigId($config_id): static
     {
         if (isset($config_id) !== true) {
             return $this;

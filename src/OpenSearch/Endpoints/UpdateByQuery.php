@@ -90,7 +90,7 @@ class UpdateByQuery extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): UpdateByQuery
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

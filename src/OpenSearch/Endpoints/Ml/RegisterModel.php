@@ -43,7 +43,7 @@ class RegisterModel extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): RegisterModel
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

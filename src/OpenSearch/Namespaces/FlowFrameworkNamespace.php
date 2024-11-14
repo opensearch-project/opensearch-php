@@ -32,9 +32,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * $params['update_fields'] = (boolean)  (Default = false)
      * $params['use_case']      = (string) To use a workflow template, specify it in the use_case query parameter when creating a workflow.
      * $params['validation']    = (string)  (Default = all)
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']         = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -57,9 +57,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      *
      * $params['workflow_id']  = (string)
      * $params['clear_status'] = (boolean)  (Default = false)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -82,9 +82,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      *
      * $params['workflow_id']  = (string)
      * $params['allow_delete'] = (string)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -106,9 +106,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * Get a workflow.
      *
      * $params['workflow_id'] = (string)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -131,9 +131,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      *
      * $params['workflow_id'] = (string)
      * $params['all']         = (boolean) The all parameter specifies whether the response should return all fields. (Default = false)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -155,9 +155,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * Get a list of workflow steps.
      *
      * $params['workflow_step'] = (string)
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']         = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -176,9 +176,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * Provisioning a workflow. This API is also executed when the Create or Update Workflow API is called with the provision parameter set to true.
      *
      * $params['workflow_id'] = (string)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -201,9 +201,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Search for workflows by using a query matching a field.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -224,9 +224,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Search for workflows by using a query matching a field.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -253,9 +253,9 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * $params['update_fields'] = (boolean)  (Default = false)
      * $params['use_case']      = (string) To use a workflow template, specify it in the use_case query parameter when creating a workflow.
      * $params['validation']    = (string)  (Default = all)
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']         = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *

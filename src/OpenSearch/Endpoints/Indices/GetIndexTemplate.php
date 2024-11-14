@@ -59,7 +59,7 @@ class GetIndexTemplate extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setName($name): GetIndexTemplate
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

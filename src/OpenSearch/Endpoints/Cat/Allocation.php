@@ -64,7 +64,7 @@ class Allocation extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setNodeId($node_id): Allocation
+    public function setNodeId($node_id): static
     {
         if (isset($node_id) !== true) {
             return $this;

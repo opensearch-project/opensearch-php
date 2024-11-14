@@ -50,7 +50,7 @@ class DeleteAgent extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setAgentId($agent_id): DeleteAgent
+    public function setAgentId($agent_id): static
     {
         if (isset($agent_id) !== true) {
             return $this;

@@ -64,7 +64,7 @@ class Usage extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setNodeId($node_id): Usage
+    public function setNodeId($node_id): static
     {
         if (isset($node_id) !== true) {
             return $this;
@@ -77,7 +77,7 @@ class Usage extends AbstractEndpoint
         return $this;
     }
 
-    public function setMetric($metric): Usage
+    public function setMetric($metric): static
     {
         if (isset($metric) !== true) {
             return $this;

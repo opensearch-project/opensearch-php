@@ -59,7 +59,7 @@ class CleanupRepository extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setRepository($repository): CleanupRepository
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;

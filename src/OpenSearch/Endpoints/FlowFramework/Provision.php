@@ -50,7 +50,7 @@ class Provision extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): Provision
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class Provision extends AbstractEndpoint
         return $this;
     }
 
-    public function setWorkflowId($workflow_id): Provision
+    public function setWorkflowId($workflow_id): static
     {
         if (isset($workflow_id) !== true) {
             return $this;

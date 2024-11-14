@@ -43,7 +43,7 @@ class PatchTenants extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): PatchTenants
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

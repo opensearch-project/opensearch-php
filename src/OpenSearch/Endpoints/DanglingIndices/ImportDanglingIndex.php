@@ -60,7 +60,7 @@ class ImportDanglingIndex extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setIndexUuid($index_uuid): ImportDanglingIndex
+    public function setIndexUuid($index_uuid): static
     {
         if (isset($index_uuid) !== true) {
             return $this;

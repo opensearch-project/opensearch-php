@@ -50,7 +50,7 @@ class UpdateQueryGroup extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): UpdateQueryGroup
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class UpdateQueryGroup extends AbstractEndpoint
         return $this;
     }
 
-    public function setName($name): UpdateQueryGroup
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

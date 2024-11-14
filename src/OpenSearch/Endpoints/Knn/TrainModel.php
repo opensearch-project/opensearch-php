@@ -50,7 +50,7 @@ class TrainModel extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): TrainModel
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class TrainModel extends AbstractEndpoint
         return $this;
     }
 
-    public function setModelId($model_id): TrainModel
+    public function setModelId($model_id): static
     {
         if (isset($model_id) !== true) {
             return $this;

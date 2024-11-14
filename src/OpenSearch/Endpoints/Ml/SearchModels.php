@@ -43,7 +43,7 @@ class SearchModels extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setBody($body): SearchModels
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

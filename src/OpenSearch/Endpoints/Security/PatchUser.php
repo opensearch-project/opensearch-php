@@ -52,7 +52,7 @@ class PatchUser extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): PatchUser
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class PatchUser extends AbstractEndpoint
         return $this;
     }
 
-    public function setUsername($username): PatchUser
+    public function setUsername($username): static
     {
         if (isset($username) !== true) {
             return $this;

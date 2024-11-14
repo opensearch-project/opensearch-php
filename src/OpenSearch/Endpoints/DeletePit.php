@@ -43,7 +43,7 @@ class DeletePit extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setBody($body): DeletePit
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

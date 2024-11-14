@@ -28,11 +28,21 @@ use OpenSearch\Endpoints\AbstractEndpoint;
  */
 class Stats extends AbstractEndpoint
 {
+    protected $index_metric;
+    protected $metric;
     protected $node_id;
 
     public function getURI(): string
     {
+        $index_metric = $this->index_metric ?? null;
+        $metric = $this->metric ?? null;
         $node_id = $this->node_id ?? null;
+        if (isset($metric) && isset($index_metric) && isset($node_id)) {
+            return "/_cluster/stats/$metric/$index_metric/nodes/$node_id";
+        }
+        if (isset($metric) && isset($node_id)) {
+            return "/_cluster/stats/$metric/nodes/$node_id";
+        }
         if (isset($node_id)) {
             return "/_cluster/stats/nodes/$node_id";
         }
@@ -57,7 +67,33 @@ class Stats extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setNodeId($node_id): Stats
+    public function setIndexMetric($index_metric): static
+    {
+        if (isset($index_metric) !== true) {
+            return $this;
+        }
+        if (is_array($index_metric) === true) {
+            $index_metric = implode(",", $index_metric);
+        }
+        $this->index_metric = $index_metric;
+
+        return $this;
+    }
+
+    public function setMetric($metric): static
+    {
+        if (isset($metric) !== true) {
+            return $this;
+        }
+        if (is_array($metric) === true) {
+            $metric = implode(",", $metric);
+        }
+        $this->metric = $metric;
+
+        return $this;
+    }
+
+    public function setNodeId($node_id): static
     {
         if (isset($node_id) !== true) {
             return $this;

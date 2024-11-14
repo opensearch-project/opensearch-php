@@ -35,9 +35,9 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['include_disk_info']     = (boolean) If true, returns information about disk usage and shard sizes. (Default = false)
      * $params['include_yes_decisions'] = (boolean) If true, returns YES decisions in explanation. (Default = false)
-     * $params['pretty']                = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                 = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                 = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']           = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                  = (array) The index, shard, and primary flag to explain. Empty means 'explain the first unassigned shard'
@@ -63,9 +63,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -86,9 +86,9 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Delete any existing decommission.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -107,9 +107,9 @@ class ClusterNamespace extends AbstractNamespace
      * Clears cluster voting config exclusions.
      *
      * $params['wait_for_removal'] = (boolean) Specifies whether to wait for all excluded nodes to be removed from thecluster before clearing the voting configuration exclusions list.Defaults to true, meaning that all excluded nodes must be removed fromthe cluster before this API takes any action. If set to false then thevoting configuration exclusions list is cleared even if some excludednodes are still in the cluster. (Default = true)
-     * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']            = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -127,9 +127,9 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Delete weighted shard routing weights.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -154,9 +154,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['local']                   = (boolean) If true, the request retrieves information from the local node only.Defaults to false, which means information is retrieved from the master node. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node. If no response isreceived before the timeout expires, the request fails and returns anerror.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -184,9 +184,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the master node. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -208,9 +208,9 @@ class ClusterNamespace extends AbstractNamespace
      * Get details and status of decommissioned attribute.
      *
      * $params['awareness_attribute_name'] = (string) Awareness attribute name.
-     * $params['pretty']                   = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                    = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                   = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                    = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']              = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -236,9 +236,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['include_defaults']        = (boolean) If `true`, returns default cluster settings from the local node. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -257,9 +257,9 @@ class ClusterNamespace extends AbstractNamespace
      * Fetches weighted shard routing weights.
      *
      * $params['attribute']   = (string) Awareness attribute name.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -294,9 +294,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['wait_for_no_relocating_shards']   = (boolean) A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
      * $params['wait_for_nodes']                  = (any) The request waits until the specified number N of nodes is available. It also accepts >=N, <=N, >N and <N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
      * $params['wait_for_status']                 = (enum) One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status. (Options = green,red,yellow)
-     * $params['pretty']                          = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                           = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']                     = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                           = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']                     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']                     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -320,9 +320,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the master node. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -343,9 +343,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['node_ids']    = (any) A comma-separated list of the persistent ids of the nodes to excludefrom the voting configuration. If specified, you may not also specify node_names.
      * $params['node_names']  = (any) A comma-separated list of the names of the nodes to exclude from thevoting configuration. If specified, you may not also specify node_ids.
      * $params['timeout']     = (string) When adding a voting configuration exclusion, the API waits for thespecified nodes to be excluded from the voting configuration beforereturning. If the timeout expires before the appropriate conditionis satisfied, the request fails and returns an error.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -368,9 +368,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing component templates. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Operation timeout.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The template definition (Required)
@@ -396,9 +396,9 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['awareness_attribute_name']  = (string) Awareness attribute name.
      * $params['awareness_attribute_value'] = (string) Awareness attribute value.
-     * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                     = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                     = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                    = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -425,9 +425,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['flat_settings']           = (boolean) Return settings in flat format. (Default = false)
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
      * $params['timeout']                 = (string) Explicit operation timeout
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart). (Required)
@@ -450,9 +450,9 @@ class ClusterNamespace extends AbstractNamespace
      * Updates weighted shard routing weights.
      *
      * $params['attribute']   = (string) Awareness attribute name.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -475,9 +475,9 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Returns the information about configured remote clusters.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -502,9 +502,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['metric']                  = (any) Limits the information returned to the specified metrics.
      * $params['retry_failed']            = (boolean) If true, then retries allocation of shards that are blocked due to too many subsequent allocation failures.
      * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      * $params['body']                    = (array) The definition of `commands` to perform (`move`, `cancel`, `allocate`)
@@ -537,9 +537,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['master_timeout']            = (string) Specify timeout for connection to master
      * $params['wait_for_metadata_version'] = (integer) Wait for the metadata version to be equal or greater than the specified metadata version
      * $params['wait_for_timeout']          = (string) The maximum time to wait for wait_for_metadata_version before timing out
-     * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                     = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                     = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                    = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -562,12 +562,14 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Returns high-level overview of cluster statistics.
      *
+     * $params['index_metric']  = (array) Limit the information returned for indexes metric to the specific index metrics. It can be used only if indexes (or all) metric is specified.
+     * $params['metric']        = (array) Limit the information returned to the specified metrics
      * $params['node_id']       = (array) Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
      * $params['flat_settings'] = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['timeout']       = (string) Period to wait for each node to respond.If a node does not respond before its timeout expires, the response does not include its stats.However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']         = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -576,11 +578,15 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function stats(array $params = [])
     {
+        $index_metric = $this->extractArgument($params, 'index_metric');
+        $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
 
         $endpointBuilder = $this->endpoints;
         $endpoint = $endpointBuilder('Cluster\Stats');
         $endpoint->setParams($params);
+        $endpoint->setIndexMetric($index_metric);
+        $endpoint->setMetric($metric);
         $endpoint->setNodeId($node_id);
 
         return $this->performRequest($endpoint);

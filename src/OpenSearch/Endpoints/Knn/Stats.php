@@ -58,7 +58,7 @@ class Stats extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setNodeId($node_id): Stats
+    public function setNodeId($node_id): static
     {
         if (isset($node_id) !== true) {
             return $this;
@@ -71,7 +71,7 @@ class Stats extends AbstractEndpoint
         return $this;
     }
 
-    public function setStat($stat): Stats
+    public function setStat($stat): static
     {
         if (isset($stat) !== true) {
             return $this;
