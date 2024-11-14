@@ -50,13 +50,13 @@ class IngestNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ingest\DeletePipeline');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\DeletePipeline::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a pipeline.
      *
@@ -76,13 +76,13 @@ class IngestNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ingest\GetPipeline');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\GetPipeline::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a list of the built-in patterns.
      *
@@ -97,12 +97,12 @@ class IngestNamespace extends AbstractNamespace
      */
     public function processorGrok(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ingest\ProcessorGrok');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\ProcessorGrok::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a pipeline.
      *
@@ -125,14 +125,14 @@ class IngestNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ingest\PutPipeline');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\PutPipeline::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to simulate a pipeline with example documents.
      *
@@ -153,12 +153,12 @@ class IngestNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ingest\Simulate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\Simulate::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

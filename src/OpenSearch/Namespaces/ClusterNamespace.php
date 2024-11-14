@@ -49,13 +49,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\AllocationExplain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\AllocationExplain::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a component template.
      *
@@ -76,13 +76,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete any existing decommission.
      *
@@ -97,12 +97,12 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteDecommissionAwareness(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteDecommissionAwareness');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteDecommissionAwareness::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Clears cluster voting config exclusions.
      *
@@ -118,12 +118,12 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteVotingConfigExclusions');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete weighted shard routing weights.
      *
@@ -140,13 +140,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\DeleteWeightedRouting');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\DeleteWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about whether a particular component template exist.
      *
@@ -170,13 +170,13 @@ class ClusterNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\ExistsComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\ExistsComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns one or more component templates.
      *
@@ -197,13 +197,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get details and status of decommissioned attribute.
      *
@@ -221,13 +221,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetDecommissionAwareness');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetDecommissionAwareness::class);
         $endpoint->setParams($params);
         $endpoint->setAwarenessAttributeName($awareness_attribute_name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns cluster settings.
      *
@@ -247,12 +247,12 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function getSettings(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetSettings::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Fetches weighted shard routing weights.
      *
@@ -270,21 +270,21 @@ class ClusterNamespace extends AbstractNamespace
     {
         $attribute = $this->extractArgument($params, 'attribute');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\GetWeightedRouting');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\GetWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setAttribute($attribute);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns basic information about the health of the cluster.
      *
-     * $params['index']                           = (array) Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard expressions (*) are supported. To target all data streams and indices in a cluster, omit this parameter or use `_all` or `*`.
+     * $params['index']                           = (array) Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
      * $params['awareness_attribute']             = (string) The awareness attribute for which the health is required.
      * $params['cluster_manager_timeout']         = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']                = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     * $params['level']                           = (enum) Can be one of cluster, indices or shards. Controls the details level of the health information returned. (Options = awareness_attributes,cluster,indices,shards)
+     * $params['expand_wildcards']                = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * $params['level']                           = (enum) Can be one of cluster, indexes or shards. Controls the details level of the health information returned. (Options = awareness_attributes,cluster,indices,shards)
      * $params['local']                           = (boolean) If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node. (Default = false)
      * $params['master_timeout']                  = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                         = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
@@ -307,13 +307,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\Health');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\Health::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a list of any cluster-level changes (e.g. create index, update mapping,allocate or fail shard) which have not yet been executed.
      *
@@ -331,12 +331,12 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PendingTasks');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PendingTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the cluster voting config exclusions by node ids or node names.
      *
@@ -354,16 +354,16 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function postVotingConfigExclusions(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PostVotingConfigExclusions');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PostVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a component template.
      *
-     * $params['name']                    = (string) Name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; 'logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-mapping`; `synthetics-settings`. OpenSearch Agent uses these templates to configure backing indices for its data streams. If you use OpenSearch Agent and want to overwrite one of these templates, set the `version` for your replacement template higher than the current version. If you don't use OpenSearch Agent and want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the cluster update settings API.
+     * $params['name']                    = (string) Name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; 'logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-mapping`; `synthetics-settings`. OpenSearch Agent uses these templates to configure backing indexes for its data streams. If you use OpenSearch Agent and want to overwrite one of these templates, set the `version` for your replacement template higher than the current version. If you don't use OpenSearch Agent and want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the cluster update settings API.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing component templates. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
@@ -383,14 +383,14 @@ class ClusterNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutComponentTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Decommissions an awareness attribute.
      *
@@ -410,14 +410,14 @@ class ClusterNamespace extends AbstractNamespace
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
         $awareness_attribute_value = $this->extractArgument($params, 'awareness_attribute_value');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutDecommissionAwareness');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutDecommissionAwareness::class);
         $endpoint->setParams($params);
         $endpoint->setAwarenessAttributeName($awareness_attribute_name);
         $endpoint->setAwarenessAttributeValue($awareness_attribute_value);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the cluster settings.
      *
@@ -439,13 +439,13 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutSettings::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates weighted shard routing weights.
      *
@@ -464,14 +464,14 @@ class ClusterNamespace extends AbstractNamespace
         $attribute = $this->extractArgument($params, 'attribute');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\PutWeightedRouting');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\PutWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setAttribute($attribute);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the information about configured remote clusters.
      *
@@ -486,12 +486,12 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function remoteInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\RemoteInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\RemoteInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to manually change the allocation of individual shards in the cluster.
      *
@@ -516,23 +516,23 @@ class ClusterNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\Reroute');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\Reroute::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a comprehensive information about the state of the cluster.
      *
      * $params['metric']                    = (array) Limit the information returned to the specified metrics
-     * $params['index']                     = (array) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-     * $params['allow_no_indices']          = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
+     * $params['index']                     = (array) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
+     * $params['allow_no_indices']          = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified)
      * $params['cluster_manager_timeout']   = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']          = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * $params['expand_wildcards']          = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['flat_settings']             = (boolean) Return settings in flat format. (Default = false)
-     * $params['ignore_unavailable']        = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
+     * $params['ignore_unavailable']        = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']            = (string) Specify timeout for connection to master
      * $params['wait_for_metadata_version'] = (integer) Wait for the metadata version to be equal or greater than the specified metadata version
@@ -551,14 +551,14 @@ class ClusterNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\State');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\State::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns high-level overview of cluster statistics.
      *
@@ -582,8 +582,7 @@ class ClusterNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cluster\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cluster\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setIndexMetric($index_metric);
         $endpoint->setMetric($metric);
@@ -591,4 +590,5 @@ class ClusterNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
 }

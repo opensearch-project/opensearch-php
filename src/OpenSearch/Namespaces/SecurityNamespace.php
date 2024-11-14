@@ -40,12 +40,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function authinfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Authinfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Authinfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the authorization token.
      *
@@ -60,12 +60,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function authtoken(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Authtoken');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Authtoken::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Not supported for cache API.
      *
@@ -80,12 +80,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function cache(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Cache');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Cache::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Check whether or not an upgrade can be performed and what resources can be updated.
      *
@@ -100,12 +100,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function configUpgradeCheck(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ConfigUpgradeCheck');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ConfigUpgradeCheck::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Helps cluster operator upgrade missing defaults and stale default definitions.
      *
@@ -122,15 +122,15 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ConfigUpgradePerform');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ConfigUpgradePerform::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Creates or replaces the allowlisted APIs. Accessible via Super Admin certificate or REST API permission.
+     * Creates or replaces the permitted APIs. Accessible using Super Admin certificate or REST API permission.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -145,13 +145,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateAllowlist');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateAllowlist::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or replaces the multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
      *
@@ -168,13 +168,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateUpdateTenancyConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateUpdateTenancyConfig::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or replaces the specified user. Legacy API.
      *
@@ -193,14 +193,14 @@ class SecurityNamespace extends AbstractNamespace
         $username = $this->extractArgument($params, 'username');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateUserLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateUserLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete a specified action group.
      *
@@ -218,13 +218,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $action_group = $this->extractArgument($params, 'action_group');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes all distinguished names in the specified cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
@@ -242,13 +242,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified role.
      *
@@ -266,13 +266,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes the specified role mapping.
      *
@@ -290,13 +290,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified tenant.
      *
@@ -314,13 +314,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $tenant = $this->extractArgument($params, 'tenant');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified user.
      *
@@ -338,13 +338,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete the specified user. Legacy API.
      *
@@ -362,13 +362,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\DeleteUserLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\DeleteUserLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Flushes the Security plugin user, authentication, and authorization cache.
      *
@@ -383,12 +383,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function flushCache(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\FlushCache');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\FlushCache::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Generates On-Behalf-Of token for the current user.
      *
@@ -405,13 +405,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GenerateOboToken');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GenerateOboToken::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Generates authorization token for the given user.
      *
@@ -429,13 +429,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GenerateUserToken');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GenerateUserToken::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Generates authorization token for the given user. Legacy API.  Not Implemented.
      *
@@ -453,13 +453,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GenerateUserTokenLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GenerateUserTokenLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns account details for the current user.
      *
@@ -474,12 +474,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAccountDetails(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAccountDetails');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAccountDetails::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one action group.
      *
@@ -497,13 +497,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $action_group = $this->extractArgument($params, 'action_group');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the cluster security certificates.
      *
@@ -520,12 +520,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAllCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAllCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAllCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the current list of allowed API accessible to normal user.
      *
@@ -540,12 +540,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAllowlist(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAllowlist');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAllowlist::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the audit configuration.
      *
@@ -560,12 +560,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAuditConfiguration(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetAuditConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetAuditConfiguration::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the cluster security certificates.
      *
@@ -580,12 +580,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the current Security plugin configuration in JSON format.
      *
@@ -600,12 +600,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getConfiguration(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetConfiguration::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the current security-dashboards plugin configuration.
      *
@@ -620,12 +620,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getDashboardsInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetDashboardsInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDashboardsInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
      *
@@ -644,13 +644,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the given node's security certificates.
      *
@@ -670,13 +670,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetNodeCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetNodeCertificates::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the evaluated REST API permissions for the currently logged in user.
      *
@@ -691,12 +691,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getPermissionsInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetPermissionsInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetPermissionsInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one role.
      *
@@ -714,13 +714,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one role mapping.
      *
@@ -738,13 +738,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $role = $this->extractArgument($params, 'role');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the SSL configuration information.
      *
@@ -760,12 +760,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getSslinfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetSslinfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetSslinfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
      *
@@ -780,12 +780,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getTenancyConfig(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetTenancyConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenancyConfig::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves one tenant.
      *
@@ -803,13 +803,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $tenant = $this->extractArgument($params, 'tenant');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieve one internal user.
      *
@@ -827,13 +827,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieve one user. Legacy API.
      *
@@ -851,13 +851,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $username = $this->extractArgument($params, 'username');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetUserLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUserLegacy::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieve all internal users. Legacy API.
      *
@@ -872,12 +872,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getUsersLegacy(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\GetUsersLegacy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUsersLegacy::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Checks to see if the Security plugin is up and running.
      *
@@ -893,12 +893,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function health(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Health');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Health::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Migrates security configuration from v6 to v7.
      *
@@ -913,12 +913,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function migrate(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Migrate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Migrate::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of an action group.
      *
@@ -937,14 +937,14 @@ class SecurityNamespace extends AbstractNamespace
         $action_group = $this->extractArgument($params, 'action_group');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the current list of allowed API accessible to normal user.
      *
@@ -961,13 +961,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchAllowlist');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchAllowlist::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * A PATCH call is used to update specified fields in the audit configuration.
      *
@@ -984,13 +984,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchAuditConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchAuditConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * A PATCH call is used to update the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
      *
@@ -1007,13 +1007,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
      *
@@ -1032,14 +1032,14 @@ class SecurityNamespace extends AbstractNamespace
         $cluster_name = $this->extractArgument($params, 'cluster_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Bulk update of distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
      *
@@ -1056,13 +1056,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchDistinguishedNames');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchDistinguishedNames::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of a role.
      *
@@ -1081,14 +1081,14 @@ class SecurityNamespace extends AbstractNamespace
         $role = $this->extractArgument($params, 'role');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of a role mapping.
      *
@@ -1107,14 +1107,14 @@ class SecurityNamespace extends AbstractNamespace
         $role = $this->extractArgument($params, 'role');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Add, delete, or modify a single tenant.
      *
@@ -1133,14 +1133,14 @@ class SecurityNamespace extends AbstractNamespace
         $tenant = $this->extractArgument($params, 'tenant');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates individual attributes of an internal user.
      *
@@ -1159,14 +1159,14 @@ class SecurityNamespace extends AbstractNamespace
         $username = $this->extractArgument($params, 'username');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PatchUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the current security-dashboards plugin configuration.
      *
@@ -1181,12 +1181,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function postDashboardsInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\PostDashboardsInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PostDashboardsInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Reload HTTP layer communication certificates.
      *
@@ -1201,12 +1201,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function reloadHttpCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ReloadHttpCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ReloadHttpCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Reload Transport layer communication certificates.
      *
@@ -1221,12 +1221,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function reloadTransportCertificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ReloadTransportCertificates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ReloadTransportCertificates::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves the tenant names if any exist. Only accessible to super admins or kibanaserver user.
      *
@@ -1241,12 +1241,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function tenantInfo(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\TenantInfo');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\TenantInfo::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the audit configuration.
      *
@@ -1263,13 +1263,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\UpdateAuditConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\UpdateAuditConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Adds or updates the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
      *
@@ -1286,13 +1286,13 @@ class SecurityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\UpdateConfiguration');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\UpdateConfiguration::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Adds or updates the specified distinguished names in the cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
@@ -1311,14 +1311,14 @@ class SecurityNamespace extends AbstractNamespace
         $cluster_name = $this->extractArgument($params, 'cluster_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\UpdateDistinguishedName');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\UpdateDistinguishedName::class);
         $endpoint->setParams($params);
         $endpoint->setClusterName($cluster_name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
      *
@@ -1334,12 +1334,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function validate(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\Validate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\Validate::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the user identity related information for currently logged in user.
      *
@@ -1354,12 +1354,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function whoAmI(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\WhoAmI');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\WhoAmI::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the user identity related information for currently logged in user. User needs to have access to this endpoint when authorization at REST layer is enabled.
      *
@@ -1374,12 +1374,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function whoAmIProtected(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\WhoAmIProtected');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\WhoAmIProtected::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the password for the current user.
      *
@@ -1404,8 +1404,7 @@ class SecurityNamespace extends AbstractNamespace
             ];
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\ChangePassword');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\ChangePassword::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1435,8 +1434,7 @@ class SecurityNamespace extends AbstractNamespace
             ];
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateActionGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateActionGroup::class);
         $endpoint->setParams($params);
         $endpoint->setActionGroup($action_group);
         $endpoint->setBody($body);
@@ -1471,8 +1469,7 @@ class SecurityNamespace extends AbstractNamespace
             ]);
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateRoleMapping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);
@@ -1507,8 +1504,7 @@ class SecurityNamespace extends AbstractNamespace
             ]);
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateRole');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateRole::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);
@@ -1539,8 +1535,7 @@ class SecurityNamespace extends AbstractNamespace
             ];
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
         $endpoint->setBody($body);
@@ -1577,8 +1572,7 @@ class SecurityNamespace extends AbstractNamespace
             ]);
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
         $endpoint->setBody($body);
@@ -1616,13 +1610,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getActionGroups(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['action_group'])) {
-            $endpoint = $endpointBuilder('Security\GetActionGroup');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetActionGroup::class);
             $action_group = $this->extractArgument($params, 'action_group');
             $endpoint->setActionGroup($action_group);
         } else {
-            $endpoint = $endpointBuilder('Security\GetActionGroups');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetActionGroups::class);
         }
         $endpoint->setParams($params);
 
@@ -1653,13 +1646,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getDistinguishedNames(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['cluster_name'])) {
-            $endpoint = $endpointBuilder('Security\GetDistinguishedName');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDistinguishedName::class);
             $cluster_name = $this->extractArgument($params, 'cluster_name');
             $endpoint->setClusterName($cluster_name);
         } else {
-            $endpoint = $endpointBuilder('Security\GetDistinguishedNames');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDistinguishedNames::class);
         }
         $endpoint->setParams($params);
 
@@ -1681,13 +1673,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getRoleMappings(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['role'])) {
-            $endpoint = $endpointBuilder('Security\GetRoleMapping');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRoleMapping::class);
             $role = $this->extractArgument($params, 'role');
             $endpoint->setRole($role);
         } else {
-            $endpoint = $endpointBuilder('Security\GetRoleMappings');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRoleMappings::class);
         }
         $endpoint->setParams($params);
 
@@ -1709,13 +1700,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getRoles(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['role'])) {
-            $endpoint = $endpointBuilder('Security\GetRole');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRole::class);
             $role = $this->extractArgument($params, 'role');
             $endpoint->setRole($role);
         } else {
-            $endpoint = $endpointBuilder('Security\GetRoles');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetRoles::class);
         }
         $endpoint->setParams($params);
 
@@ -1737,13 +1727,12 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getTenants(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['tenant'])) {
-            $endpoint = $endpointBuilder('Security\GetTenant');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenant::class);
             $tenant = $this->extractArgument($params, 'tenant');
             $endpoint->setTenant($tenant);
         } else {
-            $endpoint = $endpointBuilder('Security\GetTenants');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetTenants::class);
         }
         $endpoint->setParams($params);
 
@@ -1768,11 +1757,11 @@ class SecurityNamespace extends AbstractNamespace
         $endpointBuilder = $this->endpoints;
 
         if (isset($params['username'])) {
-            $endpoint = $endpointBuilder('Security\GetUser');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUser::class);
             $username = $this->extractArgument($params, 'username');
             $endpoint->setUsername($username);
         } else {
-            $endpoint = $endpointBuilder('Security\GetUsers');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUsers::class);
         }
 
         $endpoint->setParams($params);
@@ -1800,13 +1789,12 @@ class SecurityNamespace extends AbstractNamespace
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['action_group'])) {
-            $endpoint = $endpointBuilder('Security\PatchActionGroup');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchActionGroup::class);
             $action_group = $this->extractArgument($params, 'action_group');
             $endpoint->setActionGroup($action_group);
         } else {
-            $endpoint = $endpointBuilder('Security\PatchActionGroups');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchActionGroups::class);
         }
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1845,13 +1833,12 @@ class SecurityNamespace extends AbstractNamespace
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['role'])) {
-            $endpoint = $endpointBuilder('Security\PatchRoleMapping');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoleMapping::class);
             $role = $this->extractArgument($params, 'role');
             $endpoint->setRole($role);
         } else {
-            $endpoint = $endpointBuilder('Security\PatchRoleMappings');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoleMappings::class);
         }
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1878,13 +1865,12 @@ class SecurityNamespace extends AbstractNamespace
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['role'])) {
-            $endpoint = $endpointBuilder('Security\PatchRole');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRole::class);
             $role = $this->extractArgument($params, 'role');
             $endpoint->setRole($role);
         } else {
-            $endpoint = $endpointBuilder('Security\PatchRoles');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoles::class);
         }
 
         $endpoint->setParams($params);
@@ -1912,13 +1898,12 @@ class SecurityNamespace extends AbstractNamespace
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['tenant'])) {
-            $endpoint = $endpointBuilder('Security\PatchTenant');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchTenant::class);
             $tenant = $this->extractArgument($params, 'tenant');
             $endpoint->setTenant($tenant);
         } else {
-            $endpoint = $endpointBuilder('Security\PatchTenants');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchTenants::class);
         }
 
         $endpoint->setParams($params);
@@ -1946,13 +1931,12 @@ class SecurityNamespace extends AbstractNamespace
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['username'])) {
-            $endpoint = $endpointBuilder('Security\PatchUser');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchUser::class);
             $username = $this->extractArgument($params, 'username');
             $endpoint->setUsername($username);
         } else {
-            $endpoint = $endpointBuilder('Security\PatchUsers');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchUsers::class);
         }
 
         $endpoint->setParams($params);

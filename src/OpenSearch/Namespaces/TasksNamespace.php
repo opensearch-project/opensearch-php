@@ -51,13 +51,13 @@ class TasksNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Tasks\Cancel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\Cancel::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about a task.
      *
@@ -77,13 +77,13 @@ class TasksNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Tasks\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\Get::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a list of tasks.
      *
@@ -105,12 +105,12 @@ class TasksNamespace extends AbstractNamespace
      */
     public function list(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Tasks\ListTasks');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\ListTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Proxy function to list() to prevent BC break since 7.4.0
      */

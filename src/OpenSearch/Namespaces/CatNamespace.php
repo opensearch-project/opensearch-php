@@ -31,10 +31,10 @@ use OpenSearch\Namespaces\AbstractNamespace;
 class CatNamespace extends AbstractNamespace
 {
     /**
-     * Shows information about currently configured aliases to indices including filter and routing infos.
+     * Shows information about currently configured aliases to indexes including filter and routing info.
      *
      * $params['name']             = (array) A comma-separated list of aliases to retrieve. Supports wildcards (`*`).  To retrieve all aliases, omit this parameter or use `*` or `_all`.
-     * $params['expand_wildcards'] = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * $params['expand_wildcards'] = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['format']           = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                = (array) Comma-separated list of column names to display.
      * $params['help']             = (boolean) Return help information. (Default = false)
@@ -54,13 +54,13 @@ class CatNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Aliases');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Aliases::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Lists all active point-in-time segments.
      *
@@ -81,12 +81,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function allPitSegments(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\AllPitSegments');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\AllPitSegments::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
      *
@@ -113,13 +113,13 @@ class CatNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Allocation');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Allocation::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about the cluster-manager node.
      *
@@ -142,16 +142,16 @@ class CatNamespace extends AbstractNamespace
      */
     public function clusterManager(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\ClusterManager');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\ClusterManager::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Provides quick access to the document count of the entire cluster, or individual indices.
+     * Provides quick access to the document count of the entire cluster, or individual indexes.
      *
-     * $params['index']       = (array) Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
+     * $params['index']       = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
@@ -170,13 +170,13 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Count');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Count::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Shows how much heap memory is currently being used by fielddata on every data node in the cluster.
      *
@@ -200,13 +200,13 @@ class CatNamespace extends AbstractNamespace
     {
         $fields = $this->extractArgument($params, 'fields');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Fielddata');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Fielddata::class);
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a concise representation of the cluster health.
      *
@@ -228,12 +228,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function health(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Health');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Health::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns help for the Cat APIs.
      *
@@ -248,22 +248,22 @@ class CatNamespace extends AbstractNamespace
      */
     public function help(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Help');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Help::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Returns information about indices: number of primaries and replicas, document counts, disk size, ...
+     * Returns information about indexes: number of primaries and replicas, document counts, disk size, ...
      *
-     * $params['index']                     = (array) Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
+     * $params['index']                     = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['bytes']                     = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout']   = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.
      * $params['format']                    = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                         = (array) Comma-separated list of column names to display.
-     * $params['health']                    = (enum) The health status used to limit returned indices. By default, the response includes indices of any health status. (Options = green,red,yellow)
+     * $params['health']                    = (enum) The health status used to limit returned indexes. By default, the response includes indexes of any health status. (Options = green,red,yellow)
      * $params['help']                      = (boolean) Return help information. (Default = false)
      * $params['include_unloaded_segments'] = (boolean) If true, the response includes information from segments that are not loaded into memory. (Default = false)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
@@ -285,13 +285,13 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Indices');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Indices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about the cluster-manager node.
      *
@@ -314,12 +314,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function master(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Master');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Master::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about custom node attributes.
      *
@@ -342,12 +342,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function nodeattrs(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\NodeAttrs');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\NodeAttrs::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns basic statistics about performance of cluster nodes.
      *
@@ -373,12 +373,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function nodes(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Nodes');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Nodes::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a concise representation of the cluster pending tasks.
      *
@@ -402,12 +402,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\PendingTasks');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\PendingTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * List segments for one or several PITs.
      *
@@ -430,13 +430,13 @@ class CatNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\PitSegments');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\PitSegments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about installed plugins across nodes node.
      *
@@ -459,16 +459,16 @@ class CatNamespace extends AbstractNamespace
      */
     public function plugins(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Plugins');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Plugins::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about index shard recoveries, both on-going completed.
      *
-     * $params['index']       = (array) A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
+     * $params['index']       = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['active_only'] = (boolean) If `true`, the response only includes ongoing shard recoveries. (Default = false)
      * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['detailed']    = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
@@ -491,13 +491,13 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Recovery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Recovery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about snapshot repositories registered in the cluster.
      *
@@ -520,27 +520,27 @@ class CatNamespace extends AbstractNamespace
      */
     public function repositories(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Repositories');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Repositories::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about both on-going and latest completed Segment Replication events.
      *
      * $params['index']              = (array) Comma-separated list or wildcard expression of index names to limit the returned information.
      * $params['active_only']        = (boolean) If `true`, the response only includes ongoing segment replication events. (Default = false)
-     * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified).
+     * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
      * $params['bytes']              = (enum) The unit in which to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['completed_only']     = (boolean) If `true`, the response only includes latest completed segment replication events. (Default = false)
      * $params['detailed']           = (boolean) If `true`, the response includes detailed information about segment replications. (Default = false)
-     * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['format']             = (string) A short version of the Accept header, e.g. json, yaml.
      * $params['h']                  = (array) Comma-separated list of column names to display.
      * $params['help']               = (boolean) Return help information. (Default = false)
-     * $params['ignore_throttled']   = (boolean) Whether specified concrete, expanded or aliased indices should be ignored when throttled.
-     * $params['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed).
+     * $params['ignore_throttled']   = (boolean) Whether specified concrete, expanded or aliased indexes should be ignored when throttled.
+     * $params['ignore_unavailable'] = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
      * $params['s']                  = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['shards']             = (array) Comma-separated list of shards to display.
      * $params['time']               = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
@@ -559,17 +559,17 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\SegmentReplication');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\SegmentReplication::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides low-level information about the segments in the shards of an index.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
@@ -591,17 +591,17 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Segments');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Segments::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides a detailed view of shard allocation on nodes.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indices, omit this parameter or use `*` or `_all`.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
@@ -625,13 +625,13 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Shards');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns all snapshots in a specific repository.
      *
@@ -658,13 +658,13 @@ class CatNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Snapshots');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Snapshots::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about the tasks currently executing on one or more nodes in the cluster.
      *
@@ -689,12 +689,12 @@ class CatNamespace extends AbstractNamespace
      */
     public function tasks(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Tasks');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Tasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about existing templates.
      *
@@ -720,13 +720,13 @@ class CatNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\Templates');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Templates::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns cluster-wide thread pool statistics per node.By default the active, queue and rejected statistics are returned for all thread pools.
      *
@@ -753,11 +753,11 @@ class CatNamespace extends AbstractNamespace
     {
         $thread_pool_patterns = $this->extractArgument($params, 'thread_pool_patterns');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Cat\ThreadPool');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\ThreadPool::class);
         $endpoint->setParams($params);
         $endpoint->setThreadPoolPatterns($thread_pool_patterns);
 
         return $this->performRequest($endpoint);
     }
+
 }

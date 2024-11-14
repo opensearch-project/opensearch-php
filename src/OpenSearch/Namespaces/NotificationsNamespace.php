@@ -40,13 +40,13 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\CreateConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\CreateConfig::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete a channel configuration.
      *
@@ -64,13 +64,13 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\DeleteConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\DeleteConfig::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete multiple channel configurations.
      *
@@ -87,12 +87,12 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function deleteConfigs(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\DeleteConfigs');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\DeleteConfigs::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get a specific channel configuration.
      *
@@ -110,13 +110,13 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\GetConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\GetConfig::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get multiple channel configurations with filtering.
      *
@@ -173,13 +173,13 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\GetConfigs');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\GetConfigs::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * List created notification channels.
      *
@@ -194,12 +194,12 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function listChannels(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\ListChannels');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\ListChannels::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * List supported channel configurations.
      *
@@ -214,12 +214,12 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function listFeatures(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\ListFeatures');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\ListFeatures::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Send a test notification.
      *
@@ -237,13 +237,13 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\SendTest');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\SendTest::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Update channel configuration.
      *
@@ -262,12 +262,12 @@ class NotificationsNamespace extends AbstractNamespace
         $config_id = $this->extractArgument($params, 'config_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Notifications\UpdateConfig');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\UpdateConfig::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

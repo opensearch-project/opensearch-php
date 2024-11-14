@@ -42,13 +42,13 @@ class SqlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Sql\Close');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Close::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Collect metrics for the plugin within the interval.
      *
@@ -65,12 +65,12 @@ class SqlNamespace extends AbstractNamespace
      */
     public function getStats(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Sql\GetStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\GetStats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * By a stats endpoint, you are able to collect metrics for the plugin within the interval.
      *
@@ -89,13 +89,13 @@ class SqlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Sql\PostStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\PostStats::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Adds SQL settings to the standard OpenSearch cluster settings.
      *
@@ -113,13 +113,13 @@ class SqlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Sql\Settings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Settings::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
-    }    /**
+    }
+    /**
      * This API will be removed in a future version. Use 'close' API instead.
      *
      * $params['cursor'] = (string) The cursor given by the server
@@ -129,9 +129,7 @@ class SqlNamespace extends AbstractNamespace
      */
     public function closeCursor(array $params): array
     {
-        $endpointBuilder = $this->endpoints;
-
-        $endpoint = $endpointBuilder('Sql\Close');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Close::class);
         $endpoint->setBody(array_filter([
             'cursor' => $this->extractArgument($params, 'cursor'),
         ]));
@@ -148,12 +146,10 @@ class SqlNamespace extends AbstractNamespace
      */
     public function explain(array $params): array
     {
-        $endpointBuilder = $this->endpoints;
-
         $body = $this->extractArgument($params, 'body') ?? [];
         $query = $this->extractArgument($params, 'query');
 
-        $endpoint = $endpointBuilder('Sql\Explain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Explain::class);
         $endpoint->setBody(array_merge($body, [
             'query' => $query,
         ]));
@@ -174,9 +170,7 @@ class SqlNamespace extends AbstractNamespace
      */
     public function query(array $params): array
     {
-        $endpointBuilder = $this->endpoints;
-
-        $endpoint = $endpointBuilder('Sql\Query');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Query::class);
         $body = $this->extractArgument($params, 'body') ?? [];
         $endpoint->setBody(array_merge($body, array_filter([
             'query' => $this->extractArgument($params, 'query'),

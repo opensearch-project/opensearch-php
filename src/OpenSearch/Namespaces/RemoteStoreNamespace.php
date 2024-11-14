@@ -43,11 +43,11 @@ class RemoteStoreNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('RemoteStore\Restore');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RemoteStore\Restore::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }
