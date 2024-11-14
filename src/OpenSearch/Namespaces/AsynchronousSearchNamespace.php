@@ -28,9 +28,9 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * Delete asynchronous search.
      *
      * $params['id']          = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -52,9 +52,9 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * Get partial responses from asynchronous search.
      *
      * $params['id']          = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -79,9 +79,9 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * $params['keep_alive']                  = (string) The amount of time that the result is saved in the cluster.
      * $params['keep_on_completion']          = (boolean) Whether you want to save the results in the cluster after the search is complete.
      * $params['wait_for_completion_timeout'] = (string) The amount of time that you plan to wait for the results.
-     * $params['pretty']                      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']                       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']                 = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']                      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']                 = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']                 = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -102,9 +102,9 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     /**
      * Monitoring of asynchronous searches that are running, completed, and/or persisted.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *

@@ -51,7 +51,7 @@ class GetStatus extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setWorkflowId($workflow_id): GetStatus
+    public function setWorkflowId($workflow_id): static
     {
         if (isset($workflow_id) !== true) {
             return $this;

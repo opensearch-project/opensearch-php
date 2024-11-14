@@ -52,7 +52,7 @@ class GetPolicy extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setPolicyId($policy_id): GetPolicy
+    public function setPolicyId($policy_id): static
     {
         if (isset($policy_id) !== true) {
             return $this;

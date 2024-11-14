@@ -62,7 +62,7 @@ class Get extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setRepository($repository): Get
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;
@@ -72,7 +72,7 @@ class Get extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot($snapshot): Get
+    public function setSnapshot($snapshot): static
     {
         if (isset($snapshot) !== true) {
             return $this;

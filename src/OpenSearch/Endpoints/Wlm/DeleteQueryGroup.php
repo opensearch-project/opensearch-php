@@ -50,7 +50,7 @@ class DeleteQueryGroup extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setName($name): DeleteQueryGroup
+    public function setName($name): static
     {
         if (isset($name) !== true) {
             return $this;

@@ -43,7 +43,7 @@ class CreateAllowlist extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): CreateAllowlist
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

@@ -28,9 +28,9 @@ class IsmNamespace extends AbstractNamespace
      * Adds a policy to an index.
      *
      * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -54,9 +54,9 @@ class IsmNamespace extends AbstractNamespace
      * Updates the managed index policy to a new policy.
      *
      * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -80,9 +80,9 @@ class IsmNamespace extends AbstractNamespace
      * Deletes a policy.
      *
      * $params['policy_id']   = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -104,9 +104,9 @@ class IsmNamespace extends AbstractNamespace
      * Checks whether the policy exists.
      *
      * $params['policy_id']   = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -131,9 +131,9 @@ class IsmNamespace extends AbstractNamespace
      * Gets the currently applied policy on indices.
      *
      * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -156,9 +156,9 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Gets the policies.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -177,9 +177,9 @@ class IsmNamespace extends AbstractNamespace
      * Gets a policy.
      *
      * $params['policy_id']   = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -203,9 +203,9 @@ class IsmNamespace extends AbstractNamespace
      * $params['if_primary_term'] = (number) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']       = (integer) Only perform the operation if the document has this sequence number.
      * $params['policyID']        = (string)
-     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']           = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -229,9 +229,9 @@ class IsmNamespace extends AbstractNamespace
      * $params['policy_id']       = (string)  (Required)
      * $params['if_primary_term'] = (number) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']       = (integer) Only perform the operation if the document has this sequence number.
-     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']           = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -255,9 +255,9 @@ class IsmNamespace extends AbstractNamespace
      * Refresh search analyzers in real time.
      *
      * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`). (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -279,9 +279,9 @@ class IsmNamespace extends AbstractNamespace
      * Removes a policy from an index.
      *
      * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -303,9 +303,9 @@ class IsmNamespace extends AbstractNamespace
      * Retry the failed action for an index.
      *
      * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *

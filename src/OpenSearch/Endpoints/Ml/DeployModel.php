@@ -48,7 +48,7 @@ class DeployModel extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setModelId($model_id): DeployModel
+    public function setModelId($model_id): static
     {
         if (isset($model_id) !== true) {
             return $this;

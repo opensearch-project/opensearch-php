@@ -53,7 +53,7 @@ class GetDistinguishedName extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setClusterName($cluster_name): GetDistinguishedName
+    public function setClusterName($cluster_name): static
     {
         if (isset($cluster_name) !== true) {
             return $this;

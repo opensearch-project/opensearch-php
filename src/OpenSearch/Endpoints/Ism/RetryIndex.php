@@ -48,7 +48,7 @@ class RetryIndex extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): RetryIndex
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

@@ -52,7 +52,7 @@ class DeleteRole extends AbstractEndpoint
         return 'DELETE';
     }
 
-    public function setRole($role): DeleteRole
+    public function setRole($role): static
     {
         if (isset($role) !== true) {
             return $this;

@@ -64,7 +64,7 @@ class ThreadPool extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setThreadPoolPatterns($thread_pool_patterns): ThreadPool
+    public function setThreadPoolPatterns($thread_pool_patterns): static
     {
         if (isset($thread_pool_patterns) !== true) {
             return $this;

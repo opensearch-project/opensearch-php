@@ -52,7 +52,7 @@ class PatchTenant extends AbstractEndpoint
         return 'PATCH';
     }
 
-    public function setBody($body): PatchTenant
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -62,7 +62,7 @@ class PatchTenant extends AbstractEndpoint
         return $this;
     }
 
-    public function setTenant($tenant): PatchTenant
+    public function setTenant($tenant): static
     {
         if (isset($tenant) !== true) {
             return $this;

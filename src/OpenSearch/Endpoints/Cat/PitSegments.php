@@ -49,7 +49,7 @@ class PitSegments extends AbstractEndpoint
         return 'GET';
     }
 
-    public function setBody($body): PitSegments
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

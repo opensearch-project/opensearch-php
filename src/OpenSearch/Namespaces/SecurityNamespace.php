@@ -29,9 +29,9 @@ class SecurityNamespace extends AbstractNamespace
      *
      * $params['auth_type']   = (string) The type of current authentication request.
      * $params['verbose']     = (boolean) Indicates whether a verbose response should be returned.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -49,9 +49,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Returns the authorization token.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -69,9 +69,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Not supported for cache API.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -89,9 +89,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Check whether or not an upgrade can be performed and what resources can be updated.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -109,9 +109,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Helps cluster operator upgrade missing defaults and stale default definitions.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -132,9 +132,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Creates or replaces the allowlisted APIs. Accessible via Super Admin certificate or REST API permission.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -155,9 +155,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Creates or replaces the multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -179,9 +179,9 @@ class SecurityNamespace extends AbstractNamespace
      * Creates or replaces the specified user. Legacy API.
      *
      * $params['username']    = (string) The name of the user to be created. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -205,9 +205,9 @@ class SecurityNamespace extends AbstractNamespace
      * Delete a specified action group.
      *
      * $params['action_group'] = (string) The name of the action group to delete. (Required)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -229,9 +229,9 @@ class SecurityNamespace extends AbstractNamespace
      * Deletes all distinguished names in the specified cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
      * $params['cluster_name'] = (string) The cluster-name to delete from list of distinguished names. (Required)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -253,9 +253,9 @@ class SecurityNamespace extends AbstractNamespace
      * Delete the specified role.
      *
      * $params['role']        = (string) The name of the role to delete. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -277,9 +277,9 @@ class SecurityNamespace extends AbstractNamespace
      * Deletes the specified role mapping.
      *
      * $params['role']        = (string) The name of the role whose mapping needs to delete. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -301,9 +301,9 @@ class SecurityNamespace extends AbstractNamespace
      * Delete the specified tenant.
      *
      * $params['tenant']      = (string) The name of the tenant to delete. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -325,9 +325,9 @@ class SecurityNamespace extends AbstractNamespace
      * Delete the specified user.
      *
      * $params['username']    = (string) The name of the user to delete. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -349,9 +349,9 @@ class SecurityNamespace extends AbstractNamespace
      * Delete the specified user. Legacy API.
      *
      * $params['username']    = (string) The name of the user to delete. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -372,9 +372,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Flushes the Security plugin user, authentication, and authorization cache.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -392,9 +392,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Generates On-Behalf-Of token for the current user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -416,9 +416,9 @@ class SecurityNamespace extends AbstractNamespace
      * Generates authorization token for the given user.
      *
      * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -440,9 +440,9 @@ class SecurityNamespace extends AbstractNamespace
      * Generates authorization token for the given user. Legacy API.  Not Implemented.
      *
      * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -463,9 +463,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Returns account details for the current user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -484,9 +484,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieves one action group.
      *
      * $params['action_group'] = (string) The name of the action group to retrieve. (Required)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -509,9 +509,9 @@ class SecurityNamespace extends AbstractNamespace
      *
      * $params['cert_type']   = (string) The type of certificates (HTTP, TRANSPORT, ALL) to retrieve from all nodes.
      * $params['timeout']     = (string) The maximum duration, in seconds, to be spent to retrieve certificates from all nodes.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -529,9 +529,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the current list of allowed API accessible to normal user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -549,9 +549,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the audit configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -569,9 +569,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the cluster security certificates.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -589,9 +589,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Returns the current Security plugin configuration in JSON format.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -609,9 +609,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the current security-dashboards plugin configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -631,9 +631,9 @@ class SecurityNamespace extends AbstractNamespace
      *
      * $params['cluster_name'] = (string) The cluster-name to retrieve nodes DN setting for. (Required)
      * $params['show_all']     = (boolean) A boolean flag to include/exclude static nodes DN from final result.
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -657,9 +657,9 @@ class SecurityNamespace extends AbstractNamespace
      * $params['node_id']     = (string) The full-id of the node to retrieve certificates.
      * $params['cert_type']   = (string) The type of certificates (HTTP, TRANSPORT, ALL) to retrieve for a node.
      * $params['timeout']     = (string) The maximum duration, in seconds, to be spent to retrieve a node's certificates.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -680,9 +680,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Gets the evaluated REST API permissions for the currently logged in user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -701,9 +701,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieves one role.
      *
      * $params['role']        = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -725,9 +725,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieves one role mapping.
      *
      * $params['role']        = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -749,9 +749,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieves the SSL configuration information.
      *
      * $params['show_dn']     = (Array) A boolean flag to indicate whether all domain names should be returned.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -769,9 +769,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -790,9 +790,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieves one tenant.
      *
      * $params['tenant']      = (string) The name of the tenant to retrieve. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -814,9 +814,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieve one internal user.
      *
      * $params['username']    = (string) The name of the user to retrieve. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -838,9 +838,9 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieve one user. Legacy API.
      *
      * $params['username']    = (string) The name of the user to retrieve. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -861,9 +861,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieve all internal users. Legacy API.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -882,9 +882,9 @@ class SecurityNamespace extends AbstractNamespace
      * Checks to see if the Security plugin is up and running.
      *
      * $params['mode']        = (string) A flag to indicate whether service should consider security-plugin's status before returning health response. `strict` mode indicates service should check security plugin status.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -902,9 +902,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Migrates security configuration from v6 to v7.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -923,9 +923,9 @@ class SecurityNamespace extends AbstractNamespace
      * Updates individual attributes of an action group.
      *
      * $params['action_group'] = (string) The name of the action group to update. (Required)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -948,9 +948,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Updates the current list of allowed API accessible to normal user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -971,9 +971,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * A PATCH call is used to update specified fields in the audit configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -994,9 +994,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * A PATCH call is used to update the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1018,9 +1018,9 @@ class SecurityNamespace extends AbstractNamespace
      * Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
      *
      * $params['cluster_name'] = (string) The cluster-name to update nodesDn value. (Required)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1043,9 +1043,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Bulk update of distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1067,9 +1067,9 @@ class SecurityNamespace extends AbstractNamespace
      * Updates individual attributes of a role.
      *
      * $params['role']        = (string) The name of the role to update. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1093,9 +1093,9 @@ class SecurityNamespace extends AbstractNamespace
      * Updates individual attributes of a role mapping.
      *
      * $params['role']        = (string) The name of the role to update role-mapping for. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1119,9 +1119,9 @@ class SecurityNamespace extends AbstractNamespace
      * Add, delete, or modify a single tenant.
      *
      * $params['tenant']      = (string) The name of the tenant to update. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1145,9 +1145,9 @@ class SecurityNamespace extends AbstractNamespace
      * Updates individual attributes of an internal user.
      *
      * $params['username']    = (string) The name of the user to update. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1170,9 +1170,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Updates the current security-dashboards plugin configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1190,9 +1190,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Reload HTTP layer communication certificates.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1210,9 +1210,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Reload Transport layer communication certificates.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1230,9 +1230,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the tenant names if any exist. Only accessible to super admins or kibanaserver user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1250,9 +1250,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Updates the audit configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1273,9 +1273,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Adds or updates the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1297,9 +1297,9 @@ class SecurityNamespace extends AbstractNamespace
      * Adds or updates the specified distinguished names in the cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
      * $params['cluster_name'] = (string) The cluster-name to create/update nodesDn value for. (Required)
-     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']        = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1323,9 +1323,9 @@ class SecurityNamespace extends AbstractNamespace
      * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
      *
      * $params['accept_invalid'] = (boolean) A boolean flag to indicate whether invalid v6 configuration should be allowed.
-     * $params['pretty']         = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']          = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']         = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']          = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']         = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1343,9 +1343,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Gets the user identity related information for currently logged in user.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -1363,9 +1363,9 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Gets the user identity related information for currently logged in user. User needs to have access to this endpoint when authorization at REST layer is enabled.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *

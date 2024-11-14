@@ -28,9 +28,9 @@ class TransformsNamespace extends AbstractNamespace
      * Delete an index transform.
      *
      * $params['id']          = (string) Transform to delete
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -52,9 +52,9 @@ class TransformsNamespace extends AbstractNamespace
      * Returns the status and metadata of a transform job.
      *
      * $params['id']          = (string) Transform to explain
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -76,9 +76,9 @@ class TransformsNamespace extends AbstractNamespace
      * Returns the status and metadata of a transform job.
      *
      * $params['id']          = (string) Transform to access
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -99,9 +99,9 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Returns a preview of what a transformed index would look like.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -125,9 +125,9 @@ class TransformsNamespace extends AbstractNamespace
      * $params['id']              = (string) Transform to create/update
      * $params['if_primary_term'] = (number) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']       = (integer) Only perform the operation if the document has this sequence number.
-     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']           = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -155,9 +155,9 @@ class TransformsNamespace extends AbstractNamespace
      * $params['size']          = (number) Specifies the number of transforms to return. Default is `10`.
      * $params['sortDirection'] = (string) Specifies the direction to sort results in. Can be `ASC` or `DESC`. Default is `ASC`.
      * $params['sortField']     = (string) The field to sort results with.
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']         = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -176,9 +176,9 @@ class TransformsNamespace extends AbstractNamespace
      * Start transform.
      *
      * $params['id']          = (string) Transform to start
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
@@ -200,9 +200,9 @@ class TransformsNamespace extends AbstractNamespace
      * Stop transform.
      *
      * $params['id']          = (string) Transform to stop
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response.
-     * $params['human']       = (boolean) Whether to return human readable values for statistics.
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors.
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *

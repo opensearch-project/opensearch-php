@@ -43,7 +43,7 @@ class ConfigUpgradePerform extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): ConfigUpgradePerform
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

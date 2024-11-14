@@ -52,7 +52,7 @@ class ExistsPolicy extends AbstractEndpoint
         return 'HEAD';
     }
 
-    public function setPolicyId($policy_id): ExistsPolicy
+    public function setPolicyId($policy_id): static
     {
         if (isset($policy_id) !== true) {
             return $this;
