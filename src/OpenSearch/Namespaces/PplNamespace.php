@@ -42,13 +42,13 @@ class PplNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ppl\Explain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\Explain::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Collect metrics for the plugin within the interval.
      *
@@ -65,12 +65,12 @@ class PplNamespace extends AbstractNamespace
      */
     public function getStats(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ppl\GetStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\GetStats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * By a stats endpoint, you are able to collect metrics for the plugin within the interval.
      *
@@ -89,13 +89,13 @@ class PplNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ppl\PostStats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\PostStats::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Send a PPL query to the PPL plugin.
      *
@@ -114,11 +114,11 @@ class PplNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ppl\Query');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\Query::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

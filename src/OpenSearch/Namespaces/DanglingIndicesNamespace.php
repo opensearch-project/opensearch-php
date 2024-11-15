@@ -51,13 +51,13 @@ class DanglingIndicesNamespace extends AbstractNamespace
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DanglingIndices\DeleteDanglingIndex');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DanglingIndices\DeleteDanglingIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndexUuid($index_uuid);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Imports the specified dangling index.
      *
@@ -79,15 +79,15 @@ class DanglingIndicesNamespace extends AbstractNamespace
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DanglingIndices\ImportDanglingIndex');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DanglingIndices\ImportDanglingIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndexUuid($index_uuid);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Returns all dangling indices.
+     * Returns all dangling indexes.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -100,10 +100,10 @@ class DanglingIndicesNamespace extends AbstractNamespace
      */
     public function listDanglingIndices(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DanglingIndices\ListDanglingIndices');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DanglingIndices\ListDanglingIndices::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
 }

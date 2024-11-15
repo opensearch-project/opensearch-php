@@ -41,13 +41,13 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsynchronousSearch\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get partial responses from asynchronous search.
      *
@@ -65,13 +65,13 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsynchronousSearch\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Perform an asynchronous search.
      *
@@ -92,13 +92,13 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsynchronousSearch\Search');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Search::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Monitoring of asynchronous searches that are running, completed, and/or persisted.
      *
@@ -113,10 +113,10 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      */
     public function stats(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('AsynchronousSearch\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Stats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
 }

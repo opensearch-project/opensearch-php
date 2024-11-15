@@ -19,13 +19,12 @@ return <<<'EOD'
      */
     public function getDistinguishedNames(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['cluster_name'])) {
-            $endpoint = $endpointBuilder('Security\GetDistinguishedName');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDistinguishedName::class);
             $cluster_name = $this->extractArgument($params, 'cluster_name');
             $endpoint->setClusterName($cluster_name);
         } else {
-            $endpoint = $endpointBuilder('Security\GetDistinguishedNames');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetDistinguishedNames::class);
         }
         $endpoint->setParams($params);
 

@@ -29,9 +29,8 @@ return <<<'EOD'
                 'users' => $this->extractArgument($params, 'users'),
             ]);
         }
-
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateRoleMapping');
+        
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateRoleMapping::class);
         $endpoint->setParams($params);
         $endpoint->setRole($role);
         $endpoint->setBody($body);

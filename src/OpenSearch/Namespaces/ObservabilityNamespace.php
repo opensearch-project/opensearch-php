@@ -40,13 +40,13 @@ class ObservabilityNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\CreateObject');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\CreateObject::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes specific observability object specified by ID.
      *
@@ -64,13 +64,13 @@ class ObservabilityNamespace extends AbstractNamespace
     {
         $object_id = $this->extractArgument($params, 'object_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\DeleteObject');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\DeleteObject::class);
         $endpoint->setParams($params);
         $endpoint->setObjectId($object_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes specific observability objects specified by ID or a list of IDs.
      *
@@ -87,12 +87,12 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function deleteObjects(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\DeleteObjects');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\DeleteObjects::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves Local Stats of all observability objects.
      *
@@ -107,12 +107,12 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function getLocalstats(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\GetLocalstats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\GetLocalstats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves specific observability object specified by ID.
      *
@@ -130,13 +130,13 @@ class ObservabilityNamespace extends AbstractNamespace
     {
         $object_id = $this->extractArgument($params, 'object_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\GetObject');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\GetObject::class);
         $endpoint->setParams($params);
         $endpoint->setObjectId($object_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves list of all observability objects.
      *
@@ -151,12 +151,12 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function listObjects(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\ListObjects');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\ListObjects::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates an existing observability object.
      *
@@ -175,12 +175,12 @@ class ObservabilityNamespace extends AbstractNamespace
         $object_id = $this->extractArgument($params, 'object_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Observability\UpdateObject');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Observability\UpdateObject::class);
         $endpoint->setParams($params);
         $endpoint->setObjectId($object_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

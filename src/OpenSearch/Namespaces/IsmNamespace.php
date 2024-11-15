@@ -27,7 +27,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Adds a policy to an index.
      *
-     * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
+     * $params['index']       = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -42,18 +42,18 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\AddPolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\AddPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the managed index policy to a new policy.
      *
-     * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
+     * $params['index']       = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -68,14 +68,14 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\ChangePolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\ChangePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a policy.
      *
@@ -93,13 +93,13 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\DeletePolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\DeletePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Checks whether the policy exists.
      *
@@ -120,17 +120,17 @@ class IsmNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\ExistsPolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\ExistsPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Gets the currently applied policy on indices.
      *
-     * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
+     * $params['index']       = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -145,14 +145,14 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\ExplainPolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\ExplainPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the policies.
      *
@@ -167,12 +167,12 @@ class IsmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\GetPolicies');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\GetPolicies::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets a policy.
      *
@@ -190,13 +190,13 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\GetPolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\GetPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Gets the policies.
      *
@@ -216,13 +216,13 @@ class IsmNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\PutPolicies');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\PutPolicies::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a policy.
      *
@@ -243,18 +243,18 @@ class IsmNamespace extends AbstractNamespace
         $policy_id = $this->extractArgument($params, 'policy_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\PutPolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\PutPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Refresh search analyzers in real time.
      *
-     * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`). (Required)
+     * $params['index']       = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -268,17 +268,17 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\RefreshSearchAnalyzers');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\RefreshSearchAnalyzers::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Removes a policy from an index.
      *
-     * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
+     * $params['index']       = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -292,17 +292,17 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\RemovePolicy');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\RemovePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retry the failed action for an index.
      *
-     * $params['index']       = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`).
+     * $params['index']       = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -317,12 +317,12 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ism\RetryIndex');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\RetryIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

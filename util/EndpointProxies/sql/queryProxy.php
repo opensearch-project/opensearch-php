@@ -15,9 +15,7 @@ return <<<'EOD'
      */
     public function query(array $params): array
     {
-        $endpointBuilder = $this->endpoints;
-
-        $endpoint = $endpointBuilder('Sql\Query');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Query::class);
         $body = $this->extractArgument($params, 'body') ?? [];
         $endpoint->setBody(array_merge($body, array_filter([
             'query' => $this->extractArgument($params, 'query'),

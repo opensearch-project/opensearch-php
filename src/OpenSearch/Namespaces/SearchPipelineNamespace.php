@@ -43,13 +43,13 @@ class SearchPipelineNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchPipeline\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchPipeline\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves information about a specified search pipeline.
      *
@@ -68,13 +68,13 @@ class SearchPipelineNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchPipeline\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchPipeline\Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or replaces the specified search pipeline.
      *
@@ -95,12 +95,12 @@ class SearchPipelineNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchPipeline\Put');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchPipeline\Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

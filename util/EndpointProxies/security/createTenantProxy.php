@@ -26,8 +26,7 @@ return <<<'EOD'
             ];
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateTenant');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateTenant::class);
         $endpoint->setParams($params);
         $endpoint->setTenant($tenant);
         $endpoint->setBody($body);

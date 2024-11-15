@@ -12,8 +12,7 @@ public function refreshSearchAnalyzers(array $params = [])
 {
     $index = $this->extractArgument($params, 'index');
 
-    $endpointBuilder = $this->endpoints;
-    $endpoint = $endpointBuilder('Indices\RefreshSearchAnalyzers');
+    $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\RefreshSearchAnalyzers::class);
     $endpoint->setParams($params);
     $endpoint->setIndex($index);
 

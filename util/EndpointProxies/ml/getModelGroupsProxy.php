@@ -21,8 +21,7 @@ return <<<'EOD'
             ];
         }
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetModelGroups');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModelGroups::class);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);

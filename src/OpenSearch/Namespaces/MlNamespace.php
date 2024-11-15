@@ -41,13 +41,13 @@ class MlNamespace extends AbstractNamespace
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeleteAgent');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a model.
      *
@@ -65,13 +65,13 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeleteModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a model group.
      *
@@ -89,13 +89,13 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeleteModelGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a task.
      *
@@ -113,13 +113,13 @@ class MlNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeleteTask');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteTask::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves a model group.
      *
@@ -137,13 +137,13 @@ class MlNamespace extends AbstractNamespace
     {
         $model_group_id = $this->extractArgument($params, 'model_group_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetModelGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setModelGroupId($model_group_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Retrieves a task.
      *
@@ -161,13 +161,13 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetTask');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetTask::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Register an agent.
      *
@@ -184,13 +184,13 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\RegisterAgents');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterAgents::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Registers a model.
      *
@@ -207,13 +207,13 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\RegisterModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModel::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Registers a model group.
      *
@@ -230,13 +230,13 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\RegisterModelGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Searches for models.
      *
@@ -253,13 +253,13 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\SearchModels');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * $params['body']             = (string) The body of the request (Required)
      *
@@ -271,8 +271,7 @@ class MlNamespace extends AbstractNamespace
     public function createConnector(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\CreateConnector');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateConnector::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -289,8 +288,7 @@ class MlNamespace extends AbstractNamespace
     public function deleteConnector(array $params = []): array
     {
         $connectorId = $this->extractArgument($params, 'connector_id');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeleteConnector');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteConnector::class);
         $endpoint->setParams($params);
         $endpoint->setConnectorId($connectorId);
 
@@ -309,8 +307,7 @@ class MlNamespace extends AbstractNamespace
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeployModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeployModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($modelId);
         if ($body) {
@@ -330,8 +327,7 @@ class MlNamespace extends AbstractNamespace
     public function getConnector(array $params = []): array
     {
         $id = $this->extractArgument($params, 'id');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetConnector');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetConnector::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -356,8 +352,7 @@ class MlNamespace extends AbstractNamespace
             ];
         }
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetConnectors');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetConnectors::class);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -381,8 +376,7 @@ class MlNamespace extends AbstractNamespace
             ];
         }
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetModelGroups');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModelGroups::class);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -398,8 +392,7 @@ class MlNamespace extends AbstractNamespace
     public function getModel(array $params = []): array
     {
         $id = $this->extractArgument($params, 'id');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\GetModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -435,8 +428,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\Predict');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\Predict::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
@@ -456,8 +448,7 @@ class MlNamespace extends AbstractNamespace
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\UndeployModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UndeployModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($modelId);
         if ($body) {
@@ -479,8 +470,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\UpdateModelGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
         $endpoint->setId($id);

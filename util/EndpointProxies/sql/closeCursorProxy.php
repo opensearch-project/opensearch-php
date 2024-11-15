@@ -11,9 +11,7 @@ return <<<'EOD'
      */
     public function closeCursor(array $params): array
     {
-        $endpointBuilder = $this->endpoints;
-
-        $endpoint = $endpointBuilder('Sql\Close');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Close::class);
         $endpoint->setBody(array_filter([
             'cursor' => $this->extractArgument($params, 'cursor'),
         ]));

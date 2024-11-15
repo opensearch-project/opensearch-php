@@ -53,13 +53,13 @@ class NodesNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Nodes\HotThreads');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\HotThreads::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about nodes in the cluster.
      *
@@ -83,8 +83,7 @@ class NodesNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Nodes\Info');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\Info::class);
         $endpoint->setParams($params);
         $endpoint->setNodeIdOrMetric($node_id_or_metric);
         $endpoint->setMetric($metric);
@@ -92,6 +91,7 @@ class NodesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Reloads secure settings.
      *
@@ -112,20 +112,20 @@ class NodesNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Nodes\ReloadSecureSettings');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\ReloadSecureSettings::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns statistical information about nodes in the cluster.
      *
      * $params['node_id']                    = (array) Comma-separated list of node IDs or names used to limit returned information.
      * $params['metric']                     = (array) Limit the information returned to the specified metrics
-     * $params['index_metric']               = (array) Limit the information returned for indices metric to the specific index metrics. It can be used only if indices (or all) metric is specified.
+     * $params['index_metric']               = (array) Limit the information returned for indexes metric to the specific index metrics. It can be used only if indexes (or all) metric is specified.
      * $params['completion_fields']          = (any) Comma-separated list or wildcard expressions of fields to include in fielddata and suggest statistics.
      * $params['fielddata_fields']           = (any) Comma-separated list or wildcard expressions of fields to include in fielddata statistics.
      * $params['fields']                     = (any) Comma-separated list or wildcard expressions of fields to include in the statistics.
@@ -149,8 +149,7 @@ class NodesNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $index_metric = $this->extractArgument($params, 'index_metric');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Nodes\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setMetric($metric);
@@ -158,6 +157,7 @@ class NodesNamespace extends AbstractNamespace
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns low-level information about REST actions usage on nodes.
      *
@@ -178,12 +178,12 @@ class NodesNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Nodes\Usage');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\Usage::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setMetric($metric);
 
         return $this->performRequest($endpoint);
     }
+
 }

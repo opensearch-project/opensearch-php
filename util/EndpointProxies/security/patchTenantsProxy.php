@@ -22,13 +22,12 @@ return <<<'EOD'
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['tenant'])) {
-            $endpoint = $endpointBuilder('Security\PatchTenant');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchTenant::class);
             $tenant = $this->extractArgument($params, 'tenant');
             $endpoint->setTenant($tenant);
         } else { 
-            $endpoint = $endpointBuilder('Security\PatchTenants');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchTenants::class);
         }
 
         $endpoint->setParams($params);

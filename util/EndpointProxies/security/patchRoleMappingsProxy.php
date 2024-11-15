@@ -22,13 +22,12 @@ return <<<'EOD'
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['role'])) {
-            $endpoint = $endpointBuilder('Security\PatchRoleMapping');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoleMapping::class);
             $role = $this->extractArgument($params, 'role');
             $endpoint->setRole($role);
         } else { 
-            $endpoint = $endpointBuilder('Security\PatchRoleMappings');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchRoleMappings::class);
         }
         $endpoint->setParams($params);
         $endpoint->setBody($body);

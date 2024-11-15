@@ -23,13 +23,12 @@ return <<<'EOD'
             $body = $this->extractArgument($params, 'ops') ?? [];
         }
 
-        $endpointBuilder = $this->endpoints;
         if (isset($params['action_group'])) {
-            $endpoint = $endpointBuilder('Security\PatchActionGroup');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchActionGroup::class);
             $action_group = $this->extractArgument($params, 'action_group');
             $endpoint->setActionGroup($action_group);
         } else { 
-            $endpoint = $endpointBuilder('Security\PatchActionGroups');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\PatchActionGroups::class);
         }
         $endpoint->setParams($params);
         $endpoint->setBody($body);

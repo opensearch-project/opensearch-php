@@ -25,7 +25,7 @@ use OpenSearch\Namespaces\AbstractNamespace;
 class WlmNamespace extends AbstractNamespace
 {
     /**
-     * Creates the specified query group.
+     * Creates a new query group and sets the resource limits for the new query group.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -40,17 +40,17 @@ class WlmNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Wlm\CreateQueryGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\CreateQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Deletes the specified QueryGroup.
+     * Deletes the specified query group.
      *
-     * $params['name']        = (string) QueryGroup name.
+     * $params['name']        = (string) The name of the query group.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -64,17 +64,17 @@ class WlmNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Wlm\DeleteQueryGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\DeleteQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Gets the specified QueryGroup or get all if no name is provided.
+     * Retrieves the specified query group. If no query group is specified, all query groups in the cluster are retrieved.
      *
-     * $params['name']        = (string) QueryGroup name.
+     * $params['name']        = (string) The name of the query group.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -88,17 +88,17 @@ class WlmNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Wlm\GetQueryGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\GetQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates the specified query group.
      *
-     * $params['name']        = (string) QueryGroup name.
+     * $params['name']        = (string) The name of the query group.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -113,12 +113,12 @@ class WlmNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Wlm\UpdateQueryGroup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\UpdateQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

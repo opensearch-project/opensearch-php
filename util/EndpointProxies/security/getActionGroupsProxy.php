@@ -17,13 +17,12 @@ return <<<'EOD'
      */
     public function getActionGroups(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
         if (isset($params['action_group'])) {
-            $endpoint = $endpointBuilder('Security\GetActionGroup');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetActionGroup::class);
             $action_group = $this->extractArgument($params, 'action_group');
             $endpoint->setActionGroup($action_group);
         } else {
-            $endpoint = $endpointBuilder('Security\GetActionGroups');
+            $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetActionGroups::class);
         }
         $endpoint->setParams($params);
 

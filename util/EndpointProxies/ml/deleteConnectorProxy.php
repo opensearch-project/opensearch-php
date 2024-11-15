@@ -13,8 +13,7 @@ return <<<'EOD'
     public function deleteConnector(array $params = []): array
     {
         $connectorId = $this->extractArgument($params, 'connector_id');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\DeleteConnector');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteConnector::class);
         $endpoint->setParams($params);
         $endpoint->setConnectorId($connectorId);
 

@@ -24,9 +24,12 @@ namespace OpenSearch;
 use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use Aws\Credentials\CredentialsInterface;
+use GuzzleHttp\Ring\Client\CurlHandler;
+use GuzzleHttp\Ring\Client\CurlMultiHandler;
+use GuzzleHttp\Ring\Client\Middleware;
+use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\Common\Exceptions\InvalidArgumentException;
 use OpenSearch\Common\Exceptions\RuntimeException;
-use OpenSearch\Common\Exceptions\AuthenticationConfigException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
@@ -38,9 +41,6 @@ use OpenSearch\Handlers\SigV4Handler;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
-use GuzzleHttp\Ring\Client\CurlHandler;
-use GuzzleHttp\Ring\Client\CurlMultiHandler;
-use GuzzleHttp\Ring\Client\Middleware;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionClass;
@@ -54,10 +54,7 @@ class ClientBuilder
      */
     private $transport;
 
-    /**
-     * @var callable|null
-     */
-    private $endpoint;
+    private ?EndpointFactoryInterface $endpointFactory = null;
 
     /**
      * @var NamespaceBuilderInterface[]
@@ -184,10 +181,13 @@ class ClientBuilder
 
     /**
      * Can supply second param to Client::__construct() when invoking manually or with dependency injection
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.
      */
     public function getEndpoint(): callable
     {
-        return $this->endpoint;
+        @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.', E_USER_DEPRECATED);
+        return fn ($c) => $this->endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
     }
 
     /**
@@ -329,11 +329,20 @@ class ClientBuilder
      * Set the endpoint
      *
      * @param callable $endpoint
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.
      */
     public function setEndpoint(callable $endpoint): ClientBuilder
     {
-        $this->endpoint = $endpoint;
+        @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.', E_USER_DEPRECATED);
+        $this->endpointFactory = new LegacyEndpointFactory($endpoint);
 
+        return $this;
+    }
+
+    public function setEndpointFactory(EndpointFactoryInterface $endpointFactory): ClientBuilder
+    {
+        $this->endpointFactory = $endpointFactory;
         return $this;
     }
 
@@ -671,21 +680,8 @@ class ClientBuilder
 
         $this->buildTransport();
 
-        if (is_null($this->endpoint)) {
-            $serializer = $this->serializer;
-
-            $this->endpoint = function ($class) use ($serializer) {
-                $fullPath = '\\OpenSearch\\Endpoints\\' . $class;
-
-                $reflection = new ReflectionClass($fullPath);
-                $constructor = $reflection->getConstructor();
-
-                if ($constructor && $constructor->getParameters()) {
-                    return new $fullPath($serializer);
-                } else {
-                    return new $fullPath();
-                }
-            };
+        if (is_null($this->endpointFactory)) {
+            $this->endpointFactory = new EndpointFactory($this->serializer);
         }
 
         $registeredNamespaces = [];
@@ -696,12 +692,12 @@ class ClientBuilder
             $registeredNamespaces[$builder->getName()] = $builder->getObject($this->transport, $this->serializer);
         }
 
-        return $this->instantiate($this->transport, $this->endpoint, $registeredNamespaces);
+        return $this->instantiate($this->transport, $this->endpointFactory, $registeredNamespaces);
     }
 
-    protected function instantiate(Transport $transport, callable $endpoint, array $registeredNamespaces): Client
+    protected function instantiate(Transport $transport, EndpointFactoryInterface $endpointFactory, array $registeredNamespaces): Client
     {
-        return new Client($transport, $endpoint, $registeredNamespaces);
+        return new Client($transport, $endpointFactory, $registeredNamespaces);
     }
 
     private function buildLoggers(): void

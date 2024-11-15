@@ -21,7 +21,9 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\LegacyEndpointFactory;
 use OpenSearch\Transport;
 
 abstract class AbstractNamespace
@@ -31,15 +33,30 @@ abstract class AbstractNamespace
      */
     protected $transport;
 
+    protected EndpointFactoryInterface $endpointFactory;
+
     /**
      * @var callable
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use $endpointFactory property instead.
      */
     protected $endpoints;
 
-    public function __construct(Transport $transport, callable $endpoints)
+    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory)
     {
         $this->transport = $transport;
+        if (is_callable($endpointFactory)) {
+            @trigger_error('Passing a callable as $endpointFactory param to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
+            $endpoints = $endpointFactory;
+            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
+        } else {
+            $endpoints = function ($c) use ($endpointFactory) {
+                @trigger_error('The $endpoints property is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+                return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
+            };
+        }
         $this->endpoints = $endpoints;
+        $this->endpointFactory = $endpointFactory;
     }
 
     /**

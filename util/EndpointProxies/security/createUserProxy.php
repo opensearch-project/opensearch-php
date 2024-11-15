@@ -32,8 +32,7 @@ return <<<'EOD'
             ]);
         }
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Security\CreateUser');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\CreateUser::class);
         $endpoint->setParams($params);
         $endpoint->setUsername($username);
         $endpoint->setBody($body);

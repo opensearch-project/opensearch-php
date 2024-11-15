@@ -45,13 +45,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Create');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Create::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Delete a workflow.
      *
@@ -70,13 +70,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deprovision workflow's resources when you no longer need it.
      *
@@ -95,13 +95,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Deprovision');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Deprovision::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get a workflow.
      *
@@ -119,13 +119,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Get::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get the provisioning deployment status until it is complete.
      *
@@ -144,13 +144,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\GetStatus');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\GetStatus::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Get a list of workflow steps.
      *
@@ -166,12 +166,12 @@ class FlowFrameworkNamespace extends AbstractNamespace
      */
     public function getSteps(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\GetSteps');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\GetSteps::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provisioning a workflow. This API is also executed when the Create or Update Workflow API is called with the provision parameter set to true.
      *
@@ -190,14 +190,14 @@ class FlowFrameworkNamespace extends AbstractNamespace
         $workflow_id = $this->extractArgument($params, 'workflow_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Provision');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Provision::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Search for workflows by using a query matching a field.
      *
@@ -214,13 +214,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Search');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Search::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Search for workflows by using a query matching a field.
      *
@@ -237,13 +237,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\SearchState');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\SearchState::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Update a workflow. You can only update a complete workflow if it has not yet been provisioned.
      *
@@ -267,12 +267,12 @@ class FlowFrameworkNamespace extends AbstractNamespace
         $workflow_id = $this->extractArgument($params, 'workflow_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FlowFramework\Update');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Update::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
 }

@@ -38,12 +38,12 @@ class ListNamespace extends AbstractNamespace
      */
     public function help(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('List\Help');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\List\Help::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns paginated information about indexes including number of primaries and replicas, document counts, disk size.
      *
@@ -78,13 +78,13 @@ class ListNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('List\Indices');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\List\Indices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns paginated details of shard allocation on nodes.
      *
@@ -115,11 +115,11 @@ class ListNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('List\Shards');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\List\Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
 }

@@ -38,10 +38,10 @@ class InsightsNamespace extends AbstractNamespace
      */
     public function topQueries(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Insights\TopQueries');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Insights\TopQueries::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
 }

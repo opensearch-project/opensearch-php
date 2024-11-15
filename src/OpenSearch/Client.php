@@ -57,6 +57,7 @@ use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
 use OpenSearch\Namespaces\WlmNamespace;
+use OpenSearch\Traits\DeprecatedPropertyTrait;
 
 /**
  * Class Client
@@ -77,8 +78,12 @@ class Client
      */
     protected $params;
 
+    private EndpointFactoryInterface $endpointFactory;
+
     /**
      * @var callable
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0.
      */
     protected $endpoints;
 
@@ -246,45 +251,56 @@ class Client
     /**
      * Client constructor
      *
-     * @param Transport                   $transport
-     * @param callable                    $endpoint
+     * @param Transport $transport
+     * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
-    public function __construct(Transport $transport, callable $endpoint, array $registeredNamespaces)
+    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
     {
         $this->transport = $transport;
-        $this->endpoints = $endpoint;
-        $this->asyncSearch = new AsyncSearchNamespace($transport, $endpoint);
-        $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $endpoint);
-        $this->cat = new CatNamespace($transport, $endpoint);
-        $this->cluster = new ClusterNamespace($transport, $endpoint);
-        $this->danglingIndices = new DanglingIndicesNamespace($transport, $endpoint);
-        $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $endpoint);
-        $this->flowFramework = new FlowFrameworkNamespace($transport, $endpoint);
-        $this->indices = new IndicesNamespace($transport, $endpoint);
-        $this->ingest = new IngestNamespace($transport, $endpoint);
-        $this->insights = new InsightsNamespace($transport, $endpoint);
-        $this->ism = new IsmNamespace($transport, $endpoint);
-        $this->knn = new KnnNamespace($transport, $endpoint);
-        $this->list = new ListNamespace($transport, $endpoint);
-        $this->ml = new MlNamespace($transport, $endpoint);
-        $this->monitoring = new MonitoringNamespace($transport, $endpoint);
-        $this->nodes = new NodesNamespace($transport, $endpoint);
-        $this->notifications = new NotificationsNamespace($transport, $endpoint);
-        $this->observability = new ObservabilityNamespace($transport, $endpoint);
-        $this->ppl = new PplNamespace($transport, $endpoint);
-        $this->query = new QueryNamespace($transport, $endpoint);
-        $this->remoteStore = new RemoteStoreNamespace($transport, $endpoint);
-        $this->rollups = new RollupsNamespace($transport, $endpoint);
-        $this->searchPipeline = new SearchPipelineNamespace($transport, $endpoint);
-        $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $endpoint);
-        $this->security = new SecurityNamespace($transport, $endpoint);
-        $this->snapshot = new SnapshotNamespace($transport, $endpoint);
-        $this->sql = new SqlNamespace($transport, $endpoint);
-        $this->ssl = new SslNamespace($transport, $endpoint);
-        $this->tasks = new TasksNamespace($transport, $endpoint);
-        $this->transforms = new TransformsNamespace($transport, $endpoint);
-        $this->wlm = new WlmNamespace($transport, $endpoint);
+        if (is_callable($endpointFactory)) {
+            @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
+            $endpoints = $endpointFactory;
+            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
+        } else {
+            $endpoints = function ($c) use ($endpointFactory) {
+                @trigger_error('The $endpoints property is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+                return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
+            };
+        }
+        $this->endpoints = $endpoints;
+        $this->endpointFactory = $endpointFactory;
+        $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
+        $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
+        $this->cat = new CatNamespace($transport, $this->endpointFactory);
+        $this->cluster = new ClusterNamespace($transport, $this->endpointFactory);
+        $this->danglingIndices = new DanglingIndicesNamespace($transport, $this->endpointFactory);
+        $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
+        $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
+        $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
+        $this->ingest = new IngestNamespace($transport, $this->endpointFactory);
+        $this->insights = new InsightsNamespace($transport, $this->endpointFactory);
+        $this->ism = new IsmNamespace($transport, $this->endpointFactory);
+        $this->knn = new KnnNamespace($transport, $this->endpointFactory);
+        $this->list = new ListNamespace($transport, $this->endpointFactory);
+        $this->ml = new MlNamespace($transport, $this->endpointFactory);
+        $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
+        $this->nodes = new NodesNamespace($transport, $this->endpointFactory);
+        $this->notifications = new NotificationsNamespace($transport, $this->endpointFactory);
+        $this->observability = new ObservabilityNamespace($transport, $this->endpointFactory);
+        $this->ppl = new PplNamespace($transport, $this->endpointFactory);
+        $this->query = new QueryNamespace($transport, $this->endpointFactory);
+        $this->remoteStore = new RemoteStoreNamespace($transport, $this->endpointFactory);
+        $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
+        $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
+        $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
+        $this->security = new SecurityNamespace($transport, $this->endpointFactory);
+        $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
+        $this->sql = new SqlNamespace($transport, $this->endpointFactory);
+        $this->ssl = new SslNamespace($transport, $this->endpointFactory);
+        $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
+        $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);
+        $this->wlm = new WlmNamespace($transport, $this->endpointFactory);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -317,14 +333,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Bulk');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Bulk::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to perform multiple index/update/delete operations using request response streaming.
      *
@@ -355,14 +371,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('BulkStream');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\BulkStream::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Explicitly clears the search context for a scroll.
      *
@@ -372,7 +388,7 @@ class Client
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']        = (array) Comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter
+     * $params['body']        = (array) Comma-separated list of scroll IDs to clear if none was specified using the `scroll_id` parameter
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -382,25 +398,25 @@ class Client
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ClearScroll');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ClearScroll::class);
         $endpoint->setParams($params);
         $endpoint->setScrollId($scroll_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns number of documents matching a query.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (`*`). To search all data streams and indices, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices.
+     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['analyze_wildcard']   = (boolean) If `true`, wildcard and prefix queries are analyzed.This parameter can only be used when the `q` query string parameter is specified. (Default = false)
      * $params['analyzer']           = (string) Analyzer to use for the query string.This parameter can only be used when the `q` query string parameter is specified.
      * $params['default_operator']   = (enum) The default operator for query string query: `AND` or `OR`.This parameter can only be used when the `q` query string parameter is specified. (Options = and,or)
      * $params['df']                 = (string) Field to use as default where no field prefix is given in the query string.This parameter can only be used when the `q` query string parameter is specified.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
-     * $params['ignore_throttled']   = (boolean) If `true`, concrete, expanded or aliased indices are ignored when frozen.
+     * $params['ignore_throttled']   = (boolean) If `true`, concrete, expanded or aliased indexes are ignored when frozen.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['lenient']            = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
      * $params['min_score']          = (number) Sets the minimum `_score` value that documents must have to be included in the result.
@@ -423,20 +439,20 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Count');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Count::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates point in time context.
      *
-     * $params['index']                      = (array) Comma-separated list of indices; use `_all` or empty string to perform the operation on all indices. (Required)
+     * $params['index']                      = (array) Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
      * $params['allow_partial_pit_creation'] = (boolean) Allow if point in time can be created with partial failures.
-     * $params['expand_wildcards']           = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * $params['expand_wildcards']           = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['keep_alive']                 = (string) Specify the keep alive for point in time.
      * $params['preference']                 = (string) Specify the node or shard the operation should be performed on. (Default = random)
      * $params['routing']                    = (any) Comma-separated list of specific routing values.
@@ -453,13 +469,13 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('CreatePit');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\CreatePit::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Removes a document from the index.
      *
@@ -487,14 +503,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes all active point in time searches.
      *
@@ -509,20 +525,20 @@ class Client
      */
     public function deleteAllPits(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteAllPits');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteAllPits::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes documents matching the provided query.
      *
-     * $params['index']                  = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (`*`). To search all data streams or indices, omit this parameter or use `*` or `_all`. (Required)
+     * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
      * $params['_source']                = (array) True or false to return the _source field or not, or a list of fields to return.
      * $params['_source_excludes']       = (array) List of fields to exclude from the returned _source field.
      * $params['_source_includes']       = (array) List of fields to extract and return from the _source field.
-     * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['analyze_wildcard']       = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']               = (string) Analyzer to use for the query string.
      * $params['conflicts']              = (enum) What to do if delete by query hits version conflicts: `abort` or `proceed`. (Options = abort,proceed)
@@ -547,7 +563,7 @@ class Client
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                  = (array) Specific `tag` of the request for logging and statistical purposes.
-     * $params['terminate_after']        = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+     * $params['terminate_after']        = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indexes across multiple data tiers.
      * $params['timeout']                = (string) Period each deletion request waits for active shards.
      * $params['version']                = (boolean) If `true`, returns the document version as part of a hit.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
@@ -567,14 +583,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteByQuery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the number of requests per second for a particular Delete By Query operation.
      *
@@ -593,13 +609,13 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteByQueryRethrottle');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteByQueryRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes one or more point in time searches based on the IDs passed.
      *
@@ -617,13 +633,13 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeletePit');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeletePit::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Deletes a script.
      *
@@ -644,18 +660,18 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('DeleteScript');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information about whether a document exists in an index.
      *
      * $params['id']               = (string) Identifier of the document. (Required)
-     * $params['index']            = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`). (Required)
+     * $params['index']            = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
      * $params['_source']          = (any) `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
@@ -683,19 +699,19 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Exists');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Exists::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about whether a document source exists in an index.
      *
      * $params['id']               = (string) Identifier of the document. (Required)
-     * $params['index']            = (string) Comma-separated list of data streams, indices, and aliases. Supports wildcards (`*`). (Required)
+     * $params['index']            = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
      * $params['_source']          = (any) `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
@@ -722,14 +738,14 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ExistsSource');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ExistsSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Returns information about why a specific matches (or doesn't match) a query.
      *
@@ -763,8 +779,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Explain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -772,14 +787,15 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Returns the information about the capabilities of fields among multiple indices.
+     * Returns the information about the capabilities of fields among multiple indexes.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indices, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indices, omit this parameter or use * or _all.
-     * $params['allow_no_indices']   = (boolean) If false, the request returns an error if any wildcard expression, index alias,or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a requesttargeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.
+     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indexes, omit this parameter or use * or _all.
+     * $params['allow_no_indices']   = (boolean) If false, the request returns an error if any wildcard expression, index alias,or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a requesttargeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
      * $params['fields']             = (any) Comma-separated list of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.
-     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indices are not included in the response.
+     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
      * $params['include_unmapped']   = (boolean) If true, unmapped fields are included in the response. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -796,14 +812,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('FieldCaps');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FieldCaps::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a document.
      *
@@ -833,14 +849,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Lists all active point in time searches.
      *
@@ -855,12 +871,12 @@ class Client
      */
     public function getAllPits(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetAllPits');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetAllPits::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a script.
      *
@@ -880,13 +896,13 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetScript');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns all script contexts.
      *
@@ -901,12 +917,12 @@ class Client
      */
     public function getScriptContext(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetScriptContext');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScriptContext::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns available script types, languages and contexts.
      *
@@ -921,12 +937,12 @@ class Client
      */
     public function getScriptLanguages(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetScriptLanguages');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScriptLanguages::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the source of a document.
      *
@@ -955,14 +971,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('GetSource');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Creates or updates a document in an index.
      *
@@ -995,8 +1011,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Index');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
@@ -1004,6 +1019,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns basic information about the cluster.
      *
@@ -1018,12 +1034,12 @@ class Client
      */
     public function info(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Info');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Info::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to get multiple documents in one request.
      *
@@ -1051,18 +1067,18 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Mget');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Mget::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to execute several search operations in one request.
      *
-     * $params['index']                         = (array) Comma-separated list of data streams, indices, and index aliases to search.
+     * $params['index']                         = (array) Comma-separated list of data streams, indexes, and index aliases to search.
      * $params['ccs_minimize_roundtrips']       = (boolean) If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches']       = (integer) Maximum number of concurrent searches the multi search API can execute.
      * $params['max_concurrent_shard_requests'] = (integer) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
@@ -1085,18 +1101,18 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Msearch');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Msearch::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to execute several search template operations in one request.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (`*`). To search all data streams and indices, omit this parameter or use `*`.
+     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*`.
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches'] = (integer) Maximum number of concurrent searches the API can run.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, the response returns `hits.total` as an integer.If `false`, it returns `hits.total` as an object. (Default = false)
@@ -1117,14 +1133,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('MsearchTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\MsearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns multiple termvectors in one request.
      *
@@ -1156,14 +1172,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('MTermVectors');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\MTermVectors::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns whether the cluster is running.
      *
@@ -1181,12 +1197,12 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ping');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ping::class);
         $endpoint->setParams($params);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
+
     /**
      * Creates or updates a script.
      *
@@ -1211,8 +1227,7 @@ class Client
         $context = $this->extractArgument($params, 'context');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('PutScript');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\PutScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setContext($context);
@@ -1220,13 +1235,14 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indices, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indices in a cluster, omit this parameter or use `_all` or `*`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices. This behavior applies even if the request targets other open indices. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
-     * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indices are not included in the response.
+     * $params['index']              = (array) Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
      * $params['search_type']        = (enum) Search operation type (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1243,14 +1259,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('RankEval');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RankEval::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to copy documents from one index to another, optionally filtering the sourcedocuments by a query, changing the destination index settings, or fetching thedocuments from a remote cluster.
      *
@@ -1276,13 +1292,13 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Reindex');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Reindex::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the number of requests per second for a particular Reindex operation.
      *
@@ -1301,13 +1317,13 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ReindexRethrottle');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ReindexRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to use the Mustache language to pre-render a search definition.
      *
@@ -1327,14 +1343,14 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('RenderSearchTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RenderSearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows an arbitrary script to be executed and a result to be returned.
      *
@@ -1352,13 +1368,13 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('ScriptsPainlessExecute');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ScriptsPainlessExecute::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to retrieve a large numbers of results from a single search request.
      *
@@ -1380,22 +1396,22 @@ class Client
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Scroll');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Scroll::class);
         $endpoint->setParams($params);
         $endpoint->setScrollId($scroll_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns results matching a query.
      *
-     * $params['index']                         = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (`*`). To search all data streams and indices, omit this parameter or use `*` or `_all`.
+     * $params['index']                         = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['_source']                       = (any) Indicates which source fields are returned for matching documents.These fields are returned in the `hits._source` property of the search response.Valid values are:`true` to return the entire document source;`false` to not return the document source;`<string>` to return the source fields that are specified as a comma-separated list (supports wildcard (`*`) patterns).
      * $params['_source_excludes']              = (any) A comma-separated list of source fields to exclude from the response.You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
      * $params['_source_includes']              = (any) A comma-separated list of source fields to include in the response.If this parameter is specified, only these source fields are returned.You can exclude fields from this subset using the `_source_excludes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
-     * $params['allow_no_indices']              = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * $params['allow_no_indices']              = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['allow_partial_search_results']  = (boolean) If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results. (Default = true)
      * $params['analyze_wildcard']              = (boolean) If true, wildcard and prefix queries are analyzed.This parameter can only be used when the q query string parameter is specified. (Default = false)
      * $params['analyzer']                      = (string) Analyzer to use for the query string.This parameter can only be used when the q query string parameter is specified.
@@ -1408,7 +1424,7 @@ class Client
      * $params['expand_wildcards']              = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
      * $params['explain']                       = (boolean) If `true`, returns detailed information about score computation as part of a hit.
      * $params['from']                          = (integer) Starting document offset.Needs to be non-negative.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 0)
-     * $params['ignore_throttled']              = (boolean) If `true`, concrete, expanded or aliased indices will be ignored when frozen.
+     * $params['ignore_throttled']              = (boolean) If `true`, concrete, expanded or aliased indexes will be ignored when frozen.
      * $params['ignore_unavailable']            = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['include_named_queries_score']   = (boolean) Indicates whether hit.matched_queries should be rendered as a map that includes the name of the matched query associated with its score (true) or as an array containing the name of the matched queries (false) (Default = false)
      * $params['lenient']                       = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.This parameter can only be used when the `q` query string parameter is specified.
@@ -1432,7 +1448,7 @@ class Client
      * $params['suggest_mode']                  = (enum) Specifies the suggest mode.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified. (Options = always,missing,popular)
      * $params['suggest_size']                  = (integer) Number of suggestions to return.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
      * $params['suggest_text']                  = (string) The source text for which the suggestions should be returned.This parameter can only be used when the `suggest_field` and `suggest_text` query string parameters are specified.
-     * $params['terminate_after']               = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.If set to `0` (default), the query does not terminate early.
+     * $params['terminate_after']               = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indexes across multiple data tiers.If set to `0` (default), the query does not terminate early.
      * $params['timeout']                       = (string) Specifies the period of time to wait for a response from each shard.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['track_scores']                  = (boolean) If `true`, calculate and return document scores, even if the scores are not used for sorting.
      * $params['track_total_hits']              = (any) Number of hits matching the query to count accurately.If `true`, the exact number of hits is returned at the cost of some performance.If `false`, the response does not include the total number of hits matching the query.
@@ -1453,19 +1469,19 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Search');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Search::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
-     * Returns information about the indices and shards that a search request would be executed against.
+     * Returns information about the indexes and shards that a search request would be executed against.
      *
-     * $params['index']              = (array) Returns the indices and shards that a search request would be executed against.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * $params['index']              = (array) Returns the indexes and shards that a search request would be executed against.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
@@ -1484,22 +1500,22 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchShards');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchShards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Allows to use the Mustache language to pre-render a search definition.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (*).
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (*).
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['explain']                 = (boolean) If `true`, the response includes additional details about score computation as part of a hit.
-     * $params['ignore_throttled']        = (boolean) If `true`, specified concrete, expanded, or aliased indices are not included in the response when throttled.
+     * $params['ignore_throttled']        = (boolean) If `true`, specified concrete, expanded, or aliased indexes are not included in the response when throttled.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['preference']              = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['profile']                 = (boolean) If `true`, the query execution is profiled.
@@ -1523,14 +1539,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('SearchTemplate');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns information and statistics about terms in the fields of a particular document.
      *
@@ -1563,8 +1579,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('TermVectors');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\TermVectors::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
@@ -1572,6 +1587,7 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Updates a document with a script or partial document.
      *
@@ -1605,8 +1621,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Update');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Update::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -1614,14 +1629,15 @@ class Client
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Performs an update on every document in the index without changing the source,for example to pick up a mapping change.
      *
-     * $params['index']                  = (array) Comma-separated list of data streams, indices, and aliases to search. Supports wildcards (`*`). To search all data streams or indices, omit this parameter or use `*` or `_all`. (Required)
+     * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
      * $params['_source']                = (array) True or false to return the _source field or not, or a list of fields to return.
      * $params['_source_excludes']       = (array) List of fields to exclude from the returned _source field.
      * $params['_source_includes']       = (array) List of fields to extract and return from the _source field.
-     * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indices.This behavior applies even if the request targets other open indices.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['analyze_wildcard']       = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']               = (string) Analyzer to use for the query string.
      * $params['conflicts']              = (enum) What to do if update by query hits version conflicts: `abort` or `proceed`. (Options = abort,proceed)
@@ -1647,7 +1663,7 @@ class Client
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                  = (array) Specific `tag` of the request for logging and statistical purposes.
-     * $params['terminate_after']        = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indices across multiple data tiers.
+     * $params['terminate_after']        = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.Use with caution.OpenSearch applies this parameter to each shard handling the request.When possible, let OpenSearch perform early termination automatically.Avoid specifying this parameter for requests that target data streams with backing indexes across multiple data tiers.
      * $params['timeout']                = (string) Period each update request waits for the following operations: dynamic mapping updates, waiting for active shards.
      * $params['version']                = (boolean) If `true`, returns the document version as part of a hit.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
@@ -1667,14 +1683,14 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('UpdateByQuery');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\UpdateByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Changes the number of requests per second for a particular Update By Query operation.
      *
@@ -1693,13 +1709,13 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('UpdateByQueryRethrottle');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\UpdateByQueryRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Proxy function to createPointInTime() to prevent BC break.
      * This API will be removed in a future version. Use 'createPit' API instead.
@@ -1736,8 +1752,9 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $id ? $endpointBuilder('Create') : $endpointBuilder('Index');
+        $endpoint = $id ?
+            $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Create::class)
+            : $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -1969,6 +1986,15 @@ class Client
     public function wlm(): WlmNamespace
     {
         return $this->wlm;
+    }
+
+
+    /**
+     * Gets the endpoint factory.
+     */
+    protected function getEndpointFactory(): EndpointFactoryInterface
+    {
+        return $this->endpointFactory;
     }
 
     /**

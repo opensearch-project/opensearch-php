@@ -13,8 +13,7 @@ return <<<'EOD'
     public function createConnector(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ml\CreateConnector');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateConnector::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 

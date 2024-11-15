@@ -41,13 +41,13 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Delete');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the status and metadata of a transform job.
      *
@@ -65,13 +65,13 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Explain');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the status and metadata of a transform job.
      *
@@ -89,13 +89,13 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Get');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns a preview of what a transformed index would look like.
      *
@@ -112,13 +112,13 @@ class TransformsNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Preview');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Preview::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Create an index transform, or update a transform if if_seq_no and if_primary_term are provided.
      *
@@ -139,14 +139,14 @@ class TransformsNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Put');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Returns the details of all transform jobs.
      *
@@ -166,12 +166,12 @@ class TransformsNamespace extends AbstractNamespace
      */
     public function search(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Search');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Search::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Start transform.
      *
@@ -189,13 +189,13 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Start');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Start::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Stop transform.
      *
@@ -213,11 +213,11 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Transforms\Stop');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Stop::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
         return $this->performRequest($endpoint);
     }
+
 }

@@ -41,13 +41,13 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\DeleteModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Used to retrieve information about models present in the cluster.
      *
@@ -65,20 +65,20 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\GetModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Use an OpenSearch query to search for models in the index.
      *
      * $params['_source']                       = (array) True or false to return the _source field or not, or a list of fields to return.
      * $params['_source_excludes']              = (array) List of fields to exclude from the returned _source field.
      * $params['_source_includes']              = (array) List of fields to extract and return from the _source field.
-     * $params['allow_no_indices']              = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified).
+     * $params['allow_no_indices']              = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
      * $params['allow_partial_search_results']  = (boolean) Indicate if an error should be returned if there is a partial search failure or timeout. (Default = true)
      * $params['analyze_wildcard']              = (boolean) Specify whether wildcard and prefix queries should be analyzed. (Default = false)
      * $params['analyzer']                      = (string) The analyzer to use for the query string.
@@ -87,11 +87,11 @@ class KnnNamespace extends AbstractNamespace
      * $params['default_operator']              = (enum) The default operator for query string query (AND or OR). (Options = AND,OR)
      * $params['df']                            = (string) The field to use as default where no field prefix is given in the query string.
      * $params['docvalue_fields']               = (array) Comma-separated list of fields to return as the docvalue representation of a field for each hit.
-     * $params['expand_wildcards']              = (any) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * $params['expand_wildcards']              = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['explain']                       = (boolean) Specify whether to return detailed information about score computation as part of a hit.
      * $params['from']                          = (integer) Starting offset. (Default = 0)
-     * $params['ignore_throttled']              = (boolean) Whether specified concrete, expanded or aliased indices should be ignored when throttled.
-     * $params['ignore_unavailable']            = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed).
+     * $params['ignore_throttled']              = (boolean) Whether specified concrete, expanded or aliased indexes should be ignored when throttled.
+     * $params['ignore_unavailable']            = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
      * $params['lenient']                       = (boolean) Specify whether format-based query failures (such as providing text to a numeric field) should be ignored.
      * $params['max_concurrent_shard_requests'] = (integer) The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default = 5)
      * $params['pre_filter_shard_size']         = (integer) Threshold that enforces a pre-filter round-trip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter round-trip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.
@@ -130,13 +130,13 @@ class KnnNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\SearchModels');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Provides information about the current status of the k-NN plugin.
      *
@@ -157,14 +157,14 @@ class KnnNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\Stats');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setStat($stat);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
      *
@@ -184,18 +184,18 @@ class KnnNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\TrainModel');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\TrainModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
+
     /**
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
      *
-     * $params['index']       = (array) Comma-separated list of indices; use `_all` or empty string to perform the operation on all indices. (Required)
+     * $params['index']       = (array) Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -209,11 +209,11 @@ class KnnNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Knn\Warmup');
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\Warmup::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
+
 }
