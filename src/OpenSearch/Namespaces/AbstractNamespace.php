@@ -65,20 +65,6 @@ abstract class AbstractNamespace
         $this->endpointFactory = $endpointFactory;
     }
 
-    public function isAsync(): bool
-    {
-        return $this->isAsync;
-    }
-
-    /**
-     * Set the client to run in async mode.
-     */
-    public function setAsync(bool $isAsync): static
-    {
-        $this->isAsync = $isAsync;
-        return $this;
-    }
-
     /**
      * @return null|mixed
      */
@@ -93,18 +79,16 @@ abstract class AbstractNamespace
         }
     }
 
-    protected function performRequest(AbstractEndpoint $endpoint): Promise|ResponseInterface
+    protected function performRequest(AbstractEndpoint $endpoint)
     {
-        $request = $this->transport->createRequest(
+        $response = $this->transport->performRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
+            $endpoint->getOptions()
         );
-        if ($this->isAsync()) {
-            return $this->transport->sendAsyncRequest($request);
-        }
-        return $this->transport->sendRequest($request);
-    }
 
+        return $this->transport->resultOrFuture($response, $endpoint->getOptions());
+    }
 }

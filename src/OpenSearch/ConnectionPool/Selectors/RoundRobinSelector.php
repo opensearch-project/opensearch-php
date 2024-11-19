@@ -19,16 +19,33 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Common\Exceptions\Curl;
+namespace OpenSearch\ConnectionPool\Selectors;
 
-use OpenSearch\Common\Exceptions\OpenSearchException;
-use OpenSearch\Common\Exceptions\TransportException;
+use OpenSearch\Connections\ConnectionInterface;
 
 @trigger_error(__CLASS__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
-class OperationTimeoutException extends TransportException implements OpenSearchException
+class RoundRobinSelector implements SelectorInterface
 {
+    /**
+     * @var int
+     */
+    private $current = 0;
+
+    /**
+     * Select the next connection in the sequence
+     *
+     * @param ConnectionInterface[] $connections an array of ConnectionInterface instances to choose from
+     */
+    public function select(array $connections): ConnectionInterface
+    {
+        $returnConnection = $connections[$this->current % count($connections)];
+
+        $this->current += 1;
+
+        return $returnConnection;
+    }
 }
