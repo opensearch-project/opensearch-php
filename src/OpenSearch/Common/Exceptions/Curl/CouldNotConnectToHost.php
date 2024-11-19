@@ -25,6 +25,11 @@ namespace OpenSearch\Common\Exceptions\Curl;
 use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\TransportException;
 
+@trigger_error(__CLASS__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
 class CouldNotConnectToHost extends TransportException implements OpenSearchException
 {
 }

@@ -2,20 +2,22 @@
 
 namespace OpenSearch;
 
-use Http\Client\HttpAsyncClient;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestInterface;
-
-interface TransportInterface extends ClientInterface, HttpAsyncClient
+/**
+ * Provides an interface for sending OpenSearch requests.
+ */
+interface TransportInterface
 {
     /**
      * Create a new request.
+     *
+     * @throws \Exception
      */
-    public function createRequest(
+    public function sendRequest(
         string $method,
         string $uri,
         array $params = [],
-        mixed $body = null
-    ): RequestInterface;
+        mixed $body = null,
+        array $headers = [],
+    ): array|string|null;
 
 }

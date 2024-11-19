@@ -19,16 +19,34 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Common\Exceptions\Curl;
+namespace OpenSearch\ConnectionPool;
 
-use OpenSearch\Common\Exceptions\OpenSearchException;
-use OpenSearch\Common\Exceptions\TransportException;
+use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
+use OpenSearch\Connections\ConnectionFactoryInterface;
+use OpenSearch\Connections\ConnectionInterface;
 
 @trigger_error(__CLASS__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
-class OperationTimeoutException extends TransportException implements OpenSearchException
+class SimpleConnectionPool extends AbstractConnectionPool implements ConnectionPoolInterface
 {
+    /**
+     * @param ConnectionInterface[] $connections
+     * @param array<string, mixed>  $connectionPoolParams
+     */
+    public function __construct($connections, SelectorInterface $selector, ConnectionFactoryInterface $factory, $connectionPoolParams)
+    {
+        parent::__construct($connections, $selector, $factory, $connectionPoolParams);
+    }
+
+    public function nextConnection(bool $force = false): ConnectionInterface
+    {
+        return $this->selector->select($this->connections);
+    }
+
+    public function scheduleCheck(): void
+    {
+    }
 }

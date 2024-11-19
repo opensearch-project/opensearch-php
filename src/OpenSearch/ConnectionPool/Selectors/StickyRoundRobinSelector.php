@@ -19,16 +19,44 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-namespace OpenSearch\Common\Exceptions\Curl;
+namespace OpenSearch\ConnectionPool\Selectors;
 
-use OpenSearch\Common\Exceptions\OpenSearchException;
-use OpenSearch\Common\Exceptions\TransportException;
+use OpenSearch\Connections\ConnectionInterface;
 
 @trigger_error(__CLASS__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
-class OperationTimeoutException extends TransportException implements OpenSearchException
+class StickyRoundRobinSelector implements SelectorInterface
 {
+    /**
+     * @var int
+     */
+    private $current = 0;
+
+    /**
+     * @var int
+     */
+    private $currentCounter = 0;
+
+    /**
+     * Use current connection unless it is dead, otherwise round-robin
+     *
+     * @param ConnectionInterface[] $connections Array of connections to choose from
+     */
+    public function select(array $connections): ConnectionInterface
+    {
+        /**
+ * @var ConnectionInterface[] $connections
+*/
+        if ($connections[$this->current]->isAlive()) {
+            return $connections[$this->current];
+        }
+
+        $this->currentCounter += 1;
+        $this->current = $this->currentCounter % count($connections);
+
+        return $connections[$this->current];
+    }
 }
