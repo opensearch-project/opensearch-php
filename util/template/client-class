@@ -142,23 +142,6 @@ class Client
     }
 
     /**
-     * Check if the client is running in async mode.
-     */
-    public function isAsync(): bool
-    {
-        return $this->isAsync;
-    }
-
-    /**
-     * Set the client to run in async mode.
-     */
-    public function setAsync(bool $isAsync): static
-    {
-        $this->isAsync = $isAsync;
-        return $this;
-    }
-
-    /**
      * Sends a raw request to the cluster
      * @return callable|array
      * @throws NoNodesAvailableException
@@ -172,9 +155,6 @@ class Client
         return $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
     }
 
-    /**
-     * @return callable|array
-     */
     private function performRequest(AbstractEndpoint $endpoint): array|string|null
     {
         return $this->httpTransport->sendRequest(

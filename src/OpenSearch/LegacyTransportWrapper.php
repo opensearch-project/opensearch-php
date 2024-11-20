@@ -28,7 +28,8 @@ class LegacyTransportWrapper implements TransportInterface
         array $headers = [],
     ): array|string|null {
         $promise = $this->transport->performRequest($method, $uri, $params, $body);
-        return $this->transport->resultOrFuture($promise);
+        $futureArray = $this->transport->resultOrFuture($promise);
+        return $futureArray->_value;
     }
 
 }

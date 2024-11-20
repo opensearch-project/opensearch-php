@@ -16,17 +16,17 @@ use Psr\Http\Message\UriFactoryInterface;
  */
 class TransportFactory
 {
-    protected ?PsrRequestFactoryInterface $psrRequestFactory = null;
+    private ?PsrRequestFactoryInterface $psrRequestFactory = null;
 
-    protected ?StreamFactoryInterface $streamFactory = null;
+    private ?StreamFactoryInterface $streamFactory = null;
 
-    protected ?UriFactoryInterface $uriFactory = null;
+    private ?UriFactoryInterface $uriFactory = null;
 
-    protected ?SerializerInterface $serializer = null;
+    private ?SerializerInterface $serializer = null;
 
-    protected ?RequestFactoryInterface $requestFactory = null;
+    private ?RequestFactoryInterface $requestFactory = null;
 
-    protected ?ClientInterface $httpClient = null;
+    private ?ClientInterface $httpClient = null;
 
     protected function getHttpClient(): ?ClientInterface
     {
