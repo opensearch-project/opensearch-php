@@ -32,17 +32,17 @@ abstract class AbstractEndpoint implements EndpointInterface
     /**
      * @var array
      */
-    protected array $params = [];
+    protected $params = [];
 
     /**
      * @var string|null
      */
-    protected ?string $index = null;
+    protected $index = null;
 
     /**
      * @var string|int|null
      */
-    protected string|int|null $id = null;
+    protected $id = null;
 
     /**
      * @var string|null
@@ -52,17 +52,17 @@ abstract class AbstractEndpoint implements EndpointInterface
     /**
      * @var string|array|null
      */
-    protected string|array|null $body = null;
+    protected $body = null;
 
     /**
      * @var array
      */
-    private array $options = [];
+    private $options = [];
 
     /**
      * @var SerializerInterface
      */
-    protected SerializerInterface $serializer;
+    protected $serializer;
 
     /**
      * @return string[]
@@ -84,6 +84,7 @@ abstract class AbstractEndpoint implements EndpointInterface
      * Set the parameters for this endpoint
      *
      * @param mixed[] $params Array of parameters
+     * @return $this
      */
     public function setParams(array $params): static
     {

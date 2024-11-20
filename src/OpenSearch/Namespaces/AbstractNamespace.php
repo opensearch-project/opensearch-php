@@ -39,8 +39,6 @@ abstract class AbstractNamespace
 
     protected EndpointFactoryInterface $endpointFactory;
 
-    protected bool $isAsync = false;
-
     /**
      * @var callable
      *
