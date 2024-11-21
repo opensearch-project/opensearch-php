@@ -22,10 +22,16 @@ $guzzleClient = new \GuzzleHttp\Client([
         'User-Agent' => sprintf('opensearch-php/%s (%s; PHP %s)', Client::VERSION, PHP_OS, PHP_VERSION),
     ]
 ]);
-$requestFactory = new \OpenSearch\RequestFactory();
-$transport = new OpenSearch\Transport($guzzleClient, $requestFactory);
+$guzzleHttpFactory = new \GuzzleHttp\Psr7\HttpFactory();
+$transport = (new OpenSearch\TransportFactory())
+    ->setHttpClient($guzzleClient)
+    ->setPsrRequestFactory($guzzleHttpFactory)
+    ->setStreamFactory($guzzleHttpFactory)
+    ->setUriFactory($guzzleHttpFactory)
+    ->create();
 
-$client = (new \OpenSearch\ClientBuilder($transport))->build();
+$endpointFactory = new \OpenSearch\EndpointFactory();
+$client = new Client($transport, $endpointFactory, []);
 
 $info = $client->info();
 
@@ -43,8 +49,14 @@ $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOpt
     ],
 ]);
 
-$transport = new OpenSearch\Transport($symfonyPsr18Client, $requestFactory);
 
-$client = (new \OpenSearch\ClientBuilder($transport))->build();
+$transport = (new OpenSearch\TransportFactory())
+    ->setHttpClient($symfonyPsr18Client)
+    ->setPsrRequestFactory($symfonyPsr18Client)
+    ->setStreamFactory($symfonyPsr18Client)
+    ->setUriFactory($symfonyPsr18Client)
+    ->create();
+
+$client = new Client($transport, $endpointFactory, []);
 
 $info = $client->info();

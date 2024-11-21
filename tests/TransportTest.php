@@ -21,86 +21,79 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
-use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
-use Http\Promise\Promise;
-use OpenSearch\RequestFactoryInterface;
+use OpenSearch\Common\Exceptions\ServerErrorResponseException;
+use OpenSearch\ConnectionPool\AbstractConnectionPool;
+use OpenSearch\Connections\Connection;
+use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
+use GuzzleHttp\Ring\Future\FutureArray;
+use GuzzleHttp\Ring\Future\FutureArrayInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\RequestExceptionInterface;
-use Psr\Http\Message\RequestInterface;
+use Psr\Log\LoggerInterface;
+use React\Promise\Deferred;
 
-/**
- * Class TransportTest
- *
- * @coversDefaultClass \OpenSearch\Transport
- */
 class TransportTest extends TestCase
 {
     /**
-     * The transport instance under test.
+     * @var Connection|MockObject
      */
-    private Transport $transport;
+    private $connection;
+    /**
+     * @var AbstractConnectionPool|MockObject
+     */
+    private $connectionPool;
+    /**
+     * @var MockObject|LoggerInterface
+     */
+    private $logger;
 
     public function setUp(): void
     {
-        parent::setUp();
-
-        $mockHandler = new MockHandler([
-            new Response(200, ["content-type" => "text/javascript; charset=utf-8"], '{"foo": "bar"}'),
-            new RequestException('Error Communicating with Server', $this->createMock(RequestInterface::class)),
-        ]);
-
-        $handlerStack = HandlerStack::create($mockHandler);
-        $httpClient = new GuzzleAdapter(new GuzzleClient(['handler' => $handlerStack]));
-
-        $requestFactory = $this->createMock(RequestFactoryInterface::class);
-        $requestFactory->method('createRequest')->willReturn($this->createMock(RequestInterface::class));
-
-        $this->transport = new Transport($httpClient, $requestFactory);
+        $this->logger = $this->createMock(LoggerInterface::class);
+        $this->connectionPool = $this->createMock(AbstractConnectionPool::class);
+        $this->connection = $this->createMock(Connection::class);
     }
 
-    /**
-     * @covers ::sendRequest
-     */
-    public function testSendRequest(): void
+    public function testPerformRequestWithServerErrorResponseException404Result()
     {
-        $request = new Request('GET', 'http://localhost:9200');
-        $response = $this->transport->sendRequest($request);
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('text/javascript; charset=utf-8', $response->getHeaderLine('content-type'));
-        $this->assertEquals('{"foo": "bar"}', $response->getBody()->getContents());
+        $deferred = new Deferred();
+        $deferred->reject(new ServerErrorResponseException('foo', 404));
+        $future = new FutureArray($deferred->promise());
 
-        $this->expectException(RequestExceptionInterface::class);
-        $this->expectExceptionMessage('Error Communicating with Server');
-        $this->transport->sendRequest($request);
+        $this->connection->method('performRequest')
+            ->willReturn($future);
+
+        $this->connectionPool->method('nextConnection')
+            ->willReturn($this->connection);
+
+        $this->connectionPool->expects($this->never())
+            ->method('scheduleCheck');
+
+        $transport = new Transport(1, $this->connectionPool, $this->logger);
+
+        $result = $transport->performRequest('GET', '/');
+        $this->assertInstanceOf(FutureArrayInterface::class, $result);
     }
 
-    /**
-     * @covers ::sendAsyncRequest
-     */
-    public function testSendAsyncRequest(): void
+    public function testPerformRequestWithServerErrorResponseException500Result()
     {
-        $request = new Request('GET', 'http://localhost:9200');
-        $promise = $this->transport->sendAsyncRequest($request);
-        $this->assertInstanceOf(Promise::class, $promise);
-        $response = $promise->wait();
-        $this->assertInstanceOf(Response::class, $response);
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('text/javascript; charset=utf-8', $response->getHeaderLine('content-type'));
-        $this->assertEquals('{"foo": "bar"}', $response->getBody()->getContents());
+        $deferred = new Deferred();
+        $deferred->reject(new ServerErrorResponseException('foo', 500));
+        $future = new FutureArray($deferred->promise());
 
-        $promise = $this->transport->sendAsyncRequest($request);
-        $this->assertInstanceOf(Promise::class, $promise);
-        $this->expectException(RequestExceptionInterface::class);
-        $this->expectExceptionMessage('Error Communicating with Server');
-        $promise->wait();
+        $this->connection->method('performRequest')
+            ->willReturn($future);
+
+        $this->connectionPool->method('nextConnection')
+            ->willReturn($this->connection);
+
+        $this->connectionPool->expects($this->once())
+            ->method('scheduleCheck');
+
+        $transport = new Transport(1, $this->connectionPool, $this->logger);
+
+        $result = $transport->performRequest('GET', '/');
+        $this->assertInstanceOf(FutureArrayInterface::class, $result);
     }
-
 }

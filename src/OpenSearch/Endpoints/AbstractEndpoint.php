@@ -150,7 +150,7 @@ abstract class AbstractEndpoint implements EndpointInterface
         return $this;
     }
 
-    public function getBody(): array|string
+    public function getBody(): array|string|null
     {
         return $this->body;
     }

@@ -106,7 +106,10 @@ class TransportFactory
         return $this;
     }
 
-    public function createTransport(): HttpTransport
+    /**
+     * Creates a new transport.
+     */
+    public function create(): HttpTransport
     {
         if ($this->requestFactory === null) {
             $psrRequestFactory = $this->getPsrRequestFactory();
