@@ -21,21 +21,23 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use Http\Promise\Promise;
 use OpenSearch\EndpointFactoryInterface;
-use OpenSearch\EndpointInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\LegacyEndpointFactory;
+use OpenSearch\LegacyTransportWrapper;
 use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
-use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractNamespace
 {
     /**
      * @var \OpenSearch\Transport
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use $httpTransport property instead.
      */
     protected $transport;
+
+    protected TransportInterface $httpTransport;
 
     protected EndpointFactoryInterface $endpointFactory;
 
@@ -46,9 +48,15 @@ abstract class AbstractNamespace
      */
     protected $endpoints;
 
-    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory)
+    public function __construct(TransportInterface|Transport $transport, callable|EndpointFactoryInterface $endpointFactory)
     {
-        $this->transport = $transport;
+        if (!$transport instanceof TransportInterface) {
+            @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
+            $this->transport = $transport;
+            $this->httpTransport = new LegacyTransportWrapper($transport);
+        } else {
+            $this->httpTransport = $transport;
+        }
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as $endpointFactory param to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
@@ -79,7 +87,7 @@ abstract class AbstractNamespace
 
     protected function performRequest(AbstractEndpoint $endpoint)
     {
-        $response = $this->transport->performRequest(
+        return $this->httpTransport->sendRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
@@ -87,6 +95,5 @@ abstract class AbstractNamespace
             $endpoint->getOptions()
         );
 
-        return $this->transport->resultOrFuture($response, $endpoint->getOptions());
     }
 }

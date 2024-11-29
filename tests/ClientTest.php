@@ -25,6 +25,7 @@ use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\Delete;
+use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -112,19 +113,16 @@ class ClientTest extends TestCase
     public function testSendRawRequest(): void
     {
         $this->transport->expects($this->once())
-            ->method('createRequest')
-            ->with('GET', '/', ['foo' => 'bar'], 'whizz')
-            ->willReturn($this->createMock(RequestInterface::class));
-
-        $this->transport->expects($this->once())
             ->method('sendRequest')
-            ->with($this->isInstanceOf(RequestInterface::class))
-            ->willReturn($this->createMock(ResponseInterface::class));
+            ->with('GET', '/', ['foo' => 'bar'], 'whizz')
+            ->willReturn(['bang']);
 
-        $this->client->request('GET', '/', [
+        $response = $this->client->request('GET', '/', [
             'params' => ['foo' => 'bar'],
             'body' => 'whizz',
         ]);
+
+        $this->assertEquals(['bang'], $response);
     }
 
 }
