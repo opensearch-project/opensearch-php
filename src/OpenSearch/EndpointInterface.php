@@ -67,9 +67,9 @@ interface EndpointInterface
     /**
      * Get the body of the request.
      *
-     * @return array|string
+     * @return array|string|null
      */
-    public function getBody(): array|string;
+    public function getBody(): array|string|null;
 
     /**
      * Set the body of the request.

@@ -26,17 +26,45 @@ use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Transport;
 use GuzzleHttp\Ring\Future\FutureArrayInterface;
+use OpenSearch\TransportInterface;
+use Psr\Http\Client\ClientExceptionInterface;
 
 abstract class BooleanRequestWrapper
 {
+    /**
+     * Send a request with a boolean response.
+     *
+     * Throwing a client exception will return FALSE, otherwise TRUE is returned.
+     */
+    public static function sendRequest(AbstractEndpoint $endpoint, TransportInterface $transport): bool
+    {
+        try {
+            $transport->sendRequest(
+                $endpoint->getMethod(),
+                $endpoint->getURI(),
+                $endpoint->getParams(),
+                $endpoint->getBody(),
+                $endpoint->getOptions()
+            );
+        } catch (ClientExceptionInterface) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Perform Request
      *
      * @throws Missing404Exception
      * @throws RoutingMissingException
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.
      */
     public static function performRequest(AbstractEndpoint $endpoint, Transport $transport)
     {
+        @trigger_error(
+            __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.'
+        );
         try {
             $response = $transport->performRequest(
                 $endpoint->getMethod(),

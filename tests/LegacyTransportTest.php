@@ -21,19 +21,23 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests;
 
+use GuzzleHttp\Ring\Future\FutureArray;
+use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use OpenSearch\Common\Exceptions\ServerErrorResponseException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\Connections\Connection;
-use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
-use GuzzleHttp\Ring\Future\FutureArray;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use React\Promise\Deferred;
 
-class TransportTest extends TestCase
+/**
+ * Legacy transport test.
+ *
+ * @group legacy
+ */
+class LegacyTransportTest extends TestCase
 {
     /**
      * @var Connection|MockObject
