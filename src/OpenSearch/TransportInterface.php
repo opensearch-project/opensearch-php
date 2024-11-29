@@ -10,7 +10,7 @@ interface TransportInterface
     /**
      * Create a new request.
      *
-     * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function sendRequest(
         string $method,
