@@ -75,9 +75,9 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Use an OpenSearch query to search for models in the index.
      *
-     * $params['_source']                       = (array) True or false to return the _source field or not, or a list of fields to return.
-     * $params['_source_excludes']              = (array) List of fields to exclude from the returned _source field.
-     * $params['_source_includes']              = (array) List of fields to extract and return from the _source field.
+     * $params['_source']                       = (array) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * $params['_source_excludes']              = (array) List of fields to exclude from the returned `_source` field.
+     * $params['_source_includes']              = (array) List of fields to extract and return from the `_source` field.
      * $params['allow_no_indices']              = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
      * $params['allow_partial_search_results']  = (boolean) Indicate if an error should be returned if there is a partial search failure or timeout. (Default = true)
      * $params['analyze_wildcard']              = (boolean) Specify whether wildcard and prefix queries should be analyzed. (Default = false)
@@ -94,11 +94,11 @@ class KnnNamespace extends AbstractNamespace
      * $params['ignore_unavailable']            = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
      * $params['lenient']                       = (boolean) Specify whether format-based query failures (such as providing text to a numeric field) should be ignored.
      * $params['max_concurrent_shard_requests'] = (integer) The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default = 5)
-     * $params['pre_filter_shard_size']         = (integer) Threshold that enforces a pre-filter round-trip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter round-trip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method ie. if date filters are mandatory to match but the shard bounds and the query are disjoint.
+     * $params['pre_filter_shard_size']         = (integer) Threshold that enforces a pre-filter round-trip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter round-trip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method, that is if date filters are mandatory to match but the shard bounds and the query are disjoint.
      * $params['preference']                    = (string) Specify the node or shard the operation should be performed on. (Default = random)
      * $params['q']                             = (string) Query in the Lucene query string syntax.
      * $params['request_cache']                 = (boolean) Specify if request cache should be used for this request or not, defaults to index level setting.
-     * $params['rest_total_hits_as_int']        = (boolean) Indicates whether hits.total should be rendered as an integer or an object in the rest search response. (Default = false)
+     * $params['rest_total_hits_as_int']        = (boolean) Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default = false)
      * $params['routing']                       = (any) Comma-separated list of specific routing values.
      * $params['scroll']                        = (string) Specify how long a consistent view of the index should be maintained for scrolled search.
      * $params['search_type']                   = (enum) Search operation type. (Options = dfs_query_then_fetch,query_then_fetch)

@@ -27,7 +27,7 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Clear the cursor context.
      *
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -52,7 +52,7 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Collect metrics for the plugin within the interval.
      *
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -74,7 +74,7 @@ class SqlNamespace extends AbstractNamespace
     /**
      * By a stats endpoint, you are able to collect metrics for the plugin within the interval.
      *
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -99,7 +99,7 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Adds SQL settings to the standard OpenSearch cluster settings.
      *
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

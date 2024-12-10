@@ -30,7 +30,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * $params['provision']     = (boolean)  (Default = false)
      * $params['reprovision']   = (boolean)  (Default = false)
      * $params['update_fields'] = (boolean)  (Default = false)
-     * $params['use_case']      = (string) To use a workflow template, specify it in the use_case query parameter when creating a workflow.
+     * $params['use_case']      = (string) To use a workflow template, specify it in the `use_case` query parameter when creating a workflow.
      * $params['validation']    = (string)  (Default = all)
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -251,7 +251,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * $params['provision']     = (boolean)  (Default = false)
      * $params['reprovision']   = (boolean)  (Default = false)
      * $params['update_fields'] = (boolean)  (Default = false)
-     * $params['use_case']      = (string) To use a workflow template, specify it in the use_case query parameter when creating a workflow.
+     * $params['use_case']      = (string) To use a workflow template, specify it in the `use_case` query parameter when creating a workflow.
      * $params['validation']    = (string)  (Default = all)
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
