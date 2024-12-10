@@ -47,10 +47,12 @@ use OpenSearch\Namespaces\ObservabilityNamespace;
 use OpenSearch\Namespaces\PplNamespace;
 use OpenSearch\Namespaces\QueryNamespace;
 use OpenSearch\Namespaces\RemoteStoreNamespace;
+use OpenSearch\Namespaces\ReplicationNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
 use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SecurityNamespace;
+use OpenSearch\Namespaces\SmNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\SslNamespace;
@@ -198,6 +200,11 @@ class Client
     protected $remoteStore;
 
     /**
+     * @var ReplicationNamespace
+     */
+    protected $replication;
+
+    /**
      * @var RollupsNamespace
      */
     protected $rollups;
@@ -216,6 +223,11 @@ class Client
      * @var SecurityNamespace
      */
     protected $security;
+
+    /**
+     * @var SmNamespace
+     */
+    protected $sm;
 
     /**
      * @var SnapshotNamespace
@@ -291,10 +303,12 @@ class Client
         $this->ppl = new PplNamespace($transport, $this->endpointFactory);
         $this->query = new QueryNamespace($transport, $this->endpointFactory);
         $this->remoteStore = new RemoteStoreNamespace($transport, $this->endpointFactory);
+        $this->replication = new ReplicationNamespace($transport, $this->endpointFactory);
         $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
         $this->security = new SecurityNamespace($transport, $this->endpointFactory);
+        $this->sm = new SmNamespace($transport, $this->endpointFactory);
         $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
         $this->sql = new SqlNamespace($transport, $this->endpointFactory);
         $this->ssl = new SslNamespace($transport, $this->endpointFactory);
@@ -313,7 +327,7 @@ class Client
      * $params['_source_excludes']       = (any) A comma-separated list of source fields to exclude from the response.
      * $params['_source_includes']       = (any) A comma-separated list of source fields to include in the response.
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
+     * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
@@ -351,7 +365,7 @@ class Client
      * $params['batch_interval']         = (string) Specifies for how long bulk operations should be accumulated into a batch before sending the batch to data nodes.
      * $params['batch_size']             = (integer) Specifies how many bulk operations should be accumulated into a batch before sending the batch to data nodes.
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
+     * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
@@ -413,7 +427,7 @@ class Client
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['analyze_wildcard']   = (boolean) If `true`, wildcard and prefix queries are analyzed.This parameter can only be used when the `q` query string parameter is specified. (Default = false)
      * $params['analyzer']           = (string) Analyzer to use for the query string.This parameter can only be used when the `q` query string parameter is specified.
-     * $params['default_operator']   = (enum) The default operator for query string query: `AND` or `OR`.This parameter can only be used when the `q` query string parameter is specified. (Options = and,or)
+     * $params['default_operator']   = (enum) The default operator for query string query: `AND` or `OR`.This parameter can only be used when the `q` query string parameter is specified. (Options = and,AND,or,OR)
      * $params['df']                 = (string) Field to use as default where no field prefix is given in the query string.This parameter can only be used when the `q` query string parameter is specified.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
      * $params['ignore_throttled']   = (boolean) If `true`, concrete, expanded or aliased indexes are ignored when frozen.
@@ -483,7 +497,7 @@ class Client
      * $params['index']                  = (string) Name of the target index. (Required)
      * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
+     * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
@@ -535,14 +549,14 @@ class Client
      * Deletes documents matching the provided query.
      *
      * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
-     * $params['_source']                = (array) True or false to return the _source field or not, or a list of fields to return.
-     * $params['_source_excludes']       = (array) List of fields to exclude from the returned _source field.
-     * $params['_source_includes']       = (array) List of fields to extract and return from the _source field.
+     * $params['_source']                = (array) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * $params['_source_excludes']       = (array) List of fields to exclude from the returned `_source` field.
+     * $params['_source_includes']       = (array) List of fields to extract and return from the `_source` field.
      * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['analyze_wildcard']       = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']               = (string) Analyzer to use for the query string.
      * $params['conflicts']              = (enum) What to do if delete by query hits version conflicts: `abort` or `proceed`. (Options = abort,proceed)
-     * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,or)
+     * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
      * $params['df']                     = (string) Field to use as default where no field prefix is given in the query string.
      * $params['expand_wildcards']       = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['from']                   = (integer) Starting offset. (Default = 0)
@@ -551,7 +565,7 @@ class Client
      * $params['max_docs']               = (integer) Maximum number of documents to process.Defaults to all documents.
      * $params['preference']             = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                      = (string) Query in the Lucene query string syntax.
-     * $params['refresh']                = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
+     * $params['refresh']                = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['request_cache']          = (boolean) If `true`, the request cache is used for this request.Defaults to the index-level setting.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second. (Default = 0)
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
@@ -559,7 +573,7 @@ class Client
      * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.Defaults to no timeout.
      * $params['search_type']            = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
-     * $params['size']                   = (integer) Deprecated, please use `max_docs` instead.
+     * $params['size']                   = (integer) Deprecated, use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                  = (array) Specific `tag` of the request for logging and statistical purposes.
@@ -645,7 +659,7 @@ class Client
      *
      * $params['id']                      = (string) Identifier for the stored script or search template. (Required)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -677,7 +691,7 @@ class Client
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
-     * $params['refresh']          = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
+     * $params['refresh']          = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
@@ -716,8 +730,8 @@ class Client
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If true, the request is real-time as opposed to near-real-time.
-     * $params['refresh']          = (boolean) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
+     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['refresh']          = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
@@ -751,12 +765,12 @@ class Client
      *
      * $params['id']               = (string) Defines the document ID. (Required)
      * $params['index']            = (string) Index names used to limit the request. Only a single index name can be provided to this parameter. (Required)
-     * $params['_source']          = (any) True or false to return the `_source` field or not, or a list of fields to return.
+     * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude from the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['analyze_wildcard'] = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']         = (string) Analyzer to use for the query string.This parameter can only be used when the `q` query string parameter is specified.
-     * $params['default_operator'] = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,or)
+     * $params['default_operator'] = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
      * $params['df']               = (string) Field to use as default where no field prefix is given in the query string. (Default = _all)
      * $params['lenient']          = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
@@ -791,12 +805,12 @@ class Client
     /**
      * Returns the information about the capabilities of fields among multiple indexes.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indexes, omit this parameter or use * or _all.
-     * $params['allow_no_indices']   = (boolean) If false, the request returns an error if any wildcard expression, index alias,or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a requesttargeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.
+     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indexes, omit this parameter or use * or `_all`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias,or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a requesttargeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
      * $params['fields']             = (any) Comma-separated list of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.
      * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
-     * $params['include_unmapped']   = (boolean) If true, unmapped fields are included in the response. (Default = false)
+     * $params['include_unmapped']   = (boolean) If `true`, unmapped fields are included in the response. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -825,16 +839,16 @@ class Client
      *
      * $params['id']               = (string) Unique identifier of the document. (Required)
      * $params['index']            = (string) Name of the index that contains the document. (Required)
-     * $params['_source']          = (any) True or false to return the _source field or not, or a list of fields to return.
+     * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
-     * $params['refresh']          = (boolean) If true, OpenSearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
+     * $params['refresh']          = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (enum) Specific version type: `internal`, `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -948,15 +962,15 @@ class Client
      *
      * $params['id']               = (string) Unique identifier of the document. (Required)
      * $params['index']            = (string) Name of the index that contains the document. (Required)
-     * $params['_source']          = (any) True or false to return the _source field or not, or a list of fields to return.
+     * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
-     * $params['realtime']         = (boolean) Boolean) If true, the request is real-time as opposed to near-real-time.
-     * $params['refresh']          = (boolean) If true, OpenSearch refreshes the affected shards to make this operation visible to search. If false, do nothing with refreshes.
+     * $params['realtime']         = (boolean) Boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['refresh']          = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: internal, external, external_gte. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (enum) Specific version type. One of `internal`, `external`, `external_gte`. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -988,7 +1002,7 @@ class Client
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['op_type']                = (enum) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`. (Options = create,index)
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
-     * $params['refresh']                = (enum) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`. (Options = false,true,wait_for)
+     * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
@@ -1044,12 +1058,12 @@ class Client
      * Allows to get multiple documents in one request.
      *
      * $params['index']            = (string) Name of the index to retrieve documents from when `ids` are specified, or when a document in the `docs` array does not specify an index.
-     * $params['_source']          = (any) True or false to return the `_source` field or not, or a list of fields to return.
+     * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude from the response.You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the `_source_excludes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
-     * $params['refresh']          = (boolean) If `true`, the request refreshes relevant shards before retrieving documents.
+     * $params['refresh']          = (any) If `true`, the request refreshes relevant shards before retrieving documents.
      * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['stored_fields']    = (any) If `true`, retrieves the document fields stored in the index rather than the document `_source`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1079,11 +1093,11 @@ class Client
      * Allows to execute several search operations in one request.
      *
      * $params['index']                         = (array) Comma-separated list of data streams, indexes, and index aliases to search.
-     * $params['ccs_minimize_roundtrips']       = (boolean) If true, network roundtrips between the coordinating node and remote clusters are minimized for cross-cluster search requests. (Default = true)
+     * $params['ccs_minimize_roundtrips']       = (boolean) If `true`, network round-trips between the coordinating node and remote clusters are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches']       = (integer) Maximum number of concurrent searches the multi search API can execute.
      * $params['max_concurrent_shard_requests'] = (integer) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
      * $params['pre_filter_shard_size']         = (integer) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
-     * $params['rest_total_hits_as_int']        = (boolean) If true, hits.total are returned as an integer in the response. Defaults to false, which returns an object. (Default = false)
+     * $params['rest_total_hits_as_int']        = (boolean) If `true`, `hits.total` are returned as an integer in the response. Defaults to false, which returns an object. (Default = false)
      * $params['search_type']                   = (enum) Indicates whether global term and document frequencies should be used when scoring returned documents. (Options = dfs_query_then_fetch,query_then_fetch)
      * $params['typed_keys']                    = (boolean) Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
      * $params['pretty']                        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1152,9 +1166,9 @@ class Client
      * $params['payloads']         = (boolean) If `true`, the response includes term payloads. (Default = true)
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If true, the request is real-time as opposed to near-real-time. (Default = true)
+     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time. (Default = true)
      * $params['routing']          = (any) Custom value used to route operations to a specific shard.
-     * $params['term_statistics']  = (boolean) If true, the response includes term frequency and document frequency. (Default = false)
+     * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
      * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1209,7 +1223,7 @@ class Client
      * $params['id']                      = (string) Identifier for the stored script or search template. Must be unique within the cluster. (Required)
      * $params['context']                 = (string) Context in which the script or search template should run. To prevent errors, the API immediately compiles the script or template in this context.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1271,7 +1285,7 @@ class Client
      * Allows to copy documents from one index to another, optionally filtering the sourcedocuments by a query, changing the destination index settings, or fetching thedocuments from a remote cluster.
      *
      * $params['max_docs']               = (integer) Maximum number of documents to process. By default, all documents.
-     * $params['refresh']                = (boolean) If `true`, the request refreshes affected shards to make this operation visible to search.
+     * $params['refresh']                = (any) If `true`, the request refreshes affected shards to make this operation visible to search.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second.Defaults to no throttle. (Default = 0)
      * $params['scroll']                 = (string) Specifies how long a consistent view of the index should be maintained for scrolled search.
      * $params['slices']                 = (any) The number of slices this task should be divided into.Defaults to 1 slice, meaning the task isn't sliced into subtasks.
@@ -1333,7 +1347,7 @@ class Client
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']        = (array) The search definition template and its params
+     * $params['body']        = (array) The search definition template and its parameters.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1379,7 +1393,7 @@ class Client
      * Allows to retrieve a large numbers of results from a single search request.
      *
      * $params['scroll_id']              = DEPRECATED (string) The scroll ID
-     * $params['rest_total_hits_as_int'] = (boolean) If true, the API response's hit.total property is returned as an integer. If false, the API response's hit.total property is returned as an object. (Default = false)
+     * $params['rest_total_hits_as_int'] = (boolean) If `true`, the API response's `hit.total` property is returned as an integer. If `false`, the API response's `hit.total` property is returned as an object. (Default = false)
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                  = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1412,13 +1426,13 @@ class Client
      * $params['_source_excludes']              = (any) A comma-separated list of source fields to exclude from the response.You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
      * $params['_source_includes']              = (any) A comma-separated list of source fields to include in the response.If this parameter is specified, only these source fields are returned.You can exclude fields from this subset using the `_source_excludes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
      * $params['allow_no_indices']              = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
-     * $params['allow_partial_search_results']  = (boolean) If true, returns partial results if there are shard request timeouts or shard failures. If false, returns an error with no partial results. (Default = true)
-     * $params['analyze_wildcard']              = (boolean) If true, wildcard and prefix queries are analyzed.This parameter can only be used when the q query string parameter is specified. (Default = false)
+     * $params['allow_partial_search_results']  = (boolean) If `true`, returns partial results if there are shard request timeouts or shard failures. If `false`, returns an error with no partial results. (Default = true)
+     * $params['analyze_wildcard']              = (boolean) If `true`, wildcard and prefix queries are analyzed.This parameter can only be used when the q query string parameter is specified. (Default = false)
      * $params['analyzer']                      = (string) Analyzer to use for the query string.This parameter can only be used when the q query string parameter is specified.
      * $params['batched_reduce_size']           = (integer) The number of shard results that should be reduced at once on the coordinating node.This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large. (Default = 512)
      * $params['cancel_after_time_interval']    = (string) The time after which the search request will be canceled.Request-level parameter takes precedence over `cancel_after_time_interval` cluster setting.
-     * $params['ccs_minimize_roundtrips']       = (boolean) If true, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests. (Default = true)
-     * $params['default_operator']              = (enum) The default operator for query string query: AND or OR.This parameter can only be used when the `q` query string parameter is specified. (Options = and,or)
+     * $params['ccs_minimize_roundtrips']       = (boolean) If `true`, network round-trips between the coordinating node and the remote clusters are minimized when executing cross-cluster search (CCS) requests. (Default = true)
+     * $params['default_operator']              = (enum) The default operator for query string query: AND or OR.This parameter can only be used when the `q` query string parameter is specified. (Options = and,AND,or,OR)
      * $params['df']                            = (string) Field to use as default where no field prefix is given in the query string.This parameter can only be used when the q query string parameter is specified.
      * $params['docvalue_fields']               = (any) A comma-separated list of fields to return as the docvalue representation for each hit.
      * $params['expand_wildcards']              = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
@@ -1426,7 +1440,7 @@ class Client
      * $params['from']                          = (integer) Starting document offset.Needs to be non-negative.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 0)
      * $params['ignore_throttled']              = (boolean) If `true`, concrete, expanded or aliased indexes will be ignored when frozen.
      * $params['ignore_unavailable']            = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['include_named_queries_score']   = (boolean) Indicates whether hit.matched_queries should be rendered as a map that includes the name of the matched query associated with its score (true) or as an array containing the name of the matched queries (false) (Default = false)
+     * $params['include_named_queries_score']   = (boolean) Indicates whether `hit.matched_queries` should be rendered as a map that includes the name of the matched query associated with its score (true) or as an array containing the name of the matched queries (false) (Default = false)
      * $params['lenient']                       = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.This parameter can only be used when the `q` query string parameter is specified.
      * $params['max_concurrent_shard_requests'] = (integer) Defines the number of concurrent shard requests per node this search executes concurrently.This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default = 5)
      * $params['phase_took']                    = (boolean) Indicates whether to return phase-level `took` time values in the response. (Default = false)
@@ -1492,6 +1506,7 @@ class Client
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['body']               = (array) Defines the parameters that can be used in the `search_shards` endpoint request. See documentation for supported query syntax.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1499,10 +1514,12 @@ class Client
     public function searchShards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+        $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchShards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
@@ -1519,7 +1536,7 @@ class Client
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['preference']              = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['profile']                 = (boolean) If `true`, the query execution is profiled.
-     * $params['rest_total_hits_as_int']  = (boolean) If true, hits.total are rendered as an integer in the response. (Default = false)
+     * $params['rest_total_hits_as_int']  = (boolean) If `true`, `hits.total` are rendered as an integer in the response. (Default = false)
      * $params['routing']                 = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                  = (string) Specifies how long a consistent view of the indexshould be maintained for scrolled search.
      * $params['search_type']             = (enum) The type of the search operation. (Options = dfs_query_then_fetch,query_then_fetch)
@@ -1529,7 +1546,7 @@ class Client
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']                    = (array) The search definition template and its params (Required)
+     * $params['body']                    = (array) The search definition template and its parameters. (Required)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1558,7 +1575,7 @@ class Client
      * $params['payloads']         = (boolean) If `true`, the response includes term payloads. (Default = true)
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If true, the request is real-time as opposed to near-real-time. (Default = true)
+     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time. (Default = true)
      * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
@@ -1593,14 +1610,14 @@ class Client
      *
      * $params['id']                     = (string) Document ID (Required)
      * $params['index']                  = (string) The name of the index (Required)
-     * $params['_source']                = (any) Set to false to disable source retrieval. You can also specify a comma-separatedlist of the fields you want to retrieve.
+     * $params['_source']                = (any) Set to `false` to disable source retrieval. You can also specify a comma-separatedlist of the fields you want to retrieve.
      * $params['_source_excludes']       = (any) Specify the source fields you want to exclude.
      * $params['_source_includes']       = (any) Specify the source fields you want to retrieve.
      * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['lang']                   = (string) The script language. (Default = painless)
-     * $params['refresh']                = (enum) If 'true', OpenSearch refreshes the affected shards to make this operationvisible to search, if 'wait_for' then wait for a refresh to make this operationvisible to search, if 'false' do nothing with refreshes. (Options = false,true,wait_for)
-     * $params['require_alias']          = (boolean) If true, the destination must be an index alias. (Default = false)
+     * $params['refresh']                = (any) If 'true', OpenSearch refreshes the affected shards to make this operationvisible to search, if `wait_for` then wait for a refresh to make this operationvisible to search, if `false` do nothing with refreshes.
+     * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
      * $params['retry_on_conflict']      = (integer) Specify how many times should the operation be retried when a conflict occurs. (Default = 0)
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for dynamic mapping updates and active shards.This guarantees OpenSearch waits for at least the timeout before failing.The actual wait time could be longer, particularly when multiple waits occur.
@@ -1634,14 +1651,14 @@ class Client
      * Performs an update on every document in the index without changing the source,for example to pick up a mapping change.
      *
      * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
-     * $params['_source']                = (array) True or false to return the _source field or not, or a list of fields to return.
-     * $params['_source_excludes']       = (array) List of fields to exclude from the returned _source field.
-     * $params['_source_includes']       = (array) List of fields to extract and return from the _source field.
+     * $params['_source']                = (array) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * $params['_source_excludes']       = (array) List of fields to exclude from the returned `_source` field.
+     * $params['_source_includes']       = (array) List of fields to extract and return from the `_source` field.
      * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['analyze_wildcard']       = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']               = (string) Analyzer to use for the query string.
      * $params['conflicts']              = (enum) What to do if update by query hits version conflicts: `abort` or `proceed`. (Options = abort,proceed)
-     * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,or)
+     * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
      * $params['df']                     = (string) Field to use as default where no field prefix is given in the query string.
      * $params['expand_wildcards']       = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['from']                   = (integer) Starting offset. (Default = 0)
@@ -1651,7 +1668,7 @@ class Client
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['preference']             = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                      = (string) Query in the Lucene query string syntax.
-     * $params['refresh']                = (boolean) If `true`, OpenSearch refreshes affected shards to make the operation visible to search.
+     * $params['refresh']                = (any) If `true`, OpenSearch refreshes affected shards to make the operation visible to search.
      * $params['request_cache']          = (boolean) If `true`, the request cache is used for this request.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second. (Default = 0)
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
@@ -1659,7 +1676,7 @@ class Client
      * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.
      * $params['search_type']            = (enum) The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
-     * $params['size']                   = (integer) Deprecated, please use `max_docs` instead.
+     * $params['size']                   = (integer) Deprecated, use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                  = (array) Specific `tag` of the request for logging and statistical purposes.
@@ -1918,6 +1935,13 @@ class Client
         return $this->remoteStore;
     }
     /**
+     * Returns the replication namespace
+     */
+    public function replication(): ReplicationNamespace
+    {
+        return $this->replication;
+    }
+    /**
      * Returns the rollups namespace
      */
     public function rollups(): RollupsNamespace
@@ -1944,6 +1968,13 @@ class Client
     public function security(): SecurityNamespace
     {
         return $this->security;
+    }
+    /**
+     * Returns the sm namespace
+     */
+    public function sm(): SmNamespace
+    {
+        return $this->sm;
     }
     /**
      * Returns the snapshot namespace
