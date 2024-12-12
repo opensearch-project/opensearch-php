@@ -34,13 +34,13 @@ class CatNamespace extends AbstractNamespace
      * Shows information about currently configured aliases to indexes including filter and routing info.
      *
      * $params['name']             = (array) A comma-separated list of aliases to retrieve. Supports wildcards (`*`).  To retrieve all aliases, omit this parameter or use `*` or `_all`.
-     * $params['expand_wildcards'] = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['format']           = (string) A short version of the Accept header, e.g. json, yaml.
-     * $params['h']                = (array) Comma-separated list of column names to display.
-     * $params['help']             = (boolean) Return help information. (Default = false)
-     * $params['local']            = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['s']                = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['v']                = (boolean) Verbose mode. Display column headers. (Default = false)
+     * $params['expand_wildcards'] = (any) Expands wildcard expressions to concrete indexes. Combine multiple values with commas. Supported values are `all`, `open`, `closed`, `hidden`, and `none`.
+     * $params['format']           = (string) A short version of the `Accept` header, such as `json` or `yaml`.
+     * $params['h']                = (array) A comma-separated list of column names to display.
+     * $params['help']             = (boolean) Returns help information. (Default = false)
+     * $params['local']            = (boolean) Whether to return information from the local node only instead of from the cluster manager node. (Default = false)
+     * $params['s']                = (array) A comma-separated list of column names or column aliases to sort by.
+     * $params['v']                = (boolean) Enables verbose mode, which displays column headers. (Default = false)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -65,7 +65,7 @@ class CatNamespace extends AbstractNamespace
      * Lists all active point-in-time segments.
      *
      * $params['bytes']       = (enum) The unit in which to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
@@ -90,16 +90,16 @@ class CatNamespace extends AbstractNamespace
     /**
      * Provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
      *
-     * $params['node_id']                 = (array) Comma-separated list of node identifiers or names used to limit the returned information.
-     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
-     * $params['h']                       = (array) Comma-separated list of column names to display.
-     * $params['help']                    = (boolean) Return help information. (Default = false)
-     * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
-     * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
+     * $params['node_id']                 = (array) A comma-separated list of node IDs or names used to limit the returned information.
+     * $params['bytes']                   = (enum) The units used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
+     * $params['cluster_manager_timeout'] = (string) A timeout for connection to the cluster manager node.
+     * $params['format']                  = (string) A short version of the HTTP `Accept` header, such as `json` or `yaml`.
+     * $params['h']                       = (array) A comma-separated list of column names to display.
+     * $params['help']                    = (boolean) Returns help information. (Default = false)
+     * $params['local']                   = (boolean) Returns local information but does not retrieve the state from cluster-manager node. (Default = false)
+     * $params['master_timeout']          = (string) A timeout for connection to the cluster manager node.
+     * $params['s']                       = (array) A comma-separated list of column names or column aliases to sort by.
+     * $params['v']                       = (boolean) Enables verbose mode, which displays column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -123,14 +123,14 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about the cluster-manager node.
      *
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
-     * $params['h']                       = (array) Comma-separated list of column names to display.
+     * $params['cluster_manager_timeout'] = (string) A timeout for connection to the cluster manager node.
+     * $params['format']                  = (string) A short version of the HTTP `Accept` header, such as `json` or `yaml`.
+     * $params['h']                       = (array) A comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
-     * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
-     * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
+     * $params['master_timeout']          = (string) A timeout for connection to the cluster manager node.
+     * $params['s']                       = (array) A comma-separated list of column names or column aliases to sort by.
+     * $params['v']                       = (boolean) Enables verbose mode, which displays column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -152,7 +152,7 @@ class CatNamespace extends AbstractNamespace
      * Provides quick access to the document count of the entire cluster, or individual indexes.
      *
      * $params['index']       = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
@@ -178,11 +178,11 @@ class CatNamespace extends AbstractNamespace
     }
 
     /**
-     * Shows how much heap memory is currently being used by fielddata on every data node in the cluster.
+     * Shows how much heap memory is currently being used by field data on every data node in the cluster.
      *
      * $params['fields']      = (array) Comma-separated list of fields used to limit returned information. To retrieve all fields, omit this parameter.
      * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
@@ -210,12 +210,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns a concise representation of the cluster health.
      *
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['time']        = (enum) The unit used to display time values. (Options = d,h,m,micros,ms,nanos,s)
-     * $params['ts']          = (boolean) If true, returns `HH:MM:SS` and Unix epoch timestamps. (Default = true)
+     * $params['ts']          = (boolean) If `true`, returns `HH:MM:SS` and Unix epoch timestamps. (Default = true)
      * $params['v']           = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -261,14 +261,14 @@ class CatNamespace extends AbstractNamespace
      * $params['bytes']                     = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout']   = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.
-     * $params['format']                    = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                    = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                         = (array) Comma-separated list of column names to display.
-     * $params['health']                    = (enum) The health status used to limit returned indexes. By default, the response includes indexes of any health status. (Options = green,red,yellow)
+     * $params['health']                    = (any) The health status used to limit returned indexes. By default, the response includes indexes of any health status.
      * $params['help']                      = (boolean) Return help information. (Default = false)
-     * $params['include_unloaded_segments'] = (boolean) If true, the response includes information from segments that are not loaded into memory. (Default = false)
+     * $params['include_unloaded_segments'] = (boolean) If `true`, the response includes information from segments that are not loaded into memory. (Default = false)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']            = (string) Operation timeout for connection to master node.
-     * $params['pri']                       = (boolean) If true, the response only includes information from primary shards. (Default = false)
+     * $params['master_timeout']            = (string) Operation timeout for connection to cluster-manager node.
+     * $params['pri']                       = (boolean) If `true`, the response only includes information from primary shards. (Default = false)
      * $params['s']                         = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['time']                      = (enum) The unit used to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                         = (boolean) Verbose mode. Display column headers. (Default = false)
@@ -296,11 +296,11 @@ class CatNamespace extends AbstractNamespace
      * Returns information about the cluster-manager node.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -324,11 +324,11 @@ class CatNamespace extends AbstractNamespace
      * Returns information about custom node attributes.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -353,12 +353,12 @@ class CatNamespace extends AbstractNamespace
      *
      * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['full_id']                 = (any) If `true`, return the full node ID. If `false`, return the shortened node ID. (Default = )
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
@@ -383,11 +383,11 @@ class CatNamespace extends AbstractNamespace
      * Returns a concise representation of the cluster pending tasks.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
@@ -412,7 +412,7 @@ class CatNamespace extends AbstractNamespace
      * List segments for one or several PITs.
      *
      * $params['bytes']       = (enum) The unit in which to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
@@ -441,11 +441,11 @@ class CatNamespace extends AbstractNamespace
      * Returns information about installed plugins across nodes node.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -472,7 +472,7 @@ class CatNamespace extends AbstractNamespace
      * $params['active_only'] = (boolean) If `true`, the response only includes ongoing shard recoveries. (Default = false)
      * $params['bytes']       = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['detailed']    = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
@@ -502,11 +502,11 @@ class CatNamespace extends AbstractNamespace
      * Returns information about snapshot repositories registered in the cluster.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -536,7 +536,7 @@ class CatNamespace extends AbstractNamespace
      * $params['completed_only']     = (boolean) If `true`, the response only includes latest completed segment replication events. (Default = false)
      * $params['detailed']           = (boolean) If `true`, the response includes detailed information about segment replications. (Default = false)
      * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['format']             = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']             = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                  = (array) Comma-separated list of column names to display.
      * $params['help']               = (boolean) Return help information. (Default = false)
      * $params['ignore_throttled']   = (boolean) Whether specified concrete, expanded or aliased indexes should be ignored when throttled.
@@ -572,10 +572,10 @@ class CatNamespace extends AbstractNamespace
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -604,11 +604,11 @@ class CatNamespace extends AbstractNamespace
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
@@ -637,11 +637,11 @@ class CatNamespace extends AbstractNamespace
      *
      * $params['repository']              = (array) A comma-separated list of snapshot repositories used to limit the request. Accepts wildcard expressions. `_all` returns all repositories. If any repository fails during the request, OpenSearch returns an error.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['ignore_unavailable']      = (boolean) If `true`, the response does not include information from unavailable snapshots. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
@@ -670,7 +670,7 @@ class CatNamespace extends AbstractNamespace
      *
      * $params['actions']     = (array) The task action names, which are used to limit the response.
      * $params['detailed']    = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
-     * $params['format']      = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']           = (array) Comma-separated list of column names to display.
      * $params['help']        = (boolean) Return help information. (Default = false)
      * $params['s']           = (array) Comma-separated list of column names or column aliases to sort by.
@@ -700,11 +700,11 @@ class CatNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) The name of the template to return. Accepts wildcard expressions. If omitted, all templates are returned.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -732,11 +732,11 @@ class CatNamespace extends AbstractNamespace
      *
      * $params['thread_pool_patterns']    = (array) A comma-separated list of thread pool names used to limit the request. Accepts wildcard expressions.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, e.g. json, yaml.
+     * $params['format']                  = (string) A short version of the Accept header (for example, `json`, `yaml`).
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to master node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['size']                    = (integer) The multiplier in which to display values.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)

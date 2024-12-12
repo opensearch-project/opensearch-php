@@ -437,7 +437,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Generates authorization token for the given user. Legacy API.  Not Implemented.
+     * Generates authorization token for the given user. Legacy API. Not Implemented.
      *
      * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -630,7 +630,7 @@ class SecurityNamespace extends AbstractNamespace
      * Retrieves distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
      *
      * $params['cluster_name'] = (string) The cluster-name to retrieve nodes DN setting for. (Required)
-     * $params['show_all']     = (boolean) A boolean flag to include/exclude static nodes DN from final result.
+     * $params['show_all']     = (boolean) A Boolean flag to include/exclude static nodes DN from final result.
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -748,7 +748,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the SSL configuration information.
      *
-     * $params['show_dn']     = (Array) A boolean flag to indicate whether all domain names should be returned.
+     * $params['show_dn']     = (Array) A Boolean flag to indicate whether all domain names should be returned.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -881,7 +881,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Checks to see if the Security plugin is up and running.
      *
-     * $params['mode']        = (string) A flag to indicate whether service should consider security-plugin's status before returning health response. `strict` mode indicates service should check security plugin status.
+     * $params['mode']        = (string) A flag to indicate whether service should consider security-plugin's status before returning health response. `strict` mode indicates service should check Security plugin status.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -992,7 +992,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * A PATCH call is used to update the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
+     * A `PATCH` call is used to update the existing configuration using the REST API. Only accessible by admins and users with REST API access and only when put or patch is enabled.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1017,7 +1017,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['cluster_name'] = (string) The cluster-name to update nodesDn value. (Required)
+     * $params['cluster_name'] = (string) The cluster name to update `nodesDn` value. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1271,7 +1271,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Adds or updates the existing configuration using the REST API. Only accessible by admins and users with rest api access and only when put or patch is enabled.
+     * Adds or updates the existing configuration using the REST API. Only accessible by admins and users with REST API access and only when put or patch is enabled.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1296,7 +1296,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Adds or updates the specified distinguished names in the cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
      *
-     * $params['cluster_name'] = (string) The cluster-name to create/update nodesDn value for. (Required)
+     * $params['cluster_name'] = (string) The cluster-name to create/update `nodesDn` value for. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1322,7 +1322,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
      *
-     * $params['accept_invalid'] = (boolean) A boolean flag to indicate whether invalid v6 configuration should be allowed.
+     * $params['accept_invalid'] = (boolean) A Boolean flag to indicate whether invalid v6 configuration should be allowed.
      * $params['pretty']         = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']          = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors. (Default = false)

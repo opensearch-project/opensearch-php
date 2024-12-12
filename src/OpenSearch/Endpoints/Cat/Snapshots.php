@@ -48,6 +48,7 @@ class Snapshots extends AbstractEndpoint
             'help',
             'ignore_unavailable',
             'master_timeout',
+            'repository',
             's',
             'time',
             'v',
