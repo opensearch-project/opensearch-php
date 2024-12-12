@@ -57,4 +57,14 @@ class Upgrade extends AbstractEndpoint
     {
         return 'POST';
     }
+
+    public function setBody($body): static
+    {
+        if (isset($body) !== true) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
+    }
 }
