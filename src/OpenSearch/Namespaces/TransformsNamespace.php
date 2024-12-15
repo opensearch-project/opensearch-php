@@ -120,7 +120,7 @@ class TransformsNamespace extends AbstractNamespace
     }
 
     /**
-     * Create an index transform, or update a transform if if_seq_no and if_primary_term are provided.
+     * Create an index transform, or update a transform if `if_seq_no` and `if_primary_term` are provided.
      *
      * $params['id']              = (string) Transform to create/update
      * $params['if_primary_term'] = (number) Only perform the operation if the document has this primary term.

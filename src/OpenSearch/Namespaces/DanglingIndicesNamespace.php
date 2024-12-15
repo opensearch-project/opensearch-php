@@ -33,11 +33,11 @@ class DanglingIndicesNamespace extends AbstractNamespace
     /**
      * Deletes the specified dangling index.
      *
-     * $params['index_uuid']              = (string) The UUID of the dangling index
-     * $params['accept_data_loss']        = (boolean) Must be set to true in order to delete the dangling index
+     * $params['index_uuid']              = (string) The UUID of the dangling index.
+     * $params['accept_data_loss']        = (boolean) Must be set to true in order to delete the dangling index.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Specify timeout for connection to master
-     * $params['timeout']                 = (string) Explicit operation timeout
+     * $params['master_timeout']          = (string) Specify timeout for connection to cluster manager.
+     * $params['timeout']                 = (string) Explicit operation timeout.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -61,11 +61,11 @@ class DanglingIndicesNamespace extends AbstractNamespace
     /**
      * Imports the specified dangling index.
      *
-     * $params['index_uuid']              = (string) The UUID of the dangling index
-     * $params['accept_data_loss']        = (boolean) Must be set to true in order to import the dangling index
+     * $params['index_uuid']              = (string) The UUID of the dangling index.
+     * $params['accept_data_loss']        = (boolean) Must be set to true in order to import the dangling index.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Specify timeout for connection to master
-     * $params['timeout']                 = (string) Explicit operation timeout
+     * $params['master_timeout']          = (string) Specify timeout for connection to cluster manager.
+     * $params['timeout']                 = (string) Explicit operation timeout.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)

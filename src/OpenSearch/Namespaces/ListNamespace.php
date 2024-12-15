@@ -53,13 +53,13 @@ class ListNamespace extends AbstractNamespace
      * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.
      * $params['format']                    = (string) A short version of the Accept header, such as `JSON`, `YAML`.
      * $params['h']                         = (array) Comma-separated list of column names to display.
-     * $params['health']                    = (enum) The health status used to limit returned indexes. By default, the response includes indexes of any health status. (Options = green,red,yellow)
+     * $params['health']                    = (any) The health status used to limit returned indexes. By default, the response includes indexes of any health status.
      * $params['help']                      = (boolean) Return help information. (Default = false)
-     * $params['include_unloaded_segments'] = (boolean) If true, the response includes information from segments that are not loaded into memory. (Default = false)
+     * $params['include_unloaded_segments'] = (boolean) If `true`, the response includes information from segments that are not loaded into memory. (Default = false)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']            = (string) Operation timeout for connection to cluster manager node.
+     * $params['master_timeout']            = (string) Operation timeout for connection to cluster-manager node.
      * $params['next_token']                = (Array) Token to retrieve next page of indexes.
-     * $params['pri']                       = (boolean) If true, the response only includes information from primary shards. (Default = false)
+     * $params['pri']                       = (boolean) If `true`, the response only includes information from primary shards. (Default = false)
      * $params['s']                         = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['size']                      = (integer) Maximum number of indexes to be displayed in a page.
      * $params['sort']                      = (enum) Defines order in which indexes will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created indexes would be displayed first. (Options = asc,desc)
@@ -95,7 +95,7 @@ class ListNamespace extends AbstractNamespace
      * $params['h']                       = (array) Comma-separated list of column names to display.
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to cluster manager node.
+     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
      * $params['next_token']              = (Array) Token to retrieve next page of shards.
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['size']                    = (integer) Maximum number of shards to be displayed in a page.

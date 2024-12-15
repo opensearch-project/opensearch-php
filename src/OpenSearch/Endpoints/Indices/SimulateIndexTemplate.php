@@ -43,9 +43,7 @@ class SimulateIndexTemplate extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'cause',
             'cluster_manager_timeout',
-            'create',
             'master_timeout',
             'pretty',
             'human',

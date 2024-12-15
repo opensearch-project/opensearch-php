@@ -33,8 +33,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Provides explanations for shard allocations in the cluster.
      *
-     * $params['include_disk_info']     = (boolean) If true, returns information about disk usage and shard sizes. (Default = false)
-     * $params['include_yes_decisions'] = (boolean) If true, returns YES decisions in explanation. (Default = false)
+     * $params['include_disk_info']     = (boolean) If `true`, returns information about disk usage and shard sizes. (Default = false)
+     * $params['include_yes_decisions'] = (boolean) If `true`, returns YES decisions in explanation. (Default = false)
      * $params['pretty']                = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                 = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -61,7 +61,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) Name of the component template to delete. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -106,7 +106,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Clears cluster voting config exclusions.
      *
-     * $params['wait_for_removal'] = (boolean) Specifies whether to wait for all excluded nodes to be removed from thecluster before clearing the voting configuration exclusions list.Defaults to true, meaning that all excluded nodes must be removed fromthe cluster before this API takes any action. If set to false then thevoting configuration exclusions list is cleared even if some excludednodes are still in the cluster. (Default = true)
+     * $params['wait_for_removal'] = (boolean) Specifies whether to wait for all excluded nodes to be removed from thecluster before clearing the voting configuration exclusions list.Defaults to true, meaning that all excluded nodes must be removed fromthe cluster before this API takes any action. If set to `false` then thevoting configuration exclusions list is cleared even if some excludednodes are still in the cluster. (Default = true)
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -152,8 +152,8 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) Name of the component template to check existence of. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['local']                   = (boolean) If true, the request retrieves information from the local node only.Defaults to false, which means information is retrieved from the master node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node. If no response isreceived before the timeout expires, the request fails and returns anerror.
+     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.Defaults to false, which means information is retrieved from the cluster-manager node. (Default = false)
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response isreceived before the timeout expires, the request fails and returns anerror.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -182,8 +182,8 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (array) Name of the component template to retrieve. Wildcard (`*`) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the master node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the cluster-manager node. (Default = false)
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -234,7 +234,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['include_defaults']        = (boolean) If `true`, returns default cluster settings from the local node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -285,15 +285,15 @@ class ClusterNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout']         = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']                = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['level']                           = (enum) Can be one of cluster, indexes or shards. Controls the details level of the health information returned. (Options = awareness_attributes,cluster,indices,shards)
-     * $params['local']                           = (boolean) If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node. (Default = false)
-     * $params['master_timeout']                  = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['local']                           = (boolean) If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node. (Default = false)
+     * $params['master_timeout']                  = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                         = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['wait_for_active_shards']          = (any) A number controlling to how many active shards to wait for, all to wait for all shards in the cluster to be active, or 0 to not wait.
      * $params['wait_for_events']                 = (enum) Can be one of immediate, urgent, high, normal, low, languid. Wait until all currently queued events with the given priority are processed. (Options = high,immediate,languid,low,normal,urgent)
-     * $params['wait_for_no_initializing_shards'] = (boolean) A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
-     * $params['wait_for_no_relocating_shards']   = (boolean) A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
+     * $params['wait_for_no_initializing_shards'] = (boolean) A Boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard initializations. Defaults to false, which means it will not wait for initializing shards.
+     * $params['wait_for_no_relocating_shards']   = (boolean) A Boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards.
      * $params['wait_for_nodes']                  = (any) The request waits until the specified number N of nodes is available. It also accepts >=N, <=N, >N and <N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
-     * $params['wait_for_status']                 = (enum) One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status. (Options = green,red,yellow)
+     * $params['wait_for_status']                 = (any) One of green, yellow or red. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. green > yellow > red. By default, will not wait for any status.
      * $params['pretty']                          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                           = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']                     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -318,8 +318,8 @@ class ClusterNamespace extends AbstractNamespace
      * Returns a list of any cluster-level changes (e.g. create index, update mapping,allocate or fail shard) which have not yet been executed.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the master node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the cluster-manager node. (Default = false)
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -340,8 +340,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Updates the cluster voting config exclusions by node ids or node names.
      *
-     * $params['node_ids']    = (any) A comma-separated list of the persistent ids of the nodes to excludefrom the voting configuration. If specified, you may not also specify node_names.
-     * $params['node_names']  = (any) A comma-separated list of the names of the nodes to exclude from thevoting configuration. If specified, you may not also specify node_ids.
+     * $params['node_ids']    = (any) A comma-separated list of the persistent ids of the nodes to excludefrom the voting configuration. If specified, you may not also specify `node_names`.
+     * $params['node_names']  = (any) A comma-separated list of the names of the nodes to exclude from thevoting configuration. If specified, you may not also specify `node_ids`.
      * $params['timeout']     = (string) When adding a voting configuration exclusion, the API waits for thespecified nodes to be excluded from the voting configuration beforereturning. If the timeout expires before the appropriate conditionis satisfied, the request fails and returns an error.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -366,7 +366,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['name']                    = (string) Name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; 'logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-mapping`; `synthetics-settings`. OpenSearch Agent uses these templates to configure backing indexes for its data streams. If you use OpenSearch Agent and want to overwrite one of these templates, set the `version` for your replacement template higher than the current version. If you don't use OpenSearch Agent and want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the cluster update settings API.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing component templates. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Operation timeout.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -423,7 +423,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['flat_settings']           = (boolean) Return settings in flat format. (Default = false)
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) Explicit operation timeout
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -496,11 +496,11 @@ class ClusterNamespace extends AbstractNamespace
      * Allows to manually change the allocation of individual shards in the cluster.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['dry_run']                 = (boolean) If true, then the request simulates the operation only and returns the resulting state.
-     * $params['explain']                 = (boolean) If true, then the response contains an explanation of why the commands can or cannot be executed.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['dry_run']                 = (boolean) If `true`, then the request simulates the operation only and returns the resulting state.
+     * $params['explain']                 = (boolean) If `true`, then the response contains an explanation of why the commands can or cannot be executed.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['metric']                  = (any) Limits the information returned to the specified metrics.
-     * $params['retry_failed']            = (boolean) If true, then retries allocation of shards that are blocked due to too many subsequent allocation failures.
+     * $params['retry_failed']            = (boolean) If `true`, then retries allocation of shards that are blocked due to too many subsequent allocation failures.
      * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -534,9 +534,9 @@ class ClusterNamespace extends AbstractNamespace
      * $params['flat_settings']             = (boolean) Return settings in flat format. (Default = false)
      * $params['ignore_unavailable']        = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']            = (string) Specify timeout for connection to master
-     * $params['wait_for_metadata_version'] = (integer) Wait for the metadata version to be equal or greater than the specified metadata version
-     * $params['wait_for_timeout']          = (string) The maximum time to wait for wait_for_metadata_version before timing out
+     * $params['master_timeout']            = (string) Specify timeout for connection to cluster manager.
+     * $params['wait_for_metadata_version'] = (integer) Wait for the metadata version to be equal or greater than the specified metadata version.
+     * $params['wait_for_timeout']          = (string) The maximum time to wait for `wait_for_metadata_version` before timing out.
      * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                     = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -563,7 +563,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns high-level overview of cluster statistics.
      *
      * $params['index_metric']  = (array) Limit the information returned for indexes metric to the specific index metrics. It can be used only if indexes (or all) metric is specified.
-     * $params['metric']        = (array) Limit the information returned to the specified metrics
+     * $params['metric']        = (array) Limit the information returned to the specified metrics.
      * $params['node_id']       = (array) Comma-separated list of node filters used to limit returned information. Defaults to all nodes in the cluster.
      * $params['flat_settings'] = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['timeout']       = (string) Period to wait for each node to respond.If a node does not respond before its timeout expires, the response does not include its stats.However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.

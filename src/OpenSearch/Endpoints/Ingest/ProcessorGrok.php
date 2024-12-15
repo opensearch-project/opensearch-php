@@ -36,6 +36,7 @@ class ProcessorGrok extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            's',
             'pretty',
             'human',
             'error_trace',
