@@ -1,26 +1,40 @@
-<?php
+- [Upgrading OpenSearch PHP Client](#upgrading-opensearch-php-client)
+    - [Upgrading to >= 2.0.0](#upgrading-to--200)
+        - [HTTP Client Auto-Discovery](#http-client-auto-discovery)
+        - [Configuring Guzzle HTTP Client in 2.x](#configuring-guzzle-http-client-in-2x)
+        - [Configuring Symfony HTTP Client in 2.x](#configuring-symfony-http-client-in-2x)
 
-/**
- * Copyright OpenSearch Contributors
- * SPDX-License-Identifier: Apache-2.0
- */
+# Upgrading OpenSearch PHP Client
 
-use OpenSearch\Client;
+## Upgrading to >= 2.0.0
 
-require_once __DIR__ . '/vendor/autoload.php';
+openseach-php removes the hard-coded dependency on the [Guzzle HTTP client](https://docs.guzzlephp.org/en/stable/#) and switches to the following PSR interfaces: 
 
+- [PSR-7 HTTP message interfaces](https://www.php-fig.org/psr/psr-7/)
+- [PSR-17 HTTP Factories](https://www.php-fig.org/psr/psr-17/)
+- [PSR-18 HTTP Client](https://www.php-fig.org/psr/psr-18/)
 
-// Auto-configure by discovery example
+You can continue to use Guzzle, but will need to configure it as a PSR-18 HTTP Client.
 
+### HTTP Client Auto-Discovery
+
+opensearch-php 2.x will try and discover and install a PSR HTTP Client using [PHP-HTTP Discovery](https://docs.php-http.org/en/latest/discovery.html) 
+if one is not explicitly provided.
+
+```php
 $transport = (new \OpenSearch\TransportFactory())->create();
 $endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
 $info = $client->info();
+```
 
-// Guzzle example
+### Configuring Guzzle HTTP Client in 2.x
 
+To configure Guzzle as a PSR HTTP Client with the similar configuration to opensearch 1.x you can use the following example:
+
+```php
 $guzzleClient = new \GuzzleHttp\Client([
     'base_uri' => 'https://localhost:9200',
     'auth' => ['admin', getenv('OPENSEARCH_PASSWORD')],
@@ -42,13 +56,14 @@ $transport = (new OpenSearch\TransportFactory())
 
 $endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new Client($transport, $endpointFactory, []);
+```
 
-// Send a request to the 'info' endpoint.
-$info = $client->info();
+### Configuring Symfony HTTP Client in 2.x
 
+You can configure [Symfony HTTP Client](https://symfony.com/doc/current/http_client.html) as a PSR HTTP Client using
+the following example:
 
-// Symfony example
-
+```php
 $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOptions([
     'base_uri' => 'https://localhost:9200',
     'auth_basic' => ['admin', getenv('OPENSEARCH_PASSWORD')],
@@ -59,7 +74,6 @@ $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOpt
         'Content-Type' => 'application/json',
     ],
 ]);
-
 
 $transport = (new OpenSearch\TransportFactory())
     ->setHttpClient($symfonyPsr18Client)
@@ -72,3 +86,5 @@ $client = new Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
 $info = $client->info();
+
+```
