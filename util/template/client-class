@@ -142,9 +142,9 @@ class Client
     }
 
     /**
-     * Sends a raw request to the cluster
-     * @return callable|array
-     * @throws NoNodesAvailableException
+     * Send a raw request to the cluster.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function request(string $method, string $uri, array $attributes = []): array|string|null
     {
@@ -155,6 +155,11 @@ class Client
         return $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
     }
 
+    /**
+     * Send a request for an endpoint.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     private function performRequest(AbstractEndpoint $endpoint): array|string|null
     {
         return $this->httpTransport->sendRequest(
