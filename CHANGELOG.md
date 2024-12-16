@@ -9,6 +9,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added samples ([#218](https://github.com/opensearch-project/opensearch-php/pull/218))
 - Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
 ### Changed
+- Switched to PSR Interfaces
+- Increased PHP min version to 8.1
 - Increased min version of `ezimuel/ringphp` to `^1.2.2`
 - Changed fluent setters to return static
 ### Deprecated
