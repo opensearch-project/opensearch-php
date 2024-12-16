@@ -2,8 +2,7 @@
 
 namespace OpenSearch;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Ring\Future\FutureArrayInterface;
 
 /**
  * Transport that wraps the legacy transport.
@@ -29,7 +28,10 @@ class LegacyTransportWrapper implements TransportInterface
     ): array|string|null {
         $promise = $this->transport->performRequest($method, $uri, $params, $body);
         $futureArray = $this->transport->resultOrFuture($promise);
-        return $futureArray->_value;
+        if ($futureArray instanceof FutureArrayInterface) {
+            return $futureArray->wait();
+        }
+        return $futureArray;
     }
 
 }
