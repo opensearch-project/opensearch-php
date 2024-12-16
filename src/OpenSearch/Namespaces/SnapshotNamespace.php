@@ -35,7 +35,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * $params['repository']              = (string) Snapshot repository to clean up.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.
      * $params['timeout']                 = (string) Period to wait for a response.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -64,7 +64,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['snapshot']                = (string) The name of the snapshot to clone from
      * $params['target_snapshot']         = (string) The name of the cloned snapshot to create
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -98,7 +98,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['repository']              = (string) Repository for the snapshot.
      * $params['snapshot']                = (string) Name of the snapshot. Must be unique in the repository.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['wait_for_completion']     = (boolean) If `true`, the request returns a response when the snapshot is complete. If `false`, the request returns a response when the snapshot initializes. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -130,7 +130,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * $params['repository']              = (string) A repository name
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) Explicit operation timeout
      * $params['verify']                  = (boolean) Whether to verify the repository after creation
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -162,7 +162,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['repository']              = (string) A repository name
      * $params['snapshot']                = (string) A comma-separated list of snapshot names
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -190,7 +190,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * $params['repository']              = (array) Name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) Explicit operation timeout
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -216,11 +216,11 @@ class SnapshotNamespace extends AbstractNamespace
      * Returns information about a snapshot.
      *
      * $params['repository']              = (string) Comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
-     * $params['snapshot']                = (array) Comma-separated list of snapshot names to retrieve. Also accepts wildcards (*). - To get information about all snapshots in a registered repository, use a wildcard (*) or _all. - To get information about any snapshots that are currently running, use _current.
+     * $params['snapshot']                = (array) Comma-separated list of snapshot names to retrieve. Also accepts wildcards (`*`). - To get information about all snapshots in a registered repository, use a wildcard (`*`) or `_all`. - To get information about any snapshots that are currently running, use `_current`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['ignore_unavailable']      = (boolean) If false, the request returns an error for any snapshots that are unavailable. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['verbose']                 = (boolean) If true, returns additional information about each snapshot such as the version of OpenSearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
+     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error for any snapshots that are unavailable. (Default = false)
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['verbose']                 = (boolean) If `true`, returns additional information about each snapshot such as the version of OpenSearch which took the snapshot, the start and end times of the snapshot, and the number of shards snapshotted.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -249,7 +249,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['repository']              = (array) A comma-separated list of repository names
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -276,7 +276,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['repository']              = (string) A repository name
      * $params['snapshot']                = (string) A snapshot name
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -309,8 +309,8 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['repository']              = (string) A repository name
      * $params['snapshot']                = (array) A comma-separated list of snapshot names
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['ignore_unavailable']      = (boolean) Whether to ignore unavailable snapshots, defaults to false which means a SnapshotMissingException is thrown (Default = false)
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['ignore_unavailable']      = (boolean) Whether to ignore unavailable snapshots, defaults to `false` which means a SnapshotMissingException is thrown (Default = false)
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -338,7 +338,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * $params['repository']              = (string) A repository name
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to master node
+     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) Explicit operation timeout
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)

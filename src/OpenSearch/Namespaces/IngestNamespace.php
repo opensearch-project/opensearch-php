@@ -35,7 +35,7 @@ class IngestNamespace extends AbstractNamespace
      *
      * $params['id']                      = (string) Pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of `*`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -62,7 +62,7 @@ class IngestNamespace extends AbstractNamespace
      *
      * $params['id']                      = (string) Comma-separated list of pipeline IDs to retrieve. Wildcard (`*`) expressions are supported. To get all ingest pipelines, omit this parameter or use `*`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -86,6 +86,7 @@ class IngestNamespace extends AbstractNamespace
     /**
      * Returns a list of the built-in patterns.
      *
+     * $params['s']           = (boolean) Sort returned patterns by key name. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -108,7 +109,7 @@ class IngestNamespace extends AbstractNamespace
      *
      * $params['id']                      = (string) ID of the ingest pipeline to create or update.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
