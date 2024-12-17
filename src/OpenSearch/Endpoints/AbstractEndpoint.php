@@ -22,11 +22,12 @@ declare(strict_types=1);
 namespace OpenSearch\Endpoints;
 
 use OpenSearch\Common\Exceptions\UnexpectedValueException;
+use OpenSearch\EndpointInterface;
 use OpenSearch\Serializers\SerializerInterface;
 
 use function array_filter;
 
-abstract class AbstractEndpoint
+abstract class AbstractEndpoint implements EndpointInterface
 {
     /**
      * @var array
@@ -85,7 +86,7 @@ abstract class AbstractEndpoint
      * @param mixed[] $params Array of parameters
      * @return $this
      */
-    public function setParams(array $params)
+    public function setParams(array $params): static
     {
         $this->extractOptions($params);
         $this->checkUserParams($params);
@@ -117,7 +118,7 @@ abstract class AbstractEndpoint
      *
      * @return $this
      */
-    public function setIndex($index)
+    public function setIndex($index): static
     {
         if ($index === null) {
             return $this;
@@ -134,12 +135,7 @@ abstract class AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param int|string|null $docID
-     *
-     * @return $this
-     */
-    public function setId($docID)
+    public function setId(int|string|null $docID): static
     {
         if ($docID === null) {
             return $this;
@@ -154,16 +150,12 @@ abstract class AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return array|string
-     */
-    public function getBody()
+    public function getBody(): string|array|null
     {
         return $this->body;
     }
 
-
-    public function setBody(array $body)
+    public function setBody(string|iterable|null $body): static
     {
         $this->body = $body;
 

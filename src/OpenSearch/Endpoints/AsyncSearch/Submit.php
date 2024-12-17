@@ -87,7 +87,7 @@ class Submit extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): Submit
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;

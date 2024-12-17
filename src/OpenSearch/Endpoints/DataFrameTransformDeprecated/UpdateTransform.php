@@ -50,7 +50,7 @@ class UpdateTransform extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): UpdateTransform
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -60,7 +60,7 @@ class UpdateTransform extends AbstractEndpoint
         return $this;
     }
 
-    public function setTransformId($transform_id): UpdateTransform
+    public function setTransformId($transform_id): static
     {
         if (isset($transform_id) !== true) {
             return $this;

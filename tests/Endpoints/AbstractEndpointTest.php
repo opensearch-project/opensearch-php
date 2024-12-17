@@ -21,18 +21,17 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
+use OpenSearch\EndpointInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \OpenSearch\Endpoints\AbstractEndpoint
  */
-class AbstractEndpointTest extends \PHPUnit\Framework\TestCase
+class AbstractEndpointTest extends TestCase
 {
-    /**
-     * @var AbstractEndpoint&MockObject
-     */
-    private $endpoint;
+    private EndpointInterface&MockObject $endpoint;
 
     protected function setUp(): void
     {

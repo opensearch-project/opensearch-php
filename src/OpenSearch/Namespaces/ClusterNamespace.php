@@ -174,7 +174,7 @@ class ClusterNamespace extends AbstractNamespace
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**

@@ -54,7 +54,7 @@ class Mount extends AbstractEndpoint
         return 'POST';
     }
 
-    public function setBody($body): Mount
+    public function setBody($body): static
     {
         if (isset($body) !== true) {
             return $this;
@@ -64,7 +64,7 @@ class Mount extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository($repository): Mount
+    public function setRepository($repository): static
     {
         if (isset($repository) !== true) {
             return $this;
@@ -74,7 +74,7 @@ class Mount extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot($snapshot): Mount
+    public function setSnapshot($snapshot): static
     {
         if (isset($snapshot) !== true) {
             return $this;

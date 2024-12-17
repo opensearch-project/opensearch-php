@@ -8,5 +8,5 @@
         $endpoint = $this->endpointFactory->getEndpoint(:EndpointClass::class);
         $endpoint->setParams($params);
 :setparam
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }

@@ -4,6 +4,7 @@ namespace OpenSearch;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Serializers\SerializerInterface;
+use OpenSearch\Serializers\SmartSerializer;
 use ReflectionClass;
 
 /**
@@ -16,9 +17,11 @@ class EndpointFactory implements EndpointFactoryInterface
      */
     private array $endpoints = [];
 
-    public function __construct(
-        protected SerializerInterface $serializer,
-    ) {
+    private ?SerializerInterface $serializer;
+
+    public function __construct(?SerializerInterface $serializer = null)
+    {
+        $this->serializer = $serializer;
     }
 
     /**
@@ -31,6 +34,14 @@ class EndpointFactory implements EndpointFactoryInterface
         }
 
         return $this->endpoints[$class];
+    }
+
+    private function getSerializer(): SerializerInterface
+    {
+        if ($this->serializer === null) {
+            $this->serializer = new SmartSerializer();
+        }
+        return $this->serializer;
     }
 
     /**
@@ -47,7 +58,7 @@ class EndpointFactory implements EndpointFactoryInterface
         $constructor = $reflection->getConstructor();
 
         if ($constructor && $constructor->getParameters()) {
-            return new $class($this->serializer);
+            return new $class($this->getSerializer());
         }
         return new $class();
     }
