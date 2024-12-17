@@ -8,6 +8,10 @@ interface RequestFactoryInterface
 {
     /**
      * Create a new request.
+     *
+     * @param array<string, mixed> $params
+     * @param string|array<string, mixed>|null $body
+     * @param array<string, string> $headers
      */
     public function createRequest(
         string $method,

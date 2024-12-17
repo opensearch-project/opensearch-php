@@ -34,7 +34,10 @@ abstract class BooleanRequestWrapper
     /**
      * Send a request with a boolean response.
      *
-     * Throwing a client exception will return FALSE, otherwise TRUE is returned.
+     * @return bool
+     *   Returns FALSE for a 404 error, otherwise TRUE.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public static function sendRequest(AbstractEndpoint $endpoint, TransportInterface $transport): bool
     {
@@ -46,8 +49,11 @@ abstract class BooleanRequestWrapper
                 $endpoint->getBody(),
                 $endpoint->getOptions()
             );
-        } catch (ClientExceptionInterface) {
-            return false;
+        } catch (ClientExceptionInterface $e) {
+            if ($e->getCode() === 404) {
+                return false;
+            }
+            throw $e;
         }
         return true;
     }

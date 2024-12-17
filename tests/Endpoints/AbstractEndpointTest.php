@@ -31,7 +31,7 @@ use PHPUnit\Framework\TestCase;
  */
 class AbstractEndpointTest extends TestCase
 {
-    private EndpointInterface|MockObject $endpoint;
+    private EndpointInterface&MockObject $endpoint;
 
     protected function setUp(): void
     {

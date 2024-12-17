@@ -1,12 +1,12 @@
 - [Upgrading OpenSearch PHP Client](#upgrading-opensearch-php-client)
-    - [Upgrading to >= 2.0.0](#upgrading-to--200)
+    - [Upgrading to >= 2.0.0](#upgrading-to--240)
         - [HTTP Client Auto-Discovery](#http-client-auto-discovery)
         - [Configuring Guzzle HTTP Client in 2.x](#configuring-guzzle-http-client-in-2x)
         - [Configuring Symfony HTTP Client in 2.x](#configuring-symfony-http-client-in-2x)
 
 # Upgrading OpenSearch PHP Client
 
-## Upgrading to >= 2.0.0
+## Upgrading to >= 2.4.0
 
 openseach-php removes the hard-coded dependency on the [Guzzle HTTP client](https://docs.guzzlephp.org/en/stable/#) and switches to the following PSR interfaces: 
 

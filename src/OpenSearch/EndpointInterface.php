@@ -67,10 +67,12 @@ interface EndpointInterface
     /**
      * Get the body of the request.
      */
-    public function getBody(): string|iterable|null;
+    public function getBody(): string|array|null;
 
     /**
      * Set the body of the request.
+     *
+     * @param string|iterable<string,mixed>|null $body
      */
     public function setBody(string|iterable|null $body): static;
 

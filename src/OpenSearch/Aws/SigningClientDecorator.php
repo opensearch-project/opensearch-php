@@ -18,11 +18,6 @@ class SigningClientDecorator implements ClientInterface
         protected CredentialsInterface $credentials,
         protected SignatureInterface $signer,
     ) {
-        if (!class_exists(SignatureInterface::class)) {
-            throw new \RuntimeException(
-                'The AWS SDK for PHP must be installed in order to use the AWS signing client.'
-            );
-        }
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
