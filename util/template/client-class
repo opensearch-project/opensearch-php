@@ -68,7 +68,7 @@ class Client
     /**
      * Client constructor
      *
-     * @param \OpenSearch\TransportInterface|\OpenSearch\Transport $transport
+     * @param TransportInterface|Transport $transport
      * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
