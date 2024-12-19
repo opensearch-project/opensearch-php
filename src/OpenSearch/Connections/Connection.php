@@ -47,7 +47,7 @@ use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
 use Psr\Log\LoggerInterface;
 
-@trigger_error(__CLASS__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(Connection::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.

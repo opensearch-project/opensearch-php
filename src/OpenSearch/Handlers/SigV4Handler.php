@@ -13,7 +13,7 @@ use OpenSearch\ClientBuilder;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 
-@trigger_error(__CLASS__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(SigV4Handler::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @phpstan-type RingPhpRequest array{http_method: string, scheme: string, uri: string, query_string?: string, version?: string, headers: array<string, list<string>>, body: string|resource|null, client?: array<string, mixed>}
