@@ -75,6 +75,8 @@ class Client
      */
     public $transport;
 
+    private TransportInterface $httpTransport;
+
     /**
      * @var array
      */
@@ -263,13 +265,19 @@ class Client
     /**
      * Client constructor
      *
-     * @param Transport $transport
+     * @param \OpenSearch\TransportInterface|\OpenSearch\Transport $transport
      * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
-    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
+    public function __construct(TransportInterface|Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
     {
-        $this->transport = $transport;
+        if (!$transport instanceof TransportInterface) {
+            @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
+            $this->transport = $transport;
+            $this->httpTransport = new LegacyTransportWrapper($transport);
+        } else {
+            $this->httpTransport = $transport;
+        }
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
@@ -2063,33 +2071,36 @@ class Client
 
     /**
      * Sends a raw request to the cluster
-     * @return callable|array
-     * @throws NoNodesAvailableException
+     * @return array|string|null
+     * @throws \Exception
      */
-    public function request(string $method, string $uri, array $attributes = [])
+    public function request(string $method, string $uri, array $attributes = []): array|string|null
     {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
 
-        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
-
-        return $this->transport->resultOrFuture($promise, $options);
+        return $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
     }
 
     /**
-     * @return callable|array
+     * Sends a request for the given endpoint.
+     *
+     * @param \OpenSearch\Endpoints\AbstractEndpoint $endpoint
+     *
+     * @return array|string|null
+     *
+     * @throws \Exception
      */
-    private function performRequest(AbstractEndpoint $endpoint)
+    private function performRequest(AbstractEndpoint $endpoint): array|string|null
     {
-        $promise =  $this->transport->performRequest(
+        $options = $endpoint->getOptions();
+        return $this->httpTransport->sendRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
-            $endpoint->getOptions()
+            $options['headers'] ?? []
         );
-
-        return $this->transport->resultOrFuture($promise, $endpoint->getOptions());
     }
 }

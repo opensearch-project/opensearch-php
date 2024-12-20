@@ -1,7 +1,7 @@
 
     public function set:Part($:part): static
     {
-        if (isset($:part) !== true) {
+        if (is_null($:part)) {
             return $this;
         }
         $this->:part = $:part;

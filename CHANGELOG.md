@@ -9,12 +9,16 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added samples ([#218](https://github.com/opensearch-project/opensearch-php/pull/218))
 - Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
 ### Changed
+- Switched to PSR Interfaces
+- Increased PHP min version to 8.1
 - Increased min version of `ezimuel/ringphp` to `^1.2.2`
 - Changed fluent setters to return static
 ### Deprecated
 - Passing a callable to \OpenSearch\ClientBuilder::setEndpoint() is deprecated and replaced with passing an EndpointFactory to \OpenSearch\ClientBuilder::setEndpointFactory() ([#237](https://github.com/opensearch-project/opensearch-php/pull/237))
+- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.   
 ### Removed
-- Removed support for PHP 7.3 and 7.4
+- Removed support for PHP 7.3, 7.4 and 8.0.
+- Removed support for async requests which were never actually working.
 ### Fixed
 - Fixed PHP 8.4 deprecations
 ### Updated APIs

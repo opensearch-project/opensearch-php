@@ -21,13 +21,17 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
+use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use OpenSearch\Common\Exceptions;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
-use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionInterface;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use Psr\Log\LoggerInterface;
 
+@trigger_error(Transport::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
 class Transport
 {
     /**
