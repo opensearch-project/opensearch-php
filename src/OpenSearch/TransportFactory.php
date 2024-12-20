@@ -128,7 +128,7 @@ class TransportFactory
             $this->httpClient = Psr18ClientDiscovery::find();
         }
 
-        return new HttpTransport($this->httpClient, $this->requestFactory, $this->serializer);
+        return new HttpTransport($this->httpClient, $this->requestFactory, $this->getSerializer());
     }
 
 }

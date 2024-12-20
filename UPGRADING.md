@@ -43,19 +43,31 @@ $guzzleClient = new \GuzzleHttp\Client([
     'headers' => [
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
-        'User-Agent' => sprintf('opensearch-php/%s (%s; PHP %s)', Client::VERSION, PHP_OS, PHP_VERSION),
+        'User-Agent' => sprintf('opensearch-php/%s (%s; PHP %s)', \OpenSearch\Client::VERSION, PHP_OS, PHP_VERSION),
     ]
 ]);
+
 $guzzleHttpFactory = new \GuzzleHttp\Psr7\HttpFactory();
+
+$serializer = new \OpenSearch\Serializers\SmartSerializer();
+
+$requestFactory = new \OpenSearch\RequestFactory(
+    $guzzleHttpFactory,
+    $guzzleHttpFactory,
+    $guzzleHttpFactory,
+    $serializer,
+);
+
 $transport = (new OpenSearch\TransportFactory())
     ->setHttpClient($guzzleClient)
-    ->setPsrRequestFactory($guzzleHttpFactory)
-    ->setStreamFactory($guzzleHttpFactory)
-    ->setUriFactory($guzzleHttpFactory)
+    ->setRequestFactory($requestFactory)
     ->create();
 
 $endpointFactory = new \OpenSearch\EndpointFactory();
-$client = new Client($transport, $endpointFactory, []);
+$client = new \OpenSearch\Client($transport, $endpointFactory, []);
+
+// Send a request to the 'info' endpoint.
+$info = $client->info();
 ```
 
 ### Configuring Symfony HTTP Client in 2.x
@@ -75,14 +87,21 @@ $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOpt
     ],
 ]);
 
-$transport = (new OpenSearch\TransportFactory())
+$serializer = new \OpenSearch\Serializers\SmartSerializer();
+
+$requestFactory = new \OpenSearch\RequestFactory(
+    $symfonyPsr18Client,
+    $symfonyPsr18Client,
+    $symfonyPsr18Client,
+    $serializer,
+);
+
+$transport = (new \OpenSearch\TransportFactory())
     ->setHttpClient($symfonyPsr18Client)
-    ->setPsrRequestFactory($symfonyPsr18Client)
-    ->setStreamFactory($symfonyPsr18Client)
-    ->setUriFactory($symfonyPsr18Client)
+    ->setRequestFactory($requestFactory)
     ->create();
 
-$client = new Client($transport, $endpointFactory, []);
+$client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
 $info = $client->info();
