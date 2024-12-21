@@ -1314,7 +1314,7 @@ class Client
     }
 
     /**
-     * Changes the number of requests per second for a particular Reindex operation.
+     * Changes the number of requests per second for a particular reindex operation.
      *
      * $params['task_id']             = (string) Identifier for the task. (Required)
      * $params['requests_per_second'] = (number) The throttle for this request in sub-requests per second.
@@ -1400,7 +1400,6 @@ class Client
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']                   = (array) The scroll ID if not passed by URL or query parameter.
      *
      * @param array $params Associative array of parameters
      * @return array
