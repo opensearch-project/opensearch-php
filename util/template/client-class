@@ -21,13 +21,10 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
-use OpenSearch\Common\Exceptions\BadMethodCallException;
-use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
+use OpenSearch\Namespaces\NamespaceBuilderInterface;
 :use-namespaces
-use OpenSearch\Traits\DeprecatedPropertyTrait;
 
 /**
  * Class Client
@@ -41,8 +38,12 @@ class Client
 
     /**
      * @var Transport
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0.
      */
     public $transport;
+
+    private TransportInterface $httpTransport;
 
     /**
      * @var array
@@ -67,13 +68,19 @@ class Client
     /**
      * Client constructor
      *
-     * @param Transport $transport
+     * @param TransportInterface|Transport $transport
      * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      */
-    public function __construct(Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
+    public function __construct(TransportInterface|Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
     {
-        $this->transport = $transport;
+        if (!$transport instanceof TransportInterface) {
+            @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
+            $this->transport = $transport;
+            $this->httpTransport = new LegacyTransportWrapper($transport);
+        } else {
+            $this->httpTransport = $transport;
+        }
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
@@ -103,14 +110,14 @@ class Client
      * Catchall for registered namespaces
      *
      * @return object
-     * @throws BadMethodCallException if the namespace cannot be found
+     * @throws \BadMethodCallException if the namespace cannot be found
      */
     public function __call(string $name, array $arguments)
     {
         if (isset($this->registeredNamespaces[$name])) {
             return $this->registeredNamespaces[$name];
         }
-        throw new BadMethodCallException("Namespace [$name] not found");
+        throw new \BadMethodCallException("Namespace [$name] not found");
     }
 
     /**
@@ -133,34 +140,33 @@ class Client
     }
 
     /**
-     * Sends a raw request to the cluster
-     * @return callable|array
-     * @throws NoNodesAvailableException
+     * Send a raw request to the cluster.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
-    public function request(string $method, string $uri, array $attributes = [])
+    public function request(string $method, string $uri, array $attributes = []): array|string|null
     {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
 
-        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
-
-        return $this->transport->resultOrFuture($promise, $options);
+        return $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
     }
 
     /**
-     * @return callable|array
+     * Send a request for an endpoint.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
-    private function performRequest(AbstractEndpoint $endpoint)
+    private function performRequest(AbstractEndpoint $endpoint): array|string|null
     {
-        $promise =  $this->transport->performRequest(
+        return $this->httpTransport->sendRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
             $endpoint->getOptions()
         );
-
-        return $this->transport->resultOrFuture($promise, $endpoint->getOptions());
     }
+
 }

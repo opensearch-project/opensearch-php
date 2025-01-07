@@ -24,6 +24,11 @@ namespace OpenSearch\Connections;
 use OpenSearch\Serializers\SerializerInterface;
 use Psr\Log\LoggerInterface;
 
+@trigger_error(ConnectionFactory::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
 class ConnectionFactory implements ConnectionFactoryInterface
 {
     /**

@@ -21,18 +21,22 @@ declare(strict_types=1);
 
 namespace OpenSearch\Connections;
 
+use Exception;
+use GuzzleHttp\Ring\Core;
+use GuzzleHttp\Ring\Exception\ConnectException;
+use GuzzleHttp\Ring\Exception\RingException;
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\BadRequest400Exception;
 use OpenSearch\Common\Exceptions\Conflict409Exception;
 use OpenSearch\Common\Exceptions\Curl\CouldNotConnectToHost;
 use OpenSearch\Common\Exceptions\Curl\CouldNotResolveHostException;
 use OpenSearch\Common\Exceptions\Curl\OperationTimeoutException;
-use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\Forbidden403Exception;
 use OpenSearch\Common\Exceptions\MaxRetriesException;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\NoDocumentsToGetException;
 use OpenSearch\Common\Exceptions\NoShardAvailableException;
+use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\RequestTimeout408Exception;
 use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Common\Exceptions\ScriptLangNotSupportedException;
@@ -41,12 +45,13 @@ use OpenSearch\Common\Exceptions\TransportException;
 use OpenSearch\Common\Exceptions\Unauthorized401Exception;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
-use Exception;
-use GuzzleHttp\Ring\Core;
-use GuzzleHttp\Ring\Exception\ConnectException;
-use GuzzleHttp\Ring\Exception\RingException;
 use Psr\Log\LoggerInterface;
 
+@trigger_error(Connection::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
 class Connection implements ConnectionInterface
 {
     /**

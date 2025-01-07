@@ -66,16 +66,14 @@ interface EndpointInterface
 
     /**
      * Get the body of the request.
-     *
-     * @return array|string
      */
-    public function getBody(): array|string;
+    public function getBody(): string|array|null;
 
     /**
      * Set the body of the request.
      *
-     * @param array<string,mixed> $body
+     * @param string|iterable<string,mixed>|null $body
      */
-    public function setBody(array $body): static;
+    public function setBody(string|iterable|null $body): static;
 
 }

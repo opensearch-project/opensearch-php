@@ -2,4 +2,3 @@
      * @var :namespaceNamespace
      */
     protected $:var_namespace;
-    
