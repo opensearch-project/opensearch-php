@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -13,77 +15,70 @@
 
 namespace OpenSearch\Tests\Namespaces;
 
-use OpenSearch\EndpointFactoryInterface;
-use OpenSearch\Endpoints\Ml\CreateConnector;
-use OpenSearch\Endpoints\Sql\CursorClose;
-use OpenSearch\Endpoints\Sql\Explain;
-use OpenSearch\Endpoints\Sql\Query;
+use OpenSearch\EndpointFactory;
 use OpenSearch\Namespaces\SqlNamespace;
-use OpenSearch\Transport;
+use OpenSearch\TransportInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @group Integration
+ * Tests the SQL namespace.
  */
 class SqlNamespaceTest extends TestCase
 {
+    private TransportInterface&MockObject $transport;
+
+    private SqlNamespace $sqlNamespace;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->transport = $this->createMock(TransportInterface::class);
+        $this->sqlNamespace = new SqlNamespace($this->transport, new EndpointFactory());
+    }
+
     public function testQuery(): void
     {
-        $transport = $this->createMock(Transport::class);
-        $transport->method('performRequest')
+        $this->transport->method('sendRequest')
             ->with('POST', '/_plugins/_sql', [], [
                 'query' => 'select * from test',
-            ]);
+            ])
+            ->willReturn(['foo' => 'bar']);
 
-        $transport->method('resultOrFuture')
-            ->willReturn([]);
-
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new Query());
-
-        (new SqlNamespace($transport, $endpointFactory))->query([
+        $result = $this->sqlNamespace->query([
             'query' => 'select * from test',
         ]);
+
+        $this->assertEquals(['foo' => 'bar'], $result);
     }
 
     public function testExplain(): void
     {
-        $transport = $this->createMock(Transport::class);
-        $transport->method('performRequest')
+        $this->transport->method('sendRequest')
             ->with('POST', '/_plugins/_sql/_explain', [], [
                 'query' => 'select * from test',
-            ]);
+            ])
+            ->willReturn(['foo' => 'bar']);
 
-        $transport->method('resultOrFuture')
-            ->willReturn([]);
-
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new Explain());
-
-        (new SqlNamespace($transport, $endpointFactory))->explain([
+        $result = $this->sqlNamespace->explain([
             'query' => 'select * from test',
         ]);
+
+        $this->assertEquals(['foo' => 'bar'], $result);
     }
 
     public function testCloseCursor(): void
     {
-        $transport = $this->createMock(Transport::class);
-        $transport->method('performRequest')
+        $this->transport->method('sendRequest')
             ->with('POST', '/_plugins/_sql/close', [], [
                 'cursor' => 'fooo',
-            ]);
+            ])
+            ->willReturn(['foo' => 'bar']);
 
-        $transport->method('resultOrFuture')
-            ->willReturn([]);
-
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new CursorClose());
-
-        (new SqlNamespace($transport, $endpointFactory))->closeCursor([
+        $result = $this->sqlNamespace->closeCursor([
             'cursor' => 'fooo',
         ]);
+
+        $this->assertEquals(['foo' => 'bar'], $result);
     }
 }

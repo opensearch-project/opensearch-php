@@ -29,7 +29,7 @@ class SecurityNamespaceTest extends TestCase
 {
     private SecurityNamespace $securityNamespace;
 
-    private TransportInterface|MockObject $transport;
+    private TransportInterface&MockObject $transport;
 
     protected function setUp(): void
     {
