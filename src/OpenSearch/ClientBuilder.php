@@ -702,7 +702,7 @@ class ClientBuilder
 
     protected function instantiate(Transport $transport, EndpointFactoryInterface $endpointFactory, array $registeredNamespaces): Client
     {
-        return new Client($transport, $endpointFactory, $registeredNamespaces);
+        return new Client($transport, $endpointFactory, $registeredNamespaces, true);
     }
 
     private function buildLoggers(): void
