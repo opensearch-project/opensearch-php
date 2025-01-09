@@ -21,13 +21,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Transport;
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use OpenSearch\TransportInterface;
-use Psr\Http\Client\ClientExceptionInterface;
 
 abstract class BooleanRequestWrapper
 {
@@ -42,20 +41,22 @@ abstract class BooleanRequestWrapper
     public static function sendRequest(AbstractEndpoint $endpoint, TransportInterface $transport): bool
     {
         try {
-            $transport->sendRequest(
+            $response = $transport->sendRequest(
                 $endpoint->getMethod(),
                 $endpoint->getURI(),
                 $endpoint->getParams(),
                 $endpoint->getBody(),
                 $endpoint->getOptions()
             );
-        } catch (ClientExceptionInterface $e) {
-            if ($e->getCode() === 404) {
-                return false;
-            }
-            throw $e;
+
+            return match ($response['status_code'] ?? null) {
+                404 => false,
+                default => true,
+            };
+        } catch (Missing404Exception|RoutingMissingException $e) {
+            // Handle legacy exceptions.
+            return false;
         }
-        return true;
     }
 
     /**
