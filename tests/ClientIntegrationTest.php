@@ -79,7 +79,7 @@ class ClientIntegrationTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->client->delete(
             [
-                'index' => null,
+                'index' => '',
                 'id' => 'test',
             ]
         );
