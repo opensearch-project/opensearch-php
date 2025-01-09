@@ -52,7 +52,7 @@ class GetDecommissionAwareness extends AbstractEndpoint
 
     public function setAwarenessAttributeName($awareness_attribute_name): static
     {
-        if (isset($awareness_attribute_name) !== true) {
+        if (is_null($awareness_attribute_name)) {
             return $this;
         }
         $this->awareness_attribute_name = $awareness_attribute_name;

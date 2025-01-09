@@ -62,7 +62,7 @@ class Delete extends AbstractEndpoint
 
     public function setRepository($repository): static
     {
-        if (isset($repository) !== true) {
+        if (is_null($repository)) {
             return $this;
         }
         $this->repository = $repository;
@@ -72,7 +72,7 @@ class Delete extends AbstractEndpoint
 
     public function setSnapshot($snapshot): static
     {
-        if (isset($snapshot) !== true) {
+        if (is_null($snapshot)) {
             return $this;
         }
         $this->snapshot = $snapshot;

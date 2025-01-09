@@ -43,6 +43,7 @@ class GetComponentTemplate extends AbstractEndpoint
     {
         return [
             'cluster_manager_timeout',
+            'flat_settings',
             'local',
             'master_timeout',
             'pretty',

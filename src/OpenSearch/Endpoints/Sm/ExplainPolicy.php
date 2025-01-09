@@ -52,7 +52,7 @@ class ExplainPolicy extends AbstractEndpoint
 
     public function setPolicyName($policy_name): static
     {
-        if (isset($policy_name) !== true) {
+        if (is_null($policy_name)) {
             return $this;
         }
         $this->policy_name = $policy_name;

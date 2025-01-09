@@ -52,7 +52,7 @@ class GetObject extends AbstractEndpoint
 
     public function setObjectId($object_id): static
     {
-        if (isset($object_id) !== true) {
+        if (is_null($object_id)) {
             return $this;
         }
         $this->object_id = $object_id;

@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class IsmNamespace
  *
@@ -124,7 +122,7 @@ class IsmNamespace extends AbstractNamespace
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**

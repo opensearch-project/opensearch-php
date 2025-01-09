@@ -27,12 +27,11 @@ class GenerateUserToken extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->username) !== true) {
-            throw new RuntimeException(
-                'username is required for generate_user_token'
-            );
+        if (!isset($this->username) || $this->username === '') {
+            throw new RuntimeException('username is required for generate_user_token');
         }
         $username = $this->username;
+
         return "/_plugins/_security/api/internalusers/$username/authtoken";
     }
 
@@ -54,7 +53,7 @@ class GenerateUserToken extends AbstractEndpoint
 
     public function setUsername($username): static
     {
-        if (isset($username) !== true) {
+        if (is_null($username)) {
             return $this;
         }
         $this->username = $username;

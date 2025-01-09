@@ -25,12 +25,11 @@ class RefreshSearchAnalyzers extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->index) !== true) {
-            throw new RuntimeException(
-                'index is required for refresh_search_analyzers'
-            );
+        if (!isset($this->index) || $this->index === '') {
+            throw new RuntimeException('index is required for refresh_search_analyzers');
         }
         $index = $this->index;
+
         return "/_plugins/_refresh_search_analyzers/$index";
     }
 

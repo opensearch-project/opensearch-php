@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class ListNamespace
  *
@@ -48,7 +46,7 @@ class ListNamespace extends AbstractNamespace
      * Returns paginated information about indexes including number of primaries and replicas, document counts, disk size.
      *
      * $params['index']                     = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                     = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
+     * $params['bytes']                     = (any) The unit used to display byte values.
      * $params['cluster_manager_timeout']   = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.
      * $params['format']                    = (string) A short version of the Accept header, such as `JSON`, `YAML`.
@@ -63,7 +61,7 @@ class ListNamespace extends AbstractNamespace
      * $params['s']                         = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['size']                      = (integer) Maximum number of indexes to be displayed in a page.
      * $params['sort']                      = (enum) Defines order in which indexes will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created indexes would be displayed first. (Options = asc,desc)
-     * $params['time']                      = (enum) The unit used to display time values. (Options = d,h,m,micros,ms,nanos,s)
+     * $params['time']                      = (any) The unit used to display time values.
      * $params['v']                         = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                     = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -89,7 +87,7 @@ class ListNamespace extends AbstractNamespace
      * Returns paginated details of shard allocation on nodes.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                   = (enum) The unit used to display byte values. (Options = b,g,gb,k,kb,m,mb,p,pb,t,tb)
+     * $params['bytes']                   = (any) The unit used to display byte values.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['format']                  = (string) A short version of the Accept header, such as `JSON`, `YAML`.
      * $params['h']                       = (array) Comma-separated list of column names to display.
@@ -100,7 +98,7 @@ class ListNamespace extends AbstractNamespace
      * $params['s']                       = (array) Comma-separated list of column names or column aliases to sort by.
      * $params['size']                    = (integer) Maximum number of shards to be displayed in a page.
      * $params['sort']                    = (enum) Defines order in which shards will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created shards would be displayed first. (Options = asc,desc)
-     * $params['time']                    = (enum) The unit in which to display time values. (Options = d,h,m,micros,ms,nanos,s)
+     * $params['time']                    = (any) The unit in which to display time values.
      * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)

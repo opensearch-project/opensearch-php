@@ -66,23 +66,25 @@ class BulkStream extends AbstractEndpoint
         return 'PUT';
     }
 
-    public function setBody($body): static
+    public function setBody(string|iterable|null $body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
-        if (is_array($body) === true || $body instanceof Traversable) {
-            foreach ($body as $item) {
-                $this->body .= $this->serializer->serialize($item) . "\n";
+
+        if (is_string($body)) {
+            if (!str_ends_with($body, "\n")) {
+                $body .= "\n";
             }
-        } elseif (is_string($body)) {
             $this->body = $body;
-            if (substr($body, -1) != "\n") {
-                $this->body .= "\n";
-            }
-        } else {
-            throw new InvalidArgumentException("Body must be an array, traversable object or string");
+            return $this;
         }
+
+        // Must be an iterable.
+        foreach ($body as $item) {
+            $this->body .= $this->serializer->serialize($item) . "\n";
+        }
+
         return $this;
     }
 

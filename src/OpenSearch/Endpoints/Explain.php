@@ -31,18 +31,15 @@ class Explain extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->id) !== true) {
-            throw new RuntimeException(
-                'id is required for explain'
-            );
+        if (!isset($this->id) || $this->id === '') {
+            throw new RuntimeException('id is required for explain');
         }
         $id = $this->id;
-        if (isset($this->index) !== true) {
-            throw new RuntimeException(
-                'index is required for explain'
-            );
+        if (!isset($this->index) || $this->index === '') {
+            throw new RuntimeException('index is required for explain');
         }
         $index = $this->index;
+
         return "/$index/_explain/$id";
     }
 
@@ -76,7 +73,7 @@ class Explain extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;

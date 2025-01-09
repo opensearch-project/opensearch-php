@@ -62,7 +62,7 @@ class CreateRepository extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -72,7 +72,7 @@ class CreateRepository extends AbstractEndpoint
 
     public function setRepository($repository): static
     {
-        if (isset($repository) !== true) {
+        if (is_null($repository)) {
             return $this;
         }
         $this->repository = $repository;

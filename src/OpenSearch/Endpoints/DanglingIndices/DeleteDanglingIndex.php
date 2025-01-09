@@ -62,7 +62,7 @@ class DeleteDanglingIndex extends AbstractEndpoint
 
     public function setIndexUuid($index_uuid): static
     {
-        if (isset($index_uuid) !== true) {
+        if (is_null($index_uuid)) {
             return $this;
         }
         $this->index_uuid = $index_uuid;

@@ -33,10 +33,8 @@ class ExistsAlias extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->name) !== true) {
-            throw new RuntimeException(
-                'name is required for exists_alias'
-            );
+        if (!isset($this->name) || $this->name === '') {
+            throw new RuntimeException('name is required for exists_alias');
         }
         $name = $this->name;
         $index = $this->index ?? null;

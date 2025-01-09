@@ -50,7 +50,7 @@ class DeleteConnector extends AbstractEndpoint
 
     public function setConnectorId($connector_id): static
     {
-        if (isset($connector_id) !== true) {
+        if (is_null($connector_id)) {
             return $this;
         }
         $this->connector_id = $connector_id;

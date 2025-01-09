@@ -25,12 +25,11 @@ class Stop extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->id) !== true) {
-            throw new RuntimeException(
-                'id is required for stop'
-            );
+        if (!isset($this->id) || $this->id === '') {
+            throw new RuntimeException('id is required for stop');
         }
         $id = $this->id;
+
         return "/_plugins/_rollup/jobs/$id/_stop";
     }
 

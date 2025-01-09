@@ -27,12 +27,11 @@ class DeleteActionGroup extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->action_group) !== true) {
-            throw new RuntimeException(
-                'action_group is required for delete_action_group'
-            );
+        if (!isset($this->action_group) || $this->action_group === '') {
+            throw new RuntimeException('action_group is required for delete_action_group');
         }
         $action_group = $this->action_group;
+
         return "/_plugins/_security/api/actiongroups/$action_group";
     }
 
@@ -54,7 +53,7 @@ class DeleteActionGroup extends AbstractEndpoint
 
     public function setActionGroup($action_group): static
     {
-        if (isset($action_group) !== true) {
+        if (is_null($action_group)) {
             return $this;
         }
         $this->action_group = $action_group;
