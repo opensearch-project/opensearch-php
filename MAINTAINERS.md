@@ -4,13 +4,14 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 ## Current Maintainers
 
-| Maintainer                | GitHub ID                                     | Affiliation |
-| ------------------------- | --------------------------------------------- | ----------- |
-| Daniel Doubrovkine        | [dblock](https://github.com/dblock)           | Amazon      |
-| Harsha Vamsi Kalluri      | [harshavamsi](https://github.com/harshavamsi) | Amazon      |
-| Sai Medhini Reddy Maryada | [saimedhi](https://github.com/saimedhi)       | Amazon      |
-| Soner Sayakci             | [shyim](https://github.com/shyim)             | shopware AG |
-| Vacha Shah                | [VachaShah](https://github.com/VachaShah)     | Amazon      |
+| Maintainer                | GitHub ID                                     | Affiliation  |
+| ------------------------- | --------------------------------------------- | ------------ |
+| Daniel Doubrovkine        | [dblock](https://github.com/dblock)           | Amazon       |
+| Harsha Vamsi Kalluri      | [harshavamsi](https://github.com/harshavamsi) | Amazon       |
+| Kim Pepper                | [kimpepper](https://github.com/kimpepper)     | PreviousNext |
+| Sai Medhini Reddy Maryada | [saimedhi](https://github.com/saimedhi)       | Amazon       |
+| Soner Sayakci             | [shyim](https://github.com/shyim)             | shopware AG  |
+| Vacha Shah                | [VachaShah](https://github.com/VachaShah)     | Amazon       |
 
 ## Emeritus
 
