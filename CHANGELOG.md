@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added workflow for automated API update using OpenSearch API specification ([#209](https://github.com/opensearch-project/opensearch-php/pull/209))
 - Added samples ([#218](https://github.com/opensearch-project/opensearch-php/pull/218))
 - Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
+- Added a Docker Compose config file for local development.
 ### Changed
 - Switched to PSR Interfaces
 - Increased PHP min version to 8.1
@@ -15,7 +16,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Changed fluent setters to return static
 ### Deprecated
 - Passing a callable to \OpenSearch\ClientBuilder::setEndpoint() is deprecated and replaced with passing an EndpointFactory to \OpenSearch\ClientBuilder::setEndpointFactory() ([#237](https://github.com/opensearch-project/opensearch-php/pull/237))
-- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.   
+- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.
+- Throwing exceptions for different HTTP status codes is deprecated. Use the response object to check the status code instead.
 ### Removed
 - Removed support for PHP 7.3, 7.4 and 8.0.
 - Removed support for async requests which were never actually working.

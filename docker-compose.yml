@@ -1,0 +1,9 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch:2
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=myStrongPassword123!

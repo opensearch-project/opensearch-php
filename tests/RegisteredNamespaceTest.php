@@ -53,7 +53,7 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
         $builder = new FooNamespaceBuilder();
         $client = ClientBuilder::create()->registerNamespace($builder)->build();
 
-        $this->expectException(\OpenSearch\Common\Exceptions\BadMethodCallException::class);
+        $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage('Namespace [bar] not found');
 
         $client->bar()->fooMethod();

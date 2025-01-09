@@ -21,12 +21,15 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests;
 
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7\HttpFactory;
 use OpenSearch\Client;
-use OpenSearch\ClientBuilder;
-use OpenSearch\Common\Exceptions\BadRequest400Exception;
-use OpenSearch\Common\Exceptions\Missing404Exception;
-use OpenSearch\Tests\ClientBuilder\ArrayLogger;
-use Psr\Log\LogLevel;
+use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\EndpointFactory;
+use OpenSearch\RequestFactory;
+use OpenSearch\Serializers\SmartSerializer;
+use OpenSearch\TransportFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ClientTest
@@ -35,75 +38,48 @@ use Psr\Log\LogLevel;
  * @group      Integration
  * @group      Integration-Min
  */
-class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
+class ClientIntegrationTest extends TestCase
 {
     /**
-     * @var ArrayLogger
+     * The client under test.
      */
-    private $logger;
+    private Client $client;
 
-    /**
-     * @var string
-     */
-    private $host;
-
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->host = Utility::getHost();
-        $this->logger = new ArrayLogger();
+        parent::setUp();
+        $this->client = $this->getClient();
     }
 
-    private function getClient(): Client
+    public function testInfoNotEmpty()
     {
-        $client = ClientBuilder::create()
-            ->setHosts([$this->host])
-            ->setLogger($this->logger)
-            ->setSSLVerification(false);
+        $result = $this->client->info();
 
-        return $client->build();
+        $this->assertArrayHasKey('name', $result);
+        $this->assertArrayHasKey('cluster_name', $result);
+        $this->assertArrayHasKey('cluster_uuid', $result);
+        $this->assertArrayHasKey('version', $result);
     }
 
-    public function testLogRequestSuccessHasInfoNotEmpty()
+    public function testNotFoundError()
     {
-        $client = $this->getClient();
-
-        $result = $client->info();
-
-        $this->assertNotEmpty($this->getLevelOutput(LogLevel::INFO, $this->logger->output));
-    }
-
-    public function testLogRequestSuccessHasPortInInfo()
-    {
-        $client = $this->getClient();
-
-        $result = $client->info();
-
-        $this->assertStringContainsString('"port"', $this->getLevelOutput(LogLevel::INFO, $this->logger->output));
-    }
-
-    public function testLogRequestFailHasWarning()
-    {
-        $client = $this->getClient();
-
-        try {
-            $result = $client->get([
-                'index' => 'foo',
-                'id' => 'bar',
-            ]);
-        } catch (Missing404Exception $e) {
-            $this->assertNotEmpty($this->getLevelOutput(LogLevel::WARNING, $this->logger->output));
-        }
+        $result = $this->client->get([
+            'index' => 'foo',
+            'id' => 'bar',
+        ]);
+        $this->assertEquals(404, $result['status']);
+        $error = $result['error'];
+        $this->assertEquals('index_not_found_exception', $error['type']);
+        $this->assertEquals('no such index [foo]', $error['reason']);
+        $this->assertEquals('foo', $error['index']);
     }
 
     public function testIndexCannotBeEmptyStringForDelete()
     {
-        $client = $this->getClient();
-
-        $this->expectException(Missing404Exception::class);
-
-        $client->delete(
+        $this->expectException(RuntimeException::class);
+        $this->client->delete(
             [
-                'index' => '',
+                'index' => null,
                 'id' => 'test',
             ]
         );
@@ -111,11 +87,10 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
     public function testIdCannotBeEmptyStringForDelete()
     {
-        $client = $this->getClient();
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('id is required for delete');
 
-        $this->expectException(BadRequest400Exception::class);
-
-        $client->delete(
+        $this->client->delete(
             [
                 'index' => 'test',
                 'id' => '',
@@ -125,11 +100,10 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
     public function testIndexCannotBeArrayOfEmptyStringsForDelete()
     {
-        $client = $this->getClient();
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('index is required for delete');
 
-        $this->expectException(Missing404Exception::class);
-
-        $client->delete(
+        $this->client->delete(
             [
                 'index' => ['', '', ''],
                 'id' => 'test',
@@ -139,11 +113,10 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
 
     public function testIndexCannotBeArrayOfNullsForDelete()
     {
-        $client = $this->getClient();
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('index is required for delete');
 
-        $this->expectException(Missing404Exception::class);
-
-        $client->delete(
+        $this->client->delete(
             [
                 'index' => [null, null, null],
                 'id' => 'test',
@@ -154,9 +127,7 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function sendRawRequest(): void
     {
-        $client = $this->getClient();
-
-        $response = $client->request('GET', '/');
+        $response = $this->client->request('GET', '/');
 
         $this->assertIsArray($response);
         $expectedKeys = ['name', 'cluster_name', 'cluster_uuid', 'version', 'tagline'];
@@ -168,10 +139,9 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function insertDocumentUsingRawRequest(): void
     {
-        $client = $this->getClient();
-        $randomIndex = 'test_index_' .time();
+        $randomIndex = 'test_index_' . time();
 
-        $response = $client->request('POST', "/$randomIndex/_doc", ['body' => ['field' => 'value']]);
+        $response = $this->client->request('POST', "/$randomIndex/_doc", ['body' => ['field' => 'value']]);
 
         $this->assertIsArray($response);
         $this->assertArrayHasKey('_index', $response);
@@ -181,14 +151,42 @@ class ClientIntegrationTest extends \PHPUnit\Framework\TestCase
         $this->assertSame('created', $response['result']);
     }
 
-    private function getLevelOutput(string $level, array $output): string
+    private function getClient(): Client
     {
-        foreach ($output as $out) {
-            if (false !== strpos($out, $level)) {
-                return $out;
-            }
-        }
+        $guzzleClient = new GuzzleClient([
+            'base_uri' => Utility::getHost(),
+            'auth' => ['admin', getenv('OPENSEARCH_INITIAL_ADMIN_PASSWORD')],
+            'verify' => false,
+            'retries' => 2,
+            'headers' => [
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'User-Agent' => sprintf(
+                    'opensearch-php/%s (%s; PHP %s)',
+                    Client::VERSION,
+                    PHP_OS,
+                    PHP_VERSION
+                ),
+            ]
+        ]);
 
-        return '';
+        $guzzleHttpFactory = new HttpFactory();
+        $serializer = new SmartSerializer();
+
+        $requestFactory = new RequestFactory(
+            $guzzleHttpFactory,
+            $guzzleHttpFactory,
+            $guzzleHttpFactory,
+            $serializer,
+        );
+
+        $transport = (new TransportFactory())
+            ->setHttpClient($guzzleClient)
+            ->setRequestFactory($requestFactory)
+            ->create();
+
+        $endpointFactory = new EndpointFactory();
+        return new Client($transport, $endpointFactory, []);
     }
+
 }

@@ -27,6 +27,9 @@ use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group legacy
+ */
 class ClientBuilderTest extends TestCase
 {
     /**
