@@ -61,7 +61,7 @@ class Cancel extends AbstractEndpoint
 
     public function setTaskId($task_id): static
     {
-        if (isset($task_id) !== true) {
+        if (is_null($task_id)) {
             return $this;
         }
         $this->task_id = $task_id;

@@ -33,18 +33,15 @@ class DeleteAlias extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->index) !== true) {
-            throw new RuntimeException(
-                'index is required for delete_alias'
-            );
+        if (!isset($this->index) || $this->index === '') {
+            throw new RuntimeException('index is required for delete_alias');
         }
         $index = $this->index;
-        if (isset($this->name) !== true) {
-            throw new RuntimeException(
-                'name is required for delete_alias'
-            );
+        if (!isset($this->name) || $this->name === '') {
+            throw new RuntimeException('name is required for delete_alias');
         }
         $name = $this->name;
+
         return "/$index/_alias/$name";
     }
 

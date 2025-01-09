@@ -25,12 +25,11 @@ class Put extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->id) !== true) {
-            throw new RuntimeException(
-                'id is required for put'
-            );
+        if (!isset($this->id) || $this->id === '') {
+            throw new RuntimeException('id is required for put');
         }
         $id = $this->id;
+
         return "/_plugins/_rollup/jobs/$id";
     }
 
@@ -54,7 +53,7 @@ class Put extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;

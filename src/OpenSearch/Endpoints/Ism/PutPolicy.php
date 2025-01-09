@@ -27,12 +27,11 @@ class PutPolicy extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->policy_id) !== true) {
-            throw new RuntimeException(
-                'policy_id is required for put_policy'
-            );
+        if (!isset($this->policy_id) || $this->policy_id === '') {
+            throw new RuntimeException('policy_id is required for put_policy');
         }
         $policy_id = $this->policy_id;
+
         return "/_plugins/_ism/policies/$policy_id";
     }
 
@@ -56,7 +55,7 @@ class PutPolicy extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -66,7 +65,7 @@ class PutPolicy extends AbstractEndpoint
 
     public function setPolicyId($policy_id): static
     {
-        if (isset($policy_id) !== true) {
+        if (is_null($policy_id)) {
             return $this;
         }
         $this->policy_id = $policy_id;

@@ -13,9 +13,11 @@ return <<<'EOD'
     public function getConnector(array $params = []): array
     {
         $id = $this->extractArgument($params, 'id');
+        $connector_id = $this->extractArgument($params, 'connector_id');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetConnector::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
+        $endpoint->setConnectorId($connector_id);
 
         return $this->performRequest($endpoint);
     }

@@ -65,7 +65,7 @@ class Status extends AbstractEndpoint
 
     public function setRepository($repository): static
     {
-        if (isset($repository) !== true) {
+        if (is_null($repository)) {
             return $this;
         }
         $this->repository = $repository;

@@ -27,12 +27,11 @@ class CreateRole extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->role) !== true) {
-            throw new RuntimeException(
-                'role is required for create_role'
-            );
+        if (!isset($this->role) || $this->role === '') {
+            throw new RuntimeException('role is required for create_role');
         }
         $role = $this->role;
+
         return "/_plugins/_security/api/roles/$role";
     }
 
@@ -54,7 +53,7 @@ class CreateRole extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -64,7 +63,7 @@ class CreateRole extends AbstractEndpoint
 
     public function setRole($role): static
     {
-        if (isset($role) !== true) {
+        if (is_null($role)) {
             return $this;
         }
         $this->role = $role;

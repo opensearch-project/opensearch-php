@@ -27,12 +27,11 @@ class PatchUser extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->username) !== true) {
-            throw new RuntimeException(
-                'username is required for patch_user'
-            );
+        if (!isset($this->username) || $this->username === '') {
+            throw new RuntimeException('username is required for patch_user');
         }
         $username = $this->username;
+
         return "/_plugins/_security/api/internalusers/$username";
     }
 
@@ -54,7 +53,7 @@ class PatchUser extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -64,7 +63,7 @@ class PatchUser extends AbstractEndpoint
 
     public function setUsername($username): static
     {
-        if (isset($username) !== true) {
+        if (is_null($username)) {
             return $this;
         }
         $this->username = $username;

@@ -25,12 +25,9 @@ use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\Delete;
-use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class ClientTest

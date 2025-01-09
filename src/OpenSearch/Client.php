@@ -21,11 +21,20 @@ declare(strict_types=1);
 
 namespace OpenSearch;
 
-use OpenSearch\Common\Exceptions\BadMethodCallException;
-use OpenSearch\Common\Exceptions\NoNodesAvailableException;
+use OpenSearch\Common\Exceptions\BadRequest400Exception;
+use OpenSearch\Common\Exceptions\Conflict409Exception;
+use OpenSearch\Common\Exceptions\Forbidden403Exception;
+use OpenSearch\Common\Exceptions\Missing404Exception;
+use OpenSearch\Common\Exceptions\NoDocumentsToGetException;
+use OpenSearch\Common\Exceptions\NoShardAvailableException;
+use OpenSearch\Common\Exceptions\RequestTimeout408Exception;
+use OpenSearch\Common\Exceptions\RoutingMissingException;
+use OpenSearch\Common\Exceptions\ScriptLangNotSupportedException;
+use OpenSearch\Common\Exceptions\ServerErrorResponseException;
+use OpenSearch\Common\Exceptions\Unauthorized401Exception;
 use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
+use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\AsyncSearchNamespace;
 use OpenSearch\Namespaces\AsynchronousSearchNamespace;
 use OpenSearch\Namespaces\CatNamespace;
@@ -59,7 +68,6 @@ use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
 use OpenSearch\Namespaces\WlmNamespace;
-use OpenSearch\Traits\DeprecatedPropertyTrait;
 
 /**
  * Class Client
@@ -72,6 +80,8 @@ class Client
 
     /**
      * @var Transport
+     *
+     * @deprecated in 2.3.2 and will be removed in 3.0.0.
      */
     public $transport;
 
@@ -95,6 +105,11 @@ class Client
      * @var NamespaceBuilderInterface[]
      */
     protected $registeredNamespaces = [];
+
+    /**
+     * @deprecated in 2.3.2 and will be removed in 3.0.0.
+     */
+    private bool $throwExceptions = false;
 
     /**
      * @var AsyncSearchNamespace
@@ -262,15 +277,21 @@ class Client
     protected $wlm;
 
 
+
     /**
      * Client constructor
      *
-     * @param \OpenSearch\TransportInterface|\OpenSearch\Transport $transport
+     * @param TransportInterface|Transport $transport
      * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
+     * @param bool $throwExceptions
      */
-    public function __construct(TransportInterface|Transport $transport, callable|EndpointFactoryInterface $endpointFactory, array $registeredNamespaces)
-    {
+    public function __construct(
+        TransportInterface|Transport $transport,
+        callable|EndpointFactoryInterface $endpointFactory,
+        array $registeredNamespaces,
+        bool $throwExceptions = false,
+    ) {
         if (!$transport instanceof TransportInterface) {
             @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
             $this->transport = $transport;
@@ -290,6 +311,13 @@ class Client
         }
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
+        if ($throwExceptions === true) {
+            @trigger_error(
+                'The $throwExceptions parameter is deprecated in 2.4.0 and will be removed in 3.0.0. Check the response \'status_code\' instead',
+                E_USER_DEPRECATED
+            );
+            $this->throwExceptions = true;
+        }
         $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
         $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
         $this->cat = new CatNamespace($transport, $this->endpointFactory);
@@ -726,7 +754,7 @@ class Client
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -765,7 +793,7 @@ class Client
         $endpoint->setId($id);
         $endpoint->setIndex($index);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -1222,7 +1250,7 @@ class Client
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ping::class);
         $endpoint->setParams($params);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -1322,7 +1350,7 @@ class Client
     }
 
     /**
-     * Changes the number of requests per second for a particular Reindex operation.
+     * Changes the number of requests per second for a particular reindex operation.
      *
      * $params['task_id']             = (string) Identifier for the task. (Required)
      * $params['requests_per_second'] = (number) The throttle for this request in sub-requests per second.
@@ -1408,7 +1436,6 @@ class Client
      * $params['error_trace']            = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                 = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']            = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']                   = (array) The scroll ID if not passed by URL or query parameter.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -2040,14 +2067,14 @@ class Client
      * Catchall for registered namespaces
      *
      * @return object
-     * @throws BadMethodCallException if the namespace cannot be found
+     * @throws \BadMethodCallException if the namespace cannot be found
      */
     public function __call(string $name, array $arguments)
     {
         if (isset($this->registeredNamespaces[$name])) {
             return $this->registeredNamespaces[$name];
         }
-        throw new BadMethodCallException("Namespace [$name] not found");
+        throw new \BadMethodCallException("Namespace [$name] not found");
     }
 
     /**
@@ -2070,37 +2097,131 @@ class Client
     }
 
     /**
-     * Sends a raw request to the cluster
-     * @return array|string|null
-     * @throws \Exception
+     * Send a raw request to the cluster.
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \OpenSearch\Common\Exceptions\OpenSearchException
      */
-    public function request(string $method, string $uri, array $attributes = []): array|string|null
-    {
+    public function request(
+        string $method,
+        string $uri,
+        array $attributes = []
+    ): array|string|null {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
 
-        return $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
+        $response = $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
+
+        // @todo: Remove this in the next major release.
+        // Throw legacy exceptions.
+        if ($this->throwExceptions) {
+            if (isset($response['status']) && $response['status'] >= 400) {
+                $this->throwLegacyException($response);
+            }
+        }
+
+        return $response;
     }
 
     /**
-     * Sends a request for the given endpoint.
+     * Send a request for an endpoint.
      *
-     * @param \OpenSearch\Endpoints\AbstractEndpoint $endpoint
-     *
-     * @return array|string|null
-     *
-     * @throws \Exception
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \OpenSearch\Common\Exceptions\OpenSearchException
      */
     private function performRequest(AbstractEndpoint $endpoint): array|string|null
     {
-        $options = $endpoint->getOptions();
-        return $this->httpTransport->sendRequest(
+        $response = $this->httpTransport->sendRequest(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
-            $options['headers'] ?? []
+            $endpoint->getOptions()
         );
+
+        // @todo: Remove this in the next major release.
+        // Throw legacy exceptions.
+        if ($this->throwExceptions) {
+            if (isset($response['status']) && $response['status'] >= 400) {
+                $this->throwLegacyException($response);
+            }
+        }
+
+        return $response;
     }
+
+    /**
+     * Throw legacy exceptions.
+     *
+     * @param array<string,mixed> $response
+     *
+     * @throws \OpenSearch\Common\Exceptions\OpenSearchException
+     */
+    private function throwLegacyException(array $response): void
+    {
+        if ($response['status'] >= 400 && $response['status'] < 500) {
+            $this->throwLegacyClientException($response);
+        }
+        if ($response['status'] >= 500) {
+            $this->throwLegacyServerException($response);
+        }
+    }
+
+    /**
+     * Throw legacy client exceptions based on status code.
+     *
+     * @throws \OpenSearch\Common\Exceptions\OpenSearchException
+     */
+    private function throwLegacyClientException($response): void
+    {
+        $statusCode = $response['status_code'];
+        $responseBody = $this->convertBodyToString($response['body'], $statusCode);
+        throw match ($statusCode) {
+            401 => new Unauthorized401Exception($responseBody, $statusCode),
+            403 => new Forbidden403Exception($responseBody, $statusCode),
+            404 => new Missing404Exception($responseBody, $statusCode),
+            409 => new Conflict409Exception($responseBody, $statusCode),
+            400 => (str_contains($responseBody, 'script_lang not supported'))
+                ? new ScriptLangNotSupportedException($responseBody . $statusCode)
+                : new BadRequest400Exception($responseBody, $statusCode),
+            408 => new RequestTimeout408Exception($responseBody, $statusCode),
+            default => new BadRequest400Exception($responseBody, $statusCode),
+        };
+    }
+
+    /**
+     * Throw legacy server exceptions based on status code.
+     *
+     * @throws \OpenSearch\Common\Exceptions\OpenSearchException
+     */
+    private function throwLegacyServerException($response): void
+    {
+        $statusCode = $response['status_code'];
+        $error = $response['body']['error'] ?? [];
+        $reason = $error['reason'] ?? 'undefined reason';
+        $type = $error['type'] ?? 'undefined type';
+        $errorMessage = "$type: $reason";
+        $responseBody = $this->convertBodyToString($response['body'], $statusCode);
+
+        $exception = new ServerErrorResponseException($responseBody, $statusCode);
+        if ($statusCode === 500) {
+            if (str_contains($responseBody, "RoutingMissingException")) {
+                $exception = new RoutingMissingException($errorMessage, $statusCode);
+            } elseif (preg_match('/ActionRequestValidationException.+ no documents to get/', $responseBody) === 1) {
+                $exception = new NoDocumentsToGetException($errorMessage, $statusCode);
+            } elseif (str_contains($responseBody, 'NoShardAvailableActionException')) {
+                $exception = new NoShardAvailableException($errorMessage, $statusCode);
+            }
+        }
+        throw $exception;
+    }
+
+    private function convertBodyToString(mixed $body, int $statusCode): string
+    {
+        return empty($body)
+            ? "Unknown $statusCode error from OpenSearch"
+            : (is_string($body) ? $body : json_encode($body));
+    }
+
 }

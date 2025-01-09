@@ -65,7 +65,7 @@ class AddBlock extends AbstractEndpoint
 
     public function setBlock($block): static
     {
-        if (isset($block) !== true) {
+        if (is_null($block)) {
             return $this;
         }
         $this->block = $block;

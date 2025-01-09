@@ -15,10 +15,15 @@ return <<<'EOD'
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
+        $algorithm_name = $this->extractArgument($params, 'algorithm_name');
+        $model_id = $this->extractArgument($params, 'model_id');
+        
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\Predict::class);
-        $endpoint->setParams($params);
-        $endpoint->setId($id);
-        $endpoint->setBody($body);
+        $endpoint->setParams($params)
+            ->setId($id)
+            ->setBody($body)
+            ->setAlgorithmName($algorithm_name)
+            ->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }

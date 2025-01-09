@@ -52,7 +52,7 @@ class CreatePolicy extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -62,7 +62,7 @@ class CreatePolicy extends AbstractEndpoint
 
     public function setPolicyName($policy_name): static
     {
-        if (isset($policy_name) !== true) {
+        if (is_null($policy_name)) {
             return $this;
         }
         $this->policy_name = $policy_name;

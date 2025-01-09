@@ -31,18 +31,15 @@ class GetSource extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->id) !== true) {
-            throw new RuntimeException(
-                'id is required for get_source'
-            );
+        if (!isset($this->id) || $this->id === '') {
+            throw new RuntimeException('id is required for get_source');
         }
         $id = $this->id;
-        if (isset($this->index) !== true) {
-            throw new RuntimeException(
-                'index is required for get_source'
-            );
+        if (!isset($this->index) || $this->index === '') {
+            throw new RuntimeException('index is required for get_source');
         }
         $index = $this->index;
+
         return "/$index/_source/$id";
     }
 

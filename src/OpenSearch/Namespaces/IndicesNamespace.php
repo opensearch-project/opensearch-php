@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class IndicesNamespace
  *
@@ -440,7 +438,7 @@ class IndicesNamespace extends AbstractNamespace
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -474,7 +472,7 @@ class IndicesNamespace extends AbstractNamespace
         $endpoint->setName($name);
         $endpoint->setIndex($index);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -505,7 +503,7 @@ class IndicesNamespace extends AbstractNamespace
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -536,7 +534,7 @@ class IndicesNamespace extends AbstractNamespace
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
-        return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
+        return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
     }
 
     /**
@@ -576,7 +574,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['expand_wildcards']     = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['flush']                = (boolean) Specify whether the index should be flushed after performing the operation. (Default = true)
      * $params['ignore_unavailable']   = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed)
-     * $params['max_num_segments']     = (number) The number of larger segments into which smaller segments are merged.Set this parameter to 1 to merge all segments into one segment.The default behavior is to perform the merge as necessary.
+     * $params['max_num_segments']     = (integer) The number of larger segments into which smaller segments are merged.Set this parameter to 1 to merge all segments into one segment.The default behavior is to perform the merge as necessary.
      * $params['only_expunge_deletes'] = (boolean) Specify whether the operation should only expunge deleted documents
      * $params['primary_only']         = (boolean) Specify whether the operation should only perform on primary shards. Defaults to false. (Default = false)
      * $params['wait_for_completion']  = (boolean) Should the request wait until the force merge is completed. (Default = true)
@@ -1449,12 +1447,10 @@ class IndicesNamespace extends AbstractNamespace
     public function upgrade(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Upgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }

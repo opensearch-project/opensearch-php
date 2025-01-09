@@ -25,12 +25,11 @@ class Get extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        if (isset($this->id) !== true) {
-            throw new RuntimeException(
-                'id is required for get'
-            );
+        if (!isset($this->id) || $this->id === '') {
+            throw new RuntimeException('id is required for get');
         }
         $id = $this->id;
+
         return "/_plugins/_rollup/jobs/$id";
     }
 

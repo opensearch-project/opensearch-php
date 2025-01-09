@@ -72,7 +72,7 @@ class Info extends AbstractEndpoint
 
     public function setNodeIdOrMetric($node_id_or_metric): static
     {
-        if (isset($node_id_or_metric) !== true) {
+        if (is_null($node_id_or_metric)) {
             return $this;
         }
         $this->node_id_or_metric = $node_id_or_metric;

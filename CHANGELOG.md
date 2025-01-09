@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added workflow for automated API update using OpenSearch API specification ([#209](https://github.com/opensearch-project/opensearch-php/pull/209))
 - Added samples ([#218](https://github.com/opensearch-project/opensearch-php/pull/218))
 - Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
+- Added a Docker Compose config file for local development.
 ### Changed
 - Switched to PSR Interfaces
 - Increased PHP min version to 8.1
@@ -15,13 +16,16 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Changed fluent setters to return static
 ### Deprecated
 - Passing a callable to \OpenSearch\ClientBuilder::setEndpoint() is deprecated and replaced with passing an EndpointFactory to \OpenSearch\ClientBuilder::setEndpointFactory() ([#237](https://github.com/opensearch-project/opensearch-php/pull/237))
-- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.   
+- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.
+- Throwing exceptions for different HTTP status codes is deprecated. Use the response object to check the status code instead.
 ### Removed
 - Removed support for PHP 7.3, 7.4 and 8.0.
 - Removed support for async requests which were never actually working.
 ### Fixed
 - Fixed PHP 8.4 deprecations
+- Fixed outdated tests
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@2395cb4](https://github.com/opensearch-project/opensearch-api-specification/commit/2395cb472ec5581656aac184f7b20548cd5b06ac)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@ebe0f8a](https://github.com/opensearch-project/opensearch-api-specification/commit/ebe0f8a885f7db7e882d160c101055a5aa70a707)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@398481e](https://github.com/opensearch-project/opensearch-api-specification/commit/398481e5bd1cc590d947c35379c47096f2114f00)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@6bb1fed](https://github.com/opensearch-project/opensearch-api-specification/commit/6bb1fed0a2c7cf094a5ecfdb01f0306a4b9f8eba)

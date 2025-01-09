@@ -62,7 +62,7 @@ class PutComponentTemplate extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -72,7 +72,7 @@ class PutComponentTemplate extends AbstractEndpoint
 
     public function setName($name): static
     {
-        if (isset($name) !== true) {
+        if (is_null($name)) {
             return $this;
         }
         $this->name = $name;

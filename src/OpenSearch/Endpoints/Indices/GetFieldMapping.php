@@ -33,10 +33,8 @@ class GetFieldMapping extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->fields) !== true) {
-            throw new RuntimeException(
-                'fields is required for get_field_mapping'
-            );
+        if (!isset($this->fields) || $this->fields === '') {
+            throw new RuntimeException('fields is required for get_field_mapping');
         }
         $fields = $this->fields;
         $index = $this->index ?? null;

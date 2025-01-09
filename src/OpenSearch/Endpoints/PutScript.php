@@ -33,10 +33,8 @@ class PutScript extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->id) !== true) {
-            throw new RuntimeException(
-                'id is required for put_script'
-            );
+        if (!isset($this->id) || $this->id === '') {
+            throw new RuntimeException('id is required for put_script');
         }
         $id = $this->id;
         $context = $this->context ?? null;
@@ -68,7 +66,7 @@ class PutScript extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -78,7 +76,7 @@ class PutScript extends AbstractEndpoint
 
     public function setContext($context): static
     {
-        if (isset($context) !== true) {
+        if (is_null($context)) {
             return $this;
         }
         $this->context = $context;

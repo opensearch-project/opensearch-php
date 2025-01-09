@@ -57,7 +57,7 @@ class Update extends AbstractEndpoint
 
     public function setBody($body): static
     {
-        if (isset($body) !== true) {
+        if (is_null($body)) {
             return $this;
         }
         $this->body = $body;
@@ -67,7 +67,7 @@ class Update extends AbstractEndpoint
 
     public function setWorkflowId($workflow_id): static
     {
-        if (isset($workflow_id) !== true) {
+        if (is_null($workflow_id)) {
             return $this;
         }
         $this->workflow_id = $workflow_id;

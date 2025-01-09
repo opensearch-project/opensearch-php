@@ -1,6 +1,4 @@
-        if (isset($this->:part) !== true) {
-            throw new RuntimeException(
-                ':part is required for :endpoint'
-            );
+        if (!isset($this->:part) || $this->:part === '') {
+            throw new RuntimeException(':part is required for :endpoint');
         }
         $:part = $this->:part;

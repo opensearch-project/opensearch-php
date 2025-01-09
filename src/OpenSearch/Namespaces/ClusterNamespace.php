@@ -21,8 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
-
 /**
  * Class ClusterNamespace
  *
@@ -182,6 +180,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (array) Name of the component template to retrieve. Wildcard (`*`) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
+     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only.If `false`, information is retrieved from the cluster-manager node. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
