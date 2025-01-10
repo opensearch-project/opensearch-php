@@ -504,4 +504,6 @@ $client = \OpenSearch\ClientBuilder::fromConfig($config);
 
 ## Advanced Features
 
+* [Authentication](guides/auth.md)
 * [ML Commons](guides/ml-commons.md)
+* [Sending Raw JSON Requests](guides/raw-request.md)
