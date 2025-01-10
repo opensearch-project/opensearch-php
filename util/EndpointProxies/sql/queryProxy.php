@@ -8,12 +8,12 @@ return <<<'EOD'
      * $params['fetch_size'] = (int) The fetch size
      *
      * @param array{'query'?: string, 'cursor'?: string, 'fetch_size'?: int} $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      *
      * Note: Use of `query`, `cursor` and `fetch_size` parameters is deprecated. Pass them in `body` instead.
      * 
      */
-    public function query(array $params): array
+    public function query(array $params)
     {
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Query::class);
         $body = $this->extractArgument($params, 'body') ?? [];

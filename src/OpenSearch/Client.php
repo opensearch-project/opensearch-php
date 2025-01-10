@@ -2101,17 +2101,20 @@ class Client
      *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \OpenSearch\Common\Exceptions\OpenSearchException
+     *
+     * @return \OpenSearch\Response
      */
     public function request(
         string $method,
         string $uri,
         array $attributes = []
-    ): array|string|null {
+    ): Response|array|string|null {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
+        $request = new Request($method, $uri, $params, $body, $options);
 
-        $response = $this->httpTransport->sendRequest($method, $uri, $params, $body, $options['headers'] ?? []);
+        $response = $this->httpTransport->sendRequest($request);
 
         // @todo: Remove this in the next major release.
         // Throw legacy exceptions.
@@ -2119,6 +2122,8 @@ class Client
             if (isset($response['status']) && $response['status'] >= 400) {
                 $this->throwLegacyException($response);
             }
+            // Return the response body if we are in legacy mode.
+            return $response->getBody();
         }
 
         return $response;
@@ -2130,15 +2135,16 @@ class Client
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \OpenSearch\Common\Exceptions\OpenSearchException
      */
-    private function performRequest(AbstractEndpoint $endpoint): array|string|null
+    private function performRequest(AbstractEndpoint $endpoint): Response|array|string|null
     {
-        $response = $this->httpTransport->sendRequest(
+        $request = new Request(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
             $endpoint->getOptions()
         );
+        $response = $this->httpTransport->sendRequest($request);
 
         // @todo: Remove this in the next major release.
         // Throw legacy exceptions.
@@ -2146,6 +2152,9 @@ class Client
             if (isset($response['status']) && $response['status'] >= 400) {
                 $this->throwLegacyException($response);
             }
+
+            // Return the response body if we are in legacy mode.
+            return $response->getBody();
         }
 
         return $response;
@@ -2154,16 +2163,16 @@ class Client
     /**
      * Throw legacy exceptions.
      *
-     * @param array<string,mixed> $response
+     * @param \OpenSearch\Response $response
      *
      * @throws \OpenSearch\Common\Exceptions\OpenSearchException
      */
-    private function throwLegacyException(array $response): void
+    private function throwLegacyException(Response $response): void
     {
-        if ($response['status'] >= 400 && $response['status'] < 500) {
+        if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 500) {
             $this->throwLegacyClientException($response);
         }
-        if ($response['status'] >= 500) {
+        if ($response->getStatusCode() >= 500) {
             $this->throwLegacyServerException($response);
         }
     }
@@ -2173,10 +2182,10 @@ class Client
      *
      * @throws \OpenSearch\Common\Exceptions\OpenSearchException
      */
-    private function throwLegacyClientException($response): void
+    private function throwLegacyClientException(Response $response): void
     {
-        $statusCode = $response['status_code'];
-        $responseBody = $this->convertBodyToString($response['body'], $statusCode);
+        $statusCode = $response->getStatusCode();
+        $responseBody = $this->convertBodyToString($response->getBody(), $statusCode);
         throw match ($statusCode) {
             401 => new Unauthorized401Exception($responseBody, $statusCode),
             403 => new Forbidden403Exception($responseBody, $statusCode),
@@ -2195,14 +2204,15 @@ class Client
      *
      * @throws \OpenSearch\Common\Exceptions\OpenSearchException
      */
-    private function throwLegacyServerException($response): void
+    private function throwLegacyServerException(Response $response): void
     {
-        $statusCode = $response['status_code'];
-        $error = $response['body']['error'] ?? [];
+        $statusCode = $response->getStatusCode();
+        $body = $response->getBody();
+        $error = $body['error'] ?? [];
         $reason = $error['reason'] ?? 'undefined reason';
         $type = $error['type'] ?? 'undefined type';
         $errorMessage = "$type: $reason";
-        $responseBody = $this->convertBodyToString($response['body'], $statusCode);
+        $responseBody = $this->convertBodyToString($body, $statusCode);
 
         $exception = new ServerErrorResponseException($responseBody, $statusCode);
         if ($statusCode === 500) {
@@ -2217,7 +2227,7 @@ class Client
         throw $exception;
     }
 
-    private function convertBodyToString(mixed $body, int $statusCode): string
+    private function convertBodyToString(array|string|null $body, int $statusCode): string
     {
         return empty($body)
             ? "Unknown $statusCode error from OpenSearch"

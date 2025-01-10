@@ -8,10 +8,10 @@ return <<<'EOD'
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function predict(array $params = []): array
+    public function predict(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');

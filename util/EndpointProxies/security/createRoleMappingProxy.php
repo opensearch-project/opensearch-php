@@ -16,7 +16,7 @@ return <<<'EOD'
      * $params['users']          = (array)
      * 
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createRoleMapping(array $params = [])
     {

@@ -25,6 +25,8 @@ use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\LegacyEndpointFactory;
 use OpenSearch\LegacyTransportWrapper;
+use OpenSearch\Request;
+use OpenSearch\Response;
 use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
 
@@ -87,13 +89,18 @@ abstract class AbstractNamespace
 
     protected function performRequest(AbstractEndpoint $endpoint)
     {
-        return $this->httpTransport->sendRequest(
+        $request = new Request(
             $endpoint->getMethod(),
             $endpoint->getURI(),
             $endpoint->getParams(),
             $endpoint->getBody(),
             $endpoint->getOptions()
         );
-
+        $httpResponse = $this->httpTransport->sendRequest($request);
+        return new Response(
+            $httpResponse->getStatusCode(),
+            $httpResponse->getHeaders(),
+            $httpResponse->getBody()
+        );
     }
 }

@@ -11,7 +11,7 @@ use Psr\Http\Message\UriFactoryInterface;
 /**
  * Request factory that uses PSR-7, PSR-17 and PSR-18 interfaces.
  */
-final class RequestFactory implements RequestFactoryInterface
+final class HttpRequestFactory implements HttpRequestFactoryInterface
 {
     public function __construct(
         protected PsrRequestFactoryInterface $psrRequestFactory,
@@ -24,7 +24,7 @@ final class RequestFactory implements RequestFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createRequest(
+    public function createHttpRequest(
         string $method,
         string $uri,
         array $params = [],

@@ -8,10 +8,10 @@ return <<<'EOD'
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function updateModelGroup(array $params = []): array
+    public function updateModelGroup(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
         $model_group_id = $this->extractArgument($params, 'model_group_id');

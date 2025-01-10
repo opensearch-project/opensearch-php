@@ -7,10 +7,10 @@ return <<<'EOD'
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function getConnector(array $params = []): array
+    public function getConnector(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
         $connector_id = $this->extractArgument($params, 'connector_id');

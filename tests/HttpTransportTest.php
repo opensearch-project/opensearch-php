@@ -2,8 +2,9 @@
 
 namespace OpenSearch\Tests;
 
+use OpenSearch\HttpRequestFactoryInterface;
 use OpenSearch\HttpTransport;
-use OpenSearch\RequestFactoryInterface;
+use OpenSearch\Request;
 use OpenSearch\Serializers\SmartSerializer;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
@@ -25,9 +26,9 @@ class HttpTransportTest extends TestCase
     {
         $request = $this->createMock(RequestInterface::class);
 
-        $requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $requestFactory = $this->createMock(HttpRequestFactoryInterface::class);
         $requestFactory->expects($this->once())
-            ->method('createRequest')
+            ->method('createHttpRequest')
             ->with($this->anything())
             ->willReturn($request);
 
@@ -50,8 +51,10 @@ class HttpTransportTest extends TestCase
         $serializer = new SmartSerializer();
 
         $transport = new HttpTransport($client, $requestFactory, $serializer);
-        $response = $transport->sendRequest('GET', '/');
+        $request = new Request('GET', '/');
+        $response = $transport->sendRequest($request);
+        $body = $response->getBody();
 
-        $this->assertEquals(['foo' => 'bar'], $response);
+        $this->assertEquals(['foo' => 'bar'], $body);
     }
 }

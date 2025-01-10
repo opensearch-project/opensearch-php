@@ -16,7 +16,7 @@ return <<<'EOD'
      * $params['tenant_permissions']   = (array)
      * 
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createRole(array $params = [])
     {

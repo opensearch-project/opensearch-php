@@ -13,7 +13,7 @@ final class HttpTransport implements TransportInterface
 {
     public function __construct(
         protected ClientInterface $client,
-        protected RequestFactoryInterface $requestFactory,
+        protected HttpRequestFactoryInterface $requestFactory,
         protected SerializerInterface $serializer,
     ) {
     }
@@ -21,24 +21,29 @@ final class HttpTransport implements TransportInterface
     /**
      * Create a new request.
      */
-    public function createRequest(string $method, string $uri, array $params = [], mixed $body = null, array $headers = []): RequestInterface
+    public function createHttpRequest(Request $request): RequestInterface
     {
-        return $this->requestFactory->createRequest($method, $uri, $params, $body, $headers);
+        return $this->requestFactory->createHttpRequest(
+            $request->getMethod(),
+            $request->getUri(),
+            $request->getParams(),
+            $request->getBody(),
+            $request->getHeaders()
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function sendRequest(
-        string $method,
-        string $uri,
-        array $params = [],
-        mixed $body = null,
-        array $headers = [],
-    ): array|string|null {
-        $request = $this->createRequest($method, $uri, $params, $body, $headers);
-        $response = $this->client->sendRequest($request);
-        return $this->serializer->deserialize($response->getBody()->getContents(), $response->getHeaders());
+    public function sendRequest(Request $request): Response
+    {
+        $httpRequest = $this->createHttpRequest($request);
+        $httpResponse = $this->client->sendRequest($httpRequest);
+        return new Response(
+            $httpResponse->getStatusCode(),
+            $httpResponse->getHeaders(),
+            $this->serializer->deserialize($httpResponse->getBody()->getContents(), $httpResponse->getHeaders())
+        );
     }
 
 }

@@ -24,7 +24,7 @@ class TransportFactory
 
     private ?SerializerInterface $serializer = null;
 
-    private ?RequestFactoryInterface $requestFactory = null;
+    private ?HttpRequestFactoryInterface $requestFactory = null;
 
     private ?ClientInterface $httpClient = null;
 
@@ -39,12 +39,12 @@ class TransportFactory
         return $this;
     }
 
-    protected function getRequestFactory(): ?RequestFactoryInterface
+    protected function getRequestFactory(): ?HttpRequestFactoryInterface
     {
         return $this->requestFactory;
     }
 
-    public function setRequestFactory(?RequestFactoryInterface $requestFactory): static
+    public function setRequestFactory(?HttpRequestFactoryInterface $requestFactory): static
     {
         $this->requestFactory = $requestFactory;
         return $this;
@@ -117,7 +117,7 @@ class TransportFactory
             $uriFactory = $this->getUriFactory();
             $serializer = $this->getSerializer();
 
-            $this->requestFactory = new RequestFactory(
+            $this->requestFactory = new HttpRequestFactory(
                 $psrRequestFactory,
                 $streamFactory,
                 $uriFactory,

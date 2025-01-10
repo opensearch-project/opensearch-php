@@ -477,7 +477,7 @@ class Endpoint
         $result .= $this->extractBodyDescription($space);
         $result .= "     *\n";
         $result .= "     * @param array \$params Associative array of parameters\n";
-        $result .= sprintf("     * @return %s\n", $this->getMethod() === ['HEAD'] ? 'bool' : 'array');
+        $result .= sprintf("     * @return %s\n", $this->getMethod() === ['HEAD'] ? 'bool' : 'array|\OpenSearch\Response');
 
         if (isset($this->content['documentation']['url'])) {
             $result .= "     * @see {$this->content['documentation']['url']}\n";

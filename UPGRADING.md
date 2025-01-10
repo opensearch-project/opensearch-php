@@ -8,13 +8,43 @@
 
 ## Upgrading to >= 2.4.0
 
-openseach-php removes the hard-coded dependency on the [Guzzle HTTP client](https://docs.guzzlephp.org/en/stable/#) and switches to the following PSR interfaces: 
+`openseach-php` removes the hard-coded dependency on the [Guzzle HTTP client](https://docs.guzzlephp.org/en/stable/#) and switches to the following PSR interfaces: 
 
 - [PSR-7 HTTP message interfaces](https://www.php-fig.org/psr/psr-7/)
 - [PSR-17 HTTP Factories](https://www.php-fig.org/psr/psr-17/)
 - [PSR-18 HTTP Client](https://www.php-fig.org/psr/psr-18/)
 
-You can continue to use Guzzle, but will need to configure it as a PSR-18 HTTP Client.
+You can continue to use Guzzle, but will need to configure it as a PSR-18 HTTP Client as per the examples below.
+
+### HTTP Status Code Exceptions Are Deprecated
+
+`opensearch-php >= 2.4.0` deprecates throwing exceptions for different HTTP status codes. This behaviour will be removed
+in `3.0.0` Instead, you can use the response object to check the status code. It will continue to throw exceptions for
+critical connection issues. For example, it will throw a 
+`\Psr\Http\Client\NetworkExceptionInterface` when the request cannot be completed because of network issues.
+
+Before (`< 2.4.0`):
+
+```php
+try {
+    $data = $client->info();
+} catch (\OpenSearch\Common\Exceptions\Missing404Exception $e) {
+    // Handle 404 Not Found
+}
+````
+
+After (`>= 2.4.0`):
+
+```php
+$response = $client->info();
+$response->getStatusCode(); // 404
+$data = $response->getBody();
+// Handle 404 Not Found
+```
+
+The for backwards-compatibility a `\OpenSearch\Client` object created using the deprecated 
+`\OpenSearch\ClientBuilder::build()` method will continue to enable throwing exceptions. However, this will be removed in 
+3.0.0. You should instead create a `Client` using the examples below.
 
 ### HTTP Client Auto-Discovery
 
@@ -27,7 +57,9 @@ $endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
-$info = $client->info();
+$response = $client->info();
+$status = $response->getStatusCode();
+$info = $response->getBody();
 ```
 
 ### Configuring Guzzle HTTP Client in 2.x
@@ -51,7 +83,7 @@ $guzzleHttpFactory = new \GuzzleHttp\Psr7\HttpFactory();
 
 $serializer = new \OpenSearch\Serializers\SmartSerializer();
 
-$requestFactory = new \OpenSearch\RequestFactory(
+$requestFactory = new \OpenSearch\HttpRequestFactory(
     $guzzleHttpFactory,
     $guzzleHttpFactory,
     $guzzleHttpFactory,
@@ -67,7 +99,9 @@ $endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
-$info = $client->info();
+$response = $client->info();
+$status = $response->getStatusCode();
+$info = $response->getBody();
 ```
 
 ### Configuring Symfony HTTP Client in 2.x
@@ -89,7 +123,7 @@ $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOpt
 
 $serializer = new \OpenSearch\Serializers\SmartSerializer();
 
-$requestFactory = new \OpenSearch\RequestFactory(
+$requestFactory = new \OpenSearch\HttpRequestFactory(
     $symfonyPsr18Client,
     $symfonyPsr18Client,
     $symfonyPsr18Client,
@@ -104,6 +138,7 @@ $transport = (new \OpenSearch\TransportFactory())
 $client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
-$info = $client->info();
-
+$response = $client->info();
+$status = $response->getStatusCode();
+$info = $response->getBody();
 ```

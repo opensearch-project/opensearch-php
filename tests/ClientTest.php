@@ -23,8 +23,11 @@ namespace OpenSearch\Tests;
 
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\Common\Exceptions\ServerErrorResponseException;
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\Delete;
+use OpenSearch\Request;
+use OpenSearch\Response;
 use OpenSearch\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -111,15 +114,58 @@ class ClientTest extends TestCase
     {
         $this->transport->expects($this->once())
             ->method('sendRequest')
-            ->with('GET', '/', ['foo' => 'bar'], 'whizz')
-            ->willReturn(['bang']);
+            ->with(new Request('GET', '/', ['foo' => 'bar'], 'whizz'))
+            ->willReturn(new Response(200, [], ['bang']));
 
         $response = $this->client->request('GET', '/', [
             'params' => ['foo' => 'bar'],
             'body' => 'whizz',
         ]);
 
-        $this->assertEquals(['bang'], $response);
+        $this->assertEquals(['bang'], $response->getBody());
     }
 
+    public function test404ErrorStatus(): void
+    {
+        $this->transport->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->anything())
+            ->willReturn(new Response(404));
+
+        $response = $this->client->request('GET', '/');
+
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    /**
+     * @group legacy
+     */
+    public function test500ErrorException(): void
+    {
+        $this->transport->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->anything())
+            ->willReturn(new Response(500));
+
+        $this->expectException(ServerErrorResponseException::class);
+        $this->expectExceptionMessage('Unknown 500 error from OpenSearch');
+        $this->client = new Client($this->transport, $this->endpointFactory, [], true);
+        $this->client->request('GET', '/');
+    }
+
+    /**
+     * @group legacy
+     */
+    public function test200IsArray(): void
+    {
+        $this->transport->expects($this->once())
+            ->method('sendRequest')
+            ->with($this->anything())
+            ->willReturn(new Response(200, [], ['foo' => 'bar']));
+
+        $this->client = new Client($this->transport, $this->endpointFactory, [], true);
+        $response = $this->client->request('GET', '/');
+        $this->assertIsArray($response);
+        $this->assertEquals(['foo' => 'bar'], $response);
+    }
 }

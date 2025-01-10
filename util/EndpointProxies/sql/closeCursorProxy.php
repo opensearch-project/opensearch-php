@@ -7,9 +7,9 @@ return <<<'EOD'
      * $params['cursor'] = (string) The cursor given by the server
      *
      * @param array{'cursor': string} $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
-    public function closeCursor(array $params): array
+    public function closeCursor(array $params)
     {
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Close::class);
         $endpoint->setBody(array_filter([

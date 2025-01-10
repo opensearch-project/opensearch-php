@@ -14,7 +14,9 @@ $endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
-$info = $client->info();
+$response = $client->info();
+$status = $response->getStatusCode();
+$info = $response->getBody();
 
 // Guzzle example
 
@@ -34,7 +36,7 @@ $guzzleHttpFactory = new \GuzzleHttp\Psr7\HttpFactory();
 
 $serializer = new \OpenSearch\Serializers\SmartSerializer();
 
-$requestFactory = new \OpenSearch\RequestFactory(
+$requestFactory = new \OpenSearch\HttpRequestFactory(
     $guzzleHttpFactory,
     $guzzleHttpFactory,
     $guzzleHttpFactory,
@@ -50,7 +52,9 @@ $endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
-$info = $client->info();
+$response = $client->info();
+$status = $response->getStatusCode();
+$info = $response->getBody();
 
 // Symfony example
 
@@ -67,7 +71,7 @@ $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOpt
 
 $serializer = new \OpenSearch\Serializers\SmartSerializer();
 
-$requestFactory = new \OpenSearch\RequestFactory(
+$requestFactory = new \OpenSearch\HttpRequestFactory(
     $symfonyPsr18Client,
     $symfonyPsr18Client,
     $symfonyPsr18Client,
@@ -82,4 +86,6 @@ $transport = (new \OpenSearch\TransportFactory())
 $client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
-$info = $client->info();
+$response = $client->info();
+$status = $response->getStatusCode();
+$info = $response->getBody();

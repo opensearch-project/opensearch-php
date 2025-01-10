@@ -15,7 +15,7 @@ return <<<'EOD'
      * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getDistinguishedNames(array $params = [])
     {

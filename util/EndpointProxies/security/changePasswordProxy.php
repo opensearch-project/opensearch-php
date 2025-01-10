@@ -14,7 +14,7 @@ return <<<'EOD'
      * $params['password']           = (string) New password
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function changePassword(array $params = [])
     {

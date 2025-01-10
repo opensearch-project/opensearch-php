@@ -7,10 +7,10 @@ return <<<'EOD'
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function deleteConnector(array $params = []): array
+    public function deleteConnector(array $params = [])
     {
         $connectorId = $this->extractArgument($params, 'connector_id');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteConnector::class);

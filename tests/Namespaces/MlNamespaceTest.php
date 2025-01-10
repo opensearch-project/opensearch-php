@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Namespaces;
 
+use OpenSearch\EndpointFactory;
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\Ml\CreateConnector;
 use OpenSearch\Endpoints\Ml\DeleteConnector;
@@ -22,7 +23,11 @@ use OpenSearch\Endpoints\Ml\SearchModels;
 use OpenSearch\Endpoints\Ml\UndeployModel;
 use OpenSearch\Endpoints\Ml\UpdateModelGroup;
 use OpenSearch\Namespaces\MlNamespace;
+use OpenSearch\Namespaces\SecurityNamespace;
+use OpenSearch\Request;
+use OpenSearch\Response;
 use OpenSearch\TransportInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,42 +40,41 @@ use PHPUnit\Framework\TestCase;
  */
 class MlNamespaceTest extends TestCase
 {
+    private MlNamespace $mlNamespace;
+
+    private TransportInterface&MockObject $transport;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->transport = $this->createMock(TransportInterface::class);
+        $this->mlNamespace = new MlNamespace($this->transport, new EndpointFactory());
+    }
+
     public function testCreatingConnector(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/connectors/_create', [], [
+                    'foo' => 'bar',
+                ])
+            )
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-          ->willReturn(new CreateConnector());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/connectors/_create', [], [
+        $this->mlNamespace->createConnector([
+            'body' => [
                 'foo' => 'bar',
-            ])
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->createConnector([
-          'body' => [
-            'foo' => 'bar',
-          ],
+            ],
         ]);
     }
 
     public function testGetConnector(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(new Request('GET', '/_plugins/_ml/connectors/foobar'))
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new GetConnector());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('GET', '/_plugins/_ml/connectors/foobar', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->getConnector([
+        $this->mlNamespace->getConnector([
             'id' => 'foobar',
             'connector_id' => 'foobar'
         ]);
@@ -78,280 +82,210 @@ class MlNamespaceTest extends TestCase
 
     public function testGetConnectors(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/connectors/_search', [], [
+                    'query' => [
+                        'match_all' => new \StdClass(),
+                    ],
+                    'size' => 1000,
+                ])
+            )
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new GetConnectors());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-          ->with('POST', '/_plugins/_ml/connectors/_search', [], [
-            'query' => [
-              'match_all' => new \StdClass(),
+        $this->mlNamespace->getConnectors([
+            'body' => [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
             ],
-            'size' => 1000,
-          ])
-        ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->getConnectors([
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
-            ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testDeleteConnector(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(new Request('DELETE', '/_plugins/_ml/connectors/foobar'))
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new DeleteConnector());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('DELETE', '/_plugins/_ml/connectors/foobar', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->deleteConnector([
-          'connector_id' => 'foobar'
+        $this->mlNamespace->deleteConnector([
+            'connector_id' => 'foobar'
         ]);
     }
 
     public function testRegisterModelGroup(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/model_groups/_register', [], [
+                    'foo' => 'bar',
+                ])
+            )
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new RegisterModelGroup());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/model_groups/_register', [], [
+        $this->mlNamespace->registerModelGroup([
+            'body' => [
                 'foo' => 'bar',
-            ])
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->registerModelGroup([
-          'body' => [
-            'foo' => 'bar',
-          ],
+            ],
         ]);
     }
 
     public function testGetModelGroups(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/model_groups/_search', [], [
+                    'query' => [
+                        'match_all' => new \StdClass(),
+                    ],
+                    'size' => 1000,
+                ])
+            )
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new GetModelGroups());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/model_groups/_search', [], [
+        $this->mlNamespace->getModelGroups([
+            'body' => [
                 'query' => [
                     'match_all' => new \StdClass(),
                 ],
                 'size' => 1000,
-            ])
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->getModelGroups([
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
             ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testUpdateModelGroup(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('PUT', '/_plugins/_ml/model_groups/foobar', [], [
+                    'query' => [
+                        'match_all' => new \StdClass(),
+                    ],
+                    'size' => 1000,
+                ])
+            )
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new UpdateModelGroup());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('PUT', '/_plugins/_ml/model_groups/foobar', [], [
+        $this->mlNamespace->updateModelGroup([
+            'id' => 'foobar',
+            'model_group_id' => 'foobar',
+            'body' => [
                 'query' => [
                     'match_all' => new \StdClass(),
                 ],
                 'size' => 1000,
-            ])
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->updateModelGroup([
-          'id' => 'foobar',
-          'model_group_id' => 'foobar',
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
             ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testDeleteModelGroup(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(new Request('DELETE', '/_plugins/_ml/model_groups/foobar'))
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new DeleteModelGroup());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('DELETE', '/_plugins/_ml/model_groups/foobar', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->deleteModelGroup([
-          'id' => 'foobar'
+        $this->mlNamespace->deleteModelGroup([
+            'id' => 'foobar'
         ]);
     }
 
     public function testRegisterModel(): void
     {
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/models/_register', [], [
+                    'foo' => 'bar',
+                ])
+            )
+            ->willReturn(new Response());
 
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new RegisterModel());
-
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/models/_register', [], [
+        $this->mlNamespace->registerModel([
+            'body' => [
                 'foo' => 'bar',
-            ])
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->registerModel([
-          'body' => [
-            'foo' => 'bar',
-          ],
+            ],
         ]);
     }
 
     public function testGetModel(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new GetModel());
+        $this->transport->method('sendRequest')
+            ->with(new Request('GET', '/_plugins/_ml/models/foobar_model'))
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('GET', '/_plugins/_ml/models/foobar', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->getModel([
-          'id' => 'foobar',
+        $this->mlNamespace->getModel([
+            'id' => 'foobar',
+            'model_id' => 'foobar_model'
         ]);
     }
 
     public function testSearchModels(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new SearchModels());
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/models/_search', [], [
+                    'query' => [
+                        'match_all' => new \StdClass(),
+                    ],
+                    'size' => 1000,
+                ])
+            )
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-          ->with('GET', '/_plugins/_ml/models/_search', [], [
-            'query' => [
-              'match_all' => new \StdClass(),
+        $this->mlNamespace->searchModels([
+            'body' => [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
             ],
-            'size' => 1000,
-          ])
-        ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->searchModels([
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
-            ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testDeployModel(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new DeployModel());
+        $this->transport->method('sendRequest')
+            ->with(new Request('POST', '/_plugins/_ml/models/foobar/_deploy'))
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/models/foobar/_deploy', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->deployModel([
-          'model_id' => 'foobar',
+        $this->mlNamespace->deployModel([
+            'model_id' => 'foobar',
         ]);
     }
 
     public function testUnDeployModel(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new UndeployModel());
+        $this->transport->method('sendRequest')
+            ->with(new Request('POST', '/_plugins/_ml/models/foobar/_undeploy'))
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/models/foobar/_undeploy', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->undeployModel([
-          'model_id' => 'foobar',
+        $this->mlNamespace->undeployModel([
+            'model_id' => 'foobar',
         ]);
     }
 
     public function testDeleteModel(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new DeleteModel());
+        $this->transport->method('sendRequest')
+            ->with(new Request('DELETE', '/_plugins/_ml/models/foobar'))
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('DELETE', '/_plugins/_ml/models/foobar', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->deleteModel([
-          'id' => 'foobar',
+        $this->mlNamespace->deleteModel([
+            'id' => 'foobar',
         ]);
     }
 
     public function testPredict(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new Predict());
+        $this->transport->method('sendRequest')
+            ->with(
+                new Request('POST', '/_plugins/_ml/_predict/algo/model', [], [
+                    'foo' => 'bar',
+                ])
+            )
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('POST', '/_plugins/_ml/_predict/algo/model', [], [
-                'foo' => 'bar',
-            ])
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->predict([
+        $this->mlNamespace->predict([
             'id' => 'foobar',
             'body' => [
                 'foo' => 'bar',
@@ -363,18 +297,12 @@ class MlNamespaceTest extends TestCase
 
     public function testGetTask(): void
     {
-        $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
-        $endpointFactory->method('getEndpoint')
-            ->willReturn(new GetTask());
+        $this->transport->method('sendRequest')
+            ->with(new Request('GET', '/_plugins/_ml/tasks/foobar'))
+            ->willReturn(new Response());
 
-        $transport = $this->createMock(TransportInterface::class);
-
-        $transport->method('sendRequest')
-            ->with('GET', '/_plugins/_ml/tasks/foobar', [], null)
-            ->willReturn([]);
-
-        (new MlNamespace($transport, $endpointFactory))->getTask([
-          'id' => 'foobar',
+        $this->mlNamespace->getTask([
+            'id' => 'foobar',
         ]);
     }
 }

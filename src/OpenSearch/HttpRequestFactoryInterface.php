@@ -4,7 +4,7 @@ namespace OpenSearch;
 
 use Psr\Http\Message\RequestInterface;
 
-interface RequestFactoryInterface
+interface HttpRequestFactoryInterface
 {
     /**
      * Create a new request.
@@ -13,7 +13,7 @@ interface RequestFactoryInterface
      * @param string|array<string, mixed>|null $body
      * @param array<string, string> $headers
      */
-    public function createRequest(
+    public function createHttpRequest(
         string $method,
         string $uri,
         array $params = [],

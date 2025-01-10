@@ -40,7 +40,7 @@ class MlNamespaceIntegrationTest extends \PHPUnit\Framework\TestCase
                 'description' => 'Group containing models for OpenAI',
             ],
         ]);
-        $this->assertNotEmpty($modelGroupResponse['model_group_id']);
+        $this->assertNotEmpty($modelGroupResponse->getBody()['model_group_id']);
     }
 
     public function testgetModels()
@@ -52,7 +52,7 @@ class MlNamespaceIntegrationTest extends \PHPUnit\Framework\TestCase
         }
 
         $modelGroupResponse = $client->ml()->getModels();
-        $this->assertNotEmpty($modelGroupResponse['hits']);
+        $this->assertNotEmpty($modelGroupResponse->getBody()['hits']);
     }
 
     public function testsearchModels()
@@ -71,6 +71,6 @@ class MlNamespaceIntegrationTest extends \PHPUnit\Framework\TestCase
                 'size' => 1000,
               ],
         ]);
-        $this->assertNotEmpty($modelGroupResponse['hits']);
+        $this->assertNotEmpty($modelGroupResponse->getBody()['hits']);
     }
 }

@@ -7,10 +7,10 @@ return <<<'EOD'
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function createConnector(array $params = []): array
+    public function createConnector(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateConnector::class);

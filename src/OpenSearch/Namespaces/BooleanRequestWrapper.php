@@ -25,6 +25,7 @@ use GuzzleHttp\Ring\Future\FutureArrayInterface;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\Request;
 use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
 
@@ -41,15 +42,16 @@ abstract class BooleanRequestWrapper
     public static function sendRequest(AbstractEndpoint $endpoint, TransportInterface $transport): bool
     {
         try {
-            $response = $transport->sendRequest(
+            $request = new Request(
                 $endpoint->getMethod(),
                 $endpoint->getURI(),
                 $endpoint->getParams(),
                 $endpoint->getBody(),
                 $endpoint->getOptions()
             );
+            $response = $transport->sendRequest($request);
 
-            return match ($response['status_code'] ?? null) {
+            return match ($response->getStatusCode()) {
                 404 => false,
                 default => true,
             };

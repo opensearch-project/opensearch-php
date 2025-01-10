@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OpenSearch;
 
 use GuzzleHttp\Ring\Future\FutureArrayInterface;
@@ -19,19 +21,21 @@ class LegacyTransportWrapper implements TransportInterface
     /**
      * {@inheritdoc}
      */
-    public function sendRequest(
-        string $method,
-        string $uri,
-        array $params = [],
-        mixed $body = null,
-        array $headers = [],
-    ): array|string|null {
-        $promise = $this->transport->performRequest($method, $uri, $params, $body);
+    public function sendRequest(Request $request): Response
+    {
+        $promise = $this->transport->performRequest(
+            $request->getMethod(),
+            $request->getUri(),
+            $request->getParams(),
+            $request->getBody(),
+        );
         $futureArray = $this->transport->resultOrFuture($promise);
         if ($futureArray instanceof FutureArrayInterface) {
-            return $futureArray->wait();
+            // We set status code as 200 because exceptions are thrown for other status codes.
+            return new Response(200, [], $futureArray->wait());
         }
-        return $futureArray;
+        // We set status code as 200 because exceptions are thrown for other status codes.
+        return new Response(200, [], $futureArray);
     }
 
 }

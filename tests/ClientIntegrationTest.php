@@ -26,7 +26,7 @@ use GuzzleHttp\Psr7\HttpFactory;
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\EndpointFactory;
-use OpenSearch\RequestFactory;
+use OpenSearch\HttpRequestFactory;
 use OpenSearch\Serializers\SmartSerializer;
 use OpenSearch\TransportFactory;
 use PHPUnit\Framework\TestCase;
@@ -53,7 +53,8 @@ class ClientIntegrationTest extends TestCase
 
     public function testInfoNotEmpty()
     {
-        $result = $this->client->info();
+        $response = $this->client->info();
+        $result = $response->getBody();
 
         $this->assertArrayHasKey('name', $result);
         $this->assertArrayHasKey('cluster_name', $result);
@@ -63,10 +64,11 @@ class ClientIntegrationTest extends TestCase
 
     public function testNotFoundError()
     {
-        $result = $this->client->get([
+        $response = $this->client->get([
             'index' => 'foo',
             'id' => 'bar',
         ]);
+        $result = $response->getBody();
         $this->assertEquals(404, $result['status']);
         $error = $result['error'];
         $this->assertEquals('index_not_found_exception', $error['type']);
@@ -128,11 +130,11 @@ class ClientIntegrationTest extends TestCase
     public function sendRawRequest(): void
     {
         $response = $this->client->request('GET', '/');
-
-        $this->assertIsArray($response);
+        $body = $response->getBody();
+        $this->assertIsArray($body);
         $expectedKeys = ['name', 'cluster_name', 'cluster_uuid', 'version', 'tagline'];
         foreach ($expectedKeys as $key) {
-            $this->assertArrayHasKey($key, $response);
+            $this->assertArrayHasKey($key, $body);
         }
     }
 
@@ -143,12 +145,14 @@ class ClientIntegrationTest extends TestCase
 
         $response = $this->client->request('POST', "/$randomIndex/_doc", ['body' => ['field' => 'value']]);
 
-        $this->assertIsArray($response);
-        $this->assertArrayHasKey('_index', $response);
-        $this->assertSame($randomIndex, $response['_index']);
-        $this->assertArrayHasKey('_id', $response);
-        $this->assertArrayHasKey('result', $response);
-        $this->assertSame('created', $response['result']);
+        $body = $response->getBody();
+
+        $this->assertIsArray($body);
+        $this->assertArrayHasKey('_index', $body);
+        $this->assertSame($randomIndex, $body['_index']);
+        $this->assertArrayHasKey('_id', $body);
+        $this->assertArrayHasKey('result', $body);
+        $this->assertSame('created', $body['result']);
     }
 
     private function getClient(): Client
@@ -173,7 +177,7 @@ class ClientIntegrationTest extends TestCase
         $guzzleHttpFactory = new HttpFactory();
         $serializer = new SmartSerializer();
 
-        $requestFactory = new RequestFactory(
+        $requestFactory = new HttpRequestFactory(
             $guzzleHttpFactory,
             $guzzleHttpFactory,
             $guzzleHttpFactory,

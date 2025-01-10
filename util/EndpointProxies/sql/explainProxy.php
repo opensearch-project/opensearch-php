@@ -5,11 +5,11 @@ return <<<'EOD'
      * $params['query'] = (string) The SQL Query
      *
      * @param array{'query': string} $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      *
      * Note: Use of query parameter is deprecated. Pass it in `body` instead.
      */
-    public function explain(array $params): array
+    public function explain(array $params)
     {
         $body = $this->extractArgument($params, 'body') ?? [];
         $query = $this->extractArgument($params, 'query');

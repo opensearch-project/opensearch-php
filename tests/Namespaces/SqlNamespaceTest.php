@@ -17,6 +17,8 @@ namespace OpenSearch\Tests\Namespaces;
 
 use OpenSearch\EndpointFactory;
 use OpenSearch\Namespaces\SqlNamespace;
+use OpenSearch\Request;
+use OpenSearch\Response;
 use OpenSearch\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -40,45 +42,45 @@ class SqlNamespaceTest extends TestCase
     public function testQuery(): void
     {
         $this->transport->method('sendRequest')
-            ->with('POST', '/_plugins/_sql', [], [
+            ->with(new Request('POST', '/_plugins/_sql', [], [
                 'query' => 'select * from test',
-            ])
-            ->willReturn(['foo' => 'bar']);
+            ]))
+            ->willReturn(new Response(200, [], ['foo' => 'bar']));
 
         $result = $this->sqlNamespace->query([
             'query' => 'select * from test',
         ]);
 
-        $this->assertEquals(['foo' => 'bar'], $result);
+        $this->assertEquals(['foo' => 'bar'], $result->getBody());
     }
 
     public function testExplain(): void
     {
         $this->transport->method('sendRequest')
-            ->with('POST', '/_plugins/_sql/_explain', [], [
+            ->with(new Request('POST', '/_plugins/_sql/_explain', [], [
                 'query' => 'select * from test',
-            ])
-            ->willReturn(['foo' => 'bar']);
+            ]))
+            ->willReturn(new Response(200, [], ['foo' => 'bar']));
 
         $result = $this->sqlNamespace->explain([
             'query' => 'select * from test',
         ]);
 
-        $this->assertEquals(['foo' => 'bar'], $result);
+        $this->assertEquals(['foo' => 'bar'], $result->getBody());
     }
 
     public function testCloseCursor(): void
     {
         $this->transport->method('sendRequest')
-            ->with('POST', '/_plugins/_sql/close', [], [
+            ->with(new Request('POST', '/_plugins/_sql/close', [], [
                 'cursor' => 'fooo',
-            ])
-            ->willReturn(['foo' => 'bar']);
+            ]))
+            ->willReturn(new Response(200, [], ['foo' => 'bar']));
 
         $result = $this->sqlNamespace->closeCursor([
             'cursor' => 'fooo',
         ]);
 
-        $this->assertEquals(['foo' => 'bar'], $result);
+        $this->assertEquals(['foo' => 'bar'], $result->getBody());
     }
 }

@@ -7,10 +7,10 @@ return <<<'EOD'
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function getModelGroups(array $params = []): array
+    public function getModelGroups(array $params = [])
     {
         if (!isset($params['body'])) {
             $params['body'] = [
