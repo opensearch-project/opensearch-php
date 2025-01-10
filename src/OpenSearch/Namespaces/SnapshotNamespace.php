@@ -42,7 +42,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function cleanupRepository(array $params = [])
     {
@@ -71,7 +71,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['body']                    = (array) The snapshot clone definition (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function clone(array $params = [])
     {
@@ -106,7 +106,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['body']                    = (array) The snapshot definition
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function create(array $params = [])
     {
@@ -139,7 +139,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['body']                    = (array) The repository definition (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createRepository(array $params = [])
     {
@@ -168,7 +168,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function delete(array $params = [])
     {
@@ -197,7 +197,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteRepository(array $params = [])
     {
@@ -226,7 +226,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function get(array $params = [])
     {
@@ -255,7 +255,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getRepository(array $params = [])
     {
@@ -284,7 +284,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['body']                    = (array) Details of what to restore
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function restore(array $params = [])
     {
@@ -316,7 +316,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function status(array $params = [])
     {
@@ -345,7 +345,7 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function verifyRepository(array $params = [])
     {

@@ -43,7 +43,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteDanglingIndex(array $params = [])
     {
@@ -71,7 +71,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function importDanglingIndex(array $params = [])
     {
@@ -94,7 +94,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function listDanglingIndices(array $params = [])
     {

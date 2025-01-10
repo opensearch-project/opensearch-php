@@ -46,7 +46,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function aliases(array $params = [])
     {
@@ -75,7 +75,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function allPitSegments(array $params = [])
     {
@@ -105,7 +105,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function allocation(array $params = [])
     {
@@ -136,7 +136,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function clusterManager(array $params = [])
     {
@@ -162,7 +162,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function count(array $params = [])
     {
@@ -192,7 +192,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function fielddata(array $params = [])
     {
@@ -222,7 +222,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function health(array $params = [])
     {
@@ -242,7 +242,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function help(array $params = [])
     {
@@ -277,7 +277,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function indices(array $params = [])
     {
@@ -308,7 +308,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function master(array $params = [])
     {
@@ -336,7 +336,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function nodeattrs(array $params = [])
     {
@@ -367,7 +367,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function nodes(array $params = [])
     {
@@ -396,7 +396,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function pendingTasks(array $params = [])
     {
@@ -422,7 +422,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function pitSegments(array $params = [])
     {
@@ -453,7 +453,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function plugins(array $params = [])
     {
@@ -483,7 +483,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function recovery(array $params = [])
     {
@@ -514,7 +514,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function repositories(array $params = [])
     {
@@ -551,7 +551,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function segmentReplication(array $params = [])
     {
@@ -583,7 +583,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function segments(array $params = [])
     {
@@ -617,7 +617,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function shards(array $params = [])
     {
@@ -650,7 +650,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function snapshots(array $params = [])
     {
@@ -683,7 +683,7 @@ class CatNamespace extends AbstractNamespace
      * $params['parent_task'] = (string) The parent task identifier, which is used to limit the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function tasks(array $params = [])
     {
@@ -712,7 +712,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function templates(array $params = [])
     {
@@ -745,7 +745,7 @@ class CatNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function threadPool(array $params = [])
     {

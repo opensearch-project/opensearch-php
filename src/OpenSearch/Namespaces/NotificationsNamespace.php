@@ -32,7 +32,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createConfig(array $params = [])
     {
@@ -56,7 +56,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteConfig(array $params = [])
     {
@@ -81,7 +81,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteConfigs(array $params = [])
     {
@@ -102,7 +102,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getConfig(array $params = [])
     {
@@ -165,7 +165,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path']                                  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getConfigs(array $params = [])
     {
@@ -188,7 +188,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function listChannels(array $params = [])
     {
@@ -208,7 +208,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function listFeatures(array $params = [])
     {
@@ -229,7 +229,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function sendTest(array $params = [])
     {
@@ -253,7 +253,7 @@ class NotificationsNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateConfig(array $params = [])
     {

@@ -41,7 +41,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['body']                  = (array) The index, shard, and primary flag to explain. Empty means 'explain the first unassigned shard'
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function allocationExplain(array $params = [])
     {
@@ -68,7 +68,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteComponentTemplate(array $params = [])
     {
@@ -91,7 +91,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteDecommissionAwareness(array $params = [])
     {
@@ -112,7 +112,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
@@ -132,7 +132,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteWeightedRouting(array $params = [])
     {
@@ -190,7 +190,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getComponentTemplate(array $params = [])
     {
@@ -214,7 +214,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']              = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getDecommissionAwareness(array $params = [])
     {
@@ -242,7 +242,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getSettings(array $params = [])
     {
@@ -263,7 +263,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getWeightedRouting(array $params = [])
     {
@@ -300,7 +300,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']                     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function health(array $params = [])
     {
@@ -326,7 +326,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function pendingTasks(array $params = [])
     {
@@ -349,7 +349,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function postVotingConfigExclusions(array $params = [])
     {
@@ -375,7 +375,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putComponentTemplate(array $params = [])
     {
@@ -402,7 +402,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putDecommissionAwareness(array $params = [])
     {
@@ -432,7 +432,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['body']                    = (array) The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart). (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putSettings(array $params = [])
     {
@@ -456,7 +456,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putWeightedRouting(array $params = [])
     {
@@ -481,7 +481,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function remoteInfo(array $params = [])
     {
@@ -509,7 +509,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['body']                    = (array) The definition of `commands` to perform (`move`, `cancel`, `allocate`)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function reroute(array $params = [])
     {
@@ -543,7 +543,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']               = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function state(array $params = [])
     {
@@ -573,7 +573,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function stats(array $params = [])
     {

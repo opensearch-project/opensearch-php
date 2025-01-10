@@ -35,7 +35,7 @@ class RemoteStoreNamespace extends AbstractNamespace
      * $params['body']                    = (array) Comma-separated list of index IDs (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function restore(array $params = [])
     {

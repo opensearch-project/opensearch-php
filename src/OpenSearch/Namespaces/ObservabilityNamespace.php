@@ -32,7 +32,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createObject(array $params = [])
     {
@@ -56,7 +56,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteObject(array $params = [])
     {
@@ -81,7 +81,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteObjects(array $params = [])
     {
@@ -101,7 +101,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getLocalstats(array $params = [])
     {
@@ -122,7 +122,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getObject(array $params = [])
     {
@@ -145,7 +145,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function listObjects(array $params = [])
     {
@@ -166,7 +166,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateObject(array $params = [])
     {

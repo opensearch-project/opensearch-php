@@ -34,7 +34,7 @@ class SqlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function close(array $params = [])
     {
@@ -59,7 +59,7 @@ class SqlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getStats(array $params = [])
     {
@@ -81,7 +81,7 @@ class SqlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function postStats(array $params = [])
     {
@@ -105,7 +105,7 @@ class SqlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function settings(array $params = [])
     {
@@ -123,9 +123,9 @@ class SqlNamespace extends AbstractNamespace
      * $params['cursor'] = (string) The cursor given by the server
      *
      * @param array{'cursor': string} $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
-    public function closeCursor(array $params): array
+    public function closeCursor(array $params)
     {
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Close::class);
         $endpoint->setBody(array_filter([
@@ -138,11 +138,11 @@ class SqlNamespace extends AbstractNamespace
      * $params['query'] = (string) The SQL Query
      *
      * @param array{'query': string} $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      *
      * Note: Use of query parameter is deprecated. Pass it in `body` instead.
      */
-    public function explain(array $params): array
+    public function explain(array $params)
     {
         $body = $this->extractArgument($params, 'body') ?? [];
         $query = $this->extractArgument($params, 'query');
@@ -161,12 +161,12 @@ class SqlNamespace extends AbstractNamespace
      * $params['fetch_size'] = (int) The fetch size
      *
      * @param array{'query'?: string, 'cursor'?: string, 'fetch_size'?: int} $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      *
      * Note: Use of `query`, `cursor` and `fetch_size` parameters is deprecated. Pass them in `body` instead.
      *
      */
-    public function query(array $params): array
+    public function query(array $params)
     {
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sql\Query::class);
         $body = $this->extractArgument($params, 'body') ?? [];

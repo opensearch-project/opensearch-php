@@ -34,7 +34,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function authinfo(array $params = [])
     {
@@ -54,7 +54,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function authtoken(array $params = [])
     {
@@ -74,7 +74,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function cache(array $params = [])
     {
@@ -94,7 +94,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function configUpgradeCheck(array $params = [])
     {
@@ -114,7 +114,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function configUpgradePerform(array $params = [])
     {
@@ -137,7 +137,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createAllowlist(array $params = [])
     {
@@ -160,7 +160,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createUpdateTenancyConfig(array $params = [])
     {
@@ -184,7 +184,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createUserLegacy(array $params = [])
     {
@@ -210,7 +210,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteActionGroup(array $params = [])
     {
@@ -234,7 +234,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteDistinguishedName(array $params = [])
     {
@@ -258,7 +258,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteRole(array $params = [])
     {
@@ -282,7 +282,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteRoleMapping(array $params = [])
     {
@@ -306,7 +306,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteTenant(array $params = [])
     {
@@ -330,7 +330,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteUser(array $params = [])
     {
@@ -354,7 +354,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteUserLegacy(array $params = [])
     {
@@ -377,7 +377,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function flushCache(array $params = [])
     {
@@ -397,7 +397,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function generateOboToken(array $params = [])
     {
@@ -421,7 +421,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function generateUserToken(array $params = [])
     {
@@ -445,7 +445,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function generateUserTokenLegacy(array $params = [])
     {
@@ -468,7 +468,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getAccountDetails(array $params = [])
     {
@@ -489,7 +489,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getActionGroup(array $params = [])
     {
@@ -514,7 +514,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getAllCertificates(array $params = [])
     {
@@ -534,7 +534,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getAllowlist(array $params = [])
     {
@@ -554,7 +554,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getAuditConfiguration(array $params = [])
     {
@@ -574,7 +574,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getCertificates(array $params = [])
     {
@@ -594,7 +594,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getConfiguration(array $params = [])
     {
@@ -614,7 +614,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getDashboardsInfo(array $params = [])
     {
@@ -636,7 +636,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getDistinguishedName(array $params = [])
     {
@@ -662,7 +662,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getNodeCertificates(array $params = [])
     {
@@ -685,7 +685,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getPermissionsInfo(array $params = [])
     {
@@ -706,7 +706,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getRole(array $params = [])
     {
@@ -730,7 +730,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getRoleMapping(array $params = [])
     {
@@ -754,7 +754,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getSslinfo(array $params = [])
     {
@@ -774,7 +774,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getTenancyConfig(array $params = [])
     {
@@ -795,7 +795,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getTenant(array $params = [])
     {
@@ -819,7 +819,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getUser(array $params = [])
     {
@@ -843,7 +843,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getUserLegacy(array $params = [])
     {
@@ -866,7 +866,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getUsersLegacy(array $params = [])
     {
@@ -887,7 +887,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function health(array $params = [])
     {
@@ -907,7 +907,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function migrate(array $params = [])
     {
@@ -928,7 +928,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchActionGroup(array $params = [])
     {
@@ -953,7 +953,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchAllowlist(array $params = [])
     {
@@ -976,7 +976,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchAuditConfiguration(array $params = [])
     {
@@ -999,7 +999,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchConfiguration(array $params = [])
     {
@@ -1023,7 +1023,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchDistinguishedName(array $params = [])
     {
@@ -1048,7 +1048,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchDistinguishedNames(array $params = [])
     {
@@ -1072,7 +1072,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchRole(array $params = [])
     {
@@ -1098,7 +1098,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchRoleMapping(array $params = [])
     {
@@ -1124,7 +1124,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchTenant(array $params = [])
     {
@@ -1150,7 +1150,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchUser(array $params = [])
     {
@@ -1175,7 +1175,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function postDashboardsInfo(array $params = [])
     {
@@ -1195,7 +1195,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function reloadHttpCertificates(array $params = [])
     {
@@ -1215,7 +1215,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function reloadTransportCertificates(array $params = [])
     {
@@ -1235,7 +1235,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function tenantInfo(array $params = [])
     {
@@ -1255,7 +1255,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateAuditConfiguration(array $params = [])
     {
@@ -1278,7 +1278,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateConfiguration(array $params = [])
     {
@@ -1302,7 +1302,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateDistinguishedName(array $params = [])
     {
@@ -1328,7 +1328,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function validate(array $params = [])
     {
@@ -1348,7 +1348,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function whoAmI(array $params = [])
     {
@@ -1368,7 +1368,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function whoAmIProtected(array $params = [])
     {
@@ -1390,7 +1390,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['password']           = (string) New password
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function changePassword(array $params = [])
     {
@@ -1420,7 +1420,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createActionGroup(array $params = [])
     {
@@ -1453,7 +1453,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['users']          = (array)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createRoleMapping(array $params = [])
     {
@@ -1488,7 +1488,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['tenant_permissions']   = (array)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createRole(array $params = [])
     {
@@ -1521,7 +1521,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createTenant(array $params = [])
     {
@@ -1555,7 +1555,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['attributes']                 = (array)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createUser(array $params = [])
     {
@@ -1604,7 +1604,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getActionGroups(array $params = [])
     {
@@ -1640,7 +1640,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getDistinguishedNames(array $params = [])
     {
@@ -1667,7 +1667,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getRoleMappings(array $params = [])
     {
@@ -1694,7 +1694,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getRoles(array $params = [])
     {
@@ -1721,7 +1721,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getTenants(array $params = [])
     {
@@ -1748,9 +1748,9 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
-    public function getUsers(array $params = []): array
+    public function getUsers(array $params = [])
     {
         $endpointBuilder = $this->endpoints;
 
@@ -1777,7 +1777,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchActionGroups(array $params = [])
     {
@@ -1822,7 +1822,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchRoleMappings(array $params = [])
     {
@@ -1854,7 +1854,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchRoles(array $params = [])
     {
@@ -1887,7 +1887,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchTenants(array $params = [])
     {
@@ -1920,7 +1920,7 @@ class SecurityNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Comma-separated list of filters used to reduce the response.
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function patchUsers(array $params = [])
     {

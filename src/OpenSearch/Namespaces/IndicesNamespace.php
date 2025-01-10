@@ -46,7 +46,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function addBlock(array $params = [])
     {
@@ -73,7 +73,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']        = (array) Define analyzer/tokenizer parameters and the text on which the analysis should be performed
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function analyze(array $params = [])
     {
@@ -107,7 +107,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function clearCache(array $params = [])
     {
@@ -139,7 +139,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function clone(array $params = [])
     {
@@ -174,7 +174,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function close(array $params = [])
     {
@@ -203,7 +203,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The configuration for the index (`settings` and `mappings`)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function create(array $params = [])
     {
@@ -230,7 +230,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']        = (array) The data stream definition
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createDataStream(array $params = [])
     {
@@ -256,7 +256,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function dataStreamsStats(array $params = [])
     {
@@ -286,7 +286,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function delete(array $params = [])
     {
@@ -314,7 +314,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteAlias(array $params = [])
     {
@@ -340,7 +340,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteDataStream(array $params = [])
     {
@@ -367,7 +367,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteIndexTemplate(array $params = [])
     {
@@ -394,7 +394,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteTemplate(array $params = [])
     {
@@ -553,7 +553,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function flush(array $params = [])
     {
@@ -585,7 +585,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']          = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function forcemerge(array $params = [])
     {
@@ -617,7 +617,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function get(array $params = [])
     {
@@ -646,7 +646,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getAlias(array $params = [])
     {
@@ -672,7 +672,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getDataStream(array $params = [])
     {
@@ -702,7 +702,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getFieldMapping(array $params = [])
     {
@@ -732,7 +732,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getIndexTemplate(array $params = [])
     {
@@ -762,7 +762,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getMapping(array $params = [])
     {
@@ -795,7 +795,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getSettings(array $params = [])
     {
@@ -825,7 +825,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getTemplate(array $params = [])
     {
@@ -852,7 +852,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getUpgrade(array $params = [])
     {
@@ -885,7 +885,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function open(array $params = [])
     {
@@ -914,7 +914,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The settings for the alias, such as `routing` or `filter`
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putAlias(array $params = [])
     {
@@ -947,7 +947,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putIndexTemplate(array $params = [])
     {
@@ -981,7 +981,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The mapping definition (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putMapping(array $params = [])
     {
@@ -1015,7 +1015,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putSettings(array $params = [])
     {
@@ -1046,7 +1046,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The template definition (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function putTemplate(array $params = [])
     {
@@ -1074,7 +1074,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function recovery(array $params = [])
     {
@@ -1101,7 +1101,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function refresh(array $params = [])
     {
@@ -1126,7 +1126,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']      = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function resolveIndex(array $params = [])
     {
@@ -1157,7 +1157,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The conditions that needs to be met for executing rollover
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function rollover(array $params = [])
     {
@@ -1189,7 +1189,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function segments(array $params = [])
     {
@@ -1217,7 +1217,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function shardStores(array $params = [])
     {
@@ -1250,7 +1250,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function shrink(array $params = [])
     {
@@ -1281,7 +1281,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) New index template definition, which will be included in the simulation, as if it already exists in the system
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function simulateIndexTemplate(array $params = [])
     {
@@ -1311,7 +1311,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function simulateTemplate(array $params = [])
     {
@@ -1346,7 +1346,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function split(array $params = [])
     {
@@ -1384,7 +1384,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']                = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function stats(array $params = [])
     {
@@ -1413,7 +1413,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']                    = (array) The definition of `actions` to perform (Required)
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateAliases(array $params = [])
     {
@@ -1442,7 +1442,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['filter_path']           = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function upgrade(array $params = [])
     {
@@ -1479,7 +1479,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['body']               = (array) The query definition specified with the Query DSL
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function validateQuery(array $params = [])
     {

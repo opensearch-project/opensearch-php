@@ -23,6 +23,35 @@ namespace OpenSearch\Namespaces;
 class MlNamespace extends AbstractNamespace
 {
     /**
+     * Uploads model chunk.
+     *
+     * $params['chunk_number'] = (integer)
+     * $params['model_id']     = (string)
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function chunkModel(array $params = [])
+    {
+        $chunk_number = $this->extractArgument($params, 'chunk_number');
+        $model_id = $this->extractArgument($params, 'model_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\ChunkModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setChunkNumber($chunk_number);
+        $endpoint->setModelId($model_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Create a memory.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -32,7 +61,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createMemory(array $params = [])
     {
@@ -56,7 +85,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function createMessage(array $params = [])
     {
@@ -66,6 +95,29 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Registers model metadata.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function createModelMeta(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateModelMeta::class);
+        $endpoint->setParams($params);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -82,7 +134,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteAgent(array $params = [])
     {
@@ -106,7 +158,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteMemory(array $params = [])
     {
@@ -130,7 +182,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteModel(array $params = [])
     {
@@ -154,7 +206,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteModelGroup(array $params = [])
     {
@@ -178,7 +230,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function deleteTask(array $params = [])
     {
@@ -202,7 +254,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getMemory(array $params = [])
     {
@@ -229,7 +281,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getMessage(array $params = [])
     {
@@ -255,7 +307,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getMessageTraces(array $params = [])
     {
@@ -279,7 +331,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getModelGroup(array $params = [])
     {
@@ -303,7 +355,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function getTask(array $params = [])
     {
@@ -312,6 +364,56 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetTask::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Deploys a model.
+     *
+     * $params['model_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function loadModel(array $params = [])
+    {
+        $model_id = $this->extractArgument($params, 'model_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\LoadModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setModelId($model_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Predicts a model.
+     *
+     * $params['model_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function predictModel(array $params = [])
+    {
+        $model_id = $this->extractArgument($params, 'model_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\PredictModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setModelId($model_id);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
@@ -326,7 +428,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function registerAgents(array $params = [])
     {
@@ -349,7 +451,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function registerModel(array $params = [])
     {
@@ -372,13 +474,36 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function registerModelGroup(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModelGroup::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Registers model metadata.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function registerModelMeta(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModelMeta::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -395,7 +520,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function searchConnectors(array $params = [])
     {
@@ -418,7 +543,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function searchMemory(array $params = [])
     {
@@ -442,7 +567,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function searchMessage(array $params = [])
     {
@@ -467,7 +592,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function searchModelGroup(array $params = [])
     {
@@ -490,7 +615,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function searchModels(array $params = [])
     {
@@ -514,7 +639,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function train(array $params = [])
     {
@@ -540,7 +665,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function trainPredict(array $params = [])
     {
@@ -550,6 +675,32 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\TrainPredict::class);
         $endpoint->setParams($params);
         $endpoint->setAlgorithmName($algorithm_name);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Unloads a model.
+     *
+     * $params['model_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function unloadModel(array $params = [])
+    {
+        $model_id = $this->extractArgument($params, 'model_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UnloadModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -566,7 +717,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateConnector(array $params = [])
     {
@@ -592,7 +743,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateMemory(array $params = [])
     {
@@ -618,7 +769,7 @@ class MlNamespace extends AbstractNamespace
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
      *
      * @param array $params Associative array of parameters
-     * @return array
+     * @return array|\OpenSearch\Response
      */
     public function updateMessage(array $params = [])
     {
@@ -634,14 +785,92 @@ class MlNamespace extends AbstractNamespace
     }
 
     /**
+     * Updates a model.
+     *
+     * $params['model_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function updateModel(array $params = [])
+    {
+        $model_id = $this->extractArgument($params, 'model_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setModelId($model_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Uploads model chunk.
+     *
+     * $params['chunk_number'] = (integer)
+     * $params['model_id']     = (string)
+     * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']  = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function uploadChunk(array $params = [])
+    {
+        $chunk_number = $this->extractArgument($params, 'chunk_number');
+        $model_id = $this->extractArgument($params, 'model_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UploadChunk::class);
+        $endpoint->setParams($params);
+        $endpoint->setChunkNumber($chunk_number);
+        $endpoint->setModelId($model_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Registers a model.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array|\OpenSearch\Response
+     */
+    public function uploadModel(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UploadModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * $params['body']             = (string) The body of the request (Required)
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function createConnector(array $params = []): array
+    public function createConnector(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateConnector::class);
@@ -655,10 +884,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function deleteConnector(array $params = []): array
+    public function deleteConnector(array $params = [])
     {
         $connectorId = $this->extractArgument($params, 'connector_id');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteConnector::class);
@@ -673,10 +902,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function deployModel(array $params = []): array
+    public function deployModel(array $params = [])
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -694,10 +923,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function getConnector(array $params = []): array
+    public function getConnector(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
         $connector_id = $this->extractArgument($params, 'connector_id');
@@ -713,10 +942,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function getConnectors(array $params = []): array
+    public function getConnectors(array $params = [])
     {
         if (!isset($params['body'])) {
             $params['body'] = [
@@ -737,10 +966,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function getModelGroups(array $params = []): array
+    public function getModelGroups(array $params = [])
     {
         if (!isset($params['body'])) {
             $params['body'] = [
@@ -761,15 +990,17 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function getModel(array $params = []): array
+    public function getModel(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
+        $model_id = $this->extractArgument($params, 'model_id');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
+        $endpoint->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }
@@ -796,10 +1027,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function predict(array $params = []): array
+    public function predict(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -821,10 +1052,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function undeployModel(array $params = []): array
+    public function undeployModel(array $params = [])
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -843,10 +1074,10 @@ class MlNamespace extends AbstractNamespace
      *
      * @param array $params Associative array of parameters
      *
-     * @return array
+     * @return array|\OpenSearch\Response
      *   The response.
      */
-    public function updateModelGroup(array $params = []): array
+    public function updateModelGroup(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
         $model_group_id = $this->extractArgument($params, 'model_group_id');

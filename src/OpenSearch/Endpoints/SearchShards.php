@@ -56,16 +56,6 @@ class SearchShards extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return isset($this->body) ? 'POST' : 'GET';
-    }
-
-    public function setBody($body): static
-    {
-        if (is_null($body)) {
-            return $this;
-        }
-        $this->body = $body;
-
-        return $this;
+        return 'GET';
     }
 }
