@@ -34,6 +34,10 @@ class SigningClientDecorator implements ClientInterface
             $request = $request->withHeader($name, $value);
         }
 
+        if (empty($request->getHeaderLine('Host'))) {
+            throw new \RuntimeException('Missing Host header.');
+        }
+
         $request = $request->withHeader('x-amz-content-sha256', hash('sha256', (string) $request->getBody()));
         $request = $this->signer->signRequest($request, $this->credentials);
         return $this->inner->sendRequest($request);
