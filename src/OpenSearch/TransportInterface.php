@@ -15,6 +15,7 @@ interface TransportInterface
      * @param array<string, string> $headers
      *
      * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \OpenSearch\Exception\HttpExceptionInterface
      */
     public function sendRequest(
         string $method,
