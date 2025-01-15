@@ -465,7 +465,7 @@ class Client
      * $params['analyzer']           = (string) Analyzer to use for the query string.This parameter can only be used when the `q` query string parameter is specified.
      * $params['default_operator']   = (enum) The default operator for query string query: `AND` or `OR`.This parameter can only be used when the `q` query string parameter is specified. (Options = and,AND,or,OR)
      * $params['df']                 = (string) Field to use as default where no field prefix is given in the query string.This parameter can only be used when the `q` query string parameter is specified.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
+     * $params['expand_wildcards']   = (any)
      * $params['ignore_throttled']   = (boolean) If `true`, concrete, expanded or aliased indexes are ignored when frozen.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['lenient']            = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
@@ -585,7 +585,7 @@ class Client
      * Deletes documents matching the provided query.
      *
      * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
-     * $params['_source']                = (array) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * $params['_source']                = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes']       = (array) List of fields to exclude from the returned `_source` field.
      * $params['_source_includes']       = (array) List of fields to extract and return from the `_source` field.
      * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
@@ -608,7 +608,7 @@ class Client
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.Defaults to no timeout.
-     * $params['search_type']            = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']            = (any) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`.
      * $params['size']                   = (integer) Deprecated, use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.
@@ -1134,7 +1134,7 @@ class Client
      * $params['max_concurrent_shard_requests'] = (integer) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
      * $params['pre_filter_shard_size']         = (integer) Defines a threshold that enforces a pre-filter roundtrip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter roundtrip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method i.e., if date filters are mandatory to match but the shard bounds and the query are disjoint.
      * $params['rest_total_hits_as_int']        = (boolean) If `true`, `hits.total` are returned as an integer in the response. Defaults to false, which returns an object. (Default = false)
-     * $params['search_type']                   = (enum) Indicates whether global term and document frequencies should be used when scoring returned documents. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']                   = (any) Indicates whether global term and document frequencies should be used when scoring returned documents.
      * $params['typed_keys']                    = (boolean) Specifies whether aggregation and suggester names should be prefixed by their respective types in the response.
      * $params['pretty']                        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                         = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1166,7 +1166,7 @@ class Client
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches'] = (integer) Maximum number of concurrent searches the API can run.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, the response returns `hits.total` as an integer.If `false`, it returns `hits.total` as an object. (Default = false)
-     * $params['search_type']             = (enum) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']             = (any) The type of the search operation.Available options: `query_then_fetch`, `dfs_query_then_fetch`.
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1293,7 +1293,7 @@ class Client
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
-     * $params['search_type']        = (enum) Search operation type (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']        = (any) Search operation type
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1323,6 +1323,7 @@ class Client
      * $params['max_docs']               = (integer) Maximum number of documents to process. By default, all documents.
      * $params['refresh']                = (any) If `true`, the request refreshes affected shards to make this operation visible to search.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second.Defaults to no throttle. (Default = 0)
+     * $params['require_alias']          = (boolean)
      * $params['scroll']                 = (string) Specifies how long a consistent view of the index should be maintained for scrolled search.
      * $params['slices']                 = (any) The number of slices this task should be divided into.Defaults to 1 slice, meaning the task isn't sliced into subtasks.
      * $params['timeout']                = (string) Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
@@ -1487,7 +1488,7 @@ class Client
      * $params['routing']                       = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                        = (string) Period to retain the search context for scrolling. See Scroll search results.By default, this value cannot exceed `1d` (24 hours).You can change this limit using the `search.max_keep_alive` cluster-level setting.
      * $params['search_pipeline']               = (string) Customizable sequence of processing stages applied to search queries.
-     * $params['search_type']                   = (enum) How distributed term frequencies are calculated for relevance scoring. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']                   = (any) How distributed term frequencies are calculated for relevance scoring.
      * $params['seq_no_primary_term']           = (boolean) If `true`, returns sequence number and primary term of the last modification of each hit.
      * $params['size']                          = (integer) Defines the number of hits to return.By default, you cannot page through more than 10,000 hits using the `from` and `size` parameters.To page through more hits, use the `search_after` parameter. (Default = 10)
      * $params['sort']                          = (any) A comma-separated list of <field>:<direction> pairs.
@@ -1541,7 +1542,6 @@ class Client
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']        = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']               = (array) Defines the parameters that can be used in the `search_shards` endpoint request. See documentation for supported query syntax.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -1549,12 +1549,10 @@ class Client
     public function searchShards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-        $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchShards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
-        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
@@ -1574,7 +1572,7 @@ class Client
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, `hits.total` are rendered as an integer in the response. (Default = false)
      * $params['routing']                 = (any) Custom value used to route operations to a specific shard.
      * $params['scroll']                  = (string) Specifies how long a consistent view of the indexshould be maintained for scrolled search.
-     * $params['search_type']             = (enum) The type of the search operation. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']             = (any) The type of the search operation.
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1686,7 +1684,7 @@ class Client
      * Performs an update on every document in the index without changing the source,for example to pick up a mapping change.
      *
      * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
-     * $params['_source']                = (array) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * $params['_source']                = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes']       = (array) List of fields to exclude from the returned `_source` field.
      * $params['_source_includes']       = (array) List of fields to extract and return from the `_source` field.
      * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
@@ -1710,7 +1708,7 @@ class Client
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.
-     * $params['search_type']            = (enum) The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']            = (any) The type of the search operation. Available options: `query_then_fetch`, `dfs_query_then_fetch`.
      * $params['size']                   = (integer) Deprecated, use `max_docs` instead.
      * $params['slices']                 = (any) The number of slices this task should be divided into.
      * $params['sort']                   = (array) A comma-separated list of <field>:<direction> pairs.

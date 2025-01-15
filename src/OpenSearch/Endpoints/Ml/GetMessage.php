@@ -23,16 +23,11 @@ use OpenSearch\Endpoints\AbstractEndpoint;
  */
 class GetMessage extends AbstractEndpoint
 {
-    protected $memory_id;
     protected $message_id;
 
     public function getURI(): string
     {
-        $memory_id = $this->memory_id ?? null;
         $message_id = $this->message_id ?? null;
-        if (isset($memory_id)) {
-            return "/_plugins/_ml/memory/$memory_id/messages";
-        }
         if (isset($message_id)) {
             return "/_plugins/_ml/memory/message/$message_id";
         }
@@ -53,16 +48,6 @@ class GetMessage extends AbstractEndpoint
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    public function setMemoryId($memory_id): static
-    {
-        if (is_null($memory_id)) {
-            return $this;
-        }
-        $this->memory_id = $memory_id;
-
-        return $this;
     }
 
     public function setMessageId($message_id): static

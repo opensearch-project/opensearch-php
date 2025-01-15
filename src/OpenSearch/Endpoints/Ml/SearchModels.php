@@ -40,7 +40,7 @@ class SearchModels extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'GET';
+        return isset($this->body) ? 'POST' : 'GET';
     }
 
     public function setBody($body): static
