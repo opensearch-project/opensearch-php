@@ -13,9 +13,11 @@ return <<<'EOD'
     public function getModel(array $params = []): array
     {
         $id = $this->extractArgument($params, 'id');
+        $model_id = $this->extractArgument($params, 'model_id');
         $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
+        $endpoint->setModelId($model_id);
 
         return $this->performRequest($endpoint);
     }

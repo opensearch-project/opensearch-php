@@ -37,10 +37,9 @@ class MlNamespaceTest extends TestCase
 {
     public function testCreatingConnector(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
-          ->willReturn(new CreateConnector());
+            ->willReturn(new CreateConnector());
 
         $transport = $this->createMock(TransportInterface::class);
 
@@ -51,15 +50,14 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->createConnector([
-          'body' => [
-            'foo' => 'bar',
-          ],
+            'body' => [
+                'foo' => 'bar',
+            ],
         ]);
     }
 
     public function testGetConnector(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new GetConnector());
@@ -78,7 +76,6 @@ class MlNamespaceTest extends TestCase
 
     public function testGetConnectors(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new GetConnectors());
@@ -86,27 +83,26 @@ class MlNamespaceTest extends TestCase
         $transport = $this->createMock(TransportInterface::class);
 
         $transport->method('sendRequest')
-          ->with('POST', '/_plugins/_ml/connectors/_search', [], [
-            'query' => [
-              'match_all' => new \StdClass(),
-            ],
-            'size' => 1000,
-          ])
-        ->willReturn([]);
+            ->with('POST', '/_plugins/_ml/connectors/_search', [], [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
+            ])
+            ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->getConnectors([
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
+            'body' => [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
             ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testDeleteConnector(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new DeleteConnector());
@@ -118,13 +114,12 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->deleteConnector([
-          'connector_id' => 'foobar'
+            'connector_id' => 'foobar'
         ]);
     }
 
     public function testRegisterModelGroup(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new RegisterModelGroup());
@@ -138,15 +133,14 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->registerModelGroup([
-          'body' => [
-            'foo' => 'bar',
-          ],
+            'body' => [
+                'foo' => 'bar',
+            ],
         ]);
     }
 
     public function testGetModelGroups(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new GetModelGroups());
@@ -163,18 +157,17 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->getModelGroups([
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
+            'body' => [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
             ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testUpdateModelGroup(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new UpdateModelGroup());
@@ -191,20 +184,19 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->updateModelGroup([
-          'id' => 'foobar',
-          'model_group_id' => 'foobar',
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
+            'id' => 'foobar',
+            'model_group_id' => 'foobar',
+            'body' => [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
             ],
-            'size' => 1000,
-          ],
         ]);
     }
 
     public function testDeleteModelGroup(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new DeleteModelGroup());
@@ -216,13 +208,12 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->deleteModelGroup([
-          'id' => 'foobar'
+            'id' => 'foobar'
         ]);
     }
 
     public function testRegisterModel(): void
     {
-
         $endpointFactory = $this->createMock(EndpointFactoryInterface::class);
         $endpointFactory->method('getEndpoint')
             ->willReturn(new RegisterModel());
@@ -236,9 +227,9 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->registerModel([
-          'body' => [
-            'foo' => 'bar',
-          ],
+            'body' => [
+                'foo' => 'bar',
+            ],
         ]);
     }
 
@@ -255,7 +246,8 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->getModel([
-          'id' => 'foobar',
+            'id' => 'foobar',
+            'model_id' => 'foobar'
         ]);
     }
 
@@ -268,21 +260,21 @@ class MlNamespaceTest extends TestCase
         $transport = $this->createMock(TransportInterface::class);
 
         $transport->method('sendRequest')
-          ->with('GET', '/_plugins/_ml/models/_search', [], [
-            'query' => [
-              'match_all' => new \StdClass(),
-            ],
-            'size' => 1000,
-          ])
-        ->willReturn([]);
+            ->with('POST', '/_plugins/_ml/models/_search', [], [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
+            ])
+            ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->searchModels([
-          'body' => [
-            'query' => [
-              'match_all' => new \StdClass(),
+            'body' => [
+                'query' => [
+                    'match_all' => new \StdClass(),
+                ],
+                'size' => 1000,
             ],
-            'size' => 1000,
-          ],
         ]);
     }
 
@@ -299,7 +291,7 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->deployModel([
-          'model_id' => 'foobar',
+            'model_id' => 'foobar',
         ]);
     }
 
@@ -316,7 +308,7 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->undeployModel([
-          'model_id' => 'foobar',
+            'model_id' => 'foobar',
         ]);
     }
 
@@ -333,7 +325,7 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->deleteModel([
-          'id' => 'foobar',
+            'id' => 'foobar',
         ]);
     }
 
@@ -374,7 +366,7 @@ class MlNamespaceTest extends TestCase
             ->willReturn([]);
 
         (new MlNamespace($transport, $endpointFactory))->getTask([
-          'id' => 'foobar',
+            'id' => 'foobar',
         ]);
     }
 }
