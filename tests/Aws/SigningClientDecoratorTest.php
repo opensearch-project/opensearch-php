@@ -44,7 +44,6 @@ class SigningClientDecoratorTest extends TestCase
             )
             ->willReturn($this->createMock(ResponseInterface::class));
 
-
         $decorator = new SigningClientDecorator($client, $credentials, $signer);
         $request = new Request('GET', 'http://localhost:9200/_search');
         $decorator->sendRequest($request);
