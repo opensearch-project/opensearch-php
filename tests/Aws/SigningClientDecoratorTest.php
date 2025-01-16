@@ -19,7 +19,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class SigningClientDecoratorTest extends TestCase
 {
-
     /**
      * Test that the decorator signs the request.
      *
@@ -44,7 +43,6 @@ class SigningClientDecoratorTest extends TestCase
                 })
             )
             ->willReturn($this->createMock(ResponseInterface::class));
-
 
         $decorator = new SigningClientDecorator($client, $credentials, $signer);
         $request = new Request('GET', 'http://localhost:9200/_search');
