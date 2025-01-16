@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints\Ml;
 
+use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 /**
@@ -30,7 +31,7 @@ class GetMemory extends AbstractEndpoint
         if (isset($memory_id)) {
             return "/_plugins/_ml/memory/$memory_id";
         }
-        return "/_plugins/_ml/memory";
+        throw new RuntimeException('Missing parameter for the endpoint ml.get_memory');
     }
 
     public function getParamWhitelist(): array
@@ -47,16 +48,6 @@ class GetMemory extends AbstractEndpoint
     public function getMethod(): string
     {
         return 'GET';
-    }
-
-    public function setBody($body): static
-    {
-        if (is_null($body)) {
-            return $this;
-        }
-        $this->body = $body;
-
-        return $this;
     }
 
     public function setMemoryId($memory_id): static

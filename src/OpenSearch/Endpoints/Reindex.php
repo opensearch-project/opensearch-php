@@ -39,6 +39,7 @@ class Reindex extends AbstractEndpoint
             'max_docs',
             'refresh',
             'requests_per_second',
+            'require_alias',
             'scroll',
             'slices',
             'timeout',

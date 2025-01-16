@@ -19,7 +19,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class SigningClientDecoratorTest extends TestCase
 {
-
     /**
      * Test that the decorator signs the request.
      *
