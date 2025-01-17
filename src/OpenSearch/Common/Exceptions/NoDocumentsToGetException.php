@@ -21,11 +21,16 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-@trigger_error(NoDocumentsToGetException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(
+    NoDocumentsToGetException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NoDocumentsToGetException instead.',
+    E_USER_DEPRECATED
+);
 
 /**
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NoDocumentsToGetException instead.
+ *
+ * @see \OpenSearch\Exception\ScriptLangNotSupportedException
  */
-class NoDocumentsToGetException extends ServerErrorResponseException implements OpenSearchException
+class NoDocumentsToGetException extends \OpenSearch\Exception\NoDocumentsToGetException
 {
 }

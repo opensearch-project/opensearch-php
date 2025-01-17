@@ -664,19 +664,19 @@ class Connection implements ConnectionInterface
 
         $responseBody = $this->convertBodyToString($response['body'], $statusCode, $exception);
         if ($statusCode === 401) {
-            $exception = new Unauthorized401Exception($responseBody, $statusCode);
+            $exception = new Unauthorized401Exception($responseBody);
         } elseif ($statusCode === 403) {
-            $exception = new Forbidden403Exception($responseBody, $statusCode);
+            $exception = new Forbidden403Exception($responseBody);
         } elseif ($statusCode === 404) {
-            $exception = new Missing404Exception($responseBody, $statusCode);
+            $exception = new Missing404Exception($responseBody);
         } elseif ($statusCode === 409) {
             $exception = new Conflict409Exception($responseBody, $statusCode);
         } elseif ($statusCode === 400 && strpos($responseBody, 'script_lang not supported') !== false) {
-            $exception = new ScriptLangNotSupportedException($responseBody. $statusCode);
+            $exception = new ScriptLangNotSupportedException($responseBody);
         } elseif ($statusCode === 408) {
-            $exception = new RequestTimeout408Exception($responseBody, $statusCode);
+            $exception = new RequestTimeout408Exception($responseBody);
         } else {
-            $exception = new BadRequest400Exception($responseBody, $statusCode);
+            $exception = new BadRequest400Exception($responseBody);
         }
 
         $this->logRequestFail($request, $response, $exception);
@@ -706,15 +706,14 @@ class Connection implements ConnectionInterface
         }
 
         if ($statusCode === 500 && strpos($responseBody, "RoutingMissingException") !== false) {
-            $exception = new RoutingMissingException($exception->getMessage(), $statusCode, $exception);
+            $exception = new RoutingMissingException($exception->getMessage(), [], 0, $exception);
         } elseif ($statusCode === 500 && preg_match('/ActionRequestValidationException.+ no documents to get/', $responseBody) === 1) {
-            $exception = new NoDocumentsToGetException($exception->getMessage(), $statusCode, $exception);
+            $exception = new NoDocumentsToGetException($exception->getMessage(), [], 0, $exception);
         } elseif ($statusCode === 500 && strpos($responseBody, 'NoShardAvailableActionException') !== false) {
-            $exception = new NoShardAvailableException($exception->getMessage(), $statusCode, $exception);
+            $exception = new NoShardAvailableException($exception->getMessage(), [], 0, $exception);
         } else {
             $exception = new ServerErrorResponseException(
                 $this->convertBodyToString($responseBody, $statusCode, $exception),
-                $statusCode
             );
         }
 

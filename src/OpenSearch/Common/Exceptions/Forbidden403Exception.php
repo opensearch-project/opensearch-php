@@ -21,11 +21,15 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-@trigger_error(Forbidden403Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+use OpenSearch\Exception\ForbiddenHttpException;
+
+@trigger_error(Forbidden403Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\ForbiddenHttpException instead', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ *
+ * @see \OpenSearch\Exception\ForbiddenHttpException
  */
-class Forbidden403Exception extends \Exception implements OpenSearchException
+class Forbidden403Exception extends ForbiddenHttpException
 {
 }

@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-class RuntimeException extends \RuntimeException implements OpenSearchException
+use OpenSearch\Exception\OpenSearchExceptionInterface;
+
+class RuntimeException extends \RuntimeException implements OpenSearchExceptionInterface
 {
 }

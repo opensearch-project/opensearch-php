@@ -61,6 +61,7 @@ class StaticConnectionPoolIntegrationTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($client->indices()->exists(['index' => 'not_existing_index']));
 
         // But the node should be marked as alive since the server responded
+        $connection = $client->transport->getConnection();
         $this->assertTrue($connection->isAlive());
     }
 }

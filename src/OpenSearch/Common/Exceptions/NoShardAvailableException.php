@@ -21,6 +21,16 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-class NoShardAvailableException extends ServerErrorResponseException implements OpenSearchException
+@trigger_error(
+    NoShardAvailableException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NoShardAvailableException instead.',
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NoShardAvailableException instead.
+ *
+ * @see \OpenSearch\Exception\NoShardAvailableException
+ */
+class NoShardAvailableException extends \OpenSearch\Exception\NoShardAvailableException
 {
 }

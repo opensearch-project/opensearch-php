@@ -26,6 +26,7 @@ use GuzzleHttp\Psr7\HttpFactory;
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\EndpointFactory;
+use OpenSearch\Exception\NotFoundHttpException;
 use OpenSearch\RequestFactory;
 use OpenSearch\Serializers\SmartSerializer;
 use OpenSearch\TransportFactory;
@@ -63,15 +64,12 @@ class ClientIntegrationTest extends TestCase
 
     public function testNotFoundError()
     {
-        $result = $this->client->get([
+        $this->expectException(NotFoundHttpException::class);
+        $this->expectExceptionMessage("index_not_found_exception: no such index [foo]");
+        $this->client->get([
             'index' => 'foo',
             'id' => 'bar',
         ]);
-        $this->assertEquals(404, $result['status']);
-        $error = $result['error'];
-        $this->assertEquals('index_not_found_exception', $error['type']);
-        $this->assertEquals('no such index [foo]', $error['reason']);
-        $this->assertEquals('foo', $error['index']);
     }
 
     public function testIndexCannotBeEmptyStringForDelete()

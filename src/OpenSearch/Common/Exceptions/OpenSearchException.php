@@ -21,8 +21,16 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-use Throwable;
+use OpenSearch\Exception\OpenSearchExceptionInterface;
 
-interface OpenSearchException extends Throwable
+@trigger_error(
+    NoNodesAvailableException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.',
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
+interface OpenSearchException extends OpenSearchExceptionInterface
 {
 }

@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-class UnexpectedValueException extends \UnexpectedValueException implements OpenSearchException
+use OpenSearch\Exception\OpenSearchExceptionInterface;
+
+class UnexpectedValueException extends \UnexpectedValueException implements OpenSearchExceptionInterface
 {
 }

@@ -21,6 +21,16 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-class RoutingMissingException extends ServerErrorResponseException implements OpenSearchException
+@trigger_error(
+    RoutingMissingException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\RoutingMissingException instead.',
+    E_USER_DEPRECATED
+);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\UnauthorizedHttpException instead.
+ *
+ * @see \OpenSearch\Exception\ScriptLangNotSupportedException
+ */
+class RoutingMissingException extends \OpenSearch\Exception\RoutingMissingException
 {
 }

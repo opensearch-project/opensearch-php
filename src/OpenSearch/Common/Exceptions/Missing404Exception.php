@@ -21,11 +21,18 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-@trigger_error(Missing404Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+use OpenSearch\Exception\NotFoundHttpException;
+
+@trigger_error(
+    Missing404Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NotFoundHttpException instead.',
+    E_USER_DEPRECATED
+);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ *
+ * @see \OpenSearch\Exception\NotFoundHttpException
  */
-class Missing404Exception extends \Exception implements OpenSearchException
+class Missing404Exception extends NotFoundHttpException
 {
 }
