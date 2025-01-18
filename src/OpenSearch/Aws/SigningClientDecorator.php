@@ -17,7 +17,7 @@ class SigningClientDecorator implements ClientInterface
      * @param ClientInterface $inner The client to decorate.
      * @param CredentialsInterface $credentials The AWS credentials to use for signing requests.
      * @param SignatureInterface $signer The AWS signer to use for signing requests.
-     * @param array $headers Additional headers to add to the request, usually `Host` is required.
+     * @param array $headers Additional headers to add to the request. `Host` is required.
      * @return void
      */
     public function __construct(
