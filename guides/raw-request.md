@@ -1,12 +1,12 @@
-# Raw JSON Requests
+# Sending Raw JSON Requests
 
-Opensearch client implements many high-level APIs out of the box. However, there are times when you need to send a raw
+OpenSearch client implements many high-level APIs out of the box. However, there are times when you need to send a raw
 JSON request to the server. This can be done using the `request()` method of the client.
 
 The `request()` method expects the following parameters:
 
 | Parameter     | Description                                                                  |
-|---------------|------------------------------------------------------------------------------|
+| ------------- | ---------------------------------------------------------------------------- |
 | `$method`     | The HTTP method to use for the request, `GET`, `POST`, `PUT`, `DELETE`, etc. |
 | `$uri`        | The URI to send the request to, e.g. `/_search`.                             |
 | `$attributes` | An array of request options. `body`, `params` & `options`                    |

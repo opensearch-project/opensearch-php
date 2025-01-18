@@ -52,7 +52,14 @@ class SigningClientDecoratorGuzzleTest extends TestCase
         $credentials = $this->createMock(CredentialsInterface::class);
         $signer = new SignatureV4('es', 'us-east-1');
 
-        $decorator = new SigningClientDecorator($guzzleClient, $credentials, $signer);
+        $decorator = new SigningClientDecorator(
+            $guzzleClient,
+            $credentials,
+            $signer,
+            [
+                'Host' => 'search.host'
+            ]
+        );
 
         $transport = (new TransportFactory())
             ->setHttpClient($decorator)
@@ -66,7 +73,7 @@ class SigningClientDecoratorGuzzleTest extends TestCase
 
         // Check the last request to ensure it was signed and has a host header.
         $lastRequest = $mockHandler->getLastRequest();
-        $this->assertEquals('localhost:9200', $lastRequest->getHeader('Host')[0]);
+        $this->assertEquals('search.host', $lastRequest->getHeader('Host')[0]);
         $this->assertNotEmpty($lastRequest->getHeader('x-amz-content-sha256'));
         $this->assertNotEmpty($lastRequest->getHeader('x-amz-date'));
         $this->assertNotEmpty($lastRequest->getHeader('Authorization'));

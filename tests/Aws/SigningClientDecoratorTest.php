@@ -34,8 +34,9 @@ class SigningClientDecoratorTest extends TestCase
             ->method('sendRequest')
             ->with(
                 $this->callback(function (Request $req): bool {
-                    $this->assertEquals('localhost:9200', $req->getHeaderLine('Host'));
+                    $this->assertEquals('server:443', $req->getHeaderLine('Host'));
                     $this->assertEquals('GET', $req->getMethod());
+                    $this->assertTrue($req->hasHeader('Host'));
                     $this->assertTrue($req->hasHeader('Authorization'));
                     $this->assertTrue($req->hasHeader('x-amz-content-sha256'));
                     $this->assertTrue($req->hasHeader('x-amz-date'));
@@ -44,8 +45,20 @@ class SigningClientDecoratorTest extends TestCase
             )
             ->willReturn($this->createMock(ResponseInterface::class));
 
-        $decorator = new SigningClientDecorator($client, $credentials, $signer);
+        $decorator = new SigningClientDecorator($client, $credentials, $signer, ['Host' => 'server:443']);
         $request = new Request('GET', 'http://localhost:9200/_search');
+        $decorator->sendRequest($request);
+    }
+
+    public function testSendRequestWithEmptyHostHeader(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Missing Host header.');
+        $client = $this->createMock(ClientInterface::class);
+        $credentials = $this->createMock(CredentialsInterface::class);
+        $signer = $this->createMock(SignatureV4::class);
+        $decorator = new SigningClientDecorator($client, $credentials, $signer, []);
+        $request = new Request('GET', 'http://localhost:9200/_search', ['Host' => '']);
         $decorator->sendRequest($request);
     }
 }

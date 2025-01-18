@@ -101,6 +101,7 @@ $transport = (new \OpenSearch\TransportFactory())
     ->setRequestFactory($requestFactory)
     ->create();
 
+$endpointFactory = new \OpenSearch\EndpointFactory();
 $client = new \OpenSearch\Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.

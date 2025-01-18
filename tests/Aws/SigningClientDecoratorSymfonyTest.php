@@ -51,7 +51,14 @@ class SigningClientDecoratorSymfonyTest extends TestCase
         $credentials = $this->createMock(CredentialsInterface::class);
         $signer = new SignatureV4('es', 'us-east-1');
 
-        $decorator = new SigningClientDecorator($symfonyPsr18Client, $credentials, $signer);
+        $decorator = new SigningClientDecorator(
+            $symfonyPsr18Client,
+            $credentials,
+            $signer,
+            [
+                'Host' => 'search.host'
+            ]
+        );
 
         $transport = (new TransportFactory())
             ->setHttpClient($decorator)
@@ -71,8 +78,5 @@ class SigningClientDecoratorSymfonyTest extends TestCase
         $this->assertArrayHasKey('x-amz-content-sha256', $requestHeaders);
         $this->assertArrayHasKey('x-amz-date', $requestHeaders);
         $this->assertArrayHasKey('host', $requestHeaders);
-
     }
-
-
 }
