@@ -31,8 +31,8 @@ class CatNamespace extends AbstractNamespace
     /**
      * Shows information about aliases currently configured to indexes, including filter and routing information.
      *
-     * $params['name']             = (array) A comma-separated list of aliases to retrieve. Supports wildcards (`*`).  To retrieve all aliases, omit this parameter or use `*` or `_all`.
-     * $params['expand_wildcards'] = (any) Expands wildcard expressions to concrete indexes. Combine multiple values with commas. Supported values are `all`, `open`, `closed`, `hidden`, and `none`.
+     * $params['name']             = (array)
+     * $params['expand_wildcards'] = (any)
      * $params['format']           = (string) A short version of the `Accept` header, such as `json` or `yaml`.
      * $params['h']                = (array) A comma-separated list of column names to display.
      * $params['help']             = (boolean) Returns help information. (Default = false)
@@ -258,7 +258,7 @@ class CatNamespace extends AbstractNamespace
      * $params['index']                     = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['bytes']                     = (any) The units used to display byte values.
      * $params['cluster_manager_timeout']   = (string) The amount of time allowed to establish a connection to the cluster manager node.
-     * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.  Supported values are `all`, `open`, `closed`, `hidden`, and `none`.
+     * $params['expand_wildcards']          = (any)
      * $params['format']                    = (string) A short version of the `Accept` header, such as `json` or `yaml`.
      * $params['h']                         = (array) A comma-separated list of column names to display.
      * $params['health']                    = (any) Limits indexes based on their health status. Supported values are `green`, `yellow`, and `red`.
@@ -533,7 +533,7 @@ class CatNamespace extends AbstractNamespace
      * $params['bytes']              = (any) The units used to display byte values.
      * $params['completed_only']     = (boolean) When `true`, the response only includes the last-completed segment replication events. (Default = false)
      * $params['detailed']           = (boolean) When `true`, the response includes additional metrics for each stage of a segment replication event. (Default = false)
-     * $params['expand_wildcards']   = (any) The type of index that wildcard patterns can match. Supported values are `all`, `open`, `closed`, `hidden`, and `none`.
+     * $params['expand_wildcards']   = (any)
      * $params['format']             = (string) A short version of the `Accept` header, such as `json` or `yaml`.
      * $params['h']                  = (array) A comma-separated list of column names to display.
      * $params['help']               = (boolean) Returns help information. (Default = false)
@@ -599,7 +599,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists the states of all primary and replica shards and how they are distributed.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']                   = (array)
      * $params['bytes']                   = (any) The units used to display byte values.
      * $params['cluster_manager_timeout'] = (string) The amount of time allowed to establish a connection to the cluster manager node.
      * $params['format']                  = (string) A short version of the `Accept` header, such as `json` or `yaml`.
@@ -608,7 +608,7 @@ class CatNamespace extends AbstractNamespace
      * $params['local']                   = (boolean) Returns local information but does not retrieve the state from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string) The amount of time allowed to establish a connection to the cluster manager node.
      * $params['s']                       = (array) A comma-separated list of column names or column aliases to sort by.
-     * $params['time']                    = (any) Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://opensearch.org/docs/latest/api-reference/units/).
+     * $params['time']                    = (any)
      * $params['v']                       = (boolean) Enables verbose mode, which displays column headers. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
