@@ -41,7 +41,9 @@
     "friendsofphp/php-cs-fixer": "^v3.64",
     "guzzlehttp/psr7": "^2.7",
     "mockery/mockery": "^1.6",
+    "phpstan/extension-installer": "^1.4",
     "phpstan/phpstan": "^1.12",
+    "phpstan/phpstan-deprecation-rules": "^1.2",
     "phpstan/phpstan-mockery": "^1.1",
     "phpunit/phpunit": "^9.6",
     "symfony/finder": "^6.4|^7.0",
@@ -66,7 +68,8 @@
   "config": {
     "sort-packages": true,
     "allow-plugins": {
-      "php-http/discovery": true
+      "php-http/discovery": true,
+      "phpstan/extension-installer": true
     }
   },
   "scripts": {
