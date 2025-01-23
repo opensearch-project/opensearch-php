@@ -35,8 +35,15 @@ use ReflectionClass;
 use function base64_encode;
 use function random_bytes;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(ConnectionTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+
 /**
  * @covers \OpenSearch\Connections\Connection
+ * @group legacy
+ *
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
 class ConnectionTest extends \PHPUnit\Framework\TestCase
 {

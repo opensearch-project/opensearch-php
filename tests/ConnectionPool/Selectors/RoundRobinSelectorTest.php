@@ -24,10 +24,15 @@ namespace OpenSearch\Tests\ConnectionPool\Selectors;
 use OpenSearch;
 use OpenSearch\Connections\ConnectionInterface;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(RoundRobinSelectorTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
 /**
  * Class SnifferTest
  *
  * @subpackage Tests\ConnectionPool\RoundRobinSelectorTest
+ *
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
 class RoundRobinSelectorTest extends \PHPUnit\Framework\TestCase
 {

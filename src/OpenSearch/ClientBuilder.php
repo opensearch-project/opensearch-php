@@ -45,6 +45,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use ReflectionClass;
 
+// @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(ClientBuilder::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**

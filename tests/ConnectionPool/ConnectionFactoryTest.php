@@ -20,6 +20,12 @@ use OpenSearch\Serializers\ArrayToJSONSerializer;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(ConnectionFactoryTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
 class ConnectionFactoryTest extends TestCase
 {
     public function testConnectionWithoutPath(): void

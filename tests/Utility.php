@@ -53,6 +53,7 @@ class Utility
      */
     public static function getClient(): Client
     {
+        // @phpstan-ignore staticMethod.deprecatedClass
         $clientBuilder = ClientBuilder::create()
             ->setHosts([self::getHost()]);
 

@@ -27,6 +27,7 @@ use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\Connections\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 
+// @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(Transport::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**

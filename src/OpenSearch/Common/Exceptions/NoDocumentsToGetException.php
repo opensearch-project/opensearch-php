@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace OpenSearch\Common\Exceptions;
 
 @trigger_error(
+    // @phpstan-ignore classConstant.deprecatedClass
     NoDocumentsToGetException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NoDocumentsToGetException instead.',
     E_USER_DEPRECATED
 );

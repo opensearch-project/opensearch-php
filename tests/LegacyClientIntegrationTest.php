@@ -36,6 +36,8 @@ use Psr\Log\LogLevel;
  * @group      Integration
  * @group      Integration-Min
  * @group     Legacy
+ *
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class LegacyClientIntegrationTest extends \PHPUnit\Framework\TestCase
 {

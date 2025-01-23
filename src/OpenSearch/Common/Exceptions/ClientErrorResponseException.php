@@ -21,10 +21,13 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
+// @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(ClientErrorResponseException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ *
+ * @phpstan-ignore class.extendsDeprecatedClass
  */
 class ClientErrorResponseException extends TransportException implements OpenSearchException
 {

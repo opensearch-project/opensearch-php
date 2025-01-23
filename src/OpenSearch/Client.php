@@ -268,6 +268,8 @@ class Client
      * @param TransportInterface|Transport $transport
      * @param callable|EndpointFactoryInterface $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
+     *
+     * @phpstan-ignore parameter.deprecatedClass
      */
     public function __construct(
         TransportInterface|Transport $transport,
@@ -276,7 +278,9 @@ class Client
     ) {
         if (!$transport instanceof TransportInterface) {
             @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
+            // @phpstan-ignore property.deprecated
             $this->transport = $transport;
+            // @phpstan-ignore new.deprecated
             $this->httpTransport = new LegacyTransportWrapper($transport);
         } else {
             $this->httpTransport = $transport;
@@ -284,6 +288,7 @@ class Client
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
+            // @phpstan-ignore new.deprecated
             $endpointFactory = new LegacyEndpointFactory($endpointFactory);
         } else {
             $endpoints = function ($c) use ($endpointFactory) {
@@ -291,6 +296,7 @@ class Client
                 return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
             };
         }
+        // @phpstan-ignore property.deprecated
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
         $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);

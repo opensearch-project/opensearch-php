@@ -23,6 +23,7 @@ namespace OpenSearch\Connections;
 
 use OpenSearch\Transport;
 
+// @phpstan-ignore classConstant.deprecatedInterface
 @trigger_error(ConnectionInterface::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
