@@ -213,7 +213,7 @@ class ClientBuilderTest extends TestCase
 
         try {
             $client->info();
-            $this->assertTrue(false, 'Exception was not thrown!');
+            $this->fail('Exception was not thrown!');
         } catch (OpenSearchException $e) {
             $request = $client->transport->getLastConnection()->getLastRequestInfo();
             $this->assertTrue(isset($request['request']['headers']['Host'][0]));
