@@ -25,6 +25,12 @@ namespace OpenSearch\Tests\ClientBuilder;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(ArrayLogger::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
+ */
 class ArrayLogger implements LoggerInterface
 {
     /**

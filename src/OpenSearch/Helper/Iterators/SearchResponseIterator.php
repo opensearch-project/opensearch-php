@@ -24,6 +24,12 @@ namespace OpenSearch\Helper\Iterators;
 use OpenSearch\Client;
 use Iterator;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(SearchResponseIterator::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
+/**
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
+ */
 class SearchResponseIterator implements Iterator
 {
     /**

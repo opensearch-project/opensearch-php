@@ -23,11 +23,17 @@ namespace OpenSearch\Serializers;
 
 use OpenSearch\Common\Exceptions\RuntimeException;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(ArrayToJSONSerializer::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
 if (!defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
     //PHP < 7.2 Define it as 0 so it does nothing
     define('JSON_INVALID_UTF8_SUBSTITUTE', 0);
 }
 
+/**
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
+ */
 class ArrayToJSONSerializer implements SerializerInterface
 {
     /**
