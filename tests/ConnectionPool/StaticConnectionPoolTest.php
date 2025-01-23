@@ -34,7 +34,7 @@ use OpenSearch\Connections\ConnectionFactoryInterface;
 use OpenSearch\Connections\ConnectionInterface;
 
 // @phpstan-ignore classConstant.deprecatedClass
-@trigger_error(StaticConnectionPoolTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(StaticConnectionPoolTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * Class StaticConnectionPoolTest
@@ -42,7 +42,7 @@ use OpenSearch\Connections\ConnectionInterface;
  * @subpackage Tests/StaticConnectionPoolTest
  * @group legacy
  *
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
 {

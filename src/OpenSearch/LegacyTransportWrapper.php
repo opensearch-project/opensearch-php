@@ -10,7 +10,7 @@ use GuzzleHttp\Ring\Future\FutureArrayInterface;
 /**
  * Transport that wraps the legacy transport.
  *
- * @deprecated in 2.3.2 and will be removed in 3.0.0. Use PsrTransport instead.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0. Use PsrTransport instead.
  */
 class LegacyTransportWrapper implements TransportInterface
 {

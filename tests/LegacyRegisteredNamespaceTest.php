@@ -32,7 +32,7 @@ use Mockery as m;
  * Class RegisteredNamespaceTest
  *
  * @subpackage Tests
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class LegacyRegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
 {
@@ -65,7 +65,7 @@ class LegacyRegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
 
 /**
  * @codingStandardsIgnoreStart "Each class must be in a file by itself" - not worth the extra work here
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class FooNamespaceBuilder implements OpenSearch\Namespaces\NamespaceBuilderInterface
 {

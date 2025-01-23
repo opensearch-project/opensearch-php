@@ -63,12 +63,12 @@ abstract class BooleanRequestWrapper
      * @throws Missing404Exception
      * @throws RoutingMissingException
      *
-     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.
+     * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.
      */
     public static function performRequest(AbstractEndpoint $endpoint, Transport $transport)
     {
         @trigger_error(
-            __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.'
+            __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.'
         );
         try {
             $response = $transport->performRequest(

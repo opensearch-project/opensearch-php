@@ -22,14 +22,14 @@ declare(strict_types=1);
 namespace OpenSearch\Common\Exceptions;
 
 // @phpstan-ignore classConstant.deprecatedClass
-@trigger_error(BadMethodCallException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(BadMethodCallException::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * BadMethodCallException
  *
  * Denote problems with a method call (e.g. incorrect number of arguments)
  *
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class BadMethodCallException extends \BadMethodCallException implements OpenSearchException
 {

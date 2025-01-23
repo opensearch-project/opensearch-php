@@ -46,10 +46,10 @@ use Psr\Log\NullLogger;
 use ReflectionClass;
 
 // @phpstan-ignore classConstant.deprecatedClass
-@trigger_error(ClientBuilder::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(ClientBuilder::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class ClientBuilder
 {
@@ -188,11 +188,11 @@ class ClientBuilder
     /**
      * Can supply second param to Client::__construct() when invoking manually or with dependency injection
      *
-     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.
+     * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.
      */
     public function getEndpoint(): callable
     {
-        @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.', E_USER_DEPRECATED);
+        @trigger_error(__METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::getEndpointFactory() instead.', E_USER_DEPRECATED);
         return fn ($c) => $this->endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
     }
 
@@ -336,11 +336,11 @@ class ClientBuilder
      *
      * @param callable $endpoint
      *
-     * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.
+     * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.
      */
     public function setEndpoint(callable $endpoint): ClientBuilder
     {
-        @trigger_error(__METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.', E_USER_DEPRECATED);
+        @trigger_error(__METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\ClientBuilder::setEndpointFactory() instead.', E_USER_DEPRECATED);
         $this->endpointFactory = new LegacyEndpointFactory($endpoint);
 
         return $this;
