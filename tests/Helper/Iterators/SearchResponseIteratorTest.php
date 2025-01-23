@@ -28,6 +28,7 @@ use Mockery as m;
 /**
  * Class SearchResponseIteratorTest
  *
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class SearchResponseIteratorTest extends \PHPUnit\Framework\TestCase
 {
