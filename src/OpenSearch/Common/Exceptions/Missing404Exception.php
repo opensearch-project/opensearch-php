@@ -25,12 +25,12 @@ use OpenSearch\Exception\NotFoundHttpException;
 
 @trigger_error(
     // @phpstan-ignore classConstant.deprecatedClass
-    Missing404Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Exception\NotFoundHttpException instead.',
+    Missing404Exception::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Exception\NotFoundHttpException instead.',
     E_USER_DEPRECATED
 );
 
 /**
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  *
  * @see \OpenSearch\Exception\NotFoundHttpException
  */

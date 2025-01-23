@@ -14,12 +14,12 @@ use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 
 // @phpstan-ignore classConstant.deprecatedClass
-@trigger_error(SigV4Handler::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(SigV4Handler::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @phpstan-type RingPhpRequest array{http_method: string, scheme: string, uri: string, query_string?: string, version?: string, headers: array<string, list<string>>, body: string|resource|null, client?: array<string, mixed>}
  *
- * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Aws\SigV4RequestFactory instead.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Aws\SigV4RequestFactory instead.
  */
 class SigV4Handler
 {

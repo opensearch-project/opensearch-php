@@ -3,7 +3,7 @@ parameters:
 		-
 			message: """
 				#^Instantiation of deprecated class OpenSearch\\\\Common\\\\Exceptions\\\\InvalidArgumentException\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Endpoints/Monitoring/Bulk.php
@@ -11,7 +11,7 @@ parameters:
 		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 3
 			path: src/OpenSearch/Namespaces/AsyncSearchNamespace.php
@@ -27,7 +27,7 @@ parameters:
 		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 8
 			path: src/OpenSearch/Namespaces/DataFrameTransformDeprecatedNamespace.php
@@ -75,7 +75,7 @@ parameters:
 		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/MonitoringNamespace.php
@@ -83,7 +83,7 @@ parameters:
 		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 4
 			path: src/OpenSearch/Namespaces/SearchableSnapshotsNamespace.php
@@ -91,7 +91,7 @@ parameters:
 		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/SecurityNamespace.php
@@ -99,7 +99,7 @@ parameters:
 		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.3\\.2 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/SslNamespace.php

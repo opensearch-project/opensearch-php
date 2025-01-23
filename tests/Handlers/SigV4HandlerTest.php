@@ -12,11 +12,11 @@ use OpenSearch\Handlers\SigV4Handler;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
-@trigger_error(SigV4HandlerTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(SigV4HandlerTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @group legacy
- * @deprecated in 2.3.2 and will be removed in 3.0.0. Use \OpenSearch\Aws\SigV4RequestFactory instead.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Aws\SigV4RequestFactory instead.
  */
 class SigV4HandlerTest extends TestCase
 {

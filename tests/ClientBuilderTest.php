@@ -28,12 +28,12 @@ use OpenSearch\Common\Exceptions\RuntimeException;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
-@trigger_error(ClientBuilderTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(ClientBuilderTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @group legacy
  *
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class ClientBuilderTest extends TestCase
 {

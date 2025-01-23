@@ -22,10 +22,10 @@ declare(strict_types=1);
 namespace OpenSearch\Connections;
 
 // @phpstan-ignore classConstant.deprecatedInterface
-@trigger_error(ConnectionFactoryInterface::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+@trigger_error(ConnectionFactoryInterface::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
- * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 interface ConnectionFactoryInterface
 {
