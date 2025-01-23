@@ -4,6 +4,9 @@ namespace OpenSearch;
 
 use GuzzleHttp\Ring\Future\FutureArrayInterface;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(LegacyTransportWrapper::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
 /**
  * Transport that wraps the legacy transport.
  *

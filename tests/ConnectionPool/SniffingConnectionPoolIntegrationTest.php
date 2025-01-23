@@ -27,12 +27,18 @@ use OpenSearch\ConnectionPool\StaticConnectionPool;
 use OpenSearch\Tests\Utility;
 use PHPUnit\Framework\TestCase;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(SniffingConnectionPoolIntegrationTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
 /**
  * Class SniffingConnectionPoolIntegrationTest
  *
  * @subpackage Tests/SniffingConnectionPoolTest
  * @group Integration
  * @group Integration-Min
+ * @group legacy
+ *
+ * @deprecated in 2.4.0 and will be remove in 3.0.0.
  */
 class SniffingConnectionPoolIntegrationTest extends TestCase
 {

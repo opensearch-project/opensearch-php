@@ -36,6 +36,7 @@ use React\Promise\Deferred;
  * Legacy transport test.
  *
  * @group legacy
+ * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
 class LegacyTransportTest extends TestCase
 {

@@ -24,10 +24,13 @@ namespace OpenSearch\Common\Exceptions\Curl;
 use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\TransportException;
 
+// @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(OperationTimeoutException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ *
+ * @phpstan-ignore class.extendsDeprecatedClass
  */
 class OperationTimeoutException extends TransportException implements OpenSearchException
 {

@@ -23,10 +23,8 @@ namespace OpenSearch\Common\Exceptions;
 
 use OpenSearch\Exception\UnauthorizedHttpException;
 
-@trigger_error(
-    Unauthorized401Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\UnauthorizedHttpException instead.',
-    E_USER_DEPRECATED
-);
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(Unauthorized401Exception::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\UnauthorizedHttpException instead.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\UnauthorizedHttpException instead.

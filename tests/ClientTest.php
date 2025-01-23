@@ -64,6 +64,7 @@ class ClientTest extends TestCase
     public function testUnknownNamespace(): void
     {
         $this->expectException(\BadMethodCallException::class);
+        // @phpstan-ignore method.notFound
         $this->client->foo();
     }
 

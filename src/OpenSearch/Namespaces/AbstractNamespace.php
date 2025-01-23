@@ -48,11 +48,16 @@ abstract class AbstractNamespace
      */
     protected $endpoints;
 
+    /**
+     * @phpstan-ignore parameter.deprecatedClass
+     */
     public function __construct(TransportInterface|Transport $transport, callable|EndpointFactoryInterface $endpointFactory)
     {
         if (!$transport instanceof TransportInterface) {
             @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
+            // @phpstan-ignore property.deprecated
             $this->transport = $transport;
+            // @phpstan-ignore new.deprecated
             $this->httpTransport = new LegacyTransportWrapper($transport);
         } else {
             $this->httpTransport = $transport;
@@ -60,6 +65,7 @@ abstract class AbstractNamespace
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as $endpointFactory param to ' . __METHOD__ . '() is deprecated in 2.3.2 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
+            // @phpstan-ignore new.deprecated
             $endpointFactory = new LegacyEndpointFactory($endpointFactory);
         } else {
             $endpoints = function ($c) use ($endpointFactory) {
@@ -67,6 +73,7 @@ abstract class AbstractNamespace
                 return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
             };
         }
+        // @phpstan-ignore property.deprecated
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
     }

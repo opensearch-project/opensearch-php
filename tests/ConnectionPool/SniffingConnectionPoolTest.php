@@ -23,10 +23,15 @@ use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 use PHPUnit\Framework\TestCase;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(SniffingConnectionPoolTest::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
 /**
  * Class SniffingConnectionPoolTest
  *
  * @subpackage Tests/SniffingConnectionPoolTest
+ *
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
 class SniffingConnectionPoolTest extends TestCase
 {

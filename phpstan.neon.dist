@@ -1,10 +1,9 @@
+includes:
+	- phpstan-baseline.neon
+
 parameters:
     level: 5
     paths:
         - src
         - tests
     reportUnmatchedIgnoredErrors: true
-    ignoreErrors:
-        - '#Call to an undefined method OpenSearch\\Client::bar\(\).#'
-        - '#Call to an undefined method OpenSearch\\Client::foo\(\).#'
-        - '#Call to an undefined method OpenSearch\\Client::slm\(\).#'

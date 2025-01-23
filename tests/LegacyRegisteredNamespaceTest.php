@@ -32,8 +32,9 @@ use Mockery as m;
  * Class RegisteredNamespaceTest
  *
  * @subpackage Tests
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
  */
-class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
+class LegacyRegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
 {
     public function tearDown(): void
     {
@@ -43,8 +44,9 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
     public function testRegisteringNamespace()
     {
         $builder = new FooNamespaceBuilder();
-        $client = ClientBuilder::create()->registerNamespace($builder)->build();
 
+        $client = ClientBuilder::create()->registerNamespace($builder)->build();
+        // @phpstan-ignore method.notFound
         $this->assertSame("123", $client->foo()->fooMethod());
     }
 
@@ -56,11 +58,15 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage('Namespace [bar] not found');
 
+        // @phpstan-ignore method.notFound
         $client->bar()->fooMethod();
     }
 }
 
-// @codingStandardsIgnoreStart "Each class must be in a file by itself" - not worth the extra work here
+/**
+ * @codingStandardsIgnoreStart "Each class must be in a file by itself" - not worth the extra work here
+ * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ */
 class FooNamespaceBuilder implements OpenSearch\Namespaces\NamespaceBuilderInterface
 {
     public function getName(): string
@@ -68,7 +74,7 @@ class FooNamespaceBuilder implements OpenSearch\Namespaces\NamespaceBuilderInter
         return "foo";
     }
 
-    public function getObject(Transport $transport, SerializerInterface $serializer)
+    public function getObject(Transport|OpenSearch\TransportInterface $transport, SerializerInterface $serializer)
     {
         return new FooNamespace();
     }

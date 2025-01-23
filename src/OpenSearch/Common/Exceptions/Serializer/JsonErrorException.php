@@ -21,12 +21,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions\Serializer;
 
-use OpenSearch\Common\Exceptions\OpenSearchException;
+use OpenSearch\Exception\OpenSearchExceptionInterface;
 
 /**
  * Class JsonErrorException
  */
-class JsonErrorException extends \Exception implements OpenSearchException
+class JsonErrorException extends \Exception implements OpenSearchExceptionInterface
 {
     /**
      * @var mixed

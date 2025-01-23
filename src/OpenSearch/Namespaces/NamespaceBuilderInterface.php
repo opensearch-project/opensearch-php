@@ -23,6 +23,7 @@ namespace OpenSearch\Namespaces;
 
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
+use OpenSearch\TransportInterface;
 
 interface NamespaceBuilderInterface
 {
@@ -37,9 +38,11 @@ interface NamespaceBuilderInterface
      * and serializer objects are provided so that your namespace may do whatever custom
      * logic is required.
      *
-     * @param  Transport           $transport
-     * @param  SerializerInterface $serializer
+     * @param Transport|TransportInterface $transport
+     * @param SerializerInterface $serializer
      * @return Object
+     *
+     * @phpstan-ignore parameter.deprecatedClass
      */
-    public function getObject(Transport $transport, SerializerInterface $serializer);
+    public function getObject(Transport|TransportInterface $transport, SerializerInterface $serializer);
 }

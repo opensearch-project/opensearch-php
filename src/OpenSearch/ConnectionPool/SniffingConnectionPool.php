@@ -28,10 +28,13 @@ use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 use OpenSearch\Connections\ConnectionInterface;
 
+// @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(SniffingConnectionPool::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0.
+ *
+ * @phpstan-ignore class.extendsDeprecatedClass
  */
 class SniffingConnectionPool extends AbstractConnectionPool
 {

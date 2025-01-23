@@ -13,6 +13,7 @@ use OpenSearch\ClientBuilder;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
 
+// @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(SigV4Handler::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**

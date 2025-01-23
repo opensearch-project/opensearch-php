@@ -21,10 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-@trigger_error(
-    ScriptLangNotSupportedException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\ScriptLangNotSupportedException instead.',
-    E_USER_DEPRECATED
-);
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(ScriptLangNotSupportedException::class . ' is deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\ScriptLangNotSupportedException instead.', E_USER_DEPRECATED);
 
 /**
  * @deprecated in 2.3.2 and will be removed in 3.0.0. Use OpenSearch\Exception\UnauthorizedHttpException instead.

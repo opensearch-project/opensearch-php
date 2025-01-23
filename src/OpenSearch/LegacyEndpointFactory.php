@@ -6,10 +6,13 @@ namespace OpenSearch;
 
 use OpenSearch\Endpoints\AbstractEndpoint;
 
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(LegacyEndpointFactory::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+
 /**
  * Provides a endpoint factory using a legacy callable.
  *
- * @internal
+ * @deprecated in 2.4.0 and will be removed in 3.0.0. Use PsrTransport instead.
  */
 class LegacyEndpointFactory implements EndpointFactoryInterface
 {
