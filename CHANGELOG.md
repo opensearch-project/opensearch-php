@@ -10,7 +10,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
 - Added a Docker Compose config file for local development.
 - Added a test for the AWS signing client decorator
-- Added PHPStan deprecation rules and baseline
+- Added PHPStan Deprecation rules and baseline
+- Added PHPStan PHPUnit extensions and rules
 ### Changed
 - Switched to PSR Interfaces
 - Increased PHP min version to 8.1

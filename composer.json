@@ -45,6 +45,7 @@
     "phpstan/phpstan": "^1.12",
     "phpstan/phpstan-deprecation-rules": "^1.2",
     "phpstan/phpstan-mockery": "^1.1",
+    "phpstan/phpstan-phpunit": "^1.4",
     "phpunit/phpunit": "^9.6",
     "symfony/finder": "^6.4|^7.0",
     "symfony/http-client": "^6.4|^7.0",
