@@ -28,6 +28,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fixed PHP 8.4 deprecations
 - Fixed outdated tests
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@592336a](https://github.com/opensearch-project/opensearch-api-specification/commit/592336afb88844f0c5785ba4b085dba3884ac580)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@799d046](https://github.com/opensearch-project/opensearch-api-specification/commit/799d04622aeddce7b697665d63a29fc049e5088e)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@1422af3](https://github.com/opensearch-project/opensearch-api-specification/commit/1422af3cddc8140fe9c3d59ee0205b278e193bb9)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@2395cb4](https://github.com/opensearch-project/opensearch-api-specification/commit/2395cb472ec5581656aac184f7b20548cd5b06ac)
