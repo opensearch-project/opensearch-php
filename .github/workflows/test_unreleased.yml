@@ -15,9 +15,9 @@ jobs:
       fail-fast: false
       matrix:
         entry:
-          - { opensearch_ref: "1.x", java: 11 }
-          - { opensearch_ref: "2.x", java: 11, gradle-runtime: 17 }
-          - { opensearch_ref: "main", java: 11, gradle-runtime: 17 }
+          - { opensearch_ref: "1.x", java: 21 }
+          - { opensearch_ref: "2.x", java: 21, gradle-runtime: 21 }
+          - { opensearch_ref: "main", java: 21, gradle-runtime: 21 }
     steps:
       - name: Checkout PHP Client
         uses: actions/checkout@v4
