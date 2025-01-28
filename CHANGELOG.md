@@ -21,7 +21,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Passing a callable to \OpenSearch\ClientBuilder::setEndpoint() is deprecated and replaced with passing an EndpointFactory to \OpenSearch\ClientBuilder::setEndpointFactory() ([#237](https://github.com/opensearch-project/opensearch-php/pull/237))
 - Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.
 - Throwing exceptions for different HTTP status codes is deprecated. Use the response object to check the status code instead.
-- The following namespaces have been deprecated and will be removed in 3.0.0: 'async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'
+- The following namespaces have been deprecated and will be removed in 3.0.0: 'async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'.
 ### Removed
 - Removed support for PHP 7.3, 7.4 and 8.0.
 - Removed support for async requests which were never actually working.
