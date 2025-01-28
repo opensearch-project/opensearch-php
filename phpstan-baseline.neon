@@ -2,6 +2,86 @@ parameters:
 	ignoreErrors:
 		-
 			message: """
+				#^Instantiation of deprecated class OpenSearch\\\\Namespaces\\\\AsyncSearchNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use AsynchronousSearchNamespace instead\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class OpenSearch\\\\Namespaces\\\\DataFrameTransformDeprecatedNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class OpenSearch\\\\Namespaces\\\\MonitoringNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class OpenSearch\\\\Namespaces\\\\SearchableSnapshotsNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Instantiation of deprecated class OpenSearch\\\\Namespaces\\\\SslNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use SslNamespace instead\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Return type of method OpenSearch\\\\Client\\:\\:asyncSearch\\(\\) has typehint with deprecated class OpenSearch\\\\Namespaces\\\\AsyncSearchNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use AsynchronousSearchNamespace instead\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Return type of method OpenSearch\\\\Client\\:\\:dataFrameTransformDeprecated\\(\\) has typehint with deprecated class OpenSearch\\\\Namespaces\\\\DataFrameTransformDeprecatedNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Return type of method OpenSearch\\\\Client\\:\\:monitoring\\(\\) has typehint with deprecated class OpenSearch\\\\Namespaces\\\\MonitoringNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Return type of method OpenSearch\\\\Client\\:\\:searchableSnapshots\\(\\) has typehint with deprecated class OpenSearch\\\\Namespaces\\\\SearchableSnapshotsNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
+				#^Return type of method OpenSearch\\\\Client\\:\\:ssl\\(\\) has typehint with deprecated class OpenSearch\\\\Namespaces\\\\SslNamespace\\:
+				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use SslNamespace instead\\.$#
+			"""
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: """
 				#^Instantiation of deprecated class OpenSearch\\\\Common\\\\Exceptions\\\\InvalidArgumentException\\:
 				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
 			"""
@@ -10,27 +90,11 @@ parameters:
 
 		-
 			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
-			count: 3
-			path: src/OpenSearch/Namespaces/AsyncSearchNamespace.php
-
-		-
-			message: """
 				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Cat\\\\Master\\:
 				To promote inclusive language, use '/_cat/cluster_manager' instead\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/CatNamespace.php
-
-		-
-			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
-			count: 8
-			path: src/OpenSearch/Namespaces/DataFrameTransformDeprecatedNamespace.php
 
 		-
 			message: """
@@ -78,31 +142,7 @@ parameters:
 				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 1
-			path: src/OpenSearch/Namespaces/MonitoringNamespace.php
-
-		-
-			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
-			count: 4
-			path: src/OpenSearch/Namespaces/SearchableSnapshotsNamespace.php
-
-		-
-			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
-			count: 1
 			path: src/OpenSearch/Namespaces/SecurityNamespace.php
-
-		-
-			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
-			count: 1
-			path: src/OpenSearch/Namespaces/SslNamespace.php
 
 		-
 			message: "#^Call to an undefined method OpenSearch\\\\Client\\:\\:slm\\(\\)\\.$#"
