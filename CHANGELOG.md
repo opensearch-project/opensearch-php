@@ -12,7 +12,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added a test for the AWS signing client decorator
 - Added PHPStan Deprecation rules and baseline
 - Added PHPStan PHPUnit extensions and rules
-- Added Guzzle and Symfony HTTP client factories
+- Added Guzzle and Symfony HTTP client factories.
+- Added 'colinodell/psr-testlogger' as a dev dependency.
 ### Changed
 - Switched to PSR Interfaces
 - Increased PHP min version to 8.1

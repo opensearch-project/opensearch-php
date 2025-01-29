@@ -2,28 +2,26 @@
 
 declare(strict_types=1);
 
-namespace OpenSearch\Tests;
+namespace OpenSearch\Tests\HttpClient;
 
-use OpenSearch\GuzzleHttpClientFactory;
+use OpenSearch\HttpClient\GuzzleHttpClientFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
-use Psr\Log\NullLogger;
 
 /**
  * Test the Guzzle HTTP client factory.
  *
- * @coversDefaultClass \OpenSearch\GuzzleHttpClientFactory
+ * @coversDefaultClass \OpenSearch\HttpClient\GuzzleHttpClientFactory
  */
 class GuzzleHttpClientFactoryTest extends TestCase
 {
     public function testCreate()
     {
-        $client = GuzzleHttpClientFactory::create([
+        $factory = new GuzzleHttpClientFactory(2);
+        $client = $factory->create([
             'base_uri' => 'http://example.com',
             'verify' => true,
-            'max_retries' => 2,
             'auth' => ['username', 'password'],
-            'logger' => new NullLogger(),
         ]);
 
         $this->assertInstanceOf(ClientInterface::class, $client);

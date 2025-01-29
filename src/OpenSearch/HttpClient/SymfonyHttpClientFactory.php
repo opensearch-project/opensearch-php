@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace OpenSearch;
+namespace OpenSearch\HttpClient;
 
+use OpenSearch\Client;
 use Psr\Http\Client\ClientInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
 use Symfony\Component\HttpClient\RetryableHttpClient;
@@ -14,10 +16,16 @@ use Symfony\Component\HttpClient\RetryableHttpClient;
  */
 class SymfonyHttpClientFactory implements HttpClientFactoryInterface
 {
+    public function __construct(
+        protected int $maxRetries = 0,
+        protected ?LoggerInterface $logger = null,
+    ) {
+    }
+
     /**
      * {@inheritdoc}
      */
-    public static function create(array $options): ClientInterface
+    public function create(array $options): ClientInterface
     {
         if (!isset($options['base_uri'])) {
             throw new \InvalidArgumentException('The base_uri option is required.');
@@ -31,16 +39,11 @@ class SymfonyHttpClientFactory implements HttpClientFactoryInterface
             ],
         ];
         $options = array_merge_recursive($defaults, $options);
-        $maxRetries = $options['max_retries'] ?? 0;
-        unset($options['max_retries']);
-
-        $logger = $options['logger'] ?? null;
-        unset($options['logger']);
 
         $symfonyClient = HttpClient::create()->withOptions($options);
 
-        if ($maxRetries > 0) {
-            $symfonyClient = new RetryableHttpClient($symfonyClient, null, $maxRetries, $logger);
+        if ($this->maxRetries > 0) {
+            $symfonyClient = new RetryableHttpClient($symfonyClient, null, $this->maxRetries, $this->logger);
         }
 
         return new Psr18Client($symfonyClient);
