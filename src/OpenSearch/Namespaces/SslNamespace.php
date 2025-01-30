@@ -21,13 +21,15 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use OpenSearch\Namespaces\AbstractNamespace;
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(SslNamespace::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Use SslNamespace instead.', E_USER_DEPRECATED);
 
 /**
  * Class SslNamespace
  *
+ * @deprecated in 2.4.0 and will be removed in 3.0.0. Use SslNamespace instead.
  */
-class SslNamespace extends AbstractNamespace
+class SslNamespace extends SecurityNamespace
 {
     /**
      *
@@ -36,10 +38,6 @@ class SslNamespace extends AbstractNamespace
      */
     public function certificates(array $params = [])
     {
-        $endpointBuilder = $this->endpoints;
-        $endpoint = $endpointBuilder('Ssl\Certificates');
-        $endpoint->setParams($params);
-
-        return $this->performRequest($endpoint);
+        return $this->getCertificates($params);
     }
 }
