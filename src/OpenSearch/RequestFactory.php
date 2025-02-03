@@ -32,7 +32,7 @@ final class RequestFactory implements RequestFactoryInterface
         array $headers = [],
     ): RequestInterface {
         $uri = $this->uriFactory->createUri($uri);
-        $uri = $uri->withQuery(http_build_query($params));
+        $uri = $uri->withQuery($this->createQuery($params));
         $request = $this->psrRequestFactory->createRequest($method, $uri);
         if ($body !== null) {
             $bodyJson = $this->serializer->serialize($body);
@@ -43,6 +43,25 @@ final class RequestFactory implements RequestFactoryInterface
             $request = $request->withHeader($name, $value);
         }
         return $request;
+    }
+
+    /**
+     * Create a query string from an array of parameters.
+     */
+    private function createQuery(array $params): string
+    {
+        ksort($params);
+
+        return http_build_query(array_map(function ($value) {
+            // Ensure boolean values are serialized as strings.
+            if ($value === true) {
+                return 'true';
+            }
+            if ($value === false) {
+                return 'false';
+            }
+            return $value;
+        }, $params));
     }
 
 }
