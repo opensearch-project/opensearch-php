@@ -26,6 +26,6 @@ class RequestFactoryTest extends TestCase
         $params = ['foo' => true, 'bar' => false];
         $request = $factory->createRequest('GET', 'http://localhost:9200/_search', $params);
 
-        $this->assertEquals('bar=false&foo=true', $request->getUri()->getQuery());
+        $this->assertEquals('foo=true&bar=false', $request->getUri()->getQuery());
     }
 }

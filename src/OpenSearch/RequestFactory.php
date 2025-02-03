@@ -50,8 +50,6 @@ final class RequestFactory implements RequestFactoryInterface
      */
     private function createQuery(array $params): string
     {
-        ksort($params);
-
         return http_build_query(array_map(function ($value) {
             // Ensure boolean values are serialized as strings.
             if ($value === true) {
