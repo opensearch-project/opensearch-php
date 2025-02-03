@@ -21,7 +21,7 @@ declare(strict_types=1);
  */
 use OpenSearch\Client;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
-use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Util\ClientEndpoint;
 use OpenSearch\Util\Endpoint;
 use OpenSearch\Util\NamespaceEndpoint;

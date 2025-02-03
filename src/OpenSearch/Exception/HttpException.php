@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace OpenSearch\Exception;
 
+use OpenSearch\Common\Exceptions\OpenSearchException;
+
 /**
  * Exception thrown when an HTTP error occurs.
  *
  * @phpstan-consistent-constructor
+ * @phpstan-ignore class.implementsDeprecatedInterface
  */
-class HttpException extends \RuntimeException implements HttpExceptionInterface
+class HttpException extends \RuntimeException implements HttpExceptionInterface, OpenSearchException
 {
     public function __construct(
         protected readonly int $statusCode,

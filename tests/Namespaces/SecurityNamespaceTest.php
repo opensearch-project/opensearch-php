@@ -15,8 +15,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Namespaces;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\EndpointFactory;
+use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;

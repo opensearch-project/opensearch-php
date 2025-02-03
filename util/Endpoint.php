@@ -284,7 +284,7 @@ class Endpoint
                         $this->name,
                         str_replace(':part', $part, $skeleton)
                     );
-                    $this->addNamespace('OpenSearch\Common\Exceptions\RuntimeException');
+                    $this->addNamespace('OpenSearch\Exception\RuntimeException');
                 } else {
                     $params .= sprintf("%s\$%s = \$this->%s ?? null;", $tab8, $part, $part);
                 }
@@ -346,7 +346,7 @@ class Endpoint
                 $tab8,
                 $this->apiName
             );
-            $this->addNamespace('OpenSearch\Common\Exceptions\RuntimeException');
+            $this->addNamespace('OpenSearch\Exception\RuntimeException');
         }
         return $checkPart . $params . $deprecated . $urls . $else;
     }

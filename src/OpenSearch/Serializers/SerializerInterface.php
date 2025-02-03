@@ -37,6 +37,8 @@ interface SerializerInterface
      * @param  string $data    JSON encoded string
      * @param  array  $headers Response Headers
      * @return string|array
+     *
+     * @throws \OpenSearch\Exception\JsonException
      */
     public function deserialize(?string $data, array $headers);
 }

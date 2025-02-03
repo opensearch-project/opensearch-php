@@ -22,9 +22,9 @@ declare(strict_types=1);
 namespace OpenSearch\Tests;
 
 use OpenSearch\Client;
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\Delete;
+use OpenSearch\Exception\RuntimeException;
 use OpenSearch\TransportInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

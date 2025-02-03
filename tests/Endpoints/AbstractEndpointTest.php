@@ -23,6 +23,7 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\EndpointInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
+use OpenSearch\Exception\UnexpectedValueException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -55,7 +56,7 @@ class AbstractEndpointTest extends TestCase
             ->method('getParamWhitelist')
             ->willReturn(['one', 'two']);
 
-        $this->expectException(\OpenSearch\Common\Exceptions\UnexpectedValueException::class);
+        $this->expectException(UnexpectedValueException::class);
 
         $this->endpoint->setParams($params);
     }

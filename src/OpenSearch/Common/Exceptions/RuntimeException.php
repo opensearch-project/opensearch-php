@@ -21,8 +21,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions;
 
-use OpenSearch\Exception\OpenSearchExceptionInterface;
+// @phpstan-ignore classConstant.deprecatedClass
+@trigger_error(RuntimeException::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Exception\RuntimeException instead.', E_USER_DEPRECATED);
 
-class RuntimeException extends \RuntimeException implements OpenSearchExceptionInterface
+/**
+ * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Exception\RuntimeException instead.
+ */
+class RuntimeException extends \OpenSearch\Exception\RuntimeException
 {
 }

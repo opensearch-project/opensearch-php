@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Serializers;
 
-use OpenSearch\Common\Exceptions;
-use OpenSearch\Common\Exceptions\Serializer\JsonErrorException;
+use OpenSearch\Exception\JsonException;
+use OpenSearch\Exception\RuntimeException;
 
 if (!defined('JSON_INVALID_UTF8_SUBSTITUTE')) {
     //PHP < 7.2 Define it as 0 so it does nothing
@@ -41,7 +41,7 @@ class SmartSerializer implements SerializerInterface
         } else {
             $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION + JSON_INVALID_UTF8_SUBSTITUTE);
             if ($data === false) {
-                throw new Exceptions\RuntimeException("Failed to JSON encode: ".json_last_error_msg());
+                throw new RuntimeException("Failed to JSON encode: ".json_last_error_msg());
             }
             if ($data === '[]') {
                 return '{}';
@@ -70,10 +70,9 @@ class SmartSerializer implements SerializerInterface
     }
 
     /**
-     * @param string|null $data
+     * Decode JSON data.
      *
-     * @return array
-     * @throws JsonErrorException
+     * @throws \OpenSearch\Exception\JsonException
      */
     private function decode(?string $data): array
     {
@@ -84,7 +83,7 @@ class SmartSerializer implements SerializerInterface
         try {
             return json_decode($data, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
-            throw new JsonErrorException($e->getCode(), $data, []);
+            throw new JsonException($e->getCode(), $data, $e);
         }
     }
 }
