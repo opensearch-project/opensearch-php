@@ -104,7 +104,6 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($secondConnection, $connectionPool->nextConnection(true));
     }
 
-
     /** @test */
     public function itShouldReturnFirstSeededConnectionIfAlive(): void
     {

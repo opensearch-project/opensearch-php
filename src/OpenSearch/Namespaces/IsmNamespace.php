@@ -15,6 +15,19 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Ism\AddPolicy;
+use OpenSearch\Endpoints\Ism\ChangePolicy;
+use OpenSearch\Endpoints\Ism\DeletePolicy;
+use OpenSearch\Endpoints\Ism\ExistsPolicy;
+use OpenSearch\Endpoints\Ism\ExplainPolicy;
+use OpenSearch\Endpoints\Ism\GetPolicies;
+use OpenSearch\Endpoints\Ism\GetPolicy;
+use OpenSearch\Endpoints\Ism\PutPolicies;
+use OpenSearch\Endpoints\Ism\PutPolicy;
+use OpenSearch\Endpoints\Ism\RefreshSearchAnalyzers;
+use OpenSearch\Endpoints\Ism\RemovePolicy;
+use OpenSearch\Endpoints\Ism\RetryIndex;
+
 /**
  * Class IsmNamespace
  *
@@ -40,7 +53,7 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\AddPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(AddPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -66,7 +79,7 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\ChangePolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ChangePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -91,7 +104,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\DeletePolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeletePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
@@ -118,7 +131,7 @@ class IsmNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\ExistsPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExistsPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
@@ -143,7 +156,7 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\ExplainPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExplainPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -165,7 +178,7 @@ class IsmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\GetPolicies::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -188,7 +201,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\GetPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
 
@@ -214,7 +227,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\PutPolicies::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutPolicies::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -241,7 +254,7 @@ class IsmNamespace extends AbstractNamespace
         $policy_id = $this->extractArgument($params, 'policy_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\PutPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
         $endpoint->setBody($body);
@@ -266,7 +279,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\RefreshSearchAnalyzers::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RefreshSearchAnalyzers::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -290,7 +303,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\RemovePolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RemovePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -315,7 +328,7 @@ class IsmNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ism\RetryIndex::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RetryIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);

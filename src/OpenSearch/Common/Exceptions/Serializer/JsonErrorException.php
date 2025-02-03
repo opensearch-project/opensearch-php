@@ -21,6 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Common\Exceptions\Serializer;
 
+use OpenSearch\Exception\JsonException;
+
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(JsonErrorException::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Exception\JsonErrorException instead.', E_USER_DEPRECATED);
 
@@ -29,6 +31,6 @@ namespace OpenSearch\Common\Exceptions\Serializer;
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Exception\JsonErrorException instead.
  */
-class JsonErrorException extends \OpenSearch\Exception\JsonException
+class JsonErrorException extends JsonException
 {
 }

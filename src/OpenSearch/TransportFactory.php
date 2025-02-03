@@ -92,7 +92,7 @@ class TransportFactory
         return $this;
     }
 
-    protected function getSerializer(): Serializers\SerializerInterface
+    protected function getSerializer(): SerializerInterface
     {
         if ($this->serializer === null) {
             $this->serializer = new SmartSerializer();
@@ -100,7 +100,7 @@ class TransportFactory
         return $this->serializer;
     }
 
-    public function setSerializer(Serializers\SerializerInterface $serializer): static
+    public function setSerializer(SerializerInterface $serializer): static
     {
         $this->serializer = $serializer;
         return $this;

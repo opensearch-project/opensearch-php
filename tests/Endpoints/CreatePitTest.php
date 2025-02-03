@@ -23,8 +23,9 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\CreatePit;
 use OpenSearch\Exception\RuntimeException;
+use PHPUnit\Framework\TestCase;
 
-class CreatePitTest extends \PHPUnit\Framework\TestCase
+class CreatePitTest extends TestCase
 {
     /** @var CreatePit */
     private $instance;

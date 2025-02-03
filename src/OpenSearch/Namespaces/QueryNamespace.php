@@ -15,6 +15,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Query\DatasourceDelete;
+use OpenSearch\Endpoints\Query\DatasourceRetrieve;
+use OpenSearch\Endpoints\Query\DatasourcesCreate;
+use OpenSearch\Endpoints\Query\DatasourcesList;
+use OpenSearch\Endpoints\Query\DatasourcesUpdate;
+
 /**
  * Class QueryNamespace
  *
@@ -39,7 +45,7 @@ class QueryNamespace extends AbstractNamespace
     {
         $datasource_name = $this->extractArgument($params, 'datasource_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Query\DatasourceDelete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DatasourceDelete::class);
         $endpoint->setParams($params);
         $endpoint->setDatasourceName($datasource_name);
 
@@ -63,7 +69,7 @@ class QueryNamespace extends AbstractNamespace
     {
         $datasource_name = $this->extractArgument($params, 'datasource_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Query\DatasourceRetrieve::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DatasourceRetrieve::class);
         $endpoint->setParams($params);
         $endpoint->setDatasourceName($datasource_name);
 
@@ -86,7 +92,7 @@ class QueryNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Query\DatasourcesCreate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DatasourcesCreate::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -107,7 +113,7 @@ class QueryNamespace extends AbstractNamespace
      */
     public function datasourcesList(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Query\DatasourcesList::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DatasourcesList::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -129,7 +135,7 @@ class QueryNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Query\DatasourcesUpdate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DatasourcesUpdate::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 

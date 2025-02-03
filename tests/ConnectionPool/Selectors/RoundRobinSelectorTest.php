@@ -23,6 +23,7 @@ namespace OpenSearch\Tests\ConnectionPool\Selectors;
 
 use OpenSearch;
 use OpenSearch\Connections\ConnectionInterface;
+use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(RoundRobinSelectorTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
@@ -34,7 +35,7 @@ use OpenSearch\Connections\ConnectionInterface;
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class RoundRobinSelectorTest extends \PHPUnit\Framework\TestCase
+class RoundRobinSelectorTest extends TestCase
 {
     /**
      * Add Ten connections, select 15 to verify round robin

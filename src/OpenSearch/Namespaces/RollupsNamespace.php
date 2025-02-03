@@ -15,6 +15,13 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Rollups\Delete;
+use OpenSearch\Endpoints\Rollups\Explain;
+use OpenSearch\Endpoints\Rollups\Get;
+use OpenSearch\Endpoints\Rollups\Put;
+use OpenSearch\Endpoints\Rollups\Start;
+use OpenSearch\Endpoints\Rollups\Stop;
+
 /**
  * Class RollupsNamespace
  *
@@ -39,7 +46,7 @@ class RollupsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Rollups\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -63,7 +70,7 @@ class RollupsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Rollups\Explain::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -87,7 +94,7 @@ class RollupsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Rollups\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -114,7 +121,7 @@ class RollupsNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Rollups\Put::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
@@ -139,7 +146,7 @@ class RollupsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Rollups\Start::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Start::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -163,7 +170,7 @@ class RollupsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Rollups\Stop::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stop::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 

@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Tests\Utility;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class CreateIntegrationTest
@@ -30,7 +31,7 @@ use OpenSearch\Tests\Utility;
  * @group Integration
  * @group Integration-Min
  */
-class CreateIntegrationTest extends \PHPUnit\Framework\TestCase
+class CreateIntegrationTest extends TestCase
 {
     public function testCreatePassingId()
     {

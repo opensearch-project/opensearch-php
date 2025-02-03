@@ -21,17 +21,14 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\ConnectionPool;
 
-use OpenSearch;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\NoNodesAvailableException;
-use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\ConnectionPool\StaticConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactory;
 use Mockery as m;
-use OpenSearch\Connections\ConnectionFactoryInterface;
-use OpenSearch\Connections\ConnectionInterface;
+use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(StaticConnectionPoolTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
@@ -44,7 +41,7 @@ use OpenSearch\Connections\ConnectionInterface;
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class StaticConnectionPoolTest extends \PHPUnit\Framework\TestCase
+class StaticConnectionPoolTest extends TestCase
 {
     public function tearDown(): void
     {

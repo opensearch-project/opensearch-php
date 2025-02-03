@@ -21,6 +21,10 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Tasks\Cancel;
+use OpenSearch\Endpoints\Tasks\Get;
+use OpenSearch\Endpoints\Tasks\ListTasks;
+
 /**
  * Class TasksNamespace
  *
@@ -49,7 +53,7 @@ class TasksNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\Cancel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Cancel::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
@@ -75,7 +79,7 @@ class TasksNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
@@ -103,7 +107,7 @@ class TasksNamespace extends AbstractNamespace
      */
     public function list(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Tasks\ListTasks::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ListTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

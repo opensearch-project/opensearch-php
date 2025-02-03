@@ -21,6 +21,56 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Indices\AddBlock;
+use OpenSearch\Endpoints\Indices\Analyze;
+use OpenSearch\Endpoints\Indices\ClearCache;
+use OpenSearch\Endpoints\Indices\CloneIndices;
+use OpenSearch\Endpoints\Indices\Close;
+use OpenSearch\Endpoints\Indices\Create;
+use OpenSearch\Endpoints\Indices\CreateDataStream;
+use OpenSearch\Endpoints\Indices\DataStreamsStats;
+use OpenSearch\Endpoints\Indices\Delete;
+use OpenSearch\Endpoints\Indices\DeleteAlias;
+use OpenSearch\Endpoints\Indices\DeleteDataStream;
+use OpenSearch\Endpoints\Indices\DeleteIndexTemplate;
+use OpenSearch\Endpoints\Indices\DeleteTemplate;
+use OpenSearch\Endpoints\Indices\Exists;
+use OpenSearch\Endpoints\Indices\ExistsAlias;
+use OpenSearch\Endpoints\Indices\ExistsIndexTemplate;
+use OpenSearch\Endpoints\Indices\ExistsTemplate;
+use OpenSearch\Endpoints\Indices\Flush;
+use OpenSearch\Endpoints\Indices\ForceMerge;
+use OpenSearch\Endpoints\Indices\Get;
+use OpenSearch\Endpoints\Indices\GetAlias;
+use OpenSearch\Endpoints\Indices\GetDataStream;
+use OpenSearch\Endpoints\Indices\GetFieldMapping;
+use OpenSearch\Endpoints\Indices\GetIndexTemplate;
+use OpenSearch\Endpoints\Indices\GetMapping;
+use OpenSearch\Endpoints\Indices\GetSettings;
+use OpenSearch\Endpoints\Indices\GetTemplate;
+use OpenSearch\Endpoints\Indices\GetUpgrade;
+use OpenSearch\Endpoints\Indices\Open;
+use OpenSearch\Endpoints\Indices\PutAlias;
+use OpenSearch\Endpoints\Indices\PutIndexTemplate;
+use OpenSearch\Endpoints\Indices\PutMapping;
+use OpenSearch\Endpoints\Indices\PutSettings;
+use OpenSearch\Endpoints\Indices\PutTemplate;
+use OpenSearch\Endpoints\Indices\Recovery;
+use OpenSearch\Endpoints\Indices\Refresh;
+use OpenSearch\Endpoints\Indices\RefreshSearchAnalyzers;
+use OpenSearch\Endpoints\Indices\ResolveIndex;
+use OpenSearch\Endpoints\Indices\Rollover;
+use OpenSearch\Endpoints\Indices\Segments;
+use OpenSearch\Endpoints\Indices\ShardStores;
+use OpenSearch\Endpoints\Indices\Shrink;
+use OpenSearch\Endpoints\Indices\SimulateIndexTemplate;
+use OpenSearch\Endpoints\Indices\SimulateTemplate;
+use OpenSearch\Endpoints\Indices\Split;
+use OpenSearch\Endpoints\Indices\Stats;
+use OpenSearch\Endpoints\Indices\UpdateAliases;
+use OpenSearch\Endpoints\Indices\Upgrade;
+use OpenSearch\Endpoints\Indices\ValidateQuery;
+
 /**
  * Class IndicesNamespace
  *
@@ -53,7 +103,7 @@ class IndicesNamespace extends AbstractNamespace
         $block = $this->extractArgument($params, 'block');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\AddBlock::class);
+        $endpoint = $this->endpointFactory->getEndpoint(AddBlock::class);
         $endpoint->setParams($params);
         $endpoint->setBlock($block);
         $endpoint->setIndex($index);
@@ -80,7 +130,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Analyze::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Analyze::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -113,7 +163,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ClearCache::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ClearCache::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -147,7 +197,7 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\CloneIndices::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CloneIndices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setTarget($target);
@@ -180,7 +230,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Close::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Close::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -210,7 +260,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Create::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Create::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -237,7 +287,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\CreateDataStream::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
@@ -262,7 +312,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DataStreamsStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DataStreamsStats::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -292,7 +342,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -321,7 +371,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteAlias::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteAlias::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setName($name);
@@ -346,7 +396,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteDataStream::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -373,7 +423,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteIndexTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -400,7 +450,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\DeleteTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -434,7 +484,7 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Exists::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -467,7 +517,7 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ExistsAlias::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExistsAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
@@ -499,7 +549,7 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ExistsIndexTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExistsIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -530,7 +580,7 @@ class IndicesNamespace extends AbstractNamespace
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ExistsTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExistsTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -559,7 +609,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Flush::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Flush::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -591,7 +641,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ForceMerge::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ForceMerge::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -623,7 +673,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -653,7 +703,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetAlias::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
@@ -678,7 +728,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetDataStream::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -709,7 +759,7 @@ class IndicesNamespace extends AbstractNamespace
         $fields = $this->extractArgument($params, 'fields');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetFieldMapping::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetFieldMapping::class);
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
         $endpoint->setIndex($index);
@@ -738,7 +788,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetIndexTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -768,7 +818,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetMapping::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetMapping::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -802,7 +852,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetSettings::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetSettings::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
@@ -831,7 +881,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -858,7 +908,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\GetUpgrade::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetUpgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -891,7 +941,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Open::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Open::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -922,7 +972,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutAlias::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setIndex($index);
@@ -954,7 +1004,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutIndexTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
@@ -988,7 +1038,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutMapping::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutMapping::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1022,7 +1072,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutSettings::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutSettings::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1053,7 +1103,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\PutTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
@@ -1080,7 +1130,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Recovery::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Recovery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -1107,7 +1157,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Refresh::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Refresh::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -1132,7 +1182,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ResolveIndex::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ResolveIndex::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -1165,7 +1215,7 @@ class IndicesNamespace extends AbstractNamespace
         $new_index = $this->extractArgument($params, 'new_index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Rollover::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Rollover::class);
         $endpoint->setParams($params);
         $endpoint->setAlias($alias);
         $endpoint->setNewIndex($new_index);
@@ -1195,7 +1245,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Segments::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Segments::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -1223,7 +1273,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ShardStores::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ShardStores::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -1258,7 +1308,7 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Shrink::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Shrink::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setTarget($target);
@@ -1288,7 +1338,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\SimulateIndexTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SimulateIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
@@ -1318,7 +1368,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\SimulateTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SimulateTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);
@@ -1354,7 +1404,7 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Split::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Split::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setTarget($target);
@@ -1391,7 +1441,7 @@ class IndicesNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Stats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
         $endpoint->setIndex($index);
@@ -1419,7 +1469,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\UpdateAliases::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateAliases::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1448,7 +1498,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\Upgrade::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Upgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -1486,7 +1536,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\ValidateQuery::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ValidateQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1514,7 +1564,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Indices\RefreshSearchAnalyzers::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RefreshSearchAnalyzers::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 

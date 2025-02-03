@@ -68,7 +68,6 @@ class ClientTest extends TestCase
         $this->client->foo();
     }
 
-
     public function testIndexCannotBeNullForDelete()
     {
         $this->endpointFactory->expects($this->once())

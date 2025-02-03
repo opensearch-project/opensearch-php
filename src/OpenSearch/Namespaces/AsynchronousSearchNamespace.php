@@ -15,6 +15,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\AsynchronousSearch\Delete;
+use OpenSearch\Endpoints\AsynchronousSearch\Get;
+use OpenSearch\Endpoints\AsynchronousSearch\Search;
+use OpenSearch\Endpoints\AsynchronousSearch\Stats;
+
 /**
  * Class AsynchronousSearchNamespace
  *
@@ -39,7 +44,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -63,7 +68,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -90,7 +95,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Search::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -111,7 +116,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      */
     public function stats(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\AsynchronousSearch\Stats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

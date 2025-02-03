@@ -27,7 +27,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 
 try {
     $client = Utility::getClient();
-} catch (RuntimeException $e) {
+} catch (\RuntimeException $e) {
     printf("ERROR: I cannot find STACK_VERSION and TEST_SUITE environment variables\n");
     exit(1);
 }

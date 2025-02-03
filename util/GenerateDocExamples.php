@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 /**
@@ -42,8 +41,8 @@ if (!file_exists($argv[1])) {
 printf("Reading specification from %s\n", $argv[1]);
 try {
     $spec = json_decode(file_get_contents($argv[1]), true);
-} catch (JsonException $e) {
-    throw new Exception(sprintf(
+} catch (\JsonException $e) {
+    throw new \Exception(sprintf(
         "The json file %s contains an error: %s\n",
         $argv[1],
         $e->getMessage()
@@ -181,8 +180,8 @@ function checkIfCodeHasValidSyntax(string $code): void
     try {
         eval($script . $code);
     } catch (OpenSearchException $e) {
-    } catch (Error $e) {
-        throw new Exception(sprintf(
+    } catch (\Error $e) {
+        throw new \Exception(sprintf(
             "The generated code:\n%s\nhas the following parse error:\n%s",
             $code,
             $e->getMessage()

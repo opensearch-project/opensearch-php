@@ -1,5 +1,13 @@
 <?php
 
+use GuzzleHttp\Psr7\HttpFactory;
+use OpenSearch\Client;
+use OpenSearch\EndpointFactory;
+use OpenSearch\RequestFactory;
+use OpenSearch\Serializers\SmartSerializer;
+use OpenSearch\TransportFactory;
+use Symfony\Component\HttpClient\Psr18Client;
+
 /**
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
@@ -9,9 +17,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // Auto-configure by discovery example
 
-$transport = (new \OpenSearch\TransportFactory())->create();
-$endpointFactory = new \OpenSearch\EndpointFactory();
-$client = new \OpenSearch\Client($transport, $endpointFactory, []);
+$transport = (new TransportFactory())->create();
+$endpointFactory = new EndpointFactory();
+$client = new Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
 $info = $client->info();
@@ -26,35 +34,35 @@ $guzzleClient = new \GuzzleHttp\Client([
     'headers' => [
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
-        'User-Agent' => sprintf('opensearch-php/%s (%s; PHP %s)', \OpenSearch\Client::VERSION, PHP_OS, PHP_VERSION),
+        'User-Agent' => sprintf('opensearch-php/%s (%s; PHP %s)', Client::VERSION, PHP_OS, PHP_VERSION),
     ]
 ]);
 
-$guzzleHttpFactory = new \GuzzleHttp\Psr7\HttpFactory();
+$guzzleHttpFactory = new HttpFactory();
 
-$serializer = new \OpenSearch\Serializers\SmartSerializer();
+$serializer = new SmartSerializer();
 
-$requestFactory = new \OpenSearch\RequestFactory(
+$requestFactory = new RequestFactory(
     $guzzleHttpFactory,
     $guzzleHttpFactory,
     $guzzleHttpFactory,
     $serializer,
 );
 
-$transport = (new OpenSearch\TransportFactory())
+$transport = (new TransportFactory())
     ->setHttpClient($guzzleClient)
     ->setRequestFactory($requestFactory)
     ->create();
 
-$endpointFactory = new \OpenSearch\EndpointFactory();
-$client = new \OpenSearch\Client($transport, $endpointFactory, []);
+$endpointFactory = new EndpointFactory();
+$client = new Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
 $info = $client->info();
 
 // Symfony example
 
-$symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOptions([
+$symfonyPsr18Client = (new Psr18Client())->withOptions([
     'base_uri' => 'https://localhost:9200',
     'auth_basic' => ['admin', getenv('OPENSEARCH_PASSWORD')],
     'verify_peer' => false,
@@ -65,21 +73,21 @@ $symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOpt
     ],
 ]);
 
-$serializer = new \OpenSearch\Serializers\SmartSerializer();
+$serializer = new SmartSerializer();
 
-$requestFactory = new \OpenSearch\RequestFactory(
+$requestFactory = new RequestFactory(
     $symfonyPsr18Client,
     $symfonyPsr18Client,
     $symfonyPsr18Client,
     $serializer,
 );
 
-$transport = (new \OpenSearch\TransportFactory())
+$transport = (new TransportFactory())
     ->setHttpClient($symfonyPsr18Client)
     ->setRequestFactory($requestFactory)
     ->create();
 
-$client = new \OpenSearch\Client($transport, $endpointFactory, []);
+$client = new Client($transport, $endpointFactory, []);
 
 // Send a request to the 'info' endpoint.
 $info = $client->info();

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Exception;
 
 use OpenSearch\Exception\ErrorMessageExtractor;
-use OpenSearch\Serializers\SmartSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -76,6 +75,5 @@ class ErrorMessageExtractorTest extends TestCase
 
         $this->assertEquals('root_cause_type: root_cause_reason', $message);
     }
-
 
 }

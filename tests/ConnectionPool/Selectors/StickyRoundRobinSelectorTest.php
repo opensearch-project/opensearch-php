@@ -18,6 +18,7 @@ namespace OpenSearch\Tests\ConnectionPool\Selectors;
 use OpenSearch;
 use OpenSearch\Connections\ConnectionInterface;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(StickyRoundRobinSelectorTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
@@ -29,7 +30,7 @@ use Mockery as m;
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class StickyRoundRobinSelectorTest extends \PHPUnit\Framework\TestCase
+class StickyRoundRobinSelectorTest extends TestCase
 {
     public function tearDown(): void
     {

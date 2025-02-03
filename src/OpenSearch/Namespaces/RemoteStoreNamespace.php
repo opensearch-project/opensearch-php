@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\RemoteStore\Restore;
+
 /**
  * Class RemoteStoreNamespace
  *
@@ -41,7 +43,7 @@ class RemoteStoreNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RemoteStore\Restore::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Restore::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 

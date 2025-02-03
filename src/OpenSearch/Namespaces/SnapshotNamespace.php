@@ -21,6 +21,18 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Snapshot\CleanupRepository;
+use OpenSearch\Endpoints\Snapshot\CloneSnapshot;
+use OpenSearch\Endpoints\Snapshot\Create;
+use OpenSearch\Endpoints\Snapshot\CreateRepository;
+use OpenSearch\Endpoints\Snapshot\Delete;
+use OpenSearch\Endpoints\Snapshot\DeleteRepository;
+use OpenSearch\Endpoints\Snapshot\Get;
+use OpenSearch\Endpoints\Snapshot\GetRepository;
+use OpenSearch\Endpoints\Snapshot\Restore;
+use OpenSearch\Endpoints\Snapshot\Status;
+use OpenSearch\Endpoints\Snapshot\VerifyRepository;
+
 /**
  * Class SnapshotNamespace
  *
@@ -48,7 +60,7 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\CleanupRepository::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CleanupRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
@@ -80,7 +92,7 @@ class SnapshotNamespace extends AbstractNamespace
         $target_snapshot = $this->extractArgument($params, 'target_snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\CloneSnapshot::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CloneSnapshot::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -114,7 +126,7 @@ class SnapshotNamespace extends AbstractNamespace
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Create::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Create::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -146,7 +158,7 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\CreateRepository::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setBody($body);
@@ -175,7 +187,7 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -203,7 +215,7 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\DeleteRepository::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
@@ -233,7 +245,7 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -261,7 +273,7 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\GetRepository::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
@@ -292,7 +304,7 @@ class SnapshotNamespace extends AbstractNamespace
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Restore::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Restore::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -323,7 +335,7 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\Status::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Status::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
@@ -351,7 +363,7 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Snapshot\VerifyRepository::class);
+        $endpoint = $this->endpointFactory->getEndpoint(VerifyRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 

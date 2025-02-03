@@ -15,6 +15,15 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Sm\CreatePolicy;
+use OpenSearch\Endpoints\Sm\DeletePolicy;
+use OpenSearch\Endpoints\Sm\ExplainPolicy;
+use OpenSearch\Endpoints\Sm\GetPolicies;
+use OpenSearch\Endpoints\Sm\GetPolicy;
+use OpenSearch\Endpoints\Sm\StartPolicy;
+use OpenSearch\Endpoints\Sm\StopPolicy;
+use OpenSearch\Endpoints\Sm\UpdatePolicy;
+
 /**
  * Class SmNamespace
  *
@@ -40,7 +49,7 @@ class SmNamespace extends AbstractNamespace
         $policy_name = $this->extractArgument($params, 'policy_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\CreatePolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreatePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
         $endpoint->setBody($body);
@@ -65,7 +74,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\DeletePolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeletePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
 
@@ -89,7 +98,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\ExplainPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExplainPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
 
@@ -115,7 +124,7 @@ class SmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\GetPolicies::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -138,7 +147,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\GetPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
 
@@ -162,7 +171,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\StartPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(StartPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
 
@@ -186,7 +195,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\StopPolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(StopPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
 
@@ -213,7 +222,7 @@ class SmNamespace extends AbstractNamespace
         $policy_name = $this->extractArgument($params, 'policy_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Sm\UpdatePolicy::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdatePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
         $endpoint->setBody($body);

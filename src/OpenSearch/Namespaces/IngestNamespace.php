@@ -21,6 +21,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Ingest\DeletePipeline;
+use OpenSearch\Endpoints\Ingest\GetPipeline;
+use OpenSearch\Endpoints\Ingest\ProcessorGrok;
+use OpenSearch\Endpoints\Ingest\PutPipeline;
+use OpenSearch\Endpoints\Ingest\Simulate;
+
 /**
  * Class IngestNamespace
  *
@@ -48,7 +54,7 @@ class IngestNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\DeletePipeline::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeletePipeline::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -74,7 +80,7 @@ class IngestNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\GetPipeline::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetPipeline::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -96,7 +102,7 @@ class IngestNamespace extends AbstractNamespace
      */
     public function processorGrok(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\ProcessorGrok::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ProcessorGrok::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -124,7 +130,7 @@ class IngestNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\PutPipeline::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutPipeline::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
@@ -152,7 +158,7 @@ class IngestNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ingest\Simulate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Simulate::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
