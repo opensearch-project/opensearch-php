@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints\Replication;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 /**
