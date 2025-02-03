@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\Common\Exceptions\UnexpectedValueException;
 use OpenSearch\Endpoints\Sql\Query;
+use OpenSearch\Exception\UnexpectedValueException;
 use PHPUnit\Framework\TestCase;
 
 /**

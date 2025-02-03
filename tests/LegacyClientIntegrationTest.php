@@ -23,9 +23,8 @@ namespace OpenSearch\Tests;
 
 use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
-use OpenSearch\Common\Exceptions\BadRequest400Exception;
 use OpenSearch\Common\Exceptions\Missing404Exception;
-use OpenSearch\Common\Exceptions\RuntimeException;
+use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Tests\ClientBuilder\ArrayLogger;
 use Psr\Log\LogLevel;
 

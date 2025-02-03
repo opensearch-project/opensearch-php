@@ -21,14 +21,14 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Serializers;
 
-use OpenSearch\Common\Exceptions\Serializer\JsonErrorException;
+use OpenSearch\Exception\JsonException;
 use OpenSearch\Serializers\SmartSerializer;
-use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class SmartSerializerTest
  *
+ * @coversDefaultClass \OpenSearch\Serializers\SmartSerializer
  */
 class SmartSerializerTest extends TestCase
 {
@@ -43,14 +43,19 @@ class SmartSerializerTest extends TestCase
     }
 
     /**
-     * @requires PHP 7.3
-     * @see https://github.com/elastic/elasticsearch-php/issues/1012
+     * @
      */
-    public function testThrowJsonErrorException()
+    public function testThrowJsonException(): void
     {
-        $this->expectException(JsonErrorException::class);
-        $this->expectExceptionCode(JSON_ERROR_SYNTAX);
-
-        $this->serializer->deserialize('{ "foo" : bar" }', []);
+        $data = '{ "foo" : bar" }';
+        try {
+            $this->serializer->deserialize($data, []);
+            $this->fail('An expected exception has not been raised.');
+        } catch (JsonException $e) {
+            $this->assertSame(JSON_ERROR_SYNTAX, $e->getCode());
+            $this->assertSame('Syntax error', $e->getMessage());
+            $this->assertSame($data, $e->getData());
+        }
     }
+
 }

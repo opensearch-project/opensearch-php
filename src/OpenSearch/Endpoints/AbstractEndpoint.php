@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints;
 
-use OpenSearch\Common\Exceptions\UnexpectedValueException;
 use OpenSearch\EndpointInterface;
+use OpenSearch\Exception\UnexpectedValueException;
 use OpenSearch\Serializers\SerializerInterface;
 
 use function array_filter;

@@ -21,8 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\Common\Exceptions\RuntimeException;
 use OpenSearch\Endpoints\Indices\RefreshSearchAnalyzers;
+use OpenSearch\Exception\RuntimeException;
 
 class RefreshSearchAnalyzersTest extends \PHPUnit\Framework\TestCase
 {

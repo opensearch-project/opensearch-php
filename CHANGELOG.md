@@ -24,6 +24,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.
 - Throwing exceptions for different HTTP status codes is deprecated. Use the response object to check the status code instead.
 - The following namespaces have been deprecated and will be removed in 3.0.0: 'async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'.
+- A number of exceptions under `\OpenSearch\Common\Exceptions` are deprecated and moved to `\OpenSearch\Exception`. 
 ### Removed
 - Removed support for PHP 7.3, 7.4 and 8.0.
 - Removed support for async requests which were never actually working.
@@ -31,6 +32,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fixed PHP 8.4 deprecations
 - Fixed outdated tests
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@b9dcb25](https://github.com/opensearch-project/opensearch-api-specification/commit/b9dcb251d551e90ecfc416ba134efe83cbcbc1b3)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@9df46f8](https://github.com/opensearch-project/opensearch-api-specification/commit/9df46f8134641ae5b429e3e9269858c7cb27e4f0)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@592336a](https://github.com/opensearch-project/opensearch-api-specification/commit/592336afb88844f0c5785ba4b085dba3884ac580)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@799d046](https://github.com/opensearch-project/opensearch-api-specification/commit/799d04622aeddce7b697665d63a29fc049e5088e)
