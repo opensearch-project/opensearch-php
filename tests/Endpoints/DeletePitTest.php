@@ -22,8 +22,9 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\DeletePit;
+use PHPUnit\Framework\TestCase;
 
-class DeletePitTest extends \PHPUnit\Framework\TestCase
+class DeletePitTest extends TestCase
 {
     /** @var DeletePit */
     private $instance;

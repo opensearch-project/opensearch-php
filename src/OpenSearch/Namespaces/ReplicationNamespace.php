@@ -15,6 +15,18 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Replication\AutofollowStats;
+use OpenSearch\Endpoints\Replication\CreateReplicationRule;
+use OpenSearch\Endpoints\Replication\DeleteReplicationRule;
+use OpenSearch\Endpoints\Replication\FollowerStats;
+use OpenSearch\Endpoints\Replication\LeaderStats;
+use OpenSearch\Endpoints\Replication\Pause;
+use OpenSearch\Endpoints\Replication\Resume;
+use OpenSearch\Endpoints\Replication\Start;
+use OpenSearch\Endpoints\Replication\Status;
+use OpenSearch\Endpoints\Replication\Stop;
+use OpenSearch\Endpoints\Replication\UpdateSettings;
+
 /**
  * Class ReplicationNamespace
  *
@@ -36,7 +48,7 @@ class ReplicationNamespace extends AbstractNamespace
      */
     public function autofollowStats(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\AutofollowStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(AutofollowStats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -58,7 +70,7 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\CreateReplicationRule::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateReplicationRule::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -81,7 +93,7 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\DeleteReplicationRule::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteReplicationRule::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -102,7 +114,7 @@ class ReplicationNamespace extends AbstractNamespace
      */
     public function followerStats(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\FollowerStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(FollowerStats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -122,7 +134,7 @@ class ReplicationNamespace extends AbstractNamespace
      */
     public function leaderStats(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\LeaderStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(LeaderStats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -146,7 +158,7 @@ class ReplicationNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\Pause::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Pause::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -172,7 +184,7 @@ class ReplicationNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\Resume::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Resume::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -198,7 +210,7 @@ class ReplicationNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\Start::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Start::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -223,7 +235,7 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\Status::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Status::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -248,7 +260,7 @@ class ReplicationNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\Stop::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stop::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -274,7 +286,7 @@ class ReplicationNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Replication\UpdateSettings::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateSettings::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);

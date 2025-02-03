@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\List\Help;
+use OpenSearch\Endpoints\List\Indices;
+use OpenSearch\Endpoints\List\Shards;
+
 /**
  * Class ListNamespace
  *
@@ -36,7 +40,7 @@ class ListNamespace extends AbstractNamespace
      */
     public function help(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\List\Help::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Help::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -76,7 +80,7 @@ class ListNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\List\Indices::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Indices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -113,7 +117,7 @@ class ListNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\List\Shards::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 

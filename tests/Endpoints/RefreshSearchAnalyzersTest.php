@@ -23,8 +23,9 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\Indices\RefreshSearchAnalyzers;
 use OpenSearch\Exception\RuntimeException;
+use PHPUnit\Framework\TestCase;
 
-class RefreshSearchAnalyzersTest extends \PHPUnit\Framework\TestCase
+class RefreshSearchAnalyzersTest extends TestCase
 {
     /** @var RefreshSearchAnalyzers */
     private $instance;

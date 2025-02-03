@@ -21,6 +21,10 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\DanglingIndices\DeleteDanglingIndex;
+use OpenSearch\Endpoints\DanglingIndices\ImportDanglingIndex;
+use OpenSearch\Endpoints\DanglingIndices\ListDanglingIndices;
+
 /**
  * Class DanglingIndicesNamespace
  *
@@ -49,7 +53,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DanglingIndices\DeleteDanglingIndex::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteDanglingIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndexUuid($index_uuid);
 
@@ -77,7 +81,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DanglingIndices\ImportDanglingIndex::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ImportDanglingIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndexUuid($index_uuid);
 
@@ -98,7 +102,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      */
     public function listDanglingIndices(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DanglingIndices\ListDanglingIndices::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ListDanglingIndices::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

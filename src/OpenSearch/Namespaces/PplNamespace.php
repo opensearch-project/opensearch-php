@@ -15,6 +15,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Ppl\Explain;
+use OpenSearch\Endpoints\Ppl\GetStats;
+use OpenSearch\Endpoints\Ppl\PostStats;
+use OpenSearch\Endpoints\Ppl\Query;
+
 /**
  * Class PplNamespace
  *
@@ -40,7 +45,7 @@ class PplNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\Explain::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Explain::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -63,7 +68,7 @@ class PplNamespace extends AbstractNamespace
      */
     public function getStats(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\GetStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -87,7 +92,7 @@ class PplNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\PostStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PostStats::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -112,7 +117,7 @@ class PplNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ppl\Query::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Query::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 

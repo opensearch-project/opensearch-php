@@ -22,7 +22,6 @@ $LICENSE_HEADER = "/**\n" .
 " * GitHub history for details.\n" .
 " */\n";
 
-
 function doesFileNeedFix(string $filepath): bool
 {
     $content = file_get_contents($filepath);
@@ -50,9 +49,9 @@ function fix_license_header(string $path): void
             addHeaderToFile($path);
         }
     } elseif (is_dir($path)) {
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::LEAVES_ONLY
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::LEAVES_ONLY
         );
         foreach ($iterator as $file) {
             if ($file->isFile() && doesFileNeedFix($file->getPathname())) {

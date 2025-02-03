@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Exception;
 
-use OpenSearch\Serializers\SmartSerializer;
-
 /**
  * Factory for creating HTTP exceptions.
  */

@@ -15,6 +15,13 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Knn\DeleteModel;
+use OpenSearch\Endpoints\Knn\GetModel;
+use OpenSearch\Endpoints\Knn\SearchModels;
+use OpenSearch\Endpoints\Knn\Stats;
+use OpenSearch\Endpoints\Knn\TrainModel;
+use OpenSearch\Endpoints\Knn\Warmup;
+
 /**
  * Class KnnNamespace
  *
@@ -39,7 +46,7 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\DeleteModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
@@ -63,7 +70,7 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\GetModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
@@ -128,7 +135,7 @@ class KnnNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\SearchModels::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -155,7 +162,7 @@ class KnnNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\Stats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setStat($stat);
@@ -182,7 +189,7 @@ class KnnNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\TrainModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(TrainModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -207,7 +214,7 @@ class KnnNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Knn\Warmup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Warmup::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 

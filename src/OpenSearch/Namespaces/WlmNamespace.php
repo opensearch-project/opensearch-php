@@ -15,6 +15,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Wlm\CreateQueryGroup;
+use OpenSearch\Endpoints\Wlm\DeleteQueryGroup;
+use OpenSearch\Endpoints\Wlm\GetQueryGroup;
+use OpenSearch\Endpoints\Wlm\UpdateQueryGroup;
+
 /**
  * Class WlmNamespace
  *
@@ -38,7 +43,7 @@ class WlmNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\CreateQueryGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -62,7 +67,7 @@ class WlmNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\DeleteQueryGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -86,7 +91,7 @@ class WlmNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\GetQueryGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -111,7 +116,7 @@ class WlmNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Wlm\UpdateQueryGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);

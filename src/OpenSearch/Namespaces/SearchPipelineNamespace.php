@@ -15,6 +15,10 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\SearchPipeline\Delete;
+use OpenSearch\Endpoints\SearchPipeline\Get;
+use OpenSearch\Endpoints\SearchPipeline\Put;
+
 /**
  * Class SearchPipelineNamespace
  *
@@ -41,7 +45,7 @@ class SearchPipelineNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchPipeline\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -66,7 +70,7 @@ class SearchPipelineNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchPipeline\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -93,7 +97,7 @@ class SearchPipelineNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchPipeline\Put::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);

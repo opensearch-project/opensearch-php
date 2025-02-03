@@ -21,8 +21,10 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\ConnectionPool;
 
-use OpenSearch;
 use OpenSearch\Tests\Utility;
+use OpenSearch\ClientBuilder;
+use OpenSearch\ConnectionPool\StaticConnectionPool;
+use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(StaticConnectionPoolIntegrationTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
@@ -36,7 +38,7 @@ use OpenSearch\Tests\Utility;
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class StaticConnectionPoolIntegrationTest extends \PHPUnit\Framework\TestCase
+class StaticConnectionPoolIntegrationTest extends TestCase
 {
     /**
      * @var string
@@ -51,9 +53,9 @@ class StaticConnectionPoolIntegrationTest extends \PHPUnit\Framework\TestCase
     // Issue #636
     public function test404Liveness()
     {
-        $client = \OpenSearch\ClientBuilder::create()
+        $client = ClientBuilder::create()
             ->setHosts([$this->host])
-            ->setConnectionPool(\OpenSearch\ConnectionPool\StaticConnectionPool::class)
+            ->setConnectionPool(StaticConnectionPool::class)
             ->setSSLVerification(false)
             ->build();
 

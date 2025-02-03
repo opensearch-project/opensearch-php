@@ -21,6 +21,31 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Cat\Aliases;
+use OpenSearch\Endpoints\Cat\AllPitSegments;
+use OpenSearch\Endpoints\Cat\Allocation;
+use OpenSearch\Endpoints\Cat\ClusterManager;
+use OpenSearch\Endpoints\Cat\Count;
+use OpenSearch\Endpoints\Cat\Fielddata;
+use OpenSearch\Endpoints\Cat\Health;
+use OpenSearch\Endpoints\Cat\Help;
+use OpenSearch\Endpoints\Cat\Indices;
+use OpenSearch\Endpoints\Cat\Master;
+use OpenSearch\Endpoints\Cat\NodeAttrs;
+use OpenSearch\Endpoints\Cat\Nodes;
+use OpenSearch\Endpoints\Cat\PendingTasks;
+use OpenSearch\Endpoints\Cat\PitSegments;
+use OpenSearch\Endpoints\Cat\Plugins;
+use OpenSearch\Endpoints\Cat\Recovery;
+use OpenSearch\Endpoints\Cat\Repositories;
+use OpenSearch\Endpoints\Cat\SegmentReplication;
+use OpenSearch\Endpoints\Cat\Segments;
+use OpenSearch\Endpoints\Cat\Shards;
+use OpenSearch\Endpoints\Cat\Snapshots;
+use OpenSearch\Endpoints\Cat\Tasks;
+use OpenSearch\Endpoints\Cat\Templates;
+use OpenSearch\Endpoints\Cat\ThreadPool;
+
 /**
  * Class CatNamespace
  *
@@ -52,7 +77,7 @@ class CatNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Aliases::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Aliases::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -79,7 +104,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function allPitSegments(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\AllPitSegments::class);
+        $endpoint = $this->endpointFactory->getEndpoint(AllPitSegments::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -111,7 +136,7 @@ class CatNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Allocation::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Allocation::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
 
@@ -140,7 +165,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function clusterManager(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\ClusterManager::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ClusterManager::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -168,7 +193,7 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Count::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Count::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -198,7 +223,7 @@ class CatNamespace extends AbstractNamespace
     {
         $fields = $this->extractArgument($params, 'fields');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Fielddata::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Fielddata::class);
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
 
@@ -226,7 +251,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function health(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Health::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Health::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -246,7 +271,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function help(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Help::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Help::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -283,7 +308,7 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Indices::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Indices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -312,7 +337,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function master(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Master::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Master::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -340,7 +365,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function nodeattrs(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\NodeAttrs::class);
+        $endpoint = $this->endpointFactory->getEndpoint(NodeAttrs::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -371,7 +396,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function nodes(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Nodes::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Nodes::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -400,7 +425,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\PendingTasks::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PendingTasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -428,7 +453,7 @@ class CatNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\PitSegments::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PitSegments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -457,7 +482,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function plugins(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Plugins::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Plugins::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -489,7 +514,7 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Recovery::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Recovery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -518,7 +543,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function repositories(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Repositories::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Repositories::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -557,7 +582,7 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\SegmentReplication::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SegmentReplication::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -589,7 +614,7 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Segments::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Segments::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -623,7 +648,7 @@ class CatNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Shards::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -656,7 +681,7 @@ class CatNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Snapshots::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Snapshots::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
 
@@ -687,7 +712,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function tasks(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Tasks::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Tasks::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -718,7 +743,7 @@ class CatNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\Templates::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Templates::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -751,7 +776,7 @@ class CatNamespace extends AbstractNamespace
     {
         $thread_pool_patterns = $this->extractArgument($params, 'thread_pool_patterns');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Cat\ThreadPool::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ThreadPool::class);
         $endpoint->setParams($params);
         $endpoint->setThreadPoolPatterns($thread_pool_patterns);
 

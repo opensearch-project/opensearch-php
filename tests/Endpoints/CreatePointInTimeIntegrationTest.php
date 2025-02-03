@@ -23,6 +23,7 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Client;
 use OpenSearch\Tests\Utility;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class OpenPointInTimeIntegrationTest
@@ -31,7 +32,7 @@ use OpenSearch\Tests\Utility;
  * @group Integration
  * @group Integration-Min
  */
-class CreatePointInTimeIntegrationTest extends \PHPUnit\Framework\TestCase
+class CreatePointInTimeIntegrationTest extends TestCase
 {
     private const INDEX = 'movies';
 

@@ -23,7 +23,6 @@ namespace OpenSearch\Tests\ConnectionPool;
 
 use OpenSearch\ClientBuilder;
 use OpenSearch\ConnectionPool\SniffingConnectionPool;
-use OpenSearch\ConnectionPool\StaticConnectionPool;
 use OpenSearch\Tests\Utility;
 use PHPUnit\Framework\TestCase;
 

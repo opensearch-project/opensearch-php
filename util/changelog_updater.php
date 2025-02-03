@@ -22,7 +22,7 @@ function main()
     try {
         $gitStatus = shell_exec("git status");
         if ($gitStatus === null) {
-            throw new RuntimeException('Failed to execute git command.');
+            throw new \RuntimeException('Failed to execute git command.');
         }
 
         if (strpos($gitStatus, "Changes to be committed:") !== false ||
@@ -37,7 +37,7 @@ function main()
             ]);
 
             if ($response->getStatusCode() !== 200) {
-                throw new RuntimeException(
+                throw new \RuntimeException(
                     'Failed to fetch opensearch-api-specification commit information. Status code: ' . $response->getStatusCode()
                 );
             }
@@ -49,7 +49,7 @@ function main()
             $changelogPath = "CHANGELOG.md";
             $content = file_get_contents($changelogPath);
             if ($content === false) {
-                throw new RuntimeException('Failed to read CHANGELOG.md');
+                throw new \RuntimeException('Failed to read CHANGELOG.md');
             }
 
             if (strpos($content, $commitUrl) === false) {
@@ -62,17 +62,17 @@ function main()
 
                     $result = file_put_contents($changelogPath, $fileContent);
                     if ($result === false) {
-                        throw new RuntimeException('Failed to write to CHANGELOG.md');
+                        throw new \RuntimeException('Failed to write to CHANGELOG.md');
                     }
                 } else {
-                    throw new RuntimeException("'Updated APIs' section is not present in CHANGELOG.md");
+                    throw new \RuntimeException("'Updated APIs' section is not present in CHANGELOG.md");
                 }
             }
         } else {
             echo "No changes detected\n";
         }
 
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
         echo "Error occurred: " . $e->getMessage() . "\n";
     }
 }

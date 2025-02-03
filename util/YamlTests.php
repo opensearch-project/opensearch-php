@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 /**
@@ -265,7 +264,7 @@ class YamlTests
         foreach ($params as $name => $value) {
             if (is_array($value)) {
                 $value = var_export($value, true);
-            } elseif ($value instanceof \stdClass) {
+            } elseif ($value instanceof stdClass) {
                 $value = 'new \stdClass';
             } elseif (is_numeric($value)) {
                 $value = (string) $value;

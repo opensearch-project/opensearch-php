@@ -15,6 +15,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Insights\TopQueries;
+
 /**
  * Class InsightsNamespace
  *
@@ -36,7 +38,7 @@ class InsightsNamespace extends AbstractNamespace
      */
     public function topQueries(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Insights\TopQueries::class);
+        $endpoint = $this->endpointFactory->getEndpoint(TopQueries::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

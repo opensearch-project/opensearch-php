@@ -15,6 +15,15 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Transforms\Delete;
+use OpenSearch\Endpoints\Transforms\Explain;
+use OpenSearch\Endpoints\Transforms\Get;
+use OpenSearch\Endpoints\Transforms\Preview;
+use OpenSearch\Endpoints\Transforms\Put;
+use OpenSearch\Endpoints\Transforms\Search;
+use OpenSearch\Endpoints\Transforms\Start;
+use OpenSearch\Endpoints\Transforms\Stop;
+
 /**
  * Class TransformsNamespace
  *
@@ -39,7 +48,7 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -63,7 +72,7 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Explain::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -87,7 +96,7 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -110,7 +119,7 @@ class TransformsNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Preview::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Preview::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -137,7 +146,7 @@ class TransformsNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Put::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
@@ -164,7 +173,7 @@ class TransformsNamespace extends AbstractNamespace
      */
     public function search(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Search::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -187,7 +196,7 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Start::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Start::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -211,7 +220,7 @@ class TransformsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Transforms\Stop::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stop::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 

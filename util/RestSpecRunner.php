@@ -58,7 +58,7 @@ if (!file_exists($tempFilePath)) {
     printf("ERROR: the commit_hash %s has not been found\n", $serverInfo['version']['build_hash']);
     exit(1);
 }
-$zip = new ZipArchive();
+$zip = new \ZipArchive();
 $zip->open($tempFilePath);
 printf("Extracting %s\ninto %s/rest-spec/%s\n", $tempFilePath, __DIR__, $serverInfo['version']['build_hash']);
 $zip->extractTo(sprintf("%s/rest-spec/%s", __DIR__, $serverInfo['version']['build_hash']));

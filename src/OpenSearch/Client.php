@@ -57,6 +57,49 @@ use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
 use OpenSearch\Namespaces\WlmNamespace;
+use OpenSearch\Endpoints\Bulk;
+use OpenSearch\Endpoints\BulkStream;
+use OpenSearch\Endpoints\ClearScroll;
+use OpenSearch\Endpoints\Count;
+use OpenSearch\Endpoints\Create;
+use OpenSearch\Endpoints\CreatePit;
+use OpenSearch\Endpoints\Delete;
+use OpenSearch\Endpoints\DeleteAllPits;
+use OpenSearch\Endpoints\DeleteByQuery;
+use OpenSearch\Endpoints\DeleteByQueryRethrottle;
+use OpenSearch\Endpoints\DeletePit;
+use OpenSearch\Endpoints\DeleteScript;
+use OpenSearch\Endpoints\Exists;
+use OpenSearch\Endpoints\ExistsSource;
+use OpenSearch\Endpoints\Explain;
+use OpenSearch\Endpoints\FieldCaps;
+use OpenSearch\Endpoints\Get;
+use OpenSearch\Endpoints\GetAllPits;
+use OpenSearch\Endpoints\GetScript;
+use OpenSearch\Endpoints\GetScriptContext;
+use OpenSearch\Endpoints\GetScriptLanguages;
+use OpenSearch\Endpoints\GetSource;
+use OpenSearch\Endpoints\Index;
+use OpenSearch\Endpoints\Info;
+use OpenSearch\Endpoints\MTermVectors;
+use OpenSearch\Endpoints\Mget;
+use OpenSearch\Endpoints\Msearch;
+use OpenSearch\Endpoints\MsearchTemplate;
+use OpenSearch\Endpoints\Ping;
+use OpenSearch\Endpoints\PutScript;
+use OpenSearch\Endpoints\RankEval;
+use OpenSearch\Endpoints\Reindex;
+use OpenSearch\Endpoints\ReindexRethrottle;
+use OpenSearch\Endpoints\RenderSearchTemplate;
+use OpenSearch\Endpoints\ScriptsPainlessExecute;
+use OpenSearch\Endpoints\Scroll;
+use OpenSearch\Endpoints\Search;
+use OpenSearch\Endpoints\SearchShards;
+use OpenSearch\Endpoints\SearchTemplate;
+use OpenSearch\Endpoints\TermVectors;
+use OpenSearch\Endpoints\Update;
+use OpenSearch\Endpoints\UpdateByQuery;
+use OpenSearch\Endpoints\UpdateByQueryRethrottle;
 
 /**
  * Class Client
@@ -260,8 +303,6 @@ class Client
      */
     protected $wlm;
 
-
-
     /**
      * Client constructor
      *
@@ -364,7 +405,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Bulk::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Bulk::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -402,7 +443,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\BulkStream::class);
+        $endpoint = $this->endpointFactory->getEndpoint(BulkStream::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -429,7 +470,7 @@ class Client
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ClearScroll::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ClearScroll::class);
         $endpoint->setParams($params);
         $endpoint->setScrollId($scroll_id);
         $endpoint->setBody($body);
@@ -470,7 +511,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Count::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Count::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -500,7 +541,7 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\CreatePit::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreatePit::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -534,7 +575,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -556,7 +597,7 @@ class Client
      */
     public function deleteAllPits(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteAllPits::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteAllPits::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -614,7 +655,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteByQuery::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -640,7 +681,7 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteByQueryRethrottle::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteByQueryRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
@@ -664,7 +705,7 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeletePit::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeletePit::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -691,7 +732,7 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\DeleteScript::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -730,7 +771,7 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Exists::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -769,7 +810,7 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ExistsSource::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExistsSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -810,7 +851,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Explain::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -843,7 +884,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FieldCaps::class);
+        $endpoint = $this->endpointFactory->getEndpoint(FieldCaps::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -880,7 +921,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -902,7 +943,7 @@ class Client
      */
     public function getAllPits(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetAllPits::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetAllPits::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -927,7 +968,7 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScript::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -948,7 +989,7 @@ class Client
      */
     public function getScriptContext(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScriptContext::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetScriptContext::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -968,7 +1009,7 @@ class Client
      */
     public function getScriptLanguages(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetScriptLanguages::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetScriptLanguages::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -1002,7 +1043,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\GetSource::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -1042,7 +1083,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Index::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
@@ -1065,7 +1106,7 @@ class Client
      */
     public function info(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Info::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Info::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -1098,7 +1139,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Mget::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Mget::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1132,7 +1173,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Msearch::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Msearch::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1164,7 +1205,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\MsearchTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(MsearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1203,7 +1244,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\MTermVectors::class);
+        $endpoint = $this->endpointFactory->getEndpoint(MTermVectors::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1228,7 +1269,7 @@ class Client
         // manually make this verbose so we can check status code
         $params['client']['verbose'] = true;
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ping::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Ping::class);
         $endpoint->setParams($params);
 
         return BooleanRequestWrapper::sendRequest($endpoint, $this->httpTransport);
@@ -1258,7 +1299,7 @@ class Client
         $context = $this->extractArgument($params, 'context');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\PutScript::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PutScript::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setContext($context);
@@ -1290,7 +1331,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RankEval::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RankEval::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1324,7 +1365,7 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Reindex::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Reindex::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1349,7 +1390,7 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ReindexRethrottle::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ReindexRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
@@ -1375,7 +1416,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\RenderSearchTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RenderSearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setBody($body);
@@ -1400,7 +1441,7 @@ class Client
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\ScriptsPainlessExecute::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ScriptsPainlessExecute::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1427,7 +1468,7 @@ class Client
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Scroll::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Scroll::class);
         $endpoint->setParams($params);
         $endpoint->setScrollId($scroll_id);
         $endpoint->setBody($body);
@@ -1500,7 +1541,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Search::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1531,7 +1572,7 @@ class Client
     {
         $index = $this->extractArgument($params, 'index');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchShards::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchShards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
@@ -1570,7 +1611,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\SearchTemplate::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1610,7 +1651,7 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\TermVectors::class);
+        $endpoint = $this->endpointFactory->getEndpoint(TermVectors::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setId($id);
@@ -1652,7 +1693,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Update::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Update::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -1714,7 +1755,7 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\UpdateByQuery::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
@@ -1740,7 +1781,7 @@ class Client
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\UpdateByQueryRethrottle::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateByQueryRethrottle::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
@@ -1784,8 +1825,8 @@ class Client
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $id ?
-            $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Create::class)
-            : $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Index::class);
+            $this->endpointFactory->getEndpoint(Create::class)
+            : $this->endpointFactory->getEndpoint(Index::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setIndex($index);
@@ -2032,7 +2073,6 @@ class Client
     {
         return $this->wlm;
     }
-
 
     /**
      * Gets the endpoint factory.

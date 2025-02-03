@@ -27,6 +27,7 @@ use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Tests\ClientBuilder\ArrayLogger;
 use Psr\Log\LogLevel;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ClientTest
@@ -38,7 +39,7 @@ use Psr\Log\LogLevel;
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class LegacyClientIntegrationTest extends \PHPUnit\Framework\TestCase
+class LegacyClientIntegrationTest extends TestCase
 {
     /**
      * @var ArrayLogger

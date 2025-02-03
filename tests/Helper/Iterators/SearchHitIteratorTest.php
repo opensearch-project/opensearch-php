@@ -24,13 +24,14 @@ namespace OpenSearch\Tests\Helper\Iterators;
 use OpenSearch\Helper\Iterators\SearchHitIterator;
 use OpenSearch\Helper\Iterators\SearchResponseIterator;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class SearchResponseIteratorTest
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class SearchHitIteratorTest extends \PHPUnit\Framework\TestCase
+class SearchHitIteratorTest extends TestCase
 {
     /**
      * @var SearchResponseIterator|Mockery\MockInterface

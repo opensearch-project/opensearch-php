@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 /**
@@ -20,12 +19,9 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 use OpenSearch\Client;
-use OpenSearch\Common\Exceptions\NoNodesAvailableException;
-use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Util\ClientEndpoint;
 use OpenSearch\Util\Endpoint;
 use OpenSearch\Util\NamespaceEndpoint;
-use OpenSearch\Tests\Utility;
 use Symfony\Component\Yaml\Yaml;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
@@ -55,7 +51,6 @@ foreach ($data["paths"] as $path => $pathDetails) {
         $list_of_dicts[] = $methodDetails;
     }
 }
-
 
 $outputDir = __DIR__ . "/output";
 if (!file_exists($outputDir)) {
@@ -490,8 +485,8 @@ function moveSubFolder(string $origin, string $destination)
  */
 function backup(string $fileName)
 {
-    $zip = new ZipArchive();
-    $result = $zip->open($fileName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+    $zip = new \ZipArchive();
+    $result = $zip->open($fileName, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
     if ($result !== true) {
         printf("Error opening the zip file %s: %s\n", $fileName, $result);
         exit(1);
@@ -521,7 +516,7 @@ function backup(string $fileName)
  */
 function restore(string $fileName)
 {
-    $zip = new ZipArchive();
+    $zip = new \ZipArchive();
     $result = $zip->open($fileName);
     if ($result !== true) {
         printf("Error opening the zip file %s: %s\n", $fileName, $result);
@@ -564,8 +559,8 @@ function Patch_Endpoints()
             continue;
         }
 
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($dirPath, RecursiveDirectoryIterator::SKIP_DOTS)
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($dirPath, \RecursiveDirectoryIterator::SKIP_DOTS)
         );
 
         foreach ($iterator as $file) {

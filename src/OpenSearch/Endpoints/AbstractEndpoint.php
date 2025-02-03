@@ -79,7 +79,6 @@ abstract class AbstractEndpoint implements EndpointInterface
      */
     abstract public function getMethod(): string;
 
-
     /**
      * Set the parameters for this endpoint
      *

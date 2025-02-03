@@ -15,6 +15,17 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\FlowFramework\Create;
+use OpenSearch\Endpoints\FlowFramework\Delete;
+use OpenSearch\Endpoints\FlowFramework\Deprovision;
+use OpenSearch\Endpoints\FlowFramework\Get;
+use OpenSearch\Endpoints\FlowFramework\GetStatus;
+use OpenSearch\Endpoints\FlowFramework\GetSteps;
+use OpenSearch\Endpoints\FlowFramework\Provision;
+use OpenSearch\Endpoints\FlowFramework\Search;
+use OpenSearch\Endpoints\FlowFramework\SearchState;
+use OpenSearch\Endpoints\FlowFramework\Update;
+
 /**
  * Class FlowFrameworkNamespace
  *
@@ -43,7 +54,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Create::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Create::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -68,7 +79,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Delete::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
@@ -93,7 +104,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Deprovision::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Deprovision::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
@@ -117,7 +128,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Get::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
@@ -142,7 +153,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\GetStatus::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetStatus::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
 
@@ -164,7 +175,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      */
     public function getSteps(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\GetSteps::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetSteps::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -188,7 +199,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
         $workflow_id = $this->extractArgument($params, 'workflow_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Provision::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Provision::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
         $endpoint->setBody($body);
@@ -212,7 +223,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Search::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -235,7 +246,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\SearchState::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchState::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -265,7 +276,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
         $workflow_id = $this->extractArgument($params, 'workflow_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\FlowFramework\Update::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Update::class);
         $endpoint->setParams($params);
         $endpoint->setWorkflowId($workflow_id);
         $endpoint->setBody($body);

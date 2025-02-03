@@ -21,6 +21,12 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Nodes\HotThreads;
+use OpenSearch\Endpoints\Nodes\Info;
+use OpenSearch\Endpoints\Nodes\ReloadSecureSettings;
+use OpenSearch\Endpoints\Nodes\Stats;
+use OpenSearch\Endpoints\Nodes\Usage;
+
 /**
  * Class NodesNamespace
  *
@@ -51,7 +57,7 @@ class NodesNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\HotThreads::class);
+        $endpoint = $this->endpointFactory->getEndpoint(HotThreads::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
 
@@ -81,7 +87,7 @@ class NodesNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\Info::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Info::class);
         $endpoint->setParams($params);
         $endpoint->setNodeIdOrMetric($node_id_or_metric);
         $endpoint->setMetric($metric);
@@ -110,7 +116,7 @@ class NodesNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\ReloadSecureSettings::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ReloadSecureSettings::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setBody($body);
@@ -147,7 +153,7 @@ class NodesNamespace extends AbstractNamespace
         $metric = $this->extractArgument($params, 'metric');
         $index_metric = $this->extractArgument($params, 'index_metric');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\Stats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setMetric($metric);
@@ -176,7 +182,7 @@ class NodesNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Nodes\Usage::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Usage::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setMetric($metric);

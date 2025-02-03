@@ -15,6 +15,67 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Ml\ChunkModel;
+use OpenSearch\Endpoints\Ml\CreateConnector;
+use OpenSearch\Endpoints\Ml\CreateController;
+use OpenSearch\Endpoints\Ml\CreateMemory;
+use OpenSearch\Endpoints\Ml\CreateMessage;
+use OpenSearch\Endpoints\Ml\CreateModelMeta;
+use OpenSearch\Endpoints\Ml\DeleteAgent;
+use OpenSearch\Endpoints\Ml\DeleteConnector;
+use OpenSearch\Endpoints\Ml\DeleteController;
+use OpenSearch\Endpoints\Ml\DeleteMemory;
+use OpenSearch\Endpoints\Ml\DeleteModel;
+use OpenSearch\Endpoints\Ml\DeleteModelGroup;
+use OpenSearch\Endpoints\Ml\DeleteTask;
+use OpenSearch\Endpoints\Ml\DeployModel;
+use OpenSearch\Endpoints\Ml\ExecuteAgent;
+use OpenSearch\Endpoints\Ml\GetAgent;
+use OpenSearch\Endpoints\Ml\GetAllMemories;
+use OpenSearch\Endpoints\Ml\GetAllMessages;
+use OpenSearch\Endpoints\Ml\GetAllTools;
+use OpenSearch\Endpoints\Ml\GetConnector;
+use OpenSearch\Endpoints\Ml\GetConnectors;
+use OpenSearch\Endpoints\Ml\GetController;
+use OpenSearch\Endpoints\Ml\GetMemory;
+use OpenSearch\Endpoints\Ml\GetMessage;
+use OpenSearch\Endpoints\Ml\GetMessageTraces;
+use OpenSearch\Endpoints\Ml\GetModel;
+use OpenSearch\Endpoints\Ml\GetModelGroup;
+use OpenSearch\Endpoints\Ml\GetModelGroups;
+use OpenSearch\Endpoints\Ml\GetProfile;
+use OpenSearch\Endpoints\Ml\GetProfileModels;
+use OpenSearch\Endpoints\Ml\GetProfileTasks;
+use OpenSearch\Endpoints\Ml\GetStats;
+use OpenSearch\Endpoints\Ml\GetTask;
+use OpenSearch\Endpoints\Ml\GetTool;
+use OpenSearch\Endpoints\Ml\LoadModel;
+use OpenSearch\Endpoints\Ml\Predict;
+use OpenSearch\Endpoints\Ml\PredictModel;
+use OpenSearch\Endpoints\Ml\RegisterAgents;
+use OpenSearch\Endpoints\Ml\RegisterModel;
+use OpenSearch\Endpoints\Ml\RegisterModelGroup;
+use OpenSearch\Endpoints\Ml\RegisterModelMeta;
+use OpenSearch\Endpoints\Ml\SearchAgents;
+use OpenSearch\Endpoints\Ml\SearchConnectors;
+use OpenSearch\Endpoints\Ml\SearchMemory;
+use OpenSearch\Endpoints\Ml\SearchMessage;
+use OpenSearch\Endpoints\Ml\SearchModelGroup;
+use OpenSearch\Endpoints\Ml\SearchModels;
+use OpenSearch\Endpoints\Ml\SearchTasks;
+use OpenSearch\Endpoints\Ml\Train;
+use OpenSearch\Endpoints\Ml\TrainPredict;
+use OpenSearch\Endpoints\Ml\UndeployModel;
+use OpenSearch\Endpoints\Ml\UnloadModel;
+use OpenSearch\Endpoints\Ml\UpdateConnector;
+use OpenSearch\Endpoints\Ml\UpdateController;
+use OpenSearch\Endpoints\Ml\UpdateMemory;
+use OpenSearch\Endpoints\Ml\UpdateMessage;
+use OpenSearch\Endpoints\Ml\UpdateModel;
+use OpenSearch\Endpoints\Ml\UpdateModelGroup;
+use OpenSearch\Endpoints\Ml\UploadChunk;
+use OpenSearch\Endpoints\Ml\UploadModel;
+
 /**
  * Class MlNamespace
  *
@@ -42,7 +103,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\ChunkModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ChunkModel::class);
         $endpoint->setParams($params);
         $endpoint->setChunkNumber($chunk_number);
         $endpoint->setModelId($model_id);
@@ -69,7 +130,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateController::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -93,7 +154,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateMemory::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateMemory::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -118,7 +179,7 @@ class MlNamespace extends AbstractNamespace
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateMessage::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
         $endpoint->setBody($body);
@@ -142,7 +203,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateModelMeta::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateModelMeta::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -166,7 +227,7 @@ class MlNamespace extends AbstractNamespace
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteAgent::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
 
@@ -190,7 +251,7 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteController::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
@@ -214,7 +275,7 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteMemory::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
 
@@ -238,7 +299,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -262,7 +323,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteModelGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -286,7 +347,7 @@ class MlNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteTask::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteTask::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
@@ -311,7 +372,7 @@ class MlNamespace extends AbstractNamespace
         $agent_id = $this->extractArgument($params, 'agent_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\ExecuteAgent::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ExecuteAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
         $endpoint->setBody($body);
@@ -336,7 +397,7 @@ class MlNamespace extends AbstractNamespace
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetAgent::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
 
@@ -359,7 +420,7 @@ class MlNamespace extends AbstractNamespace
      */
     public function getAllMemories(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetAllMemories::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetAllMemories::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -384,7 +445,7 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetAllMessages::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetAllMessages::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
 
@@ -405,7 +466,7 @@ class MlNamespace extends AbstractNamespace
      */
     public function getAllTools(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetAllTools::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetAllTools::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -428,7 +489,7 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetController::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
@@ -452,7 +513,7 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetMemory::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
 
@@ -476,7 +537,7 @@ class MlNamespace extends AbstractNamespace
     {
         $message_id = $this->extractArgument($params, 'message_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetMessage::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMessageId($message_id);
 
@@ -502,7 +563,7 @@ class MlNamespace extends AbstractNamespace
     {
         $message_id = $this->extractArgument($params, 'message_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetMessageTraces::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetMessageTraces::class);
         $endpoint->setParams($params);
         $endpoint->setMessageId($message_id);
 
@@ -526,7 +587,7 @@ class MlNamespace extends AbstractNamespace
     {
         $model_group_id = $this->extractArgument($params, 'model_group_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModelGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setModelGroupId($model_group_id);
 
@@ -549,7 +610,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetProfile::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetProfile::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -574,7 +635,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetProfileModels::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetProfileModels::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -600,7 +661,7 @@ class MlNamespace extends AbstractNamespace
         $task_id = $this->extractArgument($params, 'task_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetProfileTasks::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetProfileTasks::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
         $endpoint->setBody($body);
@@ -627,7 +688,7 @@ class MlNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetStats::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
         $endpoint->setStat($stat);
@@ -652,7 +713,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetTask::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetTask::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
 
@@ -676,7 +737,7 @@ class MlNamespace extends AbstractNamespace
     {
         $tool_name = $this->extractArgument($params, 'tool_name');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetTool::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetTool::class);
         $endpoint->setParams($params);
         $endpoint->setToolName($tool_name);
 
@@ -700,7 +761,7 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\LoadModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(LoadModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
 
@@ -725,7 +786,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\PredictModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(PredictModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -749,7 +810,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterAgents::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RegisterAgents::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -772,7 +833,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RegisterModel::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -795,7 +856,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModelGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RegisterModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -818,7 +879,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\RegisterModelMeta::class);
+        $endpoint = $this->endpointFactory->getEndpoint(RegisterModelMeta::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -841,7 +902,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchAgents::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchAgents::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -864,7 +925,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchConnectors::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchConnectors::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -887,7 +948,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchMemory::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchMemory::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -912,7 +973,7 @@ class MlNamespace extends AbstractNamespace
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchMessage::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
         $endpoint->setBody($body);
@@ -936,7 +997,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchModelGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -959,7 +1020,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchModels::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -982,7 +1043,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\SearchTasks::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SearchTasks::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1007,7 +1068,7 @@ class MlNamespace extends AbstractNamespace
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\Train::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Train::class);
         $endpoint->setParams($params);
         $endpoint->setAlgorithmName($algorithm_name);
         $endpoint->setBody($body);
@@ -1033,7 +1094,7 @@ class MlNamespace extends AbstractNamespace
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\TrainPredict::class);
+        $endpoint = $this->endpointFactory->getEndpoint(TrainPredict::class);
         $endpoint->setParams($params);
         $endpoint->setAlgorithmName($algorithm_name);
         $endpoint->setBody($body);
@@ -1059,7 +1120,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UnloadModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UnloadModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -1085,7 +1146,7 @@ class MlNamespace extends AbstractNamespace
         $connector_id = $this->extractArgument($params, 'connector_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateConnector::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateConnector::class);
         $endpoint->setParams($params);
         $endpoint->setConnectorId($connector_id);
         $endpoint->setBody($body);
@@ -1111,7 +1172,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateController::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -1137,7 +1198,7 @@ class MlNamespace extends AbstractNamespace
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateMemory::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
         $endpoint->setBody($body);
@@ -1163,7 +1224,7 @@ class MlNamespace extends AbstractNamespace
         $message_id = $this->extractArgument($params, 'message_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateMessage::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMessageId($message_id);
         $endpoint->setBody($body);
@@ -1189,7 +1250,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
@@ -1217,7 +1278,7 @@ class MlNamespace extends AbstractNamespace
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UploadChunk::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UploadChunk::class);
         $endpoint->setParams($params);
         $endpoint->setChunkNumber($chunk_number);
         $endpoint->setModelId($model_id);
@@ -1242,7 +1303,7 @@ class MlNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UploadModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UploadModel::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1260,7 +1321,7 @@ class MlNamespace extends AbstractNamespace
     public function createConnector(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\CreateConnector::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateConnector::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1277,7 +1338,7 @@ class MlNamespace extends AbstractNamespace
     public function deleteConnector(array $params = []): array
     {
         $connectorId = $this->extractArgument($params, 'connector_id');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeleteConnector::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteConnector::class);
         $endpoint->setParams($params);
         $endpoint->setConnectorId($connectorId);
 
@@ -1296,7 +1357,7 @@ class MlNamespace extends AbstractNamespace
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\DeployModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeployModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($modelId);
         if ($body) {
@@ -1317,7 +1378,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $connector_id = $this->extractArgument($params, 'connector_id');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetConnector::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetConnector::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setConnectorId($connector_id);
@@ -1343,7 +1404,7 @@ class MlNamespace extends AbstractNamespace
             ];
         }
         $body = $this->extractArgument($params, 'body');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetConnectors::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetConnectors::class);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -1367,7 +1428,7 @@ class MlNamespace extends AbstractNamespace
             ];
         }
         $body = $this->extractArgument($params, 'body');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModelGroups::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetModelGroups::class);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -1384,7 +1445,7 @@ class MlNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $model_id = $this->extractArgument($params, 'model_id');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\GetModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
         $endpoint->setModelId($model_id);
@@ -1424,7 +1485,7 @@ class MlNamespace extends AbstractNamespace
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $model_id = $this->extractArgument($params, 'model_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\Predict::class);
+        $endpoint = $this->endpointFactory->getEndpoint(Predict::class);
         $endpoint->setParams($params)
             ->setId($id)
             ->setBody($body)
@@ -1446,7 +1507,7 @@ class MlNamespace extends AbstractNamespace
     {
         $modelId = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UndeployModel::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UndeployModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($modelId);
         if ($body) {
@@ -1469,7 +1530,7 @@ class MlNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $model_group_id = $this->extractArgument($params, 'model_group_id');
         $body = $this->extractArgument($params, 'body');
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Ml\UpdateModelGroup::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
         $endpoint->setId($id);

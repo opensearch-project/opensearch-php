@@ -23,10 +23,10 @@ namespace OpenSearch\Tests;
 
 use OpenSearch;
 use OpenSearch\ClientBuilder;
-use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Transport;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class RegisteredNamespaceTest
@@ -34,7 +34,7 @@ use Mockery as m;
  * @subpackage Tests
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class LegacyRegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
+class LegacyRegisteredNamespaceTest extends TestCase
 {
     public function tearDown(): void
     {

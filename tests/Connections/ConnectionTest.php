@@ -31,6 +31,7 @@ use OpenSearch\Tests\ClientBuilder\ArrayLogger;
 use Exception;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
+use PHPUnit\Framework\TestCase;
 
 use function base64_encode;
 use function random_bytes;
@@ -38,14 +39,13 @@ use function random_bytes;
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(ConnectionTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
-
 /**
  * @covers \OpenSearch\Connections\Connection
  * @group legacy
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class ConnectionTest extends \PHPUnit\Framework\TestCase
+class ConnectionTest extends TestCase
 {
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject&\Psr\Log\LoggerInterface

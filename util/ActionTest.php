@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 /**
@@ -29,7 +28,6 @@ use OpenSearch\Common\Exceptions\Forbidden403Exception;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Common\Exceptions\RequestTimeout408Exception;
 use OpenSearch\Common\Exceptions\Unauthorized401Exception;
-use OpenSearch\Util\YamlTests;
 use PHPUnit\Runner\Version as PHPUnitVersion;
 use stdClass;
 

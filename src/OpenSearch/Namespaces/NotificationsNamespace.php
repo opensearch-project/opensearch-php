@@ -15,6 +15,16 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Notifications\CreateConfig;
+use OpenSearch\Endpoints\Notifications\DeleteConfig;
+use OpenSearch\Endpoints\Notifications\DeleteConfigs;
+use OpenSearch\Endpoints\Notifications\GetConfig;
+use OpenSearch\Endpoints\Notifications\GetConfigs;
+use OpenSearch\Endpoints\Notifications\ListChannels;
+use OpenSearch\Endpoints\Notifications\ListFeatures;
+use OpenSearch\Endpoints\Notifications\SendTest;
+use OpenSearch\Endpoints\Notifications\UpdateConfig;
+
 /**
  * Class NotificationsNamespace
  *
@@ -38,7 +48,7 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\CreateConfig::class);
+        $endpoint = $this->endpointFactory->getEndpoint(CreateConfig::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -62,7 +72,7 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\DeleteConfig::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteConfig::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
 
@@ -85,7 +95,7 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function deleteConfigs(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\DeleteConfigs::class);
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteConfigs::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -108,7 +118,7 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\GetConfig::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetConfig::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
 
@@ -171,7 +181,7 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\GetConfigs::class);
+        $endpoint = $this->endpointFactory->getEndpoint(GetConfigs::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -192,7 +202,7 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function listChannels(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\ListChannels::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ListChannels::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -212,7 +222,7 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function listFeatures(array $params = [])
     {
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\ListFeatures::class);
+        $endpoint = $this->endpointFactory->getEndpoint(ListFeatures::class);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -235,7 +245,7 @@ class NotificationsNamespace extends AbstractNamespace
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\SendTest::class);
+        $endpoint = $this->endpointFactory->getEndpoint(SendTest::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
 
@@ -260,7 +270,7 @@ class NotificationsNamespace extends AbstractNamespace
         $config_id = $this->extractArgument($params, 'config_id');
         $body = $this->extractArgument($params, 'body');
 
-        $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Notifications\UpdateConfig::class);
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateConfig::class);
         $endpoint->setParams($params);
         $endpoint->setConfigId($config_id);
         $endpoint->setBody($body);

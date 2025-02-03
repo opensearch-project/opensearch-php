@@ -23,13 +23,14 @@ namespace OpenSearch\Tests\Serializers;
 
 use OpenSearch\Serializers\EverythingToJSONSerializer;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class EverythingToJSONSerializerTest
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
-class EverythingToJSONSerializerTest extends \PHPUnit\Framework\TestCase
+class EverythingToJSONSerializerTest extends TestCase
 {
     public function tearDown(): void
     {

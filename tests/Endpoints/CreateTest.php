@@ -23,8 +23,9 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\Create;
 use OpenSearch\Exception\RuntimeException;
+use PHPUnit\Framework\TestCase;
 
-class CreateTest extends \PHPUnit\Framework\TestCase
+class CreateTest extends TestCase
 {
     /** @var Create */
     private $instance;
