@@ -65,7 +65,7 @@ use OpenSearch\Namespaces\WlmNamespace;
  */
 class Client
 {
-    public const VERSION = '2.4.0';
+    public const VERSION = '2.4.1';
 
     /**
      * @var Transport
