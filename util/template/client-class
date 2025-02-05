@@ -78,7 +78,7 @@ class Client
     public function __construct(
         TransportInterface|Transport $transport,
         callable|EndpointFactoryInterface $endpointFactory,
-        array $registeredNamespaces,
+        array $registeredNamespaces = [],
     ) {
         if (!$transport instanceof TransportInterface) {
             @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
