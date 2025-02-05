@@ -8,7 +8,6 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use OpenSearch\Client;
-use Psr\Http\Client\ClientInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -25,7 +24,7 @@ class GuzzleHttpClientFactory implements HttpClientFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(array $options): ClientInterface
+    public function create(array $options): GuzzleClient
     {
         if (!isset($options['base_uri'])) {
             throw new \InvalidArgumentException('The base_uri option is required.');

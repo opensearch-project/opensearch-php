@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OpenSearch\HttpClient;
 
 use OpenSearch\Client;
-use Psr\Http\Client\ClientInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
@@ -25,7 +24,7 @@ class SymfonyHttpClientFactory implements HttpClientFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(array $options): ClientInterface
+    public function create(array $options): Psr18Client
     {
         if (!isset($options['base_uri'])) {
             throw new \InvalidArgumentException('The base_uri option is required.');
