@@ -2,7 +2,20 @@
   - [Example usage](#example-usage)
 # User Guide
 
-Install this client using Composer into your project `composer req opensearch-project/opensearch-php`
+Install this client using Composer into your project 
+```bash
+composer require opensearch-project/opensearch-php`
+```
+
+Install a PSR-18 compatible HTTP client. For example, to use Guzzle:
+```bash
+composer require guzzlehttp/guzzle
+```
+
+Alternatively, you can use Symfony HTTP Client:
+```bash
+composer require symfony/http-client
+```
 
 ## Example usage
 
@@ -25,23 +38,11 @@ class MyOpenSearchClass
     public function __construct()
     {
         // Simple Setup
-        $this->client = OpenSearch\ClientBuilder::fromConfig([
-            'hosts' => [
-                'https://localhost:9200'
-            ],
-            'retries' => 2,
-            'handler' => OpenSearch\ClientBuilder::multiHandler()
+        $client = (new \OpenSearch\GuzzleClientFactory())->create([
+            'base_uri' => 'https://localhost:9200',
+            'auth' => ['admin', getenv('OPENSEARCH_PASSWORD')],
+            'verify' => false,
         ]);
-
-        // OR via Builder
-        // $this->client = (new \OpenSearch\ClientBuilder())
-        //     ->setHosts(['https://localhost:9200'])
-        //     ->setBasicAuthentication('admin', 'admin') // For testing only. Don't store credentials in code.
-        //     // or, if using AWS SigV4 authentication:
-        //     ->setSigV4Region('us-east-2')
-        //     ->setSigV4CredentialProvider(true)
-        //     ->setSSLVerification(false) // For testing only. Use certificate for validation
-        //     ->build();
     }
 
 
@@ -359,7 +360,64 @@ try {
 
 ```
 
-## ClientBuilder
+## Client Factories
+
+You can create an OpenSearch Client using any [PSR-18](https://www.php-fig.org/psr/psr-18/) compatible 
+HTTP client. Two factories are provided to reduce the boilerplate code required to create a client 
+using [Guzzle](https://docs.guzzlephp.org/en/stable/) or [Symfony](https://symfony.com/doc/current/http_client.html) 
+HTTP clients.
+
+The `GuzzleClientFactory` and `SymfonyClientFactory` classes are used to create an OpenSearch Client instance.
+
+### Guzzle Client Factory
+
+This factory creates an OpenSearch Client instance using the Guzzle HTTP client.
+
+```bash
+composer require guzzlehttp/guzzle
+```
+
+```php
+$client = (new \OpenSearch\GuzzleClientFactory())->create([
+    'base_uri' => 'https://localhost:9200',
+    'auth' => ['admin', getenv('OPENSEARCH_PASSWORD')],
+    'verify' => false,
+]);
+```
+`GuzzleClientFactory::__construct()` accepts an `int $maxRetries` as the first argument to enable retrying a request
+when a `500 Server Error` status code is received in the response, or network connection error occurs. A PSR-3 Logger
+can be passed as the second argument to log the retries.
+
+[Guzzle Request options](https://docs.guzzlephp.org/en/stable/request-options.html) can be passed to the 
+`create()` method. The `base_uri` option is *required*.
+
+### Symfony Client Factory
+
+This factory creates an OpenSearch Client instance using the Symfony HTTP client.
+
+```bash
+composer require symfony/http-client
+```
+
+```php
+$client = (new \OpenSearch\SymfonyClientFactory())->create([
+    'base_uri' => 'https://localhost:9200',
+    'auth_basic' => ['admin', getenv('OPENSEARCH_PASSWORD')],
+    'verify_peer' => false,
+]);
+````
+
+`SymfonyClientFactory::__construct()` accepts an `int $maxRetries` as the first argument to enable retrying a request
+when a `500 Server Error` status code is received in the response, or network connection error occurs. A PSR-3 Logger
+can be passed as the second argument to log the retries.
+
+[Symfony HTTP Client configuration options](https://symfony.com/doc/current/http_client.html#configuration-options) can 
+be passed to the `create()` method. The `base_uri` option is *required*.
+
+## ClientBuilder (Deprecated)
+
+**`ClientBuilder` is deprecated in 2.4.0 and will be removed in 3.0.0. Use the `GuzzleClientFactory` or `SymfonyClientFactory` instead.**
+
 
 The `\OpenSearch\ClientBuilder` class is used to create a `\OpenSearch\Client` instance. It provides a fluent interface for configuring the client.
 
