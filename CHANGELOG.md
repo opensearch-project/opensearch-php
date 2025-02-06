@@ -4,7 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
-- Added Guzzle and Symfony client factories.
+- Added Guzzle and Symfony client factories ([#287](https://github.com/opensearch-project/opensearch-php/pull/287))
 ### Changed
 ### Deprecated
 ### Removed
@@ -19,29 +19,28 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added workflow for automated API update using OpenSearch API specification ([#209](https://github.com/opensearch-project/opensearch-php/pull/209))
 - Added samples ([#218](https://github.com/opensearch-project/opensearch-php/pull/218))
 - Added support for PHP 8.3 and 8.4 ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
-- Added a Docker Compose config file for local development.
-- Added a test for the AWS signing client decorator
-- Added PHPStan Deprecation rules and baseline
-- Added PHPStan PHPUnit extensions and rules
-- Added Guzzle and Symfony HTTP client factories.
-- Added 'colinodell/psr-testlogger' as a dev dependency.
+- Added a Docker Compose config file for local development ([#245](https://github.com/opensearch-project/opensearch-php/pull/245))
+- Added a test for the AWS signing client decorator ([#252](https://github.com/opensearch-project/opensearch-php/pull/252))
+- Added PHPStan Deprecation rules and baseline ([#263](https://github.com/opensearch-project/opensearch-php/pull/263))
+- Added PHPStan PHPUnit extensions and rules ([#263](https://github.com/opensearch-project/opensearch-php/pull/263))
+- Added Guzzle and Symfony HTTP client factories ([#271](https://github.com/opensearch-project/opensearch-php/pull/271))
+- Added 'colinodell/psr-testlogger' as a dev dependency ([#271](https://github.com/opensearch-project/opensearch-php/pull/271))
 ### Changed
-- Switched to PSR Interfaces
-- Increased PHP min version to 8.1
-- Increased min version of `ezimuel/ringphp` to `^1.2.2`
-- Changed fluent setters to return static
+- Switched to PSR Interfaces ([#233](https://github.com/opensearch-project/opensearch-php/pull/233))
+- Increased PHP min version to 8.1 ([#233](https://github.com/opensearch-project/opensearch-php/pull/233))
+- Increased min version of `ezimuel/ringphp` to `^1.2.2` ([225](https://github.com/opensearch-project/opensearch-php/pull/225))
+- Changed fluent setters to return static ([#236](https://github.com/opensearch-project/opensearch-php/pull/236))
 ### Deprecated
 - Passing a callable to \OpenSearch\ClientBuilder::setEndpoint() is deprecated and replaced with passing an EndpointFactory to \OpenSearch\ClientBuilder::setEndpointFactory() ([#237](https://github.com/opensearch-project/opensearch-php/pull/237))
-- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead.
-- Throwing exceptions for different HTTP status codes is deprecated. Use the response object to check the status code instead.
-- The following namespaces have been deprecated and will be removed in 3.0.0: 'async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'.
-- A number of exceptions under `\OpenSearch\Common\Exceptions` are deprecated and moved to `\OpenSearch\Exception`. 
+- Connections, Connection pools and Selectors are deprecated. Use a PSR HTTP Client that supports retries instead ([#245](https://github.com/opensearch-project/opensearch-php/pull/245))
+- The following namespaces have been deprecated and will be removed in 3.0.0: 'async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring' ([#270](https://github.com/opensearch-project/opensearch-php/pull/270))
+- A number of exceptions under `\OpenSearch\Common\Exceptions` are deprecated and moved to `\OpenSearch\Exception` ([#274](https://github.com/opensearch-project/opensearch-php/pull/274))
 ### Removed
-- Removed support for PHP 7.3, 7.4 and 8.0.
-- Removed support for async requests which were never actually working.
+- Removed support for PHP 7.3, 7.4 and 8.0 ([#233](https://github.com/opensearch-project/opensearch-php/pull/233))
+- Removed support for async requests which were never actually working ([#233](https://github.com/opensearch-project/opensearch-php/pull/233))
 ### Fixed
-- Fixed PHP 8.4 deprecations
-- Fixed outdated tests
+- Fixed PHP 8.4 deprecations ([#229](https://github.com/opensearch-project/opensearch-php/pull/229))
+- Fixed outdated tests ([#245](https://github.com/opensearch-project/opensearch-php/pull/245))
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@b9dcb25](https://github.com/opensearch-project/opensearch-api-specification/commit/b9dcb251d551e90ecfc416ba134efe83cbcbc1b3)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@9df46f8](https://github.com/opensearch-project/opensearch-api-specification/commit/9df46f8134641ae5b429e3e9269858c7cb27e4f0)

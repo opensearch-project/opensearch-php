@@ -507,3 +507,4 @@ $client = \OpenSearch\ClientBuilder::fromConfig($config);
 * [Authentication](guides/auth.md)
 * [ML Commons](guides/ml-commons.md)
 * [Sending Raw JSON Requests](guides/raw-request.md)
+* [Using PSR Interfaces](guides/psr.md)
