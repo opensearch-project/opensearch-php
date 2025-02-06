@@ -3,7 +3,7 @@
 Start an OpenSearch instance.
 
 ```
-docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" -e "OPENSEARCH_INITIAL_ADMIN_PASSWORD=myStrongPassword123!" opensearchproject/opensearch:latest
+docker compose up
 ```
 
 Run sample.
