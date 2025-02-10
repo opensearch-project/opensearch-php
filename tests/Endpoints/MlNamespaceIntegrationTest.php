@@ -41,6 +41,12 @@ class MlNamespaceIntegrationTest extends TestCase
             ],
         ]);
         $this->assertNotEmpty($modelGroupResponse['model_group_id']);
+
+        if (Utility::isOpenSearchVersionAtLeast($client, '2.11.0')) {
+            $client->ml()->deleteModelGroup([
+                 'id' => $modelGroupResponse['model_group_id'],
+             ]);
+        }
     }
 
     public function testgetModels()
