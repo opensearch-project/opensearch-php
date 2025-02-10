@@ -1,6 +1,6 @@
     /**
      * @var :namespaceNamespace
      *
-     * @deprecated in 2.4.1 and will be removed in 3.0.0.
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $:var_namespace;
