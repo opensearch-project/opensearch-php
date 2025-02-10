@@ -4,15 +4,19 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
-- Added Guzzle and Symfony client factories ([#287](https://github.com/opensearch-project/opensearch-php/pull/287))
 ### Changed
-- Changed EndpointFactory to return new objects on each call to fix issues with parameter reusage ([#292](https://github.com/opensearch-project/opensearch-php/pull/292))
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
 ### Dependencies
 ### Updated APIs
+
+## [2.4.1]
+### Added
+- Added Guzzle and Symfony client factories ([#287](https://github.com/opensearch-project/opensearch-php/pull/287))
+### Changed
+- Changed EndpointFactory to return new objects on each call to fix issues with parameter reusage ([#292](https://github.com/opensearch-project/opensearch-php/pull/292))
 
 ## [2.4.0]
 ### Added
