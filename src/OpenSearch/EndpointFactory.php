@@ -12,11 +12,6 @@ use ReflectionClass;
  */
 class EndpointFactory implements EndpointFactoryInterface
 {
-    /**
-     * @var array<string, AbstractEndpoint>
-     */
-    private array $endpoints = [];
-
     private ?SerializerInterface $serializer;
 
     public function __construct(?SerializerInterface $serializer = null)
@@ -29,11 +24,7 @@ class EndpointFactory implements EndpointFactoryInterface
      */
     public function getEndpoint(string $class): AbstractEndpoint
     {
-        if (!isset($this->endpoints[$class])) {
-            $this->endpoints[$class] = $this->createEndpoint($class);
-        }
-
-        return $this->endpoints[$class];
+        return $this->createEndpoint($class);
     }
 
     private function getSerializer(): SerializerInterface
