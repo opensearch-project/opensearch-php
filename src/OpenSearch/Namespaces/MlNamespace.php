@@ -30,6 +30,7 @@ use OpenSearch\Endpoints\Ml\DeleteModelGroup;
 use OpenSearch\Endpoints\Ml\DeleteTask;
 use OpenSearch\Endpoints\Ml\DeployModel;
 use OpenSearch\Endpoints\Ml\ExecuteAgent;
+use OpenSearch\Endpoints\Ml\ExecuteAlgorithm;
 use OpenSearch\Endpoints\Ml\GetAgent;
 use OpenSearch\Endpoints\Ml\GetAllMemories;
 use OpenSearch\Endpoints\Ml\GetAllMessages;
@@ -375,6 +376,32 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(ExecuteAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Execute an algorithm.
+     *
+     * $params['algorithm_name'] = (string)
+     * $params['pretty']         = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']          = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']         = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']    = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function executeAlgorithm(array $params = [])
+    {
+        $algorithm_name = $this->extractArgument($params, 'algorithm_name');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(ExecuteAlgorithm::class);
+        $endpoint->setParams($params);
+        $endpoint->setAlgorithmName($algorithm_name);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);

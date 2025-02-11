@@ -25,10 +25,13 @@ use Exception;
 
 class ClientEndpoint extends NamespaceEndpoint
 {
-    public const CLIENT_CLASS_TEMPLATE   = __DIR__ . '/template/client-class';
-    public const NEW_NAMESPACE_TEMPLATE  = __DIR__ . '/template/new-namespace';
+    public const CLIENT_CLASS_TEMPLATE = __DIR__ . '/template/client-class';
+    public const NEW_NAMESPACE_TEMPLATE = __DIR__ . '/template/new-namespace';
+    public const NEW_NAMESPACE_DEPRECATED_TEMPLATE = __DIR__ . '/template/new-namespace-deprecated';
     public const PROPERTY_CLASS_TEMPLATE = __DIR__ . '/template/namespace-property';
+    public const PROPERTY_CLASS_DEPRECATED_TEMPLATE = __DIR__ . '/template/namespace-property-deprecated';
     public const NAMESPACE_FUNC_TEMPLATE = __DIR__ . '/template/client-namespace-function';
+    public const NAMESPACE_FUNC_DEPRECATED_TEMPLATE = __DIR__ . '/template/client-namespace-function-deprecated';
 
     protected $endpoints = [];
     protected $endpointNames = [];
@@ -49,9 +52,9 @@ class ClientEndpoint extends NamespaceEndpoint
         $useNamespace = '';
 
         // The following namespaces do not have OpenSearch API specifications
-        // @todo Remove these namespaces in 3.0.0
-        $patchnamespaces = ['async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'];
-        $this->namespace = array_unique(array_merge($this->namespace, $patchnamespaces));
+        // @todo Remove these deprecated namespaces in 3.0.0
+        $deprecatedNamespaces = ['async_search', 'searchable_snapshots', 'ssl', 'data_frame_transform_deprecated', 'monitoring'];
+        $this->namespace = array_unique(array_merge($this->namespace, $deprecatedNamespaces));
         sort($this->namespace);
 
         foreach ($this->namespace as $name) {
@@ -68,8 +71,12 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
+            $template = in_array(
+                $name,
+                $deprecatedNamespaces
+            ) ? self::NEW_NAMESPACE_DEPRECATED_TEMPLATE : self::NEW_NAMESPACE_TEMPLATE;
             $normNamespace = NamespaceEndpoint::normalizeName($name);
-            $newName = file_get_contents(self::NEW_NAMESPACE_TEMPLATE);
+            $newName = file_get_contents($template);
             $newName = str_replace(':namespace', $normNamespace . 'Namespace', $newName);
             $newName = str_replace(':name', lcfirst($normNamespace), $newName);
             $newNamespace .= $newName;
@@ -82,8 +89,12 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
+            $template = in_array(
+                $name,
+                $deprecatedNamespaces
+            ) ? self::PROPERTY_CLASS_DEPRECATED_TEMPLATE : self::PROPERTY_CLASS_TEMPLATE;
             $normNamespace = NamespaceEndpoint::normalizeName($name);
-            $prop = file_get_contents(self::PROPERTY_CLASS_TEMPLATE);
+            $prop = file_get_contents($template);
             $prop = str_replace(':namespace', $normNamespace, $prop);
             $prop = str_replace(':var_namespace', lcfirst($normNamespace), $prop);
             $properties .= $prop . "\n";
@@ -114,8 +125,12 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
+            $template = in_array(
+                $name,
+                $deprecatedNamespaces
+            ) ? self::NAMESPACE_FUNC_DEPRECATED_TEMPLATE : self::NAMESPACE_FUNC_TEMPLATE;
             $normNamespace = NamespaceEndpoint::normalizeName($name);
-            $func = file_get_contents(self::NAMESPACE_FUNC_TEMPLATE);
+            $func = file_get_contents($template);
             $func = str_replace(':namespace', $normNamespace . 'Namespace', $func);
             $func = str_replace(':name', lcfirst($normNamespace), $func);
             $functions .= $func;

@@ -1,0 +1,10 @@
+    /**
+     * Returns the :name namespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
+     */
+    public function :name(): :namespace
+    {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
+        return $this->:name;
+    }

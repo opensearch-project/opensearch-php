@@ -140,6 +140,8 @@ class Client
 
     /**
      * @var AsyncSearchNamespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $asyncSearch;
 
@@ -165,6 +167,8 @@ class Client
 
     /**
      * @var DataFrameTransformDeprecatedNamespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $dataFrameTransformDeprecated;
 
@@ -210,6 +214,8 @@ class Client
 
     /**
      * @var MonitoringNamespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $monitoring;
 
@@ -260,6 +266,8 @@ class Client
 
     /**
      * @var SearchableSnapshotsNamespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $searchableSnapshots;
 
@@ -285,6 +293,8 @@ class Client
 
     /**
      * @var SslNamespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $ssl;
 
@@ -340,11 +350,13 @@ class Client
         // @phpstan-ignore property.deprecated
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
+        // @phpstan-ignore new.deprecated, property.deprecated
         $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
         $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
         $this->cat = new CatNamespace($transport, $this->endpointFactory);
         $this->cluster = new ClusterNamespace($transport, $this->endpointFactory);
         $this->danglingIndices = new DanglingIndicesNamespace($transport, $this->endpointFactory);
+        // @phpstan-ignore new.deprecated, property.deprecated
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
         $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
         $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
@@ -354,6 +366,7 @@ class Client
         $this->knn = new KnnNamespace($transport, $this->endpointFactory);
         $this->list = new ListNamespace($transport, $this->endpointFactory);
         $this->ml = new MlNamespace($transport, $this->endpointFactory);
+        // @phpstan-ignore new.deprecated, property.deprecated
         $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
         $this->nodes = new NodesNamespace($transport, $this->endpointFactory);
         $this->notifications = new NotificationsNamespace($transport, $this->endpointFactory);
@@ -364,11 +377,13 @@ class Client
         $this->replication = new ReplicationNamespace($transport, $this->endpointFactory);
         $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
+        // @phpstan-ignore new.deprecated, property.deprecated
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
         $this->security = new SecurityNamespace($transport, $this->endpointFactory);
         $this->sm = new SmNamespace($transport, $this->endpointFactory);
         $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
         $this->sql = new SqlNamespace($transport, $this->endpointFactory);
+        // @phpstan-ignore new.deprecated, property.deprecated
         $this->ssl = new SslNamespace($transport, $this->endpointFactory);
         $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
         $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);
@@ -666,7 +681,7 @@ class Client
     /**
      * Changes the number of requests per second for a particular Delete By Query operation.
      *
-     * $params['task_id']             = (number) The ID for the task. (Required)
+     * $params['task_id']             = (string) The ID for the task. (Required)
      * $params['requests_per_second'] = (number) The throttle for this request in sub-requests per second.
      * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']               = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1844,9 +1859,12 @@ class Client
     }
     /**
      * Returns the asyncSearch namespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     public function asyncSearch(): AsyncSearchNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->asyncSearch;
     }
     /**
@@ -1879,9 +1897,12 @@ class Client
     }
     /**
      * Returns the dataFrameTransformDeprecated namespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     public function dataFrameTransformDeprecated(): DataFrameTransformDeprecatedNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->dataFrameTransformDeprecated;
     }
     /**
@@ -1942,9 +1963,12 @@ class Client
     }
     /**
      * Returns the monitoring namespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     public function monitoring(): MonitoringNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->monitoring;
     }
     /**
@@ -2012,9 +2036,12 @@ class Client
     }
     /**
      * Returns the searchableSnapshots namespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     public function searchableSnapshots(): SearchableSnapshotsNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->searchableSnapshots;
     }
     /**
@@ -2047,9 +2074,12 @@ class Client
     }
     /**
      * Returns the ssl namespace
+     *
+     * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     public function ssl(): SslNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->ssl;
     }
     /**

@@ -35,7 +35,7 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Cancels a task, if it can be cancelled through an API.
      *
-     * $params['task_id']             = (number) ID of the task.
+     * $params['task_id']             = (string) ID of the task.
      * $params['actions']             = (any) Comma-separated list or wildcard expression of actions used to limit the request.
      * $params['nodes']               = (array) Comma-separated list of node IDs or names used to limit the request.
      * $params['parent_task_id']      = (string) Parent task ID used to limit the tasks.
