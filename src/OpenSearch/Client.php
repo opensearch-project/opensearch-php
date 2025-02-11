@@ -1864,6 +1864,7 @@ class Client
      */
     public function asyncSearch(): AsyncSearchNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->asyncSearch;
     }
     /**
@@ -1901,6 +1902,7 @@ class Client
      */
     public function dataFrameTransformDeprecated(): DataFrameTransformDeprecatedNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->dataFrameTransformDeprecated;
     }
     /**
@@ -1966,6 +1968,7 @@ class Client
      */
     public function monitoring(): MonitoringNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->monitoring;
     }
     /**
@@ -2038,6 +2041,7 @@ class Client
      */
     public function searchableSnapshots(): SearchableSnapshotsNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->searchableSnapshots;
     }
     /**
@@ -2075,6 +2079,7 @@ class Client
      */
     public function ssl(): SslNamespace
     {
+        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->ssl;
     }
     /**
