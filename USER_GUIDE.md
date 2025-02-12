@@ -4,7 +4,7 @@
 
 Install this client using Composer into your project 
 ```bash
-composer require opensearch-project/opensearch-php`
+composer require opensearch-project/opensearch-php
 ```
 
 Install a PSR-18 compatible HTTP client. For example, to use Guzzle:
