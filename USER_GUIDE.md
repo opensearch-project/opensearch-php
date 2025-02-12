@@ -12,7 +12,7 @@ Install a PSR-18 compatible HTTP client. For example, to use Guzzle:
 composer require guzzlehttp/guzzle
 ```
 
-Alternatively, you can use Symfony HTTP Client:
+Alternatively, you can use Symfony:
 ```bash
 composer require symfony/http-client
 ```
