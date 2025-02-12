@@ -1,5 +1,11 @@
 - [User Guide](#user-guide)
   - [Example usage](#example-usage)
+  - [Client Factories](#client-factories)
+    - [Guzzle Client Factory](#guzzle-client-factory)
+    - [Symfony Client Factory](#symfony-client-factory)
+  - [ClientBuilder (Deprecated)](#clientbuilder-deprecated)
+  - [Advanced Features](#advanced-features)
+
 # User Guide
 
 Install this client using Composer into your project 
@@ -38,10 +44,10 @@ class MyOpenSearchClass
     public function __construct()
     {
         // Simple Setup
-        $client = (new \OpenSearch\GuzzleClientFactory())->create([
+        $this->client = (new \OpenSearch\GuzzleClientFactory())->create([
             'base_uri' => 'https://localhost:9200',
             'auth' => ['admin', getenv('OPENSEARCH_PASSWORD')],
-            'verify' => false,
+            'verify' => false, // Disables SSL verification for local development.
         ]);
     }
 
@@ -362,10 +368,7 @@ try {
 
 ## Client Factories
 
-You can create an OpenSearch Client using any [PSR-18](https://www.php-fig.org/psr/psr-18/) compatible 
-HTTP client. Two factories are provided to reduce the boilerplate code required to create a client 
-using [Guzzle](https://docs.guzzlephp.org/en/stable/) or [Symfony](https://symfony.com/doc/current/http_client.html) 
-HTTP clients.
+You can create an OpenSearch Client using any [PSR-18](https://www.php-fig.org/psr/psr-18/) compatible HTTP client. Two factories are provided to reduce the boilerplate code required to create a client using [Guzzle](https://docs.guzzlephp.org/en/stable/) or [Symfony](https://symfony.com/doc/current/http_client.html) HTTP clients.
 
 The `GuzzleClientFactory` and `SymfonyClientFactory` classes are used to create an OpenSearch Client instance.
 
@@ -407,7 +410,7 @@ $client = (new \OpenSearch\SymfonyClientFactory())->create([
 ]);
 ````
 
-`SymfonyClientFactory::__construct()` accepts an `int $maxRetries` as the first argument to enable retrying a request
+The `SymfonyClientFactory` constructor accepts an `int $maxRetries` as the first argument to enable retrying a request
 when a `500 Server Error` status code is received in the response, or network connection error occurs. A PSR-3 Logger
 can be passed as the second argument to log the retries.
 
