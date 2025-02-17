@@ -2155,7 +2155,7 @@ class Client
         string $method,
         string $uri,
         array $attributes = []
-    ): array|string|null {
+    ): \Traversable|array|string|null {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
@@ -2169,7 +2169,7 @@ class Client
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \OpenSearch\Exception\HttpExceptionInterface
      */
-    private function performRequest(AbstractEndpoint $endpoint): array|string|null
+    private function performRequest(AbstractEndpoint $endpoint): \Traversable|array|string|null
     {
         return $this->httpTransport->sendRequest(
             $endpoint->getMethod(),

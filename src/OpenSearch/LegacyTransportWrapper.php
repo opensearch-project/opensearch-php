@@ -28,13 +28,10 @@ class LegacyTransportWrapper implements TransportInterface
         array $params = [],
         mixed $body = null,
         array $headers = [],
-    ): array|string|null {
-        $promise = $this->transport->performRequest($method, $uri, $params, $body);
-        $futureArray = $this->transport->resultOrFuture($promise);
-        if ($futureArray instanceof FutureArrayInterface) {
-            return $futureArray->wait();
-        }
-        return $futureArray;
+    ): \Traversable|array|string|null {
+        $promise = $this->transport->performRequest($method, $uri, $params, $body, $headers);
+
+        return $this->transport->resultOrFuture($promise, $headers);
     }
 
 }
