@@ -1,8 +1,8 @@
 <?php
 
-namespace OpenSearch;
+declare(strict_types=1);
 
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
+namespace OpenSearch;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(LegacyTransportWrapper::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
@@ -28,13 +28,11 @@ class LegacyTransportWrapper implements TransportInterface
         array $params = [],
         mixed $body = null,
         array $headers = [],
-    ): array|string|null {
+    ): iterable|string|null {
         $promise = $this->transport->performRequest($method, $uri, $params, $body);
-        $futureArray = $this->transport->resultOrFuture($promise);
-        if ($futureArray instanceof FutureArrayInterface) {
-            return $futureArray->wait();
-        }
-        return $futureArray;
+        // Provide legacy support for options.
+        $options = $headers;
+        return $this->transport->resultOrFuture($promise, $options);
     }
 
 }

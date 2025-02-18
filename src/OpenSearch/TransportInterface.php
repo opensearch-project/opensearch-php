@@ -23,6 +23,6 @@ interface TransportInterface
         array $params = [],
         string|array|null $body = null,
         array $headers = [],
-    ): array|string|null;
+    ): iterable|string|null;
 
 }
