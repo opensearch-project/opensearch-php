@@ -36,7 +36,7 @@ final class HttpTransport implements TransportInterface
         array $params = [],
         mixed $body = null,
         array $headers = [],
-    ): array|string|null {
+    ): iterable|string|null {
         $request = $this->createRequest($method, $uri, $params, $body, $headers);
         $response = $this->client->sendRequest($request);
         $statusCode = $response->getStatusCode();
