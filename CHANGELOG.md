@@ -2,14 +2,12 @@
 
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [Unreleased]
-### Added
+## [2.4.2]
 ### Changed
-### Deprecated
-### Removed
+- Update user guide with new factory approach ([#257](https://github.com/opensearch-project/opensearch-php/issues/257))
 ### Fixed
-### Security
-### Dependencies
+- Fixed deprecated class instantiation warnings ([#283](https://github.com/opensearch-project/opensearch-php/issues/283))
+- Fixed async requests ([#297](https://github.com/opensearch-project/opensearch-php/issues/297))
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@5697cbd](https://github.com/opensearch-project/opensearch-api-specification/commit/5697cbd37a824f756ec6579e5cb812bd06ceee53)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@22483a2](https://github.com/opensearch-project/opensearch-api-specification/commit/22483a2bdfe1022611b1de7db5f45af9289a8654)
