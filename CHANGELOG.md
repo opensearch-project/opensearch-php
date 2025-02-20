@@ -2,6 +2,16 @@
 
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [Unreleased]
+
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+### Updated APIs
+
 ## [2.4.2]
 ### Changed
 - Update user guide with new factory approach ([#257](https://github.com/opensearch-project/opensearch-php/issues/257))
@@ -90,7 +100,9 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fixed basic authentication being overridden by connection params in `ClientBuilder` ([#160](https://github.com/opensearch-project/opensearch-php/pull/160))
 - Fixed PHP warning in `Connection::tryDeserializeError()` for some error responses ([#167](https://github.com/opensearch-project/opensearch-php/issues/167))
 
-[Unreleased]: https://github.com/opensearch-project/opensearch-php/compare/2.4.0...main
+[Unreleased]: https://github.com/opensearch-project/opensearch-php/compare/2.4.2...main
+[2.4.2]: https://github.com/opensearch-project/opensearch-php/compare/2.4.1...2.4.2
+[2.4.1]: https://github.com/opensearch-project/opensearch-php/compare/2.4.0...2.4.1
 [2.4.0]: https://github.com/opensearch-project/opensearch-php/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/opensearch-project/opensearch-php/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/opensearch-project/opensearch-php/compare/2.1.0...2.2.0
