@@ -384,7 +384,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Creates or updates a component template.
      *
-     * $params['name']                    = (string) The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; 'logs-settings`; `metrics-mappings`; `metrics-settings`;`synthetics-mapping`; `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the Cluster Update Settings API.
+     * $params['name']                    = (string) The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; `logs-settings`; `metrics-mappings`; `metrics-settings`; `synthetics-mapping`; `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the Cluster Update Settings API.
      * $params['cluster_manager_timeout'] = (string)
      * $params['create']                  = (boolean) When `true`, this request cannot replace or update existing component templates. (Default = false)
      * $params['master_timeout']          = (string)
