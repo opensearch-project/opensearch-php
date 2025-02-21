@@ -52,13 +52,14 @@ function main()
                 throw new \RuntimeException('Failed to read CHANGELOG.md');
             }
 
-            if (strpos($content, $commitUrl) === false) {
-                if (strpos($content, "### Updated APIs") !== false) {
-                    $fileContent = str_replace(
-                        "### Updated APIs",
-                        "### Updated APIs\n- Updated opensearch-php APIs to reflect [opensearch-api-specification@" . substr($latestCommitSha, 0, 7) . "]($commitUrl)",
-                        $content
-                    );
+            if (!str_contains($content, $commitUrl)) {
+                $search = "### Updated APIs";
+                $pos = strpos($content, $search);
+                if ($pos !== false) {
+                    $shortHash = substr($latestCommitSha, 0, 7);
+                    $replace = "### Updated APIs\n- Updated opensearch-php APIs to reflect [opensearch-api-specification@$shortHash]($commitUrl)";
+                    // Only replace first occurrence of 'Updated APIs' section.
+                    $fileContent = substr_replace($content, $replace, $pos, strlen($search));
 
                     $result = file_put_contents($changelogPath, $fileContent);
                     if ($result === false) {
