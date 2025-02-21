@@ -101,10 +101,10 @@ use OpenSearch\Endpoints\Security\WhoAmIProtected;
 class SecurityNamespace extends AbstractNamespace
 {
     /**
-     * Returns the authentication information.
+     * Returns or updates authentication information for the currently authenticated user.
      *
-     * $params['auth_type']   = (string) The type of current authentication request.
-     * $params['verbose']     = (boolean) Indicates whether a verbose response should be returned.
+     * $params['auth_type']   = (string) The type of the current authentication request.
+     * $params['verbose']     = (boolean) Whether to return a verbose response.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -123,7 +123,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Returns the authorization token.
+     * Returns the authorization token for the current user.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -143,7 +143,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Not supported for cache API.
+     * Not supported for the Cache API.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -163,7 +163,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Check whether or not an upgrade can be performed and what resources can be updated.
+     * Checks whether or not an upgrade can be performed and which security resources can be updated.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -183,7 +183,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Helps cluster operator upgrade missing defaults and stale default definitions.
+     * Assists the cluster operator with upgrading missing default values and stale default definitions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -206,7 +206,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Creates or replaces the permitted APIs. Accessible using Super Admin certificate or REST API permission.
+     * Creates or replaces APIs permitted for users on the allow list. Requires a super admin certificate or REST API permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -229,7 +229,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Creates or replaces the multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
+     * Creates or replaces the multi-tenancy configuration. Requires super admin or REST API permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -254,7 +254,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Creates or replaces the specified user. Legacy API.
      *
-     * $params['username']    = (string) The name of the user to be created. (Required)
+     * $params['username']    = (string) The name of the user to create. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -278,7 +278,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Delete a specified action group.
+     * Deletes the specified action group.
      *
      * $params['action_group'] = (string) The name of the action group to delete. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -302,9 +302,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Deletes all distinguished names in the specified cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
+     * Deletes all distinguished names in the specified cluster or node allowlist. Requires super admin or REST API permissions.
      *
-     * $params['cluster_name'] = (string) The cluster-name to delete from list of distinguished names. (Required)
+     * $params['cluster_name'] = (string) The cluster name to delete from list of distinguished names. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -326,7 +326,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Delete the specified role.
+     * Deletes the specified role.
      *
      * $params['role']        = (string) The name of the role to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -352,7 +352,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Deletes the specified role mapping.
      *
-     * $params['role']        = (string) The name of the role whose mapping needs to delete. (Required)
+     * $params['role']        = (string) The name of the role for which to delete the role's mappings. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -374,7 +374,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Delete the specified tenant.
+     * Deletes the specified tenant.
      *
      * $params['tenant']      = (string) The name of the tenant to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -398,7 +398,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Delete the specified user.
+     * Deletes the specified internal user.
      *
      * $params['username']    = (string) The name of the user to delete. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -446,7 +446,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Flushes the Security plugin user, authentication, and authorization cache.
+     * Flushes the Security plugin's user, authentication, and authorization cache.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -466,7 +466,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Generates On-Behalf-Of token for the current user.
+     * Generates a `On-Behalf-Of` token for the current user.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -489,9 +489,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Generates authorization token for the given user.
+     * Generates an authorization token for the specified user.
      *
-     * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
+     * $params['username']    = (string) The name of the user for whom to issue an authorization token. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -515,7 +515,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Generates authorization token for the given user. Legacy API. Not Implemented.
      *
-     * $params['username']    = (string) The name of the user for whom an auth token is to be vended. (Required)
+     * $params['username']    = (string) The name of the user for whom to issue an authorization token. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -537,7 +537,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Returns account details for the current user.
+     * Returns account information for the current user.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -583,8 +583,8 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves the cluster security certificates.
      *
-     * $params['cert_type']   = (string) The type of certificates (HTTP, TRANSPORT, ALL) to retrieve from all nodes.
-     * $params['timeout']     = (string) The maximum duration, in seconds, to be spent to retrieve certificates from all nodes.
+     * $params['cert_type']   = (string) The type of certificates (`HTTP`, `TRANSPORT`, or `ALL`) to retrieve from all nodes.
+     * $params['timeout']     = (string) The maximum duration, in seconds, to spend retrieving certificates from all nodes before a timeout.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -603,7 +603,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves the current list of allowed API accessible to normal user.
+     * Retrieves the current list of allowed APIs accessible to a normal user.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -663,7 +663,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Returns the current Security plugin configuration in JSON format.
+     * Returns the current Security plugin configuration in a JSON format.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -683,7 +683,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves the current security-dashboards plugin configuration.
+     * Retrieves the current values for dynamic security settings for OpenSearch Dashboards.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -703,10 +703,10 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
+     * Retrieves all node distinguished names. Requires super admin or REST API permissions.
      *
-     * $params['cluster_name'] = (string) The cluster-name to retrieve nodes DN setting for. (Required)
-     * $params['show_all']     = (boolean) A Boolean flag to include/exclude static nodes DN from final result.
+     * $params['cluster_name'] = (string) The name of the cluster to retrieve that cluster's nodes DN settings. (Required)
+     * $params['show_all']     = (boolean) Whether to include or exclude any static node's DN settings from the final result.
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -728,11 +728,11 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves the given node's security certificates.
+     * Retrieves the specified node's security certificates.
      *
-     * $params['node_id']     = (string) The full-id of the node to retrieve certificates.
-     * $params['cert_type']   = (string) The type of certificates (HTTP, TRANSPORT, ALL) to retrieve for a node.
-     * $params['timeout']     = (string) The maximum duration, in seconds, to be spent to retrieve a node's certificates.
+     * $params['node_id']     = (string) The node ID to retrieve certificates for.
+     * $params['cert_type']   = (string) The type of certificates (`HTTP`, `TRANSPORT`, or `ALL`) to retrieve from a node.
+     * $params['timeout']     = (string) The maximum duration, in seconds, to spend retrieving certificates from all nodes before a timeout.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -754,7 +754,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Gets the evaluated REST API permissions for the currently logged in user.
+     * Retrieves the evaluated REST API permissions for the currently logged in user.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -776,7 +776,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves one role.
      *
-     * $params['role']        = (string)  (Required)
+     * $params['role']        = (string) The name of the role to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -798,9 +798,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves one role mapping.
+     * Retrieves the specified role mapping.
      *
-     * $params['role']        = (string)  (Required)
+     * $params['role']        = (string) The name of the role mapping to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -822,9 +822,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves the SSL configuration information.
+     * Retrieves information about the SSL configuration.
      *
-     * $params['show_dn']     = (Array) A Boolean flag to indicate whether all domain names should be returned.
+     * $params['show_dn']     = (Array) Whether to include all domain names in the response.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -843,7 +843,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves multi-tenancy configuration. Only accessible to admins and users with REST API permissions.
+     * Retrieves the multi-tenancy configuration. Requires super admin or REST API permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -863,7 +863,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves one tenant.
+     * Retrieves the specified tenant.
      *
      * $params['tenant']      = (string) The name of the tenant to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -887,7 +887,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieve one internal user.
+     * Retrieve information about the specified internal user.
      *
      * $params['username']    = (string) The name of the user to retrieve. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -955,9 +955,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Checks to see if the Security plugin is up and running.
+     * Checks to see if the Security plugin is running.
      *
-     * $params['mode']        = (string) A flag to indicate whether service should consider security-plugin's status before returning health response. `strict` mode indicates service should check Security plugin status.
+     * $params['mode']        = (string) A flag that determines whether to consider the security status before returning a response for a health query response. For example, `strict` mode indicates service should check the Security plugin status.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -976,7 +976,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Migrates security configuration from v6 to v7.
+     * Migrates the security configuration from v6 to v7.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -996,7 +996,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates individual attributes of an action group.
+     * Updates the individual attributes of an action group.
      *
      * $params['action_group'] = (string) The name of the action group to update. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1022,7 +1022,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates the current list of allowed API accessible to normal user.
+     * Updates the current list of APIs accessible for users on the allow list.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1045,7 +1045,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * A PATCH call is used to update specified fields in the audit configuration.
+     * Updates the specified fields in the audit configuration.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1068,7 +1068,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * A `PATCH` call is used to update the existing configuration using the REST API. Only accessible by admins and users with REST API access and only when put or patch is enabled.
+     * Updates the existing security configuration using the REST API. Requires super admin or REST API permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1091,9 +1091,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates a distinguished cluster name for a specific cluster. Only accessible to super-admins and with rest-api permissions when enabled.
+     * Updates the distinguished cluster name for the specified cluster. Requires super admin or REST API permissions.
      *
-     * $params['cluster_name'] = (string) The cluster name to update `nodesDn` value. (Required)
+     * $params['cluster_name'] = (string) The cluster name to update the `nodesDn` value. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1117,7 +1117,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Bulk update of distinguished names. Only accessible to super-admins and with rest-api permissions when enabled.
+     * Bulk updates specified node distinguished names. Requires super admin or REST API permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1140,7 +1140,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates individual attributes of a role.
+     * Updates the individual attributes of a role.
      *
      * $params['role']        = (string) The name of the role to update. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1166,9 +1166,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates individual attributes of a role mapping.
+     * Updates the individual attributes of a role mapping.
      *
-     * $params['role']        = (string) The name of the role to update role-mapping for. (Required)
+     * $params['role']        = (string) The name of the role to update a role mapping for (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1192,7 +1192,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Add, delete, or modify a single tenant.
+     * Adds, deletes, or modifies a single tenant.
      *
      * $params['tenant']      = (string) The name of the tenant to update. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1218,7 +1218,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates individual attributes of an internal user.
+     * Updates individual attributes for an internal user.
      *
      * $params['username']    = (string) The name of the user to update. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1244,7 +1244,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates the current security-dashboards plugin configuration.
+     * Retrieves the current values for dynamic security settings for OpenSearch Dashboards.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1264,7 +1264,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Reload HTTP layer communication certificates.
+     * Reloads the HTTP communication certificates.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1284,7 +1284,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Reload Transport layer communication certificates.
+     * Reloads the transport communication certificates.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1304,7 +1304,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves the tenant names if any exist. Only accessible to super admins or kibanaserver user.
+     * Retrieves the names of current tenants. Requires super admin or `kibanaserver` permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1347,7 +1347,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Adds or updates the existing configuration using the REST API. Only accessible by admins and users with REST API access and only when put or patch is enabled.
+     * Updates the settings for an existing security configuration. Requires super admin or REST API permissions.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1370,9 +1370,9 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Adds or updates the specified distinguished names in the cluster or node allow list. Only accessible to super-admins and with rest-api permissions when enabled.
+     * Adds or updates the specified distinguished names in the cluster or node allowlist. Requires super admin or REST API permissions.
      *
-     * $params['cluster_name'] = (string) The cluster-name to create/update `nodesDn` value for. (Required)
+     * $params['cluster_name'] = (string) The name of the cluster containing the `nodesDn` value to create or update. (Required)
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1398,7 +1398,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Checks whether the v6 security configuration is valid and ready to be migrated to v7.
      *
-     * $params['accept_invalid'] = (boolean) A Boolean flag to indicate whether invalid v6 configuration should be allowed.
+     * $params['accept_invalid'] = (boolean) Whether an invalid v6 configuration should be allowed.
      * $params['pretty']         = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']          = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1417,7 +1417,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Gets the user identity related information for currently logged in user.
+     * Gets the identity information for the user currently logged in.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1437,7 +1437,7 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
-     * Gets the user identity related information for currently logged in user. User needs to have access to this endpoint when authorization at REST layer is enabled.
+     * Gets the identity information for the user currently logged in. To use this operation, you must have access to this endpoint when authorization at REST layer is enabled.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
