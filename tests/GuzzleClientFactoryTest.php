@@ -10,6 +10,8 @@ use OpenSearch\Client;
 
 /**
  * @coversDefaultClass \OpenSearch\GuzzleClientFactory
+ *
+ * @group integration
  */
 class GuzzleClientFactoryTest extends TestCase
 {
