@@ -2169,7 +2169,7 @@ class Client
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \OpenSearch\Exception\HttpExceptionInterface
      */
-    private function performRequest(AbstractEndpoint $endpoint): array|string|null
+    private function performRequest(AbstractEndpoint $endpoint): iterable|string|null
     {
         return $this->httpTransport->sendRequest(
             $endpoint->getMethod(),
