@@ -28,4 +28,20 @@ class SymfonyClientFactoryTest extends TestCase
 
         $this->assertInstanceOf(Client::class, $client);
     }
+
+    /**
+     * @covers ::__construct
+     */
+    public function testLegacyOptions(): void
+    {
+        $factory = new SymfonyClientFactory();
+        $client = $factory->create([
+            'base_uri' => 'https://localhost:9200',
+            'auth_basic' => ['admin', 'password'],
+            'verify_peer' => false,
+        ]);
+
+        $exists = $client->indices()->exists(['index' => 'test']);
+        $this->assertFalse($exists);
+    }
 }

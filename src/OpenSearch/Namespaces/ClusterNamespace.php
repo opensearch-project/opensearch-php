@@ -187,7 +187,8 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        // manually make this verbose so we can check status code
+        // Legacy option to manually make this verbose so we can check status code.
+        // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(ExistsComponentTemplate::class);

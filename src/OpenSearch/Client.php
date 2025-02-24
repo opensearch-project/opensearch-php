@@ -783,7 +783,8 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        // manually make this verbose so we can check status code
+        // Legacy option to manually make this verbose so we can check status code.
+        // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
@@ -822,7 +823,8 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        // manually make this verbose so we can check status code
+        // Legacy option to manually make this verbose so we can check status code.
+        // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(ExistsSource::class);
@@ -1281,7 +1283,8 @@ class Client
      */
     public function ping(array $params = []): bool
     {
-        // manually make this verbose so we can check status code
+        // Legacy option to manually make this verbose so we can check status code.
+        // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(Ping::class);

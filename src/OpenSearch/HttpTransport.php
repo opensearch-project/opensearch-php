@@ -37,6 +37,12 @@ final class HttpTransport implements TransportInterface
         mixed $body = null,
         array $headers = [],
     ): iterable|string|null {
+        // @todo Remove support for legacy options in 3.0.0.
+        // @phpstan-ignore isset.offset
+        if (isset($headers['client']['headers'])) {
+            $headers = array_merge($headers, $headers['client']['headers']);
+        }
+        unset($headers['client']);
         $request = $this->createRequest($method, $uri, $params, $body, $headers);
         $response = $this->client->sendRequest($request);
         $statusCode = $response->getStatusCode();
