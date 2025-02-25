@@ -2155,7 +2155,7 @@ class Client
         string $method,
         string $uri,
         array $attributes = []
-    ): array|string|null {
+    ): iterable|string|null {
         $params = $attributes['params'] ?? [];
         $body = $attributes['body'] ?? null;
         $options = $attributes['options'] ?? [];
