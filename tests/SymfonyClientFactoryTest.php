@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @coversDefaultClass \OpenSearch\SymfonyClientFactory
+ * @group      Integration
  */
 class SymfonyClientFactoryTest extends TestCase
 {
@@ -21,11 +22,27 @@ class SymfonyClientFactoryTest extends TestCase
     {
         $factory = new SymfonyClientFactory();
         $client = $factory->create([
-            'base_uri' => 'https://localhost:9200',
+            'base_uri' => 'http://localhost:9200',
             'auth_basic' => ['admin', 'password'],
             'verify_peer' => false,
         ]);
 
         $this->assertInstanceOf(Client::class, $client);
+    }
+
+    /**
+     * @covers ::__construct
+     */
+    public function testLegacyOptions(): void
+    {
+        $factory = new SymfonyClientFactory();
+        $client = $factory->create([
+            'base_uri' => 'http://localhost:9200',
+            'auth_basic' => ['admin', 'password'],
+            'verify_peer' => false,
+        ]);
+
+        $exists = $client->indices()->exists(['index' => 'test']);
+        $this->assertFalse($exists);
     }
 }

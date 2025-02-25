@@ -42,6 +42,7 @@ use function random_bytes;
 /**
  * @covers \OpenSearch\Connections\Connection
  * @group legacy
+ * @group Integration
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */

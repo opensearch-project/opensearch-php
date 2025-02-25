@@ -128,7 +128,8 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
-        // manually make this verbose so we can check status code
+        // Legacy option to manually make this verbose so we can check status code.
+        // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(ExistsPolicy::class);
