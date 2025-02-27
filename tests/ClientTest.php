@@ -122,4 +122,26 @@ class ClientTest extends TestCase
         $this->assertEquals(['bang'], $response);
     }
 
+    /**
+     * @covers ::request
+     */
+    public function testOptionalEndpointFactory(): void
+    {
+
+        $this->transport->expects($this->once())
+            ->method('sendRequest')
+            ->with('GET', '/', ['foo' => 'bar'], 'whizz')
+            ->willReturn(['bang']);
+
+        $this->client = new Client($this->transport);
+
+        $response = $this->client->request('GET', '/', [
+            'params' => ['foo' => 'bar'],
+            'body' => 'whizz',
+        ]);
+
+        $this->assertEquals(['bang'], $response);
+
+    }
+
 }

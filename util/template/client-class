@@ -77,7 +77,7 @@ class Client
      */
     public function __construct(
         TransportInterface|Transport $transport,
-        callable|EndpointFactoryInterface|null $endpointFactory,
+        callable|EndpointFactoryInterface|null $endpointFactory = null,
         array $registeredNamespaces = [],
     ) {
         if (!$transport instanceof TransportInterface) {
