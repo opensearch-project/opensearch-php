@@ -13,7 +13,7 @@ OpenSearch allows you to use different methods for the authentication.
 ## Basic Auth
 
 ```php
-$endpoint = "https://localhost:9200"
+$endpoint = "http://localhost:9200"
 $username = "admin"
 $password = "..."
 ```
@@ -30,15 +30,21 @@ $client = (new \OpenSearch\ClientBuilder())
 
 ### Using a Psr Client
 
+Using Symfony HTTP Client:
+
 ```php
-$symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOptions([
+$client = (new SymfonyClientFactory())->create([
     'base_uri' => $endpoint,
     'auth_basic' => [$username, $password],
-    'verify_peer' => false, // for testing only
-    'headers' => [
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
-    ],
+]);
+```
+
+Using Guzzle:
+
+```php
+$client = (new GuzzleClientFactory())->create([
+    'base_uri' => $endpoint,
+    'auth' => [$username, $password],
 ]);
 ```
 
@@ -72,53 +78,27 @@ $client = (new \OpenSearch\ClientBuilder())
 
 ### Using a Psr Client
 
+We can use the `AwsSigningHttpClientFactory` to create an HTTP Client to sign the requests using the AWS SDK for PHP.
+
+Require a PSR-18 client (e.g. Symfony) and the AWS SDK for PHP:
+
+```bash
+composer require symfony/http-client aws/aws-sdk-php
+```
+
+Create an OpenSearch Client using the Symfony HTTP Client and the AWS SDK for PHP:
+
 ```php
-$symfonyPsr18Client = (new \Symfony\Component\HttpClient\Psr18Client())->withOptions([
+$client = (new SymfonyClientFactory())->create([
     'base_uri' => $endpoint,
-    'headers' => [
-        'Accept' => 'application/json',
-        'Content-Type' => 'application/json',
+    'auth_aws' => [
+        'region' => $region,
+        'service' => 'es',
+        'credentials' => [
+            'access_key' => $aws_access_key_id,
+            'secret_key' => $aws_secret_access_key,
+            'session_token' => $aws_session_token,
+        ],
     ],
 ]);
-
-$serializer = new \OpenSearch\Serializers\SmartSerializer();
-$endpointFactory = new \OpenSearch\EndpointFactory();
-
-$signer = new Aws\Signature\SignatureV4(
-    $service,
-    $region
-);
-
-$credentials = new Aws\Credentials\Credentials(
-    $aws_access_key_id,
-    $aws_secret_access_key,
-    $aws_session_token
-);
-
-$signingClient = new \OpenSearch\Aws\SigningClientDecorator(
-    $symfonyPsr18Client,
-    $credentials,
-    $signer, 
-    [
-        'Host' => parse_url(getenv("ENDPOINT"))['host']
-    ]
-);
-
-$requestFactory = new \OpenSearch\RequestFactory(
-    $symfonyPsr18Client,
-    $symfonyPsr18Client,
-    $symfonyPsr18Client,
-    $serializer,
-);
-
-$transport = (new \OpenSearch\TransportFactory())
-    ->setHttpClient($signingClient)
-    ->setRequestFactory($requestFactory)
-    ->create();
-
-$client = new \OpenSearch\Client(
-    $transport,
-    $endpointFactory,
-    []
-);
 ```

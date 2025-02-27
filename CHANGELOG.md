@@ -5,6 +5,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 
 ### Added
+- Added `auth_aws` option to GuzzleClientFactory and SymfonyClientFactory ([#314](https://github.com/opensearch-project/opensearch-php/pull/314))
 ### Changed
 - Updated Client constructor to make EndpointFactory and optional parameter.
 ### Deprecated
