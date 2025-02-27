@@ -26,8 +26,8 @@ use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Tests\ClientBuilder\ArrayLogger;
-use Psr\Log\LogLevel;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LogLevel;
 
 /**
  * Class ClientTest
@@ -193,5 +193,16 @@ class LegacyClientIntegrationTest extends TestCase
         }
 
         return '';
+    }
+
+    /**
+     * Tests we ignore 404 when passed as an option.
+     */
+    public function testIgnore404(): void
+    {
+        $result = $this->getClient()->indices()->getAlias(['name' => 'i_dont_exist', 'client' => ['ignore' => 404]]);
+
+        $this->assertEquals(404, $result['status']);
+
     }
 }
