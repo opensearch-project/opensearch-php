@@ -29,9 +29,9 @@ class LegacyTransportWrapper implements TransportInterface
         mixed $body = null,
         array $headers = [],
     ): iterable|string|null {
-        $promise = $this->transport->performRequest($method, $uri, $params, $body);
         // Provide legacy support for options.
         $options = $headers;
+        $promise = $this->transport->performRequest($method, $uri, $params, $body, $options);
         return $this->transport->resultOrFuture($promise, $options);
     }
 
