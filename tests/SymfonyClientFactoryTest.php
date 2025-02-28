@@ -32,6 +32,26 @@ class SymfonyClientFactoryTest extends TestCase
 
     /**
      * @covers ::__construct
+     * @covers ::create
+     */
+    public function testCreateWithAwsAuth(): void
+    {
+        $client = (new SymfonyClientFactory())->create([
+            'base_uri' => 'http://localhost:9200',
+            'auth_aws' => [
+                'region' => 'us-east-1',
+                'credentials' => [
+                    'access_key' => 'foo',
+                    'secret_key' => 'bar',
+                ],
+            ],
+        ]);
+
+        $this->assertInstanceOf(Client::class, $client);
+    }
+
+    /**
+     * @covers ::__construct
      */
     public function testLegacyOptions(): void
     {
