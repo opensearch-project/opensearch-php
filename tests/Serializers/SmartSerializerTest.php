@@ -87,4 +87,14 @@ class SmartSerializerTest extends TestCase
 
         $this->assertEquals('plain text data', $result);
     }
+
+    public function testDeserializeWithNoContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = [];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('bar', $result['foo']);
+    }
 }
