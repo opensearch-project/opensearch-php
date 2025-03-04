@@ -58,4 +58,62 @@ class SmartSerializerTest extends TestCase
         }
     }
 
+    public function testDeserializeJsonWithKebabCaseContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['Content-Type' => 'application/json'];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('foo', $result);
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeJsonWithKebabCaseArrayContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['Content-Type' => ['application/json']];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('foo', $result);
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeJsonWithSnakeCaseContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['content_type' => 'application/json'];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('foo', $result);
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeJsonWithoutContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = [];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('foo', $result);
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeNonJsonData(): void
+    {
+        $data = 'plain text data';
+        $headers = ['Content-Type' => 'text/plain'];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertIsString($result);
+        $this->assertEquals('plain text data', $result);
+    }
 }

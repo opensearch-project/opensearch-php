@@ -56,8 +56,17 @@ class SmartSerializer implements SerializerInterface
      */
     public function deserialize(?string $data, array $headers)
     {
-        if (isset($headers['content_type']) === true) {
-            if (strpos($headers['content_type'], 'json') !== false) {
+        if (isset($headers['Content-Type'])) {
+            $contentType = $headers['Content-Type'];
+        } elseif (isset($headers['content_type'])) {
+            $contentType = $headers['content_type'];
+        } else {
+            $contentType = null;
+        }
+
+        if (!is_null($contentType)) {
+            $contentType = is_array($contentType) ? $contentType[0] : $contentType;
+            if (strpos($contentType, 'json') !== false) {
                 return $this->decode($data);
             } else {
                 //Not json, return as string
