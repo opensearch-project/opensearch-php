@@ -58,4 +58,53 @@ class SmartSerializerTest extends TestCase
         }
     }
 
+    public function testDeserialize(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['Content-Type' => ['application/json']];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeLowercaseContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['content-type' => ['application/json']];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeWithLegacyContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['content_type' => 'application/json'];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('bar', $result['foo']);
+    }
+
+    public function testDeserializeNonJsonData(): void
+    {
+        $data = 'plain text data';
+        $headers = ['Content-Type' => ['text/plain']];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('plain text data', $result);
+    }
+
+    public function testDeserializeWithNoContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = [];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('bar', $result['foo']);
+    }
 }
