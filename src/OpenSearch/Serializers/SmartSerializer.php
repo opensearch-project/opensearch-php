@@ -56,17 +56,10 @@ class SmartSerializer implements SerializerInterface
      */
     public function deserialize(?string $data, array $headers)
     {
-        if (isset($headers['content_type']) === true) {
-            if (strpos($headers['content_type'], 'json') !== false) {
-                return $this->decode($data);
-            } else {
-                //Not json, return as string
-                return $data;
-            }
-        } else {
-            //No content headers, assume json
+        if ($this->isJson($headers)) {
             return $this->decode($data);
         }
+        return $data;
     }
 
     /**
@@ -85,5 +78,31 @@ class SmartSerializer implements SerializerInterface
         } catch (\JsonException $e) {
             throw new JsonException($e->getCode(), $data, $e);
         }
+    }
+
+    /**
+     * Check the response content type to see if it is JSON.
+     *
+     * @param array<string,mixed> $headers
+     */
+    private function isJson(array $headers): bool
+    {
+        // Legacy support for 'transfer_stats'.
+        if (array_key_exists('content_type', $headers)) {
+            return str_contains($headers['content_type'], 'json');
+        }
+
+        // Check PSR-7 headers.
+        if (array_key_exists('Content-Type', $headers)) {
+            foreach ($headers['Content-Type'] as $type) {
+                if (str_contains($type, 'json')) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // No content type header, so assume it is JSON.
+        return true;
     }
 }
