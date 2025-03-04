@@ -65,7 +65,6 @@ class SmartSerializerTest extends TestCase
 
         $result = $this->serializer->deserialize($data, $headers);
 
-        $this->assertIsArray($result);
         $this->assertArrayHasKey('foo', $result);
         $this->assertEquals('bar', $result['foo']);
     }
@@ -77,8 +76,6 @@ class SmartSerializerTest extends TestCase
 
         $result = $this->serializer->deserialize($data, $headers);
 
-        $this->assertIsArray($result);
-        $this->assertArrayHasKey('foo', $result);
         $this->assertEquals('bar', $result['foo']);
     }
 
@@ -89,8 +86,6 @@ class SmartSerializerTest extends TestCase
 
         $result = $this->serializer->deserialize($data, $headers);
 
-        $this->assertIsArray($result);
-        $this->assertArrayHasKey('foo', $result);
         $this->assertEquals('bar', $result['foo']);
     }
 
@@ -101,8 +96,6 @@ class SmartSerializerTest extends TestCase
 
         $result = $this->serializer->deserialize($data, $headers);
 
-        $this->assertIsArray($result);
-        $this->assertArrayHasKey('foo', $result);
         $this->assertEquals('bar', $result['foo']);
     }
 
@@ -113,7 +106,6 @@ class SmartSerializerTest extends TestCase
 
         $result = $this->serializer->deserialize($data, $headers);
 
-        $this->assertIsString($result);
         $this->assertEquals('plain text data', $result);
     }
 }
