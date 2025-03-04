@@ -68,6 +68,16 @@ class SmartSerializerTest extends TestCase
         $this->assertEquals('bar', $result['foo']);
     }
 
+    public function testDeserializeLowercaseContentTypeHeader(): void
+    {
+        $data = '{ "foo" : "bar" }';
+        $headers = ['content-type' => ['application/json']];
+
+        $result = $this->serializer->deserialize($data, $headers);
+
+        $this->assertEquals('bar', $result['foo']);
+    }
+
     public function testDeserializeWithLegacyContentTypeHeader(): void
     {
         $data = '{ "foo" : "bar" }';

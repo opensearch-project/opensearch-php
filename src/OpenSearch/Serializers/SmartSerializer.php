@@ -93,8 +93,9 @@ class SmartSerializer implements SerializerInterface
         }
 
         // Check PSR-7 headers.
-        if (array_key_exists('Content-Type', $headers)) {
-            foreach ($headers['Content-Type'] as $type) {
+        $lowercaseHeaders = array_change_key_case($headers, CASE_LOWER);
+        if (array_key_exists('content-type', $lowercaseHeaders)) {
+            foreach ($lowercaseHeaders['content-type'] as $type) {
                 if (str_contains($type, 'json')) {
                     return true;
                 }
