@@ -54,7 +54,7 @@ class ClusterNamespace extends AbstractNamespace
      * Explains how shards are allocated in the current cluster and provides an explanation for why unassigned shards can't be allocated to a node.
      *
      * $params['include_disk_info']     = (boolean) When `true`, returns information about disk usage and shard sizes. (Default = false)
-     * $params['include_yes_decisions'] = (boolean) When `true`, returns any `YES` decisions in the allocation explanation. (Default = false)
+     * $params['include_yes_decisions'] = (boolean) When `true`, returns any `YES` decisions in the allocation explanation. `YES` decisions indicate when a particular shard allocation attempt was successful for the given node. (Default = false)
      * $params['pretty']                = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                 = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -80,7 +80,7 @@ class ClusterNamespace extends AbstractNamespace
      * Deletes a component template.
      *
      * $params['name']                    = (string) The name of the component template to delete. Supports wildcard (*) expressions.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -171,7 +171,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns information about whether a particular component template exist.
      *
      * $params['name']                    = (string) The name of the component template. Wildcard (*) expressions are supported.
-     * $params['cluster_manager_timeout'] = (string)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -202,8 +202,8 @@ class ClusterNamespace extends AbstractNamespace
      * Returns one or more component templates.
      *
      * $params['name']                    = (array) The name of the component template to retrieve. Wildcard (`*`) expressions are supported.
-     * $params['cluster_manager_timeout'] = (string)
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false`, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -253,7 +253,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Returns cluster settings.
      *
-     * $params['cluster_manager_timeout'] = (string)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['flat_settings']           = (boolean) When `true`, returns cluster settings in a flat format. (Default = false)
      * $params['include_defaults']        = (boolean) When `true`, returns default cluster settings from the local node. (Default = false)
      * $params['master_timeout']          = (string)
@@ -304,16 +304,16 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['index']                           = (array)
      * $params['awareness_attribute']             = (string) The name of the awareness attribute for which to return the cluster health status (for example, `zone`). Applicable only if `level` is set to `awareness_attributes`.
-     * $params['cluster_manager_timeout']         = (string)
+     * $params['cluster_manager_timeout']         = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['expand_wildcards']                = (any)
      * $params['level']                           = (enum)  (Options = awareness_attributes,cluster,indices,shards)
      * $params['local']                           = (boolean) Whether to return information from the local node only instead of from the cluster manager node. (Default = false)
      * $params['master_timeout']                  = (string)
-     * $params['timeout']                         = (string)
+     * $params['timeout']                         = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['wait_for_active_shards']          = (any)
-     * $params['wait_for_events']                 = (enum)  (Options = high,immediate,languid,low,normal,urgent)
+     * $params['wait_for_events']                 = (any)
      * $params['wait_for_no_initializing_shards'] = (boolean) Whether to wait until there are no initializing shards in the cluster. (Default = false)
-     * $params['wait_for_no_relocating_shards']   = (boolean) Whether to wait until there are no relocating shards in the cluster.
+     * $params['wait_for_no_relocating_shards']   = (boolean) Whether to wait until there are no relocating shards in the cluster. (Default = false)
      * $params['wait_for_nodes']                  = (any) Waits until the specified number of nodes (`N`) is available. Accepts `>=N`, `<=N`, `>N`, and `<N`. You can also use `ge(N)`, `le(N)`, `gt(N)`, and `lt(N)` notation.
      * $params['wait_for_status']                 = (any) Waits until the cluster health reaches the specified status or better.
      * $params['pretty']                          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -339,7 +339,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates,or new allocations.
      *
-     * $params['cluster_manager_timeout'] = (string)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false`, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -386,7 +386,7 @@ class ClusterNamespace extends AbstractNamespace
      * Creates or updates a component template.
      *
      * $params['name']                    = (string) The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; `logs-settings`; `metrics-mappings`; `metrics-settings`; `synthetics-mapping`; `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the Cluster Update Settings API.
-     * $params['cluster_manager_timeout'] = (string)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['create']                  = (boolean) When `true`, this request cannot replace or update existing component templates. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
@@ -417,7 +417,7 @@ class ClusterNamespace extends AbstractNamespace
      * Decommissions a cluster zone based on awareness. This can greatly benefit multi-zone deployments, where awareness attributes can aid in applying new upgrades to a cluster in a controlled fashion.
      *
      * $params['awareness_attribute_name']  = (string) The name of the awareness attribute.
-     * $params['awareness_attribute_value'] = (string) The value of the awareness attribute.
+     * $params['awareness_attribute_value'] = (string) The value of the awareness attribute. For example, if you have shards allocated in two different zones, you can give each zone a value of `zone-a` or `zoneb`. The cluster decommission operation decommissions the zone listed in the method.
      * $params['pretty']                    = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                     = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -443,7 +443,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Updates the cluster settings.
      *
-     * $params['cluster_manager_timeout'] = (string)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['flat_settings']           = (boolean) Returns settings in a flat format. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
@@ -471,7 +471,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Updates weighted shard routing weights.
      *
-     * $params['attribute']   = (string) The name of the awareness attribute.
+     * $params['attribute']   = (string) The name of awareness attribute, usually `zone`.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -517,9 +517,9 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Allows to manually change the allocation of individual shards in the cluster.
      *
-     * $params['cluster_manager_timeout'] = (string)
+     * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['dry_run']                 = (boolean) When `true`, the request simulates the operation and returns the resulting state.
-     * $params['explain']                 = (boolean) When `true`, the response contains an explanation of why certain commands can or cannot be executed.
+     * $params['explain']                 = (boolean) When `true`, the response contains an explanation of why reroute certain commands can or cannot be executed.
      * $params['master_timeout']          = (string)
      * $params['metric']                  = (any) Limits the information returned to the specified metrics.
      * $params['retry_failed']            = (boolean) When `true`, retries shard allocation if it was blocked because of too many subsequent failures.
@@ -551,7 +551,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['metric']                    = (array) Limits the information returned to only the specified metrics.
      * $params['index']                     = (array)
      * $params['allow_no_indices']          = (boolean) Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
-     * $params['cluster_manager_timeout']   = (string)
+     * $params['cluster_manager_timeout']   = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters]({https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['expand_wildcards']          = (any)
      * $params['flat_settings']             = (boolean) Returns settings in a flat format. (Default = false)
      * $params['ignore_unavailable']        = (boolean) Whether the specified concrete indexes should be ignored when unavailable (missing or closed).

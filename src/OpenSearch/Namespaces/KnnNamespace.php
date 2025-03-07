@@ -89,7 +89,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['analyzer']                      = (string) The analyzer to use for the query string.
      * $params['batched_reduce_size']           = (integer) The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large. (Default = 512)
      * $params['ccs_minimize_roundtrips']       = (boolean) Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution. (Default = true)
-     * $params['default_operator']              = (enum) The default operator for query string query (AND or OR). (Options = AND,OR)
+     * $params['default_operator']              = (enum) The default operator for query string query (AND or OR). (Options = and,AND,or,OR)
      * $params['df']                            = (string) The field to use as default where no field prefix is given in the query string.
      * $params['docvalue_fields']               = (array) Comma-separated list of fields to return as the docvalue representation of a field for each hit.
      * $params['expand_wildcards']              = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
@@ -106,7 +106,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['rest_total_hits_as_int']        = (boolean) Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default = false)
      * $params['routing']                       = (any) Comma-separated list of specific routing values.
      * $params['scroll']                        = (string) Specify how long a consistent view of the index should be maintained for scrolled search.
-     * $params['search_type']                   = (enum) Search operation type. (Options = dfs_query_then_fetch,query_then_fetch)
+     * $params['search_type']                   = (any) Search operation type.
      * $params['seq_no_primary_term']           = (boolean) Specify whether to return sequence number and primary term of the last modification of each hit.
      * $params['size']                          = (integer) Number of hits to return. (Default = 10)
      * $params['sort']                          = (array) Comma-separated list of <field>:<direction> pairs.
