@@ -2,20 +2,16 @@
 
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## [Unreleased]
-
+## [2.4.3]
 ### Added
 - Added `auth_aws` option to GuzzleClientFactory and SymfonyClientFactory ([#314](https://github.com/opensearch-project/opensearch-php/pull/314))
 ### Changed
-- Updated Client constructor to make EndpointFactory and optional parameter.
-### Deprecated
-### Removed
+- Updated Client constructor to make EndpointFactory an optional parameter ([#315](https://github.com/opensearch-project/opensearch-php/pull/315))
 ### Fixed
 - Fixed checking for content type in JSON deserialization ([#318](https://github.com/opensearch-project/opensearch-php/issues/318))
 - Fixed mismatch in return types between `Client::performRequest()` and `Transport::sendRequest()` ([#307](https://github.com/opensearch-project/opensearch-php/issues/307))
 - Fixed legacy client options being passed as headers ([#301](https://github.com/opensearch-project/opensearch-php/issues/301))
 - Fixed endpoint options not being passed to legacy transport ([#296](https://github.com/opensearch-project/opensearch-php/issues/296))
-### Security
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@89cd8f3](https://github.com/opensearch-project/opensearch-api-specification/commit/89cd8f36a17a452e16307261969537107ba54b0b)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@5ed668d](https://github.com/opensearch-project/opensearch-api-specification/commit/5ed668d81b34ae90c22a605755fe1c340f38c27d)
