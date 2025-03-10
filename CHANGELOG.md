@@ -2,6 +2,15 @@
 
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [Unreleased]
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+### Updated APIs
+
 ## [2.4.3]
 ### Added
 - Added `auth_aws` option to GuzzleClientFactory and SymfonyClientFactory ([#314](https://github.com/opensearch-project/opensearch-php/pull/314))
