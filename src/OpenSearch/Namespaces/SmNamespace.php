@@ -34,7 +34,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Creates a snapshot management policy.
      *
-     * $params['policy_name'] = (string) The name of the snapshot management policy.
+     * $params['policy_name'] = (string) The snapshot management policy name.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -60,7 +60,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Deletes a snapshot management policy.
      *
-     * $params['policy_name'] = (string) The name of the snapshot management policy.
+     * $params['policy_name'] = (string) The snapshot management policy name.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -84,7 +84,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Explains the state of the snapshot management policy.
      *
-     * $params['policy_name'] = (string) The name of the snapshot management policy.
+     * $params['policy_name'] = (string) The snapshot management policy name.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -108,11 +108,11 @@ class SmNamespace extends AbstractNamespace
     /**
      * Retrieves all snapshot management policies with optional pagination and filtering.
      *
-     * $params['from']        = (integer) The starting index (default: 0)
-     * $params['queryString'] = (string) A query string to filter policies.
-     * $params['size']        = (integer) The number of policies to return.
-     * $params['sortField']   = (string) The field to sort on.
-     * $params['sortOrder']   = (enum) The order of sorting. (Options = asc,desc) (Default = asc)
+     * $params['from']        = (integer) The index to retrieve snapshot management policies from. (Default = 0)
+     * $params['queryString'] = (string) Filters the returned snapshot management policies based on query string.
+     * $params['size']        = (integer) The number of snapshot management policies to return.
+     * $params['sortField']   = (string) The name of the query field to sort on.
+     * $params['sortOrder']   = (enum) The order to sort the snapshot management policy result. (Options = asc,desc) (Default = asc)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -133,7 +133,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Retrieves a specific snapshot management policy by name.
      *
-     * $params['policy_name'] = (string) The name of the snapshot management policy.
+     * $params['policy_name'] = (string) The snapshot management name.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -157,7 +157,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Starts a snapshot management policy.
      *
-     * $params['policy_name'] = (string) The name of the snapshot management policy.
+     * $params['policy_name'] = (string) The snapshot management policy name.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -181,7 +181,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Stops a snapshot management policy.
      *
-     * $params['policy_name'] = (string) The name of the snapshot management policy.
+     * $params['policy_name'] = (string) The snapshot management policy name.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -205,7 +205,7 @@ class SmNamespace extends AbstractNamespace
     /**
      * Updates an existing snapshot management policy. Requires `if_seq_no` and `if_primary_term`.
      *
-     * $params['policy_name']     = (string) The name of the snapshot management policy.
+     * $params['policy_name']     = (string) The snapshot management policy name.
      * $params['if_primary_term'] = (integer) The primary term of the policy to update.
      * $params['if_seq_no']       = (integer) The sequence number of the policy to update.
      * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
