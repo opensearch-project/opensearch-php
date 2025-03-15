@@ -551,7 +551,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['metric']                    = (array) Limits the information returned to only the specified metrics.
      * $params['index']                     = (array)
      * $params['allow_no_indices']          = (boolean) Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
-     * $params['cluster_manager_timeout']   = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters]({https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * $params['cluster_manager_timeout']   = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['expand_wildcards']          = (any)
      * $params['flat_settings']             = (boolean) Returns settings in a flat format. (Default = false)
      * $params['ignore_unavailable']        = (boolean) Whether the specified concrete indexes should be ignored when unavailable (missing or closed).
