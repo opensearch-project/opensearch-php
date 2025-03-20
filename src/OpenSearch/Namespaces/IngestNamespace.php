@@ -35,12 +35,12 @@ use OpenSearch\Endpoints\Ingest\Simulate;
 class IngestNamespace extends AbstractNamespace
 {
     /**
-     * Deletes a pipeline.
+     * Deletes an ingest pipeline.
      *
-     * $params['id']                      = (string) Pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of `*`.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
+     * $params['id']                      = (string) The pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of `*`.
+     * $params['cluster_manager_timeout'] = (string) The amount of time allowed to establish a connection to the cluster manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) The amount of time to wait for a response.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -62,10 +62,10 @@ class IngestNamespace extends AbstractNamespace
     }
 
     /**
-     * Returns a pipeline.
+     * Returns an ingest pipeline.
      *
-     * $params['id']                      = (string) Comma-separated list of pipeline IDs to retrieve. Wildcard (`*`) expressions are supported. To get all ingest pipelines, omit this parameter or use `*`.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
+     * $params['id']                      = (string) A comma-separated list of pipeline IDs to retrieve. Wildcard (`*`) expressions are supported. To get all ingest pipelines, omit this parameter or use `*`.
+     * $params['cluster_manager_timeout'] = (string) The amount of time allowed to establish a connection to the cluster manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -88,9 +88,9 @@ class IngestNamespace extends AbstractNamespace
     }
 
     /**
-     * Returns a list of the built-in patterns.
+     * Returns a list of built-in grok patterns.
      *
-     * $params['s']           = (boolean) Sort returned patterns by key name. (Default = false)
+     * $params['s']           = (boolean) Determines how to sort returned grok patterns by key name. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -109,18 +109,18 @@ class IngestNamespace extends AbstractNamespace
     }
 
     /**
-     * Creates or updates a pipeline.
+     * Creates or updates an ingest pipeline.
      *
-     * $params['id']                      = (string) ID of the ingest pipeline to create or update.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
+     * $params['id']                      = (string) The ID of the ingest pipeline.
+     * $params['cluster_manager_timeout'] = (string) The amount of time allowed to establish a connection to the cluster manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) The amount of time to wait for a response.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']                    = (array) The ingest definition (Required)
+     * $params['body']                    = (array) The ingest definition. (Required)
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -139,10 +139,10 @@ class IngestNamespace extends AbstractNamespace
     }
 
     /**
-     * Allows to simulate a pipeline with example documents.
+     * Simulates an ingest pipeline with example documents.
      *
-     * $params['id']          = (string) Pipeline to test. If you don't specify a `pipeline` in the request body, this parameter is required.
-     * $params['verbose']     = (boolean) If `true`, the response includes output data for each processor in the executed pipeline. (Default = false)
+     * $params['id']          = (string) The pipeline to test. If you don't specify a `pipeline` in the request body, this parameter is required.
+     * $params['verbose']     = (boolean) When `true`, the response includes output data for each processor in the pipeline (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

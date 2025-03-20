@@ -37,6 +37,7 @@ use OpenSearch\Namespaces\InsightsNamespace;
 use OpenSearch\Namespaces\IsmNamespace;
 use OpenSearch\Namespaces\KnnNamespace;
 use OpenSearch\Namespaces\ListNamespace;
+use OpenSearch\Namespaces\LtrNamespace;
 use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
@@ -208,6 +209,11 @@ class Client
     protected $list;
 
     /**
+     * @var LtrNamespace
+     */
+    protected $ltr;
+
+    /**
      * @var MlNamespace
      */
     protected $ml;
@@ -370,6 +376,7 @@ class Client
         $this->ism = new IsmNamespace($transport, $this->endpointFactory);
         $this->knn = new KnnNamespace($transport, $this->endpointFactory);
         $this->list = new ListNamespace($transport, $this->endpointFactory);
+        $this->ltr = new LtrNamespace($transport, $this->endpointFactory);
         $this->ml = new MlNamespace($transport, $this->endpointFactory);
         // @phpstan-ignore new.deprecated, property.deprecated
         $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
@@ -1961,6 +1968,13 @@ class Client
     public function list(): ListNamespace
     {
         return $this->list;
+    }
+    /**
+     * Returns the ltr namespace
+     */
+    public function ltr(): LtrNamespace
+    {
+        return $this->ltr;
     }
     /**
      * Returns the ml namespace

@@ -35,11 +35,11 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Cancels a task, if it can be cancelled through an API.
      *
-     * $params['task_id']             = (string) ID of the task.
-     * $params['actions']             = (any) Comma-separated list or wildcard expression of actions used to limit the request.
-     * $params['nodes']               = (array) Comma-separated list of node IDs or names used to limit the request.
-     * $params['parent_task_id']      = (string) Parent task ID used to limit the tasks.
-     * $params['wait_for_completion'] = (boolean) Should the request block until the cancellation of the task and its descendant tasks is completed. Defaults to false (Default = false)
+     * $params['task_id']             = (string) The task ID.
+     * $params['actions']             = (any) A comma-separated list of actions that should be returned. Keep empty to return all.
+     * $params['nodes']               = (array) A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from a specific node, or keep the parameter empty to get information from all nodes.
+     * $params['parent_task_id']      = (string) Returns tasks with a specified parent task ID (`node_id:task_number`). Keep empty or set to -1 to return all.
+     * $params['wait_for_completion'] = (boolean) Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default = false)
      * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']               = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -63,9 +63,9 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Returns information about a task.
      *
-     * $params['task_id']             = (string) ID of the task.
-     * $params['timeout']             = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_completion'] = (boolean) If `true`, the request blocks until the task has completed. (Default = false)
+     * $params['task_id']             = (string) The task ID.
+     * $params['timeout']             = (string) The amount of time to wait for a response.
+     * $params['wait_for_completion'] = (boolean) Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default = false)
      * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']               = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -89,13 +89,13 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Returns a list of tasks.
      *
-     * $params['actions']             = (any) Comma-separated list or wildcard expression of actions used to limit the request.
-     * $params['detailed']            = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
-     * $params['group_by']            = (enum) Key used to group tasks in the response. (Options = nodes,none,parents)
-     * $params['nodes']               = (array) Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-     * $params['parent_task_id']      = (string) Parent task ID used to limit returned information. To return all tasks, omit this parameter or use a value of `-1`.
-     * $params['timeout']             = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_completion'] = (boolean) If `true`, the request blocks until the operation is complete. (Default = false)
+     * $params['actions']             = (any) A comma-separated list of actions that should be returned. Keep empty to return all.
+     * $params['detailed']            = (boolean) When `true`, the response includes detailed information about shard recoveries. (Default = false)
+     * $params['group_by']            = (enum) Groups tasks by parent/child relationships or nodes. (Options = nodes,none,parents)
+     * $params['nodes']               = (array) A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from a specific node, or keep the parameter empty to get information from all nodes.
+     * $params['parent_task_id']      = (string) Returns tasks with a specified parent task ID (`node_id:task_number`). Keep empty or set to -1 to return all.
+     * $params['timeout']             = (string) The amount of time to wait for a response.
+     * $params['wait_for_completion'] = (boolean) Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default = false)
      * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']               = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
