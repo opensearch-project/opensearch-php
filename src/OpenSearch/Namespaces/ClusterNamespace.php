@@ -254,7 +254,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns cluster settings.
      *
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['flat_settings']           = (boolean) When `true`, returns cluster settings in a flat format. (Default = false)
+     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['include_defaults']        = (boolean) When `true`, returns default cluster settings from the local node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
@@ -362,8 +362,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Updates the cluster voting configuration by excluding certain node IDs or names.
      *
-     * $params['node_ids']    = (any) A comma-separated list of node IDs to excludefrom the voting configuration. When using this setting, you cannot also specify `node_names`.
-     * $params['node_names']  = (any) A comma-separated list of node names to exclude from thevoting configuration. When using this setting, you cannot also specify `node_ids`.
+     * $params['node_ids']    = (any) A comma-separated list of node IDs to excludefrom the voting configuration. When using this setting, you cannot also specify `node_names`. Either `node_ids` or `node_names` are required to receive a valid response.
+     * $params['node_names']  = (any) A comma-separated list of node names to exclude from thevoting configuration. When using this setting, you cannot also specify `node_ids`. Either `node_ids` or `node_names` are required to receive a valid response.
      * $params['timeout']     = (string) When adding a voting configuration exclusion, the API waits for thespecified nodes to be excluded from the voting configuration beforereturning a response. If the timeout expires before the appropriate conditionis satisfied, the request fails and returns an error.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -385,7 +385,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Creates or updates a component template.
      *
-     * $params['name']                    = (string) The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`; `logs-settings`; `metrics-mappings`; `metrics-settings`; `synthetics-mapping`; `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the Cluster Update Settings API.
+     * $params['name']                    = (string) The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`, `logs-settings`, `metrics-mappings`, `metrics-settings`, `synthetics-mapping`, and `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the [Cluster Update Settings API](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-settings/).
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['create']                  = (boolean) When `true`, this request cannot replace or update existing component templates. (Default = false)
      * $params['master_timeout']          = (string)
@@ -444,7 +444,7 @@ class ClusterNamespace extends AbstractNamespace
      * Updates the cluster settings.
      *
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['flat_settings']           = (boolean) Returns settings in a flat format. (Default = false)
+     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -548,12 +548,12 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Returns comprehensive information about the state of the cluster.
      *
-     * $params['metric']                    = (array) Limits the information returned to only the specified metrics.
+     * $params['metric']                    = (array) Limits the information returned to only the [specified metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#metric-groups).
      * $params['index']                     = (array)
      * $params['allow_no_indices']          = (boolean) Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
-     * $params['cluster_manager_timeout']   = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters]({https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * $params['cluster_manager_timeout']   = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['expand_wildcards']          = (any)
-     * $params['flat_settings']             = (boolean) Returns settings in a flat format. (Default = false)
+     * $params['flat_settings']             = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['ignore_unavailable']        = (boolean) Whether the specified concrete indexes should be ignored when unavailable (missing or closed).
      * $params['local']                     = (boolean) Whether to return information from the local node only instead of from the cluster manager node. (Default = false)
      * $params['master_timeout']            = (string)
@@ -584,10 +584,10 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Returns a high-level overview of cluster statistics.
      *
-     * $params['index_metric']  = (array) A comma-separated list of index metric groups, for example, `docs,store`.
+     * $params['index_metric']  = (array) A comma-separated list of [index metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#index-metric-groups), for example, `docs,store`.
      * $params['metric']        = (array) Limit the information returned to the specified metrics.
      * $params['node_id']       = (array)
-     * $params['flat_settings'] = (boolean) When `true`, returns settings in a flat format. (Default = false)
+     * $params['flat_settings'] = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['timeout']       = (string) The amount of time to wait for each node to respond.If a node does not respond before its timeout expires, the response does not include its stats.However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)

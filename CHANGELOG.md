@@ -10,6 +10,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 ### Security
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@fc5e888](https://github.com/opensearch-project/opensearch-api-specification/commit/fc5e888f8b7c1a09ca0c718c1dcb8bbca48c0a37)
 
 ## [2.4.3]
 ### Added
