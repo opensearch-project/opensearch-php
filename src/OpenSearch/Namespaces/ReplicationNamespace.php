@@ -35,7 +35,7 @@ use OpenSearch\Endpoints\Replication\UpdateSettings;
 class ReplicationNamespace extends AbstractNamespace
 {
     /**
-     * Gets information about auto-follow activity and any replication rules configured on the specified cluster.
+     * Retrieves information about any auto-follow activity and any replication rules configured on the specified cluster.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -55,7 +55,7 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Automatically starts replication on indexes matching a specified pattern.
+     * Automatically starts the replication on indexes matching a specified pattern.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -101,7 +101,7 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Gets information about follower (syncing) indexes on a specified cluster.
+     * Retrieves information about any follower (syncing) indexes on a specified cluster.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -121,7 +121,7 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Gets information about replicated leader indexes on a specified cluster.
+     * Retrieves information about any replicated leader indexes on a specified cluster.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -141,9 +141,9 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Pauses replication of the leader index.
+     * Pauses the replication of the leader index.
      *
-     * $params['index']       = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['index']       = (string) The name of the data stream, index, or index alias to perform bulk actions on.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -169,7 +169,7 @@ class ReplicationNamespace extends AbstractNamespace
     /**
      * Resumes replication of the leader index.
      *
-     * $params['index']       = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['index']       = (string) The name of the data stream, index, or index alias to perform bulk actions on.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -193,9 +193,9 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Initiate replication of an index from the leader cluster to the follower cluster.
+     * Initiates the replication of an index from the leader cluster to the follower cluster.
      *
-     * $params['index']       = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['index']       = (string) The name of the data stream, index, or index alias to perform bulk actions on.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -219,9 +219,9 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Gets the status of index replication.
+     * Retrieves the the status of an index replication.
      *
-     * $params['index']       = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['index']       = (string) The name of the data stream, index, or index alias to perform bulk actions on.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -243,9 +243,9 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Terminates replication and converts the follower index to a standard index.
+     * Terminates the replication and converts the follower index to a standard index.
      *
-     * $params['index']       = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['index']       = (string) The name of the data stream, index, or index alias to perform bulk actions on.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -269,9 +269,9 @@ class ReplicationNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates settings on the follower index.
+     * Updates any settings on the follower index.
      *
-     * $params['index']       = (string) Name of the data stream, index, or index alias to perform bulk actions on.
+     * $params['index']       = (string) The name of the data stream, index, or index alias to perform bulk actions on.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

@@ -586,7 +586,7 @@ class Client
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
+     * $params['version_type']           = (any) Specific version type: `external`, `external_gte`.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                  = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -780,7 +780,7 @@ class Client
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (any) Specific version type: `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -820,7 +820,7 @@ class Client
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (any) Specific version type: `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -935,7 +935,7 @@ class Client
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type: `internal`, `external`, `external_gte`. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (any) Specific version type: `internal`, `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1057,7 +1057,7 @@ class Client
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (enum) Specific version type. One of `internal`, `external`, `external_gte`. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (any) Specific version type. One of `internal`, `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1094,7 +1094,7 @@ class Client
      * $params['routing']                = (any) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']           = (enum) Specific version type: `external`, `external_gte`. (Options = external,external_gte,force,internal)
+     * $params['version_type']           = (any) Specific version type: `external`, `external_gte`.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                  = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1257,7 +1257,7 @@ class Client
      * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
-     * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (any) Specific version type.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1664,7 +1664,7 @@ class Client
      * $params['routing']          = (any) Custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
-     * $params['version_type']     = (enum) Specific version type. (Options = external,external_gte,force,internal)
+     * $params['version_type']     = (any) Specific version type.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
