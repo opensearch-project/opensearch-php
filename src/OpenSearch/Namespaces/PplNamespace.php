@@ -28,10 +28,10 @@ use OpenSearch\Endpoints\Ppl\Query;
 class PplNamespace extends AbstractNamespace
 {
     /**
-     * Shows how a query is executed against OpenSearch.
+     * Returns the execution plan for a PPL query.
      *
-     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
-     * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results. (Default = true)
+     * $params['format']      = (string) Specifies the response format (JSON, YAML).
+     * $params['sanitize']    = (boolean) Whether to escape special characters in the results. (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -53,10 +53,10 @@ class PplNamespace extends AbstractNamespace
     }
 
     /**
-     * Collect metrics for the plugin within the interval.
+     * Retrieves performance metrics for the PPL plugin.
      *
-     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
-     * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results. (Default = true)
+     * $params['format']      = (string) Specifies the response format (JSON, YAML).
+     * $params['sanitize']    = (boolean) Whether to escape special characters in the results. (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -75,10 +75,10 @@ class PplNamespace extends AbstractNamespace
     }
 
     /**
-     * By a stats endpoint, you are able to collect metrics for the plugin within the interval.
+     * Retrieves filtered performance metrics for the PPL plugin.
      *
-     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
-     * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results. (Default = true)
+     * $params['format']      = (string) Specifies the response format (JSON, YAML).
+     * $params['sanitize']    = (boolean) Whether to escape special characters in the results. (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -100,10 +100,10 @@ class PplNamespace extends AbstractNamespace
     }
 
     /**
-     * Send a PPL query to the PPL plugin.
+     * Executes a PPL query against OpenSearch indexes.
      *
-     * $params['format']      = (string) A short version of the Accept header (for example, `json`, `yaml`).
-     * $params['sanitize']    = (boolean) Specifies whether to escape special characters in the results. (Default = true)
+     * $params['format']      = (string) Specifies the response format (JSON OR YAML).
+     * $params['sanitize']    = (boolean) Whether to sanitize special characters in the results. (Default = true)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

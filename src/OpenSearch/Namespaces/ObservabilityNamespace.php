@@ -56,7 +56,7 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Deletes specific observability object specified by ID.
      *
-     * $params['object_id']   = (string) The ID of the Observability Object.
+     * $params['object_id']   = (string) The ID of the observability object to delete.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -80,8 +80,8 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Deletes specific observability objects specified by ID or a list of IDs.
      *
-     * $params['objectId']     = (string) The ID of a single Observability Object to delete.
-     * $params['objectIdList'] = (string) A comma-separated list of Observability Object IDs to delete.
+     * $params['objectId']     = (string) The ID of a single observability object to delete.
+     * $params['objectIdList'] = (string) A comma-separated list of observability object IDs to delete.
      * $params['pretty']       = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']        = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -122,7 +122,7 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Retrieves specific observability object specified by ID.
      *
-     * $params['object_id']   = (string) The ID of the Observability Object.
+     * $params['object_id']   = (string) The ID of the observability object to retrieve.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -166,7 +166,7 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Updates an existing observability object.
      *
-     * $params['object_id']   = (string) The ID of the Observability Object.
+     * $params['object_id']   = (string) The ID of the observability object to update.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

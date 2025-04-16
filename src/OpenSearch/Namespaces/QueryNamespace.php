@@ -29,9 +29,9 @@ use OpenSearch\Endpoints\Query\DatasourcesUpdate;
 class QueryNamespace extends AbstractNamespace
 {
     /**
-     * Deletes specific datasource specified by name.
+     * Deletes a specific data source by name.
      *
-     * $params['datasource_name'] = (string) The Name of the DataSource to delete.
+     * $params['datasource_name'] = (string) The name of the data source to delete.
      * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -53,9 +53,9 @@ class QueryNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves specific datasource specified by name.
+     * Retrieves a specific data source by name.
      *
-     * $params['datasource_name'] = (string) The Name of the DataSource to retrieve.
+     * $params['datasource_name'] = (string) The name of the data source to retrieve.
      * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -77,7 +77,7 @@ class QueryNamespace extends AbstractNamespace
     }
 
     /**
-     * Creates a new query datasource.
+     * Creates a new query data source.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -100,7 +100,7 @@ class QueryNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves list of all datasources.
+     * Retrieves a list of all available datasources.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -120,7 +120,7 @@ class QueryNamespace extends AbstractNamespace
     }
 
     /**
-     * Updates an existing query datasource.
+     * Updates an existing query data source.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)

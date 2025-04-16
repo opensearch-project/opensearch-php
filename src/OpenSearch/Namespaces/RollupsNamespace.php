@@ -30,9 +30,9 @@ use OpenSearch\Endpoints\Rollups\Stop;
 class RollupsNamespace extends AbstractNamespace
 {
     /**
-     * Delete index rollup.
+     * Deletes an index rollup job configuration.
      *
-     * $params['id']          = (string) Rollup to access (Required)
+     * $params['id']          = (string) The ID of the rollup job. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -54,9 +54,9 @@ class RollupsNamespace extends AbstractNamespace
     }
 
     /**
-     * Get a rollup's current status.
+     * Retrieves the execution status information for an index rollup job.
      *
-     * $params['id']          = (string) Rollup to access (Required)
+     * $params['id']          = (string) The ID of the rollup job. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -78,9 +78,9 @@ class RollupsNamespace extends AbstractNamespace
     }
 
     /**
-     * Get an index rollup.
+     * Retrieves an index rollup job configuration by ID.
      *
-     * $params['id']          = (string) Rollup to access (Required)
+     * $params['id']          = (string) The ID of the rollup job. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -102,11 +102,11 @@ class RollupsNamespace extends AbstractNamespace
     }
 
     /**
-     * Create or update index rollup.
+     * Creates or updates an index rollup job configuration.
      *
-     * $params['id']              = (string) Rollup to access (Required)
-     * $params['if_primary_term'] = (number) Only perform the operation if the document has this primary term.
-     * $params['if_seq_no']       = (integer) Only perform the operation if the document has this sequence number.
+     * $params['id']              = (string) The ID of the rollup job. (Required)
+     * $params['if_primary_term'] = (number) Only performs the operation if the document has the specified primary term.
+     * $params['if_seq_no']       = (integer) Only performs the operation if the document has the specified sequence number.
      * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -130,9 +130,9 @@ class RollupsNamespace extends AbstractNamespace
     }
 
     /**
-     * Start rollup.
+     * Starts the execution of an index rollup job.
      *
-     * $params['id']          = (string) Rollup to access (Required)
+     * $params['id']          = (string) The ID of the rollup job. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -154,9 +154,9 @@ class RollupsNamespace extends AbstractNamespace
     }
 
     /**
-     * Stop rollup.
+     * Stops the execution of an index rollup job.
      *
-     * $params['id']          = (string) Rollup to access (Required)
+     * $params['id']          = (string) The ID of the rollup job. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
