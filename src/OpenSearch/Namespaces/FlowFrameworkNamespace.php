@@ -34,12 +34,12 @@ use OpenSearch\Endpoints\FlowFramework\Update;
 class FlowFrameworkNamespace extends AbstractNamespace
 {
     /**
-     * Create a workflow.
+     * Creates a new workflow template.
      *
      * $params['provision']     = (boolean)  (Default = false)
      * $params['reprovision']   = (boolean)  (Default = false)
      * $params['update_fields'] = (boolean)  (Default = false)
-     * $params['use_case']      = (string) To use a workflow template, specify it in the `use_case` query parameter when creating a workflow.
+     * $params['use_case']      = (string) Specifies the workflow template to use.
      * $params['validation']    = (string)  (Default = all)
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -62,7 +62,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     }
 
     /**
-     * Delete a workflow.
+     * Deletes a workflow template.
      *
      * $params['workflow_id']  = (string)
      * $params['clear_status'] = (boolean)  (Default = false)
@@ -87,7 +87,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     }
 
     /**
-     * Deprovision workflow's resources when you no longer need it.
+     * Deprovision workflow's resources when you no longer need them.
      *
      * $params['workflow_id']  = (string)
      * $params['allow_delete'] = (string)
@@ -112,7 +112,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     }
 
     /**
-     * Get a workflow.
+     * Retrieves a workflow template.
      *
      * $params['workflow_id'] = (string)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -136,10 +136,10 @@ class FlowFrameworkNamespace extends AbstractNamespace
     }
 
     /**
-     * Get the provisioning deployment status until it is complete.
+     * Retrieves the current workflow provisioning status.
      *
      * $params['workflow_id'] = (string)
-     * $params['all']         = (boolean) The all parameter specifies whether the response should return all fields. (Default = false)
+     * $params['all']         = (boolean) Whether to return all fields in the response. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -161,7 +161,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
     }
 
     /**
-     * Get a list of workflow steps.
+     * Retrieves available workflow steps.
      *
      * $params['workflow_step'] = (string)
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -254,13 +254,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     }
 
     /**
-     * Update a workflow. You can only update a complete workflow if it has not yet been provisioned.
+     * Updates a workflow template that has not been provisioned.
      *
      * $params['workflow_id']   = (string)
      * $params['provision']     = (boolean)  (Default = false)
      * $params['reprovision']   = (boolean)  (Default = false)
      * $params['update_fields'] = (boolean)  (Default = false)
-     * $params['use_case']      = (string) To use a workflow template, specify it in the `use_case` query parameter when creating a workflow.
+     * $params['use_case']      = (string) Specifies the workflow template to use.
      * $params['validation']    = (string)  (Default = all)
      * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
