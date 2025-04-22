@@ -8,6 +8,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Reduce distribution size by actualizing .gitattributes' export ignore section ([#330](https://github.com/opensearch-project/opensearch-php/pull/330))
 ### Security
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@0e87c7c](https://github.com/opensearch-project/opensearch-api-specification/commit/0e87c7ca0676ddfe03d419b985e08031742f5b62)
