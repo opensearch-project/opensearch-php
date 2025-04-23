@@ -1,7 +1,7 @@
 # Files to exclude when creating archive
 /.github export-ignore
-/guides/ export-ignore
-/samples/ export-ignore
+/guides export-ignore
+/samples export-ignore
 /tests export-ignore
 /util export-ignore
 /.gitattributes export-ignore
