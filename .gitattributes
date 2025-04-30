@@ -17,7 +17,7 @@
 /docker-compose.yml export-ignore
 /MAINTAINERS.md export-ignore
 /phpstan.neon.dist export-ignore
-/phpstan-baseline.dist export-ignore
+/phpstan-baseline.neon export-ignore
 /phpunit.xml.dist export-ignore
 /RELEASING.md export-ignore
 /USER_GUIDE.md export-ignore
