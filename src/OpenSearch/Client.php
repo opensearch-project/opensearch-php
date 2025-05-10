@@ -40,6 +40,7 @@ use OpenSearch\Namespaces\ListNamespace;
 use OpenSearch\Namespaces\LtrNamespace;
 use OpenSearch\Namespaces\MlNamespace;
 use OpenSearch\Namespaces\MonitoringNamespace;
+use OpenSearch\Namespaces\NeuralNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\NotificationsNamespace;
 use OpenSearch\Namespaces\ObservabilityNamespace;
@@ -226,6 +227,11 @@ class Client
     protected $monitoring;
 
     /**
+     * @var NeuralNamespace
+     */
+    protected $neural;
+
+    /**
      * @var NodesNamespace
      */
     protected $nodes;
@@ -380,6 +386,7 @@ class Client
         $this->ml = new MlNamespace($transport, $this->endpointFactory);
         // @phpstan-ignore new.deprecated, property.deprecated
         $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
+        $this->neural = new NeuralNamespace($transport, $this->endpointFactory);
         $this->nodes = new NodesNamespace($transport, $this->endpointFactory);
         $this->notifications = new NotificationsNamespace($transport, $this->endpointFactory);
         $this->observability = new ObservabilityNamespace($transport, $this->endpointFactory);
@@ -414,7 +421,7 @@ class Client
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -640,7 +647,7 @@ class Client
      * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['analyze_wildcard']       = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']               = (string) Analyzer to use for the query string.
-     * $params['conflicts']              = (string) What to do if delete by query hits version conflicts: `abort` or `proceed`.
+     * $params['conflicts']              = (any) What to do if delete by query hits version conflicts: `abort` or `proceed`.
      * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
      * $params['df']                     = (string) Field to use as default where no field prefix is given in the query string.
      * $params['expand_wildcards']       = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -1087,7 +1094,7 @@ class Client
      * $params['id']                     = (string) Unique identifier for the document.
      * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
-     * $params['op_type']                = (string) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`.
+     * $params['op_type']                = (any) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`.
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
@@ -1555,6 +1562,7 @@ class Client
      * $params['track_scores']                  = (boolean) If `true`, calculate and return document scores, even if the scores are not used for sorting.
      * $params['track_total_hits']              = (any) Number of hits matching the query to count accurately.If `true`, the exact number of hits is returned at the cost of some performance.If `false`, the response does not include the total number of hits matching the query.
      * $params['typed_keys']                    = (boolean) If `true`, aggregation and suggester names are be prefixed by their respective types in the response.
+     * $params['verbose_pipeline']              = (boolean) Enables or disables verbose mode for the search pipeline.When verbose mode is enabled, detailed information about each processorin the search pipeline is included in the search response. This includesthe processor name, execution status, input, output, and time taken for processing.This parameter is primarily intended for debugging purposes, allowing usersto track how data flows and transforms through the search pipeline.
      * $params['version']                       = (boolean) If `true`, returns document version as part of a hit.
      * $params['pretty']                        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                         = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1742,7 +1750,7 @@ class Client
      * $params['allow_no_indices']       = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['analyze_wildcard']       = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
      * $params['analyzer']               = (string) Analyzer to use for the query string.
-     * $params['conflicts']              = (string) What to do if update by query hits version conflicts: `abort` or `proceed`.
+     * $params['conflicts']              = (any) What to do if update by query hits version conflicts: `abort` or `proceed`.
      * $params['default_operator']       = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
      * $params['df']                     = (string) Field to use as default where no field prefix is given in the query string.
      * $params['expand_wildcards']       = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -1992,6 +2000,13 @@ class Client
     {
         @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->monitoring;
+    }
+    /**
+     * Returns the neural namespace
+     */
+    public function neural(): NeuralNamespace
+    {
+        return $this->neural;
     }
     /**
      * Returns the nodes namespace

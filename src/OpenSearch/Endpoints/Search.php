@@ -83,6 +83,7 @@ class Search extends AbstractEndpoint
             'track_scores',
             'track_total_hits',
             'typed_keys',
+            'verbose_pipeline',
             'version',
             'pretty',
             'human',
