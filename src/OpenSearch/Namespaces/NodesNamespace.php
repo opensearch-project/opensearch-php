@@ -37,13 +37,13 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns information about hot threads on each node in the cluster.
      *
-     * $params['node_id']             = (array) Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-     * $params['ignore_idle_threads'] = (boolean) Don't show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue. (Default = true)
-     * $params['interval']            = (string) The interval for the second sampling of threads.
-     * $params['snapshots']           = (integer) Number of samples of thread stack trace. (Default = 10)
-     * $params['threads']             = (integer) Specify the number of threads to provide information for. (Default = 3)
-     * $params['timeout']             = (string) Operation timeout.
-     * $params['type']                = (enum) The type to sample. (Options = block,cpu,wait)
+     * $params['node_id']             = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+     * $params['ignore_idle_threads'] = (boolean) Whether to show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue. (Default = true)
+     * $params['interval']            = (string) The time interval between thread stack trace samples.
+     * $params['snapshots']           = (integer) The number of thread stack trace samples to collect. (Default = 10)
+     * $params['threads']             = (integer) The number of threads to provide information for. (Default = 3)
+     * $params['timeout']             = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['type']                = (string) The type to sample.
      * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']               = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -70,8 +70,8 @@ class NodesNamespace extends AbstractNamespace
      * $params['node_id_or_metric'] = (any) Limits the information returned to a list of node IDs or specific metrics. Supports a comma-separated list, such as `node1,node2` or `http,ingest`.
      * $params['metric']            = (array) Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
      * $params['node_id']           = (array) Comma-separated list of node IDs or names used to limit returned information.
-     * $params['flat_settings']     = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['timeout']           = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['flat_settings']     = (boolean) When `true`, returns settings in flat format. (Default = false)
+     * $params['timeout']           = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']            = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']             = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']       = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -100,7 +100,7 @@ class NodesNamespace extends AbstractNamespace
      * Reloads secure settings.
      *
      * $params['node_id']     = (array) The names of particular nodes in the cluster to target.
-     * $params['timeout']     = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']     = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -127,16 +127,16 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns statistical information about nodes in the cluster.
      *
-     * $params['node_id']                    = (array) Comma-separated list of node IDs or names used to limit returned information.
-     * $params['metric']                     = (array) Limit the information returned to the specified metrics
-     * $params['index_metric']               = (array) Limit the information returned for indexes metric to the specific index metrics. It can be used only if indexes (or all) metric is specified.
-     * $params['completion_fields']          = (any) Comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
-     * $params['fielddata_fields']           = (any) Comma-separated list or wildcard expressions of fields to include in field data statistics.
-     * $params['fields']                     = (any) Comma-separated list or wildcard expressions of fields to include in the statistics.
-     * $params['groups']                     = (array) Comma-separated list of search groups to include in the search statistics.
-     * $params['include_segment_file_sizes'] = (boolean) If `true`, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
+     * $params['node_id']                    = (array) A comma-separated list of node IDs or names used to limit returned information.
+     * $params['metric']                     = (array) Limit the information returned to the specified metrics.
+     * $params['index_metric']               = (array) Limit the information returned for indexes metric to the specified index metrics. It can be used only if indexes (or all) metric is specified.
+     * $params['completion_fields']          = (any) A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
+     * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
+     * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
+     * $params['groups']                     = (array) A comma-separated list of search groups to include in the search statistics.
+     * $params['include_segment_file_sizes'] = (boolean) When `true`,  reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
      * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
-     * $params['timeout']                    = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                    = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['types']                      = (array) A comma-separated list of document types for the indexing index metric.
      * $params['pretty']                     = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                      = (boolean) Whether to return human readable values for statistics. (Default = true)
