@@ -100,7 +100,7 @@ class QueryNamespace extends AbstractNamespace
     }
 
     /**
-     * Retrieves a list of all available datasources.
+     * Retrieves a list of all available data sources.
      *
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
