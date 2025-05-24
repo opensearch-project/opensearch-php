@@ -29,7 +29,7 @@ class DeleteTask extends AbstractEndpoint
     {
         $task_id = $this->task_id ?? null;
         if (isset($task_id)) {
-            return "/_plugins/_ml/tasks/$task_id";
+            return '/_plugins/_ml/tasks/' . rawurlencode($task_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.delete_task');
     }

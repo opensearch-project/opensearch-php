@@ -24,7 +24,7 @@ class DeleteConfigs extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_notifications/configs";
+        return '/_plugins/_notifications/configs';
     }
 
     public function getParamWhitelist(): array

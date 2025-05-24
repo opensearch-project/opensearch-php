@@ -24,7 +24,7 @@ class PostDashboardsInfo extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_opendistro/_security/kibanainfo";
+        return '/_opendistro/_security/kibanainfo';
     }
 
     public function getParamWhitelist(): array

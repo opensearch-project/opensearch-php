@@ -35,12 +35,12 @@ class State extends AbstractEndpoint
         $metric = $this->metric ?? null;
         $index = $this->index ?? null;
         if (isset($metric) && isset($index)) {
-            return "/_cluster/state/$metric/$index";
+            return '/_cluster/state/' . rawurlencode($metric) . '/' . rawurlencode($index);
         }
         if (isset($metric)) {
-            return "/_cluster/state/$metric";
+            return '/_cluster/state/' . rawurlencode($metric);
         }
-        return "/_cluster/state";
+        return '/_cluster/state';
     }
 
     public function getParamWhitelist(): array

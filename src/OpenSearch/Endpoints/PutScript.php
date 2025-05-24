@@ -38,9 +38,9 @@ class PutScript extends AbstractEndpoint
         $id = $this->id;
         $context = $this->context ?? null;
         if (isset($context)) {
-            return "/_scripts/$id/$context";
+            return '/_scripts/' . rawurlencode($id) . '/' . rawurlencode($context);
         }
-        return "/_scripts/$id";
+        return '/_scripts/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

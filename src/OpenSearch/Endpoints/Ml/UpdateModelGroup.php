@@ -27,7 +27,7 @@ class UpdateModelGroup extends AbstractEndpoint
     {
         $model_group_id = $this->model_group_id ?? null;
         if (isset($model_group_id)) {
-            return "/_plugins/_ml/model_groups/$model_group_id";
+            return '/_plugins/_ml/model_groups/' . rawurlencode($model_group_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.update_model_group');
     }

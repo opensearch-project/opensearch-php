@@ -32,9 +32,9 @@ class Segments extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_segments";
+            return '/' . rawurlencode($index) . '/_segments';
         }
-        return "/_segments";
+        return '/_segments';
     }
 
     public function getParamWhitelist(): array

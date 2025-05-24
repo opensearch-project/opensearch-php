@@ -34,9 +34,9 @@ class GetDataStream extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_data_stream/$name";
+            return '/_data_stream/' . rawurlencode($name);
         }
-        return "/_data_stream";
+        return '/_data_stream';
     }
 
     public function getParamWhitelist(): array

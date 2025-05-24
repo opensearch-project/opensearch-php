@@ -35,7 +35,7 @@ class SimulateIndexTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_index_template/_simulate_index/$name";
+            return '/_index_template/_simulate_index/' . rawurlencode($name);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.simulate_index_template');
     }

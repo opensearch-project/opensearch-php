@@ -33,7 +33,7 @@ class Open extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_open";
+            return '/' . rawurlencode($index) . '/_open';
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.open');
     }

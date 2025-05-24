@@ -32,7 +32,7 @@ class DeleteUserLegacy extends AbstractEndpoint
         }
         $username = $this->username;
 
-        return "/_plugins/_security/api/user/$username";
+        return '/_plugins/_security/api/user/' . rawurlencode($username);
     }
 
     public function getParamWhitelist(): array

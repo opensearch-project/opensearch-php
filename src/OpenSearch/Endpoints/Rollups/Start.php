@@ -30,7 +30,7 @@ class Start extends AbstractEndpoint
         }
         $id = $this->id;
 
-        return "/_plugins/_rollup/jobs/$id/_start";
+        return '/_plugins/_rollup/jobs/' . rawurlencode($id) . '/_start';
     }
 
     public function getParamWhitelist(): array

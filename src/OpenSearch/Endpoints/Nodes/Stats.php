@@ -38,21 +38,21 @@ class Stats extends AbstractEndpoint
         $metric = $this->metric ?? null;
         $index_metric = $this->index_metric ?? null;
         if (isset($node_id) && isset($metric) && isset($index_metric)) {
-            return "/_nodes/$node_id/stats/$metric/$index_metric";
+            return '/_nodes/' . rawurlencode($node_id) . '/stats/' . rawurlencode($metric) . '/' . rawurlencode($index_metric);
         }
         if (isset($metric) && isset($index_metric)) {
-            return "/_nodes/stats/$metric/$index_metric";
+            return '/_nodes/stats/' . rawurlencode($metric) . '/' . rawurlencode($index_metric);
         }
         if (isset($node_id) && isset($metric)) {
-            return "/_nodes/$node_id/stats/$metric";
+            return '/_nodes/' . rawurlencode($node_id) . '/stats/' . rawurlencode($metric);
         }
         if (isset($node_id)) {
-            return "/_nodes/$node_id/stats";
+            return '/_nodes/' . rawurlencode($node_id) . '/stats';
         }
         if (isset($metric)) {
-            return "/_nodes/stats/$metric";
+            return '/_nodes/stats/' . rawurlencode($metric);
         }
-        return "/_nodes/stats";
+        return '/_nodes/stats';
     }
 
     public function getParamWhitelist(): array

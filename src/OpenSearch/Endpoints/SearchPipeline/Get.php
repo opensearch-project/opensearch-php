@@ -26,9 +26,9 @@ class Get extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_search/pipeline/$id";
+            return '/_search/pipeline/' . rawurlencode($id);
         }
-        return "/_search/pipeline";
+        return '/_search/pipeline';
     }
 
     public function getParamWhitelist(): array

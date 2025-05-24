@@ -30,7 +30,7 @@ class Delete extends AbstractEndpoint
         }
         $id = $this->id;
 
-        return "/_plugins/_asynchronous_search/$id";
+        return '/_plugins/_asynchronous_search/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

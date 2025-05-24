@@ -34,9 +34,9 @@ class GetIndexTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_index_template/$name";
+            return '/_index_template/' . rawurlencode($name);
         }
-        return "/_index_template";
+        return '/_index_template';
     }
 
     public function getParamWhitelist(): array

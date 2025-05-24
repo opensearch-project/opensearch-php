@@ -35,15 +35,15 @@ class Stats extends AbstractEndpoint
         $metric = $this->metric ?? null;
         $index = $this->index ?? null;
         if (isset($index) && isset($metric)) {
-            return "/$index/_stats/$metric";
+            return '/' . rawurlencode($index) . '/_stats/' . rawurlencode($metric);
         }
         if (isset($metric)) {
-            return "/_stats/$metric";
+            return '/_stats/' . rawurlencode($metric);
         }
         if (isset($index)) {
-            return "/$index/_stats";
+            return '/' . rawurlencode($index) . '/_stats';
         }
-        return "/_stats";
+        return '/_stats';
     }
 
     public function getParamWhitelist(): array

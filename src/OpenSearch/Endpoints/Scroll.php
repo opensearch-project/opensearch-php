@@ -36,9 +36,9 @@ class Scroll extends AbstractEndpoint
         }
 
         if (isset($scroll_id)) {
-            return "/_search/scroll/$scroll_id";
+            return '/_search/scroll/' . rawurlencode($scroll_id);
         }
-        return "/_search/scroll";
+        return '/_search/scroll';
     }
 
     public function getParamWhitelist(): array

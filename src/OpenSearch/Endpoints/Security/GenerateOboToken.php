@@ -24,7 +24,7 @@ class GenerateOboToken extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/generateonbehalfoftoken";
+        return '/_plugins/_security/api/generateonbehalfoftoken';
     }
 
     public function getParamWhitelist(): array

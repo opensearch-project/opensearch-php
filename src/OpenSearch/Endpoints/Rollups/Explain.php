@@ -30,7 +30,7 @@ class Explain extends AbstractEndpoint
         }
         $id = $this->id;
 
-        return "/_plugins/_rollup/jobs/$id/_explain";
+        return '/_plugins/_rollup/jobs/' . rawurlencode($id) . '/_explain';
     }
 
     public function getParamWhitelist(): array

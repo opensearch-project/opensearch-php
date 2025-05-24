@@ -30,7 +30,7 @@ class PendingTasks extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cluster/pending_tasks";
+        return '/_cluster/pending_tasks';
     }
 
     public function getParamWhitelist(): array

@@ -33,7 +33,7 @@ class Master extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cat/master";
+        return '/_cat/master';
     }
 
     public function getParamWhitelist(): array

@@ -34,9 +34,9 @@ class Allocation extends AbstractEndpoint
     {
         $node_id = $this->node_id ?? null;
         if (isset($node_id)) {
-            return "/_cat/allocation/$node_id";
+            return '/_cat/allocation/' . rawurlencode($node_id);
         }
-        return "/_cat/allocation";
+        return '/_cat/allocation';
     }
 
     public function getParamWhitelist(): array

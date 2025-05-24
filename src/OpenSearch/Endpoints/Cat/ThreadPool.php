@@ -34,9 +34,9 @@ class ThreadPool extends AbstractEndpoint
     {
         $thread_pool_patterns = $this->thread_pool_patterns ?? null;
         if (isset($thread_pool_patterns)) {
-            return "/_cat/thread_pool/$thread_pool_patterns";
+            return '/_cat/thread_pool/' . rawurlencode($thread_pool_patterns);
         }
-        return "/_cat/thread_pool";
+        return '/_cat/thread_pool';
     }
 
     public function getParamWhitelist(): array

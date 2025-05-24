@@ -24,7 +24,7 @@ class ReloadHttpCertificates extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/ssl/http/reloadcerts";
+        return '/_plugins/_security/api/ssl/http/reloadcerts';
     }
 
     public function getParamWhitelist(): array

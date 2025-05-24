@@ -40,9 +40,9 @@ class Rollover extends AbstractEndpoint
         $alias = $this->alias;
         $new_index = $this->new_index ?? null;
         if (isset($new_index)) {
-            return "/$alias/_rollover/$new_index";
+            return '/' . rawurlencode($alias) . '/_rollover/' . rawurlencode($new_index);
         }
-        return "/$alias/_rollover";
+        return '/' . rawurlencode($alias) . '/_rollover';
     }
 
     public function getParamWhitelist(): array

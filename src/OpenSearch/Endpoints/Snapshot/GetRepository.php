@@ -34,9 +34,9 @@ class GetRepository extends AbstractEndpoint
     {
         $repository = $this->repository ?? null;
         if (isset($repository)) {
-            return "/_snapshot/$repository";
+            return '/_snapshot/' . rawurlencode($repository);
         }
-        return "/_snapshot";
+        return '/_snapshot';
     }
 
     public function getParamWhitelist(): array

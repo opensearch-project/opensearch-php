@@ -24,7 +24,7 @@ class AllPitSegments extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cat/pit_segments/_all";
+        return '/_cat/pit_segments/_all';
     }
 
     public function getParamWhitelist(): array

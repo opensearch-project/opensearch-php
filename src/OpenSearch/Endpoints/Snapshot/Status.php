@@ -36,12 +36,12 @@ class Status extends AbstractEndpoint
         $repository = $this->repository ?? null;
         $snapshot = $this->snapshot ?? null;
         if (isset($repository) && isset($snapshot)) {
-            return "/_snapshot/$repository/$snapshot/_status";
+            return '/_snapshot/' . rawurlencode($repository) . '/' . rawurlencode($snapshot) . '/_status';
         }
         if (isset($repository)) {
-            return "/_snapshot/$repository/_status";
+            return '/_snapshot/' . rawurlencode($repository) . '/_status';
         }
-        return "/_snapshot/_status";
+        return '/_snapshot/_status';
     }
 
     public function getParamWhitelist(): array

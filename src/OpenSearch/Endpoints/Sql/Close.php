@@ -24,7 +24,7 @@ class Close extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_sql/close";
+        return '/_plugins/_sql/close';
     }
 
     public function getParamWhitelist(): array

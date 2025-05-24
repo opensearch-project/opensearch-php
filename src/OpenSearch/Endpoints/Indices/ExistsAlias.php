@@ -39,9 +39,9 @@ class ExistsAlias extends AbstractEndpoint
         $name = $this->name;
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_alias/$name";
+            return '/' . rawurlencode($index) . '/_alias/' . rawurlencode($name);
         }
-        return "/_alias/$name";
+        return '/_alias/' . rawurlencode($name);
     }
 
     public function getParamWhitelist(): array

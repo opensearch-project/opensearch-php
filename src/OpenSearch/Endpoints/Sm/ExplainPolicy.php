@@ -29,7 +29,7 @@ class ExplainPolicy extends AbstractEndpoint
     {
         $policy_name = $this->policy_name ?? null;
         if (isset($policy_name)) {
-            return "/_plugins/_sm/policies/$policy_name/_explain";
+            return '/_plugins/_sm/policies/' . rawurlencode($policy_name) . '/_explain';
         }
         throw new RuntimeException('Missing parameter for the endpoint sm.explain_policy');
     }

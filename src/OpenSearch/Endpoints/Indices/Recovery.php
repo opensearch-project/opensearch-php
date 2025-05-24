@@ -32,9 +32,9 @@ class Recovery extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_recovery";
+            return '/' . rawurlencode($index) . '/_recovery';
         }
-        return "/_recovery";
+        return '/_recovery';
     }
 
     public function getParamWhitelist(): array

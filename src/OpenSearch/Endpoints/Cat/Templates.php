@@ -34,9 +34,9 @@ class Templates extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_cat/templates/$name";
+            return '/_cat/templates/' . rawurlencode($name);
         }
-        return "/_cat/templates";
+        return '/_cat/templates';
     }
 
     public function getParamWhitelist(): array

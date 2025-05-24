@@ -35,7 +35,7 @@ class DeleteDataStream extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_data_stream/$name";
+            return '/_data_stream/' . rawurlencode($name);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.delete_data_stream');
     }

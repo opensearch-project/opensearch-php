@@ -26,9 +26,9 @@ class RemovePolicy extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_ism/remove/$index";
+            return '/_plugins/_ism/remove/' . rawurlencode($index);
         }
-        return "/_plugins/_ism/remove";
+        return '/_plugins/_ism/remove';
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class Settings extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_query/settings";
+        return '/_plugins/_query/settings';
     }
 
     public function getParamWhitelist(): array

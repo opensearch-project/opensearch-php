@@ -30,9 +30,9 @@ class RankEval extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_rank_eval";
+            return '/' . rawurlencode($index) . '/_rank_eval';
         }
-        return "/_rank_eval";
+        return '/_rank_eval';
     }
 
     public function getParamWhitelist(): array

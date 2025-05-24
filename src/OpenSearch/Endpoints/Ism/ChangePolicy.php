@@ -26,9 +26,9 @@ class ChangePolicy extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_ism/change_policy/$index";
+            return '/_plugins/_ism/change_policy/' . rawurlencode($index);
         }
-        return "/_plugins/_ism/change_policy";
+        return '/_plugins/_ism/change_policy';
     }
 
     public function getParamWhitelist(): array

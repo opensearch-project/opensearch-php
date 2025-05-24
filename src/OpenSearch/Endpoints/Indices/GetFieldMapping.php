@@ -39,9 +39,9 @@ class GetFieldMapping extends AbstractEndpoint
         $fields = $this->fields;
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_mapping/field/$fields";
+            return '/' . rawurlencode($index) . '/_mapping/field/' . rawurlencode($fields);
         }
-        return "/_mapping/field/$fields";
+        return '/_mapping/field/' . rawurlencode($fields);
     }
 
     public function getParamWhitelist(): array

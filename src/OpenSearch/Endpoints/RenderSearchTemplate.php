@@ -30,9 +30,9 @@ class RenderSearchTemplate extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_render/template/$id";
+            return '/_render/template/' . rawurlencode($id);
         }
-        return "/_render/template";
+        return '/_render/template';
     }
 
     public function getParamWhitelist(): array

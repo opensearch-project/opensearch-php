@@ -29,7 +29,7 @@ class SendTest extends AbstractEndpoint
     {
         $config_id = $this->config_id ?? null;
         if (isset($config_id)) {
-            return "/_plugins/_notifications/feature/test/$config_id";
+            return '/_plugins/_notifications/feature/test/' . rawurlencode($config_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint notifications.send_test');
     }

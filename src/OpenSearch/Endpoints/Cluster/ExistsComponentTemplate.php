@@ -35,7 +35,7 @@ class ExistsComponentTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_component_template/$name";
+            return '/_component_template/' . rawurlencode($name);
         }
         throw new RuntimeException('Missing parameter for the endpoint cluster.exists_component_template');
     }

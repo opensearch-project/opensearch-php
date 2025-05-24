@@ -35,7 +35,7 @@ class UpdateByQuery extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_update_by_query";
+        return '/' . rawurlencode($index) . '/_update_by_query';
     }
 
     public function getParamWhitelist(): array

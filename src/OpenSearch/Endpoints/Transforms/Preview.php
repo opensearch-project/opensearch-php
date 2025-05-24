@@ -24,7 +24,7 @@ class Preview extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_transform/_preview";
+        return '/_plugins/_transform/_preview';
     }
 
     public function getParamWhitelist(): array

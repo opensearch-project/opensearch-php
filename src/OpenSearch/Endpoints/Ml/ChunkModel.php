@@ -34,7 +34,7 @@ class ChunkModel extends AbstractEndpoint
         $chunk_number = $this->chunk_number ?? null;
         $model_id = $this->model_id ?? null;
         if (isset($model_id) && isset($chunk_number)) {
-            return "/_plugins/_ml/models/$model_id/chunk/$chunk_number";
+            return '/_plugins/_ml/models/' . rawurlencode($model_id) . '/chunk/' . rawurlencode($chunk_number);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.chunk_model');
     }

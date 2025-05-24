@@ -26,9 +26,9 @@ class ExplainPolicy extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_ism/explain/$index";
+            return '/_plugins/_ism/explain/' . rawurlencode($index);
         }
-        return "/_plugins/_ism/explain";
+        return '/_plugins/_ism/explain';
     }
 
     public function getParamWhitelist(): array

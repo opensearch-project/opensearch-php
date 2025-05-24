@@ -24,7 +24,7 @@ class GetUsersLegacy extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/user";
+        return '/_plugins/_security/api/user';
     }
 
     public function getParamWhitelist(): array

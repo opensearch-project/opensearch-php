@@ -29,7 +29,7 @@ class SearchMessage extends AbstractEndpoint
     {
         $memory_id = $this->memory_id ?? null;
         if (isset($memory_id)) {
-            return "/_plugins/_ml/memory/$memory_id/_search";
+            return '/_plugins/_ml/memory/' . rawurlencode($memory_id) . '/_search';
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.search_message');
     }

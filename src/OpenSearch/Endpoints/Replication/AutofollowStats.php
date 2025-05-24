@@ -24,7 +24,7 @@ class AutofollowStats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_replication/autofollow_stats";
+        return '/_plugins/_replication/autofollow_stats';
     }
 
     public function getParamWhitelist(): array

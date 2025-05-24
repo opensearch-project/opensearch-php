@@ -39,7 +39,7 @@ class Create extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_create/$id";
+        return '/' . rawurlencode($index) . '/_create/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

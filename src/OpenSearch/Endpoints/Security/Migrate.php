@@ -24,7 +24,7 @@ class Migrate extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/migrate";
+        return '/_plugins/_security/api/migrate';
     }
 
     public function getParamWhitelist(): array

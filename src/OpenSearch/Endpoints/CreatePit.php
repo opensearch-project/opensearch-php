@@ -29,7 +29,7 @@ class CreatePit extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_search/point_in_time";
+        return '/' . rawurlencode($index) . '/_search/point_in_time';
     }
 
     public function getParamWhitelist(): array
