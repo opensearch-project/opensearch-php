@@ -4,6 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Added URL encoding to all endpoint parameters ([#335](https://github.com/opensearch-project/opensearch-php/pull/335))
 ### Changed
 ### Deprecated
 ### Removed
