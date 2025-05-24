@@ -26,9 +26,9 @@ class AddPolicy extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_ism/add/$index";
+            return '/_plugins/_ism/add/' . rawurlencode($index);
         }
-        return "/_plugins/_ism/add";
+        return '/_plugins/_ism/add';
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class SearchAgents extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_ml/agents/_search";
+        return '/_plugins/_ml/agents/_search';
     }
 
     public function getParamWhitelist(): array

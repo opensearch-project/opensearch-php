@@ -32,7 +32,7 @@ class PatchActionGroup extends AbstractEndpoint
         }
         $action_group = $this->action_group;
 
-        return "/_plugins/_security/api/actiongroups/$action_group";
+        return '/_plugins/_security/api/actiongroups/' . rawurlencode($action_group);
     }
 
     public function getParamWhitelist(): array

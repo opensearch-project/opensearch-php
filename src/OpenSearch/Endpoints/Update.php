@@ -39,7 +39,7 @@ class Update extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_update/$id";
+        return '/' . rawurlencode($index) . '/_update/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

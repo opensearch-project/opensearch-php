@@ -38,15 +38,15 @@ class Stats extends AbstractEndpoint
         $metric = $this->metric ?? null;
         $node_id = $this->node_id ?? null;
         if (isset($metric) && isset($index_metric) && isset($node_id)) {
-            return "/_cluster/stats/$metric/$index_metric/nodes/$node_id";
+            return '/_cluster/stats/' . rawurlencode($metric) . '/' . rawurlencode($index_metric) . '/nodes/' . rawurlencode($node_id);
         }
         if (isset($metric) && isset($node_id)) {
-            return "/_cluster/stats/$metric/nodes/$node_id";
+            return '/_cluster/stats/' . rawurlencode($metric) . '/nodes/' . rawurlencode($node_id);
         }
         if (isset($node_id)) {
-            return "/_cluster/stats/nodes/$node_id";
+            return '/_cluster/stats/nodes/' . rawurlencode($node_id);
         }
-        return "/_cluster/stats";
+        return '/_cluster/stats';
     }
 
     public function getParamWhitelist(): array

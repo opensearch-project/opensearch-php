@@ -32,7 +32,7 @@ class DeleteDistinguishedName extends AbstractEndpoint
         }
         $cluster_name = $this->cluster_name;
 
-        return "/_plugins/_security/api/nodesdn/$cluster_name";
+        return '/_plugins/_security/api/nodesdn/' . rawurlencode($cluster_name);
     }
 
     public function getParamWhitelist(): array

@@ -33,7 +33,7 @@ class DeletePipeline extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_ingest/pipeline/$id";
+            return '/_ingest/pipeline/' . rawurlencode($id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ingest.delete_pipeline');
     }

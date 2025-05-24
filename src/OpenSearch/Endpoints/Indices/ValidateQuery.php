@@ -32,9 +32,9 @@ class ValidateQuery extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_validate/query";
+            return '/' . rawurlencode($index) . '/_validate/query';
         }
-        return "/_validate/query";
+        return '/_validate/query';
     }
 
     public function getParamWhitelist(): array

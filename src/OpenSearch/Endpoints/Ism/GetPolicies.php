@@ -24,7 +24,7 @@ class GetPolicies extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_ism/policies";
+        return '/_plugins/_ism/policies';
     }
 
     public function getParamWhitelist(): array

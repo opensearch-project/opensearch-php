@@ -29,7 +29,7 @@ class Train extends AbstractEndpoint
     {
         $algorithm_name = $this->algorithm_name ?? null;
         if (isset($algorithm_name)) {
-            return "/_plugins/_ml/_train/$algorithm_name";
+            return '/_plugins/_ml/_train/' . rawurlencode($algorithm_name);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.train');
     }

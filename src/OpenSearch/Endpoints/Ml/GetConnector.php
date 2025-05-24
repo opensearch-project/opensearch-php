@@ -27,7 +27,7 @@ class GetConnector extends AbstractEndpoint
     {
         $connector_id = $this->connector_id ?? null;
         if (isset($connector_id)) {
-            return "/_plugins/_ml/connectors/$connector_id";
+            return '/_plugins/_ml/connectors/' . rawurlencode($connector_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.get_connector');
     }

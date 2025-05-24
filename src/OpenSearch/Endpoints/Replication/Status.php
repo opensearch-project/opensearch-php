@@ -27,7 +27,7 @@ class Status extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_replication/$index/_status";
+            return '/_plugins/_replication/' . rawurlencode($index) . '/_status';
         }
         throw new RuntimeException('Missing parameter for the endpoint replication.status');
     }

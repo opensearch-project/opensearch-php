@@ -35,7 +35,7 @@ class VerifyRepository extends AbstractEndpoint
     {
         $repository = $this->repository ?? null;
         if (isset($repository)) {
-            return "/_snapshot/$repository/_verify";
+            return '/_snapshot/' . rawurlencode($repository) . '/_verify';
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.verify_repository');
     }

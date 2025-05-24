@@ -33,7 +33,7 @@ class Exists extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index";
+            return '/' . rawurlencode($index);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.exists');
     }

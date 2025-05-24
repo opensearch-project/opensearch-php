@@ -35,7 +35,7 @@ class DeleteByQuery extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_delete_by_query";
+        return '/' . rawurlencode($index) . '/_delete_by_query';
     }
 
     public function getParamWhitelist(): array

@@ -30,9 +30,9 @@ class MTermVectors extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_mtermvectors";
+            return '/' . rawurlencode($index) . '/_mtermvectors';
         }
-        return "/_mtermvectors";
+        return '/_mtermvectors';
     }
 
     public function getParamWhitelist(): array

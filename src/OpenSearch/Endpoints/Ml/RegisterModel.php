@@ -24,7 +24,7 @@ class RegisterModel extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_ml/models/_register";
+        return '/_plugins/_ml/models/_register';
     }
 
     public function getParamWhitelist(): array

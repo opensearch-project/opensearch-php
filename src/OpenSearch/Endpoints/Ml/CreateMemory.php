@@ -24,7 +24,7 @@ class CreateMemory extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_ml/memory";
+        return '/_plugins/_ml/memory';
     }
 
     public function getParamWhitelist(): array

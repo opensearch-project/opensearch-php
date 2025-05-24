@@ -24,7 +24,7 @@ class TenantInfo extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/tenantinfo";
+        return '/_plugins/_security/tenantinfo';
     }
 
     public function getParamWhitelist(): array

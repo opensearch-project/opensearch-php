@@ -35,7 +35,7 @@ class DeleteDanglingIndex extends AbstractEndpoint
     {
         $index_uuid = $this->index_uuid ?? null;
         if (isset($index_uuid)) {
-            return "/_dangling/$index_uuid";
+            return '/_dangling/' . rawurlencode($index_uuid);
         }
         throw new RuntimeException('Missing parameter for the endpoint dangling_indices.delete_dangling_index');
     }

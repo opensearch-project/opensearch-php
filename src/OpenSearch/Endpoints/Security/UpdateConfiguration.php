@@ -24,7 +24,7 @@ class UpdateConfiguration extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/securityconfig/config";
+        return '/_plugins/_security/api/securityconfig/config';
     }
 
     public function getParamWhitelist(): array

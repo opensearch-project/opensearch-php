@@ -27,7 +27,7 @@ class Resume extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_replication/$index/_resume";
+            return '/_plugins/_replication/' . rawurlencode($index) . '/_resume';
         }
         throw new RuntimeException('Missing parameter for the endpoint replication.resume');
     }

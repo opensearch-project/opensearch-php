@@ -30,9 +30,9 @@ class SearchTemplate extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_search/template";
+            return '/' . rawurlencode($index) . '/_search/template';
         }
-        return "/_search/template";
+        return '/_search/template';
     }
 
     public function getParamWhitelist(): array

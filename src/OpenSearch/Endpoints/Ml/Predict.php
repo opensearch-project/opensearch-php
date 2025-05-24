@@ -29,7 +29,7 @@ class Predict extends AbstractEndpoint
         $algorithm_name = $this->algorithm_name ?? null;
         $model_id = $this->model_id ?? null;
         if (isset($algorithm_name) && isset($model_id)) {
-            return "/_plugins/_ml/_predict/$algorithm_name/$model_id";
+            return '/_plugins/_ml/_predict/' . rawurlencode($algorithm_name) . '/' . rawurlencode($model_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.predict');
     }

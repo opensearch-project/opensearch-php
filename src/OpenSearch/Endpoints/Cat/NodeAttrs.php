@@ -30,7 +30,7 @@ class NodeAttrs extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cat/nodeattrs";
+        return '/_cat/nodeattrs';
     }
 
     public function getParamWhitelist(): array

@@ -29,7 +29,7 @@ class ExecuteAlgorithm extends AbstractEndpoint
     {
         $algorithm_name = $this->algorithm_name ?? null;
         if (isset($algorithm_name)) {
-            return "/_plugins/_ml/_execute/$algorithm_name";
+            return '/_plugins/_ml/_execute/' . rawurlencode($algorithm_name);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.execute_algorithm');
     }

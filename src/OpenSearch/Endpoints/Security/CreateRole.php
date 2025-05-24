@@ -32,7 +32,7 @@ class CreateRole extends AbstractEndpoint
         }
         $role = $this->role;
 
-        return "/_plugins/_security/api/roles/$role";
+        return '/_plugins/_security/api/roles/' . rawurlencode($role);
     }
 
     public function getParamWhitelist(): array

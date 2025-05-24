@@ -35,15 +35,15 @@ class PutAlias extends AbstractEndpoint
         $name = $this->name ?? null;
         $index = $this->index ?? null;
         if (isset($index) && isset($name)) {
-            return "/$index/_alias/$name";
+            return '/' . rawurlencode($index) . '/_alias/' . rawurlencode($name);
         }
         if (isset($index)) {
-            return "/$index/_alias";
+            return '/' . rawurlencode($index) . '/_alias';
         }
         if (isset($name)) {
-            return "/_alias/$name";
+            return '/_alias/' . rawurlencode($name);
         }
-        return "/_alias";
+        return '/_alias';
     }
 
     public function getParamWhitelist(): array

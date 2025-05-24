@@ -29,7 +29,7 @@ class UpdateConfig extends AbstractEndpoint
     {
         $config_id = $this->config_id ?? null;
         if (isset($config_id)) {
-            return "/_plugins/_notifications/configs/$config_id";
+            return '/_plugins/_notifications/configs/' . rawurlencode($config_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint notifications.update_config');
     }

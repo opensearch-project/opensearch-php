@@ -31,6 +31,7 @@ use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
 use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\FlowFrameworkNamespace;
+use OpenSearch\Namespaces\GeospatialNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
 use OpenSearch\Namespaces\InsightsNamespace;
@@ -178,6 +179,11 @@ class Client
      * @var FlowFrameworkNamespace
      */
     protected $flowFramework;
+
+    /**
+     * @var GeospatialNamespace
+     */
+    protected $geospatial;
 
     /**
      * @var IndicesNamespace
@@ -376,6 +382,7 @@ class Client
         // @phpstan-ignore new.deprecated, property.deprecated
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
         $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
+        $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
         $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
         $this->ingest = new IngestNamespace($transport, $this->endpointFactory);
         $this->insights = new InsightsNamespace($transport, $this->endpointFactory);
@@ -1934,6 +1941,13 @@ class Client
     public function flowFramework(): FlowFrameworkNamespace
     {
         return $this->flowFramework;
+    }
+    /**
+     * Returns the geospatial namespace
+     */
+    public function geospatial(): GeospatialNamespace
+    {
+        return $this->geospatial;
     }
     /**
      * Returns the indices namespace

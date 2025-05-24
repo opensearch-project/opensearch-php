@@ -34,9 +34,9 @@ class ReloadSecureSettings extends AbstractEndpoint
     {
         $node_id = $this->node_id ?? null;
         if (isset($node_id)) {
-            return "/_nodes/$node_id/reload_secure_settings";
+            return '/_nodes/' . rawurlencode($node_id) . '/reload_secure_settings';
         }
-        return "/_nodes/reload_secure_settings";
+        return '/_nodes/reload_secure_settings';
     }
 
     public function getParamWhitelist(): array

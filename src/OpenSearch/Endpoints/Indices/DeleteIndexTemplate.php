@@ -35,7 +35,7 @@ class DeleteIndexTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_index_template/$name";
+            return '/_index_template/' . rawurlencode($name);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.delete_index_template');
     }

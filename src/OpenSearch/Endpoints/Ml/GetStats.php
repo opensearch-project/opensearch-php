@@ -30,15 +30,15 @@ class GetStats extends AbstractEndpoint
         $node_id = $this->node_id ?? null;
         $stat = $this->stat ?? null;
         if (isset($node_id) && isset($stat)) {
-            return "/_plugins/_ml/$node_id/stats/$stat";
+            return '/_plugins/_ml/' . rawurlencode($node_id) . '/stats/' . rawurlencode($stat);
         }
         if (isset($node_id)) {
-            return "/_plugins/_ml/$node_id/stats";
+            return '/_plugins/_ml/' . rawurlencode($node_id) . '/stats';
         }
         if (isset($stat)) {
-            return "/_plugins/_ml/stats/$stat";
+            return '/_plugins/_ml/stats/' . rawurlencode($stat);
         }
-        return "/_plugins/_ml/stats";
+        return '/_plugins/_ml/stats';
     }
 
     public function getParamWhitelist(): array

@@ -30,9 +30,9 @@ class Mget extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_mget";
+            return '/' . rawurlencode($index) . '/_mget';
         }
-        return "/_mget";
+        return '/_mget';
     }
 
     public function getParamWhitelist(): array

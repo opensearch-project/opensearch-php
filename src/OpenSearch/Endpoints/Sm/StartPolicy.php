@@ -29,7 +29,7 @@ class StartPolicy extends AbstractEndpoint
     {
         $policy_name = $this->policy_name ?? null;
         if (isset($policy_name)) {
-            return "/_plugins/_sm/policies/$policy_name/_start";
+            return '/_plugins/_sm/policies/' . rawurlencode($policy_name) . '/_start';
         }
         throw new RuntimeException('Missing parameter for the endpoint sm.start_policy');
     }

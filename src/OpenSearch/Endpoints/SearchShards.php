@@ -30,9 +30,9 @@ class SearchShards extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_search_shards";
+            return '/' . rawurlencode($index) . '/_search_shards';
         }
-        return "/_search_shards";
+        return '/_search_shards';
     }
 
     public function getParamWhitelist(): array

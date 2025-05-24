@@ -29,7 +29,7 @@ class GetNodeCertificates extends AbstractEndpoint
     {
         $node_id = $this->node_id ?? null;
         if (isset($node_id)) {
-            return "/_plugins/_security/api/certificates/$node_id";
+            return '/_plugins/_security/api/certificates/' . rawurlencode($node_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint security.get_node_certificates');
     }

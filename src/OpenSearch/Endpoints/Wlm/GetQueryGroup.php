@@ -28,9 +28,9 @@ class GetQueryGroup extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_wlm/query_group/$name";
+            return '/_wlm/query_group/' . rawurlencode($name);
         }
-        return "/_wlm/query_group";
+        return '/_wlm/query_group';
     }
 
     public function getParamWhitelist(): array

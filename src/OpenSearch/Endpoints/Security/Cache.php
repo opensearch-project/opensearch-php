@@ -24,7 +24,7 @@ class Cache extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/cache";
+        return '/_plugins/_security/api/cache';
     }
 
     public function getParamWhitelist(): array

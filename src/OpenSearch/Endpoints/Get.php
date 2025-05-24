@@ -39,7 +39,7 @@ class Get extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_doc/$id";
+        return '/' . rawurlencode($index) . '/_doc/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

@@ -27,7 +27,7 @@ class DeleteModelGroup extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_plugins/_ml/model_groups/$id";
+            return '/_plugins/_ml/model_groups/' . rawurlencode($id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.delete_model_group');
     }

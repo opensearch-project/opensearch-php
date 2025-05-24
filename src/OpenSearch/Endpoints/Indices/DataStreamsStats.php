@@ -34,9 +34,9 @@ class DataStreamsStats extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_data_stream/$name/_stats";
+            return '/_data_stream/' . rawurlencode($name) . '/_stats';
         }
-        return "/_data_stream/_stats";
+        return '/_data_stream/_stats';
     }
 
     public function getParamWhitelist(): array

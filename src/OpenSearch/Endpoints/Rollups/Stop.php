@@ -30,7 +30,7 @@ class Stop extends AbstractEndpoint
         }
         $id = $this->id;
 
-        return "/_plugins/_rollup/jobs/$id/_stop";
+        return '/_plugins/_rollup/jobs/' . rawurlencode($id) . '/_stop';
     }
 
     public function getParamWhitelist(): array

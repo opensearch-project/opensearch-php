@@ -35,7 +35,7 @@ class ResolveIndex extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_resolve/index/$name";
+            return '/_resolve/index/' . rawurlencode($name);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.resolve_index');
     }

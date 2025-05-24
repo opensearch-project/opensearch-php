@@ -24,7 +24,7 @@ class DatasourcesUpdate extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_query/_datasources";
+        return '/_plugins/_query/_datasources';
     }
 
     public function getParamWhitelist(): array

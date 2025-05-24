@@ -36,9 +36,9 @@ class Index extends AbstractEndpoint
         $index = $this->index;
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/$index/_doc/$id";
+            return '/' . rawurlencode($index) . '/_doc/' . rawurlencode($id);
         }
-        return "/$index/_doc";
+        return '/' . rawurlencode($index) . '/_doc';
     }
 
     public function getParamWhitelist(): array

@@ -27,7 +27,7 @@ class Stop extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_replication/$index/_stop";
+            return '/_plugins/_replication/' . rawurlencode($index) . '/_stop';
         }
         throw new RuntimeException('Missing parameter for the endpoint replication.stop');
     }

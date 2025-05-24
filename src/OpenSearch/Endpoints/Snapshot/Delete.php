@@ -37,7 +37,7 @@ class Delete extends AbstractEndpoint
         $repository = $this->repository ?? null;
         $snapshot = $this->snapshot ?? null;
         if (isset($repository) && isset($snapshot)) {
-            return "/_snapshot/$repository/$snapshot";
+            return '/_snapshot/' . rawurlencode($repository) . '/' . rawurlencode($snapshot);
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.delete');
     }

@@ -28,9 +28,9 @@ class GetProfileTasks extends AbstractEndpoint
     {
         $task_id = $this->task_id ?? null;
         if (isset($task_id)) {
-            return "/_plugins/_ml/profile/tasks/$task_id";
+            return '/_plugins/_ml/profile/tasks/' . rawurlencode($task_id);
         }
-        return "/_plugins/_ml/profile/tasks";
+        return '/_plugins/_ml/profile/tasks';
     }
 
     public function getParamWhitelist(): array

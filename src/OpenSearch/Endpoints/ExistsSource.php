@@ -39,7 +39,7 @@ class ExistsSource extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_source/$id";
+        return '/' . rawurlencode($index) . '/_source/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

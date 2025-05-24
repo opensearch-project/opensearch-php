@@ -27,7 +27,7 @@ class Put extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_search/pipeline/$id";
+            return '/_search/pipeline/' . rawurlencode($id);
         }
         throw new RuntimeException('Missing parameter for the endpoint search_pipeline.put');
     }

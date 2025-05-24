@@ -37,7 +37,7 @@ class Restore extends AbstractEndpoint
         $repository = $this->repository ?? null;
         $snapshot = $this->snapshot ?? null;
         if (isset($repository) && isset($snapshot)) {
-            return "/_snapshot/$repository/$snapshot/_restore";
+            return '/_snapshot/' . rawurlencode($repository) . '/' . rawurlencode($snapshot) . '/_restore';
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.restore');
     }

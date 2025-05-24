@@ -24,7 +24,7 @@ class Search extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_transform";
+        return '/_plugins/_transform';
     }
 
     public function getParamWhitelist(): array

@@ -32,9 +32,9 @@ class Analyze extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_analyze";
+            return '/' . rawurlencode($index) . '/_analyze';
         }
-        return "/_analyze";
+        return '/_analyze';
     }
 
     public function getParamWhitelist(): array

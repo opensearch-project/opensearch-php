@@ -27,7 +27,7 @@ class Start extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_plugins/_transform/$id/_start";
+            return '/_plugins/_transform/' . rawurlencode($id) . '/_start';
         }
         throw new RuntimeException('Missing parameter for the endpoint transforms.start');
     }

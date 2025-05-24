@@ -24,7 +24,7 @@ class Stats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_asynchronous_search/stats";
+        return '/_plugins/_asynchronous_search/stats';
     }
 
     public function getParamWhitelist(): array

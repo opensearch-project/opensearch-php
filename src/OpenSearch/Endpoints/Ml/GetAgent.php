@@ -29,7 +29,7 @@ class GetAgent extends AbstractEndpoint
     {
         $agent_id = $this->agent_id ?? null;
         if (isset($agent_id)) {
-            return "/_plugins/_ml/agents/$agent_id";
+            return '/_plugins/_ml/agents/' . rawurlencode($agent_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.get_agent');
     }

@@ -24,7 +24,7 @@ class DeleteWeightedRouting extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cluster/routing/awareness/weights";
+        return '/_cluster/routing/awareness/weights';
     }
 
     public function getParamWhitelist(): array

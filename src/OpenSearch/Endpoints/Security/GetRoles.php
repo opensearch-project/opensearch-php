@@ -24,7 +24,7 @@ class GetRoles extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/roles";
+        return '/_plugins/_security/api/roles';
     }
 
     public function getParamWhitelist(): array

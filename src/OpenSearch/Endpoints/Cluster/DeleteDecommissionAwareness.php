@@ -24,7 +24,7 @@ class DeleteDecommissionAwareness extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cluster/decommission/awareness";
+        return '/_cluster/decommission/awareness';
     }
 
     public function getParamWhitelist(): array

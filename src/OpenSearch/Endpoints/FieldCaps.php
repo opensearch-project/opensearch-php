@@ -30,9 +30,9 @@ class FieldCaps extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_field_caps";
+            return '/' . rawurlencode($index) . '/_field_caps';
         }
-        return "/_field_caps";
+        return '/_field_caps';
     }
 
     public function getParamWhitelist(): array

@@ -30,7 +30,7 @@ class Get extends AbstractEndpoint
         }
         $id = $this->id;
 
-        return "/_plugins/_rollup/jobs/$id";
+        return '/_plugins/_rollup/jobs/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

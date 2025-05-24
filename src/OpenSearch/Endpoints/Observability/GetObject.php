@@ -29,7 +29,7 @@ class GetObject extends AbstractEndpoint
     {
         $object_id = $this->object_id ?? null;
         if (isset($object_id)) {
-            return "/_plugins/_observability/object/$object_id";
+            return '/_plugins/_observability/object/' . rawurlencode($object_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint observability.get_object');
     }

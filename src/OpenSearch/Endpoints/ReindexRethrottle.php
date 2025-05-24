@@ -37,7 +37,7 @@ class ReindexRethrottle extends AbstractEndpoint
         }
         $task_id = $this->task_id;
 
-        return "/_reindex/$task_id/_rethrottle";
+        return '/_reindex/' . rawurlencode($task_id) . '/_rethrottle';
     }
 
     public function getParamWhitelist(): array
