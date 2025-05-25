@@ -34,7 +34,7 @@ class Cancel extends AbstractEndpoint
     {
         $task_id = $this->task_id ?? null;
         if (isset($task_id)) {
-            return "/_tasks/$task_id/_cancel";
+            return '/_tasks/' . rawurlencode($task_id) . '/_cancel';
         }
         return '/_tasks/_cancel';
     }
