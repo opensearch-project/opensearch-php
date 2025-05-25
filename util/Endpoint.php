@@ -335,7 +335,6 @@ class Endpoint
                     $lastPos = $pos + strlen('{' . $part . '}');
                 }
 
-
                 if ($i == 0 && !in_array($part, $this->requiredParts)) {
                     $check = sprintf("isset(\$%s)", $part);
                 } elseif ($i > 0 && !in_array($part, $this->requiredParts)) {
@@ -343,11 +342,9 @@ class Endpoint
                 }
             }
 
-
             if ($lastPos < strlen($path)) {
                 $urlParts[] = "'" . substr($path, $lastPos) . "'";
             }
-
 
             $url = implode(' . ', $urlParts);
 
