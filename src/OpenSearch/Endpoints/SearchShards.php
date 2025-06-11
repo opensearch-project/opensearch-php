@@ -30,9 +30,9 @@ class SearchShards extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_search_shards";
+            return '/' . rawurlencode($index) . '/_search_shards';
         }
-        return "/_search_shards";
+        return '/_search_shards';
     }
 
     public function getParamWhitelist(): array
@@ -54,6 +54,16 @@ class SearchShards extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'GET';
+        return isset($this->body) ? 'POST' : 'GET';
+    }
+
+    public function setBody($body): static
+    {
+        if (is_null($body)) {
+            return $this;
+        }
+        $this->body = $body;
+
+        return $this;
     }
 }

@@ -27,7 +27,7 @@ class Explain extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_plugins/_transform/$id/_explain";
+            return '/_plugins/_transform/' . rawurlencode($id) . '/_explain';
         }
         throw new RuntimeException('Missing parameter for the endpoint transforms.explain');
     }

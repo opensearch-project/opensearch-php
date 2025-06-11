@@ -30,7 +30,7 @@ class Warmup extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/_plugins/_knn/warmup/$index";
+        return '/_plugins/_knn/warmup/' . rawurlencode($index);
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class RegisterAgents extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_ml/agents/_register";
+        return '/_plugins/_ml/agents/_register';
     }
 
     public function getParamWhitelist(): array

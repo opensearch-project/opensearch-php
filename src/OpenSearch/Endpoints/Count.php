@@ -30,9 +30,9 @@ class Count extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_count";
+            return '/' . rawurlencode($index) . '/_count';
         }
-        return "/_count";
+        return '/_count';
     }
 
     public function getParamWhitelist(): array

@@ -36,9 +36,9 @@ class TermVectors extends AbstractEndpoint
         $index = $this->index;
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/$index/_termvectors/$id";
+            return '/' . rawurlencode($index) . '/_termvectors/' . rawurlencode($id);
         }
-        return "/$index/_termvectors";
+        return '/' . rawurlencode($index) . '/_termvectors';
     }
 
     public function getParamWhitelist(): array

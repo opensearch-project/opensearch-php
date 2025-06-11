@@ -29,7 +29,7 @@ class Deprovision extends AbstractEndpoint
     {
         $workflow_id = $this->workflow_id ?? null;
         if (isset($workflow_id)) {
-            return "/_plugins/_flow_framework/workflow/$workflow_id/_deprovision";
+            return '/_plugins/_flow_framework/workflow/' . rawurlencode($workflow_id) . '/_deprovision';
         }
         throw new RuntimeException('Missing parameter for the endpoint flow_framework.deprovision');
     }

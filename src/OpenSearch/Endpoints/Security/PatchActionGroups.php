@@ -24,7 +24,7 @@ class PatchActionGroups extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/actiongroups";
+        return '/_plugins/_security/api/actiongroups';
     }
 
     public function getParamWhitelist(): array

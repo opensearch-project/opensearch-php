@@ -39,7 +39,7 @@ class Explain extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/$index/_explain/$id";
+        return '/' . rawurlencode($index) . '/_explain/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

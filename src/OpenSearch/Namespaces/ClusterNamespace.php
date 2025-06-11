@@ -172,7 +172,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) The name of the component template. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false, information is retrieved from the cluster manager node. (Default = false)
+     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false`, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)

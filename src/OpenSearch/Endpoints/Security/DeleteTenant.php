@@ -32,7 +32,7 @@ class DeleteTenant extends AbstractEndpoint
         }
         $tenant = $this->tenant;
 
-        return "/_plugins/_security/api/tenants/$tenant";
+        return '/_plugins/_security/api/tenants/' . rawurlencode($tenant);
     }
 
     public function getParamWhitelist(): array

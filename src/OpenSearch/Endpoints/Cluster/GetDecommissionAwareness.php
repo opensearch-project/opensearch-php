@@ -29,7 +29,7 @@ class GetDecommissionAwareness extends AbstractEndpoint
     {
         $awareness_attribute_name = $this->awareness_attribute_name ?? null;
         if (isset($awareness_attribute_name)) {
-            return "/_cluster/decommission/awareness/$awareness_attribute_name/_status";
+            return '/_cluster/decommission/awareness/' . rawurlencode($awareness_attribute_name) . '/_status';
         }
         throw new RuntimeException('Missing parameter for the endpoint cluster.get_decommission_awareness');
     }

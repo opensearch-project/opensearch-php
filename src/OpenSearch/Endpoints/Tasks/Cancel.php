@@ -38,7 +38,7 @@ class Cancel extends AbstractEndpoint
         if (isset($task_id)) {
             return '/_tasks/' . rawurlencode($task_id) . '/_cancel';
         }
-        return "/_tasks/_cancel";
+        return '/_tasks/_cancel';
     }
 
     public function getParamWhitelist(): array

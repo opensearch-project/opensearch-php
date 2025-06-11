@@ -32,7 +32,7 @@ class ExistsPolicy extends AbstractEndpoint
         }
         $policy_id = $this->policy_id;
 
-        return "/_plugins/_ism/policies/$policy_id";
+        return '/_plugins/_ism/policies/' . rawurlencode($policy_id);
     }
 
     public function getParamWhitelist(): array

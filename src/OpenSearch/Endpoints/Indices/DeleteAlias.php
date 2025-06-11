@@ -42,7 +42,7 @@ class DeleteAlias extends AbstractEndpoint
         }
         $name = $this->name;
 
-        return "/$index/_alias/$name";
+        return '/' . rawurlencode($index) . '/_alias/' . rawurlencode($name);
     }
 
     public function getParamWhitelist(): array

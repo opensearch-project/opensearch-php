@@ -32,7 +32,7 @@ class GenerateUserToken extends AbstractEndpoint
         }
         $username = $this->username;
 
-        return "/_plugins/_security/api/internalusers/$username/authtoken";
+        return '/_plugins/_security/api/internalusers/' . rawurlencode($username) . '/authtoken';
     }
 
     public function getParamWhitelist(): array

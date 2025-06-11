@@ -27,7 +27,7 @@ class UpdateSettings extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_replication/$index/_update";
+            return '/_plugins/_replication/' . rawurlencode($index) . '/_update';
         }
         throw new RuntimeException('Missing parameter for the endpoint replication.update_settings');
     }

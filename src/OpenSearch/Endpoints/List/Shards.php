@@ -26,9 +26,9 @@ class Shards extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_list/shards/$index";
+            return '/_list/shards/' . rawurlencode($index);
         }
-        return "/_list/shards";
+        return '/_list/shards';
     }
 
     public function getParamWhitelist(): array

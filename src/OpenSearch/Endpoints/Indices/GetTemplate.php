@@ -34,9 +34,9 @@ class GetTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_template/$name";
+            return '/_template/' . rawurlencode($name);
         }
-        return "/_template";
+        return '/_template';
     }
 
     public function getParamWhitelist(): array

@@ -35,7 +35,7 @@ class DeleteScript extends AbstractEndpoint
         }
         $id = $this->id;
 
-        return "/_scripts/$id";
+        return '/_scripts/' . rawurlencode($id);
     }
 
     public function getParamWhitelist(): array

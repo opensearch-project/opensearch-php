@@ -32,9 +32,9 @@ class Upgrade extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_upgrade";
+            return '/' . rawurlencode($index) . '/_upgrade';
         }
-        return "/_upgrade";
+        return '/_upgrade';
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class ListObjects extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_observability/object";
+        return '/_plugins/_observability/object';
     }
 
     public function getParamWhitelist(): array

@@ -30,9 +30,9 @@ class Search extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_search";
+            return '/' . rawurlencode($index) . '/_search';
         }
-        return "/_search";
+        return '/_search';
     }
 
     public function getParamWhitelist(): array

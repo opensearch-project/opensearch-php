@@ -34,9 +34,9 @@ class HotThreads extends AbstractEndpoint
     {
         $node_id = $this->node_id ?? null;
         if (isset($node_id)) {
-            return "/_nodes/$node_id/hot_threads";
+            return '/_nodes/' . rawurlencode($node_id) . '/hot_threads';
         }
-        return "/_nodes/hot_threads";
+        return '/_nodes/hot_threads';
     }
 
     public function getParamWhitelist(): array

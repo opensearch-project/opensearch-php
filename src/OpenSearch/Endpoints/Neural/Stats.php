@@ -30,15 +30,15 @@ class Stats extends AbstractEndpoint
         $node_id = $this->node_id ?? null;
         $stat = $this->stat ?? null;
         if (isset($node_id) && isset($stat)) {
-            return "/_plugins/_neural/$node_id/stats/$stat";
+            return '/_plugins/_neural/' . rawurlencode($node_id) . '/stats/' . rawurlencode($stat);
         }
         if (isset($node_id)) {
-            return "/_plugins/_neural/$node_id/stats";
+            return '/_plugins/_neural/' . rawurlencode($node_id) . '/stats';
         }
         if (isset($stat)) {
-            return "/_plugins/_neural/stats/$stat";
+            return '/_plugins/_neural/stats/' . rawurlencode($stat);
         }
-        return "/_plugins/_neural/stats";
+        return '/_plugins/_neural/stats';
     }
 
     public function getParamWhitelist(): array

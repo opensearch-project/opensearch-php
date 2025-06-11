@@ -35,7 +35,7 @@ class ExistsTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_template/$name";
+            return '/_template/' . rawurlencode($name);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.exists_template');
     }

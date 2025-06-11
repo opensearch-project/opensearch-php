@@ -31,9 +31,9 @@ class BulkStream extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_bulk/stream";
+            return '/' . rawurlencode($index) . '/_bulk/stream';
         }
-        return "/_bulk/stream";
+        return '/_bulk/stream';
     }
 
     public function getParamWhitelist(): array

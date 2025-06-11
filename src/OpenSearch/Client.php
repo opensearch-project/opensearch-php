@@ -31,6 +31,7 @@ use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
 use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\FlowFrameworkNamespace;
+use OpenSearch\Namespaces\GeospatialNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
 use OpenSearch\Namespaces\InsightsNamespace;
@@ -50,6 +51,7 @@ use OpenSearch\Namespaces\RemoteStoreNamespace;
 use OpenSearch\Namespaces\ReplicationNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
+use OpenSearch\Namespaces\SearchRelevanceNamespace;
 use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\Namespaces\SmNamespace;
@@ -180,6 +182,11 @@ class Client
     protected $flowFramework;
 
     /**
+     * @var GeospatialNamespace
+     */
+    protected $geospatial;
+
+    /**
      * @var IndicesNamespace
      */
     protected $indices;
@@ -275,6 +282,11 @@ class Client
      * @var SearchPipelineNamespace
      */
     protected $searchPipeline;
+
+    /**
+     * @var SearchRelevanceNamespace
+     */
+    protected $searchRelevance;
 
     /**
      * @var SearchableSnapshotsNamespace
@@ -376,6 +388,7 @@ class Client
         // @phpstan-ignore new.deprecated, property.deprecated
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
         $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
+        $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
         $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
         $this->ingest = new IngestNamespace($transport, $this->endpointFactory);
         $this->insights = new InsightsNamespace($transport, $this->endpointFactory);
@@ -396,6 +409,7 @@ class Client
         $this->replication = new ReplicationNamespace($transport, $this->endpointFactory);
         $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
+        $this->searchRelevance = new SearchRelevanceNamespace($transport, $this->endpointFactory);
         // @phpstan-ignore new.deprecated, property.deprecated
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
         $this->security = new SecurityNamespace($transport, $this->endpointFactory);
@@ -421,7 +435,7 @@ class Client
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
-     * $params['routing']                = (string) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (string) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -459,7 +473,7 @@ class Client
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the request's actions must target an index alias. (Default = false)
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period each action waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -528,7 +542,7 @@ class Client
      * $params['min_score']          = (number) Sets the minimum `_score` value that documents must have to be included in the result.
      * $params['preference']         = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                  = (string) Query in the Lucene query string syntax.
-     * $params['routing']            = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']            = (any) A custom value used to route operations to a specific shard.
      * $params['terminate_after']    = (integer) Maximum number of documents to collect for each shard.If a query reaches this limit, OpenSearch terminates the query early.OpenSearch collects documents before sorting.
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -590,7 +604,7 @@ class Client
      * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']           = (any) Specific version type: `external`, `external_gte`.
@@ -660,7 +674,7 @@ class Client
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['request_cache']          = (boolean) If `true`, the request cache is used for this request.Defaults to the index-level setting.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second. (Default = 0)
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.Defaults to no timeout.
@@ -869,7 +883,7 @@ class Client
      * $params['lenient']          = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['q']                = (string) Query in the Lucene query string syntax.
-     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['stored_fields']    = (any) A comma-separated list of stored fields to return in the response.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -931,8 +945,8 @@ class Client
     /**
      * Returns a document.
      *
-     * $params['id']               = (string) Unique identifier of the document. (Required)
-     * $params['index']            = (string) Name of the index that contains the document. (Required)
+     * $params['id']               = (string) The unique identifier of the document. (Required)
+     * $params['index']            = (string) The name of the index that contains the document. (Required)
      * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
@@ -1054,8 +1068,8 @@ class Client
     /**
      * Returns the source of a document.
      *
-     * $params['id']               = (string) Unique identifier of the document. (Required)
-     * $params['index']            = (string) Name of the index that contains the document. (Required)
+     * $params['id']               = (string) The unique identifier of the document. (Required)
+     * $params['index']            = (string) The name of the index that contains the document. (Required)
      * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
@@ -1098,7 +1112,7 @@ class Client
      * $params['pipeline']               = (string) ID of the pipeline to use to preprocess incoming documents.If the index has a default ingest pipeline specified, then setting the value to `_none` disables the default ingest pipeline for this request.If a final pipeline is configured it will always run, regardless of the value of this parameter.
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search, if `wait_for` then wait for a refresh to make this operation visible to search, if `false` do nothing with refreshes.Valid values: `true`, `false`, `wait_for`.
      * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
      * $params['version_type']           = (any) Specific version type: `external`, `external_gte`.
@@ -1158,7 +1172,7 @@ class Client
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
      * $params['refresh']          = (any) If `true`, the request refreshes relevant shards before retrieving documents.
-     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['stored_fields']    = (any) If `true`, retrieves the document fields stored in the index rather than the document `_source`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1252,19 +1266,19 @@ class Client
     /**
      * Returns multiple termvectors in one request.
      *
-     * $params['index']            = (string) Name of the index that contains the documents.
+     * $params['index']            = (string) The name of the index that contains the document.
      * $params['field_statistics'] = (boolean) If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies. (Default = true)
-     * $params['fields']           = (any) Comma-separated list or wildcard expressions of fields to include in the statistics.Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.
-     * $params['ids']              = (array) A comma-separated list of documents ids. You must define ids as parameter or set "ids" or "docs" in the request body
+     * $params['fields']           = (any)
+     * $params['ids']              = (array) A comma-separated list of documents IDs. You must provide either the `docs` field in the request body or specify `ids` as a query parameter or in the request body.
      * $params['offsets']          = (boolean) If `true`, the response includes term offsets. (Default = true)
      * $params['payloads']         = (boolean) If `true`, the response includes term payloads. (Default = true)
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
-     * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
+     * $params['preference']       = (string) Specifies the node or shard on which the operation should be performed. See [preference query parameter]({{site.url}}{{site.baseurl}}/api-reference/search-apis/search/#the-preference-query-parameter) for a list of available options. By default the requests are routed randomly to available shard copies (primary or replica), with no guarantee of consistency across repeated queries.
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time. (Default = true)
-     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
-     * $params['version_type']     = (any) Specific version type.
+     * $params['version_type']     = (any) The specific version type.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1544,7 +1558,7 @@ class Client
      * $params['q']                             = (string) Query in the Lucene query string syntax using query parameter search.Query parameter searches do not support the full OpenSearch Query DSL but are handy for testing.
      * $params['request_cache']                 = (boolean) If `true`, the caching of search results is enabled for requests where `size` is `0`.Defaults to index level settings.
      * $params['rest_total_hits_as_int']        = (boolean) Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default = false)
-     * $params['routing']                       = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                       = (any) A custom value used to route operations to a specific shard.
      * $params['scroll']                        = (string) Period to retain the search context for scrolling. See Scroll search results.By default, this value cannot exceed `1d` (24 hours).You can change this limit using the `search.max_keep_alive` cluster-level setting.
      * $params['search_pipeline']               = (string) Customizable sequence of processing stages applied to search queries.
      * $params['search_type']                   = (any) How distributed term frequencies are calculated for relevance scoring.
@@ -1596,7 +1610,7 @@ class Client
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
      * $params['preference']         = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['routing']            = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']            = (any) A custom value used to route operations to a specific shard.
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1609,10 +1623,12 @@ class Client
     public function searchShards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+        $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(SearchShards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
@@ -1630,7 +1646,7 @@ class Client
      * $params['preference']              = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['profile']                 = (boolean) If `true`, the query execution is profiled.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, `hits.total` are rendered as an integer in the response. (Default = false)
-     * $params['routing']                 = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                 = (any) A custom value used to route operations to a specific shard.
      * $params['scroll']                  = (string) Specifies how long a consistent view of the indexshould be maintained for scrolled search.
      * $params['search_type']             = (any) The type of the search operation.
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
@@ -1660,19 +1676,19 @@ class Client
     /**
      * Returns information and statistics about terms in the fields of a particular document.
      *
-     * $params['index']            = (string) Name of the index that contains the document. (Required)
-     * $params['id']               = (string) Unique identifier of the document.
+     * $params['index']            = (string) The name of the index that contains the document. (Required)
+     * $params['id']               = (string) The unique identifier of the document.
      * $params['field_statistics'] = (boolean) If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies. (Default = true)
-     * $params['fields']           = (any) Comma-separated list or wildcard expressions of fields to include in the statistics.Used as the default list unless a specific field list is provided in the `completion_fields` or `fielddata_fields` parameters.
+     * $params['fields']           = (any)
      * $params['offsets']          = (boolean) If `true`, the response includes term offsets. (Default = true)
      * $params['payloads']         = (boolean) If `true`, the response includes term payloads. (Default = true)
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
-     * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
+     * $params['preference']       = (string) Specifies the node or shard on which the operation should be performed. See [preference query parameter]({{site.url}}{{site.baseurl}}/api-reference/search-apis/search/#the-preference-query-parameter) for a list of available options. By default the requests are routed randomly to available shard copies (primary or replica), with no guarantee of consistency across repeated queries.
      * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time. (Default = true)
-     * $params['routing']          = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
-     * $params['version_type']     = (any) Specific version type.
+     * $params['version_type']     = (any) The specific version type.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1712,7 +1728,7 @@ class Client
      * $params['refresh']                = (any) If 'true', OpenSearch refreshes the affected shards to make this operationvisible to search, if `wait_for` then wait for a refresh to make this operationvisible to search, if `false` do nothing with refreshes.
      * $params['require_alias']          = (boolean) If `true`, the destination must be an index alias. (Default = false)
      * $params['retry_on_conflict']      = (integer) Specify how many times should the operation be retried when a conflict occurs. (Default = 0)
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for dynamic mapping updates and active shards.This guarantees OpenSearch waits for at least the timeout before failing.The actual wait time could be longer, particularly when multiple waits occur.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operations.Set to 'all' or any positive integer up to the total number of shards in the index(number_of_replicas+1). Defaults to 1 meaning the primary shard.
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1764,7 +1780,7 @@ class Client
      * $params['refresh']                = (any) If `true`, OpenSearch refreshes affected shards to make the operation visible to search.
      * $params['request_cache']          = (boolean) If `true`, the request cache is used for this request.
      * $params['requests_per_second']    = (number) The throttle for this request in sub-requests per second. (Default = 0)
-     * $params['routing']                = (any) Custom value used to route operations to a specific shard.
+     * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['scroll']                 = (string) Period to retain the search context for scrolling.
      * $params['scroll_size']            = (integer) Size of the scroll request that powers the operation. (Default = 100)
      * $params['search_timeout']         = (string) Explicit timeout for each search request.
@@ -1936,6 +1952,13 @@ class Client
         return $this->flowFramework;
     }
     /**
+     * Returns the geospatial namespace
+     */
+    public function geospatial(): GeospatialNamespace
+    {
+        return $this->geospatial;
+    }
+    /**
      * Returns the indices namespace
      */
     public function indices(): IndicesNamespace
@@ -2070,6 +2093,13 @@ class Client
     public function searchPipeline(): SearchPipelineNamespace
     {
         return $this->searchPipeline;
+    }
+    /**
+     * Returns the searchRelevance namespace
+     */
+    public function searchRelevance(): SearchRelevanceNamespace
+    {
+        return $this->searchRelevance;
     }
     /**
      * Returns the searchableSnapshots namespace

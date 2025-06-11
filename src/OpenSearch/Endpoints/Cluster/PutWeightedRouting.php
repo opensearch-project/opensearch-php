@@ -29,7 +29,7 @@ class PutWeightedRouting extends AbstractEndpoint
     {
         $attribute = $this->attribute ?? null;
         if (isset($attribute)) {
-            return "/_cluster/routing/awareness/$attribute/weights";
+            return '/_cluster/routing/awareness/' . rawurlencode($attribute) . '/weights';
         }
         throw new RuntimeException('Missing parameter for the endpoint cluster.put_weighted_routing');
     }

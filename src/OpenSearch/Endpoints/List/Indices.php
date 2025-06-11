@@ -26,9 +26,9 @@ class Indices extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_list/indices/$index";
+            return '/_list/indices/' . rawurlencode($index);
         }
-        return "/_list/indices";
+        return '/_list/indices';
     }
 
     public function getParamWhitelist(): array

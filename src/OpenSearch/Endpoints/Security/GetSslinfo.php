@@ -24,7 +24,7 @@ class GetSslinfo extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_opendistro/_security/sslinfo";
+        return '/_opendistro/_security/sslinfo';
     }
 
     public function getParamWhitelist(): array

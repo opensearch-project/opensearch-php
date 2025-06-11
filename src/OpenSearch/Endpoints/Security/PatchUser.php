@@ -32,7 +32,7 @@ class PatchUser extends AbstractEndpoint
         }
         $username = $this->username;
 
-        return "/_plugins/_security/api/internalusers/$username";
+        return '/_plugins/_security/api/internalusers/' . rawurlencode($username);
     }
 
     public function getParamWhitelist(): array

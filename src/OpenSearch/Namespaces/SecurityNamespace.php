@@ -824,7 +824,7 @@ class SecurityNamespace extends AbstractNamespace
     /**
      * Retrieves information about the SSL configuration.
      *
-     * $params['show_dn']     = (Array) Whether to include all domain names in the response.
+     * $params['show_dn']     = (any) Whether to include all domain names in the response.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

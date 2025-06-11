@@ -29,7 +29,7 @@ class UpdateMessage extends AbstractEndpoint
     {
         $message_id = $this->message_id ?? null;
         if (isset($message_id)) {
-            return "/_plugins/_ml/memory/message/$message_id";
+            return '/_plugins/_ml/memory/message/' . rawurlencode($message_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.update_message');
     }

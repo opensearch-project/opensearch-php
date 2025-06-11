@@ -36,15 +36,15 @@ class Usage extends AbstractEndpoint
         $node_id = $this->node_id ?? null;
         $metric = $this->metric ?? null;
         if (isset($node_id) && isset($metric)) {
-            return "/_nodes/$node_id/usage/$metric";
+            return '/_nodes/' . rawurlencode($node_id) . '/usage/' . rawurlencode($metric);
         }
         if (isset($node_id)) {
-            return "/_nodes/$node_id/usage";
+            return '/_nodes/' . rawurlencode($node_id) . '/usage';
         }
         if (isset($metric)) {
-            return "/_nodes/usage/$metric";
+            return '/_nodes/usage/' . rawurlencode($metric);
         }
-        return "/_nodes/usage";
+        return '/_nodes/usage';
     }
 
     public function getParamWhitelist(): array

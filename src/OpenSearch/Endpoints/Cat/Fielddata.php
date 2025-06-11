@@ -34,9 +34,9 @@ class Fielddata extends AbstractEndpoint
     {
         $fields = $this->fields ?? null;
         if (isset($fields)) {
-            return "/_cat/fielddata/$fields";
+            return '/_cat/fielddata/' . rawurlencode($fields);
         }
-        return "/_cat/fielddata";
+        return '/_cat/fielddata';
     }
 
     public function getParamWhitelist(): array

@@ -30,7 +30,7 @@ class RemoteInfo extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_remote/info";
+        return '/_remote/info';
     }
 
     public function getParamWhitelist(): array

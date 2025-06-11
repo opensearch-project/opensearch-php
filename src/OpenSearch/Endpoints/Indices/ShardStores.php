@@ -32,9 +32,9 @@ class ShardStores extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_shard_stores";
+            return '/' . rawurlencode($index) . '/_shard_stores';
         }
-        return "/_shard_stores";
+        return '/_shard_stores';
     }
 
     public function getParamWhitelist(): array

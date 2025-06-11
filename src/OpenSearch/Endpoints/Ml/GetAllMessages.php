@@ -29,7 +29,7 @@ class GetAllMessages extends AbstractEndpoint
     {
         $memory_id = $this->memory_id ?? null;
         if (isset($memory_id)) {
-            return "/_plugins/_ml/memory/$memory_id/messages";
+            return '/_plugins/_ml/memory/' . rawurlencode($memory_id) . '/messages';
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.get_all_messages');
     }

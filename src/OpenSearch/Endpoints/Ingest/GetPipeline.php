@@ -32,9 +32,9 @@ class GetPipeline extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_ingest/pipeline/$id";
+            return '/_ingest/pipeline/' . rawurlencode($id);
         }
-        return "/_ingest/pipeline";
+        return '/_ingest/pipeline';
     }
 
     public function getParamWhitelist(): array

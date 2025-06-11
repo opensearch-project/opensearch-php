@@ -34,9 +34,9 @@ class GetComponentTemplate extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_component_template/$name";
+            return '/_component_template/' . rawurlencode($name);
         }
-        return "/_component_template";
+        return '/_component_template';
     }
 
     public function getParamWhitelist(): array

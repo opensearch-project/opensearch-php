@@ -24,7 +24,7 @@ class Authinfo extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/authinfo";
+        return '/_plugins/_security/authinfo';
     }
 
     public function getParamWhitelist(): array

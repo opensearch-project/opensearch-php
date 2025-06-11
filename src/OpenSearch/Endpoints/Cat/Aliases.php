@@ -34,9 +34,9 @@ class Aliases extends AbstractEndpoint
     {
         $name = $this->name ?? null;
         if (isset($name)) {
-            return "/_cat/aliases/$name";
+            return '/_cat/aliases/' . rawurlencode($name);
         }
-        return "/_cat/aliases";
+        return '/_cat/aliases';
     }
 
     public function getParamWhitelist(): array

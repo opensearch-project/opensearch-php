@@ -32,9 +32,9 @@ class PutSettings extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_settings";
+            return '/' . rawurlencode($index) . '/_settings';
         }
-        return "/_settings";
+        return '/_settings';
     }
 
     public function getParamWhitelist(): array

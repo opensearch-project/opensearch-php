@@ -28,9 +28,9 @@ class GetProfileModels extends AbstractEndpoint
     {
         $model_id = $this->model_id ?? null;
         if (isset($model_id)) {
-            return "/_plugins/_ml/profile/models/$model_id";
+            return '/_plugins/_ml/profile/models/' . rawurlencode($model_id);
         }
-        return "/_plugins/_ml/profile/models";
+        return '/_plugins/_ml/profile/models';
     }
 
     public function getParamWhitelist(): array

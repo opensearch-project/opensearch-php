@@ -38,18 +38,18 @@ class Info extends AbstractEndpoint
         $metric = $this->metric ?? null;
         $node_id = $this->node_id ?? null;
         if (isset($node_id_or_metric)) {
-            return "/_nodes/$node_id_or_metric";
+            return '/_nodes/' . rawurlencode($node_id_or_metric);
         }
         if (isset($node_id) && isset($metric)) {
-            return "/_nodes/$node_id/$metric";
+            return '/_nodes/' . rawurlencode($node_id) . '/' . rawurlencode($metric);
         }
         if (isset($node_id)) {
-            return "/_nodes/$node_id";
+            return '/_nodes/' . rawurlencode($node_id);
         }
         if (isset($metric)) {
-            return "/_nodes/$metric";
+            return '/_nodes/' . rawurlencode($metric);
         }
-        return "/_nodes";
+        return '/_nodes';
     }
 
     public function getParamWhitelist(): array

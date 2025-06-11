@@ -27,7 +27,7 @@ class Pause extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/_plugins/_replication/$index/_pause";
+            return '/_plugins/_replication/' . rawurlencode($index) . '/_pause';
         }
         throw new RuntimeException('Missing parameter for the endpoint replication.pause');
     }

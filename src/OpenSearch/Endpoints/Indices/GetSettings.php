@@ -35,15 +35,15 @@ class GetSettings extends AbstractEndpoint
         $name = $this->name ?? null;
         $index = $this->index ?? null;
         if (isset($index) && isset($name)) {
-            return "/$index/_settings/$name";
+            return '/' . rawurlencode($index) . '/_settings/' . rawurlencode($name);
         }
         if (isset($index)) {
-            return "/$index/_settings";
+            return '/' . rawurlencode($index) . '/_settings';
         }
         if (isset($name)) {
-            return "/_settings/$name";
+            return '/_settings/' . rawurlencode($name);
         }
-        return "/_settings";
+        return '/_settings';
     }
 
     public function getParamWhitelist(): array

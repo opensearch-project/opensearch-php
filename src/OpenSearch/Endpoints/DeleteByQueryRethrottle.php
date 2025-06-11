@@ -37,7 +37,7 @@ class DeleteByQueryRethrottle extends AbstractEndpoint
         }
         $task_id = $this->task_id;
 
-        return "/_delete_by_query/$task_id/_rethrottle";
+        return '/_delete_by_query/' . rawurlencode($task_id) . '/_rethrottle';
     }
 
     public function getParamWhitelist(): array

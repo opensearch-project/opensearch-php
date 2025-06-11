@@ -24,7 +24,7 @@ class PatchTenants extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_security/api/tenants";
+        return '/_plugins/_security/api/tenants';
     }
 
     public function getParamWhitelist(): array

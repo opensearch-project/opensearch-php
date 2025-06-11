@@ -30,15 +30,15 @@ class Stats extends AbstractEndpoint
         $node_id = $this->node_id ?? null;
         $stat = $this->stat ?? null;
         if (isset($node_id) && isset($stat)) {
-            return "/_plugins/_knn/$node_id/stats/$stat";
+            return '/_plugins/_knn/' . rawurlencode($node_id) . '/stats/' . rawurlencode($stat);
         }
         if (isset($node_id)) {
-            return "/_plugins/_knn/$node_id/stats";
+            return '/_plugins/_knn/' . rawurlencode($node_id) . '/stats';
         }
         if (isset($stat)) {
-            return "/_plugins/_knn/stats/$stat";
+            return '/_plugins/_knn/stats/' . rawurlencode($stat);
         }
-        return "/_plugins/_knn/stats";
+        return '/_plugins/_knn/stats';
     }
 
     public function getParamWhitelist(): array

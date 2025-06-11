@@ -32,9 +32,9 @@ class Simulate extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_ingest/pipeline/$id/_simulate";
+            return '/_ingest/pipeline/' . rawurlencode($id) . '/_simulate';
         }
-        return "/_ingest/pipeline/_simulate";
+        return '/_ingest/pipeline/_simulate';
     }
 
     public function getParamWhitelist(): array

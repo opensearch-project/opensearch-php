@@ -29,7 +29,7 @@ class DeleteController extends AbstractEndpoint
     {
         $model_id = $this->model_id ?? null;
         if (isset($model_id)) {
-            return "/_plugins/_ml/controllers/$model_id";
+            return '/_plugins/_ml/controllers/' . rawurlencode($model_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.delete_controller');
     }

@@ -32,9 +32,9 @@ class ClearCache extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_cache/clear";
+            return '/' . rawurlencode($index) . '/_cache/clear';
         }
-        return "/_cache/clear";
+        return '/_cache/clear';
     }
 
     public function getParamWhitelist(): array

@@ -33,7 +33,7 @@ class Close extends AbstractEndpoint
     {
         $index = $this->index ?? null;
         if (isset($index)) {
-            return "/$index/_close";
+            return '/' . rawurlencode($index) . '/_close';
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.close');
     }

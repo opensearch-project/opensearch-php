@@ -27,7 +27,7 @@ class UploadModel extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_plugins/_ml/models/_upload";
+        return '/_plugins/_ml/models/_upload';
     }
 
     public function getParamWhitelist(): array

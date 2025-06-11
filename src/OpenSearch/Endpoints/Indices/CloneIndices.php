@@ -36,7 +36,7 @@ class CloneIndices extends AbstractEndpoint
         $index = $this->index ?? null;
         $target = $this->target ?? null;
         if (isset($index) && isset($target)) {
-            return "/$index/_clone/$target";
+            return '/' . rawurlencode($index) . '/_clone/' . rawurlencode($target);
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.clone');
     }

@@ -30,7 +30,7 @@ class Tasks extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return "/_cat/tasks";
+        return '/_cat/tasks';
     }
 
     public function getParamWhitelist(): array

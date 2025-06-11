@@ -27,7 +27,7 @@ class Stop extends AbstractEndpoint
     {
         $id = $this->id ?? null;
         if (isset($id)) {
-            return "/_plugins/_transform/$id/_stop";
+            return '/_plugins/_transform/' . rawurlencode($id) . '/_stop';
         }
         throw new RuntimeException('Missing parameter for the endpoint transforms.stop');
     }

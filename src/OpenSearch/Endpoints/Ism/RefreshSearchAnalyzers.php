@@ -30,7 +30,7 @@ class RefreshSearchAnalyzers extends AbstractEndpoint
         }
         $index = $this->index;
 
-        return "/_plugins/_refresh_search_analyzers/$index";
+        return '/_plugins/_refresh_search_analyzers/' . rawurlencode($index);
     }
 
     public function getParamWhitelist(): array
