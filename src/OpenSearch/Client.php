@@ -869,7 +869,7 @@ class Client
     }
 
     /**
-     * Returns information about why a specific matches (or doesn't match) a query.
+     * Returns information about why a specific document matches (or doesn't match) a query.
      *
      * $params['id']               = (string) Defines the document ID. (Required)
      * $params['index']            = (string) Index names used to limit the request. Only a single index name can be provided to this parameter. (Required)
