@@ -28,9 +28,9 @@ class GetSearchConfigurations extends AbstractEndpoint
     {
         $search_configuration_id = $this->search_configuration_id ?? null;
         if (isset($search_configuration_id)) {
-            return '/_plugins/search_relevance/search_configurations/' . rawurlencode($search_configuration_id);
+            return '/_plugins/_search_relevance/search_configurations/' . rawurlencode($search_configuration_id);
         }
-        return '/_plugins/search_relevance/search_configurations';
+        return '/_plugins/_search_relevance/search_configurations';
     }
 
     public function getParamWhitelist(): array

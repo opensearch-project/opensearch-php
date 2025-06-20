@@ -54,6 +54,7 @@ use OpenSearch\Namespaces\SearchPipelineNamespace;
 use OpenSearch\Namespaces\SearchRelevanceNamespace;
 use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SecurityNamespace;
+use OpenSearch\Namespaces\SecurityAnalyticsNamespace;
 use OpenSearch\Namespaces\SmNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
@@ -301,6 +302,11 @@ class Client
     protected $security;
 
     /**
+     * @var SecurityAnalyticsNamespace
+     */
+    protected $securityAnalytics;
+
+    /**
      * @var SmNamespace
      */
     protected $sm;
@@ -413,6 +419,7 @@ class Client
         // @phpstan-ignore new.deprecated, property.deprecated
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
         $this->security = new SecurityNamespace($transport, $this->endpointFactory);
+        $this->securityAnalytics = new SecurityAnalyticsNamespace($transport, $this->endpointFactory);
         $this->sm = new SmNamespace($transport, $this->endpointFactory);
         $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
         $this->sql = new SqlNamespace($transport, $this->endpointFactory);
@@ -502,13 +509,13 @@ class Client
     /**
      * Explicitly clears the search context for a scroll.
      *
-     * $params['scroll_id']   = DEPRECATED (array) Comma-separated list of scroll IDs to clear. To clear all scroll IDs, use `_all`.
+     * $params['scroll_id']   = DEPRECATED (array) A comma-separated list of scroll IDs to clear. To clear all scroll IDs, use `_all`.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
-     * $params['body']        = (array) Comma-separated list of scroll IDs to clear if none was specified using the `scroll_id` parameter
+     * $params['body']        = (array) A comma-separated list of scroll IDs to clear if none was specified using the `scroll_id` parameter
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -529,7 +536,7 @@ class Client
     /**
      * Returns number of documents matching a query.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['analyze_wildcard']   = (boolean) If `true`, wildcard and prefix queries are analyzed.This parameter can only be used when the `q` query string parameter is specified. (Default = false)
      * $params['analyzer']           = (string) Analyzer to use for the query string.This parameter can only be used when the `q` query string parameter is specified.
@@ -570,12 +577,12 @@ class Client
     /**
      * Creates point in time context.
      *
-     * $params['index']                      = (array) Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
+     * $params['index']                      = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
      * $params['allow_partial_pit_creation'] = (boolean) Allow if point in time can be created with partial failures.
      * $params['expand_wildcards']           = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['keep_alive']                 = (string) Specify the keep alive for point in time.
      * $params['preference']                 = (string) Specify the node or shard the operation should be performed on. (Default = random)
-     * $params['routing']                    = (any) Comma-separated list of specific routing values.
+     * $params['routing']                    = (any) A comma-separated list of specific routing values.
      * $params['pretty']                     = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                      = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -599,7 +606,7 @@ class Client
     /**
      * Removes a document from the index.
      *
-     * $params['id']                     = (string) Unique identifier for the document. (Required)
+     * $params['id']                     = (string) The unique identifier for the document. (Required)
      * $params['index']                  = (string) Name of the target index. (Required)
      * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
@@ -607,7 +614,7 @@ class Client
      * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period to wait for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']           = (any) Specific version type: `external`, `external_gte`.
+     * $params['version_type']           = (any) The specific version type: `external`, `external_gte`.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                  = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -654,7 +661,7 @@ class Client
     /**
      * Deletes documents matching the provided query.
      *
-     * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
+     * $params['index']                  = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
      * $params['_source']                = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes']       = (array) List of fields to exclude from the returned `_source` field.
      * $params['_source_includes']       = (array) List of fields to extract and return from the `_source` field.
@@ -791,7 +798,7 @@ class Client
      * Returns information about whether a document exists in an index.
      *
      * $params['id']               = (string) Identifier of the document. (Required)
-     * $params['index']            = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
+     * $params['index']            = (string) A comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
      * $params['_source']          = (any) `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
@@ -801,7 +808,7 @@ class Client
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (any) Specific version type: `external`, `external_gte`.
+     * $params['version_type']     = (any) The specific version type: `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -832,7 +839,7 @@ class Client
      * Returns information about whether a document source exists in an index.
      *
      * $params['id']               = (string) Identifier of the document. (Required)
-     * $params['index']            = (string) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
+     * $params['index']            = (string) A comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`). (Required)
      * $params['_source']          = (any) `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
@@ -841,7 +848,7 @@ class Client
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (any) Specific version type: `external`, `external_gte`.
+     * $params['version_type']     = (any) The specific version type: `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -869,7 +876,7 @@ class Client
     }
 
     /**
-     * Returns information about why a specific matches (or doesn't match) a query.
+     * Returns information about why a specific document matches (or doesn't match) a query.
      *
      * $params['id']               = (string) Defines the document ID. (Required)
      * $params['index']            = (string) Index names used to limit the request. Only a single index name can be provided to this parameter. (Required)
@@ -913,10 +920,10 @@ class Client
     /**
      * Returns the information about the capabilities of fields among multiple indexes.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indexes, omit this parameter or use * or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (*). To target all data streams and indexes, omit this parameter or use * or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias,or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a requesttargeting `foo*,bar*` returns an error if an index starts with foo but no index starts with bar.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
-     * $params['fields']             = (any) Comma-separated list of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.
+     * $params['fields']             = (any) A comma-separated list of fields to retrieve capabilities for. Wildcard (`*`) expressions are supported.
      * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
      * $params['include_unmapped']   = (boolean) If `true`, unmapped fields are included in the response. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -956,7 +963,7 @@ class Client
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (any) Specific version type: `internal`, `external`, `external_gte`.
+     * $params['version_type']     = (any) The specific version type: `internal`, `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1078,7 +1085,7 @@ class Client
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']     = (any) Specific version type. One of `internal`, `external`, `external_gte`.
+     * $params['version_type']     = (any) The specific version type. One of `internal`, `external`, `external_gte`.
      * $params['pretty']           = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1105,7 +1112,7 @@ class Client
      * Creates or updates a document in an index.
      *
      * $params['index']                  = (string) Name of the data stream or index to target. (Required)
-     * $params['id']                     = (string) Unique identifier for the document.
+     * $params['id']                     = (string) The unique identifier for the document.
      * $params['if_primary_term']        = (integer) Only perform the operation if the document has this primary term.
      * $params['if_seq_no']              = (integer) Only perform the operation if the document has this sequence number.
      * $params['op_type']                = (any) Set to create to only index the document if it does not already exist (put if absent).If a document with the specified `_id` already exists, the indexing operation will fail.Same as using the `<index>/_create` endpoint.Valid values: `index`, `create`.If document id is specified, it defaults to `index`.Otherwise, it defaults to `create`.
@@ -1115,7 +1122,7 @@ class Client
      * $params['routing']                = (any) A custom value used to route operations to a specific shard.
      * $params['timeout']                = (string) Period the request waits for the following operations: automatic index creation, dynamic mapping updates, waiting for active shards.
      * $params['version']                = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
-     * $params['version_type']           = (any) Specific version type: `external`, `external_gte`.
+     * $params['version_type']           = (any) The specific version type: `external`, `external_gte`.
      * $params['wait_for_active_shards'] = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                 = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']                  = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -1165,7 +1172,7 @@ class Client
     /**
      * Allows to get multiple documents in one request.
      *
-     * $params['index']            = (string) Name of the index to retrieve documents from when `ids` are specified, or when a document in the `docs` array does not specify an index.
+     * $params['index']            = (string) The name of the index to retrieve documents from when `ids` are specified, or when a document in the `docs` array does not specify an index.
      * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude from the response.You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the `_source_excludes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
@@ -1200,7 +1207,7 @@ class Client
     /**
      * Allows to execute several search operations in one request.
      *
-     * $params['index']                         = (array) Comma-separated list of data streams, indexes, and index aliases to search.
+     * $params['index']                         = (array) A comma-separated list of data streams, indexes, and index aliases to search.
      * $params['ccs_minimize_roundtrips']       = (boolean) If `true`, network round-trips between the coordinating node and remote clusters are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches']       = (integer) Maximum number of concurrent searches the multi search API can execute.
      * $params['max_concurrent_shard_requests'] = (integer) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
@@ -1234,7 +1241,7 @@ class Client
     /**
      * Allows to execute several search template operations in one request.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*`.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*`.
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches'] = (integer) Maximum number of concurrent searches the API can run.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, the response returns `hits.total` as an integer.If `false`, it returns `hits.total` as an object. (Default = false)
@@ -1362,7 +1369,7 @@ class Client
     /**
      * Allows to evaluate the quality of ranked search results over a set of typical search queries.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard (`*`) expressions are supported. To target all data streams and indexes in a cluster, omit this parameter or use `_all` or `*`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
@@ -1530,7 +1537,7 @@ class Client
     /**
      * Returns results matching a query.
      *
-     * $params['index']                         = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']                         = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['_source']                       = (any) Indicates which source fields are returned for matching documents.These fields are returned in the `hits._source` property of the search response.Valid values are:`true` to return the entire document source;`false` to not return the document source;`<string>` to return the source fields that are specified as a comma-separated list (supports wildcard (`*`) patterns).
      * $params['_source_excludes']              = (any) A comma-separated list of source fields to exclude from the response.You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
      * $params['_source_includes']              = (any) A comma-separated list of source fields to include in the response.If this parameter is specified, only these source fields are returned.You can exclude fields from this subset using the `_source_excludes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
@@ -1636,7 +1643,7 @@ class Client
     /**
      * Allows to use the Mustache language to pre-render a search definition.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (*).
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (*).
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['ccs_minimize_roundtrips'] = (boolean) If `true`, network round-trips are minimized for cross-cluster search requests. (Default = true)
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -1759,7 +1766,7 @@ class Client
     /**
      * Performs an update on every document in the index without changing the source,for example to pick up a mapping change.
      *
-     * $params['index']                  = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
+     * $params['index']                  = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`. (Required)
      * $params['_source']                = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes']       = (array) List of fields to exclude from the returned `_source` field.
      * $params['_source_includes']       = (array) List of fields to extract and return from the `_source` field.
@@ -2117,6 +2124,13 @@ class Client
     public function security(): SecurityNamespace
     {
         return $this->security;
+    }
+    /**
+     * Returns the securityAnalytics namespace
+     */
+    public function securityAnalytics(): SecurityAnalyticsNamespace
+    {
+        return $this->securityAnalytics;
     }
     /**
      * Returns the sm namespace

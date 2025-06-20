@@ -24,7 +24,7 @@ class PutSearchConfigurations extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/search_relevance/search_configurations';
+        return '/_plugins/_search_relevance/search_configurations';
     }
 
     public function getParamWhitelist(): array

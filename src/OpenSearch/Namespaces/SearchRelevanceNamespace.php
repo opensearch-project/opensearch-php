@@ -21,8 +21,10 @@ use OpenSearch\Endpoints\SearchRelevance\DeleteQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\DeleteSearchConfigurations;
 use OpenSearch\Endpoints\SearchRelevance\GetExperiments;
 use OpenSearch\Endpoints\SearchRelevance\GetJudgments;
+use OpenSearch\Endpoints\SearchRelevance\GetNodeStats;
 use OpenSearch\Endpoints\SearchRelevance\GetQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\GetSearchConfigurations;
+use OpenSearch\Endpoints\SearchRelevance\GetStats;
 use OpenSearch\Endpoints\SearchRelevance\PostQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\PutExperiments;
 use OpenSearch\Endpoints\SearchRelevance\PutJudgments;
@@ -181,6 +183,38 @@ class SearchRelevanceNamespace extends AbstractNamespace
     }
 
     /**
+     * Gets stats by node.
+     *
+     * $params['node_id']                  = (string) The node id (Required)
+     * $params['stat']                     = (string) The statistic to return
+     * $params['flat_stat_paths']          = (string) Requests flattened stat paths as keys
+     * $params['include_all_nodes']        = (string) Whether to include all nodes
+     * $params['include_individual_nodes'] = (string) Whether to include individual nodes
+     * $params['include_info']             = (string) Whether to include info
+     * $params['include_metadata']         = (string) Whether to include metadata
+     * $params['pretty']                   = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                    = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']              = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getNodeStats(array $params = [])
+    {
+        $node_id = $this->extractArgument($params, 'node_id');
+        $stat = $this->extractArgument($params, 'stat');
+
+        $endpoint = $this->endpointFactory->getEndpoint(GetNodeStats::class);
+        $endpoint->setParams($params);
+        $endpoint->setNodeId($node_id);
+        $endpoint->setStat($stat);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Lists the current query sets available.
      *
      * $params['query_set_id'] = (string) The query set id
@@ -224,6 +258,35 @@ class SearchRelevanceNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(GetSearchConfigurations::class);
         $endpoint->setParams($params);
         $endpoint->setSearchConfigurationId($search_configuration_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Gets stats.
+     *
+     * $params['stat']                     = (string) The statistic to return
+     * $params['flat_stat_paths']          = (string) Requests flattened stat paths as keys
+     * $params['include_all_nodes']        = (string) Whether to include all nodes
+     * $params['include_individual_nodes'] = (string) Whether to include individual nodes
+     * $params['include_info']             = (string) Whether to include info
+     * $params['include_metadata']         = (string) Whether to include metadata
+     * $params['pretty']                   = (boolean) Whether to pretty format the returned JSON response. (Default = false)
+     * $params['human']                    = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']              = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getStats(array $params = [])
+    {
+        $stat = $this->extractArgument($params, 'stat');
+
+        $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
+        $endpoint->setParams($params);
+        $endpoint->setStat($stat);
 
         return $this->performRequest($endpoint);
     }

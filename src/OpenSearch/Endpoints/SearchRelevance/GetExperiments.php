@@ -28,9 +28,9 @@ class GetExperiments extends AbstractEndpoint
     {
         $experiment_id = $this->experiment_id ?? null;
         if (isset($experiment_id)) {
-            return '/_plugins/search_relevance/experiments/' . rawurlencode($experiment_id);
+            return '/_plugins/_search_relevance/experiments/' . rawurlencode($experiment_id);
         }
-        return '/_plugins/search_relevance/experiments';
+        return '/_plugins/_search_relevance/experiments';
     }
 
     public function getParamWhitelist(): array

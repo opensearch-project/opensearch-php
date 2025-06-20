@@ -91,7 +91,7 @@ class KnnNamespace extends AbstractNamespace
      * $params['ccs_minimize_roundtrips']       = (boolean) Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution. (Default = true)
      * $params['default_operator']              = (enum) The default operator for query string query (AND or OR). (Options = and,AND,or,OR)
      * $params['df']                            = (string) The field to use as default where no field prefix is given in the query string.
-     * $params['docvalue_fields']               = (array) Comma-separated list of fields to return as the docvalue representation of a field for each hit.
+     * $params['docvalue_fields']               = (array) A comma-separated list of fields to return as the docvalue representation of a field for each hit.
      * $params['expand_wildcards']              = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['explain']                       = (boolean) Specify whether to return detailed information about score computation as part of a hit.
      * $params['from']                          = (integer) Starting offset. (Default = 0)
@@ -104,14 +104,14 @@ class KnnNamespace extends AbstractNamespace
      * $params['q']                             = (string) Query in the Lucene query string syntax.
      * $params['request_cache']                 = (boolean) Specify if request cache should be used for this request or not, defaults to index level setting.
      * $params['rest_total_hits_as_int']        = (boolean) Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default = false)
-     * $params['routing']                       = (any) Comma-separated list of specific routing values.
+     * $params['routing']                       = (any) A comma-separated list of specific routing values.
      * $params['scroll']                        = (string) Specify how long a consistent view of the index should be maintained for scrolled search.
      * $params['search_type']                   = (any) Search operation type.
      * $params['seq_no_primary_term']           = (boolean) Specify whether to return sequence number and primary term of the last modification of each hit.
      * $params['size']                          = (integer) Number of hits to return. (Default = 10)
-     * $params['sort']                          = (array) Comma-separated list of <field>:<direction> pairs.
+     * $params['sort']                          = (array) A comma-separated list of <field>:<direction> pairs.
      * $params['stats']                         = (array) Specific 'tag' of the request for logging and statistical purposes.
-     * $params['stored_fields']                 = (array) Comma-separated list of stored fields to return.
+     * $params['stored_fields']                 = (array) A comma-separated list of stored fields to return.
      * $params['suggest_field']                 = (string) Specify which field to use for suggestions.
      * $params['suggest_mode']                  = (enum) Specify suggest mode. (Options = always,missing,popular)
      * $params['suggest_size']                  = (integer) How many suggestions to return in response.
@@ -145,8 +145,8 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Provides information about the current status of the k-NN plugin.
      *
-     * $params['node_id']     = (array) Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-     * $params['stat']        = (array) Comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
+     * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+     * $params['stat']        = (array) A comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
      * $params['timeout']     = (string) Operation timeout.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
@@ -200,7 +200,7 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
      *
-     * $params['index']       = (array) Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
+     * $params['index']       = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

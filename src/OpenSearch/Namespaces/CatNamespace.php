@@ -174,7 +174,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Provides quick access to the document count of the entire cluster or of an individual index.
      *
-     * $params['index']       = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']       = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['format']      = (string) A short version of the `Accept` header, such as `json` or `yaml`.
      * $params['h']           = (array) A comma-separated list of column names to display.
      * $params['help']        = (boolean) Returns help information. (Default = false)
