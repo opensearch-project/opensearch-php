@@ -24,7 +24,7 @@ class PutJudgments extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/search_relevance/judgments';
+        return '/_plugins/_search_relevance/judgments';
     }
 
     public function getParamWhitelist(): array

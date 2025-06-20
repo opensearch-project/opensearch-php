@@ -29,7 +29,7 @@ class DeleteExperiments extends AbstractEndpoint
     {
         $experiment_id = $this->experiment_id ?? null;
         if (isset($experiment_id)) {
-            return '/_plugins/search_relevance/experiments/' . rawurlencode($experiment_id);
+            return '/_plugins/_search_relevance/experiments/' . rawurlencode($experiment_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint search_relevance.delete_experiments');
     }

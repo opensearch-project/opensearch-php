@@ -28,9 +28,9 @@ class GetQuerySets extends AbstractEndpoint
     {
         $query_set_id = $this->query_set_id ?? null;
         if (isset($query_set_id)) {
-            return '/_plugins/search_relevance/query_sets/' . rawurlencode($query_set_id);
+            return '/_plugins/_search_relevance/query_sets/' . rawurlencode($query_set_id);
         }
-        return '/_plugins/search_relevance/query_sets';
+        return '/_plugins/_search_relevance/query_sets';
     }
 
     public function getParamWhitelist(): array

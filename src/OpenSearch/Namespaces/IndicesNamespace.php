@@ -141,11 +141,11 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Clears all or specific caches for one or more indexes.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['fielddata']          = (boolean) If `true`, clears the fields cache.Use the `fields` parameter to clear the cache of specific fields only.
-     * $params['fields']             = (any) Comma-separated list of field names used to limit the `fielddata` parameter.
+     * $params['fields']             = (any) A comma-separated list of field names used to limit the `fielddata` parameter.
      * $params['file']               = (boolean) If `true`, clears the unused entries from the file cache on nodes with the Search role. (Default = false)
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['query']              = (boolean) If `true`, clears the query cache.
@@ -209,7 +209,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Closes an index.
      *
-     * $params['index']                   = (array) Comma-separated list or wildcard expression of index names used to limit the request.
+     * $params['index']                   = (array) A comma-separated list or wildcard expression of index names used to limit the request.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -240,7 +240,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates an index with optional settings and mappings.
      *
-     * $params['index']                   = (string) Name of the index you wish to create.
+     * $params['index']                   = (string) The name of the index you wish to create.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
@@ -298,7 +298,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Provides statistics on operations happening in a data stream.
      *
-     * $params['name']        = (array) Comma-separated list of data streams used to limit the request. Wildcard expressions (`*`) are supported. To target all data streams in a cluster, omit this parameter or use `*`.
+     * $params['name']        = (array) A comma-separated list of data streams used to limit the request. Wildcard expressions (`*`) are supported. To target all data streams in a cluster, omit this parameter or use `*`.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -322,7 +322,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an index.
      *
-     * $params['index']                   = (array) Comma-separated list of indexes to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (`*`) or `_all`. To use wildcards or `_all`, set the `action.destructive_requires_name` cluster setting to `false`.
+     * $params['index']                   = (array) A comma-separated list of indexes to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (`*`) or `_all`. To use wildcards or `_all`, set the `action.destructive_requires_name` cluster setting to `false`.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -352,8 +352,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an alias.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). (Required)
-     * $params['name']                    = (array) Comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`. (Required)
+     * $params['index']                   = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). (Required)
+     * $params['name']                    = (array) A comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`. (Required)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
@@ -382,7 +382,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes a data stream.
      *
-     * $params['name']        = (array) Comma-separated list of data streams to delete. Wildcard (`*`) expressions are supported.
+     * $params['name']        = (array) A comma-separated list of data streams to delete. Wildcard (`*`) expressions are supported.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -406,7 +406,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an index template.
      *
-     * $params['name']                    = (string) Name of the index template to delete. Wildcard (*) expressions are supported.
+     * $params['name']                    = (string) The name of the index template to delete. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
@@ -460,7 +460,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular index exists.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -495,8 +495,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular alias exists.
      *
-     * $params['name']               = (array) Comma-separated list of aliases to check. Supports wildcards (`*`). (Required)
-     * $params['index']              = (array) Comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['name']               = (array) A comma-separated list of aliases to check. Supports wildcards (`*`). (Required)
+     * $params['index']              = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, requests that include a missing data stream or index in the target indexes or data streams return an error.
@@ -530,7 +530,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular index template exists.
      *
-     * $params['name']                    = (string) Name of the index template to check existence of. Wildcard (*) expressions are supported.
+     * $params['name']                    = (string) The name of the index template to check existence of. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['flat_settings']           = (boolean) Return settings in flat format. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
@@ -594,7 +594,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Performs the flush operation on one or more indexes.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['force']              = (boolean) If `true`, the request forces a flush even if there are no changes to commit to the index.
@@ -655,7 +655,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about one or more indexes.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets onlymissing or closed indexes. This behavior applies even if the request targets other open indexes. For example,a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard expressions can match. If the request can target data streams, this argumentdetermines whether wildcard expressions match hidden data streams. Supports comma-separated values,such as `open,hidden`.
@@ -687,8 +687,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns an alias.
      *
-     * $params['name']               = (array) Comma-separated list of aliases to retrieve. Supports wildcards (`*`). To retrieve all aliases, omit this parameter or use `*` or `_all`.
-     * $params['index']              = (array) Comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['name']               = (array) A comma-separated list of aliases to retrieve. Supports wildcards (`*`). To retrieve all aliases, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
@@ -718,7 +718,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns data streams.
      *
-     * $params['name']        = (array) Comma-separated list of data stream names used to limit the request. Wildcard (`*`) expressions are supported. If omitted, all data streams are returned.
+     * $params['name']        = (array) A comma-separated list of data stream names used to limit the request. Wildcard (`*`) expressions are supported. If omitted, all data streams are returned.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -742,8 +742,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns mapping for one or more fields.
      *
-     * $params['fields']             = (array) Comma-separated list or wildcard expression of fields used to limit returned information. (Required)
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['fields']             = (array) A comma-separated list or wildcard expression of fields used to limit returned information. (Required)
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
@@ -774,7 +774,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns an index template.
      *
-     * $params['name']                    = (array) Name of the index template to retrieve. Wildcard (*) expressions are supported.
+     * $params['name']                    = (array) The name of the index template to retrieve. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node. (Default = false)
@@ -802,7 +802,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns mappings for one or more indexes.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -832,8 +832,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns settings for one or more indexes.
      *
-     * $params['name']                    = (array) Comma-separated list or wildcard expression of settings to retrieve.
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['name']                    = (array) A comma-separated list or wildcard expression of settings to retrieve.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, indexalias, or `_all` value targets only missing or closed indexes. Thisbehavior applies even if the request targets other open indexes. Forexample, a request targeting `foo*,bar*` returns an error if an indexstarts with foo but no index starts with `bar`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
@@ -867,7 +867,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns an index template.
      *
-     * $params['name']                    = (array) Comma-separated list of index template names used to limit the request. Wildcard (`*`) expressions are supported. To return all index templates, omit this parameter or use a value of `_all` or `*`.
+     * $params['name']                    = (array) A comma-separated list of index template names used to limit the request. Wildcard (`*`) expressions are supported. To return all index templates, omit this parameter or use a value of `_all` or `*`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
@@ -895,7 +895,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * The `_upgrade` API is no longer useful and will be removed.
      *
-     * $params['index']              = (array) Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * $params['index']              = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
      * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
      * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['ignore_unavailable'] = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
@@ -922,7 +922,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Opens an index.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
@@ -956,7 +956,7 @@ class IndicesNamespace extends AbstractNamespace
      * Creates or updates an alias.
      *
      * $params['name']                    = (string) Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
-     * $params['index']                   = (array) Comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
+     * $params['index']                   = (array) A comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
@@ -1053,7 +1053,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Updates the index settings.
      *
-     * $params['index']                   = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, indexalias, or `_all` value targets only missing or closed indexes. Thisbehavior applies even if the request targets other open indexes. Forexample, a request targeting `foo*,bar*` returns an error if an indexstarts with `foo` but no index starts with `bar`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can targetdata streams, this argument determines whether wildcard expressions matchhidden data streams. Supports comma-separated values, such as`open,hidden`.
@@ -1118,7 +1118,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about ongoing index shard recoveries.
      *
-     * $params['index']       = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']       = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['active_only'] = (boolean) If `true`, the response only includes ongoing shard recoveries. (Default = false)
      * $params['detailed']    = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1144,7 +1144,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Performs the refresh operation in one or more indexes.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
@@ -1197,7 +1197,7 @@ class IndicesNamespace extends AbstractNamespace
      * Updates an alias to point to a new index when the existing indexis considered to be too large or too old.
      *
      * $params['alias']                   = (string) Name of the data stream or index alias to roll over. (Required)
-     * $params['new_index']               = (string) Name of the index to create. Supports date math. Data streams do not support this parameter.
+     * $params['new_index']               = (string) The name of the index to create. Supports date math. Data streams do not support this parameter.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['dry_run']                 = (boolean) If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
@@ -1231,7 +1231,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Provides low-level information about segments in a Lucene index.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
@@ -1353,7 +1353,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Simulate resolving the given template name or body.
      *
-     * $params['name']                    = (string) Name of the index template to simulate. To test a template configuration before you add it to the cluster, omit this parameter and specify the template configuration in the request body.
+     * $params['name']                    = (string) The name of the index template to simulate. To test a template configuration before you add it to the cluster, omit this parameter and specify the template configuration in the request body.
      * $params['cause']                   = (string) User defined reason for dry-run creating the new template for simulation purposes. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['create']                  = (boolean) If `true`, the template passed in the body is only used if no existing templates match the same index patterns. If `false`, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation. (Default = false)
@@ -1422,12 +1422,12 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['metric']                     = (array) Limit the information returned the specific metrics.
      * $params['index']                      = (array) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
-     * $params['completion_fields']          = (any) Comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
+     * $params['completion_fields']          = (any) A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
      * $params['expand_wildcards']           = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argumentdetermines whether wildcard expressions match hidden data streams. Supports comma-separated values,such as `open,hidden`.
-     * $params['fielddata_fields']           = (any) Comma-separated list or wildcard expressions of fields to include in field data statistics.
-     * $params['fields']                     = (any) Comma-separated list or wildcard expressions of fields to include in the statistics.
+     * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
+     * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
      * $params['forbid_closed_indices']      = (boolean) If `true`, statistics are not collected from closed indexes. (Default = true)
-     * $params['groups']                     = (any) Comma-separated list of search groups to include in the search statistics.
+     * $params['groups']                     = (any) A comma-separated list of search groups to include in the search statistics.
      * $params['include_segment_file_sizes'] = (boolean) If `true`, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
      * $params['include_unloaded_segments']  = (boolean) If `true`, the response includes information from segments that are not loaded into memory. (Default = false)
      * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
@@ -1483,7 +1483,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * The `_upgrade` API is no longer useful and will be removed.
      *
-     * $params['index']                 = (array) Comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * $params['index']                 = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
      * $params['allow_no_indices']      = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
      * $params['expand_wildcards']      = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['ignore_unavailable']    = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
@@ -1512,7 +1512,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Allows a user to validate a potentially expensive query without executing it.
      *
-     * $params['index']              = (array) Comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
+     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
      * $params['all_shards']         = (boolean) If `true`, the validation is executed on all shards instead of one random shard per index.
      * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
      * $params['analyze_wildcard']   = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)

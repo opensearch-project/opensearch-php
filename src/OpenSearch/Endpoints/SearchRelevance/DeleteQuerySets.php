@@ -29,7 +29,7 @@ class DeleteQuerySets extends AbstractEndpoint
     {
         $query_set_id = $this->query_set_id ?? null;
         if (isset($query_set_id)) {
-            return '/_plugins/search_relevance/query_sets/' . rawurlencode($query_set_id);
+            return '/_plugins/_search_relevance/query_sets/' . rawurlencode($query_set_id);
         }
         throw new RuntimeException('Missing parameter for the endpoint search_relevance.delete_query_sets');
     }

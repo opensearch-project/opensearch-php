@@ -211,8 +211,8 @@ class LtrNamespace extends AbstractNamespace
     /**
      * Provides information about the current status of the LTR plugin.
      *
-     * $params['node_id']     = (array) Comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-     * $params['stat']        = (array) Comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
+     * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+     * $params['stat']        = (array) A comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
      * $params['timeout']     = (string) The time in milliseconds to wait for a response.
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
