@@ -803,7 +803,7 @@ class Client
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['realtime']         = (boolean) If `true`, the request is real time as opposed to near real time.
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
@@ -844,7 +844,7 @@ class Client
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['realtime']         = (boolean) If `true`, the request is real time as opposed to near real time.
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes all shards involved in the delete by query after the request completes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control.The specified version must match the current version of the document for the request to succeed.
@@ -953,12 +953,12 @@ class Client
      * Returns a document.
      *
      * $params['id']               = (string) The unique identifier of the document. (Required)
-     * $params['index']            = (string) The name of the index that contains the document. (Required)
+     * $params['index']            = (string) The name of the index containing the document. (Required)
      * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['realtime']         = (boolean) If `true`, the request is real time as opposed to near real time.
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['stored_fields']    = (any) List of stored fields to return as part of a hit.If no fields are specified, no stored fields are included in the response.If this field is specified, the `_source` parameter defaults to false.
@@ -1076,12 +1076,12 @@ class Client
      * Returns the source of a document.
      *
      * $params['id']               = (string) The unique identifier of the document. (Required)
-     * $params['index']            = (string) The name of the index that contains the document. (Required)
+     * $params['index']            = (string) The name of the index containing the document. (Required)
      * $params['_source']          = (any) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude in the response.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
-     * $params['realtime']         = (boolean) Boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['realtime']         = (boolean) Boolean) If `true`, the request is real time as opposed to near real time.
      * $params['refresh']          = (any) If `true`, OpenSearch refreshes the affected shards to make this operation visible to search. If `false`, do nothing with refreshes.
      * $params['routing']          = (any) Target the specified primary shard.
      * $params['version']          = (integer) Explicit version number for concurrency control. The specified version must match the current version of the document for the request to succeed.
@@ -1177,7 +1177,7 @@ class Client
      * $params['_source_excludes'] = (any) A comma-separated list of source fields to exclude from the response.You can also use this parameter to exclude fields from the subset specified in `_source_includes` query parameter.
      * $params['_source_includes'] = (any) A comma-separated list of source fields to include in the response.If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the `_source_excludes` query parameter.If the `_source` parameter is `false`, this parameter is ignored.
      * $params['preference']       = (string) Specifies the node or shard the operation should be performed on. Random by default. (Default = random)
-     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time.
+     * $params['realtime']         = (boolean) If `true`, the request is real time as opposed to near real time.
      * $params['refresh']          = (any) If `true`, the request refreshes relevant shards before retrieving documents.
      * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['stored_fields']    = (any) If `true`, retrieves the document fields stored in the index rather than the document `_source`.
@@ -1281,7 +1281,7 @@ class Client
      * $params['payloads']         = (boolean) If `true`, the response includes term payloads. (Default = true)
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
      * $params['preference']       = (string) Specifies the node or shard on which the operation should be performed. See [preference query parameter]({{site.url}}{{site.baseurl}}/api-reference/search-apis/search/#the-preference-query-parameter) for a list of available options. By default the requests are routed randomly to available shard copies (primary or replica), with no guarantee of consistency across repeated queries.
-     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time. (Default = true)
+     * $params['realtime']         = (boolean) If `true`, the request is real time as opposed to near real time. (Default = true)
      * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.
@@ -1650,11 +1650,13 @@ class Client
      * $params['explain']                 = (boolean) If `true`, the response includes additional details about score computation as part of a hit.
      * $params['ignore_throttled']        = (boolean) If `true`, specified concrete, expanded, or aliased indexes are not included in the response when throttled.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
+     * $params['phase_took']              = (boolean) Indicates whether to return phase-level `took` time values in the response. (Default = false)
      * $params['preference']              = (string) Specifies the node or shard the operation should be performed on.Random by default. (Default = random)
      * $params['profile']                 = (boolean) If `true`, the query execution is profiled.
      * $params['rest_total_hits_as_int']  = (boolean) If `true`, `hits.total` are rendered as an integer in the response. (Default = false)
      * $params['routing']                 = (any) A custom value used to route operations to a specific shard.
      * $params['scroll']                  = (string) Specifies how long a consistent view of the indexshould be maintained for scrolled search.
+     * $params['search_pipeline']         = (string) Customizable sequence of processing stages applied to search queries.
      * $params['search_type']             = (any) The type of the search operation.
      * $params['typed_keys']              = (boolean) If `true`, the response prefixes aggregation and suggester names with their respective types.
      * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
@@ -1683,7 +1685,7 @@ class Client
     /**
      * Returns information and statistics about terms in the fields of a particular document.
      *
-     * $params['index']            = (string) The name of the index that contains the document. (Required)
+     * $params['index']            = (string) The name of the index containing the document. (Required)
      * $params['id']               = (string) The unique identifier of the document.
      * $params['field_statistics'] = (boolean) If `true`, the response includes the document count, sum of document frequencies, and sum of total term frequencies. (Default = true)
      * $params['fields']           = (any)
@@ -1691,7 +1693,7 @@ class Client
      * $params['payloads']         = (boolean) If `true`, the response includes term payloads. (Default = true)
      * $params['positions']        = (boolean) If `true`, the response includes term positions. (Default = true)
      * $params['preference']       = (string) Specifies the node or shard on which the operation should be performed. See [preference query parameter]({{site.url}}{{site.baseurl}}/api-reference/search-apis/search/#the-preference-query-parameter) for a list of available options. By default the requests are routed randomly to available shard copies (primary or replica), with no guarantee of consistency across repeated queries.
-     * $params['realtime']         = (boolean) If `true`, the request is real-time as opposed to near-real-time. (Default = true)
+     * $params['realtime']         = (boolean) If `true`, the request is real time as opposed to near real time. (Default = true)
      * $params['routing']          = (any) A custom value used to route operations to a specific shard.
      * $params['term_statistics']  = (boolean) If `true`, the response includes term frequency and document frequency. (Default = false)
      * $params['version']          = (integer) If `true`, returns the document version as part of a hit.

@@ -1260,10 +1260,10 @@ class IndicesNamespace extends AbstractNamespace
      * Provides store information for shard copies of indexes.
      *
      * $params['index']              = (array) List of data streams, indexes, and aliases used to limit the request.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all`value targets only missing or closed indexes. This behavior applies even if the requesttargets other open indexes.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all`value targets only missing or closed indexes. This behavior applies even if the requesttargets other open indexes. (Default = false)
      * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams,this argument determines whether wildcard expressions match hidden data streams.
-     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response.
-     * $params['status']             = (any) List of shard health statuses used to limit the request.
+     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response. (Default = false)
+     * $params['status']             = (any) List of shard health statuses used to limit the request. (Default = all)
      * $params['pretty']             = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
