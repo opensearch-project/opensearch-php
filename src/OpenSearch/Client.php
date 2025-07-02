@@ -34,6 +34,7 @@ use OpenSearch\Namespaces\FlowFrameworkNamespace;
 use OpenSearch\Namespaces\GeospatialNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
 use OpenSearch\Namespaces\IngestNamespace;
+use OpenSearch\Namespaces\IngestionNamespace;
 use OpenSearch\Namespaces\InsightsNamespace;
 use OpenSearch\Namespaces\IsmNamespace;
 use OpenSearch\Namespaces\KnnNamespace;
@@ -196,6 +197,11 @@ class Client
      * @var IngestNamespace
      */
     protected $ingest;
+
+    /**
+     * @var IngestionNamespace
+     */
+    protected $ingestion;
 
     /**
      * @var InsightsNamespace
@@ -397,6 +403,7 @@ class Client
         $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
         $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
         $this->ingest = new IngestNamespace($transport, $this->endpointFactory);
+        $this->ingestion = new IngestionNamespace($transport, $this->endpointFactory);
         $this->insights = new InsightsNamespace($transport, $this->endpointFactory);
         $this->ism = new IsmNamespace($transport, $this->endpointFactory);
         $this->knn = new KnnNamespace($transport, $this->endpointFactory);
@@ -1980,6 +1987,13 @@ class Client
     public function ingest(): IngestNamespace
     {
         return $this->ingest;
+    }
+    /**
+     * Returns the ingestion namespace
+     */
+    public function ingestion(): IngestionNamespace
+    {
+        return $this->ingestion;
     }
     /**
      * Returns the insights namespace
