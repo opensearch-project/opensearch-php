@@ -12,6 +12,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Reduce distribution size by actualizing .gitattributes' export ignore section ([#330](https://github.com/opensearch-project/opensearch-php/pull/330))
 ### Security
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@f700aeb](https://github.com/opensearch-project/opensearch-api-specification/commit/f700aeb14d5bb03d4444cf50a06e15eb39a11cc1)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@8cb2e8f](https://github.com/opensearch-project/opensearch-api-specification/commit/8cb2e8fc639fbc78f6850b24ee29b6b8e44c6492)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@a8ea65d](https://github.com/opensearch-project/opensearch-api-specification/commit/a8ea65db455a2752f250df5694fa1e2195b57b87)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@acebe7b](https://github.com/opensearch-project/opensearch-api-specification/commit/acebe7b352b08feaa3ccfbd300514e143cff61d8)
