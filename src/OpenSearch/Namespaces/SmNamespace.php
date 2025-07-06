@@ -112,7 +112,7 @@ class SmNamespace extends AbstractNamespace
      * $params['queryString'] = (string) The query string to filter the returned snapshot management policies.
      * $params['size']        = (integer) The number of snapshot management policies to return.
      * $params['sortField']   = (string) The name of the field to sort the snapshot management policies by.
-     * $params['sortOrder']   = (enum) The order to sort the snapshot management policies. (Options = asc,desc) (Default = asc)
+     * $params['sortOrder']   = (enum) The order to sort the snapshot management policies. (Options = asc,desc)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)

@@ -700,7 +700,7 @@ class MlNamespace extends AbstractNamespace
      * Get stats.
      *
      * $params['node_id']     = (string)
-     * $params['stat']        = (string)
+     * $params['stat']        = (array)
      * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
