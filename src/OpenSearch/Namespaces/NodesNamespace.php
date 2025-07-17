@@ -44,11 +44,11 @@ class NodesNamespace extends AbstractNamespace
      * $params['threads']             = (integer) The number of threads to provide information for. (Default = 3)
      * $params['timeout']             = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['type']                = (string) The type to sample.
-     * $params['pretty']              = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']               = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -72,11 +72,11 @@ class NodesNamespace extends AbstractNamespace
      * $params['node_id']           = (array) Comma-separated list of node IDs or names used to limit returned information.
      * $params['flat_settings']     = (boolean) When `true`, returns settings in flat format. (Default = false)
      * $params['timeout']           = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']            = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']             = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']            = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']             = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']       = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']            = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']       = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']       = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -101,11 +101,11 @@ class NodesNamespace extends AbstractNamespace
      *
      * $params['node_id']     = (array) The names of particular nodes in the cluster to target.
      * $params['timeout']     = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * $params['body']        = (array) An object containing the password for the OpenSearch keystore.
      *
      * @param array $params Associative array of parameters
@@ -138,11 +138,11 @@ class NodesNamespace extends AbstractNamespace
      * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
      * $params['timeout']                    = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['types']                      = (array) A comma-separated list of document types for the indexing index metric.
-     * $params['pretty']                     = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                      = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                     = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                      = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                     = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']                = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -168,11 +168,11 @@ class NodesNamespace extends AbstractNamespace
      * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
      * $params['metric']      = (array) Limits the information returned to the specific metrics. A comma-separated list of the following options: `_all`, `rest_actions`.
      * $params['timeout']     = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
