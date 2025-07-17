@@ -74,8 +74,11 @@ class Stats extends AbstractEndpoint
 
     public function setStat($stat): static
     {
-        if (is_null($stat)) {
+        if (isset($stat) !== true) {
             return $this;
+        }
+        if (is_array($stat) === true) {
+            $stat = implode(",", $stat);
         }
         $this->stat = $stat;
 

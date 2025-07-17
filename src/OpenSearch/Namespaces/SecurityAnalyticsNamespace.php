@@ -41,11 +41,11 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
      * $params['sortString']    = (string) The string used by Security Analytics to sort the alerts. Optional. (Default = start_time)
      * $params['startIndex']    = (integer) The pagination index. Optional. (Default = 0)
      * $params['startTime']     = (integer) The beginning timestamp (in ms) of the time window in which you want to retrieve alerts. Optional.
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -74,11 +74,11 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
      * $params['sortString']    = (string) The string used by the Alerting plugin to sort the findings. Optional. (Default = timestamp)
      * $params['startIndex']    = (integer) The pagination index. Optional. (Default = 0)
      * $params['startTime']     = (integer) The beginning timestamp (in ms) of the time window in which you want to retrieve findings. Optional.
-     * $params['pretty']        = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -98,11 +98,11 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
      * $params['finding']         = (string) The finding ID for which you want to find other findings that are correlated. Required.
      * $params['nearby_findings'] = (integer) The number of nearby findings you want to return. Optional. (Default = 10)
      * $params['time_window']     = (integer) The time window (in ms) in which all of the correlations must have occurred together. Optional. (Default = 300000)
-     * $params['pretty']          = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']           = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']          = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']           = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']     = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']     = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array

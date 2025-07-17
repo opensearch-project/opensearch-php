@@ -47,11 +47,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.
      * $params['timeout']                 = (string) The amount of time to wait for a response.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -75,11 +75,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['target_snapshot']         = (string) The name of the cloned snapshot.
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * $params['body']                    = (array) The snapshot clone definition. (Required)
      *
      * @param array $params Associative array of parameters
@@ -110,11 +110,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['wait_for_completion']     = (boolean) When `true`, the request returns a response when the snapshot is complete. When `false`, the request returns a response when the snapshot initializes. (Default = false)
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * $params['body']                    = (array) The snapshot definition.
      *
      * @param array $params Associative array of parameters
@@ -143,11 +143,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) The amount of time to wait for a response.
      * $params['verify']                  = (boolean) When `true`, verifies the creation of the snapshot repository.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * $params['body']                    = (array) The repository definition. (Required)
      *
      * @param array $params Associative array of parameters
@@ -173,11 +173,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['snapshot']                = (string) A comma-separated list of snapshot names to delete from the repository.
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -202,11 +202,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) The amount of time to wait for a response.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -231,11 +231,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['ignore_unavailable']      = (boolean) When `false`, the request returns an error for any snapshots that are unavailable. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['verbose']                 = (boolean) When `true`, returns additional information about each snapshot such as the version of OpenSearch which took the snapshot, the start and end times of the snapshot, and the number of shards contained in the snapshot.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -260,11 +260,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['local']                   = (boolean) Whether to get information from the local node. (Default = false)
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -288,11 +288,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['wait_for_completion']     = (boolean) -| Whether to return a response after the restore operation has completed. When `false`, the request returns a response when the restore operation initializes. When `true`, the request returns a response when the restore operation completes. (Default = false)
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * $params['body']                    = (array) Determines which settings and indexes to restore when restoring a snapshot
      *
      * @param array $params Associative array of parameters
@@ -321,11 +321,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['ignore_unavailable']      = (boolean) Whether to ignore any unavailable snapshots, When `false`, a `SnapshotMissingException` is thrown. (Default = false)
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -350,11 +350,11 @@ class SnapshotNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
      * $params['timeout']                 = (string) The amount of time to wait for a response.
-     * $params['pretty']                  = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array

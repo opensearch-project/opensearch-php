@@ -31,11 +31,11 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * Deletes any responses from an asynchronous search.
      *
      * $params['id']          = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -55,11 +55,11 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * Gets partial responses from an asynchronous search.
      *
      * $params['id']          = (string)  (Required)
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -82,11 +82,11 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * $params['keep_alive']                  = (string) The amount of time that the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours. The saved search results are deleted after this period or if the search is canceled. Note that this includes the query execution time. If the query exceeds this amount of time, the process cancels this query automatically.
      * $params['keep_on_completion']          = (boolean) Whether to save the results in the cluster after the search is complete. You can examine the stored results at a later time.
      * $params['wait_for_completion_timeout'] = (string) The amount of time to wait for the results. You can poll the remaining results based on an ID. The maximum value is 300 seconds. Default is `1s`.
-     * $params['pretty']                      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']                       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']                      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']                       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']                 = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']                      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                 = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path']                 = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
@@ -105,11 +105,11 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     /**
      * Monitors any asynchronous searches that are `running`, `completed`, or `persisted`.
      *
-     * $params['pretty']      = (boolean) Whether to pretty format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human readable values for statistics. (Default = true)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) Used to reduce the response. This parameter takes a comma-separated list of filters. It supports using wildcards to match any field or part of a field’s name. You can also exclude fields with "-".
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      *
      * @param array $params Associative array of parameters
      * @return array
