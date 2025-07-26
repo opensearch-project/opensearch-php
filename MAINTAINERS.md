@@ -6,7 +6,6 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 | Maintainer                | GitHub ID                                     | Affiliation  |
 | ------------------------- | --------------------------------------------- | ------------ |
-| Daniel Doubrovkine        | [dblock](https://github.com/dblock)           | Independent  |
 | Harsha Vamsi Kalluri      | [harshavamsi](https://github.com/harshavamsi) | Amazon       |
 | Kim Pepper                | [kimpepper](https://github.com/kimpepper)     | PreviousNext |
 | Sai Medhini Reddy Maryada | [saimedhi](https://github.com/saimedhi)       | Amazon       |
@@ -15,6 +14,7 @@ This document contains a list of maintainers in this repo. See [opensearch-proje
 
 ## Emeritus
 
-| Maintainer      | GitHub ID                                           | Affiliation |
-| --------------- | --------------------------------------------------- | ----------- |
-| Paul Borgermans | [paulborgermans](https://github.com/paulborgermans) | Independent |
+| Maintainer         | GitHub ID                                           | Affiliation |
+| ------------------ | --------------------------------------------------- | ----------- |
+| Paul Borgermans    | [paulborgermans](https://github.com/paulborgermans) | Independent |
+| Daniel Doubrovkine | [dblock](https://github.com/dblock)                 | Independent |
