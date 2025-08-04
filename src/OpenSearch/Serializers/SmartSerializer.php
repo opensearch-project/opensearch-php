@@ -88,7 +88,7 @@ class SmartSerializer implements SerializerInterface
     private function isJson(array $headers): bool
     {
         // Legacy support for 'transfer_stats'.
-        if (array_key_exists('content_type', $headers)) {
+        if (!empty($headers['content_type'])) {
             return str_contains($headers['content_type'], 'json');
         }
 
