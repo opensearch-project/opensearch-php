@@ -4,13 +4,18 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
-- Added URL encoding to all endpoint parameters ([#335](https://github.com/opensearch-project/opensearch-php/pull/335))
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
-- Reduce distribution size by actualizing .gitattributes' export ignore section ([#330](https://github.com/opensearch-project/opensearch-php/pull/330))
 ### Security
+### Updated APIs
+
+## [2.4.4]
+### Added
+- Added URL encoding to all endpoint parameters ([#335](https://github.com/opensearch-project/opensearch-php/pull/335))
+### Fixed
+- Reduce distribution size by actualizing .gitattributes' export ignore section ([#330](https://github.com/opensearch-project/opensearch-php/pull/330))
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@8cb2e8f](https://github.com/opensearch-project/opensearch-api-specification/commit/8cb2e8fc639fbc78f6850b24ee29b6b8e44c6492)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@a8ea65d](https://github.com/opensearch-project/opensearch-api-specification/commit/a8ea65db455a2752f250df5694fa1e2195b57b87)
