@@ -11,6 +11,10 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Security
 ### Updated APIs
 
+## [2.4.5]
+### Fixed
+- Fixed double encoding of index ([#348](https://github.com/opensearch-project/opensearch-php/pull/348))
+
 ## [2.4.4]
 ### Added
 - Added URL encoding to all endpoint parameters ([#335](https://github.com/opensearch-project/opensearch-php/pull/335))

@@ -129,7 +129,7 @@ abstract class AbstractEndpoint implements EndpointInterface
             $index = implode(",", $index);
         }
 
-        $this->index = urlencode($index);
+        $this->index = $index;
 
         return $this;
     }
