@@ -39,6 +39,17 @@ class CreateTest extends TestCase
         $this->instance = new Create();
     }
 
+    public function testEncodingOfIndex(): void
+    {
+        $this->instance->setIndex(index: '*');
+        $this->instance->setId(10);
+
+        $result = $this->instance->getURI();
+
+        // Assert
+        $this->assertEquals('/%2A/_create/10', $result);
+    }
+
     public function testGetURIWhenIndexAndIdAreDefined(): void
     {
         // Arrange
