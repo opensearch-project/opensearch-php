@@ -7,6 +7,7 @@ namespace OpenSearch\HttpClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use GuzzleLogMiddleware\LogMiddleware;
 use OpenSearch\Client;
 use Psr\Log\LoggerInterface;
 
@@ -29,6 +30,16 @@ class GuzzleHttpClientFactory implements HttpClientFactoryInterface
         if (!isset($options['base_uri'])) {
             throw new \InvalidArgumentException('The base_uri option is required.');
         }
+
+        $middlewares = [];
+        if (isset($options['middleware'])) {
+            $middlewares = $options['middleware'];
+            unset($options['middleware']);
+            if (!is_array($middlewares)) {
+                $middlewares = [$middlewares];
+            }
+        }
+
         // Set default configuration.
         $defaults = [
             'headers' => [
@@ -47,6 +58,17 @@ class GuzzleHttpClientFactory implements HttpClientFactoryInterface
         if ($this->maxRetries > 0) {
             $decider = new GuzzleRetryDecider($this->maxRetries, $this->logger);
             $stack->push(Middleware::retry($decider(...)));
+        }
+
+        // Attach any middlewares that look valid.
+        foreach ($middlewares as $name => $middleware) {
+            if (is_callable($middleware)) {
+                // If a name was specified in the options array, use it.
+                if (is_int($name) || is_numeric($name)) {
+                    $name = '';
+                }
+                $stack->push($middleware, $name);
+            }
         }
 
         $config['handler'] = $stack;
