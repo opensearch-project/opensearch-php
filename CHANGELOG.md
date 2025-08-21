@@ -11,6 +11,10 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Security
 ### Updated APIs
 
+## [2.4.6]
+### Added
+- Added support for injecting Guzzle middleware ([#353](https://github.com/opensearch-project/opensearch-php/pull/354))
+
 ## [2.4.5]
 ### Fixed
 - Fixed double encoding of index ([#348](https://github.com/opensearch-project/opensearch-php/pull/348))

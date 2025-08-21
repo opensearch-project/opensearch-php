@@ -7,7 +7,6 @@ namespace OpenSearch\HttpClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use GuzzleLogMiddleware\LogMiddleware;
 use OpenSearch\Client;
 use Psr\Log\LoggerInterface;
 
