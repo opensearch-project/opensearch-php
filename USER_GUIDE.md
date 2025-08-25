@@ -8,7 +8,7 @@
 
 # User Guide
 
-Install this client using Composer into your project 
+Install this client using Composer into your project
 ```bash
 composer require opensearch-project/opensearch-php
 ```
@@ -43,11 +43,18 @@ class MyOpenSearchClass
 
     public function __construct()
     {
+        // Set up a Guzzle middleware to log HTTP requests and responses.
+        $logger = new \Monolog\Logger('opensearch');
+        $log_middleware = new \GuzzleLogMiddleware\LogMiddleware($logger);
+
         // Simple Setup
         $this->client = (new \OpenSearch\GuzzleClientFactory())->create([
             'base_uri' => 'https://localhost:9200',
             'auth' => ['admin', getenv('OPENSEARCH_PASSWORD')],
             'verify' => false, // Disables SSL verification for local development.
+            'middleware' => [
+                'gmponos/guzzle_logger' => $log_middleware,
+            ],
         ]);
     }
 
@@ -391,7 +398,7 @@ $client = (new \OpenSearch\GuzzleClientFactory())->create([
 when a `500 Server Error` status code is received in the response, or network connection error occurs. A PSR-3 Logger
 can be passed as the second argument to log the retries.
 
-[Guzzle Request options](https://docs.guzzlephp.org/en/stable/request-options.html) can be passed to the 
+[Guzzle Request options](https://docs.guzzlephp.org/en/stable/request-options.html) can be passed to the
 `create()` method. The `base_uri` option is *required*.
 
 ### Symfony Client Factory
@@ -414,7 +421,7 @@ The `SymfonyClientFactory` constructor accepts an `int $maxRetries` as the first
 when a `500 Server Error` status code is received in the response, or network connection error occurs. A PSR-3 Logger
 can be passed as the second argument to log the retries.
 
-[Symfony HTTP Client configuration options](https://symfony.com/doc/current/http_client.html#configuration-options) can 
+[Symfony HTTP Client configuration options](https://symfony.com/doc/current/http_client.html#configuration-options) can
 be passed to the `create()` method. The `base_uri` option is *required*.
 
 ## ClientBuilder (Deprecated)
