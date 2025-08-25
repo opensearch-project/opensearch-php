@@ -9,6 +9,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Fixed scrolling triggers deprecation error ([#163](https://github.com/opensearch-project/opensearch-php/issues/163), [#356](https://github.com/opensearch-project/opensearch-php/pull/356))
 ### Security
 ### Updated APIs
 
@@ -135,7 +136,10 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fixed basic authentication being overridden by connection params in `ClientBuilder` ([#160](https://github.com/opensearch-project/opensearch-php/pull/160))
 - Fixed PHP warning in `Connection::tryDeserializeError()` for some error responses ([#167](https://github.com/opensearch-project/opensearch-php/issues/167))
 
-[Unreleased]: https://github.com/opensearch-project/opensearch-php/compare/2.4.2...main
+[Unreleased]: https://github.com/opensearch-project/opensearch-php/compare/2.4.5...main
+[2.4.5]: https://github.com/opensearch-project/opensearch-php/compare/2.4.4...2.4.5
+[2.4.4]: https://github.com/opensearch-project/opensearch-php/compare/2.4.3...2.4.4
+[2.4.3]: https://github.com/opensearch-project/opensearch-php/compare/2.4.2...2.4.3
 [2.4.2]: https://github.com/opensearch-project/opensearch-php/compare/2.4.1...2.4.2
 [2.4.1]: https://github.com/opensearch-project/opensearch-php/compare/2.4.0...2.4.1
 [2.4.0]: https://github.com/opensearch-project/opensearch-php/compare/2.3.0...2.4.0
