@@ -21,10 +21,11 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Helper\Iterators;
 
+use Mockery as m;
 use OpenSearch\Client;
 use OpenSearch\Helper\Iterators\SearchResponseIterator;
-use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * Class SearchResponseIteratorTest
@@ -41,12 +42,12 @@ class SearchResponseIteratorTest extends TestCase
     public function testWithNoResults()
     {
         $search_params = [
-            'scroll'      => '5m',
-            'index'       => 'twitter',
-            'size'        => 1000,
-            'body'        => [
+            'scroll' => '5m',
+            'index' => 'twitter',
+            'size' => 1000,
+            'body' => [
                 'query' => [
-                    'match_all' => new \stdClass()
+                    'match_all' => new stdClass()
                 ]
             ]
         ];
@@ -70,12 +71,12 @@ class SearchResponseIteratorTest extends TestCase
     public function testWithHits()
     {
         $search_params = [
-            'scroll'      => '5m',
-            'index'       => 'twitter',
-            'size'        => 1000,
-            'body'        => [
+            'scroll' => '5m',
+            'index' => 'twitter',
+            'size' => 1000,
+            'body' => [
                 'query' => [
-                    'match_all' => new \stdClass()
+                    'match_all' => new stdClass()
                 ]
             ]
         ];
@@ -88,14 +89,14 @@ class SearchResponseIteratorTest extends TestCase
             ->with($search_params)
             ->andReturn(
                 [
-                '_scroll_id' => 'scroll_id_01',
-                'hits' => [
+                    '_scroll_id' => 'scroll_id_01',
                     'hits' => [
-                        [
-                            'foo' => 'bar'
+                        'hits' => [
+                            [
+                                'foo' => 'bar'
+                            ]
                         ]
                     ]
-                ]
                 ]
             );
 
@@ -104,8 +105,10 @@ class SearchResponseIteratorTest extends TestCase
             ->ordered()
             ->with(
                 [
-                    'scroll_id'  => 'scroll_id_01',
-                    'scroll' => '5m'
+                    'scroll' => '5m',
+                    'body' => [
+                        'scroll_id' => 'scroll_id_01',
+                    ]
                 ]
             )
             ->andReturn(
@@ -126,8 +129,10 @@ class SearchResponseIteratorTest extends TestCase
             ->ordered()
             ->with(
                 [
-                    'scroll_id'  => 'scroll_id_02',
-                    'scroll' => '5m'
+                    'scroll' => '5m',
+                    'body' => [
+                        'scroll_id' => 'scroll_id_02',
+                    ]
                 ]
             )
             ->andReturn(
@@ -148,8 +153,10 @@ class SearchResponseIteratorTest extends TestCase
             ->ordered()
             ->with(
                 [
-                    'scroll_id'  => 'scroll_id_03',
-                    'scroll' => '5m'
+                    'scroll' => '5m',
+                    'body' => [
+                        'scroll_id' => 'scroll_id_03',
+                    ]
                 ]
             )
             ->andReturn(
@@ -165,8 +172,10 @@ class SearchResponseIteratorTest extends TestCase
             ->never()
             ->with(
                 [
-                    'scroll_id'  => 'scroll_id_04',
-                    'scroll' => '5m'
+                    'scroll' => '5m',
+                    'body' => [
+                        'scroll_id' => 'scroll_id_04',
+                    ]
                 ]
             );
 
