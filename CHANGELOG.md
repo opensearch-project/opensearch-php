@@ -12,6 +12,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Fixed scrolling triggers deprecation error ([#163](https://github.com/opensearch-project/opensearch-php/issues/163), [#356](https://github.com/opensearch-project/opensearch-php/pull/356))
 ### Security
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@c7f7cff](https://github.com/opensearch-project/opensearch-api-specification/commit/c7f7cff38852ceecf613fe027893bdc34443297c)
 
 ## [2.4.5]
 ### Fixed
