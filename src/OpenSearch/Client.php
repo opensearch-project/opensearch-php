@@ -62,6 +62,7 @@ use OpenSearch\Namespaces\SqlNamespace;
 use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
+use OpenSearch\Namespaces\UbiNamespace;
 use OpenSearch\Namespaces\WlmNamespace;
 use OpenSearch\Endpoints\Bulk;
 use OpenSearch\Endpoints\BulkStream;
@@ -345,6 +346,11 @@ class Client
     protected $transforms;
 
     /**
+     * @var UbiNamespace
+     */
+    protected $ubi;
+
+    /**
      * @var WlmNamespace
      */
     protected $wlm;
@@ -434,6 +440,7 @@ class Client
         $this->ssl = new SslNamespace($transport, $this->endpointFactory);
         $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
         $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);
+        $this->ubi = new UbiNamespace($transport, $this->endpointFactory);
         $this->wlm = new WlmNamespace($transport, $this->endpointFactory);
 
         $this->registeredNamespaces = $registeredNamespaces;
@@ -2192,6 +2199,13 @@ class Client
     public function transforms(): TransformsNamespace
     {
         return $this->transforms;
+    }
+    /**
+     * Returns the ubi namespace
+     */
+    public function ubi(): UbiNamespace
+    {
+        return $this->ubi;
     }
     /**
      * Returns the wlm namespace
