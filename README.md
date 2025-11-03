@@ -18,9 +18,9 @@
 * [User Guide](USER_GUIDE.md)
 * [Samples](samples)
 * [Developer Guide](DEVELOPER_GUIDE.md)
-* [Downloads](https://opensearch.org/downloads.html).
-* [Documentation](https://opensearch.org/docs/latest/)
-* Need help? Try [Forums](https://discuss.opendistrocommunity.dev/)
+* [Downloads](https://opensearch.org/downloads/).
+* [Documentation](https://docs.opensearch.org/latest/)
+* Need help? Try [Forums](https://forum.opensearch.org/)
 * [Project Principles](https://opensearch.org/#principles)
 * [Contributing to OpenSearch](CONTRIBUTING.md)
 * [Maintainer Responsibilities](MAINTAINERS.md)

@@ -1,0 +1,6 @@
+exclude_path = ["vendor"]
+accept = ["200","403","429"]
+exclude = [
+    "https://localhost:9200",
+    "^mailto:",
+]
