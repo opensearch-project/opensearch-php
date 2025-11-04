@@ -12,4 +12,4 @@ The below matrix shows the compatibility of the [`opensearch-project/opensearch-
 
 ## Upgrading
 
-Major versions of OpenSearch introduce breaking changes that require careful upgrades of the client. While `opensearch-project/opensearch-php` 2.0.0 works against the latest OpenSearch 1.x, certain deprecated features removed in OpenSearch 2.0 have also been removed from the client. Please refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/clients/index/) for more information.
+Major versions of OpenSearch introduce breaking changes that require careful upgrades of the client. While `opensearch-project/opensearch-php` 2.0.0 works against the latest OpenSearch 1.x, certain deprecated features removed in OpenSearch 2.0 have also been removed from the client. Please refer to the [OpenSearch documentation](https://docs.opensearch.org/latest/clients/index/) for more information.

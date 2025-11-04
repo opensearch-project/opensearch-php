@@ -16,7 +16,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [2.4.5]
 ### Fixed
-- Fixed double encoding of index ([#348](https://github.com/opensearch-project/opensearch-php/pull/348))
+- Fixed double encoding of index ([#348](https://github.com/opensearch-project/opensearch-php/issues/348))
 
 ## [2.4.4]
 ### Added
