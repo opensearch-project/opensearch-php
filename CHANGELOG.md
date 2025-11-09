@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Added support for injecting Guzzle middleware ([#353](https://github.com/opensearch-project/opensearch-php/pull/354))
 ### Changed
 - Switch from deprecated tibdex/github-app-token to official actions/create-github-app-token [#362](https://github.com/opensearch-project/opensearch-php/pull/362)
+- Update OpenSearch version test matrix [#361](https://github.com/opensearch-project/opensearch-php/pull/361)
 ### Deprecated
 ### Removed
 ### Fixed

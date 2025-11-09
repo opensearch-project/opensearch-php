@@ -17,7 +17,8 @@ jobs:
         entry:
           - { opensearch_ref: "1.x", java: 11 }
           - { opensearch_ref: "2.x", java: 21, gradle-runtime: 21 }
-          - { opensearch_ref: "main", java: 21, gradle-runtime: 21 }
+          - { opensearch_ref: "main", java: 25, gradle-runtime: 25 }
+
     steps:
       - name: Checkout PHP Client
         uses: actions/checkout@v4
@@ -89,8 +90,13 @@ jobs:
           tar xf opensearch-min-*
           ./opensearch-*/bin/opensearch -d
 
-      - name: Wait for Search server
-        run: php ./.github/wait_for_opensearch.php
+      - name: Wait for cluster to be healthy
+        run: |
+          for i in {1..10}; do
+            curl -s --fail "http://localhost:9200/_cluster/health?wait_for_status=green&timeout=5s" >/dev/null && { echo "✅ Cluster is green!"; exit 0; }
+            echo "Retry $i/10..."; sleep 5
+          done
+          echo "❌ Cluster did not become green"; exit 1
 
       - name: Integration tests
         run: |
