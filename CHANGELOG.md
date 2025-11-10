@@ -4,15 +4,21 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+### Updated APIs
+
+## [2.4.6]
+### Added
 - Added support for injecting Guzzle middleware ([#353](https://github.com/opensearch-project/opensearch-php/pull/354))
 ### Changed
 - Switch from deprecated tibdex/github-app-token to official actions/create-github-app-token [#362](https://github.com/opensearch-project/opensearch-php/pull/362)
 - Update OpenSearch version test matrix [#361](https://github.com/opensearch-project/opensearch-php/pull/361)
-### Deprecated
-### Removed
 ### Fixed
 - Fixed scrolling triggers deprecation error ([#163](https://github.com/opensearch-project/opensearch-php/issues/163), [#356](https://github.com/opensearch-project/opensearch-php/pull/356))
-### Security
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@c7f7cff](https://github.com/opensearch-project/opensearch-api-specification/commit/c7f7cff38852ceecf613fe027893bdc34443297c)
 
