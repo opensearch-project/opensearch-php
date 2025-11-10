@@ -1,9 +1,14 @@
 services:
   opensearch:
-    image: opensearchproject/opensearch:2
+    image: opensearchproject/opensearch:3
     ports:
       - 9200:9200
     environment:
       - discovery.type=single-node
       - plugins.security.disabled=true
       - OPENSEARCH_INITIAL_ADMIN_PASSWORD=myStrongPassword123!
+    healthcheck:
+        test: ["CMD-SHELL", "curl -s -f http://localhost:9200/_cluster/health?wait_for_status=green || exit 1"]
+        interval: 1s
+        retries: 10
+        timeout: 5s
