@@ -217,6 +217,10 @@ jobs:
       run: |
         composer install --prefer-dist
 
+    - name: Check server is available
+      run: |
+        curl -f -s http://localhost:9200/ >/dev/null || exit 1
+
     - name: Integration tests
       run: |
         composer run integration
