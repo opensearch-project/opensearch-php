@@ -37,7 +37,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create pull request
         id: cpr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app-token.outputs.token }}
           commit-message: Updated opensearch-php to reflect the latest OpenSearch API spec (${{ steps.date.outputs.date }})
