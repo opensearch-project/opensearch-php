@@ -65,12 +65,6 @@ jobs:
           discovery.type: single-node
           plugins.security.disabled: true
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: myStrongPassword123!
-        options: >-
-          --health-cmd="curl -s -f http://localhost:9200/_cluster/health?wait_for_status=green&timeout=5s || exit 1"
-          --health-start-period=10s
-          --health-interval=5s
-          --health-retries=10
-          --health-timeout=5s
 
     steps:
       - name: Checkout
@@ -87,6 +81,9 @@ jobs:
       - name: Install dependencies
         run: |
           composer install --prefer-dist
+
+      - name: Wait for cluster to be healthy
+        uses: ./.github/actions/health-check
 
       - name: PHPUnit
         run: |
@@ -194,12 +191,6 @@ jobs:
           discovery.type: single-node
           plugins.security.disabled: true
           OPENSEARCH_INITIAL_ADMIN_PASSWORD: myStrongPassword123!
-        options: >-
-          --health-cmd="curl -s -f http://localhost:9200/_cluster/health?wait_for_status=green&timeout=5s || exit 1"
-          --health-start-period=10s
-          --health-interval=5s
-          --health-retries=10
-          --health-timeout=5s
 
     steps:
     - name: Checkout
@@ -218,12 +209,7 @@ jobs:
         composer install --prefer-dist
 
     - name: Wait for cluster to be healthy
-      run: |
-        for i in {1..10}; do
-          curl -s --fail "http://localhost:9200/_cluster/health?wait_for_status=green&timeout=5s" >/dev/null && { echo "✅ Cluster is green!"; exit 0; }
-          echo "Retry $i/10..."; sleep 5
-        done
-        echo "❌ Cluster did not become green"; exit 1
+      uses: ./.github/actions/health-check
 
     - name: Integration tests
       run: |
