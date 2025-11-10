@@ -24,7 +24,7 @@ class GetUploadStats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/geospatial/_upload/stats';
+        return "/_plugins/geospatial/_upload/stats";
     }
 
     public function getParamWhitelist(): array

@@ -35,11 +35,11 @@ class Bulk extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_bulk';
+            return "/$index/_bulk";
         }
-        return '/_bulk';
+        return "/_bulk";
     }
 
     public function getParamWhitelist(): array

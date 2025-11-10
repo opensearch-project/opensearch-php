@@ -24,7 +24,7 @@ class SearchTasks extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_ml/tasks/_search';
+        return "/_plugins/_ml/tasks/_search";
     }
 
     public function getParamWhitelist(): array

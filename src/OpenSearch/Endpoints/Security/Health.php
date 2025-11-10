@@ -24,7 +24,7 @@ class Health extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security/health';
+        return "/_plugins/_security/health";
     }
 
     public function getParamWhitelist(): array

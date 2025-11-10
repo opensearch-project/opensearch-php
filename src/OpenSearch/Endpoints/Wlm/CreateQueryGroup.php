@@ -24,7 +24,7 @@ class CreateQueryGroup extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_wlm/query_group';
+        return "/_wlm/query_group";
     }
 
     public function getParamWhitelist(): array

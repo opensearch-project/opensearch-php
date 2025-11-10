@@ -33,18 +33,18 @@ class Usage extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $node_id = $this->node_id ?? null;
-        $metric = $this->metric ?? null;
+        $node_id = $this->node_id ? rawurlencode($this->node_id) : null;
+        $metric = $this->metric ? rawurlencode($this->metric) : null;
         if (isset($node_id) && isset($metric)) {
-            return '/_nodes/' . rawurlencode($node_id) . '/usage/' . rawurlencode($metric);
+            return "/_nodes/$node_id/usage/$metric";
         }
         if (isset($node_id)) {
-            return '/_nodes/' . rawurlencode($node_id) . '/usage';
+            return "/_nodes/$node_id/usage";
         }
         if (isset($metric)) {
-            return '/_nodes/usage/' . rawurlencode($metric);
+            return "/_nodes/usage/$metric";
         }
-        return '/_nodes/usage';
+        return "/_nodes/usage";
     }
 
     public function getParamWhitelist(): array
@@ -66,26 +66,26 @@ class Usage extends AbstractEndpoint
 
     public function setNodeId($node_id): static
     {
-        if (isset($node_id) !== true) {
+        if (!isset($node_id)) {
             return $this;
         }
         if (is_array($node_id) === true) {
             $node_id = implode(",", $node_id);
         }
-        $this->node_id = $node_id;
+        $this->node_id = rawurlencode($node_id);
 
         return $this;
     }
 
     public function setMetric($metric): static
     {
-        if (isset($metric) !== true) {
+        if (!isset($metric)) {
             return $this;
         }
         if (is_array($metric) === true) {
             $metric = implode(",", $metric);
         }
-        $this->metric = $metric;
+        $this->metric = rawurlencode($metric);
 
         return $this;
     }

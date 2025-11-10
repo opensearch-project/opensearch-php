@@ -24,7 +24,7 @@ class SearchFindingCorrelations extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security_analytics/findings/correlate';
+        return "/_plugins/_security_analytics/findings/correlate";
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class GetLocalstats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_observability/_local/stats';
+        return "/_plugins/_observability/_local/stats";
     }
 
     public function getParamWhitelist(): array

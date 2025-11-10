@@ -27,18 +27,18 @@ class Stats extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $node_id = $this->node_id ?? null;
-        $stat = $this->stat ?? null;
+        $node_id = $this->node_id ? rawurlencode($this->node_id) : null;
+        $stat = $this->stat ? rawurlencode($this->stat) : null;
         if (isset($node_id) && isset($stat)) {
-            return '/_plugins/_neural/' . rawurlencode($node_id) . '/stats/' . rawurlencode($stat);
+            return "/_plugins/_neural/$node_id/stats/$stat";
         }
         if (isset($node_id)) {
-            return '/_plugins/_neural/' . rawurlencode($node_id) . '/stats';
+            return "/_plugins/_neural/$node_id/stats";
         }
         if (isset($stat)) {
-            return '/_plugins/_neural/stats/' . rawurlencode($stat);
+            return "/_plugins/_neural/stats/$stat";
         }
-        return '/_plugins/_neural/stats';
+        return "/_plugins/_neural/stats";
     }
 
     public function getParamWhitelist(): array
@@ -74,13 +74,13 @@ class Stats extends AbstractEndpoint
 
     public function setStat($stat): static
     {
-        if (isset($stat) !== true) {
+        if (!isset($stat)) {
             return $this;
         }
         if (is_array($stat) === true) {
             $stat = implode(",", $stat);
         }
-        $this->stat = $stat;
+        $this->stat = rawurlencode($stat);
 
         return $this;
     }

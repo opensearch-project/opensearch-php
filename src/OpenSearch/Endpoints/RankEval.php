@@ -28,11 +28,11 @@ class RankEval extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_rank_eval';
+            return "/$index/_rank_eval";
         }
-        return '/_rank_eval';
+        return "/_rank_eval";
     }
 
     public function getParamWhitelist(): array

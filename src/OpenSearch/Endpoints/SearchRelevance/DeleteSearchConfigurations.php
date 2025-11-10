@@ -27,9 +27,9 @@ class DeleteSearchConfigurations extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $search_configuration_id = $this->search_configuration_id ?? null;
+        $search_configuration_id = $this->search_configuration_id ? rawurlencode($this->search_configuration_id) : null;
         if (isset($search_configuration_id)) {
-            return '/_plugins/_search_relevance/search_configurations/' . rawurlencode($search_configuration_id);
+            return "/_plugins/_search_relevance/search_configurations/$search_configuration_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint search_relevance.delete_search_configurations');
     }

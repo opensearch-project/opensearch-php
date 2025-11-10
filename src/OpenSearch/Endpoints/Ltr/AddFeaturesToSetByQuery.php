@@ -32,16 +32,16 @@ class AddFeaturesToSetByQuery extends AbstractEndpoint
         if (!isset($this->name) || $this->name === '') {
             throw new RuntimeException('name is required for add_features_to_set_by_query');
         }
-        $name = $this->name;
+        $name = rawurlencode($this->name);
         if (!isset($this->query) || $this->query === '') {
             throw new RuntimeException('query is required for add_features_to_set_by_query');
         }
-        $query = $this->query;
-        $store = $this->store ?? null;
+        $query = rawurlencode($this->query);
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_featureset/' . rawurlencode($name) . '/_addfeatures/' . rawurlencode($query);
+            return "/_ltr/$store/_featureset/$name/_addfeatures/$query";
         }
-        return '/_ltr/_featureset/' . rawurlencode($name) . '/_addfeatures/' . rawurlencode($query);
+        return "/_ltr/_featureset/$name/_addfeatures/$query";
     }
 
     public function getParamWhitelist(): array

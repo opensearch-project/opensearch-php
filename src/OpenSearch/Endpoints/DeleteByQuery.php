@@ -33,9 +33,9 @@ class DeleteByQuery extends AbstractEndpoint
         if (!isset($this->index) || $this->index === '') {
             throw new RuntimeException('index is required for delete_by_query');
         }
-        $index = $this->index;
+        $index = rawurlencode($this->index);
 
-        return '/' . rawurlencode($index) . '/_delete_by_query';
+        return "/$index/_delete_by_query";
     }
 
     public function getParamWhitelist(): array

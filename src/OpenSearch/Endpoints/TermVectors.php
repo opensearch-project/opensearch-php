@@ -33,12 +33,12 @@ class TermVectors extends AbstractEndpoint
         if (!isset($this->index) || $this->index === '') {
             throw new RuntimeException('index is required for termvectors');
         }
-        $index = $this->index;
-        $id = $this->id ?? null;
+        $index = rawurlencode($this->index);
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/' . rawurlencode($index) . '/_termvectors/' . rawurlencode($id);
+            return "/$index/_termvectors/$id";
         }
-        return '/' . rawurlencode($index) . '/_termvectors';
+        return "/$index/_termvectors";
     }
 
     public function getParamWhitelist(): array

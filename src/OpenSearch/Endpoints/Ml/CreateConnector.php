@@ -22,7 +22,7 @@ class CreateConnector extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_ml/connectors/_create';
+        return "/_plugins/_ml/connectors/_create";
     }
 
     public function getParamWhitelist(): array

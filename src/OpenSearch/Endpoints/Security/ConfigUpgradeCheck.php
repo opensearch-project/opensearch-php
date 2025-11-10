@@ -24,7 +24,7 @@ class ConfigUpgradeCheck extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security/api/_upgrade_check';
+        return "/_plugins/_security/api/_upgrade_check";
     }
 
     public function getParamWhitelist(): array

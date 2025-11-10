@@ -30,9 +30,9 @@ class DeleteActionGroup extends AbstractEndpoint
         if (!isset($this->action_group) || $this->action_group === '') {
             throw new RuntimeException('action_group is required for delete_action_group');
         }
-        $action_group = $this->action_group;
+        $action_group = rawurlencode($this->action_group);
 
-        return '/_plugins/_security/api/actiongroups/' . rawurlencode($action_group);
+        return "/_plugins/_security/api/actiongroups/$action_group";
     }
 
     public function getParamWhitelist(): array

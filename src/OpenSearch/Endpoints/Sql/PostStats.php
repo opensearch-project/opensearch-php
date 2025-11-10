@@ -24,7 +24,7 @@ class PostStats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_sql/stats';
+        return "/_plugins/_sql/stats";
     }
 
     public function getParamWhitelist(): array

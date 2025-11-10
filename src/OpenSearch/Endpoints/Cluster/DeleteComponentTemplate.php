@@ -33,9 +33,9 @@ class DeleteComponentTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
+        $name = $this->name ? rawurlencode($this->name) : null;
         if (isset($name)) {
-            return '/_component_template/' . rawurlencode($name);
+            return "/_component_template/$name";
         }
         throw new RuntimeException('Missing parameter for the endpoint cluster.delete_component_template');
     }

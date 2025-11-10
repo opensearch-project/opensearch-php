@@ -25,9 +25,9 @@ class DeleteModel extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/_plugins/_ml/models/' . rawurlencode($id);
+            return "/_plugins/_ml/models/$id";
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.delete_model');
     }

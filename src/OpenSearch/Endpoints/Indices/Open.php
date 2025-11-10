@@ -31,9 +31,9 @@ class Open extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_open';
+            return "/$index/_open";
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.open');
     }

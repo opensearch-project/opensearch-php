@@ -34,22 +34,22 @@ class Info extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $node_id_or_metric = $this->node_id_or_metric ?? null;
-        $metric = $this->metric ?? null;
-        $node_id = $this->node_id ?? null;
+        $node_id_or_metric = $this->node_id_or_metric ? rawurlencode($this->node_id_or_metric) : null;
+        $metric = $this->metric ? rawurlencode($this->metric) : null;
+        $node_id = $this->node_id ? rawurlencode($this->node_id) : null;
         if (isset($node_id_or_metric)) {
-            return '/_nodes/' . rawurlencode($node_id_or_metric);
+            return "/_nodes/$node_id_or_metric";
         }
         if (isset($node_id) && isset($metric)) {
-            return '/_nodes/' . rawurlencode($node_id) . '/' . rawurlencode($metric);
+            return "/_nodes/$node_id/$metric";
         }
         if (isset($node_id)) {
-            return '/_nodes/' . rawurlencode($node_id);
+            return "/_nodes/$node_id";
         }
         if (isset($metric)) {
-            return '/_nodes/' . rawurlencode($metric);
+            return "/_nodes/$metric";
         }
-        return '/_nodes';
+        return "/_nodes";
     }
 
     public function getParamWhitelist(): array
@@ -82,26 +82,26 @@ class Info extends AbstractEndpoint
 
     public function setMetric($metric): static
     {
-        if (isset($metric) !== true) {
+        if (!isset($metric)) {
             return $this;
         }
         if (is_array($metric) === true) {
             $metric = implode(",", $metric);
         }
-        $this->metric = $metric;
+        $this->metric = rawurlencode($metric);
 
         return $this;
     }
 
     public function setNodeId($node_id): static
     {
-        if (isset($node_id) !== true) {
+        if (!isset($node_id)) {
             return $this;
         }
         if (is_array($node_id) === true) {
             $node_id = implode(",", $node_id);
         }
-        $this->node_id = $node_id;
+        $this->node_id = rawurlencode($node_id);
 
         return $this;
     }

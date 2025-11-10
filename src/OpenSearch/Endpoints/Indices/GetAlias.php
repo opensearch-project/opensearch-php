@@ -32,18 +32,18 @@ class GetAlias extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
-        $index = $this->index ?? null;
+        $name = $this->name ? rawurlencode($this->name) : null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index) && isset($name)) {
-            return '/' . rawurlencode($index) . '/_alias/' . rawurlencode($name);
+            return "/$index/_alias/$name";
         }
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_alias';
+            return "/$index/_alias";
         }
         if (isset($name)) {
-            return '/_alias/' . rawurlencode($name);
+            return "/_alias/$name";
         }
-        return '/_alias';
+        return "/_alias";
     }
 
     public function getParamWhitelist(): array
@@ -68,13 +68,13 @@ class GetAlias extends AbstractEndpoint
 
     public function setName($name): static
     {
-        if (isset($name) !== true) {
+        if (!isset($name)) {
             return $this;
         }
         if (is_array($name) === true) {
             $name = implode(",", $name);
         }
-        $this->name = $name;
+        $this->name = rawurlencode($name);
 
         return $this;
     }

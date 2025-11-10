@@ -24,7 +24,7 @@ class Search extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_flow_framework/workflow/_search';
+        return "/_plugins/_flow_framework/workflow/_search";
     }
 
     public function getParamWhitelist(): array

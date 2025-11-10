@@ -28,11 +28,11 @@ class Count extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_count';
+            return "/$index/_count";
         }
-        return '/_count';
+        return "/_count";
     }
 
     public function getParamWhitelist(): array

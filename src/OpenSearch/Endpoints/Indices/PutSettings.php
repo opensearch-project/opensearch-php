@@ -30,11 +30,11 @@ class PutSettings extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_settings';
+            return "/$index/_settings";
         }
-        return '/_settings';
+        return "/_settings";
     }
 
     public function getParamWhitelist(): array

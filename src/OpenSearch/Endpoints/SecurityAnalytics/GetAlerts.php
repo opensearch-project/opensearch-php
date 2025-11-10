@@ -24,7 +24,7 @@ class GetAlerts extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security_analytics/alerts';
+        return "/_plugins/_security_analytics/alerts";
     }
 
     public function getParamWhitelist(): array

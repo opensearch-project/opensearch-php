@@ -32,18 +32,18 @@ class Stats extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $metric = $this->metric ?? null;
-        $index = $this->index ?? null;
+        $metric = $this->metric ? rawurlencode($this->metric) : null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index) && isset($metric)) {
-            return '/' . rawurlencode($index) . '/_stats/' . rawurlencode($metric);
+            return "/$index/_stats/$metric";
         }
         if (isset($metric)) {
-            return '/_stats/' . rawurlencode($metric);
+            return "/_stats/$metric";
         }
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_stats';
+            return "/$index/_stats";
         }
-        return '/_stats';
+        return "/_stats";
     }
 
     public function getParamWhitelist(): array
@@ -73,13 +73,13 @@ class Stats extends AbstractEndpoint
 
     public function setMetric($metric): static
     {
-        if (isset($metric) !== true) {
+        if (!isset($metric)) {
             return $this;
         }
         if (is_array($metric) === true) {
             $metric = implode(",", $metric);
         }
-        $this->metric = $metric;
+        $this->metric = rawurlencode($metric);
 
         return $this;
     }

@@ -36,12 +36,12 @@ class ExistsAlias extends AbstractEndpoint
         if (!isset($this->name) || $this->name === '') {
             throw new RuntimeException('name is required for exists_alias');
         }
-        $name = $this->name;
-        $index = $this->index ?? null;
+        $name = rawurlencode($this->name);
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_alias/' . rawurlencode($name);
+            return "/$index/_alias/$name";
         }
-        return '/_alias/' . rawurlencode($name);
+        return "/_alias/$name";
     }
 
     public function getParamWhitelist(): array
@@ -66,13 +66,13 @@ class ExistsAlias extends AbstractEndpoint
 
     public function setName($name): static
     {
-        if (isset($name) !== true) {
+        if (!isset($name)) {
             return $this;
         }
         if (is_array($name) === true) {
             $name = implode(",", $name);
         }
-        $this->name = $name;
+        $this->name = rawurlencode($name);
 
         return $this;
     }

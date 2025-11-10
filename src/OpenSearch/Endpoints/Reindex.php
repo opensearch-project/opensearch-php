@@ -28,7 +28,7 @@ class Reindex extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_reindex';
+        return "/_reindex";
     }
 
     public function getParamWhitelist(): array

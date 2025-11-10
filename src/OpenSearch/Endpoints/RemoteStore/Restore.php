@@ -24,7 +24,7 @@ class Restore extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_remotestore/_restore';
+        return "/_remotestore/_restore";
     }
 
     public function getParamWhitelist(): array

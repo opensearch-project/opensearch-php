@@ -33,9 +33,9 @@ class Get extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $task_id = $this->task_id ?? null;
+        $task_id = $this->task_id ? rawurlencode($this->task_id) : null;
         if (isset($task_id)) {
-            return '/_tasks/' . rawurlencode($task_id);
+            return "/_tasks/$task_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint tasks.get');
     }

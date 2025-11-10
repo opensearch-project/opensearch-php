@@ -27,9 +27,9 @@ class TrainPredict extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $algorithm_name = $this->algorithm_name ?? null;
+        $algorithm_name = $this->algorithm_name ? rawurlencode($this->algorithm_name) : null;
         if (isset($algorithm_name)) {
-            return '/_plugins/_ml/_train_predict/' . rawurlencode($algorithm_name);
+            return "/_plugins/_ml/_train_predict/$algorithm_name";
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.train_predict');
     }

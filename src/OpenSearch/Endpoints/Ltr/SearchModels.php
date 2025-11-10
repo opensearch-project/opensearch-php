@@ -26,11 +26,11 @@ class SearchModels extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $store = $this->store ?? null;
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_model';
+            return "/_ltr/$store/_model";
         }
-        return '/_ltr/_model';
+        return "/_ltr/_model";
     }
 
     public function getParamWhitelist(): array

@@ -28,11 +28,11 @@ class MTermVectors extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_mtermvectors';
+            return "/$index/_mtermvectors";
         }
-        return '/_mtermvectors';
+        return "/_mtermvectors";
     }
 
     public function getParamWhitelist(): array

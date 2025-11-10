@@ -31,12 +31,12 @@ class GetNodeStats extends AbstractEndpoint
         if (!isset($this->node_id) || $this->node_id === '') {
             throw new RuntimeException('node_id is required for get_node_stats');
         }
-        $node_id = $this->node_id;
-        $stat = $this->stat ?? null;
+        $node_id = rawurlencode($this->node_id);
+        $stat = $this->stat ? rawurlencode($this->stat) : null;
         if (isset($stat)) {
-            return '/_plugins/_search_relevance/' . rawurlencode($node_id) . '/stats/' . rawurlencode($stat);
+            return "/_plugins/_search_relevance/$node_id/stats/$stat";
         }
-        return '/_plugins/_search_relevance/' . rawurlencode($node_id) . '/stats';
+        return "/_plugins/_search_relevance/$node_id/stats";
     }
 
     public function getParamWhitelist(): array

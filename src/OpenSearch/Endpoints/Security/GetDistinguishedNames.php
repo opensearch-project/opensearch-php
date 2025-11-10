@@ -24,7 +24,7 @@ class GetDistinguishedNames extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security/api/nodesdn';
+        return "/_plugins/_security/api/nodesdn";
     }
 
     public function getParamWhitelist(): array

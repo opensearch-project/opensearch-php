@@ -25,9 +25,9 @@ class GetTask extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/_plugins/_ml/tasks/' . rawurlencode($id);
+            return "/_plugins/_ml/tasks/$id";
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.get_task');
     }

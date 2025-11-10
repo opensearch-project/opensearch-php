@@ -33,9 +33,9 @@ class PutTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
+        $name = $this->name ? rawurlencode($this->name) : null;
         if (isset($name)) {
-            return '/_template/' . rawurlencode($name);
+            return "/_template/$name";
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.put_template');
     }

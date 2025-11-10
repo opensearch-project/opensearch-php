@@ -25,9 +25,9 @@ class Pause extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/ingestion/_pause';
+            return "/$index/ingestion/_pause";
         }
         throw new RuntimeException('Missing parameter for the endpoint ingestion.pause');
     }

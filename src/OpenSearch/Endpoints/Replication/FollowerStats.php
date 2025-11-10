@@ -24,7 +24,7 @@ class FollowerStats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_replication/follower_stats';
+        return "/_plugins/_replication/follower_stats";
     }
 
     public function getParamWhitelist(): array

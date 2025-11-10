@@ -26,11 +26,11 @@ class ClearCache extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $store = $this->store ?? null;
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_clearcache';
+            return "/_ltr/$store/_clearcache";
         }
-        return '/_ltr/_clearcache';
+        return "/_ltr/_clearcache";
     }
 
     public function getParamWhitelist(): array

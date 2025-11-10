@@ -24,7 +24,7 @@ class CreateReplicationRule extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_replication/_autofollow';
+        return "/_plugins/_replication/_autofollow";
     }
 
     public function getParamWhitelist(): array

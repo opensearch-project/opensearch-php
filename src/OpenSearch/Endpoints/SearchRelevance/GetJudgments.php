@@ -26,11 +26,11 @@ class GetJudgments extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $judgment_id = $this->judgment_id ?? null;
+        $judgment_id = $this->judgment_id ? rawurlencode($this->judgment_id) : null;
         if (isset($judgment_id)) {
-            return '/_plugins/_search_relevance/judgments/' . rawurlencode($judgment_id);
+            return "/_plugins/_search_relevance/judgments/$judgment_id";
         }
-        return '/_plugins/_search_relevance/judgments';
+        return "/_plugins/_search_relevance/judgments";
     }
 
     public function getParamWhitelist(): array

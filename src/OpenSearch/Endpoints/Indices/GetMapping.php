@@ -30,11 +30,11 @@ class GetMapping extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_mapping';
+            return "/$index/_mapping";
         }
-        return '/_mapping';
+        return "/_mapping";
     }
 
     public function getParamWhitelist(): array

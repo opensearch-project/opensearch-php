@@ -32,11 +32,11 @@ class ThreadPool extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $thread_pool_patterns = $this->thread_pool_patterns ?? null;
+        $thread_pool_patterns = $this->thread_pool_patterns ? rawurlencode($this->thread_pool_patterns) : null;
         if (isset($thread_pool_patterns)) {
-            return '/_cat/thread_pool/' . rawurlencode($thread_pool_patterns);
+            return "/_cat/thread_pool/$thread_pool_patterns";
         }
-        return '/_cat/thread_pool';
+        return "/_cat/thread_pool";
     }
 
     public function getParamWhitelist(): array
@@ -66,13 +66,13 @@ class ThreadPool extends AbstractEndpoint
 
     public function setThreadPoolPatterns($thread_pool_patterns): static
     {
-        if (isset($thread_pool_patterns) !== true) {
+        if (!isset($thread_pool_patterns)) {
             return $this;
         }
         if (is_array($thread_pool_patterns) === true) {
             $thread_pool_patterns = implode(",", $thread_pool_patterns);
         }
-        $this->thread_pool_patterns = $thread_pool_patterns;
+        $this->thread_pool_patterns = rawurlencode($thread_pool_patterns);
 
         return $this;
     }

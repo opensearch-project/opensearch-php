@@ -25,9 +25,9 @@ class Start extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/_plugins/_transform/' . rawurlencode($id) . '/_start';
+            return "/_plugins/_transform/$id/_start";
         }
         throw new RuntimeException('Missing parameter for the endpoint transforms.start');
     }

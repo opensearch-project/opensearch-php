@@ -26,11 +26,11 @@ class SearchFeaturesets extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $store = $this->store ?? null;
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_featureset';
+            return "/_ltr/$store/_featureset";
         }
-        return '/_ltr/_featureset';
+        return "/_ltr/_featureset";
     }
 
     public function getParamWhitelist(): array

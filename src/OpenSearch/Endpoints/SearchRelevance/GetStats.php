@@ -26,11 +26,11 @@ class GetStats extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $stat = $this->stat ?? null;
+        $stat = $this->stat ? rawurlencode($this->stat) : null;
         if (isset($stat)) {
-            return '/_plugins/_search_relevance/stats/' . rawurlencode($stat);
+            return "/_plugins/_search_relevance/stats/$stat";
         }
-        return '/_plugins/_search_relevance/stats';
+        return "/_plugins/_search_relevance/stats";
     }
 
     public function getParamWhitelist(): array

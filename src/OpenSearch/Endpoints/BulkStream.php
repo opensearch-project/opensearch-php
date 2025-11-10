@@ -29,11 +29,11 @@ class BulkStream extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_bulk/stream';
+            return "/$index/_bulk/stream";
         }
-        return '/_bulk/stream';
+        return "/_bulk/stream";
     }
 
     public function getParamWhitelist(): array

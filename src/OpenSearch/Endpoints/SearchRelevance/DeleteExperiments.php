@@ -27,9 +27,9 @@ class DeleteExperiments extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $experiment_id = $this->experiment_id ?? null;
+        $experiment_id = $this->experiment_id ? rawurlencode($this->experiment_id) : null;
         if (isset($experiment_id)) {
-            return '/_plugins/_search_relevance/experiments/' . rawurlencode($experiment_id);
+            return "/_plugins/_search_relevance/experiments/$experiment_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint search_relevance.delete_experiments');
     }

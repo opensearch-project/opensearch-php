@@ -30,9 +30,9 @@ class GenerateUserTokenLegacy extends AbstractEndpoint
         if (!isset($this->username) || $this->username === '') {
             throw new RuntimeException('username is required for generate_user_token_legacy');
         }
-        $username = $this->username;
+        $username = rawurlencode($this->username);
 
-        return '/_plugins/_security/api/user/' . rawurlencode($username) . '/authtoken';
+        return "/_plugins/_security/api/user/$username/authtoken";
     }
 
     public function getParamWhitelist(): array

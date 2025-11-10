@@ -30,11 +30,11 @@ class ForceMerge extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_forcemerge';
+            return "/$index/_forcemerge";
         }
-        return '/_forcemerge';
+        return "/_forcemerge";
     }
 
     public function getParamWhitelist(): array

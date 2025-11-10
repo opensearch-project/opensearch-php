@@ -1,13 +1,13 @@
 
     public function set:Part($:part): static
     {
-        if (isset($:part) !== true) {
+        if (!isset($:part)) {
             return $this;
         }
         if (is_array($:part) === true) {
             $:part = implode(",", $:part);
         }
-        $this->:part = $:part;
+        $this->:part = rawurlencode($:part);
 
         return $this;
     }

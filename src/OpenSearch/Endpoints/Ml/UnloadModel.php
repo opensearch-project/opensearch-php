@@ -29,11 +29,11 @@ class UnloadModel extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $model_id = $this->model_id ?? null;
+        $model_id = $this->model_id ? rawurlencode($this->model_id) : null;
         if (isset($model_id)) {
-            return '/_plugins/_ml/models/' . rawurlencode($model_id) . '/_unload';
+            return "/_plugins/_ml/models/$model_id/_unload";
         }
-        return '/_plugins/_ml/models/_unload';
+        return "/_plugins/_ml/models/_unload";
     }
 
     public function getParamWhitelist(): array

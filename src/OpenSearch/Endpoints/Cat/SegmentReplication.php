@@ -24,11 +24,11 @@ class SegmentReplication extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/_cat/segment_replication/' . rawurlencode($index);
+            return "/_cat/segment_replication/$index";
         }
-        return '/_cat/segment_replication';
+        return "/_cat/segment_replication";
     }
 
     public function getParamWhitelist(): array

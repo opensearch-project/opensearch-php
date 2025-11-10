@@ -27,9 +27,9 @@ class DeleteJudgments extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $judgment_id = $this->judgment_id ?? null;
+        $judgment_id = $this->judgment_id ? rawurlencode($this->judgment_id) : null;
         if (isset($judgment_id)) {
-            return '/_plugins/_search_relevance/judgments/' . rawurlencode($judgment_id);
+            return "/_plugins/_search_relevance/judgments/$judgment_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint search_relevance.delete_judgments');
     }

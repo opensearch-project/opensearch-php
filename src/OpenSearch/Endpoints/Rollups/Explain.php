@@ -28,9 +28,9 @@ class Explain extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for explain');
         }
-        $id = $this->id;
+        $id = rawurlencode($this->id);
 
-        return '/_plugins/_rollup/jobs/' . rawurlencode($id) . '/_explain';
+        return "/_plugins/_rollup/jobs/$id/_explain";
     }
 
     public function getParamWhitelist(): array

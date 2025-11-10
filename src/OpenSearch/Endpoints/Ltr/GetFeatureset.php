@@ -30,12 +30,12 @@ class GetFeatureset extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for get_featureset');
         }
-        $id = $this->id;
-        $store = $this->store ?? null;
+        $id = rawurlencode($this->id);
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_featureset/' . rawurlencode($id);
+            return "/_ltr/$store/_featureset/$id";
         }
-        return '/_ltr/_featureset/' . rawurlencode($id);
+        return "/_ltr/_featureset/$id";
     }
 
     public function getParamWhitelist(): array

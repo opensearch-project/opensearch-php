@@ -27,9 +27,9 @@ class ExecuteAgent extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $agent_id = $this->agent_id ?? null;
+        $agent_id = $this->agent_id ? rawurlencode($this->agent_id) : null;
         if (isset($agent_id)) {
-            return '/_plugins/_ml/agents/' . rawurlencode($agent_id) . '/_execute';
+            return "/_plugins/_ml/agents/$agent_id/_execute";
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.execute_agent');
     }

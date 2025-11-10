@@ -33,9 +33,9 @@ class CreateDataStream extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
+        $name = $this->name ? rawurlencode($this->name) : null;
         if (isset($name)) {
-            return '/_data_stream/' . rawurlencode($name);
+            return "/_data_stream/$name";
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.create_data_stream');
     }

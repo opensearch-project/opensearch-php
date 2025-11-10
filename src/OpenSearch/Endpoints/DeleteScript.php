@@ -33,9 +33,9 @@ class DeleteScript extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for delete_script');
         }
-        $id = $this->id;
+        $id = rawurlencode($this->id);
 
-        return '/_scripts/' . rawurlencode($id);
+        return "/_scripts/$id";
     }
 
     public function getParamWhitelist(): array

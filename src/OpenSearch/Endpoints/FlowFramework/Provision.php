@@ -27,9 +27,9 @@ class Provision extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $workflow_id = $this->workflow_id ?? null;
+        $workflow_id = $this->workflow_id ? rawurlencode($this->workflow_id) : null;
         if (isset($workflow_id)) {
-            return '/_plugins/_flow_framework/workflow/' . rawurlencode($workflow_id) . '/_provision';
+            return "/_plugins/_flow_framework/workflow/$workflow_id/_provision";
         }
         throw new RuntimeException('Missing parameter for the endpoint flow_framework.provision');
     }
