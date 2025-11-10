@@ -217,9 +217,13 @@ jobs:
       run: |
         composer install --prefer-dist
 
-    - name: Check server is available
+    - name: Wait for cluster to be healthy
       run: |
-        curl -f -s http://localhost:9200/ >/dev/null || exit 1
+        for i in {1..10}; do
+          curl -s --fail "http://localhost:9200/_cluster/health?wait_for_status=green&timeout=5s" >/dev/null && { echo "✅ Cluster is green!"; exit 0; }
+          echo "Retry $i/10..."; sleep 5
+        done
+        echo "❌ Cluster did not become green"; exit 1
 
     - name: Integration tests
       run: |
