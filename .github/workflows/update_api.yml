@@ -22,26 +22,24 @@ jobs:
         with:
           php-version: 8.3
           extensions: yaml, zip, curl 
-          tools: composer:v2.7.2
       - name: Install dependencies
         run: composer install --prefer-dist
       - name: Generate API
         run: composer run generate-api 
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: GitHub App token
-        id: github_app_token
-        uses: tibdex/github-app-token@v1.5.0
+        id: app-token
+        uses: actions/create-github-app-token@v2
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-          installation_id: 22958780
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create pull request
         id: cpr
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ steps.github_app_token.outputs.token }}
+          token: ${{ steps.app-token.outputs.token }}
           commit-message: Updated opensearch-php to reflect the latest OpenSearch API spec (${{ steps.date.outputs.date }})
           title: Updated opensearch-php to reflect the latest OpenSearch API spec
           body: |
