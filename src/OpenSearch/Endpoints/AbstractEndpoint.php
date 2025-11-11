@@ -144,7 +144,7 @@ abstract class AbstractEndpoint implements EndpointInterface
             $docID = (string)$docID;
         }
 
-        $this->id = urlencode($docID);
+        $this->id = $docID;
 
         return $this;
     }
