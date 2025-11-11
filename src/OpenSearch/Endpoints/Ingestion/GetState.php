@@ -25,9 +25,9 @@ class GetState extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/ingestion/_state';
+            return "/$index/ingestion/_state";
         }
         throw new RuntimeException('Missing parameter for the endpoint ingestion.get_state');
     }

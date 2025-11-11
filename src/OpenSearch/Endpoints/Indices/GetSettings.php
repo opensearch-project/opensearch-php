@@ -32,18 +32,18 @@ class GetSettings extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
-        $index = $this->index ?? null;
+        $name = $this->name ? rawurlencode($this->name) : null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index) && isset($name)) {
-            return '/' . rawurlencode($index) . '/_settings/' . rawurlencode($name);
+            return "/$index/_settings/$name";
         }
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_settings';
+            return "/$index/_settings";
         }
         if (isset($name)) {
-            return '/_settings/' . rawurlencode($name);
+            return "/_settings/$name";
         }
-        return '/_settings';
+        return "/_settings";
     }
 
     public function getParamWhitelist(): array
@@ -72,13 +72,13 @@ class GetSettings extends AbstractEndpoint
 
     public function setName($name): static
     {
-        if (isset($name) !== true) {
+        if (!isset($name)) {
             return $this;
         }
         if (is_array($name) === true) {
             $name = implode(",", $name);
         }
-        $this->name = $name;
+        $this->name = rawurlencode($name);
 
         return $this;
     }

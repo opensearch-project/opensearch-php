@@ -27,9 +27,9 @@ class DatasourceRetrieve extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $datasource_name = $this->datasource_name ?? null;
+        $datasource_name = $this->datasource_name ? rawurlencode($this->datasource_name) : null;
         if (isset($datasource_name)) {
-            return '/_plugins/_query/_datasources/' . rawurlencode($datasource_name);
+            return "/_plugins/_query/_datasources/$datasource_name";
         }
         throw new RuntimeException('Missing parameter for the endpoint query.datasource_retrieve');
     }

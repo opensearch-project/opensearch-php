@@ -24,7 +24,7 @@ class Explain extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_sql/_explain';
+        return "/_plugins/_sql/_explain";
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class GetAllTools extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_ml/tools';
+        return "/_plugins/_ml/tools";
     }
 
     public function getParamWhitelist(): array

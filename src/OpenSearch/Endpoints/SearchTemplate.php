@@ -28,11 +28,11 @@ class SearchTemplate extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_search/template';
+            return "/$index/_search/template";
         }
-        return '/_search/template';
+        return "/_search/template";
     }
 
     public function getParamWhitelist(): array

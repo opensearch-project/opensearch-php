@@ -24,7 +24,7 @@ class PatchConfiguration extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security/api/securityconfig';
+        return "/_plugins/_security/api/securityconfig";
     }
 
     public function getParamWhitelist(): array

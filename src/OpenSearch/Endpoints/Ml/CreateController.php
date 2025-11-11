@@ -27,9 +27,9 @@ class CreateController extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $model_id = $this->model_id ?? null;
+        $model_id = $this->model_id ? rawurlencode($this->model_id) : null;
         if (isset($model_id)) {
-            return '/_plugins/_ml/controllers/' . rawurlencode($model_id);
+            return "/_plugins/_ml/controllers/$model_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint ml.create_controller');
     }

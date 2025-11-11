@@ -24,11 +24,11 @@ class Get extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/_search/pipeline/' . rawurlencode($id);
+            return "/_search/pipeline/$id";
         }
-        return '/_search/pipeline';
+        return "/_search/pipeline";
     }
 
     public function getParamWhitelist(): array

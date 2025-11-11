@@ -30,9 +30,9 @@ class GetUserLegacy extends AbstractEndpoint
         if (!isset($this->username) || $this->username === '') {
             throw new RuntimeException('username is required for get_user_legacy');
         }
-        $username = $this->username;
+        $username = rawurlencode($this->username);
 
-        return '/_plugins/_security/api/user/' . rawurlencode($username);
+        return "/_plugins/_security/api/user/$username";
     }
 
     public function getParamWhitelist(): array

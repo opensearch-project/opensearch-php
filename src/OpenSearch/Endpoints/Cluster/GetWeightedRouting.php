@@ -27,9 +27,9 @@ class GetWeightedRouting extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $attribute = $this->attribute ?? null;
+        $attribute = $this->attribute ? rawurlencode($this->attribute) : null;
         if (isset($attribute)) {
-            return '/_cluster/routing/awareness/' . rawurlencode($attribute) . '/weights';
+            return "/_cluster/routing/awareness/$attribute/weights";
         }
         throw new RuntimeException('Missing parameter for the endpoint cluster.get_weighted_routing');
     }

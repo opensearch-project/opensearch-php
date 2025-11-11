@@ -1,4 +1,4 @@
         if (!isset($this->:part) || $this->:part === '') {
             throw new RuntimeException(':part is required for :endpoint');
         }
-        $:part = $this->:part;
+        $:part = rawurlencode($this->:part);

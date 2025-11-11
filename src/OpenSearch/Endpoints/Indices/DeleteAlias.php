@@ -36,13 +36,13 @@ class DeleteAlias extends AbstractEndpoint
         if (!isset($this->index) || $this->index === '') {
             throw new RuntimeException('index is required for delete_alias');
         }
-        $index = $this->index;
+        $index = rawurlencode($this->index);
         if (!isset($this->name) || $this->name === '') {
             throw new RuntimeException('name is required for delete_alias');
         }
-        $name = $this->name;
+        $name = rawurlencode($this->name);
 
-        return '/' . rawurlencode($index) . '/_alias/' . rawurlencode($name);
+        return "/$index/_alias/$name";
     }
 
     public function getParamWhitelist(): array
@@ -66,13 +66,13 @@ class DeleteAlias extends AbstractEndpoint
 
     public function setName($name): static
     {
-        if (isset($name) !== true) {
+        if (!isset($name)) {
             return $this;
         }
         if (is_array($name) === true) {
             $name = implode(",", $name);
         }
-        $this->name = $name;
+        $this->name = rawurlencode($name);
 
         return $this;
     }

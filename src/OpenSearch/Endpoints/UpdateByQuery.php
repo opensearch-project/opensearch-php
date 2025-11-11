@@ -33,9 +33,9 @@ class UpdateByQuery extends AbstractEndpoint
         if (!isset($this->index) || $this->index === '') {
             throw new RuntimeException('index is required for update_by_query');
         }
-        $index = $this->index;
+        $index = rawurlencode($this->index);
 
-        return '/' . rawurlencode($index) . '/_update_by_query';
+        return "/$index/_update_by_query";
     }
 
     public function getParamWhitelist(): array

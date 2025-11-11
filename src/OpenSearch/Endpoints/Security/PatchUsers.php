@@ -24,7 +24,7 @@ class PatchUsers extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security/api/internalusers';
+        return "/_plugins/_security/api/internalusers";
     }
 
     public function getParamWhitelist(): array

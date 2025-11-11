@@ -28,7 +28,7 @@ class Ping extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/';
+        return "/";
     }
 
     public function getParamWhitelist(): array

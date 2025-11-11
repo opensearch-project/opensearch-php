@@ -33,9 +33,9 @@ class CleanupRepository extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
+        $repository = $this->repository ? rawurlencode($this->repository) : null;
         if (isset($repository)) {
-            return '/_snapshot/' . rawurlencode($repository) . '/_cleanup';
+            return "/_snapshot/$repository/_cleanup";
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.cleanup_repository');
     }

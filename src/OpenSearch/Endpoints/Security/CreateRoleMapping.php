@@ -30,9 +30,9 @@ class CreateRoleMapping extends AbstractEndpoint
         if (!isset($this->role) || $this->role === '') {
             throw new RuntimeException('role is required for create_role_mapping');
         }
-        $role = $this->role;
+        $role = rawurlencode($this->role);
 
-        return '/_plugins/_security/api/rolesmapping/' . rawurlencode($role);
+        return "/_plugins/_security/api/rolesmapping/$role";
     }
 
     public function getParamWhitelist(): array

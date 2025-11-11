@@ -33,15 +33,15 @@ class Status extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-        $snapshot = $this->snapshot ?? null;
+        $repository = $this->repository ? rawurlencode($this->repository) : null;
+        $snapshot = $this->snapshot ? rawurlencode($this->snapshot) : null;
         if (isset($repository) && isset($snapshot)) {
-            return '/_snapshot/' . rawurlencode($repository) . '/' . rawurlencode($snapshot) . '/_status';
+            return "/_snapshot/$repository/$snapshot/_status";
         }
         if (isset($repository)) {
-            return '/_snapshot/' . rawurlencode($repository) . '/_status';
+            return "/_snapshot/$repository/_status";
         }
-        return '/_snapshot/_status';
+        return "/_snapshot/_status";
     }
 
     public function getParamWhitelist(): array
@@ -75,13 +75,13 @@ class Status extends AbstractEndpoint
 
     public function setSnapshot($snapshot): static
     {
-        if (isset($snapshot) !== true) {
+        if (!isset($snapshot)) {
             return $this;
         }
         if (is_array($snapshot) === true) {
             $snapshot = implode(",", $snapshot);
         }
-        $this->snapshot = $snapshot;
+        $this->snapshot = rawurlencode($snapshot);
 
         return $this;
     }

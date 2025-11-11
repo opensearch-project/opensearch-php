@@ -30,9 +30,9 @@ class GetRole extends AbstractEndpoint
         if (!isset($this->role) || $this->role === '') {
             throw new RuntimeException('role is required for get_role');
         }
-        $role = $this->role;
+        $role = rawurlencode($this->role);
 
-        return '/_plugins/_security/api/roles/' . rawurlencode($role);
+        return "/_plugins/_security/api/roles/$role";
     }
 
     public function getParamWhitelist(): array

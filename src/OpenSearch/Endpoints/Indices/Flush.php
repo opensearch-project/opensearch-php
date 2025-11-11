@@ -30,11 +30,11 @@ class Flush extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_flush';
+            return "/$index/_flush";
         }
-        return '/_flush';
+        return "/_flush";
     }
 
     public function getParamWhitelist(): array

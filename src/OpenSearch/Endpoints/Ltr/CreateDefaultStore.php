@@ -24,7 +24,7 @@ class CreateDefaultStore extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_ltr';
+        return "/_ltr";
     }
 
     public function getParamWhitelist(): array

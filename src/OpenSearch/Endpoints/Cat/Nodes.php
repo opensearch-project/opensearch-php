@@ -30,7 +30,7 @@ class Nodes extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_cat/nodes';
+        return "/_cat/nodes";
     }
 
     public function getParamWhitelist(): array

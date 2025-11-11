@@ -24,7 +24,7 @@ class GeojsonUploadPut extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/geospatial/geojson/_upload';
+        return "/_plugins/geospatial/geojson/_upload";
     }
 
     public function getParamWhitelist(): array

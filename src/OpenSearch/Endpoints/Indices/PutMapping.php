@@ -31,9 +31,9 @@ class PutMapping extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_mapping';
+            return "/$index/_mapping";
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.put_mapping');
     }

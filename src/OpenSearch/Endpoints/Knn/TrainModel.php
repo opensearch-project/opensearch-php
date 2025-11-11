@@ -26,11 +26,11 @@ class TrainModel extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $model_id = $this->model_id ?? null;
+        $model_id = $this->model_id ? rawurlencode($this->model_id) : null;
         if (isset($model_id)) {
-            return '/_plugins/_knn/models/' . rawurlencode($model_id) . '/_train';
+            return "/_plugins/_knn/models/$model_id/_train";
         }
-        return '/_plugins/_knn/models/_train';
+        return "/_plugins/_knn/models/_train";
     }
 
     public function getParamWhitelist(): array

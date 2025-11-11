@@ -30,7 +30,7 @@ class ClusterManager extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_cat/cluster_manager';
+        return "/_cat/cluster_manager";
     }
 
     public function getParamWhitelist(): array

@@ -34,19 +34,19 @@ class Stats extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index_metric = $this->index_metric ?? null;
-        $metric = $this->metric ?? null;
-        $node_id = $this->node_id ?? null;
+        $index_metric = $this->index_metric ? rawurlencode($this->index_metric) : null;
+        $metric = $this->metric ? rawurlencode($this->metric) : null;
+        $node_id = $this->node_id ? rawurlencode($this->node_id) : null;
         if (isset($metric) && isset($index_metric) && isset($node_id)) {
-            return '/_cluster/stats/' . rawurlencode($metric) . '/' . rawurlencode($index_metric) . '/nodes/' . rawurlencode($node_id);
+            return "/_cluster/stats/$metric/$index_metric/nodes/$node_id";
         }
         if (isset($metric) && isset($node_id)) {
-            return '/_cluster/stats/' . rawurlencode($metric) . '/nodes/' . rawurlencode($node_id);
+            return "/_cluster/stats/$metric/nodes/$node_id";
         }
         if (isset($node_id)) {
-            return '/_cluster/stats/nodes/' . rawurlencode($node_id);
+            return "/_cluster/stats/nodes/$node_id";
         }
-        return '/_cluster/stats';
+        return "/_cluster/stats";
     }
 
     public function getParamWhitelist(): array
@@ -69,39 +69,39 @@ class Stats extends AbstractEndpoint
 
     public function setIndexMetric($index_metric): static
     {
-        if (isset($index_metric) !== true) {
+        if (!isset($index_metric)) {
             return $this;
         }
         if (is_array($index_metric) === true) {
             $index_metric = implode(",", $index_metric);
         }
-        $this->index_metric = $index_metric;
+        $this->index_metric = rawurlencode($index_metric);
 
         return $this;
     }
 
     public function setMetric($metric): static
     {
-        if (isset($metric) !== true) {
+        if (!isset($metric)) {
             return $this;
         }
         if (is_array($metric) === true) {
             $metric = implode(",", $metric);
         }
-        $this->metric = $metric;
+        $this->metric = rawurlencode($metric);
 
         return $this;
     }
 
     public function setNodeId($node_id): static
     {
-        if (isset($node_id) !== true) {
+        if (!isset($node_id)) {
             return $this;
         }
         if (is_array($node_id) === true) {
             $node_id = implode(",", $node_id);
         }
-        $this->node_id = $node_id;
+        $this->node_id = rawurlencode($node_id);
 
         return $this;
     }

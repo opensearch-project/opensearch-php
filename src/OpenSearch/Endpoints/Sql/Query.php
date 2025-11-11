@@ -24,7 +24,7 @@ class Query extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_sql';
+        return "/_plugins/_sql";
     }
 
     public function getParamWhitelist(): array

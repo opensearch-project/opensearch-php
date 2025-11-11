@@ -28,11 +28,11 @@ class SearchShards extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_search_shards';
+            return "/$index/_search_shards";
         }
-        return '/_search_shards';
+        return "/_search_shards";
     }
 
     public function getParamWhitelist(): array

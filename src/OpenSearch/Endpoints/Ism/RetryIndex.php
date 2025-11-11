@@ -24,11 +24,11 @@ class RetryIndex extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/_plugins/_ism/retry/' . rawurlencode($index);
+            return "/_plugins/_ism/retry/$index";
         }
-        return '/_plugins/_ism/retry';
+        return "/_plugins/_ism/retry";
     }
 
     public function getParamWhitelist(): array

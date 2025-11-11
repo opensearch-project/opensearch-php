@@ -31,12 +31,12 @@ class AddFeaturesToSet extends AbstractEndpoint
         if (!isset($this->name) || $this->name === '') {
             throw new RuntimeException('name is required for add_features_to_set');
         }
-        $name = $this->name;
-        $store = $this->store ?? null;
+        $name = rawurlencode($this->name);
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_featureset/' . rawurlencode($name) . '/_addfeatures';
+            return "/_ltr/$store/_featureset/$name/_addfeatures";
         }
-        return '/_ltr/_featureset/' . rawurlencode($name) . '/_addfeatures';
+        return "/_ltr/_featureset/$name/_addfeatures";
     }
 
     public function getParamWhitelist(): array

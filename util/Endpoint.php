@@ -285,7 +285,7 @@ class Endpoint
                     );
                     $this->addNamespace('OpenSearch\Exception\RuntimeException');
                 } else {
-                    $params .= sprintf("%s\$%s = \$this->%s ?? null;", $tab8, $part, $part);
+                    $params .= sprintf("%s\$%s = \$this->%s ? rawurlencode(\$this->%s) : null;", $tab8, $part, $part, $part);
                 }
                 if ($part === 'type') {
                     $deprecated .= str_replace(
@@ -311,7 +311,7 @@ class Endpoint
         foreach ($pathsToManage as $path) {
             $parts = $this->getPartsFromUrl($path);
             if (empty($parts)) {
-                $else = sprintf("\n%sreturn '%s';", $tab8, $path);
+                $else = sprintf("\n%sreturn \"%s\";", $tab8, $path);
                 $lastUrlReturn = true;
                 continue;
             }
@@ -319,46 +319,24 @@ class Endpoint
             if (!in_array($parts[0], $this->requiredParts)) {
                 $check = sprintf("isset(\$%s)", $parts[0]);
             }
-
-            $urlParts = [];
-            $lastPos = 0;
-
-            foreach ($parts as $i => $part) {
-                $pos = strpos($path, '{' . $part . '}', $lastPos);
-                if ($pos !== false) {
-                    // Add the static part before this parameter
-                    if ($pos > $lastPos) {
-                        $urlParts[] = "'" . substr($path, $lastPos, $pos - $lastPos) . "'";
-                    }
-
-                    $urlParts[] = "rawurlencode(\$" . $part . ")";
-                    $lastPos = $pos + strlen('{' . $part . '}');
+            $url = str_replace('{' . $parts[0] .'}', '$' . $parts[0], $path);
+            for ($i = 1; $i < count($parts); $i++) {
+                $url = str_replace('{' . $parts[$i] .'}', '$' . $parts[$i], $url);
+                if (in_array($parts[$i], $this->requiredParts)) {
+                    continue;
                 }
-
-                if ($i == 0 && !in_array($part, $this->requiredParts)) {
-                    $check = sprintf("isset(\$%s)", $part);
-                } elseif ($i > 0 && !in_array($part, $this->requiredParts)) {
-                    $check .= sprintf("%sisset(\$%s)", empty($check) ? '' : ' && ', $part);
-                }
+                $check .= sprintf("%sisset(\$%s)", empty($check) ? '' : ' && ', $parts[$i]);
             }
-
-            if ($lastPos < strlen($path)) {
-                $urlParts[] = "'" . substr($path, $lastPos) . "'";
-            }
-
-            $url = implode(' . ', $urlParts);
-
             // Fix for missing / at the beginning of URL
-            if (!empty($urlParts) && strpos($urlParts[0], "'/") === false) {
-                $urlParts[0] = "'/" . substr($urlParts[0], 1);
-                $url = implode(' . ', $urlParts);
+            // @see https://github.com/elastic/elasticsearch-php/pull/970
+            if ($url[0] !== '/') {
+                $url = '/' . $url;
             }
-
             if (empty($check)) {
-                $urls .= sprintf("\n%sreturn %s;", $tab8, $url);
+                $urls .= sprintf("\n%sreturn \"%s\";", $tab8, $url);
                 $lastUrlReturn = true;
             } else {
-                $urls .= sprintf("\n%sif (%s) {\n%sreturn %s;\n%s}", $tab8, $check, $tab12, $url, $tab8);
+                $urls .= sprintf("\n%sif (%s) {\n%sreturn \"%s\";\n%s}", $tab8, $check, $tab12, $url, $tab8);
             }
         }
         if (!$lastUrlReturn) {
@@ -566,21 +544,14 @@ class Endpoint
                 continue;
             }
             $type = $values['type'] ?? 'any';
-            if (is_array($type)) {
-                $type = implode('|', $type);
-            }
             //            var_dump($type);
             //            var_dump($values);
-            $description = $values['description'] ?? '';
-            if (is_array($description)) {
-                $description = implode(' ', $description);
-            }
             $result .= sprintf(
                 "     * \$params['%s']%s = (%s) %s%s%s%s\n",
                 $param,
                 str_repeat(' ', $space - strlen($param)),
                 $type,
-                $description,
+                $values['description'] ?? '',
                 isset($values['required']) && $values['required'] ? ' (Required)' : '',
                 isset($values['options']) ? sprintf(" (Options = %s)", implode(',', $values['options'])) : '',
                 isset($values['default']) ? sprintf(" (Default = %s)", ($type === 'boolean') ? ($values['default'] ? 'true' : 'false') : (is_array($values['default']) ? implode(',', $values['default']) : $values['default'])) : ''

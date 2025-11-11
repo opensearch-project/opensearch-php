@@ -24,7 +24,7 @@ class ListChannels extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_notifications/channels';
+        return "/_plugins/_notifications/channels";
     }
 
     public function getParamWhitelist(): array

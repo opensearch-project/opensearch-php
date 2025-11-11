@@ -27,9 +27,9 @@ class GetModel extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $model_id = $this->model_id ?? null;
+        $model_id = $this->model_id ? rawurlencode($this->model_id) : null;
         if (isset($model_id)) {
-            return '/_plugins/_knn/models/' . rawurlencode($model_id);
+            return "/_plugins/_knn/models/$model_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint knn.get_model');
     }

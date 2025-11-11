@@ -28,9 +28,9 @@ class RefreshSearchAnalyzers extends AbstractEndpoint
         if (!isset($this->index) || $this->index === '') {
             throw new RuntimeException('index is required for refresh_search_analyzers');
         }
-        $index = $this->index;
+        $index = rawurlencode($this->index);
 
-        return '/_plugins/_refresh_search_analyzers/' . rawurlencode($index);
+        return "/_plugins/_refresh_search_analyzers/$index";
     }
 
     public function getParamWhitelist(): array

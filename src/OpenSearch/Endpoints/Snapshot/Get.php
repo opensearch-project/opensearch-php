@@ -34,10 +34,10 @@ class Get extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-        $snapshot = $this->snapshot ?? null;
+        $repository = $this->repository ? rawurlencode($this->repository) : null;
+        $snapshot = $this->snapshot ? rawurlencode($this->snapshot) : null;
         if (isset($repository) && isset($snapshot)) {
-            return '/_snapshot/' . rawurlencode($repository) . '/' . rawurlencode($snapshot);
+            return "/_snapshot/$repository/$snapshot";
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.get');
     }
@@ -74,13 +74,13 @@ class Get extends AbstractEndpoint
 
     public function setSnapshot($snapshot): static
     {
-        if (isset($snapshot) !== true) {
+        if (!isset($snapshot)) {
             return $this;
         }
         if (is_array($snapshot) === true) {
             $snapshot = implode(",", $snapshot);
         }
-        $this->snapshot = $snapshot;
+        $this->snapshot = rawurlencode($snapshot);
 
         return $this;
     }

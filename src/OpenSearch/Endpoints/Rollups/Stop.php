@@ -28,9 +28,9 @@ class Stop extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for stop');
         }
-        $id = $this->id;
+        $id = rawurlencode($this->id);
 
-        return '/_plugins/_rollup/jobs/' . rawurlencode($id) . '/_stop';
+        return "/_plugins/_rollup/jobs/$id/_stop";
     }
 
     public function getParamWhitelist(): array

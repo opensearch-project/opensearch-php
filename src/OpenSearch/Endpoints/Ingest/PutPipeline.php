@@ -31,9 +31,9 @@ class PutPipeline extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/_ingest/pipeline/' . rawurlencode($id);
+            return "/_ingest/pipeline/$id";
         }
         throw new RuntimeException('Missing parameter for the endpoint ingest.put_pipeline');
     }

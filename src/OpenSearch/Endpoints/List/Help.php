@@ -24,7 +24,7 @@ class Help extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_list';
+        return "/_list";
     }
 
     public function getParamWhitelist(): array

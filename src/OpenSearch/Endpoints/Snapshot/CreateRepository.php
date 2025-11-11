@@ -33,9 +33,9 @@ class CreateRepository extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
+        $repository = $this->repository ? rawurlencode($this->repository) : null;
         if (isset($repository)) {
-            return '/_snapshot/' . rawurlencode($repository);
+            return "/_snapshot/$repository";
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.create_repository');
     }

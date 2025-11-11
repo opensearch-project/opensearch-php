@@ -24,7 +24,7 @@ class SearchModels extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_knn/models/_search';
+        return "/_plugins/_knn/models/_search";
     }
 
     public function getParamWhitelist(): array

@@ -24,7 +24,7 @@ class RegisterModelMeta extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_ml/models/_register_meta';
+        return "/_plugins/_ml/models/_register_meta";
     }
 
     public function getParamWhitelist(): array

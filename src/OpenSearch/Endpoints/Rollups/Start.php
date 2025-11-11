@@ -28,9 +28,9 @@ class Start extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for start');
         }
-        $id = $this->id;
+        $id = rawurlencode($this->id);
 
-        return '/_plugins/_rollup/jobs/' . rawurlencode($id) . '/_start';
+        return "/_plugins/_rollup/jobs/$id/_start";
     }
 
     public function getParamWhitelist(): array

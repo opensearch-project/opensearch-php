@@ -24,7 +24,7 @@ class SearchMemory extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_ml/memory/_search';
+        return "/_plugins/_ml/memory/_search";
     }
 
     public function getParamWhitelist(): array

@@ -25,9 +25,9 @@ class Resume extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/ingestion/_resume';
+            return "/$index/ingestion/_resume";
         }
         throw new RuntimeException('Missing parameter for the endpoint ingestion.resume');
     }

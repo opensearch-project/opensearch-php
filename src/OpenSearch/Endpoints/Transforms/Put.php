@@ -25,9 +25,9 @@ class Put extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $id = $this->id ?? null;
+        $id = $this->id ? rawurlencode($this->id) : null;
         if (isset($id)) {
-            return '/_plugins/_transform/' . rawurlencode($id);
+            return "/_plugins/_transform/$id";
         }
         throw new RuntimeException('Missing parameter for the endpoint transforms.put');
     }

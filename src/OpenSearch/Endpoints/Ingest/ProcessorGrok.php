@@ -30,7 +30,7 @@ class ProcessorGrok extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_ingest/processor/grok';
+        return "/_ingest/processor/grok";
     }
 
     public function getParamWhitelist(): array

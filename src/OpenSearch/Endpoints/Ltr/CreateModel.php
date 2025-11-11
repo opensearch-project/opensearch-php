@@ -30,12 +30,12 @@ class CreateModel extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for create_model');
         }
-        $id = $this->id;
-        $store = $this->store ?? null;
+        $id = rawurlencode($this->id);
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_model/' . rawurlencode($id);
+            return "/_ltr/$store/_model/$id";
         }
-        return '/_ltr/_model/' . rawurlencode($id);
+        return "/_ltr/_model/$id";
     }
 
     public function getParamWhitelist(): array

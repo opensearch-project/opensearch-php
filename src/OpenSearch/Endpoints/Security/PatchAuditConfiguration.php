@@ -24,7 +24,7 @@ class PatchAuditConfiguration extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_security/api/audit';
+        return "/_plugins/_security/api/audit";
     }
 
     public function getParamWhitelist(): array

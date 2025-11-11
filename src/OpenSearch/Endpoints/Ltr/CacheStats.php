@@ -24,7 +24,7 @@ class CacheStats extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_ltr/_cachestats';
+        return "/_ltr/_cachestats";
     }
 
     public function getParamWhitelist(): array

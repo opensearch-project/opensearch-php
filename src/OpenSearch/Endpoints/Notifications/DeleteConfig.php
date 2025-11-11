@@ -27,9 +27,9 @@ class DeleteConfig extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $config_id = $this->config_id ?? null;
+        $config_id = $this->config_id ? rawurlencode($this->config_id) : null;
         if (isset($config_id)) {
-            return '/_plugins/_notifications/configs/' . rawurlencode($config_id);
+            return "/_plugins/_notifications/configs/$config_id";
         }
         throw new RuntimeException('Missing parameter for the endpoint notifications.delete_config');
     }

@@ -35,11 +35,11 @@ class CloneSnapshot extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository ?? null;
-        $snapshot = $this->snapshot ?? null;
-        $target_snapshot = $this->target_snapshot ?? null;
+        $repository = $this->repository ? rawurlencode($this->repository) : null;
+        $snapshot = $this->snapshot ? rawurlencode($this->snapshot) : null;
+        $target_snapshot = $this->target_snapshot ? rawurlencode($this->target_snapshot) : null;
         if (isset($repository) && isset($snapshot) && isset($target_snapshot)) {
-            return '/_snapshot/' . rawurlencode($repository) . '/' . rawurlencode($snapshot) . '/_clone/' . rawurlencode($target_snapshot);
+            return "/_snapshot/$repository/$snapshot/_clone/$target_snapshot";
         }
         throw new RuntimeException('Missing parameter for the endpoint snapshot.clone');
     }

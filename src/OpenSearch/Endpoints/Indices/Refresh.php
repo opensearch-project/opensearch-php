@@ -30,11 +30,11 @@ class Refresh extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_refresh';
+            return "/$index/_refresh";
         }
-        return '/_refresh';
+        return "/_refresh";
     }
 
     public function getParamWhitelist(): array

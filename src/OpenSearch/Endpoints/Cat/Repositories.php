@@ -30,7 +30,7 @@ class Repositories extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_cat/repositories';
+        return "/_cat/repositories";
     }
 
     public function getParamWhitelist(): array

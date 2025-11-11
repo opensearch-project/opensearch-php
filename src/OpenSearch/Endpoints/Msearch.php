@@ -35,11 +35,11 @@ class Msearch extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_msearch';
+            return "/$index/_msearch";
         }
-        return '/_msearch';
+        return "/_msearch";
     }
 
     public function getParamWhitelist(): array

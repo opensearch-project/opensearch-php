@@ -30,9 +30,9 @@ class CreateTenant extends AbstractEndpoint
         if (!isset($this->tenant) || $this->tenant === '') {
             throw new RuntimeException('tenant is required for create_tenant');
         }
-        $tenant = $this->tenant;
+        $tenant = rawurlencode($this->tenant);
 
-        return '/_plugins/_security/api/tenants/' . rawurlencode($tenant);
+        return "/_plugins/_security/api/tenants/$tenant";
     }
 
     public function getParamWhitelist(): array

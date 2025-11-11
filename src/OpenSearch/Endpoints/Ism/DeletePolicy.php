@@ -30,9 +30,9 @@ class DeletePolicy extends AbstractEndpoint
         if (!isset($this->policy_id) || $this->policy_id === '') {
             throw new RuntimeException('policy_id is required for delete_policy');
         }
-        $policy_id = $this->policy_id;
+        $policy_id = rawurlencode($this->policy_id);
 
-        return '/_plugins/_ism/policies/' . rawurlencode($policy_id);
+        return "/_plugins/_ism/policies/$policy_id";
     }
 
     public function getParamWhitelist(): array

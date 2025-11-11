@@ -31,12 +31,12 @@ class CreateModelFromSet extends AbstractEndpoint
         if (!isset($this->name) || $this->name === '') {
             throw new RuntimeException('name is required for create_model_from_set');
         }
-        $name = $this->name;
-        $store = $this->store ?? null;
+        $name = rawurlencode($this->name);
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store) . '/_featureset/' . rawurlencode($name) . '/_createmodel';
+            return "/_ltr/$store/_featureset/$name/_createmodel";
         }
-        return '/_ltr/_featureset/' . rawurlencode($name) . '/_createmodel';
+        return "/_ltr/_featureset/$name/_createmodel";
     }
 
     public function getParamWhitelist(): array

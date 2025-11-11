@@ -30,11 +30,11 @@ class Analyze extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ?? null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index)) {
-            return '/' . rawurlencode($index) . '/_analyze';
+            return "/$index/_analyze";
         }
-        return '/_analyze';
+        return "/_analyze";
     }
 
     public function getParamWhitelist(): array

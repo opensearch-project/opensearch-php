@@ -24,11 +24,11 @@ class UndeployModel extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $model_id = $this->model_id ?? null;
+        $model_id = $this->model_id ? rawurlencode($this->model_id) : null;
         if (isset($model_id)) {
-            return '/_plugins/_ml/models/' . rawurlencode($model_id) . '/_undeploy';
+            return "/_plugins/_ml/models/$model_id/_undeploy";
         }
-        return '/_plugins/_ml/models/_undeploy';
+        return "/_plugins/_ml/models/_undeploy";
     }
 
     public function getParamWhitelist(): array

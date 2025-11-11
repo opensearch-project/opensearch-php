@@ -33,10 +33,10 @@ class AddBlock extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $block = $this->block ?? null;
-        $index = $this->index ?? null;
+        $block = $this->block ? rawurlencode($this->block) : null;
+        $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index) && isset($block)) {
-            return '/' . rawurlencode($index) . '/_block/' . rawurlencode($block);
+            return "/$index/_block/$block";
         }
         throw new RuntimeException('Missing parameter for the endpoint indices.add_block');
     }

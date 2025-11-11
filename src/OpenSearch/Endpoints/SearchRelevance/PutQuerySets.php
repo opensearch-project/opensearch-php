@@ -24,7 +24,7 @@ class PutQuerySets extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        return '/_plugins/_search_relevance/query_sets';
+        return "/_plugins/_search_relevance/query_sets";
     }
 
     public function getParamWhitelist(): array

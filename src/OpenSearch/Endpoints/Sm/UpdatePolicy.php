@@ -27,9 +27,9 @@ class UpdatePolicy extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $policy_name = $this->policy_name ?? null;
+        $policy_name = $this->policy_name ? rawurlencode($this->policy_name) : null;
         if (isset($policy_name)) {
-            return '/_plugins/_sm/policies/' . rawurlencode($policy_name);
+            return "/_plugins/_sm/policies/$policy_name";
         }
         throw new RuntimeException('Missing parameter for the endpoint sm.update_policy');
     }

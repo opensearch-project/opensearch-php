@@ -28,9 +28,9 @@ class Get extends AbstractEndpoint
         if (!isset($this->id) || $this->id === '') {
             throw new RuntimeException('id is required for get');
         }
-        $id = $this->id;
+        $id = rawurlencode($this->id);
 
-        return '/_plugins/_rollup/jobs/' . rawurlencode($id);
+        return "/_plugins/_rollup/jobs/$id";
     }
 
     public function getParamWhitelist(): array

@@ -27,9 +27,9 @@ class DeleteStore extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $store = $this->store ?? null;
+        $store = $this->store ? rawurlencode($this->store) : null;
         if (isset($store)) {
-            return '/_ltr/' . rawurlencode($store);
+            return "/_ltr/$store";
         }
         throw new RuntimeException('Missing parameter for the endpoint ltr.delete_store');
     }

@@ -27,9 +27,9 @@ class DeleteQueryGroup extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $name = $this->name ?? null;
+        $name = $this->name ? rawurlencode($this->name) : null;
         if (isset($name)) {
-            return '/_wlm/query_group/' . rawurlencode($name);
+            return "/_wlm/query_group/$name";
         }
         throw new RuntimeException('Missing parameter for the endpoint wlm.delete_query_group');
     }
