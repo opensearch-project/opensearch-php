@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" bootstrap="tests/bootstrap.php" colors="true" failOnRisky="true" verbose="true" beStrictAboutChangesToGlobalState="true" beStrictAboutOutputDuringTests="true" beStrictAboutTestsThatDoNotTestAnything="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd" bootstrap="tests/bootstrap.php" colors="true" failOnRisky="true" beStrictAboutChangesToGlobalState="true" beStrictAboutOutputDuringTests="true" beStrictAboutTestsThatDoNotTestAnything="false" cacheDirectory=".phpunit.cache">
   <php>
     <env name="OPENSEARCH_URL" value="http://localhost:9200"/>
     <env name="OPENSEARCH_INITIAL_ADMIN_PASSWORD" value="myStrongPassword123!"/>
   </php>
   <coverage>
-      <include>
-          <directory>./src/</directory>
-      </include>
-      <exclude>
-      </exclude>
-      <report>
-          <clover outputFile="clover.xml"/>
-      </report>
+    <report>
+      <clover outputFile="clover.xml"/>
+    </report>
   </coverage>
+  <source>
+    <include>
+      <directory>./src/</directory>
+    </include>
+    <exclude>
+    </exclude>
+  </source>
   <testsuites>
     <testsuite name="Unit tests">
       <directory>tests</directory>

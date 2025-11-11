@@ -26,15 +26,14 @@ use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\Delete;
 use OpenSearch\Exception\RuntimeException;
 use OpenSearch\TransportInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class ClientTest
- *
- * @subpackage Tests
- * @coversDefaultClass \OpenSearch\Client
+ * Tests the client.
  */
+#[CoversClass(Client::class)]
 class ClientTest extends TestCase
 {
     /**
@@ -58,9 +57,6 @@ class ClientTest extends TestCase
         $this->client = new Client($this->transport, $this->endpointFactory, $registeredNamespaces);
     }
 
-    /**
-     * @covers ::__call
-     */
     public function testUnknownNamespace(): void
     {
         $this->expectException(\BadMethodCallException::class);
@@ -104,9 +100,6 @@ class ClientTest extends TestCase
         );
     }
 
-    /**
-     * @covers ::request
-     */
     public function testSendRawRequest(): void
     {
         $this->transport->expects($this->once())
@@ -122,9 +115,6 @@ class ClientTest extends TestCase
         $this->assertEquals(['bang'], $response);
     }
 
-    /**
-     * @covers ::request
-     */
     public function testOptionalEndpointFactory(): void
     {
 

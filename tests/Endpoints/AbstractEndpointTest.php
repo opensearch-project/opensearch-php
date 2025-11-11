@@ -21,24 +21,18 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Endpoints;
 
-use OpenSearch\EndpointInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Exception\UnexpectedValueException;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \OpenSearch\Endpoints\AbstractEndpoint
+ * Tests the abstract endpoint.
  */
+#[CoversClass(AbstractEndpoint::class)]
 class AbstractEndpointTest extends TestCase
 {
-    private EndpointInterface&MockObject $endpoint;
-
-    protected function setUp(): void
-    {
-        $this->endpoint = $this->getMockForAbstractClass(AbstractEndpoint::class);
-    }
-
     public static function invalidParameters(): array
     {
         return [
@@ -47,26 +41,23 @@ class AbstractEndpointTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider invalidParameters
-     */
+    #[DataProvider('invalidParameters')]
     public function testInvalidParamsCauseErrorsWhenProvidedToSetParams(array $params)
     {
-        $this->endpoint->expects($this->once())
-            ->method('getParamWhitelist')
-            ->willReturn(['one', 'two']);
+        $endpoint = new TestEndpoint();
 
         $this->expectException(UnexpectedValueException::class);
 
-        $this->endpoint->setParams($params);
+        $endpoint->setParams($params);
     }
 
     public function testOpaqueIdInHeaders()
     {
         $params = ['client' => ['opaqueId' => 'test_id_' . rand(1000, 9999)]];
-        $this->endpoint->setParams($params);
+        $endpoint = new TestEndpoint();
+        $endpoint->setParams($params);
 
-        $options = $this->endpoint->getOptions();
+        $options = $endpoint->getOptions();
         $this->assertArrayHasKey('client', $options);
         $this->assertArrayHasKey('headers', $options['client']);
         $this->assertArrayHasKey('x-opaque-id', $options['client']['headers']);
@@ -74,9 +65,7 @@ class AbstractEndpointTest extends TestCase
         $this->assertEquals($params['client']['opaqueId'], $options['client']['headers']['x-opaque-id'][0]);
     }
 
-    /**
-     * @dataProvider deprecationProvider
-     */
+    #[DataProvider('deprecationProvider')]
     public function testDeprecatedParameterTriggersError(array $input, string $message): void
     {
         $errorMessage = null;
@@ -111,7 +100,7 @@ class AbstractEndpointTest extends TestCase
         restore_error_handler();
     }
 
-    public function deprecationProvider(): iterable
+    public static function deprecationProvider(): iterable
     {
         yield 'replaced without replacement' => [
             [

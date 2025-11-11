@@ -6,17 +6,16 @@ namespace OpenSearch\Tests\Aws;
 
 use OpenSearch\Aws\SigningClientFactory;
 use OpenSearch\HttpClient\SymfonyHttpClientFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 
 /**
- * @coversDefaultClass \OpenSearch\Aws\SigningClientFactory
+ * Tests the signing client factory.
  */
+#[CoversClass(SigningClientFactory::class)]
 class SigningClientFactoryTest extends TestCase
 {
-    /**
-     * @covers ::create
-     */
     public function testCreate(): void
     {
         $symfonyClient = (new SymfonyHttpClientFactory())->create([
@@ -35,9 +34,6 @@ class SigningClientFactoryTest extends TestCase
         $this->assertInstanceOf(ClientInterface::class, $client);
     }
 
-    /**
-     * @covers ::create
-     */
     public function testValidateService(): void
     {
         $symfonyClient = (new SymfonyHttpClientFactory())->create([

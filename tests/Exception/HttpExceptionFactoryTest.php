@@ -11,13 +11,13 @@ use OpenSearch\Exception\NoDocumentsToGetException;
 use OpenSearch\Exception\NoShardAvailableException;
 use OpenSearch\Exception\RoutingMissingException;
 use OpenSearch\Exception\ScriptLangNotSupportedException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the HTTP exception factory.
- *
- * @coversDefaultClass \OpenSearch\Exception\HttpExceptionFactory
  */
+#[CoversClass(HttpExceptionFactory::class)]
 class HttpExceptionFactoryTest extends TestCase
 {
     public function testBadRequest(): void

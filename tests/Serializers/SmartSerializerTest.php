@@ -23,13 +23,13 @@ namespace OpenSearch\Tests\Serializers;
 
 use OpenSearch\Exception\JsonException;
 use OpenSearch\Serializers\SmartSerializer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class SmartSerializerTest
- *
- * @coversDefaultClass \OpenSearch\Serializers\SmartSerializer
  */
+#[CoversClass(SmartSerializer::class)]
 class SmartSerializerTest extends TestCase
 {
     /**
@@ -42,9 +42,6 @@ class SmartSerializerTest extends TestCase
         $this->serializer = new SmartSerializer();
     }
 
-    /**
-     * @
-     */
     public function testThrowJsonException(): void
     {
         $data = '{ "foo" : bar" }';

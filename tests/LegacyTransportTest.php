@@ -27,6 +27,7 @@ use OpenSearch\Common\Exceptions\ServerErrorResponseException;
 use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Transport;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -35,9 +36,9 @@ use React\Promise\Deferred;
 /**
  * Legacy transport test.
  *
- * @group legacy
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
 class LegacyTransportTest extends TestCase
 {
     /**

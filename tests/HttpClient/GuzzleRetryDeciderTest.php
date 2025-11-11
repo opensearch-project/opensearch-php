@@ -7,20 +7,17 @@ namespace OpenSearch\Tests\HttpClient;
 use ColinODell\PsrTestLogger\TestLogger;
 use GuzzleHttp\Exception\ConnectException;
 use OpenSearch\HttpClient\GuzzleRetryDecider;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Test the Guzzle retry decider.
- *
- * @coversDefaultClass \OpenSearch\HttpClient\GuzzleRetryDecider
  */
+#[CoversClass(GuzzleRetryDecider::class)]
 class GuzzleRetryDeciderTest extends TestCase
 {
-    /**
-     * @covers ::__invoke
-     */
     public function testMaxRetriesDoesNotRetry(): void
     {
         $decider = new GuzzleRetryDecider(2);
@@ -33,9 +30,6 @@ class GuzzleRetryDeciderTest extends TestCase
         $this->assertFalse($decider(0, null, null, null));
     }
 
-    /**
-     * @covers ::__invoke
-     */
     public function testConnectExceptionRetries(): void
     {
         $logger = new TestLogger();

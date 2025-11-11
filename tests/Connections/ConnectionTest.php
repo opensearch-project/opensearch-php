@@ -29,6 +29,9 @@ use OpenSearch\Serializers\SerializerInterface;
 use OpenSearch\Serializers\SmartSerializer;
 use OpenSearch\Tests\ClientBuilder\ArrayLogger;
 use Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\LoggerInterface;
 use ReflectionClass;
 use PHPUnit\Framework\TestCase;
@@ -40,12 +43,11 @@ use function random_bytes;
 @trigger_error(ConnectionTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
- * @covers \OpenSearch\Connections\Connection
- * @group legacy
- * @group Integration
- *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
+#[Group('integration')]
+#[CoversClass(Connection::class)]
 class ConnectionTest extends TestCase
 {
     /**
@@ -87,9 +89,7 @@ class ConnectionTest extends TestCase
         $this->assertInstanceOf(Connection::class, $connection);
     }
 
-    /**
-     * @depends testConstructor
-     */
+    #[Depends('testConstructor')]
     public function testGetHeadersContainUserAgent()
     {
         $params = [];
@@ -113,9 +113,7 @@ class ConnectionTest extends TestCase
         $this->assertStringContainsString('opensearch-php/'. Client::VERSION, $headers['User-Agent'][0]);
     }
 
-    /**
-     * @depends testGetHeadersContainUserAgent
-     */
+    #[Depends('testGetHeadersContainUserAgent')]
     public function testUserAgentHeaderIsSent()
     {
         $params = [];
@@ -138,9 +136,7 @@ class ConnectionTest extends TestCase
         $this->assertStringContainsString('opensearch-php/'. Client::VERSION, $request['headers']['User-Agent'][0]);
     }
 
-    /**
-     * @depends testConstructor
-     */
+    #[Depends('testConstructor')]
     public function testGetHeadersContainsHostArrayConfig()
     {
         $host = [
@@ -166,9 +162,7 @@ class ConnectionTest extends TestCase
         $this->assertStringContainsString('foo:bar', $request['client']['curl'][CURLOPT_USERPWD]);
     }
 
-    /**
-     * @depends testGetHeadersContainsHostArrayConfig
-     */
+    #[Depends('testGetHeadersContainsHostArrayConfig')]
     public function testGetHeadersContainApiKeyAuth()
     {
         $params = ['client' => ['headers' => [
@@ -196,9 +190,7 @@ class ConnectionTest extends TestCase
         $this->assertStringContainsString($params['client']['headers']['Authorization'][0], $request['headers']['Authorization'][0]);
     }
 
-    /**
-     * @depends testGetHeadersContainApiKeyAuth
-     */
+    #[Depends('testGetHeadersContainApiKeyAuth')]
     public function testGetHeadersContainApiKeyAuthOverHostArrayConfig()
     {
         $params = ['client' => ['headers' => [
@@ -228,9 +220,7 @@ class ConnectionTest extends TestCase
         $this->assertStringContainsString($params['client']['headers']['Authorization'][0], $request['headers']['Authorization'][0]);
     }
 
-    /**
-     * @depends testGetHeadersContainsHostArrayConfig
-     */
+    #[Depends('testGetHeadersContainsHostArrayConfig')]
     public function testGetHeadersContainBasicAuth()
     {
         $params = ['client' => ['curl' => [
@@ -258,9 +248,7 @@ class ConnectionTest extends TestCase
         $this->assertStringContainsString($params['client']['curl'][CURLOPT_USERPWD], $request['client']['curl'][CURLOPT_USERPWD]);
     }
 
-    /**
-     * @depends testGetHeadersContainBasicAuth
-     */
+    #[Depends('testGetHeadersContainBasicAuth')]
     public function testGetHeadersContainBasicAuthOverHostArrayConfig()
     {
         $params = ['client' => ['curl' => [

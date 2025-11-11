@@ -30,15 +30,15 @@ use OpenSearch\Exception\RuntimeException;
 use OpenSearch\RequestFactory;
 use OpenSearch\Serializers\SmartSerializer;
 use OpenSearch\TransportFactory;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ClientTest
- *
- * @subpackage Tests
- * @group      Integration
- * @group      Integration-Min
  */
+#[Group('integration')]
+#[Group('integration-min')]
 class ClientIntegrationTest extends TestCase
 {
     /**
@@ -122,7 +122,7 @@ class ClientIntegrationTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function sendRawRequest(): void
     {
         $response = $this->client->request('GET', '/');
@@ -134,7 +134,7 @@ class ClientIntegrationTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function insertDocumentUsingRawRequest(): void
     {
         $randomIndex = 'test_index_' . time();

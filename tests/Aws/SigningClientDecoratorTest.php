@@ -8,21 +8,19 @@ use Aws\Credentials\CredentialsInterface;
 use Aws\Signature\SignatureV4;
 use GuzzleHttp\Psr7\Request;
 use OpenSearch\Aws\SigningClientDecorator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Tests the signing client decorator.
- *
- * @coversDefaultClass \OpenSearch\Aws\SigningClientDecorator
  */
+#[CoversClass(SigningClientDecorator::class)]
 class SigningClientDecoratorTest extends TestCase
 {
     /**
      * Test that the decorator signs the request.
-     *
-     * @covers ::sendRequest
      */
     public function testSendRequest()
     {

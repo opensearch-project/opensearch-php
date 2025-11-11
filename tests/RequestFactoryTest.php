@@ -7,13 +7,13 @@ namespace OpenSearch\Tests;
 use GuzzleHttp\Psr7\HttpFactory;
 use OpenSearch\RequestFactory;
 use OpenSearch\Serializers\SerializerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the request factory.
- *
- * @coversDefaultClass \OpenSearch\RequestFactory
  */
+#[CoversClass(RequestFactory::class)]
 class RequestFactoryTest extends TestCase
 {
     public function testBoolean(): void

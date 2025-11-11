@@ -22,8 +22,12 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\Snapshot\Status;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests the Snapshot Status endpoint.
+ */
 class StatusEndpointTest extends TestCase
 {
     /**
@@ -52,9 +56,7 @@ class StatusEndpointTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider statusParams
-     */
+    #[DataProvider('statusParams')]
     public function testGetUriReturnsAppropriateUri($repository, $snapshot, $expected)
     {
         if ($repository) {

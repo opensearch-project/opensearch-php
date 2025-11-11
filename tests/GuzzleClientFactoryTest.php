@@ -6,19 +6,17 @@ namespace OpenSearch\Tests;
 
 use OpenSearch\Client;
 use OpenSearch\GuzzleClientFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \OpenSearch\GuzzleClientFactory
- *
- * @group integration
+ * Tests the Guzzle client factory.
  */
+#[Group('integration')]
+#[CoversClass(GuzzleClientFactory::class)]
 class GuzzleClientFactoryTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     * @covers ::create
-     */
     public function testCreate(): void
     {
         $factory = new GuzzleClientFactory();
@@ -31,10 +29,6 @@ class GuzzleClientFactoryTest extends TestCase
         $this->assertInstanceOf(Client::class, $client);
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::create
-     */
     public function testCreateWithAwsAuth(): void
     {
         $client = (new GuzzleClientFactory())->create([

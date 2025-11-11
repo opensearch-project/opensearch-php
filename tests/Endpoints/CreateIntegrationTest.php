@@ -22,15 +22,14 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Tests\Utility;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class CreateIntegrationTest
- *
- * @subpackage Tests\Endpoints
- * @group Integration
- * @group Integration-Min
+ * Tests the Create endpoint.
  */
+#[Group('integration')]
+#[Group('integration-min')]
 class CreateIntegrationTest extends TestCase
 {
     public function testCreatePassingId()

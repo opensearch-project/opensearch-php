@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\HttpClient;
 
 use OpenSearch\HttpClient\GuzzleHttpClientFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 
 /**
  * Test the Guzzle HTTP client factory.
- *
- * @coversDefaultClass \OpenSearch\HttpClient\GuzzleHttpClientFactory
  */
+#[CoversClass(GuzzleHttpClientFactory::class)]
 class GuzzleHttpClientFactoryTest extends TestCase
 {
     public function testCreate()

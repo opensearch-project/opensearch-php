@@ -28,6 +28,7 @@ use OpenSearch\ConnectionPool\StaticConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactory;
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
@@ -37,10 +38,10 @@ use PHPUnit\Framework\TestCase;
  * Class StaticConnectionPoolTest
  *
  * @subpackage Tests/StaticConnectionPoolTest
- * @group legacy
  *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
 class StaticConnectionPoolTest extends TestCase
 {
     public function tearDown(): void

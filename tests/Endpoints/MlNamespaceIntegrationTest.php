@@ -16,14 +16,13 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Tests\Utility;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class MlNamespaceIntegrationTest
- *
- * @subpackage Tests\Endpoints
- * @group Integration
+ * Tests the Ml namespace.
  */
+#[Group('integration')]
 class MlNamespaceIntegrationTest extends TestCase
 {
     public function testRegisterModelGroup()

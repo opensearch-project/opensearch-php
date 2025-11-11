@@ -8,15 +8,18 @@ use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
 use GuzzleHttp\Ring\Future\CompletedFutureArray;
 use OpenSearch\ClientBuilder;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(SigV4HandlerTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
- * @group legacy
+ * Tests the SigV4Handler.
+ *
  * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Aws\SigV4RequestFactory instead.
  */
+#[Group('legacy')]
 class SigV4HandlerTest extends TestCase
 {
     private const ENV_KEYS_USED = [CredentialProvider::ENV_KEY, CredentialProvider::ENV_SECRET];
