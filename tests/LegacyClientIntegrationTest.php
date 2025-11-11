@@ -26,19 +26,19 @@ use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\Missing404Exception;
 use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Tests\ClientBuilder\ArrayLogger;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
 
 /**
  * Class ClientTest
  *
- * @subpackage Tests
- * @group      Integration
- * @group      Integration-Min
- * @group     Legacy
- *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
+#[Group('integration')]
+#[Group('integration-min')]
 class LegacyClientIntegrationTest extends TestCase
 {
     /**
@@ -154,7 +154,7 @@ class LegacyClientIntegrationTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function sendRawRequest(): void
     {
         $client = $this->getClient();
@@ -168,7 +168,7 @@ class LegacyClientIntegrationTest extends TestCase
         }
     }
 
-    /** @test */
+    #[Test]
     public function insertDocumentUsingRawRequest(): void
     {
         $client = $this->getClient();

@@ -23,11 +23,13 @@ namespace OpenSearch\Tests\Endpoints;
 
 use OpenSearch\Endpoints\Sql\Query;
 use OpenSearch\Exception\UnexpectedValueException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \OpenSearch\Endpoints\Sql\Query
+ * Tests the SQL Query endpoint.
  */
+#[CoversClass(Query::class)]
 class SqlQueryEndpointTest extends TestCase
 {
     /**

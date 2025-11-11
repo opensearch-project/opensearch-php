@@ -19,12 +19,16 @@ use OpenSearch\EndpointFactory;
 use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\TransportInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use UnexpectedValueException;
 
+/**
+ * Tests the Security namespace.
+ */
 class SecurityNamespaceTest extends TestCase
 {
     private SecurityNamespace $securityNamespace;
@@ -38,10 +42,7 @@ class SecurityNamespaceTest extends TestCase
         $this->securityNamespace = new SecurityNamespace($this->transport, new EndpointFactory());
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function methodProvider(): array
+    public static function methodProvider(): array
     {
         return array_map(
             function (ReflectionMethod $method) {
@@ -56,9 +57,7 @@ class SecurityNamespaceTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider methodProvider
-     */
+    #[DataProvider('methodProvider')]
     public function testWithInvalidParams(string $methodName): void
     {
         $this->expectException(UnexpectedValueException::class);

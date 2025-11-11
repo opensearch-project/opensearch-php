@@ -39,10 +39,6 @@ class RoundRobinSelectorTest extends TestCase
 {
     /**
      * Add Ten connections, select 15 to verify round robin
-     *
-     * @covers \OpenSearch\ConnectionPool\Selectors\RoundRobinSelector::select
-     *
-     * @return void
      */
     public function testTenConnections()
     {
@@ -78,10 +74,6 @@ class RoundRobinSelectorTest extends TestCase
     /**
      * Add Ten connections, select five, remove three, test another 10 to check
      * that the round-robining works after removing connections
-     *
-     * @covers \OpenSearch\ConnectionPool\Selectors\RoundRobinSelector::select
-     *
-     * @return void
      */
     public function testAddTenConnectionsTestFiveRemoveThreeTestTen()
     {

@@ -25,16 +25,17 @@ use OpenSearch\Client;
 use OpenSearch\ClientBuilder;
 use OpenSearch\Common\Exceptions\OpenSearchException;
 use OpenSearch\Common\Exceptions\RuntimeException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
 @trigger_error(ClientBuilderTest::class . ' is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
 
 /**
- * @group legacy
- *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
 class ClientBuilderTest extends TestCase
 {
     /**
@@ -123,7 +124,7 @@ class ClientBuilderTest extends TestCase
         }
     }
 
-    public function getConfig()
+    public static function getConfig()
     {
         return [
             [[
@@ -137,9 +138,9 @@ class ClientBuilderTest extends TestCase
     }
 
     /**
-     * @dataProvider getConfig
      * @see https://github.com/elastic/elasticsearch-php/issues/1074
      */
+    #[DataProvider('getConfig')]
     public function testFromConfig(array $params)
     {
         $client = ClientBuilder::fromConfig($params);

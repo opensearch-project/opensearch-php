@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace OpenSearch\Tests\Exception;
 
 use OpenSearch\Exception\ErrorMessageExtractor;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the error message extractor.
- *
- * @coversDefaultClass \OpenSearch\Exception\ErrorMessageExtractor
  */
+#[CoversClass(ErrorMessageExtractor::class)]
 class ErrorMessageExtractorTest extends TestCase
 {
     public function testUnstructured(): void

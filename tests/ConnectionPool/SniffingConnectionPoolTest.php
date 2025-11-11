@@ -21,6 +21,7 @@ use OpenSearch\ConnectionPool\Selectors\RoundRobinSelector;
 use OpenSearch\ConnectionPool\SniffingConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\Connections\ConnectionFactoryInterface;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
@@ -35,7 +36,7 @@ use PHPUnit\Framework\TestCase;
  */
 class SniffingConnectionPoolTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function itShouldReturnTheSingleLiveConnectionAvailable(): void
     {
         $clusterState = $this->clusterState(1);
@@ -56,7 +57,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($connection, $connectionPool->nextConnection());
     }
 
-    /** @test */
+    #[Test]
     public function itShouldSniffNewConnectionsWhenPossible(): void
     {
         $clusterState = $this->clusterState(2);
@@ -81,7 +82,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($discoveredConnection, $actualConnection);
     }
 
-    /** @test */
+    #[Test]
     public function forceNextConnection(): void
     {
         $clusterState = $this->clusterState(2);
@@ -104,7 +105,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($secondConnection, $connectionPool->nextConnection(true));
     }
 
-    /** @test */
+    #[Test]
     public function itShouldReturnFirstSeededConnectionIfAlive(): void
     {
         $clusterState = $this->clusterState(10);
@@ -129,7 +130,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($connections[0], $connectionPool->nextConnection());
     }
 
-    /** @test */
+    #[Test]
     public function itShouldReturnTheFirstAvailableConnection(): void
     {
         $clusterState = $this->clusterState(10);
@@ -157,7 +158,7 @@ class SniffingConnectionPoolTest extends TestCase
         $this->assertSame($connections[$randomLiveConnectionIndex], $connectionPool->nextConnection());
     }
 
-    /** @test */
+    #[Test]
     public function itShouldFailIfAllNodesAreDown(): void
     {
         $clusterState = $this->clusterState(10);
@@ -184,7 +185,7 @@ class SniffingConnectionPoolTest extends TestCase
         $connectionPool->nextConnection();
     }
 
-    /** @test */
+    #[Test]
     public function sniffShouldStopIfAllSniffRequestsFail(): void
     {
         $connection = $this->createMock(Connection::class);
@@ -206,7 +207,7 @@ class SniffingConnectionPoolTest extends TestCase
         $connectionPool->nextConnection();
     }
 
-    /** @test */
+    #[Test]
     public function sniffShouldStopIfNodesAreEmpty(): void
     {
         $clusterState = $this->clusterState(0);
@@ -229,7 +230,7 @@ class SniffingConnectionPoolTest extends TestCase
         $connectionPool->nextConnection();
     }
 
-    /** @test */
+    #[Test]
     public function itShouldNotSniffBeforeScheduledSniffTime(): void
     {
         $connection = $this->createMock(Connection::class);
@@ -251,7 +252,7 @@ class SniffingConnectionPoolTest extends TestCase
         $connectionPool->nextConnection();
     }
 
-    /** @test */
+    #[Test]
     public function scheduleCheck(): void
     {
         $clusterState = $this->clusterState(2);

@@ -9,6 +9,8 @@ use OpenSearch\ConnectionPool\AbstractConnectionPool;
 use OpenSearch\Connections\Connection;
 use OpenSearch\LegacyTransportWrapper;
 use OpenSearch\Transport;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -17,10 +19,10 @@ use React\Promise\Deferred;
 /**
  * Tests for the LegacyTransportWrapper class.
  *
- * @coversDefaultClass  \OpenSearch\LegacyTransportWrapper
- * @group legacy
  * @deprecated in 2.4.2 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
+#[CoversClass(LegacyTransportWrapper::class)]
 class LegacyTransportWrapperTest extends TestCase
 {
     private Connection&MockObject $connection;

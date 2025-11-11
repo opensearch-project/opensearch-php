@@ -17,6 +17,7 @@ namespace OpenSearch\Tests\ConnectionPool;
 
 use OpenSearch\Connections\ConnectionFactory;
 use OpenSearch\Serializers\ArrayToJSONSerializer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -43,9 +44,7 @@ class ConnectionFactoryTest extends TestCase
         static::assertNull($connection->getPath());
     }
 
-    /**
-     * @dataProvider pathDataProvider
-     */
+    #[DataProvider('pathDataProvider')]
     public function testConnectionWithPath(string $path, string $expectedPath): void
     {
         $factory = new ConnectionFactory(
@@ -61,7 +60,7 @@ class ConnectionFactoryTest extends TestCase
         static::assertSame($expectedPath, $connection->getPath());
     }
 
-    public function pathDataProvider(): array
+    public static function pathDataProvider(): array
     {
         return [
             ['/', ''],

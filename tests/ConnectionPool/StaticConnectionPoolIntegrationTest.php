@@ -24,6 +24,7 @@ namespace OpenSearch\Tests\ConnectionPool;
 use OpenSearch\Tests\Utility;
 use OpenSearch\ClientBuilder;
 use OpenSearch\ConnectionPool\StaticConnectionPool;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
@@ -32,12 +33,11 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class StaticConnectionPoolIntegrationTest
  *
- * @subpackage Tests/StaticConnectionPoolTest
- * @group Integration
- * @group Integration-Min
- *
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  */
+#[Group('legacy')]
+#[Group('integration')]
+#[Group('integration-min')]
 class StaticConnectionPoolIntegrationTest extends TestCase
 {
     /**

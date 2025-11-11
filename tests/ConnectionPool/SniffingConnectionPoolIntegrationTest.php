@@ -24,6 +24,7 @@ namespace OpenSearch\Tests\ConnectionPool;
 use OpenSearch\ClientBuilder;
 use OpenSearch\ConnectionPool\SniffingConnectionPool;
 use OpenSearch\Tests\Utility;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 // @phpstan-ignore classConstant.deprecatedClass
@@ -32,13 +33,11 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class SniffingConnectionPoolIntegrationTest
  *
- * @subpackage Tests/SniffingConnectionPoolTest
- * @group Integration
- * @group Integration-Min
- * @group legacy
- *
  * @deprecated in 2.4.0 and will be remove in 3.0.0.
  */
+#[Group('legacy')]
+#[Group('integration')]
+#[Group('integration-min')]
 class SniffingConnectionPoolIntegrationTest extends TestCase
 {
     public function testSniff(): void

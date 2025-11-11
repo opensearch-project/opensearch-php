@@ -5,6 +5,7 @@ namespace OpenSearch\Tests;
 use OpenSearch\HttpTransport;
 use OpenSearch\RequestFactoryInterface;
 use OpenSearch\Serializers\SmartSerializer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -13,14 +14,10 @@ use Psr\Http\Message\StreamInterface;
 
 /**
  * Tests the HTTP transport.
- *
- * @coversDefaultClass \OpenSearch\HttpTransport
  */
+#[CoversClass(HttpTransport::class)]
 class HttpTransportTest extends TestCase
 {
-    /**
-     * @covers ::sendRequest
-     */
     public function testHttpTransport(): void
     {
         $request = $this->createMock(RequestInterface::class);
@@ -57,9 +54,6 @@ class HttpTransportTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $response);
     }
 
-    /**
-     * @covers ::sendRequest
-     */
     public function testHttpTransportWithLegacyHeaders(): void
     {
         $request = $this->createMock(RequestInterface::class);

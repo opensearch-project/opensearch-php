@@ -119,9 +119,10 @@ jobs:
       with:
         php-version: ${{ matrix.php-version }}
         extensions: yaml, zip, curl
+        coverage: xdebug
       env:
         COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   
+
     - name: Install dependencies
       run: |
         composer install --prefer-dist

@@ -6,18 +6,17 @@ namespace OpenSearch\Tests;
 
 use OpenSearch\Client;
 use OpenSearch\SymfonyClientFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \OpenSearch\SymfonyClientFactory
- * @group      Integration
+ * Tests the Symfony client factory.
  */
+#[Group('integration')]
+#[CoversClass(SymfonyClientFactory::class)]
 class SymfonyClientFactoryTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     * @covers ::create
-     */
     public function testCreate(): void
     {
         $factory = new SymfonyClientFactory();
@@ -30,10 +29,6 @@ class SymfonyClientFactoryTest extends TestCase
         $this->assertInstanceOf(Client::class, $client);
     }
 
-    /**
-     * @covers ::__construct
-     * @covers ::create
-     */
     public function testCreateWithAwsAuth(): void
     {
         $client = (new SymfonyClientFactory())->create([
@@ -50,9 +45,6 @@ class SymfonyClientFactoryTest extends TestCase
         $this->assertInstanceOf(Client::class, $client);
     }
 
-    /**
-     * @covers ::__construct
-     */
     public function testLegacyOptions(): void
     {
         $factory = new SymfonyClientFactory();
