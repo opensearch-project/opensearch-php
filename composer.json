@@ -86,13 +86,13 @@
       "phpstan analyse --no-progress"
     ],
     "unit": [
-      "phpunit --exclude-group integration,Integration"
+      "phpunit --exclude-group integration"
     ],
     "integration": [
-      "phpunit --group integration,Integration"
+      "phpunit --group integration"
     ],
     "integration-min": [
-      "phpunit --group integration-min,Integration-Min"
+      "phpunit --group integration-min"
     ],
     "phpunit": [
       "phpunit"
