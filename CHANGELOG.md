@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Moved duplicate health check workflow step to a shared action  ([#366](https://github.com/opensearch-project/opensearch-php/pull/366))
 - Bump composer dependencies and add `--prefer-lowest` to the test matrix  ([#367](https://github.com/opensearch-project/opensearch-php/pull/367))
+- Upgrade from phpunit v9 to v10 ([#371](https://github.com/opensearch-project/opensearch-php/pull/371))
 ### Deprecated
 ### Removed
 ### Fixed
