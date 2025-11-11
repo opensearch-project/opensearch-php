@@ -182,6 +182,7 @@ jobs:
           - opensearchproject/opensearch:1
           - opensearchproject/opensearch:2
           - opensearchproject/opensearch:3
+        prefer-lowest: ["--prefer-lowest", ""]
     services:
       search-server:
         image: ${{ matrix.search-server-image }}
@@ -206,7 +207,7 @@ jobs:
    
     - name: Install dependencies
       run: |
-        composer install --prefer-dist
+        composer update --with-all-dependencies --no-progress --prefer-dist ${{ matrix.prefer-lowest }}
 
     - name: Wait for cluster to be healthy
       uses: ./.github/actions/health-check
