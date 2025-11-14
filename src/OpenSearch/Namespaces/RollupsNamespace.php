@@ -42,7 +42,7 @@ class RollupsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -66,7 +66,7 @@ class RollupsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explain(array $params = [])
+    public function explain(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -90,7 +90,7 @@ class RollupsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -116,7 +116,7 @@ class RollupsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function put(array $params = [])
+    public function put(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -142,7 +142,7 @@ class RollupsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function start(array $params = [])
+    public function start(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -166,7 +166,7 @@ class RollupsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stop(array $params = [])
+    public function stop(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 

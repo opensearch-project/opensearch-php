@@ -1,5 +1,5 @@
 :apidoc
-    public function :endpoint(array $params = [])
+    public function :endpoint(array $params = []): iterable|string|null
     {
 :extract
         $endpoint = $this->endpointFactory->getEndpoint(:EndpointClass::class);

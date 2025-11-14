@@ -73,7 +73,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function aliases(array $params = [])
+    public function aliases(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -102,7 +102,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function allPitSegments(array $params = [])
+    public function allPitSegments(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(AllPitSegments::class);
         $endpoint->setParams($params);
@@ -132,7 +132,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function allocation(array $params = [])
+    public function allocation(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
@@ -163,7 +163,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clusterManager(array $params = [])
+    public function clusterManager(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ClusterManager::class);
         $endpoint->setParams($params);
@@ -189,7 +189,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function count(array $params = [])
+    public function count(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -219,7 +219,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function fielddata(array $params = [])
+    public function fielddata(array $params = []): iterable|string|null
     {
         $fields = $this->extractArgument($params, 'fields');
 
@@ -249,7 +249,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function health(array $params = [])
+    public function health(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Health::class);
         $endpoint->setParams($params);
@@ -269,7 +269,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function help(array $params = [])
+    public function help(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Help::class);
         $endpoint->setParams($params);
@@ -304,7 +304,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function indices(array $params = [])
+    public function indices(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -335,7 +335,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function master(array $params = [])
+    public function master(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Master::class);
         $endpoint->setParams($params);
@@ -363,7 +363,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function nodeattrs(array $params = [])
+    public function nodeattrs(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(NodeAttrs::class);
         $endpoint->setParams($params);
@@ -394,7 +394,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function nodes(array $params = [])
+    public function nodes(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Nodes::class);
         $endpoint->setParams($params);
@@ -423,7 +423,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function pendingTasks(array $params = [])
+    public function pendingTasks(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(PendingTasks::class);
         $endpoint->setParams($params);
@@ -449,7 +449,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function pitSegments(array $params = [])
+    public function pitSegments(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -480,7 +480,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function plugins(array $params = [])
+    public function plugins(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Plugins::class);
         $endpoint->setParams($params);
@@ -510,7 +510,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function recovery(array $params = [])
+    public function recovery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -541,7 +541,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function repositories(array $params = [])
+    public function repositories(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Repositories::class);
         $endpoint->setParams($params);
@@ -578,7 +578,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function segmentReplication(array $params = [])
+    public function segmentReplication(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -610,7 +610,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function segments(array $params = [])
+    public function segments(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -644,7 +644,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function shards(array $params = [])
+    public function shards(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -677,7 +677,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function snapshots(array $params = [])
+    public function snapshots(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -710,7 +710,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function tasks(array $params = [])
+    public function tasks(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Tasks::class);
         $endpoint->setParams($params);
@@ -739,7 +739,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function templates(array $params = [])
+    public function templates(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -772,7 +772,7 @@ class CatNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function threadPool(array $params = [])
+    public function threadPool(array $params = []): iterable|string|null
     {
         $thread_pool_patterns = $this->extractArgument($params, 'thread_pool_patterns');
 

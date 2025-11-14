@@ -34,7 +34,7 @@ use OpenSearch\Namespaces\NamespaceBuilderInterface;
 class Client
 {
 
-    const VERSION = '2.4.7';
+    const VERSION = '3.x-dev';
 
     /**
      * @var array<string, mixed>
@@ -78,7 +78,7 @@ class Client
      * @return object
      * @throws \BadMethodCallException if the namespace cannot be found
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): object
     {
         if (isset($this->registeredNamespaces[$name])) {
             return $this->registeredNamespaces[$name];
@@ -91,7 +91,7 @@ class Client
      *
      * @return null|mixed
      */
-    public function extractArgument(array &$params, string $arg)
+    public function extractArgument(array &$params, string $arg): mixed
     {
         if (!array_key_exists($arg, $params)) {
           return null;

@@ -43,7 +43,7 @@ class SqlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function close(array $params = [])
+    public function close(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -68,7 +68,7 @@ class SqlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getStats(array $params = [])
+    public function getStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
@@ -90,7 +90,7 @@ class SqlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function postStats(array $params = [])
+    public function postStats(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -114,7 +114,7 @@ class SqlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function settings(array $params = [])
+    public function settings(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 

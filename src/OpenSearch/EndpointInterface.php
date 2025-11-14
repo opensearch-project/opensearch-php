@@ -53,7 +53,7 @@ interface EndpointInterface
      *
      * @return $this
      */
-    public function setIndex(string|array|null $index): static;
+    public function setIndex(array|string|null $index): static;
 
     /**
      * Get the document ID.

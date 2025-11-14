@@ -46,7 +46,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function autofollowStats(array $params = [])
+    public function autofollowStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(AutofollowStats::class);
         $endpoint->setParams($params);
@@ -66,7 +66,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createReplicationRule(array $params = [])
+    public function createReplicationRule(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -89,7 +89,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteReplicationRule(array $params = [])
+    public function deleteReplicationRule(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -112,7 +112,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function followerStats(array $params = [])
+    public function followerStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(FollowerStats::class);
         $endpoint->setParams($params);
@@ -132,7 +132,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function leaderStats(array $params = [])
+    public function leaderStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(LeaderStats::class);
         $endpoint->setParams($params);
@@ -153,7 +153,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function pause(array $params = [])
+    public function pause(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -179,7 +179,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function resume(array $params = [])
+    public function resume(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -205,7 +205,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function start(array $params = [])
+    public function start(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -231,7 +231,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function status(array $params = [])
+    public function status(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -255,7 +255,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stop(array $params = [])
+    public function stop(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -281,7 +281,7 @@ class ReplicationNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateSettings(array $params = [])
+    public function updateSettings(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');

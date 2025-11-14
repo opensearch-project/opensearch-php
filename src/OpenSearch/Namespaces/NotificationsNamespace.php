@@ -44,7 +44,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createConfig(array $params = [])
+    public function createConfig(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -68,7 +68,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteConfig(array $params = [])
+    public function deleteConfig(array $params = []): iterable|string|null
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
@@ -93,7 +93,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteConfigs(array $params = [])
+    public function deleteConfigs(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteConfigs::class);
         $endpoint->setParams($params);
@@ -114,7 +114,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getConfig(array $params = [])
+    public function getConfig(array $params = []): iterable|string|null
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
@@ -177,7 +177,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getConfigs(array $params = [])
+    public function getConfigs(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -200,7 +200,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function listChannels(array $params = [])
+    public function listChannels(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ListChannels::class);
         $endpoint->setParams($params);
@@ -220,7 +220,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function listFeatures(array $params = [])
+    public function listFeatures(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ListFeatures::class);
         $endpoint->setParams($params);
@@ -241,7 +241,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function sendTest(array $params = [])
+    public function sendTest(array $params = []): iterable|string|null
     {
         $config_id = $this->extractArgument($params, 'config_id');
 
@@ -265,7 +265,7 @@ class NotificationsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateConfig(array $params = [])
+    public function updateConfig(array $params = []): iterable|string|null
     {
         $config_id = $this->extractArgument($params, 'config_id');
         $body = $this->extractArgument($params, 'body');

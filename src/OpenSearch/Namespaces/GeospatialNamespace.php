@@ -43,7 +43,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteIp2geoDatasource(array $params = [])
+    public function deleteIp2geoDatasource(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -66,7 +66,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function geojsonUploadPost(array $params = [])
+    public function geojsonUploadPost(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -89,7 +89,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function geojsonUploadPut(array $params = [])
+    public function geojsonUploadPut(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -113,7 +113,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getIp2geoDatasource(array $params = [])
+    public function getIp2geoDatasource(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -136,7 +136,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getUploadStats(array $params = [])
+    public function getUploadStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetUploadStats::class);
         $endpoint->setParams($params);
@@ -157,7 +157,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putIp2geoDatasource(array $params = [])
+    public function putIp2geoDatasource(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -183,7 +183,7 @@ class GeospatialNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putIp2geoDatasourceSettings(array $params = [])
+    public function putIp2geoDatasourceSettings(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');

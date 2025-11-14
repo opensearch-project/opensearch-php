@@ -36,7 +36,7 @@ class UbiNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function initialize(array $params = [])
+    public function initialize(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Initialize::class);
         $endpoint->setParams($params);

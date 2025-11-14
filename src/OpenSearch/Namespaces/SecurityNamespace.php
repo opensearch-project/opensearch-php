@@ -114,7 +114,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function authinfo(array $params = [])
+    public function authinfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Authinfo::class);
         $endpoint->setParams($params);
@@ -134,7 +134,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function authtoken(array $params = [])
+    public function authtoken(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Authtoken::class);
         $endpoint->setParams($params);
@@ -154,7 +154,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function cache(array $params = [])
+    public function cache(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Cache::class);
         $endpoint->setParams($params);
@@ -174,7 +174,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function configUpgradeCheck(array $params = [])
+    public function configUpgradeCheck(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ConfigUpgradeCheck::class);
         $endpoint->setParams($params);
@@ -194,7 +194,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function configUpgradePerform(array $params = [])
+    public function configUpgradePerform(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -217,7 +217,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createAllowlist(array $params = [])
+    public function createAllowlist(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -240,7 +240,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createUpdateTenancyConfig(array $params = [])
+    public function createUpdateTenancyConfig(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -264,7 +264,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createUserLegacy(array $params = [])
+    public function createUserLegacy(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
         $body = $this->extractArgument($params, 'body');
@@ -290,7 +290,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteActionGroup(array $params = [])
+    public function deleteActionGroup(array $params = []): iterable|string|null
     {
         $action_group = $this->extractArgument($params, 'action_group');
 
@@ -314,7 +314,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteDistinguishedName(array $params = [])
+    public function deleteDistinguishedName(array $params = []): iterable|string|null
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
 
@@ -338,7 +338,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteRole(array $params = [])
+    public function deleteRole(array $params = []): iterable|string|null
     {
         $role = $this->extractArgument($params, 'role');
 
@@ -362,7 +362,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteRoleMapping(array $params = [])
+    public function deleteRoleMapping(array $params = []): iterable|string|null
     {
         $role = $this->extractArgument($params, 'role');
 
@@ -386,7 +386,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteTenant(array $params = [])
+    public function deleteTenant(array $params = []): iterable|string|null
     {
         $tenant = $this->extractArgument($params, 'tenant');
 
@@ -410,7 +410,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteUser(array $params = [])
+    public function deleteUser(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
 
@@ -434,7 +434,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteUserLegacy(array $params = [])
+    public function deleteUserLegacy(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
 
@@ -457,7 +457,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function flushCache(array $params = [])
+    public function flushCache(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(FlushCache::class);
         $endpoint->setParams($params);
@@ -477,7 +477,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function generateOboToken(array $params = [])
+    public function generateOboToken(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -501,7 +501,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function generateUserToken(array $params = [])
+    public function generateUserToken(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
 
@@ -525,7 +525,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function generateUserTokenLegacy(array $params = [])
+    public function generateUserTokenLegacy(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
 
@@ -548,7 +548,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAccountDetails(array $params = [])
+    public function getAccountDetails(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAccountDetails::class);
         $endpoint->setParams($params);
@@ -569,7 +569,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getActionGroup(array $params = [])
+    public function getActionGroup(array $params = []): iterable|string|null
     {
         $action_group = $this->extractArgument($params, 'action_group');
 
@@ -594,7 +594,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllCertificates(array $params = [])
+    public function getAllCertificates(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAllCertificates::class);
         $endpoint->setParams($params);
@@ -614,7 +614,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllowlist(array $params = [])
+    public function getAllowlist(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAllowlist::class);
         $endpoint->setParams($params);
@@ -634,7 +634,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAuditConfiguration(array $params = [])
+    public function getAuditConfiguration(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAuditConfiguration::class);
         $endpoint->setParams($params);
@@ -654,7 +654,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getCertificates(array $params = [])
+    public function getCertificates(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetCertificates::class);
         $endpoint->setParams($params);
@@ -674,7 +674,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getConfiguration(array $params = [])
+    public function getConfiguration(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetConfiguration::class);
         $endpoint->setParams($params);
@@ -694,7 +694,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getDashboardsInfo(array $params = [])
+    public function getDashboardsInfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetDashboardsInfo::class);
         $endpoint->setParams($params);
@@ -716,7 +716,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getDistinguishedName(array $params = [])
+    public function getDistinguishedName(array $params = []): iterable|string|null
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
 
@@ -742,7 +742,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getNodeCertificates(array $params = [])
+    public function getNodeCertificates(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
@@ -765,7 +765,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getPermissionsInfo(array $params = [])
+    public function getPermissionsInfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetPermissionsInfo::class);
         $endpoint->setParams($params);
@@ -786,7 +786,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getRole(array $params = [])
+    public function getRole(array $params = []): iterable|string|null
     {
         $role = $this->extractArgument($params, 'role');
 
@@ -810,7 +810,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getRoleMapping(array $params = [])
+    public function getRoleMapping(array $params = []): iterable|string|null
     {
         $role = $this->extractArgument($params, 'role');
 
@@ -834,7 +834,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSslinfo(array $params = [])
+    public function getSslinfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetSslinfo::class);
         $endpoint->setParams($params);
@@ -854,7 +854,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getTenancyConfig(array $params = [])
+    public function getTenancyConfig(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetTenancyConfig::class);
         $endpoint->setParams($params);
@@ -875,7 +875,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getTenant(array $params = [])
+    public function getTenant(array $params = []): iterable|string|null
     {
         $tenant = $this->extractArgument($params, 'tenant');
 
@@ -899,7 +899,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getUser(array $params = [])
+    public function getUser(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
 
@@ -923,7 +923,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getUserLegacy(array $params = [])
+    public function getUserLegacy(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
 
@@ -946,7 +946,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getUsersLegacy(array $params = [])
+    public function getUsersLegacy(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetUsersLegacy::class);
         $endpoint->setParams($params);
@@ -967,7 +967,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function health(array $params = [])
+    public function health(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Health::class);
         $endpoint->setParams($params);
@@ -987,7 +987,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function migrate(array $params = [])
+    public function migrate(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Migrate::class);
         $endpoint->setParams($params);
@@ -1008,7 +1008,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchActionGroup(array $params = [])
+    public function patchActionGroup(array $params = []): iterable|string|null
     {
         $action_group = $this->extractArgument($params, 'action_group');
         $body = $this->extractArgument($params, 'body');
@@ -1033,7 +1033,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchAllowlist(array $params = [])
+    public function patchAllowlist(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1056,7 +1056,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchAuditConfiguration(array $params = [])
+    public function patchAuditConfiguration(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1079,7 +1079,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchConfiguration(array $params = [])
+    public function patchConfiguration(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1103,7 +1103,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchDistinguishedName(array $params = [])
+    public function patchDistinguishedName(array $params = []): iterable|string|null
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
         $body = $this->extractArgument($params, 'body');
@@ -1128,7 +1128,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchDistinguishedNames(array $params = [])
+    public function patchDistinguishedNames(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1152,7 +1152,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchRole(array $params = [])
+    public function patchRole(array $params = []): iterable|string|null
     {
         $role = $this->extractArgument($params, 'role');
         $body = $this->extractArgument($params, 'body');
@@ -1178,7 +1178,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchRoleMapping(array $params = [])
+    public function patchRoleMapping(array $params = []): iterable|string|null
     {
         $role = $this->extractArgument($params, 'role');
         $body = $this->extractArgument($params, 'body');
@@ -1204,7 +1204,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchTenant(array $params = [])
+    public function patchTenant(array $params = []): iterable|string|null
     {
         $tenant = $this->extractArgument($params, 'tenant');
         $body = $this->extractArgument($params, 'body');
@@ -1230,7 +1230,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function patchUser(array $params = [])
+    public function patchUser(array $params = []): iterable|string|null
     {
         $username = $this->extractArgument($params, 'username');
         $body = $this->extractArgument($params, 'body');
@@ -1255,7 +1255,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function postDashboardsInfo(array $params = [])
+    public function postDashboardsInfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(PostDashboardsInfo::class);
         $endpoint->setParams($params);
@@ -1275,7 +1275,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reloadHttpCertificates(array $params = [])
+    public function reloadHttpCertificates(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ReloadHttpCertificates::class);
         $endpoint->setParams($params);
@@ -1295,7 +1295,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reloadTransportCertificates(array $params = [])
+    public function reloadTransportCertificates(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ReloadTransportCertificates::class);
         $endpoint->setParams($params);
@@ -1315,7 +1315,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function tenantInfo(array $params = [])
+    public function tenantInfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(TenantInfo::class);
         $endpoint->setParams($params);
@@ -1335,7 +1335,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateAuditConfiguration(array $params = [])
+    public function updateAuditConfiguration(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1358,7 +1358,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateConfiguration(array $params = [])
+    public function updateConfiguration(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1382,7 +1382,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateDistinguishedName(array $params = [])
+    public function updateDistinguishedName(array $params = []): iterable|string|null
     {
         $cluster_name = $this->extractArgument($params, 'cluster_name');
         $body = $this->extractArgument($params, 'body');
@@ -1408,7 +1408,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function validate(array $params = [])
+    public function validate(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Validate::class);
         $endpoint->setParams($params);
@@ -1428,7 +1428,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function whoAmI(array $params = [])
+    public function whoAmI(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(WhoAmI::class);
         $endpoint->setParams($params);
@@ -1448,7 +1448,7 @@ class SecurityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function whoAmIProtected(array $params = [])
+    public function whoAmIProtected(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(WhoAmIProtected::class);
         $endpoint->setParams($params);

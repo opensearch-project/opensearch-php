@@ -54,15 +54,15 @@ class Endpoint
         'Termvectors'        => 'TermVectors'
     ];
 
-    public $namespace;
-    public $name;
-    public $apiName;
-    protected $content;
-    protected $parts = [];
-    protected $requiredParts = [];
-    protected $useNamespace = [];
-    private $addedPartInDoc = [];
-    private $properties = [];
+    public string $namespace;
+    public string $name;
+    public string $apiName;
+    protected array $content;
+    protected array $parts = [];
+    protected array $requiredParts = [];
+    protected array $useNamespace = [];
+    private array $addedPartInDoc = [];
+    private array $properties = [];
 
     public function __construct(
         string $fileName,
@@ -430,7 +430,7 @@ class Endpoint
         return str_replace(':endpoint', $this->getClassName(), $setPart);
     }
 
-    protected function addProperty(string $name)
+    protected function addProperty(string $name): void
     {
         if (!in_array($name, ['body', 'type', 'index', 'id'])) {
             $this->properties[$name] = sprintf("    protected \$%s;", $name);

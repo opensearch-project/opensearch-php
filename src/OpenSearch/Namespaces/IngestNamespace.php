@@ -50,7 +50,7 @@ class IngestNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deletePipeline(array $params = [])
+    public function deletePipeline(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -76,7 +76,7 @@ class IngestNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getPipeline(array $params = [])
+    public function getPipeline(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -100,7 +100,7 @@ class IngestNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function processorGrok(array $params = [])
+    public function processorGrok(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ProcessorGrok::class);
         $endpoint->setParams($params);
@@ -125,7 +125,7 @@ class IngestNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putPipeline(array $params = [])
+    public function putPipeline(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -153,7 +153,7 @@ class IngestNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function simulate(array $params = [])
+    public function simulate(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');

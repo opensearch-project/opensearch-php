@@ -49,7 +49,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteDanglingIndex(array $params = [])
+    public function deleteDanglingIndex(array $params = []): iterable|string|null
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
 
@@ -77,7 +77,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function importDanglingIndex(array $params = [])
+    public function importDanglingIndex(array $params = []): iterable|string|null
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
 
@@ -100,7 +100,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function listDanglingIndices(array $params = [])
+    public function listDanglingIndices(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ListDanglingIndices::class);
         $endpoint->setParams($params);

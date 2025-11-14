@@ -98,7 +98,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function chunkModel(array $params = [])
+    public function chunkModel(array $params = []): iterable|string|null
     {
         $chunk_number = $this->extractArgument($params, 'chunk_number');
         $model_id = $this->extractArgument($params, 'model_id');
@@ -126,7 +126,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createController(array $params = [])
+    public function createController(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -151,7 +151,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createMemory(array $params = [])
+    public function createMemory(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -175,7 +175,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createMessage(array $params = [])
+    public function createMessage(array $params = []): iterable|string|null
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
@@ -200,7 +200,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createModelMeta(array $params = [])
+    public function createModelMeta(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -224,7 +224,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteAgent(array $params = [])
+    public function deleteAgent(array $params = []): iterable|string|null
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
 
@@ -248,7 +248,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteController(array $params = [])
+    public function deleteController(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
@@ -272,7 +272,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteMemory(array $params = [])
+    public function deleteMemory(array $params = []): iterable|string|null
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
 
@@ -296,7 +296,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteModel(array $params = [])
+    public function deleteModel(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -320,7 +320,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteModelGroup(array $params = [])
+    public function deleteModelGroup(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -344,7 +344,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteTask(array $params = [])
+    public function deleteTask(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -368,7 +368,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function executeAgent(array $params = [])
+    public function executeAgent(array $params = []): iterable|string|null
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
         $body = $this->extractArgument($params, 'body');
@@ -394,7 +394,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function executeAlgorithm(array $params = [])
+    public function executeAlgorithm(array $params = []): iterable|string|null
     {
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
@@ -420,7 +420,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAgent(array $params = [])
+    public function getAgent(array $params = []): iterable|string|null
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
 
@@ -445,7 +445,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllMemories(array $params = [])
+    public function getAllMemories(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAllMemories::class);
         $endpoint->setParams($params);
@@ -468,7 +468,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllMessages(array $params = [])
+    public function getAllMessages(array $params = []): iterable|string|null
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
 
@@ -491,7 +491,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllTools(array $params = [])
+    public function getAllTools(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAllTools::class);
         $endpoint->setParams($params);
@@ -512,7 +512,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getController(array $params = [])
+    public function getController(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
@@ -536,7 +536,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getMemory(array $params = [])
+    public function getMemory(array $params = []): iterable|string|null
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
 
@@ -560,7 +560,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getMessage(array $params = [])
+    public function getMessage(array $params = []): iterable|string|null
     {
         $message_id = $this->extractArgument($params, 'message_id');
 
@@ -586,7 +586,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getMessageTraces(array $params = [])
+    public function getMessageTraces(array $params = []): iterable|string|null
     {
         $message_id = $this->extractArgument($params, 'message_id');
 
@@ -610,7 +610,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getModelGroup(array $params = [])
+    public function getModelGroup(array $params = []): iterable|string|null
     {
         $model_group_id = $this->extractArgument($params, 'model_group_id');
 
@@ -633,7 +633,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getProfile(array $params = [])
+    public function getProfile(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -657,7 +657,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getProfileModels(array $params = [])
+    public function getProfileModels(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -683,7 +683,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getProfileTasks(array $params = [])
+    public function getProfileTasks(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
         $body = $this->extractArgument($params, 'body');
@@ -710,7 +710,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getStats(array $params = [])
+    public function getStats(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
@@ -736,7 +736,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getTask(array $params = [])
+    public function getTask(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -760,7 +760,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getTool(array $params = [])
+    public function getTool(array $params = []): iterable|string|null
     {
         $tool_name = $this->extractArgument($params, 'tool_name');
 
@@ -784,7 +784,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function loadModel(array $params = [])
+    public function loadModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
@@ -808,7 +808,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function predictModel(array $params = [])
+    public function predictModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -833,7 +833,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function registerAgents(array $params = [])
+    public function registerAgents(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -856,7 +856,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function registerModel(array $params = [])
+    public function registerModel(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -879,7 +879,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function registerModelGroup(array $params = [])
+    public function registerModelGroup(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -902,7 +902,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function registerModelMeta(array $params = [])
+    public function registerModelMeta(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -925,7 +925,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchAgents(array $params = [])
+    public function searchAgents(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -948,7 +948,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchConnectors(array $params = [])
+    public function searchConnectors(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -971,7 +971,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchMemory(array $params = [])
+    public function searchMemory(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -995,7 +995,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchMessage(array $params = [])
+    public function searchMessage(array $params = []): iterable|string|null
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
@@ -1020,7 +1020,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchModelGroup(array $params = [])
+    public function searchModelGroup(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1043,7 +1043,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchModels(array $params = [])
+    public function searchModels(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1066,7 +1066,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchTasks(array $params = [])
+    public function searchTasks(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1090,7 +1090,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function train(array $params = [])
+    public function train(array $params = []): iterable|string|null
     {
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
@@ -1116,7 +1116,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function trainPredict(array $params = [])
+    public function trainPredict(array $params = []): iterable|string|null
     {
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
@@ -1142,7 +1142,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function unloadModel(array $params = [])
+    public function unloadModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -1168,7 +1168,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateConnector(array $params = [])
+    public function updateConnector(array $params = []): iterable|string|null
     {
         $connector_id = $this->extractArgument($params, 'connector_id');
         $body = $this->extractArgument($params, 'body');
@@ -1194,7 +1194,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateController(array $params = [])
+    public function updateController(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -1220,7 +1220,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateMemory(array $params = [])
+    public function updateMemory(array $params = []): iterable|string|null
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
@@ -1246,7 +1246,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateMessage(array $params = [])
+    public function updateMessage(array $params = []): iterable|string|null
     {
         $message_id = $this->extractArgument($params, 'message_id');
         $body = $this->extractArgument($params, 'body');
@@ -1272,7 +1272,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateModel(array $params = [])
+    public function updateModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -1299,7 +1299,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function uploadChunk(array $params = [])
+    public function uploadChunk(array $params = []): iterable|string|null
     {
         $chunk_number = $this->extractArgument($params, 'chunk_number');
         $model_id = $this->extractArgument($params, 'model_id');
@@ -1326,7 +1326,7 @@ class MlNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function uploadModel(array $params = [])
+    public function uploadModel(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 

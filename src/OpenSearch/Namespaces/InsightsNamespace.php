@@ -36,7 +36,7 @@ class InsightsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function topQueries(array $params = [])
+    public function topQueries(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(TopQueries::class);
         $endpoint->setParams($params);

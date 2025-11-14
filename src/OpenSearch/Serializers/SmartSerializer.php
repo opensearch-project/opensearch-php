@@ -34,7 +34,7 @@ class SmartSerializer implements SerializerInterface
     /**
      * {@inheritdoc}
      */
-    public function serialize($data): string
+    public function serialize(mixed $data): string
     {
         if (is_string($data) === true) {
             return $data;
@@ -54,7 +54,7 @@ class SmartSerializer implements SerializerInterface
     /**
      * {@inheritdoc}
      */
-    public function deserialize(?string $data, array $headers)
+    public function deserialize(?string $data, array $headers): string|array
     {
         if ($this->isJson($headers)) {
             return $this->decode($data);

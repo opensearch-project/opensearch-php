@@ -39,7 +39,7 @@ class RemoteStoreNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function restore(array $params = [])
+    public function restore(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 

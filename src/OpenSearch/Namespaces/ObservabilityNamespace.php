@@ -42,7 +42,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createObject(array $params = [])
+    public function createObject(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -66,7 +66,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteObject(array $params = [])
+    public function deleteObject(array $params = []): iterable|string|null
     {
         $object_id = $this->extractArgument($params, 'object_id');
 
@@ -91,7 +91,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteObjects(array $params = [])
+    public function deleteObjects(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteObjects::class);
         $endpoint->setParams($params);
@@ -111,7 +111,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getLocalstats(array $params = [])
+    public function getLocalstats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetLocalstats::class);
         $endpoint->setParams($params);
@@ -132,7 +132,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getObject(array $params = [])
+    public function getObject(array $params = []): iterable|string|null
     {
         $object_id = $this->extractArgument($params, 'object_id');
 
@@ -155,7 +155,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function listObjects(array $params = [])
+    public function listObjects(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ListObjects::class);
         $endpoint->setParams($params);
@@ -176,7 +176,7 @@ class ObservabilityNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateObject(array $params = [])
+    public function updateObject(array $params = []): iterable|string|null
     {
         $object_id = $this->extractArgument($params, 'object_id');
         $body = $this->extractArgument($params, 'body');

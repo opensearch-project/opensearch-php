@@ -110,7 +110,7 @@ use OpenSearch\Endpoints\UpdateByQueryRethrottle;
  */
 class Client
 {
-    public const VERSION = '2.4.7';
+    public const VERSION = '3.x-dev';
 
     /**
      * @var array<string, mixed>
@@ -124,180 +124,75 @@ class Client
      */
     protected array $registeredNamespaces = [];
 
-    /**
-     * @var AsynchronousSearchNamespace
-     */
-    protected $asynchronousSearch;
+    protected AsynchronousSearchNamespace $asynchronousSearch;
 
-    /**
-     * @var CatNamespace
-     */
-    protected $cat;
+    protected CatNamespace $cat;
 
-    /**
-     * @var ClusterNamespace
-     */
-    protected $cluster;
+    protected ClusterNamespace $cluster;
 
-    /**
-     * @var DanglingIndicesNamespace
-     */
-    protected $danglingIndices;
+    protected DanglingIndicesNamespace $danglingIndices;
 
-    /**
-     * @var FlowFrameworkNamespace
-     */
-    protected $flowFramework;
+    protected FlowFrameworkNamespace $flowFramework;
 
-    /**
-     * @var GeospatialNamespace
-     */
-    protected $geospatial;
+    protected GeospatialNamespace $geospatial;
 
-    /**
-     * @var IndicesNamespace
-     */
-    protected $indices;
+    protected IndicesNamespace $indices;
 
-    /**
-     * @var IngestNamespace
-     */
-    protected $ingest;
+    protected IngestNamespace $ingest;
 
-    /**
-     * @var IngestionNamespace
-     */
-    protected $ingestion;
+    protected IngestionNamespace $ingestion;
 
-    /**
-     * @var InsightsNamespace
-     */
-    protected $insights;
+    protected InsightsNamespace $insights;
 
-    /**
-     * @var IsmNamespace
-     */
-    protected $ism;
+    protected IsmNamespace $ism;
 
-    /**
-     * @var KnnNamespace
-     */
-    protected $knn;
+    protected KnnNamespace $knn;
 
-    /**
-     * @var ListNamespace
-     */
-    protected $list;
+    protected ListNamespace $list;
 
-    /**
-     * @var LtrNamespace
-     */
-    protected $ltr;
+    protected LtrNamespace $ltr;
 
-    /**
-     * @var MlNamespace
-     */
-    protected $ml;
+    protected MlNamespace $ml;
 
-    /**
-     * @var NeuralNamespace
-     */
-    protected $neural;
+    protected NeuralNamespace $neural;
 
-    /**
-     * @var NodesNamespace
-     */
-    protected $nodes;
+    protected NodesNamespace $nodes;
 
-    /**
-     * @var NotificationsNamespace
-     */
-    protected $notifications;
+    protected NotificationsNamespace $notifications;
 
-    /**
-     * @var ObservabilityNamespace
-     */
-    protected $observability;
+    protected ObservabilityNamespace $observability;
 
-    /**
-     * @var PplNamespace
-     */
-    protected $ppl;
+    protected PplNamespace $ppl;
 
-    /**
-     * @var QueryNamespace
-     */
-    protected $query;
+    protected QueryNamespace $query;
 
-    /**
-     * @var RemoteStoreNamespace
-     */
-    protected $remoteStore;
+    protected RemoteStoreNamespace $remoteStore;
 
-    /**
-     * @var ReplicationNamespace
-     */
-    protected $replication;
+    protected ReplicationNamespace $replication;
 
-    /**
-     * @var RollupsNamespace
-     */
-    protected $rollups;
+    protected RollupsNamespace $rollups;
 
-    /**
-     * @var SearchPipelineNamespace
-     */
-    protected $searchPipeline;
+    protected SearchPipelineNamespace $searchPipeline;
 
-    /**
-     * @var SearchRelevanceNamespace
-     */
-    protected $searchRelevance;
+    protected SearchRelevanceNamespace $searchRelevance;
 
-    /**
-     * @var SecurityNamespace
-     */
-    protected $security;
+    protected SecurityNamespace $security;
 
-    /**
-     * @var SecurityAnalyticsNamespace
-     */
-    protected $securityAnalytics;
+    protected SecurityAnalyticsNamespace $securityAnalytics;
 
-    /**
-     * @var SmNamespace
-     */
-    protected $sm;
+    protected SmNamespace $sm;
 
-    /**
-     * @var SnapshotNamespace
-     */
-    protected $snapshot;
+    protected SnapshotNamespace $snapshot;
 
-    /**
-     * @var SqlNamespace
-     */
-    protected $sql;
+    protected SqlNamespace $sql;
 
-    /**
-     * @var TasksNamespace
-     */
-    protected $tasks;
+    protected TasksNamespace $tasks;
 
-    /**
-     * @var TransformsNamespace
-     */
-    protected $transforms;
+    protected TransformsNamespace $transforms;
 
-    /**
-     * @var UbiNamespace
-     */
-    protected $ubi;
+    protected UbiNamespace $ubi;
 
-    /**
-     * @var WlmNamespace
-     */
-    protected $wlm;
+    protected WlmNamespace $wlm;
 
     public function __construct(
         protected TransportInterface $httpTransport,
@@ -370,7 +265,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function bulk(array $params = [])
+    public function bulk(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -408,7 +303,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function bulkStream(array $params = [])
+    public function bulkStream(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -435,7 +330,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clearScroll(array $params = [])
+    public function clearScroll(array $params = []): iterable|string|null
     {
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -476,7 +371,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function count(array $params = [])
+    public function count(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -507,7 +402,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createPit(array $params = [])
+    public function createPit(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -540,7 +435,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -565,7 +460,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteAllPits(array $params = [])
+    public function deleteAllPits(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAllPits::class);
         $endpoint->setParams($params);
@@ -620,7 +515,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteByQuery(array $params = [])
+    public function deleteByQuery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -647,7 +542,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteByQueryRethrottle(array $params = [])
+    public function deleteByQueryRethrottle(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -671,7 +566,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deletePit(array $params = [])
+    public function deletePit(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -698,7 +593,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteScript(array $params = [])
+    public function deleteScript(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -809,7 +704,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explain(array $params = [])
+    public function explain(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -843,7 +738,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function fieldCaps(array $params = [])
+    public function fieldCaps(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -880,7 +775,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -905,7 +800,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllPits(array $params = [])
+    public function getAllPits(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAllPits::class);
         $endpoint->setParams($params);
@@ -928,7 +823,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getScript(array $params = [])
+    public function getScript(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -951,7 +846,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getScriptContext(array $params = [])
+    public function getScriptContext(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetScriptContext::class);
         $endpoint->setParams($params);
@@ -971,7 +866,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getScriptLanguages(array $params = [])
+    public function getScriptLanguages(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetScriptLanguages::class);
         $endpoint->setParams($params);
@@ -1002,7 +897,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSource(array $params = [])
+    public function getSource(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1041,7 +936,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function index(array $params = [])
+    public function index(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $id = $this->extractArgument($params, 'id');
@@ -1068,7 +963,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function info(array $params = [])
+    public function info(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Info::class);
         $endpoint->setParams($params);
@@ -1098,7 +993,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function mget(array $params = [])
+    public function mget(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1132,7 +1027,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function msearch(array $params = [])
+    public function msearch(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1164,7 +1059,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function msearchTemplate(array $params = [])
+    public function msearchTemplate(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1203,7 +1098,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function mtermvectors(array $params = [])
+    public function mtermvectors(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1254,7 +1149,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putScript(array $params = [])
+    public function putScript(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $context = $this->extractArgument($params, 'context');
@@ -1287,7 +1182,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function rankEval(array $params = [])
+    public function rankEval(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1322,7 +1217,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reindex(array $params = [])
+    public function reindex(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1347,7 +1242,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reindexRethrottle(array $params = [])
+    public function reindexRethrottle(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -1372,7 +1267,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function renderSearchTemplate(array $params = [])
+    public function renderSearchTemplate(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -1398,7 +1293,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function scriptsPainlessExecute(array $params = [])
+    public function scriptsPainlessExecute(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1424,7 +1319,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function scroll(array $params = [])
+    public function scroll(array $params = []): iterable|string|null
     {
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -1498,7 +1393,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function search(array $params = [])
+    public function search(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1530,7 +1425,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchShards(array $params = [])
+    public function searchShards(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1572,7 +1467,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchTemplate(array $params = [])
+    public function searchTemplate(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1611,7 +1506,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function termvectors(array $params = [])
+    public function termvectors(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $id = $this->extractArgument($params, 'id');
@@ -1653,7 +1548,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function update(array $params = [])
+    public function update(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1716,7 +1611,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateByQuery(array $params = [])
+    public function updateByQuery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1743,7 +1638,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateByQueryRethrottle(array $params = [])
+    public function updateByQueryRethrottle(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -2068,7 +1963,7 @@ class Client
      * @return object
      * @throws \BadMethodCallException if the namespace cannot be found
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): object
     {
         if (isset($this->registeredNamespaces[$name])) {
             return $this->registeredNamespaces[$name];
@@ -2081,7 +1976,7 @@ class Client
      *
      * @return null|mixed
      */
-    public function extractArgument(array &$params, string $arg)
+    public function extractArgument(array &$params, string $arg): mixed
     {
         if (!array_key_exists($arg, $params)) {
             return null;
