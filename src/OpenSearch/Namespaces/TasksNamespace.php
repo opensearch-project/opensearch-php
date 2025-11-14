@@ -49,7 +49,7 @@ class TasksNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function cancel(array $params = [])
+    public function cancel(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -75,7 +75,7 @@ class TasksNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -105,7 +105,7 @@ class TasksNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function list(array $params = [])
+    public function list(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ListTasks::class);
         $endpoint->setParams($params);

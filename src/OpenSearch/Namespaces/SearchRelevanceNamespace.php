@@ -51,7 +51,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteExperiments(array $params = [])
+    public function deleteExperiments(array $params = []): iterable|string|null
     {
         $experiment_id = $this->extractArgument($params, 'experiment_id');
 
@@ -75,7 +75,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteJudgments(array $params = [])
+    public function deleteJudgments(array $params = []): iterable|string|null
     {
         $judgment_id = $this->extractArgument($params, 'judgment_id');
 
@@ -99,7 +99,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteQuerySets(array $params = [])
+    public function deleteQuerySets(array $params = []): iterable|string|null
     {
         $query_set_id = $this->extractArgument($params, 'query_set_id');
 
@@ -123,7 +123,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteSearchConfigurations(array $params = [])
+    public function deleteSearchConfigurations(array $params = []): iterable|string|null
     {
         $search_configuration_id = $this->extractArgument($params, 'search_configuration_id');
 
@@ -147,7 +147,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getExperiments(array $params = [])
+    public function getExperiments(array $params = []): iterable|string|null
     {
         $experiment_id = $this->extractArgument($params, 'experiment_id');
 
@@ -171,7 +171,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getJudgments(array $params = [])
+    public function getJudgments(array $params = []): iterable|string|null
     {
         $judgment_id = $this->extractArgument($params, 'judgment_id');
 
@@ -201,7 +201,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getNodeStats(array $params = [])
+    public function getNodeStats(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
@@ -227,7 +227,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getQuerySets(array $params = [])
+    public function getQuerySets(array $params = []): iterable|string|null
     {
         $query_set_id = $this->extractArgument($params, 'query_set_id');
 
@@ -251,7 +251,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSearchConfigurations(array $params = [])
+    public function getSearchConfigurations(array $params = []): iterable|string|null
     {
         $search_configuration_id = $this->extractArgument($params, 'search_configuration_id');
 
@@ -280,7 +280,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getStats(array $params = [])
+    public function getStats(array $params = []): iterable|string|null
     {
         $stat = $this->extractArgument($params, 'stat');
 
@@ -303,7 +303,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function postQuerySets(array $params = [])
+    public function postQuerySets(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -326,7 +326,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putExperiments(array $params = [])
+    public function putExperiments(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -349,7 +349,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putJudgments(array $params = [])
+    public function putJudgments(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -372,7 +372,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putQuerySets(array $params = [])
+    public function putQuerySets(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -395,7 +395,7 @@ class SearchRelevanceNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putSearchConfigurations(array $params = [])
+    public function putSearchConfigurations(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 

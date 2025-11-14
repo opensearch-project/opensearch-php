@@ -23,65 +23,20 @@ namespace OpenSearch\Namespaces;
 
 use OpenSearch\EndpointFactoryInterface;
 use OpenSearch\Endpoints\AbstractEndpoint;
-use OpenSearch\LegacyEndpointFactory;
-use OpenSearch\LegacyTransportWrapper;
-use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
 
 abstract class AbstractNamespace
 {
-    /**
-     * @var \OpenSearch\Transport
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0. Use $httpTransport property instead.
-     */
-    protected $transport;
-
-    protected TransportInterface $httpTransport;
-
-    protected EndpointFactoryInterface $endpointFactory;
-
-    /**
-     * @var callable
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0. Use $endpointFactory property instead.
-     */
-    protected $endpoints;
-
-    /**
-     * @phpstan-ignore parameter.deprecatedClass
-     */
-    public function __construct(TransportInterface|Transport $transport, callable|EndpointFactoryInterface $endpointFactory)
-    {
-        if (!$transport instanceof TransportInterface) {
-            @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
-            // @phpstan-ignore property.deprecated
-            $this->transport = $transport;
-            // @phpstan-ignore new.deprecated
-            $this->httpTransport = new LegacyTransportWrapper($transport);
-        } else {
-            $this->httpTransport = $transport;
-        }
-        if (is_callable($endpointFactory)) {
-            @trigger_error('Passing a callable as $endpointFactory param to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
-            $endpoints = $endpointFactory;
-            // @phpstan-ignore new.deprecated
-            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
-        } else {
-            $endpoints = function ($c) use ($endpointFactory) {
-                @trigger_error('The $endpoints property is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-                return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
-            };
-        }
-        // @phpstan-ignore property.deprecated
-        $this->endpoints = $endpoints;
-        $this->endpointFactory = $endpointFactory;
+    public function __construct(
+        protected TransportInterface $httpTransport,
+        protected EndpointFactoryInterface $endpointFactory
+    ) {
     }
 
     /**
      * @return null|mixed
      */
-    public function extractArgument(array &$params, string $arg)
+    public function extractArgument(array &$params, string $arg): mixed
     {
         if (array_key_exists($arg, $params) === true) {
             $val = $params[$arg];
@@ -92,7 +47,7 @@ abstract class AbstractNamespace
         }
     }
 
-    protected function performRequest(AbstractEndpoint $endpoint)
+    protected function performRequest(AbstractEndpoint $endpoint): iterable|string|null
     {
         return $this->httpTransport->sendRequest(
             $endpoint->getMethod(),

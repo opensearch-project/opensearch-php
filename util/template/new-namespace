@@ -1,1 +1,1 @@
-        $this->:name = new :namespace($transport, $this->endpointFactory);
+        $this->:name = new :namespace($this->httpTransport, $this->endpointFactory);

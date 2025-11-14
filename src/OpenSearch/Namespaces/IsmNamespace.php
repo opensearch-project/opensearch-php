@@ -48,7 +48,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function addPolicy(array $params = [])
+    public function addPolicy(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -74,7 +74,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function changePolicy(array $params = [])
+    public function changePolicy(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -100,7 +100,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deletePolicy(array $params = [])
+    public function deletePolicy(array $params = []): iterable|string|null
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
@@ -128,10 +128,6 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
@@ -152,7 +148,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explainPolicy(array $params = [])
+    public function explainPolicy(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -177,7 +173,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getPolicies(array $params = [])
+    public function getPolicies(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
@@ -198,7 +194,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getPolicy(array $params = [])
+    public function getPolicy(array $params = []): iterable|string|null
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
 
@@ -224,7 +220,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putPolicies(array $params = [])
+    public function putPolicies(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -250,7 +246,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putPolicy(array $params = [])
+    public function putPolicy(array $params = []): iterable|string|null
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
         $body = $this->extractArgument($params, 'body');
@@ -276,7 +272,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function refreshSearchAnalyzers(array $params = [])
+    public function refreshSearchAnalyzers(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -300,7 +296,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function removePolicy(array $params = [])
+    public function removePolicy(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -324,7 +320,7 @@ class IsmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function retryIndex(array $params = [])
+    public function retryIndex(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');

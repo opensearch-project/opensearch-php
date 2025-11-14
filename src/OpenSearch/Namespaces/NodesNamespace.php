@@ -53,7 +53,7 @@ class NodesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function hotThreads(array $params = [])
+    public function hotThreads(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
 
@@ -81,7 +81,7 @@ class NodesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function info(array $params = [])
+    public function info(array $params = []): iterable|string|null
     {
         $node_id_or_metric = $this->extractArgument($params, 'node_id_or_metric');
         $metric = $this->extractArgument($params, 'metric');
@@ -111,7 +111,7 @@ class NodesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reloadSecureSettings(array $params = [])
+    public function reloadSecureSettings(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $body = $this->extractArgument($params, 'body');
@@ -147,7 +147,7 @@ class NodesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stats(array $params = [])
+    public function stats(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');
@@ -177,7 +177,7 @@ class NodesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function usage(array $params = [])
+    public function usage(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');

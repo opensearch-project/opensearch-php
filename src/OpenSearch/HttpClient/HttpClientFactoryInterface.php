@@ -17,5 +17,4 @@ interface HttpClientFactoryInterface
      * @param array<string,mixed> $options
      */
     public function create(array $options): ClientInterface;
-
 }

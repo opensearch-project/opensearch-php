@@ -18,7 +18,7 @@ class GuzzleRetryDecider
     ) {
     }
 
-    public function __invoke(int $retries, ?RequestInterface $request, ?ResponseInterface $response, $exception): bool
+    public function __invoke(int $retries, ?RequestInterface $request, ?ResponseInterface $response, ?\Throwable $exception): bool
     {
         if ($retries >= $this->maxRetries) {
             return false;

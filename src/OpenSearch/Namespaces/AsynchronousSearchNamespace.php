@@ -40,7 +40,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -64,7 +64,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -91,7 +91,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function search(array $params = [])
+    public function search(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -114,7 +114,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stats(array $params = [])
+    public function stats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);

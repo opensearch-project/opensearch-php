@@ -23,8 +23,8 @@ namespace OpenSearch\Tests;
 
 use Exception;
 use OpenSearch\Client;
-use OpenSearch\ClientBuilder;
-use OpenSearch\Common\Exceptions\OpenSearchException;
+use OpenSearch\Exception\OpenSearchExceptionInterface;
+use OpenSearch\GuzzleClientFactory;
 
 class Utility
 {
@@ -53,20 +53,11 @@ class Utility
      */
     public static function getClient(): Client
     {
-        // @phpstan-ignore staticMethod.deprecatedClass
-        $clientBuilder = ClientBuilder::create()
-            ->setHosts([self::getHost()]);
-
-        $clientBuilder->setConnectionParams([
-            'client' => [
-                'headers' => [
-                    'Accept' => []
-                ]
-            ]
+        return (new GuzzleClientFactory())->create([
+          'base_uri' => 'http://localhost:9200',
+          'auth' => ['admin', getenv('OPENSEARCH_INITIAL_ADMIN_PASSWORD')],
+          'verify' => false,
         ]);
-
-        $clientBuilder->setSSLVerification(false);
-        return $clientBuilder->build();
     }
 
     /**
@@ -131,7 +122,7 @@ class Utility
             $client->cluster()->deleteComponentTemplate([
                 'name' => '*'
             ]);
-        } catch (OpenSearchException $e) {
+        } catch (OpenSearchExceptionInterface) {
             // We hit a version of ES that doesn't support index templates v2 yet, so it's safe to ignore
         }
 
@@ -206,13 +197,13 @@ class Utility
                 'name' => '*',
                 'expand_wildcards' => 'all'
             ]);
-        } catch (OpenSearchException $e) {
+        } catch (OpenSearchExceptionInterface) {
             // We hit a version of ES that doesn't understand expand_wildcards, try again without it
             try {
                 $client->indices()->deleteDataStream([
                     'name' => '*'
                 ]);
-            } catch (OpenSearchException $e) {
+            } catch (OpenSearchExceptionInterface) {
                 // We hit a version of ES that doesn't serialize DeleteDataStreamAction.Request#wildcardExpressionsOriginallySpecified
                 // field or that doesn't support data streams so it's safe to ignore
             }

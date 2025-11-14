@@ -44,7 +44,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -68,7 +68,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explain(array $params = [])
+    public function explain(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -92,7 +92,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -115,7 +115,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function preview(array $params = [])
+    public function preview(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -141,7 +141,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function put(array $params = [])
+    public function put(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -171,7 +171,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function search(array $params = [])
+    public function search(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
@@ -192,7 +192,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function start(array $params = [])
+    public function start(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -216,7 +216,7 @@ class TransformsNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stop(array $params = [])
+    public function stop(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 

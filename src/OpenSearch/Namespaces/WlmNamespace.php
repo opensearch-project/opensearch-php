@@ -39,7 +39,7 @@ class WlmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createQueryGroup(array $params = [])
+    public function createQueryGroup(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -63,7 +63,7 @@ class WlmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteQueryGroup(array $params = [])
+    public function deleteQueryGroup(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -87,7 +87,7 @@ class WlmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getQueryGroup(array $params = [])
+    public function getQueryGroup(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -111,7 +111,7 @@ class WlmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateQueryGroup(array $params = [])
+    public function updateQueryGroup(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');

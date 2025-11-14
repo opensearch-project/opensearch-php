@@ -41,7 +41,7 @@ class QueryNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function datasourceDelete(array $params = [])
+    public function datasourceDelete(array $params = []): iterable|string|null
     {
         $datasource_name = $this->extractArgument($params, 'datasource_name');
 
@@ -65,7 +65,7 @@ class QueryNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function datasourceRetrieve(array $params = [])
+    public function datasourceRetrieve(array $params = []): iterable|string|null
     {
         $datasource_name = $this->extractArgument($params, 'datasource_name');
 
@@ -88,7 +88,7 @@ class QueryNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function datasourcesCreate(array $params = [])
+    public function datasourcesCreate(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -111,7 +111,7 @@ class QueryNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function datasourcesList(array $params = [])
+    public function datasourcesList(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DatasourcesList::class);
         $endpoint->setParams($params);
@@ -131,7 +131,7 @@ class QueryNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function datasourcesUpdate(array $params = [])
+    public function datasourcesUpdate(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 

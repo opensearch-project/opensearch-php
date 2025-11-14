@@ -30,39 +30,43 @@ use function array_filter;
 abstract class AbstractEndpoint implements EndpointInterface
 {
     /**
-     * @var array
+     * The parameters for this endpoint.
+     *
+     * @var array<string|int, mixed> The parameters for this endpoint
      */
-    protected $params = [];
+    protected array $params = [];
 
     /**
-     * @var string|null
+     * The index name for this endpoint.
      */
-    protected $index = null;
+    protected ?string $index = null;
 
     /**
-     * @var string|int|null
+     * The document ID for this endpoint.
      */
-    protected $id = null;
+    protected string|int|null $id = null;
 
     /**
-     * @var string|null
+     * The HTTP method for this endpoint.
      */
-    protected $method = null;
+    protected ?string $method = null;
 
     /**
-     * @var string|array|null
+     * The body content for this endpoint.
      */
-    protected $body = null;
+    protected array|string|null $body = null;
 
     /**
-     * @var array
+     * The options for this endpoint.
+     *
+     * @var array<string, mixed>
      */
-    private $options = [];
+    private array $options = [];
 
     /**
-     * @var SerializerInterface
+     * The serializer instance.
      */
-    protected $serializer;
+    protected SerializerInterface $serializer;
 
     /**
      * @return string[]
@@ -117,7 +121,7 @@ abstract class AbstractEndpoint implements EndpointInterface
      *
      * @return $this
      */
-    public function setIndex($index): static
+    public function setIndex(array|string|null $index): static
     {
         if ($index === null) {
             return $this;
@@ -173,11 +177,7 @@ abstract class AbstractEndpoint implements EndpointInterface
 
     private function getOptionalIndex(): string
     {
-        if (isset($this->index) === true) {
-            return $this->index;
-        } else {
-            return '_all';
-        }
+        return $this->index ?? '_all';
     }
 
     /**
@@ -185,7 +185,7 @@ abstract class AbstractEndpoint implements EndpointInterface
      *
      * @throws UnexpectedValueException
      */
-    private function checkUserParams(array $params)
+    private function checkUserParams(array $params): void
     {
         if (empty($params)) {
             return; //no params, just return.
@@ -213,7 +213,7 @@ abstract class AbstractEndpoint implements EndpointInterface
     /**
      * @param array<string, mixed> $params Note: this is passed by-reference!
      */
-    private function extractOptions(&$params)
+    private function extractOptions(array &$params): void
     {
         // Extract out client options, then start transforming
         if (isset($params['client']) === true) {
@@ -229,7 +229,7 @@ abstract class AbstractEndpoint implements EndpointInterface
             $this->options['client'] = $params['client'];
             unset($params['client']);
         }
-        $ignore = isset($this->options['client']['ignore']) ? $this->options['client']['ignore'] : null;
+        $ignore = $this->options['client']['ignore'] ?? null;
         if (isset($ignore) === true) {
             if (is_string($ignore)) {
                 $this->options['client']['ignore'] = explode(",", $ignore);

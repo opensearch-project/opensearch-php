@@ -41,7 +41,7 @@ class PplNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explain(array $params = [])
+    public function explain(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -66,7 +66,7 @@ class PplNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getStats(array $params = [])
+    public function getStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
@@ -88,7 +88,7 @@ class PplNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function postStats(array $params = [])
+    public function postStats(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -113,7 +113,7 @@ class PplNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function query(array $params = [])
+    public function query(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 

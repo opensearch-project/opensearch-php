@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace OpenSearch\Exception;
 
-use OpenSearch\Common\Exceptions\OpenSearchException;
-
 /**
  * An exception thrown when invalid arguments are passed to a method.
- *
- * @phpstan-ignore class.implementsDeprecatedInterface
  */
-class BadMethodCallException extends \BadMethodCallException implements OpenSearchException
+class BadMethodCallException extends \BadMethodCallException
 {
 }

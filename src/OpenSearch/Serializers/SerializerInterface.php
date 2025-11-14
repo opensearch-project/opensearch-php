@@ -29,7 +29,7 @@ interface SerializerInterface
      * @param  mixed $data The data to encode
      * @return string
      */
-    public function serialize($data): string;
+    public function serialize(mixed $data): string;
 
     /**
      * Deserialize json encoded string into an associative array
@@ -40,5 +40,5 @@ interface SerializerInterface
      *
      * @throws \OpenSearch\Exception\JsonException
      */
-    public function deserialize(?string $data, array $headers);
+    public function deserialize(?string $data, array $headers): string|array;
 }

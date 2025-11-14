@@ -42,7 +42,7 @@ class IngestionNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getState(array $params = [])
+    public function getState(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -68,7 +68,7 @@ class IngestionNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function pause(array $params = [])
+    public function pause(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -94,7 +94,7 @@ class IngestionNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function resume(array $params = [])
+    public function resume(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');

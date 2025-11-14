@@ -66,7 +66,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function addFeaturesToSet(array $params = [])
+    public function addFeaturesToSet(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $store = $this->extractArgument($params, 'store');
@@ -99,7 +99,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function addFeaturesToSetByQuery(array $params = [])
+    public function addFeaturesToSetByQuery(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $query = $this->extractArgument($params, 'query');
@@ -126,7 +126,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function cacheStats(array $params = [])
+    public function cacheStats(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(CacheStats::class);
         $endpoint->setParams($params);
@@ -147,7 +147,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clearCache(array $params = [])
+    public function clearCache(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -170,7 +170,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createDefaultStore(array $params = [])
+    public function createDefaultStore(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(CreateDefaultStore::class);
         $endpoint->setParams($params);
@@ -193,7 +193,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createFeature(array $params = [])
+    public function createFeature(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -223,7 +223,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createFeatureset(array $params = [])
+    public function createFeatureset(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -253,7 +253,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createModel(array $params = [])
+    public function createModel(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -283,7 +283,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createModelFromSet(array $params = [])
+    public function createModelFromSet(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $store = $this->extractArgument($params, 'store');
@@ -311,7 +311,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createStore(array $params = [])
+    public function createStore(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -334,7 +334,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteDefaultStore(array $params = [])
+    public function deleteDefaultStore(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDefaultStore::class);
         $endpoint->setParams($params);
@@ -356,7 +356,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteFeature(array $params = [])
+    public function deleteFeature(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -383,7 +383,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteFeatureset(array $params = [])
+    public function deleteFeatureset(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -410,7 +410,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteModel(array $params = [])
+    public function deleteModel(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -436,7 +436,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteStore(array $params = [])
+    public function deleteStore(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -461,7 +461,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getFeature(array $params = [])
+    public function getFeature(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -488,7 +488,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getFeatureset(array $params = [])
+    public function getFeatureset(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -515,7 +515,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getModel(array $params = [])
+    public function getModel(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -541,7 +541,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getStore(array $params = [])
+    public function getStore(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -564,7 +564,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function listStores(array $params = [])
+    public function listStores(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(ListStores::class);
         $endpoint->setParams($params);
@@ -588,7 +588,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchFeatures(array $params = [])
+    public function searchFeatures(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -615,7 +615,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchFeaturesets(array $params = [])
+    public function searchFeaturesets(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -642,7 +642,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchModels(array $params = [])
+    public function searchModels(array $params = []): iterable|string|null
     {
         $store = $this->extractArgument($params, 'store');
 
@@ -668,7 +668,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stats(array $params = [])
+    public function stats(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
@@ -696,7 +696,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateFeature(array $params = [])
+    public function updateFeature(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
@@ -726,7 +726,7 @@ class LtrNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateFeatureset(array $params = [])
+    public function updateFeatureset(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');

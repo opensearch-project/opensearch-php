@@ -42,7 +42,7 @@ class KnnNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteModel(array $params = [])
+    public function deleteModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
@@ -66,7 +66,7 @@ class KnnNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getModel(array $params = [])
+    public function getModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
 
@@ -131,7 +131,7 @@ class KnnNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchModels(array $params = [])
+    public function searchModels(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -157,7 +157,7 @@ class KnnNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stats(array $params = [])
+    public function stats(array $params = []): iterable|string|null
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
@@ -184,7 +184,7 @@ class KnnNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function trainModel(array $params = [])
+    public function trainModel(array $params = []): iterable|string|null
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
@@ -210,7 +210,7 @@ class KnnNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function warmup(array $params = [])
+    public function warmup(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 

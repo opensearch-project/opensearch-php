@@ -38,7 +38,7 @@ class ListNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function help(array $params = [])
+    public function help(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Help::class);
         $endpoint->setParams($params);
@@ -76,7 +76,7 @@ class ListNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function indices(array $params = [])
+    public function indices(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -113,7 +113,7 @@ class ListNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function shards(array $params = [])
+    public function shards(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 

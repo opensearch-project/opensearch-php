@@ -24,12 +24,10 @@ namespace OpenSearch;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
-use OpenSearch\Namespaces\AsyncSearchNamespace;
 use OpenSearch\Namespaces\AsynchronousSearchNamespace;
 use OpenSearch\Namespaces\CatNamespace;
 use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
-use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\FlowFrameworkNamespace;
 use OpenSearch\Namespaces\GeospatialNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
@@ -41,7 +39,6 @@ use OpenSearch\Namespaces\KnnNamespace;
 use OpenSearch\Namespaces\ListNamespace;
 use OpenSearch\Namespaces\LtrNamespace;
 use OpenSearch\Namespaces\MlNamespace;
-use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\NeuralNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\NotificationsNamespace;
@@ -53,13 +50,11 @@ use OpenSearch\Namespaces\ReplicationNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
 use OpenSearch\Namespaces\SearchRelevanceNamespace;
-use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\Namespaces\SecurityAnalyticsNamespace;
 use OpenSearch\Namespaces\SmNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
-use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
 use OpenSearch\Namespaces\UbiNamespace;
@@ -115,333 +110,134 @@ use OpenSearch\Endpoints\UpdateByQueryRethrottle;
  */
 class Client
 {
-    public const VERSION = '2.4.7';
+    public const VERSION = '3.x-dev';
 
     /**
-     * @var Transport
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0.
+     * @var array<string, mixed>
      */
-    public $transport;
+    protected array $params;
 
-    private TransportInterface $httpTransport;
-
-    /**
-     * @var array
-     */
-    protected $params;
-
-    private EndpointFactoryInterface $endpointFactory;
-
-    /**
-     * @var callable
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0.
-     */
-    protected $endpoints;
+    protected EndpointFactoryInterface $endpointFactory;
 
     /**
      * @var NamespaceBuilderInterface[]
      */
-    protected $registeredNamespaces = [];
+    protected array $registeredNamespaces = [];
 
-    /**
-     * @var AsyncSearchNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $asyncSearch;
+    protected AsynchronousSearchNamespace $asynchronousSearch;
 
-    /**
-     * @var AsynchronousSearchNamespace
-     */
-    protected $asynchronousSearch;
+    protected CatNamespace $cat;
 
-    /**
-     * @var CatNamespace
-     */
-    protected $cat;
+    protected ClusterNamespace $cluster;
 
-    /**
-     * @var ClusterNamespace
-     */
-    protected $cluster;
+    protected DanglingIndicesNamespace $danglingIndices;
 
-    /**
-     * @var DanglingIndicesNamespace
-     */
-    protected $danglingIndices;
+    protected FlowFrameworkNamespace $flowFramework;
 
-    /**
-     * @var DataFrameTransformDeprecatedNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $dataFrameTransformDeprecated;
+    protected GeospatialNamespace $geospatial;
 
-    /**
-     * @var FlowFrameworkNamespace
-     */
-    protected $flowFramework;
+    protected IndicesNamespace $indices;
 
-    /**
-     * @var GeospatialNamespace
-     */
-    protected $geospatial;
+    protected IngestNamespace $ingest;
 
-    /**
-     * @var IndicesNamespace
-     */
-    protected $indices;
+    protected IngestionNamespace $ingestion;
 
-    /**
-     * @var IngestNamespace
-     */
-    protected $ingest;
+    protected InsightsNamespace $insights;
 
-    /**
-     * @var IngestionNamespace
-     */
-    protected $ingestion;
+    protected IsmNamespace $ism;
 
-    /**
-     * @var InsightsNamespace
-     */
-    protected $insights;
+    protected KnnNamespace $knn;
 
-    /**
-     * @var IsmNamespace
-     */
-    protected $ism;
+    protected ListNamespace $list;
 
-    /**
-     * @var KnnNamespace
-     */
-    protected $knn;
+    protected LtrNamespace $ltr;
 
-    /**
-     * @var ListNamespace
-     */
-    protected $list;
+    protected MlNamespace $ml;
 
-    /**
-     * @var LtrNamespace
-     */
-    protected $ltr;
+    protected NeuralNamespace $neural;
 
-    /**
-     * @var MlNamespace
-     */
-    protected $ml;
+    protected NodesNamespace $nodes;
 
-    /**
-     * @var MonitoringNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $monitoring;
+    protected NotificationsNamespace $notifications;
 
-    /**
-     * @var NeuralNamespace
-     */
-    protected $neural;
+    protected ObservabilityNamespace $observability;
 
-    /**
-     * @var NodesNamespace
-     */
-    protected $nodes;
+    protected PplNamespace $ppl;
 
-    /**
-     * @var NotificationsNamespace
-     */
-    protected $notifications;
+    protected QueryNamespace $query;
 
-    /**
-     * @var ObservabilityNamespace
-     */
-    protected $observability;
+    protected RemoteStoreNamespace $remoteStore;
 
-    /**
-     * @var PplNamespace
-     */
-    protected $ppl;
+    protected ReplicationNamespace $replication;
 
-    /**
-     * @var QueryNamespace
-     */
-    protected $query;
+    protected RollupsNamespace $rollups;
 
-    /**
-     * @var RemoteStoreNamespace
-     */
-    protected $remoteStore;
+    protected SearchPipelineNamespace $searchPipeline;
 
-    /**
-     * @var ReplicationNamespace
-     */
-    protected $replication;
+    protected SearchRelevanceNamespace $searchRelevance;
 
-    /**
-     * @var RollupsNamespace
-     */
-    protected $rollups;
+    protected SecurityNamespace $security;
 
-    /**
-     * @var SearchPipelineNamespace
-     */
-    protected $searchPipeline;
+    protected SecurityAnalyticsNamespace $securityAnalytics;
 
-    /**
-     * @var SearchRelevanceNamespace
-     */
-    protected $searchRelevance;
+    protected SmNamespace $sm;
 
-    /**
-     * @var SearchableSnapshotsNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $searchableSnapshots;
+    protected SnapshotNamespace $snapshot;
 
-    /**
-     * @var SecurityNamespace
-     */
-    protected $security;
+    protected SqlNamespace $sql;
 
-    /**
-     * @var SecurityAnalyticsNamespace
-     */
-    protected $securityAnalytics;
+    protected TasksNamespace $tasks;
 
-    /**
-     * @var SmNamespace
-     */
-    protected $sm;
+    protected TransformsNamespace $transforms;
 
-    /**
-     * @var SnapshotNamespace
-     */
-    protected $snapshot;
+    protected UbiNamespace $ubi;
 
-    /**
-     * @var SqlNamespace
-     */
-    protected $sql;
+    protected WlmNamespace $wlm;
 
-    /**
-     * @var SslNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $ssl;
-
-    /**
-     * @var TasksNamespace
-     */
-    protected $tasks;
-
-    /**
-     * @var TransformsNamespace
-     */
-    protected $transforms;
-
-    /**
-     * @var UbiNamespace
-     */
-    protected $ubi;
-
-    /**
-     * @var WlmNamespace
-     */
-    protected $wlm;
-
-    /**
-     * Client constructor
-     *
-     * @param TransportInterface|Transport $transport
-     * @param callable|EndpointFactoryInterface|null $endpointFactory
-     * @param NamespaceBuilderInterface[] $registeredNamespaces
-     *
-     * @phpstan-ignore parameter.deprecatedClass
-     */
     public function __construct(
-        TransportInterface|Transport $transport,
-        callable|EndpointFactoryInterface|null $endpointFactory = null,
+        protected TransportInterface $httpTransport,
+        ?EndpointFactoryInterface $endpointFactory = null,
         array $registeredNamespaces = [],
     ) {
-        if (!$transport instanceof TransportInterface) {
-            @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
-            // @phpstan-ignore property.deprecated
-            $this->transport = $transport;
-            // @phpstan-ignore new.deprecated
-            $this->httpTransport = new LegacyTransportWrapper($transport);
-        } else {
-            $this->httpTransport = $transport;
+        if ($endpointFactory === null) {
+            $endpointFactory = new EndpointFactory();
         }
-
-        if (is_callable($endpointFactory)) {
-            @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
-            $endpoints = $endpointFactory;
-            // @phpstan-ignore new.deprecated
-            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
-        } else {
-            if ($endpointFactory === null) {
-                $endpointFactory = new EndpointFactory();
-            }
-            $endpoints = function ($c) use ($endpointFactory) {
-                @trigger_error('The $endpoints property is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-                return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
-            };
-        }
-
-        // @phpstan-ignore property.deprecated
-        $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
-        $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
-        $this->cat = new CatNamespace($transport, $this->endpointFactory);
-        $this->cluster = new ClusterNamespace($transport, $this->endpointFactory);
-        $this->danglingIndices = new DanglingIndicesNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
-        $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
-        $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
-        $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
-        $this->ingest = new IngestNamespace($transport, $this->endpointFactory);
-        $this->ingestion = new IngestionNamespace($transport, $this->endpointFactory);
-        $this->insights = new InsightsNamespace($transport, $this->endpointFactory);
-        $this->ism = new IsmNamespace($transport, $this->endpointFactory);
-        $this->knn = new KnnNamespace($transport, $this->endpointFactory);
-        $this->list = new ListNamespace($transport, $this->endpointFactory);
-        $this->ltr = new LtrNamespace($transport, $this->endpointFactory);
-        $this->ml = new MlNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
-        $this->neural = new NeuralNamespace($transport, $this->endpointFactory);
-        $this->nodes = new NodesNamespace($transport, $this->endpointFactory);
-        $this->notifications = new NotificationsNamespace($transport, $this->endpointFactory);
-        $this->observability = new ObservabilityNamespace($transport, $this->endpointFactory);
-        $this->ppl = new PplNamespace($transport, $this->endpointFactory);
-        $this->query = new QueryNamespace($transport, $this->endpointFactory);
-        $this->remoteStore = new RemoteStoreNamespace($transport, $this->endpointFactory);
-        $this->replication = new ReplicationNamespace($transport, $this->endpointFactory);
-        $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
-        $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
-        $this->searchRelevance = new SearchRelevanceNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
-        $this->security = new SecurityNamespace($transport, $this->endpointFactory);
-        $this->securityAnalytics = new SecurityAnalyticsNamespace($transport, $this->endpointFactory);
-        $this->sm = new SmNamespace($transport, $this->endpointFactory);
-        $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
-        $this->sql = new SqlNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->ssl = new SslNamespace($transport, $this->endpointFactory);
-        $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
-        $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);
-        $this->ubi = new UbiNamespace($transport, $this->endpointFactory);
-        $this->wlm = new WlmNamespace($transport, $this->endpointFactory);
+        $this->asynchronousSearch = new AsynchronousSearchNamespace($this->httpTransport, $this->endpointFactory);
+        $this->cat = new CatNamespace($this->httpTransport, $this->endpointFactory);
+        $this->cluster = new ClusterNamespace($this->httpTransport, $this->endpointFactory);
+        $this->danglingIndices = new DanglingIndicesNamespace($this->httpTransport, $this->endpointFactory);
+        $this->flowFramework = new FlowFrameworkNamespace($this->httpTransport, $this->endpointFactory);
+        $this->geospatial = new GeospatialNamespace($this->httpTransport, $this->endpointFactory);
+        $this->indices = new IndicesNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ingest = new IngestNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ingestion = new IngestionNamespace($this->httpTransport, $this->endpointFactory);
+        $this->insights = new InsightsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ism = new IsmNamespace($this->httpTransport, $this->endpointFactory);
+        $this->knn = new KnnNamespace($this->httpTransport, $this->endpointFactory);
+        $this->list = new ListNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ltr = new LtrNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ml = new MlNamespace($this->httpTransport, $this->endpointFactory);
+        $this->neural = new NeuralNamespace($this->httpTransport, $this->endpointFactory);
+        $this->nodes = new NodesNamespace($this->httpTransport, $this->endpointFactory);
+        $this->notifications = new NotificationsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->observability = new ObservabilityNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ppl = new PplNamespace($this->httpTransport, $this->endpointFactory);
+        $this->query = new QueryNamespace($this->httpTransport, $this->endpointFactory);
+        $this->remoteStore = new RemoteStoreNamespace($this->httpTransport, $this->endpointFactory);
+        $this->replication = new ReplicationNamespace($this->httpTransport, $this->endpointFactory);
+        $this->rollups = new RollupsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->searchPipeline = new SearchPipelineNamespace($this->httpTransport, $this->endpointFactory);
+        $this->searchRelevance = new SearchRelevanceNamespace($this->httpTransport, $this->endpointFactory);
+        $this->security = new SecurityNamespace($this->httpTransport, $this->endpointFactory);
+        $this->securityAnalytics = new SecurityAnalyticsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->sm = new SmNamespace($this->httpTransport, $this->endpointFactory);
+        $this->snapshot = new SnapshotNamespace($this->httpTransport, $this->endpointFactory);
+        $this->sql = new SqlNamespace($this->httpTransport, $this->endpointFactory);
+        $this->tasks = new TasksNamespace($this->httpTransport, $this->endpointFactory);
+        $this->transforms = new TransformsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ubi = new UbiNamespace($this->httpTransport, $this->endpointFactory);
+        $this->wlm = new WlmNamespace($this->httpTransport, $this->endpointFactory);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -469,7 +265,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function bulk(array $params = [])
+    public function bulk(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -507,7 +303,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function bulkStream(array $params = [])
+    public function bulkStream(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -534,7 +330,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clearScroll(array $params = [])
+    public function clearScroll(array $params = []): iterable|string|null
     {
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -575,7 +371,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function count(array $params = [])
+    public function count(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -606,7 +402,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createPit(array $params = [])
+    public function createPit(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -639,7 +435,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -664,7 +460,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteAllPits(array $params = [])
+    public function deleteAllPits(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAllPits::class);
         $endpoint->setParams($params);
@@ -719,7 +515,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteByQuery(array $params = [])
+    public function deleteByQuery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -746,7 +542,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteByQueryRethrottle(array $params = [])
+    public function deleteByQueryRethrottle(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -770,7 +566,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deletePit(array $params = [])
+    public function deletePit(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -797,7 +593,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteScript(array $params = [])
+    public function deleteScript(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -837,10 +633,6 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -877,10 +669,6 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsSource::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -916,7 +704,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explain(array $params = [])
+    public function explain(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -950,7 +738,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function fieldCaps(array $params = [])
+    public function fieldCaps(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -987,7 +775,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1012,7 +800,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAllPits(array $params = [])
+    public function getAllPits(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetAllPits::class);
         $endpoint->setParams($params);
@@ -1035,7 +823,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getScript(array $params = [])
+    public function getScript(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1058,7 +846,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getScriptContext(array $params = [])
+    public function getScriptContext(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetScriptContext::class);
         $endpoint->setParams($params);
@@ -1078,7 +866,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getScriptLanguages(array $params = [])
+    public function getScriptLanguages(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetScriptLanguages::class);
         $endpoint->setParams($params);
@@ -1109,7 +897,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSource(array $params = [])
+    public function getSource(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1148,7 +936,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function index(array $params = [])
+    public function index(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $id = $this->extractArgument($params, 'id');
@@ -1175,7 +963,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function info(array $params = [])
+    public function info(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(Info::class);
         $endpoint->setParams($params);
@@ -1205,7 +993,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function mget(array $params = [])
+    public function mget(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1239,7 +1027,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function msearch(array $params = [])
+    public function msearch(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1271,7 +1059,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function msearchTemplate(array $params = [])
+    public function msearchTemplate(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1310,7 +1098,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function mtermvectors(array $params = [])
+    public function mtermvectors(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1337,10 +1125,6 @@ class Client
      */
     public function ping(array $params = []): bool
     {
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(Ping::class);
         $endpoint->setParams($params);
 
@@ -1365,7 +1149,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putScript(array $params = [])
+    public function putScript(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $context = $this->extractArgument($params, 'context');
@@ -1398,7 +1182,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function rankEval(array $params = [])
+    public function rankEval(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1433,7 +1217,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reindex(array $params = [])
+    public function reindex(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1458,7 +1242,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reindexRethrottle(array $params = [])
+    public function reindexRethrottle(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -1483,7 +1267,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function renderSearchTemplate(array $params = [])
+    public function renderSearchTemplate(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -1509,7 +1293,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function scriptsPainlessExecute(array $params = [])
+    public function scriptsPainlessExecute(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1535,7 +1319,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function scroll(array $params = [])
+    public function scroll(array $params = []): iterable|string|null
     {
         $scroll_id = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -1609,7 +1393,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function search(array $params = [])
+    public function search(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1641,7 +1425,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchShards(array $params = [])
+    public function searchShards(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1683,7 +1467,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchTemplate(array $params = [])
+    public function searchTemplate(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1722,7 +1506,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function termvectors(array $params = [])
+    public function termvectors(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $id = $this->extractArgument($params, 'id');
@@ -1764,7 +1548,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function update(array $params = [])
+    public function update(array $params = []): iterable|string|null
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1827,7 +1611,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateByQuery(array $params = [])
+    public function updateByQuery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1854,7 +1638,7 @@ class Client
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateByQueryRethrottle(array $params = [])
+    public function updateByQueryRethrottle(array $params = []): iterable|string|null
     {
         $task_id = $this->extractArgument($params, 'task_id');
 
@@ -1920,16 +1704,6 @@ class Client
         return $this->deletePit($params);
     }
     /**
-     * Returns the asyncSearch namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function asyncSearch(): AsyncSearchNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->asyncSearch;
-    }
-    /**
      * Returns the asynchronousSearch namespace
      */
     public function asynchronousSearch(): AsynchronousSearchNamespace
@@ -1956,16 +1730,6 @@ class Client
     public function danglingIndices(): DanglingIndicesNamespace
     {
         return $this->danglingIndices;
-    }
-    /**
-     * Returns the dataFrameTransformDeprecated namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function dataFrameTransformDeprecated(): DataFrameTransformDeprecatedNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->dataFrameTransformDeprecated;
     }
     /**
      * Returns the flowFramework namespace
@@ -2045,16 +1809,6 @@ class Client
         return $this->ml;
     }
     /**
-     * Returns the monitoring namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function monitoring(): MonitoringNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->monitoring;
-    }
-    /**
      * Returns the neural namespace
      */
     public function neural(): NeuralNamespace
@@ -2132,16 +1886,6 @@ class Client
         return $this->searchRelevance;
     }
     /**
-     * Returns the searchableSnapshots namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function searchableSnapshots(): SearchableSnapshotsNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->searchableSnapshots;
-    }
-    /**
      * Returns the security namespace
      */
     public function security(): SecurityNamespace
@@ -2175,16 +1919,6 @@ class Client
     public function sql(): SqlNamespace
     {
         return $this->sql;
-    }
-    /**
-     * Returns the ssl namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function ssl(): SslNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->ssl;
     }
     /**
      * Returns the tasks namespace
@@ -2229,7 +1963,7 @@ class Client
      * @return object
      * @throws \BadMethodCallException if the namespace cannot be found
      */
-    public function __call(string $name, array $arguments)
+    public function __call(string $name, array $arguments): object
     {
         if (isset($this->registeredNamespaces[$name])) {
             return $this->registeredNamespaces[$name];
@@ -2242,18 +1976,17 @@ class Client
      *
      * @return null|mixed
      */
-    public function extractArgument(array &$params, string $arg)
+    public function extractArgument(array &$params, string $arg): mixed
     {
-        if (array_key_exists($arg, $params) === true) {
-            $value = $params[$arg];
-            $value = (is_object($value) && !is_iterable($value)) ?
-                (array) $value :
-                $value;
-            unset($params[$arg]);
-            return $value;
-        } else {
+        if (!array_key_exists($arg, $params)) {
             return null;
         }
+        $value = $params[$arg];
+        $value = (is_object($value) && !is_iterable($value)) ?
+            (array) $value :
+            $value;
+        unset($params[$arg]);
+        return $value;
     }
 
     /**

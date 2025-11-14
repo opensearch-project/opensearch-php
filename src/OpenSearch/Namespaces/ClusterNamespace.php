@@ -65,7 +65,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function allocationExplain(array $params = [])
+    public function allocationExplain(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -92,7 +92,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteComponentTemplate(array $params = [])
+    public function deleteComponentTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -115,7 +115,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteDecommissionAwareness(array $params = [])
+    public function deleteDecommissionAwareness(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDecommissionAwareness::class);
         $endpoint->setParams($params);
@@ -136,7 +136,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteVotingConfigExclusions(array $params = [])
+    public function deleteVotingConfigExclusions(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(DeleteVotingConfigExclusions::class);
         $endpoint->setParams($params);
@@ -156,7 +156,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteWeightedRouting(array $params = [])
+    public function deleteWeightedRouting(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -187,10 +187,6 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -215,7 +211,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getComponentTemplate(array $params = [])
+    public function getComponentTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -239,7 +235,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getDecommissionAwareness(array $params = [])
+    public function getDecommissionAwareness(array $params = []): iterable|string|null
     {
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
 
@@ -267,7 +263,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSettings(array $params = [])
+    public function getSettings(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetSettings::class);
         $endpoint->setParams($params);
@@ -288,7 +284,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getWeightedRouting(array $params = [])
+    public function getWeightedRouting(array $params = []): iterable|string|null
     {
         $attribute = $this->extractArgument($params, 'attribute');
 
@@ -325,7 +321,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function health(array $params = [])
+    public function health(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -351,7 +347,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function pendingTasks(array $params = [])
+    public function pendingTasks(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(PendingTasks::class);
         $endpoint->setParams($params);
@@ -374,7 +370,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function postVotingConfigExclusions(array $params = [])
+    public function postVotingConfigExclusions(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(PostVotingConfigExclusions::class);
         $endpoint->setParams($params);
@@ -400,7 +396,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putComponentTemplate(array $params = [])
+    public function putComponentTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -427,7 +423,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putDecommissionAwareness(array $params = [])
+    public function putDecommissionAwareness(array $params = []): iterable|string|null
     {
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
         $awareness_attribute_value = $this->extractArgument($params, 'awareness_attribute_value');
@@ -457,7 +453,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putSettings(array $params = [])
+    public function putSettings(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -481,7 +477,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putWeightedRouting(array $params = [])
+    public function putWeightedRouting(array $params = []): iterable|string|null
     {
         $attribute = $this->extractArgument($params, 'attribute');
         $body = $this->extractArgument($params, 'body');
@@ -506,7 +502,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function remoteInfo(array $params = [])
+    public function remoteInfo(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(RemoteInfo::class);
         $endpoint->setParams($params);
@@ -534,7 +530,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function reroute(array $params = [])
+    public function reroute(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -568,7 +564,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function state(array $params = [])
+    public function state(array $params = []): iterable|string|null
     {
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
@@ -598,7 +594,7 @@ class ClusterNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stats(array $params = [])
+    public function stats(array $params = []): iterable|string|null
     {
         $index_metric = $this->extractArgument($params, 'index_metric');
         $metric = $this->extractArgument($params, 'metric');

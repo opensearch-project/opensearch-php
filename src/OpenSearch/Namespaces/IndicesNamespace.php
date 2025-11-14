@@ -98,7 +98,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function addBlock(array $params = [])
+    public function addBlock(array $params = []): iterable|string|null
     {
         $block = $this->extractArgument($params, 'block');
         $index = $this->extractArgument($params, 'index');
@@ -125,7 +125,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function analyze(array $params = [])
+    public function analyze(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -159,7 +159,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clearCache(array $params = [])
+    public function clearCache(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -191,7 +191,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clone(array $params = [])
+    public function clone(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
@@ -226,7 +226,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function close(array $params = [])
+    public function close(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -255,7 +255,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function create(array $params = [])
+    public function create(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -282,7 +282,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createDataStream(array $params = [])
+    public function createDataStream(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -308,7 +308,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function dataStreamsStats(array $params = [])
+    public function dataStreamsStats(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -338,7 +338,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -366,7 +366,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteAlias(array $params = [])
+    public function deleteAlias(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
@@ -392,7 +392,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteDataStream(array $params = [])
+    public function deleteDataStream(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -419,7 +419,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteIndexTemplate(array $params = [])
+    public function deleteIndexTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -446,7 +446,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteTemplate(array $params = [])
+    public function deleteTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -481,10 +481,6 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -515,10 +511,6 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -548,10 +540,6 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -580,10 +568,6 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -609,7 +593,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function flush(array $params = [])
+    public function flush(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -641,7 +625,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function forcemerge(array $params = [])
+    public function forcemerge(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -673,7 +657,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -702,7 +686,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getAlias(array $params = [])
+    public function getAlias(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
@@ -728,7 +712,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getDataStream(array $params = [])
+    public function getDataStream(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -758,7 +742,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getFieldMapping(array $params = [])
+    public function getFieldMapping(array $params = []): iterable|string|null
     {
         $fields = $this->extractArgument($params, 'fields');
         $index = $this->extractArgument($params, 'index');
@@ -788,7 +772,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getIndexTemplate(array $params = [])
+    public function getIndexTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -818,7 +802,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getMapping(array $params = [])
+    public function getMapping(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -851,7 +835,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSettings(array $params = [])
+    public function getSettings(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
@@ -881,7 +865,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getTemplate(array $params = [])
+    public function getTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -908,7 +892,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getUpgrade(array $params = [])
+    public function getUpgrade(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -941,7 +925,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function open(array $params = [])
+    public function open(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -970,7 +954,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putAlias(array $params = [])
+    public function putAlias(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
@@ -1003,7 +987,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putIndexTemplate(array $params = [])
+    public function putIndexTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -1037,7 +1021,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putMapping(array $params = [])
+    public function putMapping(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1071,7 +1055,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putSettings(array $params = [])
+    public function putSettings(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1102,7 +1086,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function putTemplate(array $params = [])
+    public function putTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -1130,7 +1114,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function recovery(array $params = [])
+    public function recovery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1157,7 +1141,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function refresh(array $params = [])
+    public function refresh(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1182,7 +1166,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function resolveIndex(array $params = [])
+    public function resolveIndex(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -1213,7 +1197,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function rollover(array $params = [])
+    public function rollover(array $params = []): iterable|string|null
     {
         $alias = $this->extractArgument($params, 'alias');
         $new_index = $this->extractArgument($params, 'new_index');
@@ -1245,7 +1229,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function segments(array $params = [])
+    public function segments(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1273,7 +1257,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function shardStores(array $params = [])
+    public function shardStores(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1306,7 +1290,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function shrink(array $params = [])
+    public function shrink(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
@@ -1337,7 +1321,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function simulateIndexTemplate(array $params = [])
+    public function simulateIndexTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -1367,7 +1351,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function simulateTemplate(array $params = [])
+    public function simulateTemplate(array $params = []): iterable|string|null
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
@@ -1402,7 +1386,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function split(array $params = [])
+    public function split(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
@@ -1440,7 +1424,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stats(array $params = [])
+    public function stats(array $params = []): iterable|string|null
     {
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
@@ -1469,7 +1453,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updateAliases(array $params = [])
+    public function updateAliases(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -1498,7 +1482,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function upgrade(array $params = [])
+    public function upgrade(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1535,7 +1519,7 @@ class IndicesNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function validateQuery(array $params = [])
+    public function validateQuery(array $params = []): iterable|string|null
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');

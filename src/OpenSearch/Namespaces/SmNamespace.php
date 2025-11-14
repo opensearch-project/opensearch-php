@@ -44,7 +44,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createPolicy(array $params = [])
+    public function createPolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
         $body = $this->extractArgument($params, 'body');
@@ -70,7 +70,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deletePolicy(array $params = [])
+    public function deletePolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
@@ -94,7 +94,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function explainPolicy(array $params = [])
+    public function explainPolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
@@ -122,7 +122,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getPolicies(array $params = [])
+    public function getPolicies(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
@@ -143,7 +143,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getPolicy(array $params = [])
+    public function getPolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
@@ -167,7 +167,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function startPolicy(array $params = [])
+    public function startPolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
@@ -191,7 +191,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function stopPolicy(array $params = [])
+    public function stopPolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
 
@@ -217,7 +217,7 @@ class SmNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function updatePolicy(array $params = [])
+    public function updatePolicy(array $params = []): iterable|string|null
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
         $body = $this->extractArgument($params, 'body');

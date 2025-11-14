@@ -56,7 +56,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function cleanupRepository(array $params = [])
+    public function cleanupRepository(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -85,7 +85,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function clone(array $params = [])
+    public function clone(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -120,7 +120,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function create(array $params = [])
+    public function create(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -153,7 +153,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function createRepository(array $params = [])
+    public function createRepository(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $body = $this->extractArgument($params, 'body');
@@ -182,7 +182,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -211,7 +211,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deleteRepository(array $params = [])
+    public function deleteRepository(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -240,7 +240,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -269,7 +269,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getRepository(array $params = [])
+    public function getRepository(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -298,7 +298,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function restore(array $params = [])
+    public function restore(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -330,7 +330,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function status(array $params = [])
+    public function status(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -359,7 +359,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function verifyRepository(array $params = [])
+    public function verifyRepository(array $params = []): iterable|string|null
     {
         $repository = $this->extractArgument($params, 'repository');
 

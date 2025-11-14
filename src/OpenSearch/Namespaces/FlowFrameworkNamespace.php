@@ -50,7 +50,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function create(array $params = [])
+    public function create(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -75,7 +75,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function delete(array $params = [])
+    public function delete(array $params = []): iterable|string|null
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
@@ -100,7 +100,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function deprovision(array $params = [])
+    public function deprovision(array $params = []): iterable|string|null
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
@@ -124,7 +124,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function get(array $params = [])
+    public function get(array $params = []): iterable|string|null
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
@@ -149,7 +149,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getStatus(array $params = [])
+    public function getStatus(array $params = []): iterable|string|null
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
 
@@ -173,7 +173,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function getSteps(array $params = [])
+    public function getSteps(array $params = []): iterable|string|null
     {
         $endpoint = $this->endpointFactory->getEndpoint(GetSteps::class);
         $endpoint->setParams($params);
@@ -194,7 +194,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function provision(array $params = [])
+    public function provision(array $params = []): iterable|string|null
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
         $body = $this->extractArgument($params, 'body');
@@ -219,7 +219,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function search(array $params = [])
+    public function search(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -242,7 +242,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function searchState(array $params = [])
+    public function searchState(array $params = []): iterable|string|null
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -271,7 +271,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      * @param array $params Associative array of parameters
      * @return array
      */
-    public function update(array $params = [])
+    public function update(array $params = []): iterable|string|null
     {
         $workflow_id = $this->extractArgument($params, 'workflow_id');
         $body = $this->extractArgument($params, 'body');
