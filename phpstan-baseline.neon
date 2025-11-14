@@ -1,12 +1,5 @@
 parameters:
 	ignoreErrors:
-		-
-			message: """
-				#^Instantiation of deprecated class OpenSearch\\\\Common\\\\Exceptions\\\\InvalidArgumentException\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
-			"""
-			count: 1
-			path: src/OpenSearch/Endpoints/Monitoring/Bulk.php
 
 		-
 			message: """
@@ -55,14 +48,6 @@ parameters:
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
-
-		-
-			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
-			count: 1
-			path: src/OpenSearch/Namespaces/SecurityNamespace.php
 
 		-
 			message: "#^Call to an undefined method OpenSearch\\\\Client\\:\\:slm\\(\\)\\.$#"

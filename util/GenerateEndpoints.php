@@ -543,11 +543,21 @@ function isValidPhpSyntax(string $filename): bool
  */
 function Patch_Endpoints()
 {
-    $patchEndpoints = ['AsyncSearch', 'SearchableSnapshots', 'Ssl', 'Sql',
-    'DataFrameTransformDeprecated', 'Monitoring', 'Indices/RefreshSearchAnalyzers',
-    'Ml/CreateConnector', 'Ml/DeleteConnector', 'Ml/GetConnector', 'Ml/GetConnectors',
-    'Ml/GetModelGroups', 'Ml/UpdateModelGroup', 'Ml/DeployModel', 'Ml/GetModel', 'Ml/Predict',
-    'Ml/UndeployModel'];
+    $patchEndpoints = [
+      'Indices/RefreshSearchAnalyzers',
+      'Ml/CreateConnector',
+      'Ml/DeleteConnector',
+      'Ml/DeployModel',
+      'Ml/GetConnector',
+      'Ml/GetConnectors',
+      'Ml/GetModel',
+      'Ml/GetModelGroups',
+      'Ml/Predict',
+      'Ml/UndeployModel',
+      'Ml/UpdateModelGroup',
+      'Sql',
+      'Ssl',
+    ];
     $outputDir = __DIR__ . "/output";
     $destDir = __DIR__ . "/../src/OpenSearch";
 

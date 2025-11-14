@@ -426,7 +426,6 @@ class Endpoint
     private function getSetBulkBody(): string
     {
         $setPart = file_get_contents(self::SET_BULK_BODY_TEMPLATE);
-        $this->addNamespace('OpenSearch\Common\Exceptions\InvalidArgumentException');
 
         return str_replace(':endpoint', $this->getClassName(), $setPart);
     }

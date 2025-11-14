@@ -18,7 +18,6 @@ return <<<'EOD'
      */
     public function getUsers(array $params = []): array
     {
-        $endpointBuilder = $this->endpoints;
 
         if (isset($params['username'])) {
             $endpoint = $this->endpointFactory->getEndpoint(\OpenSearch\Endpoints\Security\GetUser::class);

@@ -24,12 +24,10 @@ namespace OpenSearch;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Namespaces\BooleanRequestWrapper;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
-use OpenSearch\Namespaces\AsyncSearchNamespace;
 use OpenSearch\Namespaces\AsynchronousSearchNamespace;
 use OpenSearch\Namespaces\CatNamespace;
 use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
-use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
 use OpenSearch\Namespaces\FlowFrameworkNamespace;
 use OpenSearch\Namespaces\GeospatialNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
@@ -41,7 +39,6 @@ use OpenSearch\Namespaces\KnnNamespace;
 use OpenSearch\Namespaces\ListNamespace;
 use OpenSearch\Namespaces\LtrNamespace;
 use OpenSearch\Namespaces\MlNamespace;
-use OpenSearch\Namespaces\MonitoringNamespace;
 use OpenSearch\Namespaces\NeuralNamespace;
 use OpenSearch\Namespaces\NodesNamespace;
 use OpenSearch\Namespaces\NotificationsNamespace;
@@ -53,13 +50,11 @@ use OpenSearch\Namespaces\ReplicationNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
 use OpenSearch\Namespaces\SearchRelevanceNamespace;
-use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
 use OpenSearch\Namespaces\SecurityNamespace;
 use OpenSearch\Namespaces\SecurityAnalyticsNamespace;
 use OpenSearch\Namespaces\SmNamespace;
 use OpenSearch\Namespaces\SnapshotNamespace;
 use OpenSearch\Namespaces\SqlNamespace;
-use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
 use OpenSearch\Namespaces\UbiNamespace;
@@ -118,39 +113,16 @@ class Client
     public const VERSION = '2.4.7';
 
     /**
-     * @var Transport
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0.
+     * @var array<string, mixed>
      */
-    public $transport;
+    protected array $params;
 
-    private TransportInterface $httpTransport;
-
-    /**
-     * @var array
-     */
-    protected $params;
-
-    private EndpointFactoryInterface $endpointFactory;
-
-    /**
-     * @var callable
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0.
-     */
-    protected $endpoints;
+    protected EndpointFactoryInterface $endpointFactory;
 
     /**
      * @var NamespaceBuilderInterface[]
      */
-    protected $registeredNamespaces = [];
-
-    /**
-     * @var AsyncSearchNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $asyncSearch;
+    protected array $registeredNamespaces = [];
 
     /**
      * @var AsynchronousSearchNamespace
@@ -171,13 +143,6 @@ class Client
      * @var DanglingIndicesNamespace
      */
     protected $danglingIndices;
-
-    /**
-     * @var DataFrameTransformDeprecatedNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $dataFrameTransformDeprecated;
 
     /**
      * @var FlowFrameworkNamespace
@@ -235,13 +200,6 @@ class Client
     protected $ml;
 
     /**
-     * @var MonitoringNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $monitoring;
-
-    /**
      * @var NeuralNamespace
      */
     protected $neural;
@@ -297,13 +255,6 @@ class Client
     protected $searchRelevance;
 
     /**
-     * @var SearchableSnapshotsNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $searchableSnapshots;
-
-    /**
      * @var SecurityNamespace
      */
     protected $security;
@@ -329,13 +280,6 @@ class Client
     protected $sql;
 
     /**
-     * @var SslNamespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    protected $ssl;
-
-    /**
      * @var TasksNamespace
      */
     protected $tasks;
@@ -355,93 +299,50 @@ class Client
      */
     protected $wlm;
 
-    /**
-     * Client constructor
-     *
-     * @param TransportInterface|Transport $transport
-     * @param callable|EndpointFactoryInterface|null $endpointFactory
-     * @param NamespaceBuilderInterface[] $registeredNamespaces
-     *
-     * @phpstan-ignore parameter.deprecatedClass
-     */
     public function __construct(
-        TransportInterface|Transport $transport,
-        callable|EndpointFactoryInterface|null $endpointFactory = null,
+        protected TransportInterface $httpTransport,
+        ?EndpointFactoryInterface $endpointFactory = null,
         array $registeredNamespaces = [],
     ) {
-        if (!$transport instanceof TransportInterface) {
-            @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
-            // @phpstan-ignore property.deprecated
-            $this->transport = $transport;
-            // @phpstan-ignore new.deprecated
-            $this->httpTransport = new LegacyTransportWrapper($transport);
-        } else {
-            $this->httpTransport = $transport;
+        if ($endpointFactory === null) {
+            $endpointFactory = new EndpointFactory();
         }
-
-        if (is_callable($endpointFactory)) {
-            @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
-            $endpoints = $endpointFactory;
-            // @phpstan-ignore new.deprecated
-            $endpointFactory = new LegacyEndpointFactory($endpointFactory);
-        } else {
-            if ($endpointFactory === null) {
-                $endpointFactory = new EndpointFactory();
-            }
-            $endpoints = function ($c) use ($endpointFactory) {
-                @trigger_error('The $endpoints property is deprecated in 2.4.0 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-                return $endpointFactory->getEndpoint('OpenSearch\\Endpoints\\' . $c);
-            };
-        }
-
-        // @phpstan-ignore property.deprecated
-        $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
-        $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
-        $this->cat = new CatNamespace($transport, $this->endpointFactory);
-        $this->cluster = new ClusterNamespace($transport, $this->endpointFactory);
-        $this->danglingIndices = new DanglingIndicesNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
-        $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
-        $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
-        $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
-        $this->ingest = new IngestNamespace($transport, $this->endpointFactory);
-        $this->ingestion = new IngestionNamespace($transport, $this->endpointFactory);
-        $this->insights = new InsightsNamespace($transport, $this->endpointFactory);
-        $this->ism = new IsmNamespace($transport, $this->endpointFactory);
-        $this->knn = new KnnNamespace($transport, $this->endpointFactory);
-        $this->list = new ListNamespace($transport, $this->endpointFactory);
-        $this->ltr = new LtrNamespace($transport, $this->endpointFactory);
-        $this->ml = new MlNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
-        $this->neural = new NeuralNamespace($transport, $this->endpointFactory);
-        $this->nodes = new NodesNamespace($transport, $this->endpointFactory);
-        $this->notifications = new NotificationsNamespace($transport, $this->endpointFactory);
-        $this->observability = new ObservabilityNamespace($transport, $this->endpointFactory);
-        $this->ppl = new PplNamespace($transport, $this->endpointFactory);
-        $this->query = new QueryNamespace($transport, $this->endpointFactory);
-        $this->remoteStore = new RemoteStoreNamespace($transport, $this->endpointFactory);
-        $this->replication = new ReplicationNamespace($transport, $this->endpointFactory);
-        $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
-        $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
-        $this->searchRelevance = new SearchRelevanceNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
-        $this->security = new SecurityNamespace($transport, $this->endpointFactory);
-        $this->securityAnalytics = new SecurityAnalyticsNamespace($transport, $this->endpointFactory);
-        $this->sm = new SmNamespace($transport, $this->endpointFactory);
-        $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
-        $this->sql = new SqlNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
-        $this->ssl = new SslNamespace($transport, $this->endpointFactory);
-        $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
-        $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);
-        $this->ubi = new UbiNamespace($transport, $this->endpointFactory);
-        $this->wlm = new WlmNamespace($transport, $this->endpointFactory);
+        $this->asynchronousSearch = new AsynchronousSearchNamespace($this->httpTransport, $this->endpointFactory);
+        $this->cat = new CatNamespace($this->httpTransport, $this->endpointFactory);
+        $this->cluster = new ClusterNamespace($this->httpTransport, $this->endpointFactory);
+        $this->danglingIndices = new DanglingIndicesNamespace($this->httpTransport, $this->endpointFactory);
+        $this->flowFramework = new FlowFrameworkNamespace($this->httpTransport, $this->endpointFactory);
+        $this->geospatial = new GeospatialNamespace($this->httpTransport, $this->endpointFactory);
+        $this->indices = new IndicesNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ingest = new IngestNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ingestion = new IngestionNamespace($this->httpTransport, $this->endpointFactory);
+        $this->insights = new InsightsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ism = new IsmNamespace($this->httpTransport, $this->endpointFactory);
+        $this->knn = new KnnNamespace($this->httpTransport, $this->endpointFactory);
+        $this->list = new ListNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ltr = new LtrNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ml = new MlNamespace($this->httpTransport, $this->endpointFactory);
+        $this->neural = new NeuralNamespace($this->httpTransport, $this->endpointFactory);
+        $this->nodes = new NodesNamespace($this->httpTransport, $this->endpointFactory);
+        $this->notifications = new NotificationsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->observability = new ObservabilityNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ppl = new PplNamespace($this->httpTransport, $this->endpointFactory);
+        $this->query = new QueryNamespace($this->httpTransport, $this->endpointFactory);
+        $this->remoteStore = new RemoteStoreNamespace($this->httpTransport, $this->endpointFactory);
+        $this->replication = new ReplicationNamespace($this->httpTransport, $this->endpointFactory);
+        $this->rollups = new RollupsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->searchPipeline = new SearchPipelineNamespace($this->httpTransport, $this->endpointFactory);
+        $this->searchRelevance = new SearchRelevanceNamespace($this->httpTransport, $this->endpointFactory);
+        $this->security = new SecurityNamespace($this->httpTransport, $this->endpointFactory);
+        $this->securityAnalytics = new SecurityAnalyticsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->sm = new SmNamespace($this->httpTransport, $this->endpointFactory);
+        $this->snapshot = new SnapshotNamespace($this->httpTransport, $this->endpointFactory);
+        $this->sql = new SqlNamespace($this->httpTransport, $this->endpointFactory);
+        $this->tasks = new TasksNamespace($this->httpTransport, $this->endpointFactory);
+        $this->transforms = new TransformsNamespace($this->httpTransport, $this->endpointFactory);
+        $this->ubi = new UbiNamespace($this->httpTransport, $this->endpointFactory);
+        $this->wlm = new WlmNamespace($this->httpTransport, $this->endpointFactory);
 
         $this->registeredNamespaces = $registeredNamespaces;
     }
@@ -837,10 +738,6 @@ class Client
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -876,10 +773,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(ExistsSource::class);
         $endpoint->setParams($params);
@@ -1337,10 +1230,6 @@ class Client
      */
     public function ping(array $params = []): bool
     {
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(Ping::class);
         $endpoint->setParams($params);
 
@@ -1920,16 +1809,6 @@ class Client
         return $this->deletePit($params);
     }
     /**
-     * Returns the asyncSearch namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function asyncSearch(): AsyncSearchNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->asyncSearch;
-    }
-    /**
      * Returns the asynchronousSearch namespace
      */
     public function asynchronousSearch(): AsynchronousSearchNamespace
@@ -1956,16 +1835,6 @@ class Client
     public function danglingIndices(): DanglingIndicesNamespace
     {
         return $this->danglingIndices;
-    }
-    /**
-     * Returns the dataFrameTransformDeprecated namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function dataFrameTransformDeprecated(): DataFrameTransformDeprecatedNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->dataFrameTransformDeprecated;
     }
     /**
      * Returns the flowFramework namespace
@@ -2045,16 +1914,6 @@ class Client
         return $this->ml;
     }
     /**
-     * Returns the monitoring namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function monitoring(): MonitoringNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->monitoring;
-    }
-    /**
      * Returns the neural namespace
      */
     public function neural(): NeuralNamespace
@@ -2132,16 +1991,6 @@ class Client
         return $this->searchRelevance;
     }
     /**
-     * Returns the searchableSnapshots namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function searchableSnapshots(): SearchableSnapshotsNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->searchableSnapshots;
-    }
-    /**
      * Returns the security namespace
      */
     public function security(): SecurityNamespace
@@ -2175,16 +2024,6 @@ class Client
     public function sql(): SqlNamespace
     {
         return $this->sql;
-    }
-    /**
-     * Returns the ssl namespace
-     *
-     * @deprecated in 2.4.2 and will be removed in 3.0.0.
-     */
-    public function ssl(): SslNamespace
-    {
-        @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
-        return $this->ssl;
     }
     /**
      * Returns the tasks namespace
@@ -2244,16 +2083,15 @@ class Client
      */
     public function extractArgument(array &$params, string $arg)
     {
-        if (array_key_exists($arg, $params) === true) {
-            $value = $params[$arg];
-            $value = (is_object($value) && !is_iterable($value)) ?
-                (array) $value :
-                $value;
-            unset($params[$arg]);
-            return $value;
-        } else {
+        if (!array_key_exists($arg, $params)) {
             return null;
         }
+        $value = $params[$arg];
+        $value = (is_object($value) && !is_iterable($value)) ?
+            (array) $value :
+            $value;
+        unset($params[$arg]);
+        return $value;
     }
 
     /**

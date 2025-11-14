@@ -5,17 +5,12 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 ### Changed
-- Moved duplicate health check workflow step to a shared action  ([#366](https://github.com/opensearch-project/opensearch-php/pull/366))
-- Bump composer dependencies and add `--prefer-lowest` to the test matrix  ([#367](https://github.com/opensearch-project/opensearch-php/pull/367))
-- Upgrade from phpunit v9 to v10 ([#371](https://github.com/opensearch-project/opensearch-php/pull/371))
-- Simplify logic for url param encoding ([#370](https://github.com/opensearch-project/opensearch-php/pull/370))
 ### Deprecated
 ### Removed
+- Removed deprecated code
 ### Fixed
-- ID is being double encoded ([#360](https://github.com/opensearch-project/opensearch-php/issues/360))
 ### Security
 ### Updated APIs
-- Updated opensearch-php APIs to reflect [opensearch-api-specification@db59af1](https://github.com/opensearch-project/opensearch-api-specification/commit/db59af1556fced5193c61a768d7e5153976acd5d)
 
 ## [2.4.6]
 ### Added

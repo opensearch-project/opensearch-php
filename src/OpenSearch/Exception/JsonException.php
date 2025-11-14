@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace OpenSearch\Exception;
 
-use OpenSearch\Common\Exceptions\OpenSearchException;
-
 /**
  * Provides an exception for JSON errors.
- *
- * @phpstan-ignore class.implementsDeprecatedInterface
  */
-class JsonException extends \JsonException implements OpenSearchException
+class JsonException extends \JsonException
 {
     public function __construct(int $code, private readonly ?string $data, ?\Throwable $previous = null)
     {

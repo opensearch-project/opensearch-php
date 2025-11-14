@@ -1830,7 +1830,6 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getUsers(array $params = []): array
     {
-        $endpointBuilder = $this->endpoints;
 
         if (isset($params['username'])) {
             $endpoint = $this->endpointFactory->getEndpoint(GetUser::class);

@@ -21,12 +21,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
-use GuzzleHttp\Ring\Future\FutureArrayInterface;
-use OpenSearch\Common\Exceptions\Missing404Exception;
-use OpenSearch\Common\Exceptions\RoutingMissingException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 use OpenSearch\Exception\NotFoundHttpException;
-use OpenSearch\Transport;
 use OpenSearch\TransportInterface;
 
 abstract class BooleanRequestWrapper
@@ -38,6 +34,7 @@ abstract class BooleanRequestWrapper
      *   Returns FALSE for a 404 error, otherwise TRUE.
      *
      * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws \OpenSearch\Exception\HttpExceptionInterface
      */
     public static function sendRequest(AbstractEndpoint $endpoint, TransportInterface $transport): bool
     {
@@ -50,50 +47,11 @@ abstract class BooleanRequestWrapper
                 $endpoint->getOptions()
             );
 
-        } catch (NotFoundHttpException|RoutingMissingException $e) {
+        } catch (NotFoundHttpException $e) {
             // Return false for 404 errors.
             return false;
         }
         return true;
     }
 
-    /**
-     * Perform Request
-     *
-     * @throws Missing404Exception
-     * @throws RoutingMissingException
-     *
-     * @deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.
-     */
-    public static function performRequest(AbstractEndpoint $endpoint, Transport $transport)
-    {
-        @trigger_error(
-            __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Use \OpenSearch\Namespaces\BooleanRequestWrapper::sendRequest() instead.'
-        );
-        try {
-            $response = $transport->performRequest(
-                $endpoint->getMethod(),
-                $endpoint->getURI(),
-                $endpoint->getParams(),
-                $endpoint->getBody(),
-                $endpoint->getOptions()
-            );
-
-            $response = $transport->resultOrFuture($response, $endpoint->getOptions());
-            if (!($response instanceof FutureArrayInterface)) {
-                if ($response['status'] === 200) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                // async mode, can't easily resolve this...punt to user
-                return $response;
-            }
-        } catch (Missing404Exception $exception) {
-            return false;
-        } catch (RoutingMissingException $exception) {
-            return false;
-        }
-    }
 }

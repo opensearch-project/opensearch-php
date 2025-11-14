@@ -481,10 +481,6 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(Exists::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -515,10 +511,6 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -548,10 +540,6 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
-
         $endpoint = $this->endpointFactory->getEndpoint(ExistsIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -579,10 +567,6 @@ class IndicesNamespace extends AbstractNamespace
     public function existsTemplate(array $params = []): bool
     {
         $name = $this->extractArgument($params, 'name');
-
-        // Legacy option to manually make this verbose so we can check status code.
-        // @todo remove in 3.0.0
-        $params['client']['verbose'] = true;
 
         $endpoint = $this->endpointFactory->getEndpoint(ExistsTemplate::class);
         $endpoint->setParams($params);
