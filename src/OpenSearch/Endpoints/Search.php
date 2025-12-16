@@ -57,6 +57,7 @@ class Search extends AbstractEndpoint
             'ignore_throttled',
             'ignore_unavailable',
             'include_named_queries_score',
+            'index',
             'lenient',
             'max_concurrent_shard_requests',
             'phase_took',

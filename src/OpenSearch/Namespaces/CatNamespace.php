@@ -704,7 +704,7 @@ class CatNamespace extends AbstractNamespace
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
      * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['node_id']     = (array) A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node to which you're connecting, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes.
+     * $params['node_id']     = (array) A comma-separated list of node IDs or names used to limit the returned information.  Use `_local` to return information from the node to which you're connecting, specify a specific node from which to get information, or keep the parameter empty to get information from all nodes.
      * $params['parent_task'] = (string) The parent task identifier, which is used to limit the response.
      *
      * @param array $params Associative array of parameters

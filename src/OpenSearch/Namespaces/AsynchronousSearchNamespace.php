@@ -79,7 +79,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      * Performs an asynchronous search.
      *
      * $params['index']                       = (string) The name of the index to be searched. Can be an individual name, a comma-separated list of indexes, or a wildcard expression of index names.
-     * $params['keep_alive']                  = (string) The amount of time that the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours. The saved search results are deleted after this period or if the search is canceled. Note that this includes the query execution time. If the query exceeds this amount of time, the process cancels this query automatically.
+     * $params['keep_alive']                  = (string) The amount of time that the result is saved in the cluster. For example, `2d` means that the results are stored in the cluster for 48 hours.  The saved search results are deleted after this period or if the search is canceled. Note that this includes the query execution time.  If the query exceeds this amount of time, the process cancels this query automatically.
      * $params['keep_on_completion']          = (boolean) Whether to save the results in the cluster after the search is complete. You can examine the stored results at a later time.
      * $params['wait_for_completion_timeout'] = (string) The amount of time to wait for the results. You can poll the remaining results based on an ID. The maximum value is 300 seconds. Default is `1s`.
      * $params['pretty']                      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)

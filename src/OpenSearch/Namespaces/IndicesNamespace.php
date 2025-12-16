@@ -142,9 +142,9 @@ class IndicesNamespace extends AbstractNamespace
      * Clears all or specific caches for one or more indexes.
      *
      * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['fielddata']          = (boolean) If `true`, clears the fields cache.Use the `fields` parameter to clear the cache of specific fields only.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['fielddata']          = (boolean) If `true`, clears the fields cache. Use the `fields` parameter to clear the cache of specific fields only.
      * $params['fields']             = (any) A comma-separated list of field names used to limit the `fielddata` parameter.
      * $params['file']               = (boolean) If `true`, clears the unused entries from the file cache on nodes with the Search role. (Default = false)
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
@@ -176,10 +176,10 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']                   = (string) Name of the source index to clone.
      * $params['target']                  = (string) Name of the target index to create.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -210,13 +210,13 @@ class IndicesNamespace extends AbstractNamespace
      * Closes an index.
      *
      * $params['index']                   = (array) A comma-separated list or wildcard expression of index names used to limit the request.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -242,9 +242,9 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['index']                   = (string) The name of the index you wish to create.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.  Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -323,12 +323,12 @@ class IndicesNamespace extends AbstractNamespace
      * Deletes an index.
      *
      * $params['index']                   = (array) A comma-separated list of indexes to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (`*`) or `_all`. To use wildcards or `_all`, set the `action.destructive_requires_name` cluster setting to `false`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes. (Default = false)
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -355,8 +355,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']                   = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). (Required)
      * $params['name']                    = (array) A comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`. (Required)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -435,8 +435,8 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) The name of the legacy index template to delete. Wildcard (`*`) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -461,9 +461,9 @@ class IndicesNamespace extends AbstractNamespace
      * Returns information about whether a particular index exists.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes. (Default = false)
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index. (Default = false)
      * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
@@ -497,8 +497,8 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['name']               = (array) A comma-separated list of aliases to check. Supports wildcards (`*`). (Required)
      * $params['index']              = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, requests that include a missing data stream or index in the target indexes or data streams return an error.
      * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
@@ -595,11 +595,11 @@ class IndicesNamespace extends AbstractNamespace
      * Performs the flush operation on one or more indexes.
      *
      * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['force']              = (boolean) If `true`, the request forces a flush even if there are no changes to commit to the index.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['wait_if_ongoing']    = (boolean) If `true`, the flush operation blocks until execution when another flush operation is running.If `false`, OpenSearch returns an error if you request a flush when another flush operation is running. (Default = true)
+     * $params['wait_if_ongoing']    = (boolean) If `true`, the flush operation blocks until execution when another flush operation is running. If `false`, OpenSearch returns an error if you request a flush when another flush operation is running. (Default = true)
      * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -628,7 +628,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['expand_wildcards']     = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * $params['flush']                = (boolean) Specify whether the index should be flushed after performing the operation. (Default = true)
      * $params['ignore_unavailable']   = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed)
-     * $params['max_num_segments']     = (integer) The number of larger segments into which smaller segments are merged.Set this parameter to 1 to merge all segments into one segment.The default behavior is to perform the merge as necessary.
+     * $params['max_num_segments']     = (integer) The number of larger segments into which smaller segments are merged. Set this parameter to 1 to merge all segments into one segment. The default behavior is to perform the merge as necessary.
      * $params['only_expunge_deletes'] = (boolean) Specify whether the operation should only expunge deleted documents
      * $params['primary_only']         = (boolean) Specify whether the operation should only perform on primary shards. Defaults to false. (Default = false)
      * $params['wait_for_completion']  = (boolean) Should the request wait until the force merge is completed. (Default = true)
@@ -656,9 +656,9 @@ class IndicesNamespace extends AbstractNamespace
      * Returns information about one or more indexes.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets onlymissing or closed indexes. This behavior applies even if the request targets other open indexes. For example,a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar. (Default = false)
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar. (Default = false)
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard expressions can match. If the request can target data streams, this argumentdetermines whether wildcard expressions match hidden data streams. Supports comma-separated values,such as `open,hidden`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['ignore_unavailable']      = (boolean) If `false`, requests that target a missing index return an error. (Default = false)
      * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
@@ -689,8 +689,8 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['name']               = (array) A comma-separated list of aliases to retrieve. Supports wildcards (`*`). To retrieve all aliases, omit this parameter or use `*` or `_all`.
      * $params['index']              = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
@@ -744,8 +744,8 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['fields']             = (array) A comma-separated list or wildcard expression of fields used to limit returned information. (Required)
      * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['include_defaults']   = (boolean) If `true`, return all default settings in the response.
      * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
@@ -803,12 +803,12 @@ class IndicesNamespace extends AbstractNamespace
      * Returns mappings for one or more indexes.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -834,14 +834,14 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['name']                    = (array) A comma-separated list or wildcard expression of settings to retrieve.
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, indexalias, or `_all` value targets only missing or closed indexes. Thisbehavior applies even if the request targets other open indexes. Forexample, a request targeting `foo*,bar*` returns an error if an indexstarts with foo but no index starts with `bar`.
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with `bar`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. If`false`, information is retrieved from the cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response isreceived before the timeout expires, the request fails and returns anerror.
+     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. If `false`, information is retrieved from the cluster-manager node. (Default = false)
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -871,7 +871,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -923,14 +923,14 @@ class IndicesNamespace extends AbstractNamespace
      * Opens an index.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -958,8 +958,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['name']                    = (string) Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
      * $params['index']                   = (array) A comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1020,12 +1020,12 @@ class IndicesNamespace extends AbstractNamespace
      * Updates the index mappings.
      *
      * $params['index']                   = (array) A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indexes.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['write_index_only']        = (boolean) If `true`, the mappings are applied only to the current write index for the target. (Default = false)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -1054,14 +1054,14 @@ class IndicesNamespace extends AbstractNamespace
      * Updates the index settings.
      *
      * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, indexalias, or `_all` value targets only missing or closed indexes. Thisbehavior applies even if the request targets other open indexes. Forexample, a request targeting `foo*,bar*` returns an error if an indexstarts with `foo` but no index starts with `bar`.
+     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can targetdata streams, this argument determines whether wildcard expressions matchhidden data streams. Supports comma-separated values, such as`open,hidden`.
+     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
      * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
      * $params['ignore_unavailable']      = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response isreceived before the timeout expires, the request fails and returns anerror.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['preserve_existing']       = (boolean) If `true`, existing index settings remain unchanged. (Default = false)
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the  timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1090,8 +1090,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['name']                    = (string) The name of the template
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing index templates. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response isreceived before the timeout expires, the request fails and returns an error.
-     * $params['order']                   = (integer) Order in which OpenSearch applies this template if indexmatches multiple templates.Templates with lower 'order' values are merged first. Templates with higher'order' values are merged later, overriding templates with lower values.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['order']                   = (integer) Order in which OpenSearch applies this template if index matches multiple templates.  Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1145,8 +1145,8 @@ class IndicesNamespace extends AbstractNamespace
      * Performs the refresh operation in one or more indexes.
      *
      * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -1172,7 +1172,7 @@ class IndicesNamespace extends AbstractNamespace
      * Returns information about any matching indexes, aliases, and data streams.
      *
      * $params['name']             = (array) Comma-separated name(s) or index pattern(s) of the indexes, aliases, and data streams to resolve. Resources on remote clusters can be specified using the `<cluster>`:`<name>` syntax.
-     * $params['expand_wildcards'] = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['expand_wildcards'] = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['pretty']           = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1200,9 +1200,9 @@ class IndicesNamespace extends AbstractNamespace
      * $params['new_index']               = (string) The name of the index to create. Supports date math. Data streams do not support this parameter.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['dry_run']                 = (boolean) If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1232,8 +1232,8 @@ class IndicesNamespace extends AbstractNamespace
      * Provides low-level information about segments in a Lucene index.
      *
      * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['verbose']            = (boolean) If `true`, the request returns a verbose response. (Default = false)
      * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
@@ -1260,8 +1260,8 @@ class IndicesNamespace extends AbstractNamespace
      * Provides store information for shard copies of indexes.
      *
      * $params['index']              = (array) Limits health reporting to a specific source. Can be a single source or a comma-separated list of sources (comprised of data streams, indexes, and aliases).
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all`value targets only missing or closed indexes. This behavior applies even if the requesttargets other open indexes. (Default = false)
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams,this argument determines whether wildcard expressions match hidden data streams.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default = false)
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
      * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response. (Default = false)
      * $params['status']             = (any) A list of shard health statuses used to limit the request. (Default = yellow,red)
      * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
@@ -1291,10 +1291,10 @@ class IndicesNamespace extends AbstractNamespace
      * $params['target']                  = (string) Name of the target index to create.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['copy_settings']           = (boolean) whether or not to copy settings from the source index. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -1326,7 +1326,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) Index or template name to simulate
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is receivedbefore the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1387,10 +1387,10 @@ class IndicesNamespace extends AbstractNamespace
      * $params['target']                  = (string) Name of the target index to create.
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['copy_settings']           = (boolean) whether or not to copy settings from the source index. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -1423,7 +1423,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['metric']                     = (array) Limit the information returned the specific metrics.
      * $params['index']                      = (array) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
      * $params['completion_fields']          = (any) A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
-     * $params['expand_wildcards']           = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argumentdetermines whether wildcard expressions match hidden data streams. Supports comma-separated values,such as `open,hidden`.
+     * $params['expand_wildcards']           = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
      * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
      * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
      * $params['forbid_closed_indices']      = (boolean) If `true`, statistics are not collected from closed indexes. (Default = true)
@@ -1457,8 +1457,8 @@ class IndicesNamespace extends AbstractNamespace
      * Updates index aliases.
      *
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1514,12 +1514,12 @@ class IndicesNamespace extends AbstractNamespace
      *
      * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
      * $params['all_shards']         = (boolean) If `true`, the validation is executed on all shards instead of one random shard per index.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes.This behavior applies even if the request targets other open indexes.
+     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
      * $params['analyze_wildcard']   = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
-     * $params['analyzer']           = (string) Analyzer to use for the query string.This parameter can only be used when the `q` query string parameter is specified.
+     * $params['analyzer']           = (string) Analyzer to use for the query string. This parameter can only be used when the `q` query string parameter is specified.
      * $params['default_operator']   = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
-     * $params['df']                 = (string) Field to use as default where no field prefix is given in the query string.This parameter can only be used when the `q` query string parameter is specified.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match.If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.Supports comma-separated values, such as `open,hidden`.Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * $params['df']                 = (string) Field to use as default where no field prefix is given in the query string. This parameter can only be used when the `q` query string parameter is specified.
+     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
      * $params['explain']            = (boolean) If `true`, the response returns detailed information if an error has occurred.
      * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
      * $params['lenient']            = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.

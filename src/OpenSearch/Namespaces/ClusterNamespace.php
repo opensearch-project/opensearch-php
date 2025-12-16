@@ -126,7 +126,7 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Clears any cluster voting configuration exclusions.
      *
-     * $params['wait_for_removal'] = (boolean) Specifies whether to wait for all excluded nodes to be removed from thecluster before clearing the voting configuration exclusions list.When `true`, all excluded nodes are removed fromthe cluster before this API takes any action. When `false`, thevoting configuration exclusions list is cleared even if some excludednodes are still in the cluster. (Default = true)
+     * $params['wait_for_removal'] = (boolean) Specifies whether to wait for all excluded nodes to be removed from the cluster before clearing the voting configuration exclusions list. When `true`, all excluded nodes are removed from the cluster before this API takes any action. When `false`, the voting configuration exclusions list is cleared even if some excluded nodes are still in the cluster. (Default = true)
      * $params['pretty']           = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']            = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -172,7 +172,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (string) The name of the component template. Wildcard (*) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false`, information is retrieved from the cluster manager node. (Default = false)
+     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -203,8 +203,8 @@ class ClusterNamespace extends AbstractNamespace
      *
      * $params['name']                    = (array) The name of the component template to retrieve. Wildcard (`*`) expressions are supported.
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
-     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false`, information is retrieved from the cluster manager node. (Default = false)
+     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
+     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -254,7 +254,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns cluster settings.
      *
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
+     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['include_defaults']        = (boolean) When `true`, returns default cluster settings from the local node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
@@ -340,7 +340,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates,or new allocations.
      *
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only.When `false`, information is retrieved from the cluster manager node. (Default = false)
+     * $params['local']                   = (boolean) When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -362,9 +362,9 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Updates the cluster voting configuration by excluding certain node IDs or names.
      *
-     * $params['node_ids']    = (any) A comma-separated list of node IDs to excludefrom the voting configuration. When using this setting, you cannot also specify `node_names`. Either `node_ids` or `node_names` are required to receive a valid response.
-     * $params['node_names']  = (any) A comma-separated list of node names to exclude from thevoting configuration. When using this setting, you cannot also specify `node_ids`. Either `node_ids` or `node_names` are required to receive a valid response.
-     * $params['timeout']     = (string) When adding a voting configuration exclusion, the API waits for thespecified nodes to be excluded from the voting configuration beforereturning a response. If the timeout expires before the appropriate conditionis satisfied, the request fails and returns an error.
+     * $params['node_ids']    = (any) A comma-separated list of node IDs to exclude from the voting configuration. When using this setting, you cannot also specify `node_names`. Either `node_ids` or `node_names` are required to receive a valid response.
+     * $params['node_names']  = (any) A comma-separated list of node names to exclude from the voting configuration. When using this setting, you cannot also specify `node_ids`. Either `node_ids` or `node_names` are required to receive a valid response.
+     * $params['timeout']     = (string) When adding a voting configuration exclusion, the API waits for the specified nodes to be excluded from the voting configuration before returning a response. If the timeout expires before the appropriate condition is satisfied, the request fails and returns an error.
      * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -444,7 +444,7 @@ class ClusterNamespace extends AbstractNamespace
      * Updates the cluster settings.
      *
      * $params['cluster_manager_timeout'] = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
-     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
+     * $params['flat_settings']           = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['master_timeout']          = (string)
      * $params['timeout']                 = (string)
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
@@ -553,7 +553,7 @@ class ClusterNamespace extends AbstractNamespace
      * $params['allow_no_indices']          = (boolean) Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
      * $params['cluster_manager_timeout']   = (string) The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
      * $params['expand_wildcards']          = (any)
-     * $params['flat_settings']             = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
+     * $params['flat_settings']             = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
      * $params['ignore_unavailable']        = (boolean) Whether the specified concrete indexes should be ignored when unavailable (missing or closed).
      * $params['local']                     = (boolean) Whether to return information from the local node only instead of from the cluster manager node. (Default = false)
      * $params['master_timeout']            = (string)
@@ -587,8 +587,8 @@ class ClusterNamespace extends AbstractNamespace
      * $params['index_metric']  = (array) A comma-separated list of [index metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#index-metric-groups), for example, `docs,store`.
      * $params['metric']        = (array) Limit the information returned to the specified metrics.
      * $params['node_id']       = (array)
-     * $params['flat_settings'] = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings.For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
-     * $params['timeout']       = (string) The amount of time to wait for each node to respond.If a node does not respond before its timeout expires, the response does not include its stats.However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.
+     * $params['flat_settings'] = (boolean) Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default = false)
+     * $params['timeout']       = (string) The amount of time to wait for each node to respond. If a node does not respond before its timeout expires, the response does not include its stats. However, timed out nodes are included in the response's `_nodes.failed` property. Defaults to no timeout.
      * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)

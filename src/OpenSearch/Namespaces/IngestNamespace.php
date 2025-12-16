@@ -39,7 +39,7 @@ class IngestNamespace extends AbstractNamespace
      *
      * $params['id']                      = (string) The pipeline ID or wildcard expression of pipeline IDs used to limit the request. To delete all ingest pipelines in a cluster, use a value of `*`.
      * $params['cluster_manager_timeout'] = (string) The amount of time allowed to establish a connection to the cluster manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) The amount of time to wait for a response.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
@@ -66,7 +66,7 @@ class IngestNamespace extends AbstractNamespace
      *
      * $params['id']                      = (string) A comma-separated list of pipeline IDs to retrieve. Wildcard (`*`) expressions are supported. To get all ingest pipelines, omit this parameter or use `*`.
      * $params['cluster_manager_timeout'] = (string) The amount of time allowed to establish a connection to the cluster manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)

@@ -167,7 +167,7 @@ class NodesNamespace extends AbstractNamespace
      *
      * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
      * $params['metric']      = (array) Limits the information returned to the specific metrics. A comma-separated list of the following options: `_all`, `rest_actions`.
-     * $params['timeout']     = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']     = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
