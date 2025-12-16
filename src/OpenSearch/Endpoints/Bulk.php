@@ -48,6 +48,7 @@ class Bulk extends AbstractEndpoint
             '_source',
             '_source_excludes',
             '_source_includes',
+            'index',
             'pipeline',
             'refresh',
             'require_alias',

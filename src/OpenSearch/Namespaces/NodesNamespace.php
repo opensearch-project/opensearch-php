@@ -134,7 +134,7 @@ class NodesNamespace extends AbstractNamespace
      * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
      * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
      * $params['groups']                     = (array) A comma-separated list of search groups to include in the search statistics.
-     * $params['include_segment_file_sizes'] = (boolean) When `true`,  reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
+     * $params['include_segment_file_sizes'] = (boolean) When `true`, reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
      * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
      * $params['timeout']                    = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['types']                      = (array) A comma-separated list of document types for the indexing index metric.
@@ -167,7 +167,7 @@ class NodesNamespace extends AbstractNamespace
      *
      * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
      * $params['metric']      = (array) Limits the information returned to the specific metrics. A comma-separated list of the following options: `_all`, `rest_actions`.
-     * $params['timeout']     = (string) Period to wait for a response.If no response is received before the timeout expires, the request fails and returns an error.
+     * $params['timeout']     = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
