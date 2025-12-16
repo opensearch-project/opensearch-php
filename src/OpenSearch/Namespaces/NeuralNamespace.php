@@ -29,7 +29,7 @@ class NeuralNamespace extends AbstractNamespace
      *
      * $params['node_id']                  = (string) A comma-separated list of node IDs or names to limit the returned information; leave empty to get information from all nodes.
      * $params['stat']                     = (array) A comma-separated list of stats to retrieve; use empty string to retrieve all stats.
-     * $params['flat_stat_paths']          = (boolean) Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats. For example, the flat form of `"processors": { "ingest": { "text_embedding_executions": 20181212 } }` is  `"processors.ingest.text_embedding_executions": "20181212"`. (Default = false)
+     * $params['flat_stat_paths']          = (boolean) Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats. For example, the flat form of `"processors": { "ingest": { "text_embedding_executions": 20181212 } }` is `"processors.ingest.text_embedding_executions": "20181212"`. (Default = false)
      * $params['include_all_nodes']        = (boolean) When `true` includes aggregated statistics across all nodes in the `all_nodes` category. When `false`, excludes the `all_nodes` category from the response. (Default = true)
      * $params['include_individual_nodes'] = (boolean) When `true` includes statistics for individual nodes in the `nodes` category. When `false`, excludes the `nodes` category from the response. (Default = true)
      * $params['include_info']             = (boolean) When `true` includes cluster-wide information in the `info` category. When `false`, excludes the `info` category from the response. (Default = true)

@@ -244,7 +244,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation.  Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1061,7 +1061,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['ignore_unavailable']      = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['preserve_existing']       = (boolean) If `true`, existing index settings remain unchanged. (Default = false)
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the  timeout expires, the request fails and returns an error.
+     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
@@ -1091,7 +1091,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
      * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing index templates. (Default = false)
      * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['order']                   = (integer) Order in which OpenSearch applies this template if index matches multiple templates.  Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
+     * $params['order']                   = (integer) Order in which OpenSearch applies this template if index matches multiple templates. Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
      * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
      * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
      * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)

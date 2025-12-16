@@ -134,7 +134,7 @@ class NodesNamespace extends AbstractNamespace
      * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
      * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
      * $params['groups']                     = (array) A comma-separated list of search groups to include in the search statistics.
-     * $params['include_segment_file_sizes'] = (boolean) When `true`,  reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
+     * $params['include_segment_file_sizes'] = (boolean) When `true`, reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
      * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
      * $params['timeout']                    = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
      * $params['types']                      = (array) A comma-separated list of document types for the indexing index metric.

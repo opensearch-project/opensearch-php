@@ -103,7 +103,7 @@ foreach ($list_of_dicts as $index => $endpoint) {
             $param_dict = [];
 
             if (isset($param['description'])) {
-                $param_dict['description'] = str_replace("\n", " ", $param['description']);
+                $param_dict['description'] =  preg_replace('/\s+/', ' ', $param['description']);
             }
 
             if (isset($param['schema']['type'])) {
