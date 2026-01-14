@@ -15,23 +15,31 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\Ml\AddAgenticMemory;
 use OpenSearch\Endpoints\Ml\ChunkModel;
 use OpenSearch\Endpoints\Ml\CreateConnector;
 use OpenSearch\Endpoints\Ml\CreateController;
 use OpenSearch\Endpoints\Ml\CreateMemory;
+use OpenSearch\Endpoints\Ml\CreateMemoryContainer;
+use OpenSearch\Endpoints\Ml\CreateMemoryContainerSession;
 use OpenSearch\Endpoints\Ml\CreateMessage;
 use OpenSearch\Endpoints\Ml\CreateModelMeta;
 use OpenSearch\Endpoints\Ml\DeleteAgent;
+use OpenSearch\Endpoints\Ml\DeleteAgenticMemory;
+use OpenSearch\Endpoints\Ml\DeleteAgenticMemoryQuery;
 use OpenSearch\Endpoints\Ml\DeleteConnector;
 use OpenSearch\Endpoints\Ml\DeleteController;
 use OpenSearch\Endpoints\Ml\DeleteMemory;
+use OpenSearch\Endpoints\Ml\DeleteMemoryContainer;
 use OpenSearch\Endpoints\Ml\DeleteModel;
 use OpenSearch\Endpoints\Ml\DeleteModelGroup;
 use OpenSearch\Endpoints\Ml\DeleteTask;
 use OpenSearch\Endpoints\Ml\DeployModel;
 use OpenSearch\Endpoints\Ml\ExecuteAgent;
 use OpenSearch\Endpoints\Ml\ExecuteAlgorithm;
+use OpenSearch\Endpoints\Ml\ExecuteTool;
 use OpenSearch\Endpoints\Ml\GetAgent;
+use OpenSearch\Endpoints\Ml\GetAgenticMemory;
 use OpenSearch\Endpoints\Ml\GetAllMemories;
 use OpenSearch\Endpoints\Ml\GetAllMessages;
 use OpenSearch\Endpoints\Ml\GetAllTools;
@@ -39,6 +47,7 @@ use OpenSearch\Endpoints\Ml\GetConnector;
 use OpenSearch\Endpoints\Ml\GetConnectors;
 use OpenSearch\Endpoints\Ml\GetController;
 use OpenSearch\Endpoints\Ml\GetMemory;
+use OpenSearch\Endpoints\Ml\GetMemoryContainer;
 use OpenSearch\Endpoints\Ml\GetMessage;
 use OpenSearch\Endpoints\Ml\GetMessageTraces;
 use OpenSearch\Endpoints\Ml\GetModel;
@@ -57,9 +66,11 @@ use OpenSearch\Endpoints\Ml\RegisterAgents;
 use OpenSearch\Endpoints\Ml\RegisterModel;
 use OpenSearch\Endpoints\Ml\RegisterModelGroup;
 use OpenSearch\Endpoints\Ml\RegisterModelMeta;
+use OpenSearch\Endpoints\Ml\SearchAgenticMemory;
 use OpenSearch\Endpoints\Ml\SearchAgents;
 use OpenSearch\Endpoints\Ml\SearchConnectors;
 use OpenSearch\Endpoints\Ml\SearchMemory;
+use OpenSearch\Endpoints\Ml\SearchMemoryContainer;
 use OpenSearch\Endpoints\Ml\SearchMessage;
 use OpenSearch\Endpoints\Ml\SearchModelGroup;
 use OpenSearch\Endpoints\Ml\SearchModels;
@@ -68,9 +79,11 @@ use OpenSearch\Endpoints\Ml\Train;
 use OpenSearch\Endpoints\Ml\TrainPredict;
 use OpenSearch\Endpoints\Ml\UndeployModel;
 use OpenSearch\Endpoints\Ml\UnloadModel;
+use OpenSearch\Endpoints\Ml\UpdateAgenticMemory;
 use OpenSearch\Endpoints\Ml\UpdateConnector;
 use OpenSearch\Endpoints\Ml\UpdateController;
 use OpenSearch\Endpoints\Ml\UpdateMemory;
+use OpenSearch\Endpoints\Ml\UpdateMemoryContainer;
 use OpenSearch\Endpoints\Ml\UpdateMessage;
 use OpenSearch\Endpoints\Ml\UpdateModel;
 use OpenSearch\Endpoints\Ml\UpdateModelGroup;
@@ -84,6 +97,32 @@ use OpenSearch\Endpoints\Ml\UploadModel;
  */
 class MlNamespace extends AbstractNamespace
 {
+    /**
+     * Add agentic memory to a memory container.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function addAgenticMemory(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(AddAgenticMemory::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
     /**
      * Uploads model chunk.
      *
@@ -163,6 +202,55 @@ class MlNamespace extends AbstractNamespace
     }
 
     /**
+     * Create a memory container.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function createMemoryContainer(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(CreateMemoryContainer::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Create session in a memory container.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function createMemoryContainerSession(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(CreateMemoryContainerSession::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Create a message.
      *
      * $params['memory_id']   = (string)
@@ -236,6 +324,65 @@ class MlNamespace extends AbstractNamespace
     }
 
     /**
+     * Delete a specific memory by its type and ID.
+     *
+     * $params['id']                  = (string)
+     * $params['memory_container_id'] = (string)
+     * $params['type']                = DEPRECATED (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function deleteAgenticMemory(array $params = [])
+    {
+        $id = $this->extractArgument($params, 'id');
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $type = $this->extractArgument($params, 'type');
+
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteAgenticMemory::class);
+        $endpoint->setParams($params);
+        $endpoint->setId($id);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setType($type);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Delete multiple memories using a query to match specific criteria.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['type']                = DEPRECATED (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function deleteAgenticMemoryQuery(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $type = $this->extractArgument($params, 'type');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteAgenticMemoryQuery::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setType($type);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Deletes a controller.
      *
      * $params['model_id']    = (string)
@@ -279,6 +426,32 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(DeleteMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Delete a memory container.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['delete_all_memories'] = (boolean)  (Default = false)
+     * $params['delete_memories']     = (array)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function deleteMemoryContainer(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteMemoryContainer::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
 
         return $this->performRequest($endpoint);
     }
@@ -408,6 +581,32 @@ class MlNamespace extends AbstractNamespace
     }
 
     /**
+     * Execute a tool.
+     *
+     * $params['tool_name']   = (string)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function executeTool(array $params = [])
+    {
+        $tool_name = $this->extractArgument($params, 'tool_name');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(ExecuteTool::class);
+        $endpoint->setParams($params);
+        $endpoint->setToolName($tool_name);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Get an agent.
      *
      * $params['agent_id']    = (string)
@@ -427,6 +626,36 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(GetAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Get a specific memory by its type and ID.
+     *
+     * $params['id']                  = (string)
+     * $params['memory_container_id'] = (string)
+     * $params['type']                = DEPRECATED (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getAgenticMemory(array $params = [])
+    {
+        $id = $this->extractArgument($params, 'id');
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $type = $this->extractArgument($params, 'type');
+
+        $endpoint = $this->endpointFactory->getEndpoint(GetAgenticMemory::class);
+        $endpoint->setParams($params);
+        $endpoint->setId($id);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setType($type);
 
         return $this->performRequest($endpoint);
     }
@@ -543,6 +772,30 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(GetMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Get a memory container.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getMemoryContainer(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(GetMemoryContainer::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
 
         return $this->performRequest($endpoint);
     }
@@ -914,6 +1167,35 @@ class MlNamespace extends AbstractNamespace
     }
 
     /**
+     * Search for memories of a specific type within a memory container.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['type']                = DEPRECATED (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function searchAgenticMemory(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $type = $this->extractArgument($params, 'type');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(SearchAgenticMemory::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setType($type);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Search agents.
      *
      * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
@@ -976,6 +1258,29 @@ class MlNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(SearchMemory::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Search memory containers.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function searchMemoryContainer(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(SearchMemoryContainer::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
@@ -1156,6 +1461,38 @@ class MlNamespace extends AbstractNamespace
     }
 
     /**
+     * Update a specific memory by its type and ID.
+     *
+     * $params['id']                  = (string)
+     * $params['memory_container_id'] = (string)
+     * $params['type']                = DEPRECATED (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function updateAgenticMemory(array $params = [])
+    {
+        $id = $this->extractArgument($params, 'id');
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $type = $this->extractArgument($params, 'type');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateAgenticMemory::class);
+        $endpoint->setParams($params);
+        $endpoint->setId($id);
+        $endpoint->setMemoryContainerId($memory_container_id);
+        $endpoint->setType($type);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Updates a standalone connector.
      *
      * $params['connector_id'] = (string)
@@ -1228,6 +1565,32 @@ class MlNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(UpdateMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Update a memory container.
+     *
+     * $params['memory_container_id'] = (string)
+     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function updateMemoryContainer(array $params = [])
+    {
+        $memory_container_id = $this->extractArgument($params, 'memory_container_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateMemoryContainer::class);
+        $endpoint->setParams($params);
+        $endpoint->setMemoryContainerId($memory_container_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);

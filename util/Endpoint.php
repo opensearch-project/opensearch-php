@@ -186,7 +186,7 @@ class Endpoint
             }
         }
         foreach ($this->parts as $part => $value) {
-            if (in_array($part, ['type', 'index', 'id'])) {
+            if (in_array($part, ['index', 'id'])) {
                 continue;
             }
             if (isset($value['type']) && $value['type'] === 'array') {
@@ -287,13 +287,7 @@ class Endpoint
                 } else {
                     $params .= sprintf("%s\$%s = \$this->%s ? rawurlencode(\$this->%s) : null;", $tab8, $part, $part, $part);
                 }
-                if ($part === 'type') {
-                    $deprecated .= str_replace(
-                        ':msg',
-                        'Specifying types in urls has been deprecated',
-                        str_replace(':part', $part, file_get_contents(self::DEPRECATED_PART))
-                    );
-                } elseif (isset($value['deprecated']) && $value['deprecated']) {
+                if (isset($value['deprecated']) && $value['deprecated']) {
                     $deprecated .= str_replace(
                         ':msg',
                         $this->getDeprecatedMessage($part),
@@ -433,7 +427,7 @@ class Endpoint
 
     protected function addProperty(string $name)
     {
-        if (!in_array($name, ['body', 'type', 'index', 'id'])) {
+        if (!in_array($name, ['body', 'index', 'id'])) {
             $this->properties[$name] = sprintf("    protected \$%s;", $name);
         }
     }
