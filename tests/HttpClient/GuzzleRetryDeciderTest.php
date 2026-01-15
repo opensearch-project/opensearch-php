@@ -55,6 +55,9 @@ class GuzzleRetryDeciderTest extends TestCase
                 'exception' => 'Error',
             ],
         ]));
+
+        $this->assertFalse($decider(2, null, null, new ConnectException('Error', $this->createMock(RequestInterface::class))));
+
     }
 
     public function testStatus500Retries(): void
@@ -85,5 +88,7 @@ class GuzzleRetryDeciderTest extends TestCase
               'status' => 500,
             ],
         ]));
+
+        $this->assertFalse($decider(2, null, $response, null));
     }
 }
