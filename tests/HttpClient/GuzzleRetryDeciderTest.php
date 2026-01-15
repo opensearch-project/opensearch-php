@@ -39,11 +39,25 @@ class GuzzleRetryDeciderTest extends TestCase
             'level' => 'warning',
             'message' => 'Retrying request {retries} of {maxRetries}: {exception}',
             'context' => [
-                'retries' => 0,
+                'retries' => 1,
                 'maxRetries' => 2,
                 'exception' => 'Error',
             ],
         ]));
+
+        $this->assertTrue($decider(1, null, null, new ConnectException('Error', $this->createMock(RequestInterface::class))));
+        $this->assertTrue($logger->hasWarning([
+            'level' => 'warning',
+            'message' => 'Retrying request {retries} of {maxRetries}: {exception}',
+            'context' => [
+                'retries' => 2,
+                'maxRetries' => 2,
+                'exception' => 'Error',
+            ],
+        ]));
+
+        $this->assertFalse($decider(2, null, null, new ConnectException('Error', $this->createMock(RequestInterface::class))));
+
     }
 
     public function testStatus500Retries(): void
@@ -58,10 +72,23 @@ class GuzzleRetryDeciderTest extends TestCase
             'level' => 'warning',
             'message' => 'Retrying request {retries} of {maxRetries}: Status code {status}',
             'context' => [
-                'retries' => 0,
+                'retries' => 1,
                 'maxRetries' => 2,
                 'status' => 500,
             ],
         ]));
+
+        $this->assertTrue($decider(1, null, $response, null));
+        $this->assertTrue($logger->hasWarning([
+            'level' => 'warning',
+            'message' => 'Retrying request {retries} of {maxRetries}: Status code {status}',
+            'context' => [
+              'retries' => 2,
+              'maxRetries' => 2,
+              'status' => 500,
+            ],
+        ]));
+
+        $this->assertFalse($decider(2, null, $response, null));
     }
 }

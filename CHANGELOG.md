@@ -9,6 +9,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Deprecated
 ### Removed
 ### Fixed
+- Retries in logging message in GuzzleRetryDecider are off by one ([#386](https://github.com/opensearch-project/opensearch-php/pull/386))
 ### Security
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@0fbd80c](https://github.com/opensearch-project/opensearch-api-specification/commit/0fbd80c66e905d91a290c0edc741eed43f8c4e7f)
