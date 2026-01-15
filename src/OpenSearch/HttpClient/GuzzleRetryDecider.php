@@ -23,6 +23,8 @@ class GuzzleRetryDecider
         if ($retries >= $this->maxRetries) {
             return false;
         }
+        // Increment $retries after comparison for human display.
+        $retries++;
         if ($exception instanceof ConnectException) {
             $this->logger?->warning(
                 'Retrying request {retries} of {maxRetries}: {exception}',
