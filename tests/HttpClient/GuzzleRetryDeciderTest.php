@@ -45,7 +45,7 @@ class GuzzleRetryDeciderTest extends TestCase
             ],
         ]));
 
-        $this->assertTrue($decider(2, null, null, new ConnectException('Error', $this->createMock(RequestInterface::class))));
+        $this->assertTrue($decider(1, null, null, new ConnectException('Error', $this->createMock(RequestInterface::class))));
         $this->assertTrue($logger->hasWarning([
             'level' => 'warning',
             'message' => 'Retrying request {retries} of {maxRetries}: {exception}',
