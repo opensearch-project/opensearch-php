@@ -34,7 +34,7 @@ use OpenSearch\Namespaces\NamespaceBuilderInterface;
 class Client
 {
 
-    const VERSION = '2.x-dev';
+    const VERSION = '2.5.1';
 
     /**
      * @var Transport
