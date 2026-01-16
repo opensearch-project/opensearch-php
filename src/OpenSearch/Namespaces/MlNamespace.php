@@ -36,6 +36,7 @@ use OpenSearch\Endpoints\Ml\DeleteModelGroup;
 use OpenSearch\Endpoints\Ml\DeleteTask;
 use OpenSearch\Endpoints\Ml\DeployModel;
 use OpenSearch\Endpoints\Ml\ExecuteAgent;
+use OpenSearch\Endpoints\Ml\ExecuteAgentStream;
 use OpenSearch\Endpoints\Ml\ExecuteAlgorithm;
 use OpenSearch\Endpoints\Ml\ExecuteTool;
 use OpenSearch\Endpoints\Ml\GetAgent;
@@ -62,6 +63,7 @@ use OpenSearch\Endpoints\Ml\GetTool;
 use OpenSearch\Endpoints\Ml\LoadModel;
 use OpenSearch\Endpoints\Ml\Predict;
 use OpenSearch\Endpoints\Ml\PredictModel;
+use OpenSearch\Endpoints\Ml\PredictModelStream;
 use OpenSearch\Endpoints\Ml\RegisterAgents;
 use OpenSearch\Endpoints\Ml\RegisterModel;
 use OpenSearch\Endpoints\Ml\RegisterModelGroup;
@@ -547,6 +549,32 @@ class MlNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(ExecuteAgent::class);
+        $endpoint->setParams($params);
+        $endpoint->setAgentId($agent_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Execute an agent in streaming mode.
+     *
+     * $params['agent_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function executeAgentStream(array $params = [])
+    {
+        $agent_id = $this->extractArgument($params, 'agent_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(ExecuteAgentStream::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
         $endpoint->setBody($body);
@@ -1067,6 +1095,32 @@ class MlNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(PredictModel::class);
+        $endpoint->setParams($params);
+        $endpoint->setModelId($model_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Predicts a model in streaming mode.
+     *
+     * $params['model_id']    = (string)
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function predictModelStream(array $params = [])
+    {
+        $model_id = $this->extractArgument($params, 'model_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(PredictModelStream::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
         $endpoint->setBody($body);
