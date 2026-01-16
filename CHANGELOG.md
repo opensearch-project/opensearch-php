@@ -4,13 +4,20 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
-- Support Symfony 8 ([#381](https://github.com/opensearch-project/opensearch-php/pull/381))
 ### Changed
 ### Deprecated
 ### Removed
 ### Fixed
-- Retries in logging message in GuzzleRetryDecider are off by one ([#386](https://github.com/opensearch-project/opensearch-php/pull/386))
 ### Security
+### Updated APIs
+
+## [2.5.1]
+### Added
+- Support Symfony 8 ([#381](https://github.com/opensearch-project/opensearch-php/pull/381))
+### Fixed
+- Retries in logging message in GuzzleRetryDecider are off by one ([#386](https://github.com/opensearch-project/opensearch-php/pull/386))
+- Fix newlines in docs ([#382](https://github.com/opensearch-project/opensearch-php/issues/382))
+- Allow URL params with the name `type` ([#384](https://github.com/opensearch-project/opensearch-php/issues/384))
 ### Updated APIs
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@2954600](https://github.com/opensearch-project/opensearch-api-specification/commit/2954600ddafbd98a1ab9f530054bb1b62380a92a)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@0fbd80c](https://github.com/opensearch-project/opensearch-api-specification/commit/0fbd80c66e905d91a290c0edc741eed43f8c4e7f)
