@@ -27,16 +27,15 @@ class RemoteStoreNamespace extends AbstractNamespace
     /**
      * Restores from remote store.
      *
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = false)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) Comma-separated list of index IDs (Required)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{cluster_manager_timeout?: string, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - wait_for_completion: Should this request wait until the operation has completed before returning. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: Comma-separated list of index IDs (Required)
      * @return array
      */
     public function restore(array $params = [])

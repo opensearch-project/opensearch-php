@@ -81,21 +81,20 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Adds a block to an index.
      *
-     * $params['block']                   = (string) The block to add (one of `read`, `write`, `read_only` or `metadata`).
-     * $params['index']                   = (array) A comma separated list of indexes to add a block to.
-     * $params['allow_no_indices']        = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['ignore_unavailable']      = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-     * $params['master_timeout']          = (string) Specify timeout for connection to cluster manager.
-     * $params['timeout']                 = (string) Explicit operation timeout
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{block?: string, index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, ignore_unavailable?: bool, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - block: The block to add (one of `read`, `write`, `read_only` or `metadata`).
+     * - index: A comma separated list of indexes to add a block to.
+     * - allow_no_indices: Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * - ignore_unavailable: Whether specified concrete indexes should be ignored when unavailable (missing or closed).
+     * - master_timeout: Specify timeout for connection to cluster manager.
+     * - timeout: Explicit operation timeout
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function addBlock(array $params = [])
@@ -114,15 +113,14 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Performs the analysis process on a text and return the tokens breakdown of the text.
      *
-     * $params['index']       = (string) Index used to derive the analyzer. If specified, the `analyzer` or field parameter overrides this value. If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']        = (array) Define analyzer/tokenizer parameters and the text on which the analysis should be performed
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: The name of the index to scope the operation.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: Define analyzer/tokenizer parameters and the text on which the analysis should be performed
      * @return array
      */
     public function analyze(array $params = [])
@@ -141,22 +139,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Clears all or specific caches for one or more indexes.
      *
-     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['fielddata']          = (boolean) If `true`, clears the fields cache. Use the `fields` parameter to clear the cache of specific fields only.
-     * $params['fields']             = (any) A comma-separated list of field names used to limit the `fielddata` parameter.
-     * $params['file']               = (boolean) If `true`, clears the unused entries from the file cache on nodes with the Search role. (Default = false)
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['query']              = (boolean) If `true`, clears the query cache.
-     * $params['request']            = (boolean) If `true`, clears the request cache.
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, fielddata?: bool, fields?: mixed, file?: bool, ignore_unavailable?: bool, query?: bool, request?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - fielddata: If `true`, clears the fields cache. Use the `fields` parameter to clear the cache of specific fields only.
+     * - fields: A comma-separated list of field names used to limit the `fielddata` parameter.
+     * - file: If `true`, clears the unused entries from the file cache on nodes with the Search role. (Default: false)
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - query: If `true`, clears the query cache.
+     * - request: If `true`, clears the request cache.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function clearCache(array $params = [])
@@ -173,22 +170,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Clones an index.
      *
-     * $params['index']                   = (string) Name of the source index to clone.
-     * $params['target']                  = (string) Name of the target index to create.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, target?: string, cluster_manager_timeout?: string, master_timeout?: string, task_execution_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: Name of the source index to clone.
+     * - target: Name of the target index to create.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - task_execution_timeout: Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - wait_for_completion: Should this request wait until the operation has completed before returning. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The configuration for the target index (`settings` and `aliases`)
      * @return array
      */
     public function clone(array $params = [])
@@ -209,21 +205,20 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Closes an index.
      *
-     * $params['index']                   = (array) A comma-separated list or wildcard expression of index names used to limit the request.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, ignore_unavailable?: bool, master_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list or wildcard expression of index names used to limit the request.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function close(array $params = [])
@@ -240,19 +235,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates an index with optional settings and mappings.
      *
-     * $params['index']                   = (string) The name of the index you wish to create.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The configuration for the index (`settings` and `mappings`)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: The name of the index you wish to create.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The configuration for the index (`settings` and `mappings`)
      * @return array
      */
     public function create(array $params = [])
@@ -271,15 +265,14 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates or updates a data stream.
      *
-     * $params['name']        = (string) Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,`, `#`, `:`, or a space character; Cannot start with `-`, `_`, `+`, or `.ds-`; Cannot be `.` or `..`; Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']        = (array) The data stream definition
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - name: Name of the data stream, which must meet the following criteria: Lowercase only; Cannot include `\`, `/`, `*`, `?`, `"`, `<`, `>`, `|`, `,`, `#`, `:`, or a space character; Cannot start with `-`, `_`, `+`, or `.ds-`; Cannot be `.` or `..`; Cannot be longer than 255 bytes. Multi-byte characters count towards this limit faster.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The data stream definition
      * @return array
      */
     public function createDataStream(array $params = [])
@@ -298,14 +291,13 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Provides statistics on operations happening in a data stream.
      *
-     * $params['name']        = (array) A comma-separated list of data streams used to limit the request. Wildcard expressions (`*`) are supported. To target all data streams in a cluster, omit this parameter or use `*`.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list of data streams used to limit the request. Wildcard expressions (`*`) are supported. To target all data streams in a cluster, omit this parameter or use `*`.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function dataStreamsStats(array $params = [])
@@ -322,20 +314,19 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an index.
      *
-     * $params['index']                   = (array) A comma-separated list of indexes to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (`*`) or `_all`. To use wildcards or `_all`, set the `action.destructive_requires_name` cluster setting to `false`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default = false)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, ignore_unavailable?: bool, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of indexes to delete. You cannot specify index aliases. By default, this parameter does not support wildcards (`*`) or `_all`. To use wildcards or `_all`, set the `action.destructive_requires_name` cluster setting to `false`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default: false)
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function delete(array $params = [])
@@ -352,18 +343,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an alias.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). (Required)
-     * $params['name']                    = (array) A comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`. (Required)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, name?: mixed, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`).
+     * - name: A comma-separated list of aliases to remove. Supports wildcards (`*`). To remove all aliases, use `*` or `_all`.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteAlias(array $params = [])
@@ -382,14 +372,13 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes a data stream.
      *
-     * $params['name']        = (array) A comma-separated list of data streams to delete. Wildcard (`*`) expressions are supported.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list of data streams to delete. Wildcard (`*`) expressions are supported.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteDataStream(array $params = [])
@@ -406,17 +395,16 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an index template.
      *
-     * $params['name']                    = (string) The name of the index template to delete. Wildcard (*) expressions are supported.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The name of the index template to delete. Wildcard (*) expressions are supported.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteIndexTemplate(array $params = [])
@@ -433,17 +421,16 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Deletes an index template.
      *
-     * $params['name']                    = (string) The name of the legacy index template to delete. Wildcard (`*`) expressions are supported.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The name of the legacy index template to delete. Wildcard (`*`) expressions are supported.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteTemplate(array $params = [])
@@ -460,21 +447,20 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular index exists.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default = false)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index. (Default = false)
-     * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, flat_settings?: bool, ignore_unavailable?: bool, include_defaults?: bool, local?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases. Supports wildcards (`*`).
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default: false)
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - flat_settings: If `true`, returns settings in flat format. (Default: false)
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index. (Default: false)
+     * - include_defaults: If `true`, return all default settings in the response. (Default: false)
+     * - local: If `true`, the request retrieves information from the local node only. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return bool
      */
     public function exists(array $params = []): bool
@@ -495,19 +481,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular alias exists.
      *
-     * $params['name']               = (array) A comma-separated list of aliases to check. Supports wildcards (`*`). (Required)
-     * $params['index']              = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable'] = (boolean) If `false`, requests that include a missing data stream or index in the target indexes or data streams return an error.
-     * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, local?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list of aliases to check. Supports wildcards (`*`).
+     * - index: A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, requests that include a missing data stream or index in the target indexes or data streams return an error.
+     * - local: If `true`, the request retrieves information from the local node only. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return bool
      */
     public function existsAlias(array $params = []): bool
@@ -530,18 +515,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular index template exists.
      *
-     * $params['name']                    = (string) The name of the index template to check existence of. Wildcard (*) expressions are supported.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['flat_settings']           = (boolean) Return settings in flat format. (Default = false)
-     * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cluster_manager_timeout?: string, flat_settings?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The name of the index template to check existence of. Wildcard (*) expressions are supported.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - flat_settings: Return settings in flat format. (Default: false)
+     * - local: Return local information, do not retrieve the state from cluster-manager node. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return bool
      */
     public function existsIndexTemplate(array $params = []): bool
@@ -562,18 +546,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about whether a particular index template exists.
      *
-     * $params['name']                    = (array) The comma separated names of the index templates
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['flat_settings']           = (boolean) Return settings in flat format. (Default = false)
-     * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Explicit operation timeout for connection to cluster-manager node
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, cluster_manager_timeout?: string, flat_settings?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The comma separated names of the index templates
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - flat_settings: Return settings in flat format. (Default: false)
+     * - local: Return local information, do not retrieve the state from cluster-manager node. (Default: false)
+     * - master_timeout: Explicit operation timeout for connection to cluster-manager node
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return bool
      */
     public function existsTemplate(array $params = []): bool
@@ -594,19 +577,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Performs the flush operation on one or more indexes.
      *
-     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['force']              = (boolean) If `true`, the request forces a flush even if there are no changes to commit to the index.
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['wait_if_ongoing']    = (boolean) If `true`, the flush operation blocks until execution when another flush operation is running. If `false`, OpenSearch returns an error if you request a flush when another flush operation is running. (Default = true)
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, force?: bool, ignore_unavailable?: bool, wait_if_ongoing?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards (`*`). To flush all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - force: If `true`, the request forces a flush even if there are no changes to commit to the index.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - wait_if_ongoing: If `true`, the flush operation blocks until execution when another flush operation is running. If `false`, OpenSearch returns an error if you request a flush when another flush operation is running. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function flush(array $params = [])
@@ -623,22 +605,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Performs the force merge operation on one or more indexes.
      *
-     * $params['index']                = (array) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
-     * $params['allow_no_indices']     = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified)
-     * $params['expand_wildcards']     = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['flush']                = (boolean) Specify whether the index should be flushed after performing the operation. (Default = true)
-     * $params['ignore_unavailable']   = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed)
-     * $params['max_num_segments']     = (integer) The number of larger segments into which smaller segments are merged. Set this parameter to 1 to merge all segments into one segment. The default behavior is to perform the merge as necessary.
-     * $params['only_expunge_deletes'] = (boolean) Specify whether the operation should only expunge deleted documents
-     * $params['primary_only']         = (boolean) Specify whether the operation should only perform on primary shards. Defaults to false. (Default = false)
-     * $params['wait_for_completion']  = (boolean) Should the request wait until the force merge is completed. (Default = true)
-     * $params['pretty']               = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']          = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']               = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']          = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, flush?: bool, ignore_unavailable?: bool, max_num_segments?: int, only_expunge_deletes?: bool, primary_only?: bool, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
+     * - allow_no_indices: Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified)
+     * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * - flush: Specify whether the index should be flushed after performing the operation. (Default: true)
+     * - ignore_unavailable: Whether specified concrete indexes should be ignored when unavailable (missing or closed)
+     * - max_num_segments: The number of larger segments into which smaller segments are merged. Set this parameter to 1 to merge all segments into one segment. The default behavior is to perform the merge as necessary.
+     * - only_expunge_deletes: Specify whether the operation should only expunge deleted documents
+     * - primary_only: Specify whether the operation should only perform on primary shards. Defaults to false. (Default: false)
+     * - wait_for_completion: Should the request wait until the force merge is completed. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function forcemerge(array $params = [])
@@ -655,22 +636,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about one or more indexes.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar. (Default = false)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['ignore_unavailable']      = (boolean) If `false`, requests that target a missing index return an error. (Default = false)
-     * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, flat_settings?: bool, ignore_unavailable?: bool, include_defaults?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and index aliases used to limit the request. Wildcard expressions (*) are supported.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar. (Default: false)
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard expressions can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
+     * - flat_settings: If `true`, returns settings in flat format. (Default: false)
+     * - ignore_unavailable: If `false`, requests that target a missing index return an error. (Default: false)
+     * - include_defaults: If `true`, return all default settings in the response. (Default: false)
+     * - local: If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function get(array $params = [])
@@ -687,19 +667,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns an alias.
      *
-     * $params['name']               = (array) A comma-separated list of aliases to retrieve. Supports wildcards (`*`). To retrieve all aliases, omit this parameter or use `*` or `_all`.
-     * $params['index']              = (array) A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, local?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list of aliases to retrieve. Supports wildcards (`*`). To retrieve all aliases, omit this parameter or use `*` or `_all`.
+     * - index: A comma-separated list of data streams or indexes used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - local: If `true`, the request retrieves information from the local node only. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getAlias(array $params = [])
@@ -718,14 +697,13 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns data streams.
      *
-     * $params['name']        = (array) A comma-separated list of data stream names used to limit the request. Wildcard (`*`) expressions are supported. If omitted, all data streams are returned.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list of data stream names used to limit the request. Wildcard (`*`) expressions are supported. If omitted, all data streams are returned.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getDataStream(array $params = [])
@@ -742,20 +720,19 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns mapping for one or more fields.
      *
-     * $params['fields']             = (array) A comma-separated list or wildcard expression of fields used to limit returned information. (Required)
-     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['include_defaults']   = (boolean) If `true`, return all default settings in the response.
-     * $params['local']              = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{fields?: mixed, index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, include_defaults?: bool, local?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - fields: A comma-separated list or wildcard expression of fields used to limit returned information.
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - include_defaults: If `true`, return all default settings in the response.
+     * - local: If `true`, the request retrieves information from the local node only. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getFieldMapping(array $params = [])
@@ -774,18 +751,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns an index template.
      *
-     * $params['name']                    = (array) The name of the index template to retrieve. Wildcard (*) expressions are supported.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, cluster_manager_timeout?: string, flat_settings?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The name of the index template to retrieve. Wildcard (*) expressions are supported.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - flat_settings: If `true`, returns settings in flat format. (Default: false)
+     * - local: If `true`, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the cluster-manager node. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getIndexTemplate(array $params = [])
@@ -802,20 +778,19 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns mappings for one or more indexes.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, ignore_unavailable?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - local: If `true`, the request retrieves information from the local node only. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getMapping(array $params = [])
@@ -832,23 +807,22 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns settings for one or more indexes.
      *
-     * $params['name']                    = (array) A comma-separated list or wildcard expression of settings to retrieve.
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with `bar`.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['include_defaults']        = (boolean) If `true`, return all default settings in the response. (Default = false)
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. If `false`, information is retrieved from the cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, flat_settings?: bool, ignore_unavailable?: bool, include_defaults?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list or wildcard expression of settings to retrieve.
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with foo but no index starts with `bar`.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
+     * - flat_settings: If `true`, returns settings in flat format. (Default: false)
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - include_defaults: If `true`, return all default settings in the response. (Default: false)
+     * - local: If `true`, the request retrieves information from the local node only. If `false`, information is retrieved from the cluster-manager node. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getSettings(array $params = [])
@@ -867,18 +841,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns an index template.
      *
-     * $params['name']                    = (array) A comma-separated list of index template names used to limit the request. Wildcard (`*`) expressions are supported. To return all index templates, omit this parameter or use a value of `_all` or `*`.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['local']                   = (boolean) If `true`, the request retrieves information from the local node only. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, cluster_manager_timeout?: string, flat_settings?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: A comma-separated list of index template names used to limit the request. Wildcard (`*`) expressions are supported. To return all index templates, omit this parameter or use a value of `_all` or `*`.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - flat_settings: If `true`, returns settings in flat format. (Default: false)
+     * - local: If `true`, the request retrieves information from the local node only. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getTemplate(array $params = [])
@@ -895,17 +868,16 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * The `_upgrade` API is no longer useful and will be removed.
      *
-     * $params['index']              = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
-     * $params['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
-     * $params['expand_wildcards']   = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['ignore_unavailable'] = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * - allow_no_indices: Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
+     * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * - ignore_unavailable: Whether specified concrete indexes should be ignored when unavailable (missing or closed).
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getUpgrade(array $params = [])
@@ -922,23 +894,22 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Opens an index.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, ignore_unavailable?: bool, master_timeout?: string, task_execution_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). By default, you must explicitly name the indexes you using to limit the request. To limit a request using `_all`, `*`, or other wildcard expressions, change the `action.destructive_requires_name` setting to false. You can update this setting in the `opensearch.yml` file or using the cluster update settings API.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - task_execution_timeout: Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - wait_for_completion: Should this request wait until the operation has completed before returning. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function open(array $params = [])
@@ -955,19 +926,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates or updates an alias.
      *
-     * $params['name']                    = (string) Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
-     * $params['index']                   = (array) A comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The settings for the alias, such as `routing` or `filter`
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, index?: mixed, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - name: Alias to update. If the alias doesn't exist, the request creates it. Index alias names support date math.
+     * - index: A comma-separated list of data streams or indexes to add. Supports wildcards (`*`). Wildcard patterns that match both data streams and indexes return an error.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The settings for the alias, such as `routing` or `filter`
      * @return array
      */
     public function putAlias(array $params = [])
@@ -988,19 +958,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates or updates an index template.
      *
-     * $params['name']                    = (string) Index or template name
-     * $params['cause']                   = (string) User defined reason for creating/updating the index template. (Default = false)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing index templates. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The template definition (Required)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cause?: string, cluster_manager_timeout?: string, create?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - name: Index or template name
+     * - cause: User defined reason for creating/updating the index template. (Default: false)
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - create: If `true`, this request cannot replace or update existing index templates. (Default: false)
+     * - master_timeout: Operation timeout for connection to cluster-manager node.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The template definition (Required)
      * @return array
      */
     public function putIndexTemplate(array $params = [])
@@ -1019,22 +988,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Updates the index mappings.
      *
-     * $params['index']                   = (array) A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indexes.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable']      = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['write_index_only']        = (boolean) If `true`, the mappings are applied only to the current write index for the target. (Default = false)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The mapping definition (Required)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, ignore_unavailable?: bool, master_timeout?: string, timeout?: string, write_index_only?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - index: A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indexes.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - write_index_only: If `true`, the mappings are applied only to the current write index for the target. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The mapping definition (Required)
      * @return array
      */
     public function putMapping(array $params = [])
@@ -1053,22 +1021,22 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Updates the index settings.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']        = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']        = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
-     * $params['flat_settings']           = (boolean) If `true`, returns settings in flat format. (Default = false)
-     * $params['ignore_unavailable']      = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['preserve_existing']       = (boolean) If `true`, existing index settings remain unchanged. (Default = false)
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, flat_settings?: bool, ignore_unavailable?: bool, master_timeout?: string, preserve_existing?: bool, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. For example, a request targeting `foo*,bar*` returns an error if an index starts with `foo` but no index starts with `bar`.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
+     * - flat_settings: If `true`, returns settings in flat format. (Default: false)
+     * - ignore_unavailable: Whether specified concrete indexes should be ignored when unavailable (missing or closed).
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - preserve_existing: If `true`, existing index settings remain unchanged. (Default: false)
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
      * @return array
      */
     public function putSettings(array $params = [])
@@ -1087,19 +1055,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Creates or updates an index template.
      *
-     * $params['name']                    = (string) The name of the template
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['create']                  = (boolean) If `true`, this request cannot replace or update existing index templates. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['order']                   = (integer) Order in which OpenSearch applies this template if index matches multiple templates. Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The template definition (Required)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cluster_manager_timeout?: string, create?: bool, master_timeout?: string, order?: int, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - name: The name of the template
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - create: If `true`, this request cannot replace or update existing index templates. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - order: Order in which OpenSearch applies this template if index matches multiple templates. Templates with lower 'order' values are merged first. Templates with higher 'order' values are merged later, overriding templates with lower values.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The template definition (Required)
      * @return array
      */
     public function putTemplate(array $params = [])
@@ -1118,16 +1085,15 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about ongoing index shard recoveries.
      *
-     * $params['index']       = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['active_only'] = (boolean) If `true`, the response only includes ongoing shard recoveries. (Default = false)
-     * $params['detailed']    = (boolean) If `true`, the response includes detailed information about shard recoveries. (Default = false)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, active_only?: bool, detailed?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - active_only: If `true`, the response only includes ongoing shard recoveries. (Default: false)
+     * - detailed: If `true`, the response includes detailed information about shard recoveries. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function recovery(array $params = [])
@@ -1144,17 +1110,16 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Performs the refresh operation in one or more indexes.
      *
-     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function refresh(array $params = [])
@@ -1171,15 +1136,14 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Returns information about any matching indexes, aliases, and data streams.
      *
-     * $params['name']             = (array) Comma-separated name(s) or index pattern(s) of the indexes, aliases, and data streams to resolve. Resources on remote clusters can be specified using the `<cluster>`:`<name>` syntax.
-     * $params['expand_wildcards'] = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['pretty']           = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']            = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']      = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']           = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']      = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: mixed, expand_wildcards?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: Comma-separated name(s) or index pattern(s) of the indexes, aliases, and data streams to resolve. Resources on remote clusters can be specified using the `<cluster>`:`<name>` syntax.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function resolveIndex(array $params = [])
@@ -1196,21 +1160,20 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Updates an alias to point to a new index when the existing indexis considered to be too large or too old.
      *
-     * $params['alias']                   = (string) Name of the data stream or index alias to roll over. (Required)
-     * $params['new_index']               = (string) The name of the index to create. Supports date math. Data streams do not support this parameter.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['dry_run']                 = (boolean) If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The conditions that needs to be met for executing rollover
-     *
-     * @param array $params Associative array of parameters
+     * @param array{alias?: string, new_index?: string, cluster_manager_timeout?: string, dry_run?: bool, master_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - alias: Name of the data stream or index alias to roll over.
+     * - new_index: The name of the index to create. Supports date math. Data streams do not support this parameter.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - dry_run: If `true`, checks whether the current index satisfies the specified conditions but does not perform a rollover. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to all or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The conditions that needs to be met for executing rollover
      * @return array
      */
     public function rollover(array $params = [])
@@ -1231,18 +1194,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Provides low-level information about segments in a Lucene index.
      *
-     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['verbose']            = (boolean) If `true`, the request returns a verbose response. (Default = false)
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, verbose?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - verbose: If `true`, the request returns a verbose response. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function segments(array $params = [])
@@ -1259,18 +1221,17 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Provides store information for shard copies of indexes.
      *
-     * $params['index']              = (array) Limits health reporting to a specific source. Can be a single source or a comma-separated list of sources (comprised of data streams, indexes, and aliases).
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default = false)
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
-     * $params['ignore_unavailable'] = (boolean) If `true`, missing or closed indexes are not included in the response. (Default = false)
-     * $params['status']             = (any) A list of shard health statuses used to limit the request. (Default = yellow,red)
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, status?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: Limits health reporting to a specific source. Can be a single source or a comma-separated list of sources (comprised of data streams, indexes, and aliases).
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes. (Default: false)
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+     * - ignore_unavailable: If `true`, missing or closed indexes are not included in the response. (Default: false)
+     * - status: A list of shard health statuses used to limit the request. (Default: yellow, red)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function shardStores(array $params = [])
@@ -1287,23 +1248,22 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Allow to shrink an existing index into a new index with fewer primary shards.
      *
-     * $params['index']                   = (string) Name of the source index to shrink.
-     * $params['target']                  = (string) Name of the target index to create.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['copy_settings']           = (boolean) whether or not to copy settings from the source index. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, target?: string, cluster_manager_timeout?: string, copy_settings?: bool, master_timeout?: string, task_execution_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: Name of the source index to shrink.
+     * - target: Name of the target index to create.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - copy_settings: whether or not to copy settings from the source index. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - task_execution_timeout: Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - wait_for_completion: Should this request wait until the operation has completed before returning. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The configuration for the target index (`settings` and `aliases`)
      * @return array
      */
     public function shrink(array $params = [])
@@ -1324,17 +1284,16 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Simulate matching the given index name against the index templates in the system.
      *
-     * $params['name']                    = (string) Index or template name to simulate
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) New index template definition, which will be included in the simulation, as if it already exists in the system
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cluster_manager_timeout?: string, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - name: Index or template name to simulate
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: New index template definition, which will be included in the simulation, as if it already exists in the system
      * @return array
      */
     public function simulateIndexTemplate(array $params = [])
@@ -1353,18 +1312,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Simulate resolving the given template name or body.
      *
-     * $params['name']                    = (string) The name of the index template to simulate. To test a template configuration before you add it to the cluster, omit this parameter and specify the template configuration in the request body.
-     * $params['cause']                   = (string) User defined reason for dry-run creating the new template for simulation purposes. (Default = false)
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['create']                  = (boolean) If `true`, the template passed in the body is only used if no existing templates match the same index patterns. If `false`, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{name?: string, cause?: string, cluster_manager_timeout?: string, create?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - name: The name of the index template to simulate. To test a template configuration before you add it to the cluster, omit this parameter and specify the template configuration in the request body.
+     * - cause: User defined reason for dry-run creating the new template for simulation purposes. (Default: false)
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - create: If `true`, the template passed in the body is only used if no existing templates match the same index patterns. If `false`, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function simulateTemplate(array $params = [])
@@ -1383,23 +1342,22 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Allows you to split an existing index into a new index with more primary shards.
      *
-     * $params['index']                   = (string) Name of the source index to split.
-     * $params['target']                  = (string) Name of the target index to create.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['copy_settings']           = (boolean) whether or not to copy settings from the source index. (Default = false)
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['task_execution_timeout']  = (string) Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['wait_for_active_shards']  = (any) The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
-     * $params['wait_for_completion']     = (boolean) Should this request wait until the operation has completed before returning. (Default = true)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The configuration for the target index (`settings` and `aliases`)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, target?: string, cluster_manager_timeout?: string, copy_settings?: bool, master_timeout?: string, task_execution_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: Name of the source index to split.
+     * - target: Name of the target index to create.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - copy_settings: whether or not to copy settings from the source index. (Default: false)
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - task_execution_timeout: Explicit task execution timeout, only useful when `wait_for_completion` is false, defaults to `1h`.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - wait_for_active_shards: The number of shard copies that must be active before proceeding with the operation. Set to `all` or any positive integer up to the total number of shards in the index (`number_of_replicas+1`).
+     * - wait_for_completion: Should this request wait until the operation has completed before returning. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The configuration for the target index (`settings` and `aliases`)
      * @return array
      */
     public function split(array $params = [])
@@ -1420,24 +1378,23 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Provides statistics on operations happening in an index.
      *
-     * $params['metric']                     = (array) Limit the information returned the specific metrics.
-     * $params['index']                      = (array) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
-     * $params['completion_fields']          = (any) A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
-     * $params['expand_wildcards']           = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
-     * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
-     * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
-     * $params['forbid_closed_indices']      = (boolean) If `true`, statistics are not collected from closed indexes. (Default = true)
-     * $params['groups']                     = (any) A comma-separated list of search groups to include in the search statistics.
-     * $params['include_segment_file_sizes'] = (boolean) If `true`, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
-     * $params['include_unloaded_segments']  = (boolean) If `true`, the response includes information from segments that are not loaded into memory. (Default = false)
-     * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
-     * $params['pretty']                     = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                      = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                     = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{metric?: mixed, index?: mixed, completion_fields?: mixed, expand_wildcards?: mixed, fielddata_fields?: mixed, fields?: mixed, forbid_closed_indices?: bool, groups?: mixed, include_segment_file_sizes?: bool, include_unloaded_segments?: bool, level?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - metric: Limit the information returned the specific metrics.
+     * - index: A comma-separated list of index names; use `_all` or empty string to perform the operation on all indexes
+     * - completion_fields: A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`.
+     * - fielddata_fields: A comma-separated list or wildcard expressions of fields to include in field data statistics.
+     * - fields: A comma-separated list or wildcard expressions of fields to include in the statistics.
+     * - forbid_closed_indices: If `true`, statistics are not collected from closed indexes. (Default: true)
+     * - groups: A comma-separated list of search groups to include in the search statistics.
+     * - include_segment_file_sizes: If `true`, the call reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default: false)
+     * - include_unloaded_segments: If `true`, the response includes information from segments that are not loaded into memory. (Default: false)
+     * - level: Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options: cluster, indices, shards)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function stats(array $params = [])
@@ -1456,17 +1413,16 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Updates index aliases.
      *
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['timeout']                 = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']                    = (array) The definition of `actions` to perform (Required)
-     *
-     * @param array $params Associative array of parameters
+     * @param array{cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The definition of `actions` to perform (Required)
      * @return array
      */
     public function updateAliases(array $params = [])
@@ -1483,19 +1439,18 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * The `_upgrade` API is no longer useful and will be removed.
      *
-     * $params['index']                 = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
-     * $params['allow_no_indices']      = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
-     * $params['expand_wildcards']      = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['ignore_unavailable']    = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-     * $params['only_ancient_segments'] = (boolean) If `true`, only ancient (an older Lucene major release) segments will be upgraded.
-     * $params['wait_for_completion']   = (boolean) Should this request wait until the operation has completed before returning. (Default = false)
-     * $params['pretty']                = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                 = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']           = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']           = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, only_ancient_segments?: bool, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * - allow_no_indices: Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
+     * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * - ignore_unavailable: Whether specified concrete indexes should be ignored when unavailable (missing or closed).
+     * - only_ancient_segments: If `true`, only ancient (an older Lucene major release) segments will be upgraded.
+     * - wait_for_completion: Should this request wait until the operation has completed before returning. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function upgrade(array $params = [])
@@ -1512,27 +1467,26 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * Allows a user to validate a potentially expensive query without executing it.
      *
-     * $params['index']              = (array) A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
-     * $params['all_shards']         = (boolean) If `true`, the validation is executed on all shards instead of one random shard per index.
-     * $params['allow_no_indices']   = (boolean) If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
-     * $params['analyze_wildcard']   = (boolean) If `true`, wildcard and prefix queries are analyzed. (Default = false)
-     * $params['analyzer']           = (string) Analyzer to use for the query string. This parameter can only be used when the `q` query string parameter is specified.
-     * $params['default_operator']   = (enum) The default operator for query string query: `AND` or `OR`. (Options = and,AND,or,OR)
-     * $params['df']                 = (string) Field to use as default where no field prefix is given in the query string. This parameter can only be used when the `q` query string parameter is specified.
-     * $params['expand_wildcards']   = (any) Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
-     * $params['explain']            = (boolean) If `true`, the response returns detailed information if an error has occurred.
-     * $params['ignore_unavailable'] = (boolean) If `false`, the request returns an error if it targets a missing or closed index.
-     * $params['lenient']            = (boolean) If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
-     * $params['q']                  = (string) Query in the Lucene query string syntax.
-     * $params['rewrite']            = (boolean) If `true`, returns a more detailed explanation showing the actual Lucene query that will be executed.
-     * $params['pretty']             = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']              = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']        = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']             = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']        = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']               = (array) The query definition specified with the Query DSL
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, all_shards?: bool, allow_no_indices?: bool, analyze_wildcard?: bool, analyzer?: string, default_operator?: mixed, df?: string, expand_wildcards?: mixed, explain?: bool, ignore_unavailable?: bool, lenient?: bool, q?: string, rewrite?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases to search. Supports wildcards (`*`). To search all data streams or indexes, omit this parameter or use `*` or `_all`.
+     * - all_shards: If `true`, the validation is executed on all shards instead of one random shard per index.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
+     * - analyze_wildcard: If `true`, wildcard and prefix queries are analyzed. (Default: false)
+     * - analyzer: Analyzer to use for the query string. This parameter can only be used when the `q` query string parameter is specified.
+     * - default_operator: The default operator for query string query: `AND` or `OR`. (Options: and, AND, or, OR)
+     * - df: Field to use as default where no field prefix is given in the query string. This parameter can only be used when the `q` query string parameter is specified.
+     * - expand_wildcards: Type of index that wildcard patterns can match. If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams. Supports comma-separated values, such as `open,hidden`. Valid values are: `all`, `open`, `closed`, `hidden`, `none`.
+     * - explain: If `true`, the response returns detailed information if an error has occurred.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
+     * - lenient: If `true`, format-based query failures (such as providing text to a numeric field) in the query string will be ignored.
+     * - q: Query in the Lucene query string syntax.
+     * - rewrite: If `true`, returns a more detailed explanation showing the actual Lucene query that will be executed.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The query definition specified with the Query DSL
      * @return array
      */
     public function validateQuery(array $params = [])

@@ -4,6 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Update docblocks to define array shapes ([#392](https://github.com/opensearch-project/opensearch-php/pull/392))
 ### Changed
 ### Deprecated
 ### Removed

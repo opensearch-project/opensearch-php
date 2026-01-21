@@ -1,6 +1,116 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:bulk\\(\\) is incompatible with type array\\{index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, pipeline\\?\\: string, refresh\\?\\: mixed, require_alias\\?\\: bool, routing\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:bulkStream\\(\\) is incompatible with type array\\{index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, batch_interval\\?\\: string, batch_size\\?\\: int, pipeline\\?\\: string, refresh\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:delete\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:deleteByQuery\\(\\) is incompatible with type array\\{index\\?\\: mixed, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, allow_no_indices\\?\\: bool, analyze_wildcard\\?\\: bool, analyzer\\?\\: string, conflicts\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:deleteScript\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:exists\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, preference\\?\\: string, realtime\\?\\: bool, refresh\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:existsSource\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, preference\\?\\: string, realtime\\?\\: bool, refresh\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:explain\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, analyze_wildcard\\?\\: bool, analyzer\\?\\: string, default_operator\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:get\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, preference\\?\\: string, realtime\\?\\: bool, refresh\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:getScript\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:getSource\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, preference\\?\\: string, realtime\\?\\: bool, refresh\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:index\\(\\) is incompatible with type array\\{index\\?\\: string, id\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, op_type\\?\\: mixed, pipeline\\?\\: string, refresh\\?\\: mixed, require_alias\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:mget\\(\\) is incompatible with type array\\{index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, preference\\?\\: string, realtime\\?\\: bool, refresh\\?\\: mixed, routing\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:msearch\\(\\) is incompatible with type array\\{index\\?\\: mixed, ccs_minimize_roundtrips\\?\\: bool, max_concurrent_searches\\?\\: int, max_concurrent_shard_requests\\?\\: int, pre_filter_shard_size\\?\\: int, rest_total_hits_as_int\\?\\: bool, search_type\\?\\: mixed, typed_keys\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:msearchTemplate\\(\\) is incompatible with type array\\{index\\?\\: mixed, ccs_minimize_roundtrips\\?\\: bool, max_concurrent_searches\\?\\: int, rest_total_hits_as_int\\?\\: bool, search_type\\?\\: mixed, typed_keys\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:putScript\\(\\) is incompatible with type array\\{id\\: string, context\\?\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:rankEval\\(\\) is incompatible with type array\\{index\\?\\: mixed, allow_no_indices\\?\\: bool, expand_wildcards\\?\\: mixed, ignore_unavailable\\?\\: bool, search_type\\?\\: mixed, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:reindex\\(\\) is incompatible with type array\\{max_docs\\?\\: int, refresh\\?\\: mixed, requests_per_second\\?\\: float\\|int, require_alias\\?\\: bool, scroll\\?\\: string, slices\\?\\: mixed, timeout\\?\\: string, wait_for_active_shards\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:renderSearchTemplate\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:searchTemplate\\(\\) is incompatible with type array\\{index\\?\\: mixed, allow_no_indices\\?\\: bool, ccs_minimize_roundtrips\\?\\: bool, expand_wildcards\\?\\: mixed, explain\\?\\: bool, ignore_throttled\\?\\: bool, ignore_unavailable\\?\\: bool, phase_took\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:termvectors\\(\\) is incompatible with type array\\{index\\?\\: string, id\\: string, field_statistics\\?\\: bool, fields\\?\\: mixed, offsets\\?\\: bool, payloads\\?\\: bool, positions\\?\\: bool, preference\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Client\\:\\:update\\(\\) is incompatible with type array\\{id\\: string, index\\?\\: string, _source\\?\\: mixed, _source_excludes\\?\\: mixed, _source_includes\\?\\: mixed, if_primary_term\\?\\: int, if_seq_no\\?\\: int, lang\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Client.php
+
+		-
 			message: """
 				#^Instantiation of deprecated class OpenSearch\\\\Common\\\\Exceptions\\\\InvalidArgumentException\\:
 				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
@@ -9,12 +119,197 @@ parameters:
 			path: src/OpenSearch/Endpoints/Monitoring/Bulk.php
 
 		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\AsynchronousSearchNamespace\\:\\:delete\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/AsynchronousSearchNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\AsynchronousSearchNamespace\\:\\:get\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/AsynchronousSearchNamespace.php
+
+		-
 			message: """
 				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Cat\\\\Master\\:
 				To promote inclusive language, use '/_cat/cluster_manager' instead\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/CatNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ClusterNamespace\\:\\:putComponentTemplate\\(\\) is incompatible with type array\\{name\\?\\: string, cluster_manager_timeout\\?\\: string, create\\?\\: bool, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ClusterNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ClusterNamespace\\:\\:putSettings\\(\\) is incompatible with type array\\{cluster_manager_timeout\\?\\: string, flat_settings\\?\\: bool, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ClusterNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\FlowFrameworkNamespace\\:\\:search\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/FlowFrameworkNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\FlowFrameworkNamespace\\:\\:searchState\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/FlowFrameworkNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\GeospatialNamespace\\:\\:geojsonUploadPost\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/GeospatialNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\GeospatialNamespace\\:\\:geojsonUploadPut\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/GeospatialNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\GeospatialNamespace\\:\\:putIp2geoDatasourceSettings\\(\\) is incompatible with type array\\{name\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/GeospatialNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IndicesNamespace\\:\\:putIndexTemplate\\(\\) is incompatible with type array\\{name\\?\\: string, cause\\?\\: string, cluster_manager_timeout\\?\\: string, create\\?\\: bool, master_timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IndicesNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IndicesNamespace\\:\\:putMapping\\(\\) is incompatible with type array\\{index\\?\\: mixed, allow_no_indices\\?\\: bool, cluster_manager_timeout\\?\\: string, expand_wildcards\\?\\: mixed, ignore_unavailable\\?\\: bool, master_timeout\\?\\: string, timeout\\?\\: string, write_index_only\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IndicesNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IndicesNamespace\\:\\:putSettings\\(\\) is incompatible with type array\\{index\\?\\: mixed, allow_no_indices\\?\\: bool, cluster_manager_timeout\\?\\: string, expand_wildcards\\?\\: mixed, flat_settings\\?\\: bool, ignore_unavailable\\?\\: bool, master_timeout\\?\\: string, preserve_existing\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IndicesNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IndicesNamespace\\:\\:putTemplate\\(\\) is incompatible with type array\\{name\\?\\: string, cluster_manager_timeout\\?\\: string, create\\?\\: bool, master_timeout\\?\\: string, order\\?\\: int, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IndicesNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IndicesNamespace\\:\\:updateAliases\\(\\) is incompatible with type array\\{cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IndicesNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IngestNamespace\\:\\:deletePipeline\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IngestNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IngestNamespace\\:\\:getPipeline\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IngestNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IngestNamespace\\:\\:putPipeline\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IngestNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\IngestNamespace\\:\\:simulate\\(\\) is incompatible with type array\\{id\\: string, verbose\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/IngestNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:addFeaturesToSet\\(\\) is incompatible with type array\\{name\\?\\: string, store\\?\\: string, merge\\?\\: bool, routing\\?\\: string, version\\?\\: int, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:createFeature\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, routing\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:createFeatureset\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, routing\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:createModel\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, routing\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:createModelFromSet\\(\\) is incompatible with type array\\{name\\?\\: string, store\\?\\: string, routing\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:deleteFeature\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:deleteFeatureset\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:deleteModel\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:getFeature\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:getFeatureset\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:getModel\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:updateFeature\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, routing\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\LtrNamespace\\:\\:updateFeatureset\\(\\) is incompatible with type array\\{id\\: string, store\\?\\: string, routing\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/LtrNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\MlNamespace\\:\\:deleteAgenticMemory\\(\\) is incompatible with type array\\{id\\: string, memory_container_id\\?\\: string, type\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\MlNamespace\\:\\:deleteModel\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\MlNamespace\\:\\:deleteModelGroup\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\MlNamespace\\:\\:getAgenticMemory\\(\\) is incompatible with type array\\{id\\: string, memory_container_id\\?\\: string, type\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\MlNamespace\\:\\:getTask\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\MlNamespace\\:\\:updateAgenticMemory\\(\\) is incompatible with type array\\{id\\: string, memory_container_id\\?\\: string, type\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
 			message: """
@@ -57,12 +352,330 @@ parameters:
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\NotificationsNamespace\\:\\:createConfig\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/NotificationsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\NotificationsNamespace\\:\\:updateConfig\\(\\) is incompatible with type array\\{config_id\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/NotificationsNamespace.php
+
+		-
+			message: """
+				#^PHPDoc tag @param has invalid value \\(array\\{chime\\.url\\?\\: string, chime\\.url\\.keyword\\?\\: string, config_id\\?\\: string, config_id_list\\?\\: mixed, config_type\\?\\: mixed, created_time_ms\\?\\: int, description\\?\\: string, description\\.keyword\\?\\: string, email\\.email_account_id\\?\\: string, email\\.email_group_id_list\\?\\: string, email\\.recipient_list\\.recipient\\?\\: string, email\\.recipient_list\\.recipient\\.keyword\\?\\: string, email_group\\.recipient_list\\.recipient\\?\\: string, email_group\\.recipient_list\\.recipient\\.keyword\\?\\: string, is_enabled\\?\\: bool, last_updated_time_ms\\?\\: int, microsoft_teams\\.url\\?\\: string, microsoft_teams\\.url\\.keyword\\?\\: string, name\\?\\: string, name\\.keyword\\?\\: string, query\\?\\: string, ses_account\\.from_address\\?\\: string, ses_account\\.from_address\\.keyword\\?\\: string, ses_account\\.region\\?\\: string, ses_account\\.role_arn\\?\\: string, ses_account\\.role_arn\\.keyword\\?\\: string, slack\\.url\\?\\: string, slack\\.url\\.keyword\\?\\: string, smtp_account\\.from_address\\?\\: string, smtp_account\\.from_address\\.keyword\\?\\: string, smtp_account\\.host\\?\\: string, smtp_account\\.host\\.keyword\\?\\: string, smtp_account\\.method\\?\\: string, sns\\.role_arn\\?\\: string, sns\\.role_arn\\.keyword\\?\\: string, sns\\.topic_arn\\?\\: string, sns\\.topic_arn\\.keyword\\?\\: string, text_query\\?\\: string, webhook\\.url\\?\\: string, webhook\\.url\\.keyword\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\?\\: mixed\\} \\$params
+				\\- chime\\.url\\:
+				\\- chime\\.url\\.keyword\\:
+				\\- config_id\\: Notification configuration ID\\.
+				\\- config_id_list\\: Notification configuration IDs\\.
+				\\- config_type\\: Type of notification configuration\\. \\(Options\\: chime, email, email_group, microsoft_teams, ses_account, slack, smtp_account, sns, webhook\\)
+				\\- created_time_ms\\:
+				\\- description\\:
+				\\- description\\.keyword\\:
+				\\- email\\.email_account_id\\:
+				\\- email\\.email_group_id_list\\:
+				\\- email\\.recipient_list\\.recipient\\:
+				\\- email\\.recipient_list\\.recipient\\.keyword\\:
+				\\- email_group\\.recipient_list\\.recipient\\:
+				\\- email_group\\.recipient_list\\.recipient\\.keyword\\:
+				\\- is_enabled\\:
+				\\- last_updated_time_ms\\:
+				\\- microsoft_teams\\.url\\:
+				\\- microsoft_teams\\.url\\.keyword\\:
+				\\- name\\:
+				\\- name\\.keyword\\:
+				\\- query\\:
+				\\- ses_account\\.from_address\\:
+				\\- ses_account\\.from_address\\.keyword\\:
+				\\- ses_account\\.region\\:
+				\\- ses_account\\.role_arn\\:
+				\\- ses_account\\.role_arn\\.keyword\\:
+				\\- slack\\.url\\:
+				\\- slack\\.url\\.keyword\\:
+				\\- smtp_account\\.from_address\\:
+				\\- smtp_account\\.from_address\\.keyword\\:
+				\\- smtp_account\\.host\\:
+				\\- smtp_account\\.host\\.keyword\\:
+				\\- smtp_account\\.method\\:
+				\\- sns\\.role_arn\\:
+				\\- sns\\.role_arn\\.keyword\\:
+				\\- sns\\.topic_arn\\:
+				\\- sns\\.topic_arn\\.keyword\\:
+				\\- text_query\\:
+				\\- webhook\\.url\\:
+				\\- webhook\\.url\\.keyword\\:
+				\\- pretty\\: Whether to pretty\\-format the returned JSON response\\. \\(Default\\: false\\)
+				\\- human\\: Whether to return human\\-readable values for statistics\\. \\(Default\\: false\\)
+				\\- error_trace\\: Whether to include the stack trace of returned errors\\. \\(Default\\: false\\)
+				\\- source\\: The URL\\-encoded request definition\\. Useful for libraries that do not accept a request body for non\\-POST requests\\.
+				\\- filter_path\\: A comma\\-separated list of filters used to filter the response\\. Use wildcards to match any field or part of a field's name\\. To exclude fields, use `\\-`\\.
+				\\- body\\:\\)\\: Unexpected token "\\.url\\?\\:", expected '\\}' at offset 95$#
+			"""
+			count: 1
+			path: src/OpenSearch/Namespaces/NotificationsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\PplNamespace\\:\\:explain\\(\\) is incompatible with type array\\{format\\?\\: string, sanitize\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/PplNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\PplNamespace\\:\\:postStats\\(\\) is incompatible with type array\\{format\\?\\: string, sanitize\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/PplNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\PplNamespace\\:\\:query\\(\\) is incompatible with type array\\{format\\?\\: string, sanitize\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/PplNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RemoteStoreNamespace\\:\\:restore\\(\\) is incompatible with type array\\{cluster_manager_timeout\\?\\: string, wait_for_completion\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RemoteStoreNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:createReplicationRule\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:deleteReplicationRule\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:pause\\(\\) is incompatible with type array\\{index\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:resume\\(\\) is incompatible with type array\\{index\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:start\\(\\) is incompatible with type array\\{index\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:stop\\(\\) is incompatible with type array\\{index\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\ReplicationNamespace\\:\\:updateSettings\\(\\) is incompatible with type array\\{index\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/ReplicationNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RollupsNamespace\\:\\:delete\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RollupsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RollupsNamespace\\:\\:explain\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RollupsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RollupsNamespace\\:\\:get\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RollupsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RollupsNamespace\\:\\:put\\(\\) is incompatible with type array\\{id\\: string, if_primary_term\\?\\: float\\|int, if_seq_no\\?\\: int, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RollupsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RollupsNamespace\\:\\:start\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RollupsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\RollupsNamespace\\:\\:stop\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/RollupsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SearchPipelineNamespace\\:\\:delete\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SearchPipelineNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SearchPipelineNamespace\\:\\:get\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SearchPipelineNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SearchPipelineNamespace\\:\\:put\\(\\) is incompatible with type array\\{id\\: string, cluster_manager_timeout\\?\\: string, timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SearchPipelineNamespace.php
+
+		-
 			message: """
 				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
 				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
 			"""
 			count: 1
 			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:createAllowlist\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:createUpdateTenancyConfig\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:createUserLegacy\\(\\) is incompatible with type array\\{username\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:generateOboToken\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchActionGroup\\(\\) is incompatible with type array\\{action_group\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchAllowlist\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchAuditConfiguration\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchConfiguration\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchDistinguishedNames\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchRole\\(\\) is incompatible with type array\\{role\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchRoleMapping\\(\\) is incompatible with type array\\{role\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchTenant\\(\\) is incompatible with type array\\{tenant\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:patchUser\\(\\) is incompatible with type array\\{username\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:updateAuditConfiguration\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SecurityNamespace\\:\\:updateConfiguration\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SecurityNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SnapshotNamespace\\:\\:clone\\(\\) is incompatible with type array\\{repository\\?\\: string, snapshot\\?\\: string, target_snapshot\\?\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SnapshotNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\SnapshotNamespace\\:\\:createRepository\\(\\) is incompatible with type array\\{repository\\?\\: string, cluster_manager_timeout\\?\\: string, master_timeout\\?\\: string, timeout\\?\\: string, verify\\?\\: bool, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/SnapshotNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\TransformsNamespace\\:\\:delete\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/TransformsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\TransformsNamespace\\:\\:explain\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/TransformsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\TransformsNamespace\\:\\:get\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/TransformsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\TransformsNamespace\\:\\:put\\(\\) is incompatible with type array\\{id\\: string, if_primary_term\\?\\: float\\|int, if_seq_no\\?\\: int, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, \\.\\.\\.\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/TransformsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\TransformsNamespace\\:\\:start\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/TransformsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\TransformsNamespace\\:\\:stop\\(\\) is incompatible with type array\\{id\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/TransformsNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\WlmNamespace\\:\\:createQueryGroup\\(\\) is incompatible with type array\\{pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/WlmNamespace.php
+
+		-
+			message: "#^Default value of the parameter \\#1 \\$params \\(array\\{\\}\\) of method OpenSearch\\\\Namespaces\\\\WlmNamespace\\:\\:updateQueryGroup\\(\\) is incompatible with type array\\{name\\?\\: string, pretty\\?\\: bool, human\\?\\: bool, error_trace\\?\\: bool, source\\?\\: string, filter_path\\?\\: mixed, body\\: mixed\\}\\.$#"
+			count: 1
+			path: src/OpenSearch/Namespaces/WlmNamespace.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{'', '', ''\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/ClientIntegrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{null, null, null\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/ClientIntegrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: 'test', id\\: null\\} given\\.$#"
+			count: 1
+			path: tests/ClientTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: null, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/ClientTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{'', '', ''\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/LegacyClientIntegrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{null, null, null\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/LegacyClientIntegrationTest.php
 
 		-
 			message: "#^Call to an undefined method OpenSearch\\\\Client\\:\\:slm\\(\\)\\.$#"

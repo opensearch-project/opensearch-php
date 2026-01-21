@@ -29,25 +29,24 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
     /**
      * Retrieve alerts related to a specific detector type or detector ID.
      *
-     * $params['alertState']    = (enum) Used to filter by alert state. Optional. (Options = ACKNOWLEDGED,ACTIVE,COMPLETED,DELETED,ERROR)
-     * $params['detectorType']  = (string) The type of detector used to fetch alerts. Optional when `detector_id` is specified. Otherwise required.
-     * $params['detector_id']   = (string) The ID of the detector used to fetch alerts. Optional when `detectorType` is specified. Otherwise required.
-     * $params['endTime']       = (integer) The end timestamp (in ms) of the time window in which you want to retrieve alerts. Optional.
-     * $params['missing']       = (string) Used to sort by whether the field `missing` exists or not in the documents associated with the alert. Optional.
-     * $params['searchString']  = (string) The alert attribute you want returned in the search. Optional.
-     * $params['severityLevel'] = (enum) Used to filter by alert severity level. Optional. (Options = 1,2,3,4,5,ALL)
-     * $params['size']          = (integer) The maximum number of results returned in the response. Optional. (Default = 20)
-     * $params['sortOrder']     = (enum) The order used to sort the list of findings. Possible values are `asc` or `desc`. Optional. (Options = asc,desc)
-     * $params['sortString']    = (string) The string used by Security Analytics to sort the alerts. Optional. (Default = start_time)
-     * $params['startIndex']    = (integer) The pagination index. Optional. (Default = 0)
-     * $params['startTime']     = (integer) The beginning timestamp (in ms) of the time window in which you want to retrieve alerts. Optional.
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{alertState?: mixed, detectorType?: string, detector_id?: string, endTime?: int, missing?: string, searchString?: string, severityLevel?: mixed, size?: int, sortOrder?: mixed, sortString?: string, startIndex?: int, startTime?: int, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - alertState: Used to filter by alert state. Optional. (Options: ACKNOWLEDGED, ACTIVE, COMPLETED, DELETED, ERROR)
+     * - detectorType: The type of detector used to fetch alerts. Optional when `detector_id` is specified. Otherwise required.
+     * - detector_id: The ID of the detector used to fetch alerts. Optional when `detectorType` is specified. Otherwise required.
+     * - endTime: The end timestamp (in ms) of the time window in which you want to retrieve alerts. Optional.
+     * - missing: Used to sort by whether the field `missing` exists or not in the documents associated with the alert. Optional.
+     * - searchString: The alert attribute you want returned in the search. Optional.
+     * - severityLevel: Used to filter by alert severity level. Optional. (Options: 1, 2, 3, 4, 5, ALL)
+     * - size: The maximum number of results returned in the response. Optional. (Default: 20)
+     * - sortOrder: The order used to sort the list of findings. Possible values are `asc` or `desc`. Optional. (Options: asc, desc)
+     * - sortString: The string used by Security Analytics to sort the alerts. Optional. (Default: start_time)
+     * - startIndex: The pagination index. Optional. (Default: 0)
+     * - startTime: The beginning timestamp (in ms) of the time window in which you want to retrieve alerts. Optional.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getAlerts(array $params = [])
@@ -61,26 +60,25 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
     /**
      * Retrieve findings related to a specific detector type or detector ID.
      *
-     * $params['detectionType'] = (enum) The detection type that dictates the retrieval type for the findings. When the detection type is `threat`, it fetches threat intelligence feeds. When the detection type is `rule`, findings are fetched based on the detector’s rule. Optional. (Options = rule,threat)
-     * $params['detectorType']  = (string) The type of detector used to fetch alerts. Optional when the `detector_id` is specified. Otherwise required.
-     * $params['detector_id']   = (string) The ID of the detector used to fetch alerts. Optional when the `detectorType` is specified. Otherwise required.
-     * $params['endTime']       = (string) The end timestamp (in ms) of the time window in which you want to retrieve findings. Optional.
-     * $params['findingIds']    = (string) The comma-separated id list of findings for which you want retrieve details. Optional.
-     * $params['missing']       = (string) Used to sort by whether the field `missing` exists or not in the documents associated with the finding. Optional.
-     * $params['searchString']  = (string) The finding attribute you want returned in the search. To search in a specific index, specify the index name in the request path. For example, to search findings in the indexABC index, use `searchString=indexABC’. Optional.
-     * $params['severity']      = (enum) The rule severity for which retrieve findings. Severity can be `critical`, `high`, `medium`, or `low`. Optional. (Options = critical,high,low,medium)
-     * $params['size']          = (integer) The maximum number of results returned in the response. Optional. (Default = 20)
-     * $params['sortOrder']     = (enum) The order used to sort the list of findings. Possible values are `asc` or `desc`. Optional. (Options = asc,desc)
-     * $params['sortString']    = (string) The string used by the Alerting plugin to sort the findings. Optional. (Default = timestamp)
-     * $params['startIndex']    = (integer) The pagination index. Optional. (Default = 0)
-     * $params['startTime']     = (integer) The beginning timestamp (in ms) of the time window in which you want to retrieve findings. Optional.
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{detectionType?: mixed, detectorType?: string, detector_id?: string, endTime?: string, findingIds?: string, missing?: string, searchString?: string, severity?: mixed, size?: int, sortOrder?: mixed, sortString?: string, startIndex?: int, startTime?: int, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - detectionType: The detection type that dictates the retrieval type for the findings. When the detection type is `threat`, it fetches threat intelligence feeds. When the detection type is `rule`, findings are fetched based on the detector’s rule. Optional. (Options: rule, threat)
+     * - detectorType: The type of detector used to fetch alerts. Optional when the `detector_id` is specified. Otherwise required.
+     * - detector_id: The ID of the detector used to fetch alerts. Optional when the `detectorType` is specified. Otherwise required.
+     * - endTime: The end timestamp (in ms) of the time window in which you want to retrieve findings. Optional.
+     * - findingIds: The comma-separated id list of findings for which you want retrieve details. Optional.
+     * - missing: Used to sort by whether the field `missing` exists or not in the documents associated with the finding. Optional.
+     * - searchString: The finding attribute you want returned in the search. To search in a specific index, specify the index name in the request path. For example, to search findings in the indexABC index, use `searchString=indexABC’. Optional.
+     * - severity: The rule severity for which retrieve findings. Severity can be `critical`, `high`, `medium`, or `low`. Optional. (Options: critical, high, low, medium)
+     * - size: The maximum number of results returned in the response. Optional. (Default: 20)
+     * - sortOrder: The order used to sort the list of findings. Possible values are `asc` or `desc`. Optional. (Options: asc, desc)
+     * - sortString: The string used by the Alerting plugin to sort the findings. Optional. (Default: timestamp)
+     * - startIndex: The pagination index. Optional. (Default: 0)
+     * - startTime: The beginning timestamp (in ms) of the time window in which you want to retrieve findings. Optional.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getFindings(array $params = [])
@@ -94,17 +92,16 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
     /**
      * List correlations for a finding.
      *
-     * $params['detector_type']   = (string) The log type of findings you want to correlate with the specified finding. Required.
-     * $params['finding']         = (string) The finding ID for which you want to find other findings that are correlated. Required.
-     * $params['nearby_findings'] = (integer) The number of nearby findings you want to return. Optional. (Default = 10)
-     * $params['time_window']     = (integer) The time window (in ms) in which all of the correlations must have occurred together. Optional. (Default = 300000)
-     * $params['pretty']          = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']           = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']     = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{detector_type?: string, finding?: string, nearby_findings?: int, time_window?: int, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - detector_type: The log type of findings you want to correlate with the specified finding. Required.
+     * - finding: The finding ID for which you want to find other findings that are correlated. Required.
+     * - nearby_findings: The number of nearby findings you want to return. Optional. (Default: 10)
+     * - time_window: The time window (in ms) in which all of the correlations must have occurred together. Optional. (Default: 300000)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function searchFindingCorrelations(array $params = [])

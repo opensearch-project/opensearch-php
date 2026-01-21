@@ -35,18 +35,17 @@ class DanglingIndicesNamespace extends AbstractNamespace
     /**
      * Deletes the specified dangling index.
      *
-     * $params['index_uuid']              = (string) The UUID of the dangling index.
-     * $params['accept_data_loss']        = (boolean) Must be set to true in order to delete the dangling index.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Specify timeout for connection to cluster manager.
-     * $params['timeout']                 = (string) Explicit operation timeout.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index_uuid?: string, accept_data_loss?: bool, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index_uuid: The UUID of the dangling index.
+     * - accept_data_loss: Must be set to true in order to delete the dangling index.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Specify timeout for connection to cluster manager.
+     * - timeout: Explicit operation timeout.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteDanglingIndex(array $params = [])
@@ -63,18 +62,17 @@ class DanglingIndicesNamespace extends AbstractNamespace
     /**
      * Imports the specified dangling index.
      *
-     * $params['index_uuid']              = (string) The UUID of the dangling index.
-     * $params['accept_data_loss']        = (boolean) Must be set to true in order to import the dangling index.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['master_timeout']          = (string) Specify timeout for connection to cluster manager.
-     * $params['timeout']                 = (string) Explicit operation timeout.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index_uuid?: string, accept_data_loss?: bool, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index_uuid: The UUID of the dangling index.
+     * - accept_data_loss: Must be set to true in order to import the dangling index.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Specify timeout for connection to cluster manager.
+     * - timeout: Explicit operation timeout.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function importDanglingIndex(array $params = [])
@@ -91,13 +89,12 @@ class DanglingIndicesNamespace extends AbstractNamespace
     /**
      * Returns all dangling indexes.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function listDanglingIndices(array $params = [])
