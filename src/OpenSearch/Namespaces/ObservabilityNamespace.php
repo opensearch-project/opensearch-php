@@ -33,13 +33,13 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Creates a new observability object.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function createObject(array $params = [])
@@ -56,14 +56,13 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Deletes specific observability object specified by ID.
      *
-     * $params['object_id']   = (string) The ID of the observability object to delete.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{object_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - object_id: The ID of the observability object to delete.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteObject(array $params = [])
@@ -80,15 +79,14 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Deletes specific observability objects specified by ID or a list of IDs.
      *
-     * $params['objectId']     = (string) The ID of a single observability object to delete.
-     * $params['objectIdList'] = (string) A comma-separated list of observability object IDs to delete.
-     * $params['pretty']       = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']        = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{objectId?: string, objectIdList?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - objectId: The ID of a single observability object to delete.
+     * - objectIdList: A comma-separated list of observability object IDs to delete.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteObjects(array $params = [])
@@ -102,13 +100,12 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Retrieves local stats of all observability objects.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getLocalstats(array $params = [])
@@ -122,14 +119,13 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Retrieves specific observability object specified by ID.
      *
-     * $params['object_id']   = (string) The ID of the observability object to retrieve.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{object_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - object_id: The ID of the observability object to retrieve.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getObject(array $params = [])
@@ -146,13 +142,12 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Retrieves list of all observability objects.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function listObjects(array $params = [])
@@ -166,14 +161,14 @@ class ObservabilityNamespace extends AbstractNamespace
     /**
      * Updates an existing observability object.
      *
-     * $params['object_id']   = (string) The ID of the observability object to update.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{object_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - object_id: The ID of the observability object to update.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function updateObject(array $params = [])

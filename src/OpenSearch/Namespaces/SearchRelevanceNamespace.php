@@ -41,14 +41,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Deletes a specified experiment.
      *
-     * $params['experiment_id'] = (string) The experiment id
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{experiment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - experiment_id: The experiment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteExperiments(array $params = [])
@@ -65,14 +64,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Deletes a specified judgment.
      *
-     * $params['judgment_id'] = (string) The judgment id
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{judgment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - judgment_id: The judgment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteJudgments(array $params = [])
@@ -89,14 +87,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Deletes a query set.
      *
-     * $params['query_set_id'] = (string) The query set id
-     * $params['pretty']       = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']        = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{query_set_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - query_set_id: The query set id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteQuerySets(array $params = [])
@@ -113,14 +110,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Deletes a specified search configuration.
      *
-     * $params['search_configuration_id'] = (string) The search configuration id
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{search_configuration_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - search_configuration_id: The search configuration id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteSearchConfigurations(array $params = [])
@@ -137,14 +133,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets experiments.
      *
-     * $params['experiment_id'] = (string) The experiment id
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{experiment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - experiment_id: The experiment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getExperiments(array $params = [])
@@ -161,14 +156,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets judgments.
      *
-     * $params['judgment_id'] = (string) The judgment id
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{judgment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - judgment_id: The judgment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getJudgments(array $params = [])
@@ -185,20 +179,19 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets stats by node.
      *
-     * $params['node_id']                  = (string) The node id (Required)
-     * $params['stat']                     = (string) The statistic to return
-     * $params['flat_stat_paths']          = (string) Requests flattened stat paths as keys
-     * $params['include_all_nodes']        = (string) Whether to include all nodes
-     * $params['include_individual_nodes'] = (string) Whether to include individual nodes
-     * $params['include_info']             = (string) Whether to include info
-     * $params['include_metadata']         = (string) Whether to include metadata
-     * $params['pretty']                   = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                    = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']              = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: string, stat?: string, flat_stat_paths?: string, include_all_nodes?: string, include_individual_nodes?: string, include_info?: string, include_metadata?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: The node id
+     * - stat: The statistic to return
+     * - flat_stat_paths: Requests flattened stat paths as keys
+     * - include_all_nodes: Whether to include all nodes
+     * - include_individual_nodes: Whether to include individual nodes
+     * - include_info: Whether to include info
+     * - include_metadata: Whether to include metadata
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getNodeStats(array $params = [])
@@ -217,14 +210,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Lists the current query sets available.
      *
-     * $params['query_set_id'] = (string) The query set id
-     * $params['pretty']       = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']        = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{query_set_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - query_set_id: The query set id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getQuerySets(array $params = [])
@@ -241,14 +233,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets the search configurations.
      *
-     * $params['search_configuration_id'] = (string) The search configuration id
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{search_configuration_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - search_configuration_id: The search configuration id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getSearchConfigurations(array $params = [])
@@ -265,19 +256,18 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets stats.
      *
-     * $params['stat']                     = (string) The statistic to return
-     * $params['flat_stat_paths']          = (string) Requests flattened stat paths as keys
-     * $params['include_all_nodes']        = (string) Whether to include all nodes
-     * $params['include_individual_nodes'] = (string) Whether to include individual nodes
-     * $params['include_info']             = (string) Whether to include info
-     * $params['include_metadata']         = (string) Whether to include metadata
-     * $params['pretty']                   = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                    = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']              = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{stat?: string, flat_stat_paths?: string, include_all_nodes?: string, include_individual_nodes?: string, include_info?: string, include_metadata?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - stat: The statistic to return
+     * - flat_stat_paths: Requests flattened stat paths as keys
+     * - include_all_nodes: Whether to include all nodes
+     * - include_individual_nodes: Whether to include individual nodes
+     * - include_info: Whether to include info
+     * - include_metadata: Whether to include metadata
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getStats(array $params = [])
@@ -294,13 +284,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Creates a new query set by sampling queries from the user behavior data.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function postQuerySets(array $params = [])
@@ -317,13 +307,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Creates an experiment.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function putExperiments(array $params = [])
@@ -340,13 +330,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Creates a judgment.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function putJudgments(array $params = [])
@@ -363,13 +353,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Creates a new query set by uploading manually.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function putQuerySets(array $params = [])
@@ -386,13 +376,13 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Creates a search configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function putSearchConfigurations(array $params = [])

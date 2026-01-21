@@ -35,13 +35,13 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Create channel configuration.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
      * @return array
      */
     public function createConfig(array $params = [])
@@ -58,14 +58,13 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Delete a channel configuration.
      *
-     * $params['config_id']   = (string) The ID of the channel configuration to delete.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{config_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - config_id: The ID of the channel configuration to delete.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteConfig(array $params = [])
@@ -82,15 +81,14 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Delete multiple channel configurations.
      *
-     * $params['config_id']      = (string) The ID of the channel configuration to delete.
-     * $params['config_id_list'] = (string) A comma-separated list of channel IDs to delete.
-     * $params['pretty']         = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']          = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']    = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']         = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']    = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{config_id?: string, config_id_list?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - config_id: The ID of the channel configuration to delete.
+     * - config_id_list: A comma-separated list of channel IDs to delete.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteConfigs(array $params = [])
@@ -104,14 +102,13 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Get a specific channel configuration.
      *
-     * $params['config_id']   = (string)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{config_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - config_id:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getConfig(array $params = [])
@@ -128,53 +125,53 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Get multiple channel configurations with filtering.
      *
-     * $params['chime.url']                                    = (string)
-     * $params['chime.url.keyword']                            = (string)
-     * $params['config_id']                                    = (string) Notification configuration ID.
-     * $params['config_id_list']                               = (array) Notification configuration IDs.
-     * $params['config_type']                                  = (enum) Type of notification configuration. (Options = chime,email,email_group,microsoft_teams,ses_account,slack,smtp_account,sns,webhook)
-     * $params['created_time_ms']                              = (integer)
-     * $params['description']                                  = (string)
-     * $params['description.keyword']                          = (string)
-     * $params['email.email_account_id']                       = (string)
-     * $params['email.email_group_id_list']                    = (string)
-     * $params['email.recipient_list.recipient']               = (string)
-     * $params['email.recipient_list.recipient.keyword']       = (string)
-     * $params['email_group.recipient_list.recipient']         = (string)
-     * $params['email_group.recipient_list.recipient.keyword'] = (string)
-     * $params['is_enabled']                                   = (boolean)
-     * $params['last_updated_time_ms']                         = (integer)
-     * $params['microsoft_teams.url']                          = (string)
-     * $params['microsoft_teams.url.keyword']                  = (string)
-     * $params['name']                                         = (string)
-     * $params['name.keyword']                                 = (string)
-     * $params['query']                                        = (string)
-     * $params['ses_account.from_address']                     = (string)
-     * $params['ses_account.from_address.keyword']             = (string)
-     * $params['ses_account.region']                           = (string)
-     * $params['ses_account.role_arn']                         = (string)
-     * $params['ses_account.role_arn.keyword']                 = (string)
-     * $params['slack.url']                                    = (string)
-     * $params['slack.url.keyword']                            = (string)
-     * $params['smtp_account.from_address']                    = (string)
-     * $params['smtp_account.from_address.keyword']            = (string)
-     * $params['smtp_account.host']                            = (string)
-     * $params['smtp_account.host.keyword']                    = (string)
-     * $params['smtp_account.method']                          = (string)
-     * $params['sns.role_arn']                                 = (string)
-     * $params['sns.role_arn.keyword']                         = (string)
-     * $params['sns.topic_arn']                                = (string)
-     * $params['sns.topic_arn.keyword']                        = (string)
-     * $params['text_query']                                   = (string)
-     * $params['webhook.url']                                  = (string)
-     * $params['webhook.url.keyword']                          = (string)
-     * $params['pretty']                                       = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                                        = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']                                  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                                       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                                  = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{chime.url?: string, chime.url.keyword?: string, config_id?: string, config_id_list?: mixed, config_type?: mixed, created_time_ms?: int, description?: string, description.keyword?: string, email.email_account_id?: string, email.email_group_id_list?: string, email.recipient_list.recipient?: string, email.recipient_list.recipient.keyword?: string, email_group.recipient_list.recipient?: string, email_group.recipient_list.recipient.keyword?: string, is_enabled?: bool, last_updated_time_ms?: int, microsoft_teams.url?: string, microsoft_teams.url.keyword?: string, name?: string, name.keyword?: string, query?: string, ses_account.from_address?: string, ses_account.from_address.keyword?: string, ses_account.region?: string, ses_account.role_arn?: string, ses_account.role_arn.keyword?: string, slack.url?: string, slack.url.keyword?: string, smtp_account.from_address?: string, smtp_account.from_address.keyword?: string, smtp_account.host?: string, smtp_account.host.keyword?: string, smtp_account.method?: string, sns.role_arn?: string, sns.role_arn.keyword?: string, sns.topic_arn?: string, sns.topic_arn.keyword?: string, text_query?: string, webhook.url?: string, webhook.url.keyword?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - chime.url:
+     * - chime.url.keyword:
+     * - config_id: Notification configuration ID.
+     * - config_id_list: Notification configuration IDs.
+     * - config_type: Type of notification configuration. (Options: chime, email, email_group, microsoft_teams, ses_account, slack, smtp_account, sns, webhook)
+     * - created_time_ms:
+     * - description:
+     * - description.keyword:
+     * - email.email_account_id:
+     * - email.email_group_id_list:
+     * - email.recipient_list.recipient:
+     * - email.recipient_list.recipient.keyword:
+     * - email_group.recipient_list.recipient:
+     * - email_group.recipient_list.recipient.keyword:
+     * - is_enabled:
+     * - last_updated_time_ms:
+     * - microsoft_teams.url:
+     * - microsoft_teams.url.keyword:
+     * - name:
+     * - name.keyword:
+     * - query:
+     * - ses_account.from_address:
+     * - ses_account.from_address.keyword:
+     * - ses_account.region:
+     * - ses_account.role_arn:
+     * - ses_account.role_arn.keyword:
+     * - slack.url:
+     * - slack.url.keyword:
+     * - smtp_account.from_address:
+     * - smtp_account.from_address.keyword:
+     * - smtp_account.host:
+     * - smtp_account.host.keyword:
+     * - smtp_account.method:
+     * - sns.role_arn:
+     * - sns.role_arn.keyword:
+     * - sns.topic_arn:
+     * - sns.topic_arn.keyword:
+     * - text_query:
+     * - webhook.url:
+     * - webhook.url.keyword:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function getConfigs(array $params = [])
@@ -191,13 +188,12 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * List created notification channels.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function listChannels(array $params = [])
@@ -211,13 +207,12 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * List supported channel configurations.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function listFeatures(array $params = [])
@@ -231,14 +226,13 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Send a test notification.
      *
-     * $params['config_id']   = (string)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{config_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - config_id:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function sendTest(array $params = [])
@@ -255,14 +249,14 @@ class NotificationsNamespace extends AbstractNamespace
     /**
      * Update channel configuration.
      *
-     * $params['config_id']   = (string)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{config_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - config_id:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
      * @return array
      */
     public function updateConfig(array $params = [])

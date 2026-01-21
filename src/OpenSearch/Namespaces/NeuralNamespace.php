@@ -27,20 +27,19 @@ class NeuralNamespace extends AbstractNamespace
     /**
      * Provides information about the current status of the neural-search plugin.
      *
-     * $params['node_id']                  = (string) A comma-separated list of node IDs or names to limit the returned information; leave empty to get information from all nodes.
-     * $params['stat']                     = (array) A comma-separated list of stats to retrieve; use empty string to retrieve all stats.
-     * $params['flat_stat_paths']          = (boolean) Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats. For example, the flat form of `"processors": { "ingest": { "text_embedding_executions": 20181212 } }` is `"processors.ingest.text_embedding_executions": "20181212"`. (Default = false)
-     * $params['include_all_nodes']        = (boolean) When `true` includes aggregated statistics across all nodes in the `all_nodes` category. When `false`, excludes the `all_nodes` category from the response. (Default = true)
-     * $params['include_individual_nodes'] = (boolean) When `true` includes statistics for individual nodes in the `nodes` category. When `false`, excludes the `nodes` category from the response. (Default = true)
-     * $params['include_info']             = (boolean) When `true` includes cluster-wide information in the `info` category. When `false`, excludes the `info` category from the response. (Default = true)
-     * $params['include_metadata']         = (boolean) Whether to return stat metadata instead of the raw stat value, includes additional information about the stat. These can include things like type hints, time since last stats being recorded, or recent rolling interval values (Default = false)
-     * $params['pretty']                   = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                    = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']              = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                   = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']              = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: string, stat?: mixed, flat_stat_paths?: bool, include_all_nodes?: bool, include_individual_nodes?: bool, include_info?: bool, include_metadata?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names to limit the returned information; leave empty to get information from all nodes.
+     * - stat: A comma-separated list of stats to retrieve; use empty string to retrieve all stats.
+     * - flat_stat_paths: Whether to return stats in the flat form, which can improve readability, especially for heavily nested stats. For example, the flat form of `"processors": { "ingest": { "text_embedding_executions": 20181212 } }` is `"processors.ingest.text_embedding_executions": "20181212"`. (Default: false)
+     * - include_all_nodes: When `true` includes aggregated statistics across all nodes in the `all_nodes` category. When `false`, excludes the `all_nodes` category from the response. (Default: true)
+     * - include_individual_nodes: When `true` includes statistics for individual nodes in the `nodes` category. When `false`, excludes the `nodes` category from the response. (Default: true)
+     * - include_info: When `true` includes cluster-wide information in the `info` category. When `false`, excludes the `info` category from the response. (Default: true)
+     * - include_metadata: Whether to return stat metadata instead of the raw stat value, includes additional information about the stat. These can include things like type hints, time since last stats being recorded, or recent rolling interval values (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function stats(array $params = [])

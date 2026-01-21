@@ -459,22 +459,33 @@ class Endpoint
     public function renderDocParams(): string
     {
         $space = $this->getMaxLengthBodyPartsParams();
-
         $result = "\n    /**\n";
+
+        // Method description
         if (isset($this->content['documentation']['description'])) {
-            $result .= sprintf("     * %s\n", str_replace("\n", '', $this->content['documentation']['description']));
+            $result .= sprintf(
+                "     * %s\n",
+                str_replace("\n", '', $this->content['documentation']['description'])
+            );
             $result .= "     *\n";
         }
-        $result .= $this->extractPartsDescription($space);
-        $result .= $this->extractParamsDescription($space);
-        $result .= $this->extractBodyDescription($space);
-        $result .= "     *\n";
-        $result .= "     * @param array \$params Associative array of parameters\n";
-        $result .= sprintf("     * @return %s\n", $this->getMethod() === ['HEAD'] ? 'bool' : 'array');
 
+        // Input parameters
+        $result .= $this->extractAllParamsDescription($space);
+
+        // Return value
+        if ($this->getMethod() === ['HEAD']) {
+            $result .= "     * @return bool\n";
+        } else {
+            $result .= $this->extractReturnDescription();
+        }
+
+        // Documentation URL
         if (isset($this->content['documentation']['url'])) {
             $result .= "     * @see {$this->content['documentation']['url']}\n";
         }
+
+        // Stability note
         if ($this->content['stability'] !== 'stable') {
             switch ($this->content['stability']) {
                 case 'experimental':
@@ -488,70 +499,183 @@ class Endpoint
                 $result .= sprintf("     *\n     * @note %s\n     *\n", $note);
             }
         }
+
         $result .= "     */";
-
         return $result;
     }
 
-    private function extractBodyDescription(int $space): string
+    private function extractAllParamsDescription(int $space): string
     {
-        if (isset($this->content['body']) && isset($this->content['body']['description'])) {
-            return sprintf(
-                "     * \$params['body']%s = (array) %s%s\n",
-                str_repeat(' ', $space - 4),
-                $this->content['body']['description'],
-                isset($this->content['body']['required']) && $this->content['body']['required'] ? ' (Required)' : ''
-            );
-        }
-        return '';
-    }
+        $shapeParts = [];
+        $descLines  = [];
+        $allParams  = [];
 
-    private function extractPartsDescription(int $space): string
-    {
-        $result = '';
-        if (empty($this->parts)) {
-            return $result;
+        // Merge parts, params, and body
+        if (!empty($this->parts)) {
+            foreach ($this->parts as $name => $values) {
+                $allParams[$name] = $values + ['source' => 'parts'];
+            }
         }
-        foreach ($this->parts as $part => $values) {
-            $result .= sprintf(
-                "     * \$params['%s']%s = %s(%s) %s%s\n",
-                $part,
-                str_repeat(' ', $space - strlen($part)),
-                $part === 'type' || (isset($values['deprecated']) && $values['deprecated']) ? 'DEPRECATED ' : '',
-                $values['type'] ?? 'any',
-                $values['description'] ?? '',
-                in_array($part, $this->requiredParts) ? ' (Required)' : ''
-            );
-            $this->addedPartInDoc[] = $part;
+        if (!empty($this->content['params'])) {
+            foreach ($this->content['params'] as $name => $values) {
+                $allParams[$name] = $values + ['source' => 'params'];
+            }
         }
-        return $result;
-    }
+        if (!empty($this->content['body'])) {
+            $allParams['body'] = $this->content['body'] + ['source' => 'body'];
+        }
 
-    private function extractParamsDescription(int $space): string
-    {
-        $result = '';
-        if (!isset($this->content['params'])) {
-            return $result;
-        }
-        foreach ($this->content['params'] as $param => $values) {
-            if (in_array($param, $this->addedPartInDoc)) {
+        $anyRequired = false;
+
+        foreach ($allParams as $name => $values) {
+            if (in_array($name, $this->addedPartInDoc, true)) {
                 continue;
             }
-            $type = $values['type'] ?? 'any';
-            //            var_dump($type);
-            //            var_dump($values);
-            $result .= sprintf(
-                "     * \$params['%s']%s = (%s) %s%s%s%s\n",
-                $param,
-                str_repeat(' ', $space - strlen($param)),
-                $type,
-                $values['description'] ?? '',
-                isset($values['required']) && $values['required'] ? ' (Required)' : '',
-                isset($values['options']) ? sprintf(" (Options = %s)", implode(',', $values['options'])) : '',
-                isset($values['default']) ? sprintf(" (Default = %s)", ($type === 'boolean') ? ($values['default'] ? 'true' : 'false') : (is_array($values['default']) ? implode(',', $values['default']) : $values['default'])) : ''
-            );
+
+            $type = $this->mapTypeToPhpDoc($values['type'] ?? 'mixed');
+
+            // Determine if required
+            $isRequired = $values['required'] ?? false;
+
+            if ($name === 'id') {
+                $isRequired = true; // id always required
+            }
+
+            $optional = $isRequired ? '' : '?';
+            if ($isRequired) {
+                $anyRequired = true;
+            }
+
+            $shapeParts[] = sprintf('%s%s: %s', $name, $optional, $type);
+
+            // Description
+            $desc = $values['description'] ?? '';
+            if ($isRequired) {
+                $desc = ($desc ? $desc . ' ' : '') . '(Required)';
+            }
+            if (isset($values['default'])) {
+                $default = $values['default'];
+                if (is_bool($default)) {
+                    $default = $default ? 'true' : 'false';
+                } elseif (is_array($default)) {
+                    $default = implode(', ', $default);
+                }
+                $desc .= ($desc ? ' ' : '') . "(Default: {$default})";
+            }
+            if (isset($values['options'])) {
+                $desc .= ($desc ? ' ' : '') . '(Options: ' . implode(', ', $values['options']) . ')';
+            }
+
+            $descLines[] = sprintf("     * - %s: %s", $name, trim($desc));
+            $this->addedPartInDoc[] = $name;
+        }
+
+        // Build docblock string
+        if (empty($shapeParts)) {
+            return '';
+        }
+
+        $result  = sprintf(
+            "     * @param array{%s} \$params\n",
+            implode(', ', $shapeParts)
+        );
+        foreach ($descLines as $line) {
+            $result .= $line . "\n";
+        }
+
+        // Return the flag so method can know if $params = [] is safe
+        $this->paramsHaveRequired = $anyRequired;
+
+        return $result;
+    }
+
+    private function extractReturnDescription(): string
+    {
+        $doc = $this->content['documentation']['responseExample'] ?? null;
+
+        // Try spec return definitions first
+        if (!empty($this->content['returns'])) {
+            $returns = $this->content['returns'];
+        } elseif (!empty($doc)) {
+            // Infer from JSON example
+            [$shape, $descLines] = $this->inferReturnFromExample($doc);
+        } else {
+            return "     * @return array\n";
+        }
+
+        if (!empty($returns)) {
+            $shapeParts = [];
+            $descLines  = [];
+            foreach ($returns as $key => $values) {
+                $type = $this->mapTypeToPhpDoc($values['type'] ?? 'mixed');
+                $optional = isset($values['required']) && $values['required'] ? '' : '?';
+                $shapeParts[] = "$key{$optional}: $type";
+                $descLines[]  = sprintf("     * - %s: %s", $key, $values['description'] ?? '');
+            }
+        }
+
+        $result  = "     * @return array{" . $shape . "}\n";
+        foreach ($descLines as $line) {
+            $result .= $line . "\n";
         }
         return $result;
+    }
+
+    /**
+     * Build return array shape from example response JSON.
+     *
+     * @param string $jsonExample
+     * @return array<string, mixed> [$shape, $descriptionsLines]
+     */
+    private function inferReturnFromExample(string $jsonExample): array
+    {
+        $data = json_decode($jsonExample, true);
+        if (!is_array($data)) {
+            return ['', []];
+        }
+
+        $shapeParts = [];
+        $descLines  = [];
+
+        foreach ($data as $key => $value) {
+            $type = $this->inferPhpType($value);
+
+            $shapeParts[] = "$key: $type";
+            $descLines[] = sprintf("     * - %s: inferred from example", $key);
+        }
+
+        $shape = implode(', ', $shapeParts);
+        return [$shape, $descLines];
+    }
+
+    private function inferPhpType(mixed $value): string
+    {
+        return match (true) {
+            is_int($value)    => 'int',
+            is_bool($value)   => 'bool',
+            is_string($value) => 'string',
+            is_array($value)  => 'array',
+            default           => 'mixed',
+        };
+    }
+
+    private function mapTypeToPhpDoc(mixed $type): string
+    {
+        // If the type is an array (nested schema), treat as 'array'
+        if (is_array($type)) {
+            return 'array';
+        }
+
+        return match ($type) {
+            'string'  => 'string',
+            'boolean' => 'bool',
+            'integer' => 'int',
+            'number'  => 'int|float',
+            'list'    => 'array',
+            'object'  => 'array',
+            'any'     => 'mixed',
+            default   => 'mixed',
+        };
     }
 
     private function getMaxLengthBodyPartsParams(): int
@@ -580,4 +704,26 @@ class Endpoint
     {
         return empty($this->content['body']);
     }
+
+    private function buildArrayShape(array $params): string
+    {
+        $shape = [];
+
+        foreach ($params as $name => $param) {
+            $type = match ($param['type']) {
+                'string' => 'string',
+                'boolean' => 'bool',
+                'number' => 'int|float',
+                'list' => 'list',
+                'object' => 'array',
+                default => 'mixed',
+            };
+
+            $optional = $param['required'] ? '' : '?';
+            $shape[] = "{$name}{$optional}: {$type}";
+        }
+
+        return 'array{' . implode(', ', $shape) . '}';
+    }
+
 }

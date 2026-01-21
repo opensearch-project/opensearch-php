@@ -35,18 +35,17 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Cancels a task, if it can be cancelled through an API.
      *
-     * $params['task_id']             = (string) The task ID.
-     * $params['actions']             = (any) A comma-separated list of actions that should be returned. Keep empty to return all.
-     * $params['nodes']               = (array) A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from a specific node, or keep the parameter empty to get information from all nodes.
-     * $params['parent_task_id']      = (string) Returns tasks with a specified parent task ID (`node_id:task_number`). Keep empty or set to -1 to return all.
-     * $params['wait_for_completion'] = (boolean) Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default = false)
-     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{task_id?: string, actions?: mixed, nodes?: mixed, parent_task_id?: string, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - task_id: The task ID.
+     * - actions: A comma-separated list of actions that should be returned. Keep empty to return all.
+     * - nodes: A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from a specific node, or keep the parameter empty to get information from all nodes.
+     * - parent_task_id: Returns tasks with a specified parent task ID (`node_id:task_number`). Keep empty or set to -1 to return all.
+     * - wait_for_completion: Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function cancel(array $params = [])
@@ -63,16 +62,15 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Returns information about a task.
      *
-     * $params['task_id']             = (string) The task ID.
-     * $params['timeout']             = (string) The amount of time to wait for a response.
-     * $params['wait_for_completion'] = (boolean) Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default = false)
-     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{task_id?: string, timeout?: string, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - task_id: The task ID.
+     * - timeout: The amount of time to wait for a response.
+     * - wait_for_completion: Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function get(array $params = [])
@@ -89,20 +87,19 @@ class TasksNamespace extends AbstractNamespace
     /**
      * Returns a list of tasks.
      *
-     * $params['actions']             = (any) A comma-separated list of actions that should be returned. Keep empty to return all.
-     * $params['detailed']            = (boolean) When `true`, the response includes detailed information about shard recoveries. (Default = false)
-     * $params['group_by']            = (enum) Groups tasks by parent/child relationships or nodes. (Options = nodes,none,parents)
-     * $params['nodes']               = (array) A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from a specific node, or keep the parameter empty to get information from all nodes.
-     * $params['parent_task_id']      = (string) Returns tasks with a specified parent task ID (`node_id:task_number`). Keep empty or set to -1 to return all.
-     * $params['timeout']             = (string) The amount of time to wait for a response.
-     * $params['wait_for_completion'] = (boolean) Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default = false)
-     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{actions?: mixed, detailed?: bool, group_by?: mixed, nodes?: mixed, parent_task_id?: string, timeout?: string, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - actions: A comma-separated list of actions that should be returned. Keep empty to return all.
+     * - detailed: When `true`, the response includes detailed information about shard recoveries. (Default: false)
+     * - group_by: Groups tasks by parent/child relationships or nodes. (Options: nodes, none, parents)
+     * - nodes: A comma-separated list of node IDs or names used to limit the returned information. Use `_local` to return information from the node you're connecting to, specify the node name to get information from a specific node, or keep the parameter empty to get information from all nodes.
+     * - parent_task_id: Returns tasks with a specified parent task ID (`node_id:task_number`). Keep empty or set to -1 to return all.
+     * - timeout: The amount of time to wait for a response.
+     * - wait_for_completion: Waits for the matching task to complete. When `true`, the request is blocked until the task has completed. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function list(array $params = [])

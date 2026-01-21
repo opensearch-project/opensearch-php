@@ -34,14 +34,13 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Delete an index transform.
      *
-     * $params['id']          = (string) Transform to delete
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{id: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - id: Transform to delete (Required)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function delete(array $params = [])
@@ -58,14 +57,13 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Returns the status and metadata of a transform job.
      *
-     * $params['id']          = (string) Transform to explain
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{id: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - id: Transform to explain (Required)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function explain(array $params = [])
@@ -82,14 +80,13 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Returns the status and metadata of a transform job.
      *
-     * $params['id']          = (string) Transform to access
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{id: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - id: Transform to access (Required)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function get(array $params = [])
@@ -106,13 +103,13 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Returns a preview of what a transformed index would look like.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function preview(array $params = [])
@@ -129,16 +126,16 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Create an index transform, or update a transform if `if_seq_no` and `if_primary_term` are provided.
      *
-     * $params['id']              = (string) Transform to create/update
-     * $params['if_primary_term'] = (number) Only perform the operation if the document has this primary term.
-     * $params['if_seq_no']       = (integer) Only perform the operation if the document has this sequence number.
-     * $params['pretty']          = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']           = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']     = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']          = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']     = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{id: string, if_primary_term?: int|float, if_seq_no?: int, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - id: Transform to create/update (Required)
+     * - if_primary_term: Only perform the operation if the document has this primary term.
+     * - if_seq_no: Only perform the operation if the document has this sequence number.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function put(array $params = [])
@@ -157,18 +154,17 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Returns the details of all transform jobs.
      *
-     * $params['from']          = (number) The starting transform to return. Default is `0`.
-     * $params['search']        = (string) The search term to use to filter results.
-     * $params['size']          = (number) Specifies the number of transforms to return. Default is `10`.
-     * $params['sortDirection'] = (string) Specifies the direction to sort results in. Can be `ASC` or `DESC`. Default is `ASC`.
-     * $params['sortField']     = (string) The field to sort results with.
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{from?: int|float, search?: string, size?: int|float, sortDirection?: string, sortField?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - from: The starting transform to return. Default is `0`.
+     * - search: The search term to use to filter results.
+     * - size: Specifies the number of transforms to return. Default is `10`.
+     * - sortDirection: Specifies the direction to sort results in. Can be `ASC` or `DESC`. Default is `ASC`.
+     * - sortField: The field to sort results with.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function search(array $params = [])
@@ -182,14 +178,13 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Start transform.
      *
-     * $params['id']          = (string) Transform to start
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{id: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - id: Transform to start (Required)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function start(array $params = [])
@@ -206,14 +201,13 @@ class TransformsNamespace extends AbstractNamespace
     /**
      * Stop transform.
      *
-     * $params['id']          = (string) Transform to stop
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{id: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - id: Transform to stop (Required)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function stop(array $params = [])

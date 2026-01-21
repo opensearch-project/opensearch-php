@@ -32,14 +32,13 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Used to delete a particular model in the cluster.
      *
-     * $params['model_id']    = (string) The id of the model.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{model_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - model_id: The id of the model.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deleteModel(array $params = [])
@@ -56,14 +55,13 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Used to retrieve information about models present in the cluster.
      *
-     * $params['model_id']    = (string) The id of the model.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{model_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - model_id: The id of the model.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getModel(array $params = [])
@@ -80,55 +78,55 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Use an OpenSearch query to search for models in the index.
      *
-     * $params['_source']                       = (array) Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
-     * $params['_source_excludes']              = (array) List of fields to exclude from the returned `_source` field.
-     * $params['_source_includes']              = (array) List of fields to extract and return from the `_source` field.
-     * $params['allow_no_indices']              = (boolean) Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
-     * $params['allow_partial_search_results']  = (boolean) Indicate if an error should be returned if there is a partial search failure or timeout. (Default = true)
-     * $params['analyze_wildcard']              = (boolean) Specify whether wildcard and prefix queries should be analyzed. (Default = false)
-     * $params['analyzer']                      = (string) The analyzer to use for the query string.
-     * $params['batched_reduce_size']           = (integer) The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large. (Default = 512)
-     * $params['ccs_minimize_roundtrips']       = (boolean) Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution. (Default = true)
-     * $params['default_operator']              = (enum) The default operator for query string query (AND or OR). (Options = and,AND,or,OR)
-     * $params['df']                            = (string) The field to use as default where no field prefix is given in the query string.
-     * $params['docvalue_fields']               = (array) A comma-separated list of fields to return as the docvalue representation of a field for each hit.
-     * $params['expand_wildcards']              = (any) Whether to expand wildcard expression to concrete indexes that are open, closed or both.
-     * $params['explain']                       = (boolean) Specify whether to return detailed information about score computation as part of a hit.
-     * $params['from']                          = (integer) Starting offset. (Default = 0)
-     * $params['ignore_throttled']              = (boolean) Whether specified concrete, expanded or aliased indexes should be ignored when throttled.
-     * $params['ignore_unavailable']            = (boolean) Whether specified concrete indexes should be ignored when unavailable (missing or closed).
-     * $params['lenient']                       = (boolean) Specify whether format-based query failures (such as providing text to a numeric field) should be ignored.
-     * $params['max_concurrent_shard_requests'] = (integer) The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default = 5)
-     * $params['pre_filter_shard_size']         = (integer) Threshold that enforces a pre-filter round-trip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter round-trip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method, that is if date filters are mandatory to match but the shard bounds and the query are disjoint.
-     * $params['preference']                    = (string) Specify the node or shard the operation should be performed on. (Default = random)
-     * $params['q']                             = (string) Query in the Lucene query string syntax.
-     * $params['request_cache']                 = (boolean) Specify if request cache should be used for this request or not, defaults to index level setting.
-     * $params['rest_total_hits_as_int']        = (boolean) Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default = false)
-     * $params['routing']                       = (any) A comma-separated list of specific routing values.
-     * $params['scroll']                        = (string) Specify how long a consistent view of the index should be maintained for scrolled search.
-     * $params['search_type']                   = (any) Search operation type.
-     * $params['seq_no_primary_term']           = (boolean) Specify whether to return sequence number and primary term of the last modification of each hit.
-     * $params['size']                          = (integer) Number of hits to return. (Default = 10)
-     * $params['sort']                          = (array) A comma-separated list of <field>:<direction> pairs.
-     * $params['stats']                         = (array) Specific 'tag' of the request for logging and statistical purposes.
-     * $params['stored_fields']                 = (array) A comma-separated list of stored fields to return.
-     * $params['suggest_field']                 = (string) Specify which field to use for suggestions.
-     * $params['suggest_mode']                  = (enum) Specify suggest mode. (Options = always,missing,popular)
-     * $params['suggest_size']                  = (integer) How many suggestions to return in response.
-     * $params['suggest_text']                  = (string) The source text for which the suggestions should be returned.
-     * $params['terminate_after']               = (integer) The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
-     * $params['timeout']                       = (string) Operation timeout.
-     * $params['track_scores']                  = (boolean) Whether to calculate and return scores even if they are not used for sorting.
-     * $params['track_total_hits']              = (boolean) Indicate if the number of documents that match the query should be tracked.
-     * $params['typed_keys']                    = (boolean) Specify whether aggregation and suggester names should be prefixed by their respective types in the response.
-     * $params['version']                       = (boolean) Whether to return document version as part of a hit.
-     * $params['pretty']                        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']                   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{_source?: mixed, _source_excludes?: mixed, _source_includes?: mixed, allow_no_indices?: bool, allow_partial_search_results?: bool, analyze_wildcard?: bool, analyzer?: string, batched_reduce_size?: int, ccs_minimize_roundtrips?: bool, default_operator?: mixed, df?: string, docvalue_fields?: mixed, expand_wildcards?: mixed, explain?: bool, from?: int, ignore_throttled?: bool, ignore_unavailable?: bool, lenient?: bool, max_concurrent_shard_requests?: int, pre_filter_shard_size?: int, preference?: string, q?: string, request_cache?: bool, rest_total_hits_as_int?: bool, routing?: mixed, scroll?: string, search_type?: mixed, seq_no_primary_term?: bool, size?: int, sort?: mixed, stats?: mixed, stored_fields?: mixed, suggest_field?: string, suggest_mode?: mixed, suggest_size?: int, suggest_text?: string, terminate_after?: int, timeout?: string, track_scores?: bool, track_total_hits?: bool, typed_keys?: bool, version?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - _source: Set to `true` or `false` to return the `_source` field or not, or a list of fields to return.
+     * - _source_excludes: List of fields to exclude from the returned `_source` field.
+     * - _source_includes: List of fields to extract and return from the `_source` field.
+     * - allow_no_indices: Whether to ignore if a wildcard indexes expression resolves into no concrete indexes. (This includes `_all` string or when no indexes have been specified).
+     * - allow_partial_search_results: Indicate if an error should be returned if there is a partial search failure or timeout. (Default: true)
+     * - analyze_wildcard: Specify whether wildcard and prefix queries should be analyzed. (Default: false)
+     * - analyzer: The analyzer to use for the query string.
+     * - batched_reduce_size: The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large. (Default: 512)
+     * - ccs_minimize_roundtrips: Indicates whether network round-trips should be minimized as part of cross-cluster search requests execution. (Default: true)
+     * - default_operator: The default operator for query string query (AND or OR). (Options: and, AND, or, OR)
+     * - df: The field to use as default where no field prefix is given in the query string.
+     * - docvalue_fields: A comma-separated list of fields to return as the docvalue representation of a field for each hit.
+     * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * - explain: Specify whether to return detailed information about score computation as part of a hit.
+     * - from: Starting offset. (Default: 0)
+     * - ignore_throttled: Whether specified concrete, expanded or aliased indexes should be ignored when throttled.
+     * - ignore_unavailable: Whether specified concrete indexes should be ignored when unavailable (missing or closed).
+     * - lenient: Specify whether format-based query failures (such as providing text to a numeric field) should be ignored.
+     * - max_concurrent_shard_requests: The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests. (Default: 5)
+     * - pre_filter_shard_size: Threshold that enforces a pre-filter round-trip to prefilter search shards based on query rewriting if the number of shards the search request expands to exceeds the threshold. This filter round-trip can limit the number of shards significantly if for instance a shard can not match any documents based on its rewrite method, that is if date filters are mandatory to match but the shard bounds and the query are disjoint.
+     * - preference: Specify the node or shard the operation should be performed on. (Default: random)
+     * - q: Query in the Lucene query string syntax.
+     * - request_cache: Specify if request cache should be used for this request or not, defaults to index level setting.
+     * - rest_total_hits_as_int: Indicates whether `hits.total` should be rendered as an integer or an object in the rest search response. (Default: false)
+     * - routing: A comma-separated list of specific routing values.
+     * - scroll: Specify how long a consistent view of the index should be maintained for scrolled search.
+     * - search_type: Search operation type.
+     * - seq_no_primary_term: Specify whether to return sequence number and primary term of the last modification of each hit.
+     * - size: Number of hits to return. (Default: 10)
+     * - sort: A comma-separated list of <field>:<direction> pairs.
+     * - stats: Specific 'tag' of the request for logging and statistical purposes.
+     * - stored_fields: A comma-separated list of stored fields to return.
+     * - suggest_field: Specify which field to use for suggestions.
+     * - suggest_mode: Specify suggest mode. (Options: always, missing, popular)
+     * - suggest_size: How many suggestions to return in response.
+     * - suggest_text: The source text for which the suggestions should be returned.
+     * - terminate_after: The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
+     * - timeout: Operation timeout.
+     * - track_scores: Whether to calculate and return scores even if they are not used for sorting.
+     * - track_total_hits: Indicate if the number of documents that match the query should be tracked.
+     * - typed_keys: Specify whether aggregation and suggester names should be prefixed by their respective types in the response.
+     * - version: Whether to return document version as part of a hit.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function searchModels(array $params = [])
@@ -145,16 +143,15 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Provides information about the current status of the k-NN plugin.
      *
-     * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-     * $params['stat']        = (array) A comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
-     * $params['timeout']     = (string) Operation timeout.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: mixed, stat?: mixed, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+     * - stat: A comma-separated list of stats to retrieve; use `_all` or empty string to retrieve all stats.
+     * - timeout: Operation timeout.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function stats(array $params = [])
@@ -173,15 +170,15 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Create and train a model that can be used for initializing k-NN native library indexes during indexing.
      *
-     * $params['model_id']    = (string) The id of the model.
-     * $params['preference']  = (string) Preferred node to execute training.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{model_id?: string, preference?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - model_id: The id of the model.
+     * - preference: Preferred node to execute training.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function trainModel(array $params = [])
@@ -200,14 +197,13 @@ class KnnNamespace extends AbstractNamespace
     /**
      * Preloads native library files into memory, reducing initial search latency for specified indexes.
      *
-     * $params['index']       = (array) A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes. (Required)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function warmup(array $params = [])

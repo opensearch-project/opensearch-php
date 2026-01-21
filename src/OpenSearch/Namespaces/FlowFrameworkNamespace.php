@@ -36,18 +36,18 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Creates a new workflow template.
      *
-     * $params['provision']     = (boolean)  (Default = false)
-     * $params['reprovision']   = (boolean)  (Default = false)
-     * $params['update_fields'] = (boolean)  (Default = false)
-     * $params['use_case']      = (string) Specifies the workflow template to use.
-     * $params['validation']    = (string)  (Default = all)
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{provision?: bool, reprovision?: bool, update_fields?: bool, use_case?: string, validation?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - provision: (Default: false)
+     * - reprovision: (Default: false)
+     * - update_fields: (Default: false)
+     * - use_case: Specifies the workflow template to use.
+     * - validation: (Default: all)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function create(array $params = [])
@@ -64,15 +64,14 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Deletes a workflow template.
      *
-     * $params['workflow_id']  = (string)
-     * $params['clear_status'] = (boolean)  (Default = false)
-     * $params['pretty']       = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']        = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_id?: string, clear_status?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - workflow_id:
+     * - clear_status: (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function delete(array $params = [])
@@ -89,15 +88,14 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Deprovision workflow's resources when you no longer need them.
      *
-     * $params['workflow_id']  = (string)
-     * $params['allow_delete'] = (string)
-     * $params['pretty']       = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']        = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']  = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']       = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']  = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_id?: string, allow_delete?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - workflow_id:
+     * - allow_delete:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function deprovision(array $params = [])
@@ -114,14 +112,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Retrieves a workflow template.
      *
-     * $params['workflow_id'] = (string)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - workflow_id:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function get(array $params = [])
@@ -138,15 +135,14 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Retrieves the current workflow provisioning status.
      *
-     * $params['workflow_id'] = (string)
-     * $params['all']         = (boolean) Whether to return all fields in the response. (Default = false)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_id?: string, all?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - workflow_id:
+     * - all: Whether to return all fields in the response. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getStatus(array $params = [])
@@ -163,14 +159,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Retrieves available workflow steps.
      *
-     * $params['workflow_step'] = (string)
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_step?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - workflow_step:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getSteps(array $params = [])
@@ -184,14 +179,14 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Provisioning a workflow. This API is also executed when the Create or Update Workflow API is called with the provision parameter set to true.
      *
-     * $params['workflow_id'] = (string)
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - workflow_id:
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function provision(array $params = [])
@@ -210,13 +205,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Search for workflows by using a query matching a field.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
      * @return array
      */
     public function search(array $params = [])
@@ -233,13 +228,13 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Search for workflows by using a query matching a field.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
      * @return array
      */
     public function searchState(array $params = [])
@@ -256,19 +251,19 @@ class FlowFrameworkNamespace extends AbstractNamespace
     /**
      * Updates a workflow template that has not been provisioned.
      *
-     * $params['workflow_id']   = (string)
-     * $params['provision']     = (boolean)  (Default = false)
-     * $params['reprovision']   = (boolean)  (Default = false)
-     * $params['update_fields'] = (boolean)  (Default = false)
-     * $params['use_case']      = (string) Specifies the workflow template to use.
-     * $params['validation']    = (string)  (Default = all)
-     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{workflow_id?: string, provision?: bool, reprovision?: bool, update_fields?: bool, use_case?: string, validation?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - workflow_id:
+     * - provision: (Default: false)
+     * - reprovision: (Default: false)
+     * - update_fields: (Default: false)
+     * - use_case: Specifies the workflow template to use.
+     * - validation: (Default: all)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function update(array $params = [])

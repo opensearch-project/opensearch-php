@@ -29,13 +29,12 @@ class ListNamespace extends AbstractNamespace
     /**
      * Returns help for the List APIs.
      *
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function help(array $params = [])
@@ -49,31 +48,30 @@ class ListNamespace extends AbstractNamespace
     /**
      * Returns paginated information about indexes including number of primaries and replicas, document counts, disk size.
      *
-     * $params['index']                     = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                     = (any) The unit used to display byte values.
-     * $params['cluster_manager_timeout']   = (string) Operation timeout for connection to cluster-manager node.
-     * $params['expand_wildcards']          = (any) The type of index that wildcard patterns can match.
-     * $params['format']                    = (string) A short version of the Accept header, such as `JSON`, `YAML`.
-     * $params['h']                         = (array) A comma-separated list of column names to display.
-     * $params['health']                    = (any) The health status used to limit returned indexes. By default, the response includes indexes of any health status.
-     * $params['help']                      = (boolean) Return help information. (Default = false)
-     * $params['include_unloaded_segments'] = (boolean) If `true`, the response includes information from segments that are not loaded into memory. (Default = false)
-     * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']            = (string) Operation timeout for connection to cluster-manager node.
-     * $params['next_token']                = (Array) Token to retrieve next page of indexes.
-     * $params['pri']                       = (boolean) If `true`, the response only includes information from primary shards. (Default = false)
-     * $params['s']                         = (array) A comma-separated list of column names or column aliases to sort by.
-     * $params['size']                      = (integer) Maximum number of indexes to be displayed in a page.
-     * $params['sort']                      = (enum) Defines order in which indexes will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created indexes would be displayed first. (Options = asc,desc)
-     * $params['time']                      = (any) The unit used to display time values.
-     * $params['v']                         = (boolean) Verbose mode. Display column headers. (Default = false)
-     * $params['pretty']                    = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                     = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']               = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                    = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']               = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, expand_wildcards?: mixed, format?: string, h?: mixed, health?: mixed, help?: bool, include_unloaded_segments?: bool, local?: bool, master_timeout?: string, next_token?: array, pri?: bool, s?: mixed, size?: int, sort?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - bytes: The unit used to display byte values.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - expand_wildcards: The type of index that wildcard patterns can match.
+     * - format: A short version of the Accept header, such as `JSON`, `YAML`.
+     * - h: A comma-separated list of column names to display.
+     * - health: The health status used to limit returned indexes. By default, the response includes indexes of any health status.
+     * - help: Return help information. (Default: false)
+     * - include_unloaded_segments: If `true`, the response includes information from segments that are not loaded into memory. (Default: false)
+     * - local: Return local information, do not retrieve the state from cluster-manager node. (Default: false)
+     * - master_timeout: Operation timeout for connection to cluster-manager node.
+     * - next_token: Token to retrieve next page of indexes.
+     * - pri: If `true`, the response only includes information from primary shards. (Default: false)
+     * - s: A comma-separated list of column names or column aliases to sort by.
+     * - size: Maximum number of indexes to be displayed in a page.
+     * - sort: Defines order in which indexes will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created indexes would be displayed first. (Options: asc, desc)
+     * - time: The unit used to display time values.
+     * - v: Verbose mode. Display column headers. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function indices(array $params = [])
@@ -90,27 +88,26 @@ class ListNamespace extends AbstractNamespace
     /**
      * Returns paginated details of shard allocation on nodes.
      *
-     * $params['index']                   = (array) A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
-     * $params['bytes']                   = (any) The unit used to display byte values.
-     * $params['cluster_manager_timeout'] = (string) Operation timeout for connection to cluster-manager node.
-     * $params['format']                  = (string) A short version of the Accept header, such as `JSON`, `YAML`.
-     * $params['h']                       = (array) A comma-separated list of column names to display.
-     * $params['help']                    = (boolean) Return help information. (Default = false)
-     * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
-     * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
-     * $params['next_token']              = (Array) Token to retrieve next page of shards.
-     * $params['s']                       = (array) A comma-separated list of column names or column aliases to sort by.
-     * $params['size']                    = (integer) Maximum number of shards to be displayed in a page.
-     * $params['sort']                    = (enum) Defines order in which shards will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created shards would be displayed first. (Options = asc,desc)
-     * $params['time']                    = (any) The unit in which to display time values.
-     * $params['v']                       = (boolean) Verbose mode. Display column headers. (Default = false)
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: string, h?: mixed, help?: bool, local?: bool, master_timeout?: string, next_token?: array, s?: mixed, size?: int, sort?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
+     * - bytes: The unit used to display byte values.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - format: A short version of the Accept header, such as `JSON`, `YAML`.
+     * - h: A comma-separated list of column names to display.
+     * - help: Return help information. (Default: false)
+     * - local: Return local information, do not retrieve the state from cluster-manager node. (Default: false)
+     * - master_timeout: Operation timeout for connection to cluster-manager node.
+     * - next_token: Token to retrieve next page of shards.
+     * - s: A comma-separated list of column names or column aliases to sort by.
+     * - size: Maximum number of shards to be displayed in a page.
+     * - sort: Defines order in which shards will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created shards would be displayed first. (Options: asc, desc)
+     * - time: The unit in which to display time values.
+     * - v: Verbose mode. Display column headers. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function shards(array $params = [])
