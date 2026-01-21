@@ -80,7 +80,7 @@ class SniffingConnectionPool extends AbstractConnectionPool
         }
 
         if ($force === true) {
-            throw new NoNodesAvailableException("No alive nodes found in your cluster");
+            throw new NoNodesAvailableException("No alive nodes found in your cluster [possible storage issue]");
         }
 
         return $this->nextConnection(true);

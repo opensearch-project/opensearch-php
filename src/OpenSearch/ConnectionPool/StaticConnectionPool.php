@@ -87,7 +87,7 @@ class StaticConnectionPool extends AbstractConnectionPool implements ConnectionP
             }
         }
 
-        throw new NoNodesAvailableException("No alive nodes found in your cluster");
+        throw new NoNodesAvailableException("No alive nodes found in your cluster [possible storage issue]");
     }
 
     public function scheduleCheck(): void
