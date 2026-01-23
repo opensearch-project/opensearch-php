@@ -537,9 +537,14 @@ class Endpoint
             if (in_array($param, $this->addedPartInDoc)) {
                 continue;
             }
-            $type = $values['type'] ?? 'any';
-            //            var_dump($type);
-            //            var_dump($values);
+            $type = 'any';
+            if (isset($values['type'])) {
+                if (is_string($values['type'])) {
+                    $type = $values['type'];
+                } elseif (is_array($values['type'])) {
+                    $type = implode('|', $values['type']);
+                }
+            }
             $result .= sprintf(
                 "     * \$params['%s']%s = (%s) %s%s%s%s\n",
                 $param,
