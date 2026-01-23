@@ -60,7 +60,7 @@ class ListNamespace extends AbstractNamespace
      * $params['include_unloaded_segments'] = (boolean) If `true`, the response includes information from segments that are not loaded into memory. (Default = false)
      * $params['local']                     = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']            = (string) Operation timeout for connection to cluster-manager node.
-     * $params['next_token']                = (Array) Token to retrieve next page of indexes.
+     * $params['next_token']                = (null|string) Token to retrieve next page of indexes.
      * $params['pri']                       = (boolean) If `true`, the response only includes information from primary shards. (Default = false)
      * $params['s']                         = (array) A comma-separated list of column names or column aliases to sort by.
      * $params['size']                      = (integer) Maximum number of indexes to be displayed in a page.
@@ -98,7 +98,7 @@ class ListNamespace extends AbstractNamespace
      * $params['help']                    = (boolean) Return help information. (Default = false)
      * $params['local']                   = (boolean) Return local information, do not retrieve the state from cluster-manager node. (Default = false)
      * $params['master_timeout']          = (string) Operation timeout for connection to cluster-manager node.
-     * $params['next_token']              = (Array) Token to retrieve next page of shards.
+     * $params['next_token']              = (null|string) Token to retrieve next page of shards.
      * $params['s']                       = (array) A comma-separated list of column names or column aliases to sort by.
      * $params['size']                    = (integer) Maximum number of shards to be displayed in a page.
      * $params['sort']                    = (enum) Defines order in which shards will be displayed. Accepted values are `asc` and `desc`. If `desc`, most recently created shards would be displayed first. (Options = asc,desc)
