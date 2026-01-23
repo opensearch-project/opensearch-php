@@ -5,6 +5,8 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 ### Changed
+- Replace php scripts with Symfony commands ([#394](https://github.com/opensearch-project/opensearch-php/pull/394))
+- Update minimum PHP version to 8.2 and add PHP 8.5 testing ([#394](https://github.com/opensearch-project/opensearch-php/pull/394))
 ### Deprecated
 ### Removed
 ### Fixed
