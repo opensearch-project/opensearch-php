@@ -87,7 +87,7 @@ class StaticConnectionPool extends AbstractConnectionPool implements ConnectionP
             }
         }
 
-        throw new NoNodesAvailableException("No alive nodes found in your cluster [possible storage issue]");
+        throw new NoNodesAvailableException("None of the configured OpenSearch nodes are healthy or could not be reached. Check the configured URLs");
     }
 
     public function scheduleCheck(): void
