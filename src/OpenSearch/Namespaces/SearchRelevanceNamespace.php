@@ -18,14 +18,17 @@ namespace OpenSearch\Namespaces;
 use OpenSearch\Endpoints\SearchRelevance\DeleteExperiments;
 use OpenSearch\Endpoints\SearchRelevance\DeleteJudgments;
 use OpenSearch\Endpoints\SearchRelevance\DeleteQuerySets;
+use OpenSearch\Endpoints\SearchRelevance\DeleteScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\DeleteSearchConfigurations;
 use OpenSearch\Endpoints\SearchRelevance\GetExperiments;
 use OpenSearch\Endpoints\SearchRelevance\GetJudgments;
 use OpenSearch\Endpoints\SearchRelevance\GetNodeStats;
 use OpenSearch\Endpoints\SearchRelevance\GetQuerySets;
+use OpenSearch\Endpoints\SearchRelevance\GetScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\GetSearchConfigurations;
 use OpenSearch\Endpoints\SearchRelevance\GetStats;
 use OpenSearch\Endpoints\SearchRelevance\PostQuerySets;
+use OpenSearch\Endpoints\SearchRelevance\PostScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\PutExperiments;
 use OpenSearch\Endpoints\SearchRelevance\PutJudgments;
 use OpenSearch\Endpoints\SearchRelevance\PutQuerySets;
@@ -106,6 +109,30 @@ class SearchRelevanceNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(DeleteQuerySets::class);
         $endpoint->setParams($params);
         $endpoint->setQuerySetId($query_set_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Deletes a specified scheduled experiment.
+     *
+     * $params['experiment_id'] = (string) The experiment id
+     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function deleteScheduledExperiments(array $params = [])
+    {
+        $experiment_id = $this->extractArgument($params, 'experiment_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteScheduledExperiments::class);
+        $endpoint->setParams($params);
+        $endpoint->setExperimentId($experiment_id);
 
         return $this->performRequest($endpoint);
     }
@@ -239,6 +266,30 @@ class SearchRelevanceNamespace extends AbstractNamespace
     }
 
     /**
+     * Gets the scheduled experiments.
+     *
+     * $params['experiment_id'] = (string) The experiment id
+     * $params['pretty']        = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']         = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace']   = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']        = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path']   = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function getScheduledExperiments(array $params = [])
+    {
+        $experiment_id = $this->extractArgument($params, 'experiment_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(GetScheduledExperiments::class);
+        $endpoint->setParams($params);
+        $endpoint->setExperimentId($experiment_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Gets the search configurations.
      *
      * $params['search_configuration_id'] = (string) The search configuration id
@@ -308,6 +359,29 @@ class SearchRelevanceNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(PostQuerySets::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Creates a scheduled experiment.
+     *
+     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
+     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
+     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
+     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     *
+     * @param array $params Associative array of parameters
+     * @return array
+     */
+    public function postScheduledExperiments(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(PostScheduledExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
