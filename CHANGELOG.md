@@ -13,6 +13,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - fix: error thrown trying to parse type for param docs ([#395](https://github.com/opensearch-project/opensearch-php/pull/395))
 ### Security
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@cbb07cd](https://github.com/opensearch-project/opensearch-api-specification/commit/cbb07cd7856ade16a50b1f1004c50ec2b33e5943)
 
 ## [2.5.1]
 ### Added
