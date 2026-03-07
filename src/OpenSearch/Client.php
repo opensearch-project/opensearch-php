@@ -1222,6 +1222,7 @@ class Client
      * Allows to execute several search operations in one request.
      *
      * $params['index']                         = (array) A comma-separated list of data streams, indexes, and index aliases to search.
+     * $params['allow_partial_results']         = (boolean) Specifies whether to return partial results if there are shard request timeouts or shard failures (Default = true)
      * $params['ccs_minimize_roundtrips']       = (boolean) If `true`, network round-trips between the coordinating node and remote clusters are minimized for cross-cluster search requests. (Default = true)
      * $params['max_concurrent_searches']       = (integer) Maximum number of concurrent searches the multi search API can execute.
      * $params['max_concurrent_shard_requests'] = (integer) Maximum number of concurrent shard requests that each sub-search request executes per node. (Default = 5)
