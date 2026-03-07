@@ -45,6 +45,7 @@ class Msearch extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'allow_partial_results',
             'ccs_minimize_roundtrips',
             'max_concurrent_searches',
             'max_concurrent_shard_requests',
