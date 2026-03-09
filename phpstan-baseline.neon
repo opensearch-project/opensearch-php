@@ -65,6 +65,37 @@ parameters:
 			path: src/OpenSearch/Namespaces/SecurityNamespace.php
 
 		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{'', '', ''\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/ClientIntegrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{null, null, null\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/ClientIntegrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: 'test', id\\: null\\} given\\.$#"
+			count: 1
+			path: tests/ClientTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: null, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/ClientTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{'', '', ''\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/LegacyClientIntegrationTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{null, null, null\\}, id\\: 'test'\\} given\\.$#"
+			count: 1
+			path: tests/LegacyClientIntegrationTest.php
+
+		-
 			message: "#^Call to an undefined method OpenSearch\\\\Client\\:\\:slm\\(\\)\\.$#"
 			count: 2
 			path: tests/Utility.php
+

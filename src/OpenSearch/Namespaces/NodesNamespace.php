@@ -37,20 +37,19 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns information about hot threads on each node in the cluster.
      *
-     * $params['node_id']             = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
-     * $params['ignore_idle_threads'] = (boolean) Whether to show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue. (Default = true)
-     * $params['interval']            = (string) The time interval between thread stack trace samples.
-     * $params['snapshots']           = (integer) The number of thread stack trace samples to collect. (Default = 10)
-     * $params['threads']             = (integer) The number of threads to provide information for. (Default = 3)
-     * $params['timeout']             = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['type']                = (string) The type to sample.
-     * $params['pretty']              = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']               = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']         = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']              = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']         = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: mixed, ignore_idle_threads?: bool, interval?: string, snapshots?: int, threads?: int, timeout?: string, type?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes.
+     * - ignore_idle_threads: Whether to show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue. (Default: true)
+     * - interval: The time interval between thread stack trace samples.
+     * - snapshots: The number of thread stack trace samples to collect. (Default: 10)
+     * - threads: The number of threads to provide information for. (Default: 3)
+     * - timeout: The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - type: The type to sample.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function hotThreads(array $params = [])
@@ -67,18 +66,17 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns information about nodes in the cluster.
      *
-     * $params['node_id_or_metric'] = (any) Limits the information returned to a list of node IDs or specific metrics. Supports a comma-separated list, such as `node1,node2` or `http,ingest`.
-     * $params['metric']            = (array) Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
-     * $params['node_id']           = (array) Comma-separated list of node IDs or names used to limit returned information.
-     * $params['flat_settings']     = (boolean) When `true`, returns settings in flat format. (Default = false)
-     * $params['timeout']           = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']            = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']             = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']       = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']            = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']       = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id_or_metric?: mixed, metric?: mixed, node_id?: mixed, flat_settings?: bool, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id_or_metric: Limits the information returned to a list of node IDs or specific metrics. Supports a comma-separated list, such as `node1,node2` or `http,ingest`.
+     * - metric: Limits the information returned to the specific metrics. Supports a comma-separated list, such as http,ingest.
+     * - node_id: Comma-separated list of node IDs or names used to limit returned information.
+     * - flat_settings: When `true`, returns settings in flat format. (Default: false)
+     * - timeout: The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function info(array $params = [])
@@ -99,16 +97,15 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Reloads secure settings.
      *
-     * $params['node_id']     = (array) The names of particular nodes in the cluster to target.
-     * $params['timeout']     = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * $params['body']        = (array) An object containing the password for the OpenSearch keystore.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: mixed, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - node_id: The names of particular nodes in the cluster to target.
+     * - timeout: The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: An object containing the password for the OpenSearch keystore.
      * @return array
      */
     public function reloadSecureSettings(array $params = [])
@@ -127,24 +124,23 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns statistical information about nodes in the cluster.
      *
-     * $params['node_id']                    = (array) A comma-separated list of node IDs or names used to limit returned information.
-     * $params['metric']                     = (array) Limit the information returned to the specified metrics.
-     * $params['index_metric']               = (array) Limit the information returned for indexes metric to the specified index metrics. It can be used only if indexes (or all) metric is specified.
-     * $params['completion_fields']          = (any) A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
-     * $params['fielddata_fields']           = (any) A comma-separated list or wildcard expressions of fields to include in field data statistics.
-     * $params['fields']                     = (any) A comma-separated list or wildcard expressions of fields to include in the statistics.
-     * $params['groups']                     = (array) A comma-separated list of search groups to include in the search statistics.
-     * $params['include_segment_file_sizes'] = (boolean) When `true`, reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default = false)
-     * $params['level']                      = (enum) Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options = cluster,indices,shards)
-     * $params['timeout']                    = (string) The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['types']                      = (array) A comma-separated list of document types for the indexing index metric.
-     * $params['pretty']                     = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                      = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']                = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                     = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']                = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: mixed, metric?: mixed, index_metric?: mixed, completion_fields?: mixed, fielddata_fields?: mixed, fields?: mixed, groups?: mixed, include_segment_file_sizes?: bool, level?: mixed, timeout?: string, types?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names used to limit returned information.
+     * - metric: Limit the information returned to the specified metrics.
+     * - index_metric: Limit the information returned for indexes metric to the specified index metrics. It can be used only if indexes (or all) metric is specified.
+     * - completion_fields: A comma-separated list or wildcard expressions of fields to include in field data and suggest statistics.
+     * - fielddata_fields: A comma-separated list or wildcard expressions of fields to include in field data statistics.
+     * - fields: A comma-separated list or wildcard expressions of fields to include in the statistics.
+     * - groups: A comma-separated list of search groups to include in the search statistics.
+     * - include_segment_file_sizes: When `true`, reports the aggregated disk usage of each one of the Lucene index files (only applies if segment stats are requested). (Default: false)
+     * - level: Indicates whether statistics are aggregated at the cluster, index, or shard level. (Options: cluster, indices, shards)
+     * - timeout: The amount of time to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - types: A comma-separated list of document types for the indexing index metric.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function stats(array $params = [])
@@ -165,16 +161,15 @@ class NodesNamespace extends AbstractNamespace
     /**
      * Returns low-level information about REST actions usage on nodes.
      *
-     * $params['node_id']     = (array) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
-     * $params['metric']      = (array) Limits the information returned to the specific metrics. A comma-separated list of the following options: `_all`, `rest_actions`.
-     * $params['timeout']     = (string) Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{node_id?: mixed, metric?: mixed, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
+     * - metric: Limits the information returned to the specific metrics. A comma-separated list of the following options: `_all`, `rest_actions`.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function usage(array $params = [])

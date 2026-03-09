@@ -4,6 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Added
+- Update docblocks to define array shapes ([#398](https://github.com/opensearch-project/opensearch-php/pull/398))
 ### Changed
 - Replace php scripts with Symfony commands ([#394](https://github.com/opensearch-project/opensearch-php/pull/394))
 - Update minimum PHP version to 8.2 and add PHP 8.5 testing ([#394](https://github.com/opensearch-project/opensearch-php/pull/394))
@@ -13,6 +14,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - fix: error thrown trying to parse type for param docs ([#395](https://github.com/opensearch-project/opensearch-php/pull/395))
 ### Security
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@8d5d6d5](https://github.com/opensearch-project/opensearch-api-specification/commit/8d5d6d56b898158961648781fa4a16c97eca157d)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@cbb07cd](https://github.com/opensearch-project/opensearch-api-specification/commit/cbb07cd7856ade16a50b1f1004c50ec2b33e5943)
 
 ## [2.5.1]
