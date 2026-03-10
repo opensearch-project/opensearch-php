@@ -29,17 +29,16 @@ class IngestionNamespace extends AbstractNamespace
     /**
      * Use this API to retrieve the ingestion state for a given index.
      *
-     * $params['index']       = (string) Index for which ingestion state should be retrieved.
-     * $params['next_token']  = (string) Token to retrieve the next page of results.
-     * $params['size']        = (integer) Number of results to return per page.
-     * $params['timeout']     = (string) Timeout for the request.
-     * $params['pretty']      = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']       = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace'] = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']      = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path'] = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, next_token?: string, size?: int, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: Index for which ingestion state should be retrieved.
+     * - next_token: Token to retrieve the next page of results.
+     * - size: Number of results to return per page.
+     * - timeout: Timeout for the request.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function getState(array $params = [])
@@ -56,16 +55,15 @@ class IngestionNamespace extends AbstractNamespace
     /**
      * Use this API to pause ingestion for a given index.
      *
-     * $params['index']                   = (string) Index for which ingestion should be paused.
-     * $params['cluster_manager_timeout'] = (string) Time to wait for cluster manager connection.
-     * $params['timeout']                 = (string) Timeout for the request.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, cluster_manager_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: Index for which ingestion should be paused.
+     * - cluster_manager_timeout: Time to wait for cluster manager connection.
+     * - timeout: Timeout for the request.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
      * @return array
      */
     public function pause(array $params = [])
@@ -82,16 +80,16 @@ class IngestionNamespace extends AbstractNamespace
     /**
      * Use this API to resume ingestion for the given index.
      *
-     * $params['index']                   = (string) Index for which ingestion should be resumed.
-     * $params['cluster_manager_timeout'] = (string) Time to wait for cluster manager connection.
-     * $params['timeout']                 = (string) Timeout for the request.
-     * $params['pretty']                  = (boolean) Whether to pretty-format the returned JSON response. (Default = false)
-     * $params['human']                   = (boolean) Whether to return human-readable values for statistics. (Default = false)
-     * $params['error_trace']             = (boolean) Whether to include the stack trace of returned errors. (Default = false)
-     * $params['source']                  = (string) The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
-     * $params['filter_path']             = (any) A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     *
-     * @param array $params Associative array of parameters
+     * @param array{index?: string, cluster_manager_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: Index for which ingestion should be resumed.
+     * - cluster_manager_timeout: Time to wait for cluster manager connection.
+     * - timeout: Timeout for the request.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
      * @return array
      */
     public function resume(array $params = [])
