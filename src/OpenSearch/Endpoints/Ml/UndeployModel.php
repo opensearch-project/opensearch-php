@@ -66,4 +66,5 @@ class UndeployModel extends AbstractEndpoint
 
         return $this;
     }
+
 }

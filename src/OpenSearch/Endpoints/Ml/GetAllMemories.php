@@ -44,4 +44,5 @@ class GetAllMemories extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

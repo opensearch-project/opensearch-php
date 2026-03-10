@@ -73,4 +73,5 @@ class HotThreads extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -59,4 +59,5 @@ class DeleteIp2geoDatasource extends AbstractEndpoint
 
         return $this;
     }
+
 }

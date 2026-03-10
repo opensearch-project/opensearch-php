@@ -92,4 +92,5 @@ class AddFeaturesToSetByQuery extends AbstractEndpoint
 
         return $this;
     }
+
 }

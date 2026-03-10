@@ -60,4 +60,5 @@ class GenerateUserTokenLegacy extends AbstractEndpoint
 
         return $this;
     }
+
 }

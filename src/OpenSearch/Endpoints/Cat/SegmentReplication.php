@@ -63,4 +63,5 @@ class SegmentReplication extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

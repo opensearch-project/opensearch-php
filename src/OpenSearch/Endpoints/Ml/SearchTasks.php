@@ -52,4 +52,5 @@ class SearchTasks extends AbstractEndpoint
 
         return $this;
     }
+
 }

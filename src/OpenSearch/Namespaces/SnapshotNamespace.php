@@ -58,7 +58,6 @@ class SnapshotNamespace extends AbstractNamespace
     public function cleanupRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
-
         $endpoint = $this->endpointFactory->getEndpoint(CleanupRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -89,7 +88,6 @@ class SnapshotNamespace extends AbstractNamespace
         $snapshot = $this->extractArgument($params, 'snapshot');
         $target_snapshot = $this->extractArgument($params, 'target_snapshot');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CloneSnapshot::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -122,7 +120,6 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Create::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -153,7 +150,6 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -181,7 +177,6 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
-
         $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -208,7 +203,6 @@ class SnapshotNamespace extends AbstractNamespace
     public function deleteRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -237,7 +231,6 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
-
         $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -264,7 +257,6 @@ class SnapshotNamespace extends AbstractNamespace
     public function getRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -294,7 +286,6 @@ class SnapshotNamespace extends AbstractNamespace
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Restore::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -324,7 +315,6 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
-
         $endpoint = $this->endpointFactory->getEndpoint(Status::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -351,7 +341,6 @@ class SnapshotNamespace extends AbstractNamespace
     public function verifyRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
-
         $endpoint = $this->endpointFactory->getEndpoint(VerifyRepository::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);

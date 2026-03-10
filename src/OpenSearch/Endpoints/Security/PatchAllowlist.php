@@ -52,4 +52,5 @@ class PatchAllowlist extends AbstractEndpoint
 
         return $this;
     }
+
 }

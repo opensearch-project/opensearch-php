@@ -59,4 +59,5 @@ class DeleteStore extends AbstractEndpoint
 
         return $this;
     }
+
 }

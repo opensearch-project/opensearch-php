@@ -52,4 +52,5 @@ class PutQuerySets extends AbstractEndpoint
 
         return $this;
     }
+
 }

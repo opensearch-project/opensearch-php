@@ -55,7 +55,6 @@ class NodesNamespace extends AbstractNamespace
     public function hotThreads(array $params = [])
     {
         $node_id = $this->extractArgument($params, 'node_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(HotThreads::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -84,7 +83,6 @@ class NodesNamespace extends AbstractNamespace
         $node_id_or_metric = $this->extractArgument($params, 'node_id_or_metric');
         $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Info::class);
         $endpoint->setParams($params);
         $endpoint->setNodeIdOrMetric($node_id_or_metric);
@@ -112,7 +110,6 @@ class NodesNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(ReloadSecureSettings::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -148,7 +145,6 @@ class NodesNamespace extends AbstractNamespace
         $node_id = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');
         $index_metric = $this->extractArgument($params, 'index_metric');
-
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -176,7 +172,6 @@ class NodesNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');
-
         $endpoint = $this->endpointFactory->getEndpoint(Usage::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);

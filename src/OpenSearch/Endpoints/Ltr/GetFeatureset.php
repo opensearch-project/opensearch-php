@@ -63,4 +63,5 @@ class GetFeatureset extends AbstractEndpoint
 
         return $this;
     }
+
 }

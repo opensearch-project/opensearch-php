@@ -52,4 +52,5 @@ class CreateObject extends AbstractEndpoint
 
         return $this;
     }
+
 }

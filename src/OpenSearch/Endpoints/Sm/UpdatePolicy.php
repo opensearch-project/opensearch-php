@@ -71,4 +71,5 @@ class UpdatePolicy extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -61,4 +61,5 @@ class SearchFeaturesets extends AbstractEndpoint
 
         return $this;
     }
+
 }

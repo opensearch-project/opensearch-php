@@ -63,4 +63,5 @@ class Simulate extends AbstractEndpoint
 
         return $this;
     }
+
 }

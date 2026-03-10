@@ -66,4 +66,5 @@ class ExistsSource extends AbstractEndpoint
     {
         return 'HEAD';
     }
+
 }

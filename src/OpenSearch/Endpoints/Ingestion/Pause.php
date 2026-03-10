@@ -49,4 +49,5 @@ class Pause extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

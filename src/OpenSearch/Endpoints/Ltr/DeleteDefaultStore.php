@@ -42,4 +42,5 @@ class DeleteDefaultStore extends AbstractEndpoint
     {
         return 'DELETE';
     }
+
 }

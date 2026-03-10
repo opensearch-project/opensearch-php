@@ -42,4 +42,5 @@ class AutofollowStats extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

@@ -70,4 +70,5 @@ class CreateUser extends AbstractEndpoint
 
         return $this;
     }
+
 }

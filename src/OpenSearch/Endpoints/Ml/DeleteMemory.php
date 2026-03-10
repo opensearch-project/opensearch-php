@@ -59,4 +59,5 @@ class DeleteMemory extends AbstractEndpoint
 
         return $this;
     }
+
 }

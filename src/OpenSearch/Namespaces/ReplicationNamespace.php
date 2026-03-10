@@ -68,7 +68,6 @@ class ReplicationNamespace extends AbstractNamespace
     public function createReplicationRule(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateReplicationRule::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -91,7 +90,6 @@ class ReplicationNamespace extends AbstractNamespace
     public function deleteReplicationRule(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteReplicationRule::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -154,7 +152,6 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Pause::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -180,7 +177,6 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Resume::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -206,7 +202,6 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Start::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -230,7 +225,6 @@ class ReplicationNamespace extends AbstractNamespace
     public function status(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-
         $endpoint = $this->endpointFactory->getEndpoint(Status::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -255,7 +249,6 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Stop::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -281,7 +274,6 @@ class ReplicationNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateSettings::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);

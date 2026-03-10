@@ -44,4 +44,5 @@ class GetAllCertificates extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

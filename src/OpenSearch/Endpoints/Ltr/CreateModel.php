@@ -74,4 +74,5 @@ class CreateModel extends AbstractEndpoint
 
         return $this;
     }
+
 }

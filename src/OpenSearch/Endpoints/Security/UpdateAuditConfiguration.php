@@ -52,4 +52,5 @@ class UpdateAuditConfiguration extends AbstractEndpoint
 
         return $this;
     }
+
 }

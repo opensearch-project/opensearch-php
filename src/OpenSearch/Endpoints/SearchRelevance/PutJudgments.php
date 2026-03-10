@@ -52,4 +52,5 @@ class PutJudgments extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -60,4 +60,5 @@ class GetRoleMapping extends AbstractEndpoint
 
         return $this;
     }
+
 }

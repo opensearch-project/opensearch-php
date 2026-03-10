@@ -59,4 +59,5 @@ class Get extends AbstractEndpoint
 
         return $this;
     }
+
 }

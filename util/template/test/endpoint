@@ -1,4 +1,0 @@
-        :catch$response = $this->client->:endpoint(
-            :params
-        );
-:response-check

@@ -51,7 +51,6 @@ class DanglingIndicesNamespace extends AbstractNamespace
     public function deleteDanglingIndex(array $params = [])
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDanglingIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndexUuid($index_uuid);
@@ -78,7 +77,6 @@ class DanglingIndicesNamespace extends AbstractNamespace
     public function importDanglingIndex(array $params = [])
     {
         $index_uuid = $this->extractArgument($params, 'index_uuid');
-
         $endpoint = $this->endpointFactory->getEndpoint(ImportDanglingIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndexUuid($index_uuid);

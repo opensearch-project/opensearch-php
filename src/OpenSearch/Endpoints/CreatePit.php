@@ -52,4 +52,5 @@ class CreatePit extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

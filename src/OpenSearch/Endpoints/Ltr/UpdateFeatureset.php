@@ -74,4 +74,5 @@ class UpdateFeatureset extends AbstractEndpoint
 
         return $this;
     }
+
 }

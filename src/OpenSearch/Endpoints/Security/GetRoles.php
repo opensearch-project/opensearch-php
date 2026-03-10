@@ -42,4 +42,5 @@ class GetRoles extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

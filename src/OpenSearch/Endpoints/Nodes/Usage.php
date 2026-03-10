@@ -89,4 +89,5 @@ class Usage extends AbstractEndpoint
 
         return $this;
     }
+
 }

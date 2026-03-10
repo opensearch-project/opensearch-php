@@ -42,4 +42,5 @@ class TopQueries extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

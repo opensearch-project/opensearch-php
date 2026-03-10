@@ -52,4 +52,5 @@ class SearchAgents extends AbstractEndpoint
 
         return $this;
     }
+
 }

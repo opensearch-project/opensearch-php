@@ -60,4 +60,5 @@ class DeleteRoleMapping extends AbstractEndpoint
 
         return $this;
     }
+
 }

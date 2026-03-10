@@ -74,4 +74,5 @@ class Fielddata extends AbstractEndpoint
 
         return $this;
     }
+
 }

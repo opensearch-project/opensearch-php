@@ -65,4 +65,5 @@ class Reindex extends AbstractEndpoint
 
         return $this;
     }
+
 }

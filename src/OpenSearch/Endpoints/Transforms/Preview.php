@@ -52,4 +52,5 @@ class Preview extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -33,33 +33,33 @@ use stdClass;
 
 class ActionTest
 {
-    public const TEMPLATE_ENDPOINT             = __DIR__ . '/template/test/endpoint';
-    public const TEMPLATE_MATCH_EQUAL          = __DIR__ . '/template/test/match-equal';
-    public const TEMPLATE_MATCH_REGEX          = __DIR__ . '/template/test/match-regex';
-    public const TEMPLATE_IS_FALSE             = __DIR__ . '/template/test/is-false';
-    public const TEMPLATE_IS_TRUE              = __DIR__ . '/template/test/is-true';
-    public const TEMPLATE_IS_NULL              = __DIR__ . '/template/test/is-null';
-    public const TEMPLATE_LENGTH               = __DIR__ . '/template/test/length';
-    public const TEMPLATE_SKIP_VERSION         = __DIR__ . '/template/test/skip-version';
-    public const TEMPLATE_SKIP_FEATURE         = __DIR__ . '/template/test/skip-feature';
-    public const TEMPLATE_SKIP_XPACK           = __DIR__ . '/template/test/skip-xpack';
-    public const TEMPLATE_SKIP_NODE_SELECTOR   = __DIR__ . '/template/test/skip-node-selector';
-    public const TEMPLATE_SKIP_OSS             = __DIR__ . '/template/test/skip-oss';
-    public const TEMPLATE_CATCH                = __DIR__ . '/template/test/catch';
-    public const TEMPLATE_CATCH_UNAVAILABLE    = __DIR__ . '/template/test/catch-unavailable';
-    public const TEMPLATE_CATCH_REGEX          = __DIR__ . '/template/test/catch-regex';
-    public const TEMPLATE_SET_VARIABLE         = __DIR__ . '/template/test/set-variable';
-    public const TEMPLATE_TRANSFORM_AND_SET    = __DIR__ . '/template/test/transform-and-set';
-    public const TEMPLATE_WARNINGS             = __DIR__ . '/template/test/warnings';
-    public const TEMPLATE_ALLOWED_WARNINGS     = __DIR__ . '/template/test/allowed-warnings';
-    public const TEMPLATE_GT                   = __DIR__ . '/template/test/gt';
-    public const TEMPLATE_GTE                  = __DIR__ . '/template/test/gte';
-    public const TEMPLATE_LT                   = __DIR__ . '/template/test/lt';
-    public const TEMPLATE_LTE                  = __DIR__ . '/template/test/lte';
+    public const TEMPLATE_ENDPOINT             = __DIR__ . '/template/test/endpoint.twig';
+    public const TEMPLATE_MATCH_EQUAL          = __DIR__ . '/template/test/match-equal.twig';
+    public const TEMPLATE_MATCH_REGEX          = __DIR__ . '/template/test/match-regex.twig';
+    public const TEMPLATE_IS_FALSE             = __DIR__ . '/template/test/is-false.twig';
+    public const TEMPLATE_IS_TRUE              = __DIR__ . '/template/test/is-true.twig';
+    public const TEMPLATE_IS_NULL              = __DIR__ . '/template/test/is-null.twig';
+    public const TEMPLATE_LENGTH               = __DIR__ . '/template/test/length.twig';
+    public const TEMPLATE_SKIP_VERSION         = __DIR__ . '/template/test/skip-version.twig';
+    public const TEMPLATE_SKIP_FEATURE         = __DIR__ . '/template/test/skip-feature.twig';
+    public const TEMPLATE_SKIP_XPACK           = __DIR__ . '/template/test/skip-xpack.twig';
+    public const TEMPLATE_SKIP_NODE_SELECTOR   = __DIR__ . '/template/test/skip-node-selector.twig';
+    public const TEMPLATE_SKIP_OSS             = __DIR__ . '/template/test/skip-oss.twig';
+    public const TEMPLATE_CATCH                = __DIR__ . '/template/test/catch.twig';
+    public const TEMPLATE_CATCH_UNAVAILABLE    = __DIR__ . '/template/test/catch-unavailable.twig';
+    public const TEMPLATE_CATCH_REGEX          = __DIR__ . '/template/test/catch-regex.twig';
+    public const TEMPLATE_SET_VARIABLE         = __DIR__ . '/template/test/set-variable.twig';
+    public const TEMPLATE_TRANSFORM_AND_SET    = __DIR__ . '/template/test/transform-and-set.twig';
+    public const TEMPLATE_WARNINGS             = __DIR__ . '/template/test/warnings.twig';
+    public const TEMPLATE_ALLOWED_WARNINGS     = __DIR__ . '/template/test/allowed-warnings.twig';
+    public const TEMPLATE_GT                   = __DIR__ . '/template/test/gt.twig';
+    public const TEMPLATE_GTE                  = __DIR__ . '/template/test/gte.twig';
+    public const TEMPLATE_LT                   = __DIR__ . '/template/test/lt.twig';
+    public const TEMPLATE_LTE                  = __DIR__ . '/template/test/lte.twig';
 
     // --- PHPUNIT 9 TEMPLATE ---
-    public const TEMPLATE_PHPUNIT9_MATCH_REGEX = __DIR__ . '/template/test/match-regex-9';
-    public const TEMPLATE_PHPUNIT9_CATCH_REGEX = __DIR__ . '/template/test/catch-regex-9';
+    public const TEMPLATE_PHPUNIT9_MATCH_REGEX = __DIR__ . '/template/test/match-regex-9.twig';
+    public const TEMPLATE_PHPUNIT9_CATCH_REGEX = __DIR__ . '/template/test/catch-regex-9.twig';
 
     public const TAB14                 = '              ';
     public const SUPPORTED_FEATURES    = [

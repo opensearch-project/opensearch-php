@@ -60,4 +60,5 @@ class GetRole extends AbstractEndpoint
 
         return $this;
     }
+
 }

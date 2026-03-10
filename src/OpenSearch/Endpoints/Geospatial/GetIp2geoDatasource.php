@@ -61,4 +61,5 @@ class GetIp2geoDatasource extends AbstractEndpoint
 
         return $this;
     }
+
 }

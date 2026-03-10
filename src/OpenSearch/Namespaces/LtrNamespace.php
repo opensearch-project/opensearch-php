@@ -71,7 +71,6 @@ class LtrNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(AddFeaturesToSet::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -103,7 +102,6 @@ class LtrNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $query = $this->extractArgument($params, 'query');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(AddFeaturesToSetByQuery::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -147,7 +145,6 @@ class LtrNamespace extends AbstractNamespace
     public function clearCache(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(ClearCache::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -194,7 +191,6 @@ class LtrNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateFeature::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -224,7 +220,6 @@ class LtrNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateFeatureset::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -254,7 +249,6 @@ class LtrNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -284,7 +278,6 @@ class LtrNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateModelFromSet::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -309,7 +302,6 @@ class LtrNamespace extends AbstractNamespace
     public function createStore(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateStore::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -353,7 +345,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteFeature::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -379,7 +370,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteFeatureset::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -405,7 +395,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -429,7 +418,6 @@ class LtrNamespace extends AbstractNamespace
     public function deleteStore(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteStore::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -454,7 +442,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetFeature::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -480,7 +467,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetFeatureset::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -506,7 +492,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -530,7 +515,6 @@ class LtrNamespace extends AbstractNamespace
     public function getStore(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetStore::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -575,7 +559,6 @@ class LtrNamespace extends AbstractNamespace
     public function searchFeatures(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchFeatures::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -601,7 +584,6 @@ class LtrNamespace extends AbstractNamespace
     public function searchFeaturesets(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchFeaturesets::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -627,7 +609,6 @@ class LtrNamespace extends AbstractNamespace
     public function searchModels(array $params = [])
     {
         $store = $this->extractArgument($params, 'store');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setStore($store);
@@ -653,7 +634,6 @@ class LtrNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
-
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -682,7 +662,6 @@ class LtrNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateFeature::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -712,7 +691,6 @@ class LtrNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $store = $this->extractArgument($params, 'store');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateFeatureset::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);

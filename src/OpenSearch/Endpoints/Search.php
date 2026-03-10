@@ -108,4 +108,5 @@ class Search extends AbstractEndpoint
 
         return $this;
     }
+
 }

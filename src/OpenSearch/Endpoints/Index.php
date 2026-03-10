@@ -77,4 +77,5 @@ class Index extends AbstractEndpoint
 
         return $this;
     }
+
 }

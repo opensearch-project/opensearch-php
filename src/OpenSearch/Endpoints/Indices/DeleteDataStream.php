@@ -68,4 +68,5 @@ class DeleteDataStream extends AbstractEndpoint
 
         return $this;
     }
+
 }

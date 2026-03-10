@@ -22,15 +22,11 @@ declare(strict_types=1);
 namespace OpenSearch\Util;
 
 use Exception;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class NamespaceEndpoint
 {
-    public const NAMESPACE_CLASS_TEMPLATE        = __DIR__ . '/template/namespace-class';
-    public const ENDPOINT_FUNCTION_TEMPLATE      = __DIR__ . '/template/endpoint-function';
-    public const ENDPOINT_FUNCTION_BOOL_TEMPLATE = __DIR__ . '/template/endpoint-function-bool';
-    public const EXTRACT_ARG_TEMPLATE            = __DIR__ . '/template/extract-arg';
-    public const SET_PARAM_TEMPLATE              = __DIR__ . '/template/setparam';
-
     protected $name;
     protected $endpoints = [];
     protected $endpointNames = [];
@@ -45,25 +41,8 @@ class NamespaceEndpoint
         if (empty($this->endpoints)) {
             throw new Exception("No endpoints has been added. I cannot render the class");
         }
-        $class = file_get_contents(static::NAMESPACE_CLASS_TEMPLATE);
-        $namespaceName = $this->getNamespaceName(). 'Namespace';
-        $class = str_replace(':namespace', $namespaceName, $class);
-
-        # Add license header
-        $currentDir = dirname(__FILE__);
-        $baseDir = dirname($currentDir);
-        $filePath = $baseDir . "/src/OpenSearch/Namespaces/$namespaceName.php";
-
-        if (file_exists($filePath)) {
-            $content = file_get_contents($filePath);
-            if (strpos($content, 'Copyright OpenSearch') !== false) {
-                $pattern = '/\/\*\*.*?\*\//s';
-                if (preg_match($pattern, $content, $matches)) {
-                    $class = str_replace('declare(strict_types=1);', 'declare(strict_types=1);' . PHP_EOL . PHP_EOL . $matches[0], $class);
-
-                }
-            }
-        }
+        $twig = $this->getTwig();
+        $namespaceName = $this->getNamespaceName() . 'Namespace';
 
         $endpoints = '';
         foreach ($this->endpoints as $endpoint) {
@@ -80,7 +59,26 @@ class NamespaceEndpoint
                 $endpoints .= require $file;
             }
         }
-        $class = str_replace(':endpoints', $endpoints, $class);
+
+        $class = $twig->render('namespace-class.php.twig', [
+            'namespace' => $namespaceName,
+            'endpoints' => $endpoints,
+        ]);
+
+        // Add license header if existing file has one
+        $currentDir = dirname(__FILE__);
+        $baseDir = dirname($currentDir);
+        $filePath = $baseDir . "/src/OpenSearch/Namespaces/$namespaceName.php";
+
+        if (file_exists($filePath)) {
+            $content = file_get_contents($filePath);
+            if (strpos($content, 'Copyright OpenSearch') !== false) {
+                $pattern = '/\/\*\*.*?\*\//s';
+                if (preg_match($pattern, $content, $matches)) {
+                    $class = str_replace('declare(strict_types=1);', 'declare(strict_types=1);' . PHP_EOL . PHP_EOL . $matches[0], $class);
+                }
+            }
+        }
 
         return $class;
     }
@@ -101,36 +99,27 @@ class NamespaceEndpoint
 
     protected function renderEndpoint(Endpoint $endpoint): string
     {
-        $code = file_get_contents(
-            $endpoint->getMethod() === ['HEAD']
-            ? self::ENDPOINT_FUNCTION_BOOL_TEMPLATE
-            : self::ENDPOINT_FUNCTION_TEMPLATE
-        );
-
-        $code = str_replace(':apidoc', $endpoint->renderDocParams(), $code);
-        $code = str_replace(':endpoint', $this->getEndpointName($endpoint->name), $code);
+        $twig = $this->getTwig();
+        $templateName = $endpoint->getMethod() === ['HEAD']
+            ? 'endpoint-function-bool.twig'
+            : 'endpoint-function.twig';
 
         $extract = '';
         $setParams = '';
         foreach ($endpoint->getParts() as $part => $value) {
-            $extract .= str_replace(':part', $part, file_get_contents(self::EXTRACT_ARG_TEMPLATE));
-
-            $param = str_replace(':param', $part, file_get_contents(self::SET_PARAM_TEMPLATE));
-
-            $setParams .= str_replace(':Param', $this->normalizeName($part), $param);
+            $extract .= $twig->render('extract-arg.twig', ['part' => $part]);
+            $setParams .= $twig->render('setparam.twig', [
+                'param' => $part,
+                'Param' => $this->normalizeName($part),
+            ]);
         }
         if (!$endpoint->isBodyNull()) {
-            $extract .= str_replace(':part', 'body', file_get_contents(self::EXTRACT_ARG_TEMPLATE));
-
-            $param = str_replace(':param', 'body', file_get_contents(self::SET_PARAM_TEMPLATE));
-            $setParams .= str_replace(':Param', 'Body', $param);
+            $extract .= $twig->render('extract-arg.twig', ['part' => 'body']);
+            $setParams .= $twig->render('setparam.twig', [
+                'param' => 'body',
+                'Param' => 'Body',
+            ]);
         }
-        if (!empty($extract)) {
-            $code = str_replace(':extract', $extract, $code);
-        } else {
-            $code = str_replace("\n" . ':extract', '', $code);
-        }
-        $code = str_replace(':setparam', $setParams, $code);
 
         if (empty($endpoint->namespace)) {
             $endpointClass = $endpoint->getClassName();
@@ -138,7 +127,20 @@ class NamespaceEndpoint
             $endpointClass = NamespaceEndpoint::normalizeName($endpoint->namespace) . '\\' . $endpoint->getClassName();
         }
         $fullClass = '\\OpenSearch\\Endpoints\\' . $endpointClass;
-        return str_replace(':EndpointClass', $fullClass, $code);
+
+        return $twig->render($templateName, [
+            'apidoc' => $endpoint->renderDocParams(),
+            'endpoint' => $this->getEndpointName($endpoint->name),
+            'extract' => $extract,
+            'setparam' => $setParams,
+            'EndpointClass' => $fullClass,
+        ]);
+    }
+
+    protected function getTwig(): Environment
+    {
+        $loader = new FilesystemLoader(__DIR__ . '/template');
+        return new Environment($loader, ['autoescape' => false]);
     }
 
     public static function normalizeName(string $name): string

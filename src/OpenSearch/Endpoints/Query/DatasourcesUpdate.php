@@ -52,4 +52,5 @@ class DatasourcesUpdate extends AbstractEndpoint
 
         return $this;
     }
+
 }

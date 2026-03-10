@@ -69,4 +69,5 @@ class PredictModel extends AbstractEndpoint
 
         return $this;
     }
+
 }

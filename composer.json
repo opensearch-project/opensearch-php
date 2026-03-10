@@ -52,7 +52,8 @@
     "symfony/console": "v6.4.31|^7.4.3|^8.0.3",
     "symfony/finder": "^v6.4.31|^7.4.3|^v8.0.3",
     "symfony/http-client": "^6.4.31|^7.4.3|^v8.0.3",
-    "symfony/http-client-contracts": "^v3.6.0|^v8.0.3"
+    "symfony/http-client-contracts": "^v3.6.0|^v8.0.3",
+    "twig/twig": "^3.0"
   },
   "suggest": {
     "monolog/monolog": "Allows for client-level logging and tracing",
@@ -76,6 +77,12 @@
     "allow-plugins": {
       "php-http/discovery": true,
       "phpstan/extension-installer": true
+    },
+    "audit": {
+      "ignore": [
+        "PKSA-z3gr-8qht-p93v",
+        "PKSA-rkkf-636k-qjb3"
+      ]
     }
   },
   "scripts": {

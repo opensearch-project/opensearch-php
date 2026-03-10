@@ -42,4 +42,5 @@ class ReloadTransportCertificates extends AbstractEndpoint
     {
         return 'PUT';
     }
+
 }

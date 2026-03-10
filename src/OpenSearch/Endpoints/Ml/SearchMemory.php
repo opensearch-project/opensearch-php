@@ -52,4 +52,5 @@ class SearchMemory extends AbstractEndpoint
 
         return $this;
     }
+
 }

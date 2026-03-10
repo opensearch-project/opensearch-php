@@ -75,4 +75,5 @@ class CreateDataStream extends AbstractEndpoint
 
         return $this;
     }
+
 }

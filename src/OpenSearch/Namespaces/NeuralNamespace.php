@@ -46,7 +46,6 @@ class NeuralNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
-
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);

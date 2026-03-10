@@ -52,4 +52,5 @@ class PatchRoleMappings extends AbstractEndpoint
 
         return $this;
     }
+
 }

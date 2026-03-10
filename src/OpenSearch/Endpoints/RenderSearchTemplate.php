@@ -60,4 +60,5 @@ class RenderSearchTemplate extends AbstractEndpoint
 
         return $this;
     }
+
 }

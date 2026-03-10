@@ -78,4 +78,5 @@ class GetAlias extends AbstractEndpoint
 
         return $this;
     }
+
 }

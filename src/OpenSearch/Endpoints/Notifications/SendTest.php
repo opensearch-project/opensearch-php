@@ -59,4 +59,5 @@ class SendTest extends AbstractEndpoint
 
         return $this;
     }
+
 }

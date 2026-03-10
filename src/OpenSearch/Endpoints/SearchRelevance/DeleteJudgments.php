@@ -59,4 +59,5 @@ class DeleteJudgments extends AbstractEndpoint
 
         return $this;
     }
+
 }

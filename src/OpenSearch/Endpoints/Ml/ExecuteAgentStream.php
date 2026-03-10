@@ -69,4 +69,5 @@ class ExecuteAgentStream extends AbstractEndpoint
 
         return $this;
     }
+
 }

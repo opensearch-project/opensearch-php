@@ -57,4 +57,5 @@ class DeployModel extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -70,4 +70,5 @@ class CreateRole extends AbstractEndpoint
 
         return $this;
     }
+
 }

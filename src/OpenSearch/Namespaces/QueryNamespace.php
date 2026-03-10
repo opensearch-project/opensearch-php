@@ -43,7 +43,6 @@ class QueryNamespace extends AbstractNamespace
     public function datasourceDelete(array $params = [])
     {
         $datasource_name = $this->extractArgument($params, 'datasource_name');
-
         $endpoint = $this->endpointFactory->getEndpoint(DatasourceDelete::class);
         $endpoint->setParams($params);
         $endpoint->setDatasourceName($datasource_name);
@@ -66,7 +65,6 @@ class QueryNamespace extends AbstractNamespace
     public function datasourceRetrieve(array $params = [])
     {
         $datasource_name = $this->extractArgument($params, 'datasource_name');
-
         $endpoint = $this->endpointFactory->getEndpoint(DatasourceRetrieve::class);
         $endpoint->setParams($params);
         $endpoint->setDatasourceName($datasource_name);
@@ -89,7 +87,6 @@ class QueryNamespace extends AbstractNamespace
     public function datasourcesCreate(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(DatasourcesCreate::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -131,7 +128,6 @@ class QueryNamespace extends AbstractNamespace
     public function datasourcesUpdate(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(DatasourcesUpdate::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);

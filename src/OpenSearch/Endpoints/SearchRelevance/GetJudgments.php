@@ -58,4 +58,5 @@ class GetJudgments extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -61,4 +61,5 @@ class GetAllMessages extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -70,4 +70,5 @@ class CreateActionGroup extends AbstractEndpoint
 
         return $this;
     }
+
 }

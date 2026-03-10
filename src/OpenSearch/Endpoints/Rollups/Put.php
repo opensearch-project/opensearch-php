@@ -60,4 +60,5 @@ class Put extends AbstractEndpoint
 
         return $this;
     }
+
 }

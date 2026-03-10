@@ -44,4 +44,5 @@ class DeleteConfigs extends AbstractEndpoint
     {
         return 'DELETE';
     }
+
 }

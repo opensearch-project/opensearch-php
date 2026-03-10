@@ -60,4 +60,5 @@ class DeleteTenant extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -61,4 +61,5 @@ class SearchModels extends AbstractEndpoint
 
         return $this;
     }
+
 }

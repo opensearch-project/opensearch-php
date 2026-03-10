@@ -57,4 +57,5 @@ class Count extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

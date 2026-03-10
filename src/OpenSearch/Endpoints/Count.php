@@ -74,4 +74,5 @@ class Count extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -43,4 +43,5 @@ class GetSteps extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

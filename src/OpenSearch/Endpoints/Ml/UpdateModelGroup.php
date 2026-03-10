@@ -67,4 +67,5 @@ class UpdateModelGroup extends AbstractEndpoint
 
         return $this;
     }
+
 }

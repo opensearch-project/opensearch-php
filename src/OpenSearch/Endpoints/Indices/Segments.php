@@ -56,4 +56,5 @@ class Segments extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

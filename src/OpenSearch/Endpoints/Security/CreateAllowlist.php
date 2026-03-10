@@ -52,4 +52,5 @@ class CreateAllowlist extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -68,4 +68,5 @@ class Cancel extends AbstractEndpoint
 
         return $this;
     }
+
 }

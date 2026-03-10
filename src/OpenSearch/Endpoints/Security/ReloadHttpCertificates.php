@@ -42,4 +42,5 @@ class ReloadHttpCertificates extends AbstractEndpoint
     {
         return 'PUT';
     }
+
 }

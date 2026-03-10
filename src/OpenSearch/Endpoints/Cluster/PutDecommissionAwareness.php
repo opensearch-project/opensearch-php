@@ -71,4 +71,5 @@ class PutDecommissionAwareness extends AbstractEndpoint
 
         return $this;
     }
+
 }

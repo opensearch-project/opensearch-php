@@ -42,4 +42,5 @@ class GetActionGroups extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

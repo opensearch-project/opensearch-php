@@ -69,4 +69,5 @@ class UpdateModel extends AbstractEndpoint
 
         return $this;
     }
+
 }

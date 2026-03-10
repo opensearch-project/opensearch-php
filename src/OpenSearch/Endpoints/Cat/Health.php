@@ -55,4 +55,5 @@ class Health extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

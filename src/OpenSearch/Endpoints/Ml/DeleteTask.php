@@ -59,4 +59,5 @@ class DeleteTask extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -61,4 +61,5 @@ class GetMessageTraces extends AbstractEndpoint
 
         return $this;
     }
+
 }

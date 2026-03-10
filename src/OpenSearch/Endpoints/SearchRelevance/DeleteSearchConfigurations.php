@@ -59,4 +59,5 @@ class DeleteSearchConfigurations extends AbstractEndpoint
 
         return $this;
     }
+
 }

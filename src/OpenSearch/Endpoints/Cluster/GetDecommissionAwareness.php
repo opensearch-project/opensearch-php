@@ -59,4 +59,5 @@ class GetDecommissionAwareness extends AbstractEndpoint
 
         return $this;
     }
+
 }

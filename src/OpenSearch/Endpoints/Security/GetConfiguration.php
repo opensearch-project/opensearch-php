@@ -42,4 +42,5 @@ class GetConfiguration extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

@@ -42,4 +42,5 @@ class CreateDefaultStore extends AbstractEndpoint
     {
         return 'PUT';
     }
+
 }

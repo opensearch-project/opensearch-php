@@ -46,4 +46,5 @@ class Info extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

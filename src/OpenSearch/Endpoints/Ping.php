@@ -46,4 +46,5 @@ class Ping extends AbstractEndpoint
     {
         return 'HEAD';
     }
+
 }

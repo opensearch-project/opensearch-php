@@ -42,7 +42,6 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     public function delete(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -65,7 +64,6 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     public function get(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -92,7 +90,6 @@ class AsynchronousSearchNamespace extends AbstractNamespace
     public function search(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);

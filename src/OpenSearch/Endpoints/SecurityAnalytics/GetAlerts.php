@@ -54,4 +54,5 @@ class GetAlerts extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

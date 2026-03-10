@@ -51,7 +51,6 @@ class TasksNamespace extends AbstractNamespace
     public function cancel(array $params = [])
     {
         $task_id = $this->extractArgument($params, 'task_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Cancel::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
@@ -76,7 +75,6 @@ class TasksNamespace extends AbstractNamespace
     public function get(array $params = [])
     {
         $task_id = $this->extractArgument($params, 'task_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);

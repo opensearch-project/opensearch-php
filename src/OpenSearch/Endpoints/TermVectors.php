@@ -77,4 +77,5 @@ class TermVectors extends AbstractEndpoint
 
         return $this;
     }
+
 }

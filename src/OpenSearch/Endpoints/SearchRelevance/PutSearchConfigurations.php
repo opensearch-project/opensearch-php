@@ -52,4 +52,5 @@ class PutSearchConfigurations extends AbstractEndpoint
 
         return $this;
     }
+
 }

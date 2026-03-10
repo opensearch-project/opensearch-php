@@ -48,4 +48,5 @@ class RemoteInfo extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

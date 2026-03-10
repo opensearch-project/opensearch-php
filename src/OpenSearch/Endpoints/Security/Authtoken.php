@@ -42,4 +42,5 @@ class Authtoken extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

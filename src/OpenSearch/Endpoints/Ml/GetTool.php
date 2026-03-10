@@ -59,4 +59,5 @@ class GetTool extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -65,4 +65,5 @@ class FieldCaps extends AbstractEndpoint
 
         return $this;
     }
+
 }

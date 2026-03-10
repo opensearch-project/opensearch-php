@@ -48,4 +48,5 @@ class ListDanglingIndices extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

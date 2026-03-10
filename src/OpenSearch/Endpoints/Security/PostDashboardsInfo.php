@@ -42,4 +42,5 @@ class PostDashboardsInfo extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

@@ -42,4 +42,5 @@ class ListChannels extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

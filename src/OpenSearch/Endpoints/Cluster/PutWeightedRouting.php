@@ -69,4 +69,5 @@ class PutWeightedRouting extends AbstractEndpoint
 
         return $this;
     }
+
 }

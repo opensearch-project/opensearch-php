@@ -45,7 +45,6 @@ class GeospatialNamespace extends AbstractNamespace
     public function deleteIp2geoDatasource(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteIp2geoDatasource::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -68,7 +67,6 @@ class GeospatialNamespace extends AbstractNamespace
     public function geojsonUploadPost(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(GeojsonUploadPost::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -91,7 +89,6 @@ class GeospatialNamespace extends AbstractNamespace
     public function geojsonUploadPut(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(GeojsonUploadPut::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -114,7 +111,6 @@ class GeospatialNamespace extends AbstractNamespace
     public function getIp2geoDatasource(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetIp2geoDatasource::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -158,7 +154,6 @@ class GeospatialNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PutIp2geoDatasource::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -184,7 +179,6 @@ class GeospatialNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PutIp2geoDatasourceSettings::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);

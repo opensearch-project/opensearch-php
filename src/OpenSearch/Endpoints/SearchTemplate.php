@@ -75,4 +75,5 @@ class SearchTemplate extends AbstractEndpoint
 
         return $this;
     }
+
 }

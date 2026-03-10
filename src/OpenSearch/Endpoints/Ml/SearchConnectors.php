@@ -52,4 +52,5 @@ class SearchConnectors extends AbstractEndpoint
 
         return $this;
     }
+
 }

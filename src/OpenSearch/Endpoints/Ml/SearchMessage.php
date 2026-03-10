@@ -69,4 +69,5 @@ class SearchMessage extends AbstractEndpoint
 
         return $this;
     }
+
 }

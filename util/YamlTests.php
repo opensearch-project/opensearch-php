@@ -26,13 +26,15 @@ use ParseError;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use stdClass;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class YamlTests
 {
-    public const TEMPLATE_UNIT_TEST     = __DIR__ . '/template/test/unit-test-oss';
-    public const TEMPLATE_UNIT_TEST_SKIPPED = __DIR__ . '/template/test/unit-test-skipped';
-    public const TEMPLATE_FUNCTION_TEST     = __DIR__ . '/template/test/function-test';
-    public const TEMPLATE_FUNCTION_SKIPPED  = __DIR__ . '/template/test/function-skipped';
+    public const TEMPLATE_UNIT_TEST         = __DIR__ . '/template/test/unit-test-oss.php.twig';
+    public const TEMPLATE_UNIT_TEST_SKIPPED = __DIR__ . '/template/test/unit-test-skipped.php.twig';
+    public const TEMPLATE_FUNCTION_TEST     = __DIR__ . '/template/test/function-test.twig';
+    public const TEMPLATE_FUNCTION_SKIPPED  = __DIR__ . '/template/test/function-skipped.twig';
     public const OPENSEARCH_GIT_URL      = 'https://github.com/opensearch-project/OpenSearch/tree/%s/rest-api-spec/src/main/resources/rest-api-spec/test/%s';
 
     public const SKIPPED_TEST = [
@@ -252,16 +254,25 @@ class YamlTests
         return '_' . $testName . 'Test';
     }
 
+    private static function getTwig(): Environment
+    {
+        static $twig = null;
+        if ($twig === null) {
+            $loader = new FilesystemLoader(__DIR__ . '/template');
+            $twig = new Environment($loader, ['autoescape' => false]);
+        }
+        return $twig;
+    }
+
     public static function render(string $fileName, array $params = []): string
     {
-        if (!is_file($fileName)) {
-            throw new Exception(sprintf(
-                "The file %s is not valid",
-                $fileName
-            ));
-        }
-        $output = file_get_contents($fileName);
-        foreach ($params as $name => $value) {
+        // Convert full path to relative template name
+        $baseDir = __DIR__ . '/template/';
+        $templateName = str_replace($baseDir, '', $fileName);
+
+        // Convert :varname keys to Twig-compatible variable names
+        $twigParams = [];
+        foreach ($params as $key => $value) {
             if (is_array($value)) {
                 $value = var_export($value, true);
             } elseif ($value instanceof stdClass) {
@@ -269,9 +280,12 @@ class YamlTests
             } elseif (is_numeric($value)) {
                 $value = (string) $value;
             }
-            $output = str_replace($name, $value, $output);
+            $twigKey = ltrim($key, ':');
+            $twigKey = str_replace('-', '_', $twigKey);
+            $twigParams[$twigKey] = $value;
         }
-        return $output;
+
+        return self::getTwig()->render($templateName, $twigParams);
     }
 
     private function removeDirectory($directory)

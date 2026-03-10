@@ -42,4 +42,5 @@ class GetAllTools extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

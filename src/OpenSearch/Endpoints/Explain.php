@@ -79,4 +79,5 @@ class Explain extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -49,4 +49,5 @@ class DeleteVotingConfigExclusions extends AbstractEndpoint
     {
         return 'DELETE';
     }
+
 }

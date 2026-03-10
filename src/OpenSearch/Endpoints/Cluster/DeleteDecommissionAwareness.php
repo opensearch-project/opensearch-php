@@ -42,4 +42,5 @@ class DeleteDecommissionAwareness extends AbstractEndpoint
     {
         return 'DELETE';
     }
+
 }

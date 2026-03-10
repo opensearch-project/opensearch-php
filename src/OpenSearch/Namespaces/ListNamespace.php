@@ -77,7 +77,6 @@ class ListNamespace extends AbstractNamespace
     public function indices(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-
         $endpoint = $this->endpointFactory->getEndpoint(Indices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -113,7 +112,6 @@ class ListNamespace extends AbstractNamespace
     public function shards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-
         $endpoint = $this->endpointFactory->getEndpoint(Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);

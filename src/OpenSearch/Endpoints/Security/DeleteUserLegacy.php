@@ -60,4 +60,5 @@ class DeleteUserLegacy extends AbstractEndpoint
 
         return $this;
     }
+
 }

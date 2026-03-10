@@ -42,4 +42,5 @@ class LeaderStats extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

@@ -60,4 +60,5 @@ class ExistsPolicy extends AbstractEndpoint
 
         return $this;
     }
+
 }

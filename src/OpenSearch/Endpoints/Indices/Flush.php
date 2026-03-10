@@ -57,4 +57,5 @@ class Flush extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

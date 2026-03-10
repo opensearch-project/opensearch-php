@@ -42,4 +42,5 @@ class GetUploadStats extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

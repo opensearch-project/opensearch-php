@@ -59,4 +59,5 @@ class DeleteController extends AbstractEndpoint
 
         return $this;
     }
+
 }

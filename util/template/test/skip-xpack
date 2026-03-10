@@ -1,0 +1,4 @@
+        $this->markTestSkipped(sprintf(
+            "Skip test %s, xpack feature not supported",
+            :testname
+        ));

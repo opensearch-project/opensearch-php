@@ -52,4 +52,5 @@ class DeleteWeightedRouting extends AbstractEndpoint
 
         return $this;
     }
+
 }

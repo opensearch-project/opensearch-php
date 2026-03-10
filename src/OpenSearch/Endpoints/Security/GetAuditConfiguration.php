@@ -42,4 +42,5 @@ class GetAuditConfiguration extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

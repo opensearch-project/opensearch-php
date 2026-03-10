@@ -79,4 +79,5 @@ class GetNodeStats extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -44,7 +44,6 @@ class RollupsNamespace extends AbstractNamespace
     public function delete(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -67,7 +66,6 @@ class RollupsNamespace extends AbstractNamespace
     public function explain(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Explain::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -90,7 +88,6 @@ class RollupsNamespace extends AbstractNamespace
     public function get(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -117,7 +114,6 @@ class RollupsNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -141,7 +137,6 @@ class RollupsNamespace extends AbstractNamespace
     public function start(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Start::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -164,7 +159,6 @@ class RollupsNamespace extends AbstractNamespace
     public function stop(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(Stop::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);

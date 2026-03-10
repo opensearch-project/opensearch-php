@@ -52,4 +52,5 @@ class SearchModelGroup extends AbstractEndpoint
 
         return $this;
     }
+
 }

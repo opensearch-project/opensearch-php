@@ -66,4 +66,5 @@ class UpdateByQueryRethrottle extends AbstractEndpoint
 
         return $this;
     }
+
 }

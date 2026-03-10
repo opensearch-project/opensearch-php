@@ -60,4 +60,5 @@ class GetStatus extends AbstractEndpoint
 
         return $this;
     }
+
 }

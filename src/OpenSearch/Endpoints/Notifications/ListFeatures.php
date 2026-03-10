@@ -42,4 +42,5 @@ class ListFeatures extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

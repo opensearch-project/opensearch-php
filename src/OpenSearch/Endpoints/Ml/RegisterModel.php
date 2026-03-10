@@ -52,4 +52,5 @@ class RegisterModel extends AbstractEndpoint
 
         return $this;
     }
+
 }

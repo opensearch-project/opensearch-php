@@ -74,4 +74,5 @@ class ValidateQuery extends AbstractEndpoint
 
         return $this;
     }
+
 }

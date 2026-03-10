@@ -61,4 +61,5 @@ class ClearCache extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

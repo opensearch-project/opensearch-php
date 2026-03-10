@@ -58,4 +58,5 @@ class GetSearchConfigurations extends AbstractEndpoint
 
         return $this;
     }
+
 }

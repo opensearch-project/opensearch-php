@@ -42,4 +42,5 @@ class TenantInfo extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

@@ -54,4 +54,5 @@ class Query extends AbstractEndpoint
 
         return $this;
     }
+
 }

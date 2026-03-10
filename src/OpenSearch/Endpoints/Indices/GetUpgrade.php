@@ -55,4 +55,5 @@ class GetUpgrade extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

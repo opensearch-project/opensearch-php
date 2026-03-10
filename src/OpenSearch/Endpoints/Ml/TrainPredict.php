@@ -69,4 +69,5 @@ class TrainPredict extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -47,4 +47,5 @@ class Stop extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

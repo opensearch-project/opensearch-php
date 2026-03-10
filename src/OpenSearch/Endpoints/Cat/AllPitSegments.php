@@ -48,4 +48,5 @@ class AllPitSegments extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

@@ -117,4 +117,5 @@ class Stats extends AbstractEndpoint
 
         return $this;
     }
+
 }

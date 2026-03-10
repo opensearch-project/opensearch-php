@@ -59,4 +59,5 @@ class GetMemory extends AbstractEndpoint
 
         return $this;
     }
+
 }

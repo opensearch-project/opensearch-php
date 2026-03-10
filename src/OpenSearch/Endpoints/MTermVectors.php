@@ -72,4 +72,5 @@ class MTermVectors extends AbstractEndpoint
 
         return $this;
     }
+
 }

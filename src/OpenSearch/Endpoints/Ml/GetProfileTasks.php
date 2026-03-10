@@ -68,4 +68,5 @@ class GetProfileTasks extends AbstractEndpoint
 
         return $this;
     }
+
 }

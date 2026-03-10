@@ -59,4 +59,5 @@ class StopPolicy extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -56,7 +56,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function deleteExperiments(array $params = [])
     {
         $experiment_id = $this->extractArgument($params, 'experiment_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setExperimentId($experiment_id);
@@ -79,7 +78,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function deleteJudgments(array $params = [])
     {
         $judgment_id = $this->extractArgument($params, 'judgment_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteJudgments::class);
         $endpoint->setParams($params);
         $endpoint->setJudgmentId($judgment_id);
@@ -102,7 +100,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function deleteQuerySets(array $params = [])
     {
         $query_set_id = $this->extractArgument($params, 'query_set_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteQuerySets::class);
         $endpoint->setParams($params);
         $endpoint->setQuerySetId($query_set_id);
@@ -125,7 +122,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function deleteScheduledExperiments(array $params = [])
     {
         $experiment_id = $this->extractArgument($params, 'experiment_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteScheduledExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setExperimentId($experiment_id);
@@ -148,7 +144,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function deleteSearchConfigurations(array $params = [])
     {
         $search_configuration_id = $this->extractArgument($params, 'search_configuration_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteSearchConfigurations::class);
         $endpoint->setParams($params);
         $endpoint->setSearchConfigurationId($search_configuration_id);
@@ -171,7 +166,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function getExperiments(array $params = [])
     {
         $experiment_id = $this->extractArgument($params, 'experiment_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setExperimentId($experiment_id);
@@ -194,7 +188,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function getJudgments(array $params = [])
     {
         $judgment_id = $this->extractArgument($params, 'judgment_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetJudgments::class);
         $endpoint->setParams($params);
         $endpoint->setJudgmentId($judgment_id);
@@ -224,7 +217,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetNodeStats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -248,7 +240,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function getQuerySets(array $params = [])
     {
         $query_set_id = $this->extractArgument($params, 'query_set_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetQuerySets::class);
         $endpoint->setParams($params);
         $endpoint->setQuerySetId($query_set_id);
@@ -271,7 +262,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function getScheduledExperiments(array $params = [])
     {
         $experiment_id = $this->extractArgument($params, 'experiment_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetScheduledExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setExperimentId($experiment_id);
@@ -294,7 +284,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function getSearchConfigurations(array $params = [])
     {
         $search_configuration_id = $this->extractArgument($params, 'search_configuration_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetSearchConfigurations::class);
         $endpoint->setParams($params);
         $endpoint->setSearchConfigurationId($search_configuration_id);
@@ -322,7 +311,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function getStats(array $params = [])
     {
         $stat = $this->extractArgument($params, 'stat');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
         $endpoint->setStat($stat);
@@ -345,7 +333,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function postQuerySets(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PostQuerySets::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -368,7 +355,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function postScheduledExperiments(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PostScheduledExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -391,7 +377,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function putExperiments(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PutExperiments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -414,7 +399,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function putJudgments(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PutJudgments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -437,7 +421,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function putQuerySets(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PutQuerySets::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -460,7 +443,6 @@ class SearchRelevanceNamespace extends AbstractNamespace
     public function putSearchConfigurations(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PutSearchConfigurations::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);

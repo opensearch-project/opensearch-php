@@ -72,4 +72,5 @@ class DeleteAgenticMemory extends AbstractEndpoint
 
         return $this;
     }
+
 }

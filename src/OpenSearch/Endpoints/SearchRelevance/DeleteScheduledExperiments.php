@@ -59,4 +59,5 @@ class DeleteScheduledExperiments extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -48,4 +48,5 @@ class Warmup extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

@@ -48,4 +48,5 @@ class RefreshSearchAnalyzers extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

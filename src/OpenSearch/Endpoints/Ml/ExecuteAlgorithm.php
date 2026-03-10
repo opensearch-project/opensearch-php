@@ -69,4 +69,5 @@ class ExecuteAlgorithm extends AbstractEndpoint
 
         return $this;
     }
+
 }

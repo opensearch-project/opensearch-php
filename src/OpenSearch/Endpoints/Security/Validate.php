@@ -43,4 +43,5 @@ class Validate extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

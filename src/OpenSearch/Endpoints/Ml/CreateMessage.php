@@ -69,4 +69,5 @@ class CreateMessage extends AbstractEndpoint
 
         return $this;
     }
+
 }

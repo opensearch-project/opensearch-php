@@ -116,7 +116,6 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(AddAgenticMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -144,7 +143,6 @@ class MlNamespace extends AbstractNamespace
         $chunk_number = $this->extractArgument($params, 'chunk_number');
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(ChunkModel::class);
         $endpoint->setParams($params);
         $endpoint->setChunkNumber($chunk_number);
@@ -171,7 +169,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -195,7 +192,6 @@ class MlNamespace extends AbstractNamespace
     public function createMemory(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateMemory::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -218,7 +214,6 @@ class MlNamespace extends AbstractNamespace
     public function createMemoryContainer(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateMemoryContainer::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -243,7 +238,6 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateMemoryContainerSession::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -269,7 +263,6 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
@@ -293,7 +286,6 @@ class MlNamespace extends AbstractNamespace
     public function createModelMeta(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(CreateModelMeta::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -316,7 +308,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteAgent(array $params = [])
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
@@ -343,7 +334,6 @@ class MlNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $type = $this->extractArgument($params, 'type');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAgenticMemory::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -372,7 +362,6 @@ class MlNamespace extends AbstractNamespace
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAgenticMemoryQuery::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -397,7 +386,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteController(array $params = [])
     {
         $model_id = $this->extractArgument($params, 'model_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -420,7 +408,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteMemory(array $params = [])
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
@@ -445,7 +432,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteMemoryContainer(array $params = [])
     {
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteMemoryContainer::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -468,7 +454,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteModel(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -491,7 +476,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteModelGroup(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -514,7 +498,6 @@ class MlNamespace extends AbstractNamespace
     public function deleteTask(array $params = [])
     {
         $task_id = $this->extractArgument($params, 'task_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(DeleteTask::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
@@ -539,7 +522,6 @@ class MlNamespace extends AbstractNamespace
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(ExecuteAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
@@ -565,7 +547,6 @@ class MlNamespace extends AbstractNamespace
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(ExecuteAgentStream::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
@@ -591,7 +572,6 @@ class MlNamespace extends AbstractNamespace
     {
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(ExecuteAlgorithm::class);
         $endpoint->setParams($params);
         $endpoint->setAlgorithmName($algorithm_name);
@@ -617,7 +597,6 @@ class MlNamespace extends AbstractNamespace
     {
         $tool_name = $this->extractArgument($params, 'tool_name');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(ExecuteTool::class);
         $endpoint->setParams($params);
         $endpoint->setToolName($tool_name);
@@ -641,7 +620,6 @@ class MlNamespace extends AbstractNamespace
     public function getAgent(array $params = [])
     {
         $agent_id = $this->extractArgument($params, 'agent_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetAgent::class);
         $endpoint->setParams($params);
         $endpoint->setAgentId($agent_id);
@@ -668,7 +646,6 @@ class MlNamespace extends AbstractNamespace
         $id = $this->extractArgument($params, 'id');
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $type = $this->extractArgument($params, 'type');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetAgenticMemory::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -716,7 +693,6 @@ class MlNamespace extends AbstractNamespace
     public function getAllMessages(array $params = [])
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetAllMessages::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
@@ -758,7 +734,6 @@ class MlNamespace extends AbstractNamespace
     public function getController(array $params = [])
     {
         $model_id = $this->extractArgument($params, 'model_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -781,7 +756,6 @@ class MlNamespace extends AbstractNamespace
     public function getMemory(array $params = [])
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
@@ -804,7 +778,6 @@ class MlNamespace extends AbstractNamespace
     public function getMemoryContainer(array $params = [])
     {
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetMemoryContainer::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -827,7 +800,6 @@ class MlNamespace extends AbstractNamespace
     public function getMessage(array $params = [])
     {
         $message_id = $this->extractArgument($params, 'message_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMessageId($message_id);
@@ -852,7 +824,6 @@ class MlNamespace extends AbstractNamespace
     public function getMessageTraces(array $params = [])
     {
         $message_id = $this->extractArgument($params, 'message_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetMessageTraces::class);
         $endpoint->setParams($params);
         $endpoint->setMessageId($message_id);
@@ -875,7 +846,6 @@ class MlNamespace extends AbstractNamespace
     public function getModelGroup(array $params = [])
     {
         $model_group_id = $this->extractArgument($params, 'model_group_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setModelGroupId($model_group_id);
@@ -898,7 +868,6 @@ class MlNamespace extends AbstractNamespace
     public function getProfile(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetProfile::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -923,7 +892,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetProfileModels::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -949,7 +917,6 @@ class MlNamespace extends AbstractNamespace
     {
         $task_id = $this->extractArgument($params, 'task_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetProfileTasks::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
@@ -975,7 +942,6 @@ class MlNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -999,7 +965,6 @@ class MlNamespace extends AbstractNamespace
     public function getTask(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetTask::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -1022,7 +987,6 @@ class MlNamespace extends AbstractNamespace
     public function getTool(array $params = [])
     {
         $tool_name = $this->extractArgument($params, 'tool_name');
-
         $endpoint = $this->endpointFactory->getEndpoint(GetTool::class);
         $endpoint->setParams($params);
         $endpoint->setToolName($tool_name);
@@ -1045,7 +1009,6 @@ class MlNamespace extends AbstractNamespace
     public function loadModel(array $params = [])
     {
         $model_id = $this->extractArgument($params, 'model_id');
-
         $endpoint = $this->endpointFactory->getEndpoint(LoadModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -1070,7 +1033,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PredictModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -1096,7 +1058,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(PredictModelStream::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -1120,7 +1081,6 @@ class MlNamespace extends AbstractNamespace
     public function registerAgents(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(RegisterAgents::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1143,7 +1103,6 @@ class MlNamespace extends AbstractNamespace
     public function registerModel(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(RegisterModel::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1166,7 +1125,6 @@ class MlNamespace extends AbstractNamespace
     public function registerModelGroup(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(RegisterModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1189,7 +1147,6 @@ class MlNamespace extends AbstractNamespace
     public function registerModelMeta(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(RegisterModelMeta::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1216,7 +1173,6 @@ class MlNamespace extends AbstractNamespace
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchAgenticMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -1241,7 +1197,6 @@ class MlNamespace extends AbstractNamespace
     public function searchAgents(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchAgents::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1264,7 +1219,6 @@ class MlNamespace extends AbstractNamespace
     public function searchConnectors(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchConnectors::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1287,7 +1241,6 @@ class MlNamespace extends AbstractNamespace
     public function searchMemory(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchMemory::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1310,7 +1263,6 @@ class MlNamespace extends AbstractNamespace
     public function searchMemoryContainer(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchMemoryContainer::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1335,7 +1287,6 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
@@ -1359,7 +1310,6 @@ class MlNamespace extends AbstractNamespace
     public function searchModelGroup(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchModelGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1382,7 +1332,6 @@ class MlNamespace extends AbstractNamespace
     public function searchModels(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1405,7 +1354,6 @@ class MlNamespace extends AbstractNamespace
     public function searchTasks(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(SearchTasks::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1430,7 +1378,6 @@ class MlNamespace extends AbstractNamespace
     {
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(Train::class);
         $endpoint->setParams($params);
         $endpoint->setAlgorithmName($algorithm_name);
@@ -1456,7 +1403,6 @@ class MlNamespace extends AbstractNamespace
     {
         $algorithm_name = $this->extractArgument($params, 'algorithm_name');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(TrainPredict::class);
         $endpoint->setParams($params);
         $endpoint->setAlgorithmName($algorithm_name);
@@ -1482,7 +1428,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UnloadModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -1512,7 +1457,6 @@ class MlNamespace extends AbstractNamespace
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateAgenticMemory::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -1540,7 +1484,6 @@ class MlNamespace extends AbstractNamespace
     {
         $connector_id = $this->extractArgument($params, 'connector_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateConnector::class);
         $endpoint->setParams($params);
         $endpoint->setConnectorId($connector_id);
@@ -1566,7 +1509,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateController::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -1592,7 +1534,6 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_id = $this->extractArgument($params, 'memory_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateMemory::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryId($memory_id);
@@ -1618,7 +1559,6 @@ class MlNamespace extends AbstractNamespace
     {
         $memory_container_id = $this->extractArgument($params, 'memory_container_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateMemoryContainer::class);
         $endpoint->setParams($params);
         $endpoint->setMemoryContainerId($memory_container_id);
@@ -1644,7 +1584,6 @@ class MlNamespace extends AbstractNamespace
     {
         $message_id = $this->extractArgument($params, 'message_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateMessage::class);
         $endpoint->setParams($params);
         $endpoint->setMessageId($message_id);
@@ -1670,7 +1609,6 @@ class MlNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UpdateModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -1698,7 +1636,6 @@ class MlNamespace extends AbstractNamespace
         $chunk_number = $this->extractArgument($params, 'chunk_number');
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UploadChunk::class);
         $endpoint->setParams($params);
         $endpoint->setChunkNumber($chunk_number);
@@ -1723,7 +1660,6 @@ class MlNamespace extends AbstractNamespace
     public function uploadModel(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
-
         $endpoint = $this->endpointFactory->getEndpoint(UploadModel::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);

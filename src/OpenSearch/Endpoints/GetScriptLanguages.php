@@ -46,4 +46,5 @@ class GetScriptLanguages extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

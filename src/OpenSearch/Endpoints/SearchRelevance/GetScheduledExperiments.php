@@ -58,4 +58,5 @@ class GetScheduledExperiments extends AbstractEndpoint
 
         return $this;
     }
+
 }

@@ -59,4 +59,5 @@ class CreateStore extends AbstractEndpoint
 
         return $this;
     }
+
 }

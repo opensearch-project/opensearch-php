@@ -60,4 +60,5 @@ class GetUser extends AbstractEndpoint
 
         return $this;
     }
+
 }

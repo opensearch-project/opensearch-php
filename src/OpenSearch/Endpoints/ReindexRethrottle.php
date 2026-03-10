@@ -66,4 +66,5 @@ class ReindexRethrottle extends AbstractEndpoint
 
         return $this;
     }
+
 }

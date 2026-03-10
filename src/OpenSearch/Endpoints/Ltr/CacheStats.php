@@ -42,4 +42,5 @@ class CacheStats extends AbstractEndpoint
     {
         return 'GET';
     }
+
 }

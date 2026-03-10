@@ -69,4 +69,5 @@ class UpdateController extends AbstractEndpoint
 
         return $this;
     }
+
 }

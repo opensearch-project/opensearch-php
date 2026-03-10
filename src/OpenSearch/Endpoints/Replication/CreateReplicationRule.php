@@ -52,4 +52,5 @@ class CreateReplicationRule extends AbstractEndpoint
 
         return $this;
     }
+
 }

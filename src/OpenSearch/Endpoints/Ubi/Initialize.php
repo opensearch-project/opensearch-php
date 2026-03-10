@@ -42,4 +42,5 @@ class Initialize extends AbstractEndpoint
     {
         return 'POST';
     }
+
 }

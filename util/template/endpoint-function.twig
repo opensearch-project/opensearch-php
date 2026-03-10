@@ -1,0 +1,10 @@
+{{ apidoc }}
+    public function {{ endpoint }}(array $params = [])
+    {
+{%- if extract %}
+{{ extract }}{% endif %}
+        $endpoint = $this->endpointFactory->getEndpoint({{ EndpointClass }}::class);
+        $endpoint->setParams($params);
+{{ setparam }}
+        return $this->performRequest($endpoint);
+    }
