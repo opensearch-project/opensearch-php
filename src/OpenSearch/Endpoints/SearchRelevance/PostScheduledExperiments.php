@@ -52,5 +52,4 @@ class PostScheduledExperiments extends AbstractEndpoint
 
         return $this;
     }
-
 }

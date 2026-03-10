@@ -42,5 +42,4 @@ class GetRoleMappings extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

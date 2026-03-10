@@ -59,5 +59,4 @@ class DatasourceDelete extends AbstractEndpoint
 
         return $this;
     }
-
 }

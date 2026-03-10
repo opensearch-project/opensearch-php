@@ -79,5 +79,4 @@ class Scroll extends AbstractEndpoint
 
         return $this;
     }
-
 }

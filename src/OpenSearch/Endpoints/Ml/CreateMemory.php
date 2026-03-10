@@ -52,5 +52,4 @@ class CreateMemory extends AbstractEndpoint
 
         return $this;
     }
-
 }

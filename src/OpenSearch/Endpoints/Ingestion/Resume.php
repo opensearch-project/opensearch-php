@@ -59,5 +59,4 @@ class Resume extends AbstractEndpoint
 
         return $this;
     }
-
 }

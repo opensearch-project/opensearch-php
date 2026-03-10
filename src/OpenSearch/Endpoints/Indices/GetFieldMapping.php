@@ -77,5 +77,4 @@ class GetFieldMapping extends AbstractEndpoint
 
         return $this;
     }
-
 }

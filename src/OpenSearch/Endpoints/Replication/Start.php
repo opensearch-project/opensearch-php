@@ -57,5 +57,4 @@ class Start extends AbstractEndpoint
 
         return $this;
     }
-
 }

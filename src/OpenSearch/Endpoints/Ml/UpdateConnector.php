@@ -69,5 +69,4 @@ class UpdateConnector extends AbstractEndpoint
 
         return $this;
     }
-
 }

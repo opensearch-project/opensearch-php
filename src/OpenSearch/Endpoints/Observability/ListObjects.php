@@ -42,5 +42,4 @@ class ListObjects extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

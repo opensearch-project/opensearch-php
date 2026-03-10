@@ -60,5 +60,4 @@ class ForceMerge extends AbstractEndpoint
     {
         return 'POST';
     }
-
 }

@@ -74,5 +74,4 @@ class CreateFeatureset extends AbstractEndpoint
 
         return $this;
     }
-
 }

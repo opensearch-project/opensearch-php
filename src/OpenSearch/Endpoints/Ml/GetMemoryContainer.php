@@ -59,5 +59,4 @@ class GetMemoryContainer extends AbstractEndpoint
 
         return $this;
     }
-
 }

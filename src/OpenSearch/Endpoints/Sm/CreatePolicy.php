@@ -69,5 +69,4 @@ class CreatePolicy extends AbstractEndpoint
 
         return $this;
     }
-
 }

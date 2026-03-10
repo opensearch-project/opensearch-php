@@ -70,5 +70,4 @@ class CreateTenant extends AbstractEndpoint
 
         return $this;
     }
-
 }

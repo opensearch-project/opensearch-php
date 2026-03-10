@@ -69,5 +69,4 @@ class UpdateConfig extends AbstractEndpoint
 
         return $this;
     }
-
 }

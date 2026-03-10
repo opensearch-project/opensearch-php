@@ -52,5 +52,4 @@ class GeojsonUploadPut extends AbstractEndpoint
 
         return $this;
     }
-
 }

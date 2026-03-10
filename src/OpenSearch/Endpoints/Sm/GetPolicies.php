@@ -47,5 +47,4 @@ class GetPolicies extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

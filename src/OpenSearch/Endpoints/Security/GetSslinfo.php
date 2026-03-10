@@ -43,5 +43,4 @@ class GetSslinfo extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

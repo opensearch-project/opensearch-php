@@ -59,5 +59,4 @@ class GetModelGroup extends AbstractEndpoint
 
         return $this;
     }
-
 }

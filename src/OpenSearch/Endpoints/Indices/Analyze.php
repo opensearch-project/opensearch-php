@@ -63,5 +63,4 @@ class Analyze extends AbstractEndpoint
 
         return $this;
     }
-
 }

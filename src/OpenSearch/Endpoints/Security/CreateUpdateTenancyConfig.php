@@ -52,5 +52,4 @@ class CreateUpdateTenancyConfig extends AbstractEndpoint
 
         return $this;
     }
-
 }

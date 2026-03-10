@@ -69,5 +69,4 @@ class UpdateMemoryContainer extends AbstractEndpoint
 
         return $this;
     }
-
 }

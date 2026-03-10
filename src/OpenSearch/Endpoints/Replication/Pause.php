@@ -57,5 +57,4 @@ class Pause extends AbstractEndpoint
 
         return $this;
     }
-
 }

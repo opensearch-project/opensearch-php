@@ -42,5 +42,4 @@ class GetLocalstats extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

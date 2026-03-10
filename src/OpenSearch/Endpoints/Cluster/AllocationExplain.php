@@ -60,5 +60,4 @@ class AllocationExplain extends AbstractEndpoint
 
         return $this;
     }
-
 }

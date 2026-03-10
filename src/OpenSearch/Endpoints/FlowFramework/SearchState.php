@@ -52,5 +52,4 @@ class SearchState extends AbstractEndpoint
 
         return $this;
     }
-
 }

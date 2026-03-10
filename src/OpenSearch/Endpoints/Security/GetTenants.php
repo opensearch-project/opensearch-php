@@ -42,5 +42,4 @@ class GetTenants extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

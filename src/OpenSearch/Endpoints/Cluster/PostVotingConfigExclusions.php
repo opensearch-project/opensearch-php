@@ -51,5 +51,4 @@ class PostVotingConfigExclusions extends AbstractEndpoint
     {
         return 'POST';
     }
-
 }

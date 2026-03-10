@@ -74,5 +74,4 @@ class Aliases extends AbstractEndpoint
 
         return $this;
     }
-
 }

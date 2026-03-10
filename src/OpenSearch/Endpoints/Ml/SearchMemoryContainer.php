@@ -52,5 +52,4 @@ class SearchMemoryContainer extends AbstractEndpoint
 
         return $this;
     }
-
 }

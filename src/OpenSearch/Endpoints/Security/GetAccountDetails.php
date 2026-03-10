@@ -42,5 +42,4 @@ class GetAccountDetails extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

@@ -67,5 +67,4 @@ class DataStreamsStats extends AbstractEndpoint
 
         return $this;
     }
-
 }

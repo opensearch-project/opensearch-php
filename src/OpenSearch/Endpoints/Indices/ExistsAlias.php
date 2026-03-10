@@ -76,5 +76,4 @@ class ExistsAlias extends AbstractEndpoint
 
         return $this;
     }
-
 }

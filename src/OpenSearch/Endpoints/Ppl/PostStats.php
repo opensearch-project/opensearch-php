@@ -54,5 +54,4 @@ class PostStats extends AbstractEndpoint
 
         return $this;
     }
-
 }

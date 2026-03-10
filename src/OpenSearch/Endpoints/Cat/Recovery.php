@@ -62,5 +62,4 @@ class Recovery extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

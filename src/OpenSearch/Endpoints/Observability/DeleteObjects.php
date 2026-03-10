@@ -44,5 +44,4 @@ class DeleteObjects extends AbstractEndpoint
     {
         return 'DELETE';
     }
-
 }

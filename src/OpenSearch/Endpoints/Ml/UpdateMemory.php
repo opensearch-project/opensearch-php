@@ -69,5 +69,4 @@ class UpdateMemory extends AbstractEndpoint
 
         return $this;
     }
-
 }

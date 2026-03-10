@@ -78,5 +78,4 @@ class ReloadSecureSettings extends AbstractEndpoint
 
         return $this;
     }
-
 }

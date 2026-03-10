@@ -42,5 +42,4 @@ class DatasourcesList extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

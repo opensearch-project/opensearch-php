@@ -57,5 +57,4 @@ class UpdateSettings extends AbstractEndpoint
 
         return $this;
     }
-
 }

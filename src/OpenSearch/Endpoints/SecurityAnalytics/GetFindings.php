@@ -55,5 +55,4 @@ class GetFindings extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

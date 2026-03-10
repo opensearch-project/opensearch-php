@@ -42,5 +42,4 @@ class WhoAmI extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

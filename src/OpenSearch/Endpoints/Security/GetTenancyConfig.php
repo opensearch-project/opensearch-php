@@ -42,5 +42,4 @@ class GetTenancyConfig extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

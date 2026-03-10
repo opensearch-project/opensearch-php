@@ -61,5 +61,4 @@ class DeleteMemoryContainer extends AbstractEndpoint
 
         return $this;
     }
-
 }

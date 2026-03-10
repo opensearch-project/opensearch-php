@@ -70,5 +70,4 @@ class PatchUser extends AbstractEndpoint
 
         return $this;
     }
-
 }

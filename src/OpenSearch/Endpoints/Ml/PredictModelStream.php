@@ -69,5 +69,4 @@ class PredictModelStream extends AbstractEndpoint
 
         return $this;
     }
-
 }

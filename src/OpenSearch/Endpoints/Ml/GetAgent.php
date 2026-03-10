@@ -59,5 +59,4 @@ class GetAgent extends AbstractEndpoint
 
         return $this;
     }
-
 }

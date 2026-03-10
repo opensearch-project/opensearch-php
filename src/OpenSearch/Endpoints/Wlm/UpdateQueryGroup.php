@@ -69,5 +69,4 @@ class UpdateQueryGroup extends AbstractEndpoint
 
         return $this;
     }
-
 }

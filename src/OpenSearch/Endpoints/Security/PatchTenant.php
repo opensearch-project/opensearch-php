@@ -70,5 +70,4 @@ class PatchTenant extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -69,5 +69,4 @@ class UpdateMessage extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -66,5 +66,4 @@ class DeleteByQueryRethrottle extends AbstractEndpoint
 
         return $this;
     }
-
 }

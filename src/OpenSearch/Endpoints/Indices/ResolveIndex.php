@@ -69,5 +69,4 @@ class ResolveIndex extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -97,5 +97,4 @@ class UpdateByQuery extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -72,5 +72,4 @@ class PutPolicy extends AbstractEndpoint
 
         return $this;
     }
-
 }

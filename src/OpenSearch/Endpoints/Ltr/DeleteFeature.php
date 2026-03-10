@@ -63,5 +63,4 @@ class DeleteFeature extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -52,5 +52,4 @@ class ChangePassword extends AbstractEndpoint
 
         return $this;
     }
-
 }

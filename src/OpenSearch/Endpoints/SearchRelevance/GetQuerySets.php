@@ -58,5 +58,4 @@ class GetQuerySets extends AbstractEndpoint
 
         return $this;
     }
-
 }

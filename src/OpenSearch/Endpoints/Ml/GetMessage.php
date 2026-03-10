@@ -59,5 +59,4 @@ class GetMessage extends AbstractEndpoint
 
         return $this;
     }
-
 }

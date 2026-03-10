@@ -47,5 +47,4 @@ class DeleteModelGroup extends AbstractEndpoint
     {
         return 'DELETE';
     }
-
 }

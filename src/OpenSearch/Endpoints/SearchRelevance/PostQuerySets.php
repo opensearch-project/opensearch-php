@@ -52,5 +52,4 @@ class PostQuerySets extends AbstractEndpoint
 
         return $this;
     }
-
 }

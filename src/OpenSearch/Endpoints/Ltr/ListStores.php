@@ -42,5 +42,4 @@ class ListStores extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

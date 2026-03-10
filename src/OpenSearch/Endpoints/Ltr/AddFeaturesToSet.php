@@ -87,5 +87,4 @@ class AddFeaturesToSet extends AbstractEndpoint
 
         return $this;
     }
-
 }

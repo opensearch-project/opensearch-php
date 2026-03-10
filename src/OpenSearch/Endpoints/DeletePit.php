@@ -50,5 +50,4 @@ class DeletePit extends AbstractEndpoint
 
         return $this;
     }
-
 }

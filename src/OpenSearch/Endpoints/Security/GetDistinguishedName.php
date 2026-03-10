@@ -61,5 +61,4 @@ class GetDistinguishedName extends AbstractEndpoint
 
         return $this;
     }
-
 }

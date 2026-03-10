@@ -58,5 +58,4 @@ class GetExperiments extends AbstractEndpoint
 
         return $this;
     }
-
 }

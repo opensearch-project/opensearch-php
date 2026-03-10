@@ -52,5 +52,4 @@ class PatchConfiguration extends AbstractEndpoint
 
         return $this;
     }
-
 }

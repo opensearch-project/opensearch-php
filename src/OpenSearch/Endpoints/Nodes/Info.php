@@ -105,5 +105,4 @@ class Info extends AbstractEndpoint
 
         return $this;
     }
-
 }

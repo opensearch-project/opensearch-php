@@ -63,5 +63,4 @@ class GetStats extends AbstractEndpoint
 
         return $this;
     }
-
 }

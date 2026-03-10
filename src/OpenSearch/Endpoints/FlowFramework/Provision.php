@@ -69,5 +69,4 @@ class Provision extends AbstractEndpoint
 
         return $this;
     }
-
 }

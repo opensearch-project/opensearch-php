@@ -68,5 +68,4 @@ class Mget extends AbstractEndpoint
 
         return $this;
     }
-
 }

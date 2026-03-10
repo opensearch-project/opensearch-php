@@ -42,5 +42,4 @@ class GetDashboardsInfo extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

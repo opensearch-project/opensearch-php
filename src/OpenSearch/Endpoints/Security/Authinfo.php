@@ -44,5 +44,4 @@ class Authinfo extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

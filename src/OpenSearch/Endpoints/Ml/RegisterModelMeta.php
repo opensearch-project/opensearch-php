@@ -52,5 +52,4 @@ class RegisterModelMeta extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -70,5 +70,4 @@ class PatchDistinguishedName extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -64,5 +64,4 @@ class RankEval extends AbstractEndpoint
 
         return $this;
     }
-
 }

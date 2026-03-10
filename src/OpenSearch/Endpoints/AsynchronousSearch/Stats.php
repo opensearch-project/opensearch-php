@@ -42,5 +42,4 @@ class Stats extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

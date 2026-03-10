@@ -52,5 +52,4 @@ class PatchAuditConfiguration extends AbstractEndpoint
 
         return $this;
     }
-
 }

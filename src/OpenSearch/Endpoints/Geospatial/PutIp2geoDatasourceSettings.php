@@ -69,5 +69,4 @@ class PutIp2geoDatasourceSettings extends AbstractEndpoint
 
         return $this;
     }
-
 }

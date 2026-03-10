@@ -59,5 +59,4 @@ class DeleteQueryGroup extends AbstractEndpoint
 
         return $this;
     }
-
 }

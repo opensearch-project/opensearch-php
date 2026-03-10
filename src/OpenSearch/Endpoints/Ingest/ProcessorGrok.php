@@ -49,5 +49,4 @@ class ProcessorGrok extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

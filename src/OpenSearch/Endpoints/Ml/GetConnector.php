@@ -57,5 +57,4 @@ class GetConnector extends AbstractEndpoint
 
         return $this;
     }
-
 }

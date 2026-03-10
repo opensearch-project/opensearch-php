@@ -42,5 +42,4 @@ class Cache extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

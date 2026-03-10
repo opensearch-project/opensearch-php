@@ -56,5 +56,4 @@ class ScriptsPainlessExecute extends AbstractEndpoint
 
         return $this;
     }
-
 }

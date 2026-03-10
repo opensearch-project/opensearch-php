@@ -59,5 +59,4 @@ class DeleteExperiments extends AbstractEndpoint
 
         return $this;
     }
-
 }

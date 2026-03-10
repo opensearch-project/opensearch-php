@@ -67,5 +67,4 @@ class Exists extends AbstractEndpoint
     {
         return 'HEAD';
     }
-
 }

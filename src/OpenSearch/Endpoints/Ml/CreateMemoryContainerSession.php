@@ -69,5 +69,4 @@ class CreateMemoryContainerSession extends AbstractEndpoint
 
         return $this;
     }
-
 }

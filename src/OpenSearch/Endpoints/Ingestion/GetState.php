@@ -50,5 +50,4 @@ class GetState extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

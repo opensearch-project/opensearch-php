@@ -42,5 +42,4 @@ class GetUsersLegacy extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

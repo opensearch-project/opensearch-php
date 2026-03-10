@@ -60,5 +60,4 @@ class DeleteUser extends AbstractEndpoint
 
         return $this;
     }
-
 }

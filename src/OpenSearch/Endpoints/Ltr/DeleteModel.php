@@ -63,5 +63,4 @@ class DeleteModel extends AbstractEndpoint
 
         return $this;
     }
-
 }

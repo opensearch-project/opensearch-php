@@ -60,5 +60,4 @@ class GetTenant extends AbstractEndpoint
 
         return $this;
     }
-
 }

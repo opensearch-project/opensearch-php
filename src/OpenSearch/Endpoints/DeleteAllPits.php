@@ -40,5 +40,4 @@ class DeleteAllPits extends AbstractEndpoint
     {
         return 'DELETE';
     }
-
 }

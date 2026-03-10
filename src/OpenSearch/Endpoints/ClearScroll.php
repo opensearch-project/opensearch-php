@@ -79,5 +79,4 @@ class ClearScroll extends AbstractEndpoint
 
         return $this;
     }
-
 }

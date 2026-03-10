@@ -47,5 +47,4 @@ class Search extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

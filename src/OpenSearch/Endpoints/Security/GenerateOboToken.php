@@ -52,5 +52,4 @@ class GenerateOboToken extends AbstractEndpoint
 
         return $this;
     }
-
 }

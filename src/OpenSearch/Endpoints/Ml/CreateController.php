@@ -69,5 +69,4 @@ class CreateController extends AbstractEndpoint
 
         return $this;
     }
-
 }

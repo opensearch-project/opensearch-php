@@ -52,5 +52,4 @@ class CreateQueryGroup extends AbstractEndpoint
 
         return $this;
     }
-
 }

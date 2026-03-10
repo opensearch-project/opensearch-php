@@ -96,5 +96,4 @@ class DeleteByQuery extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -46,5 +46,4 @@ class GetScriptContext extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

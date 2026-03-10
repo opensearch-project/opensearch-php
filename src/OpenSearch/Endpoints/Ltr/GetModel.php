@@ -63,5 +63,4 @@ class GetModel extends AbstractEndpoint
 
         return $this;
     }
-
 }

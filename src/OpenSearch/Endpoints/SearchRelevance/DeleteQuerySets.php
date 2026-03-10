@@ -59,5 +59,4 @@ class DeleteQuerySets extends AbstractEndpoint
 
         return $this;
     }
-
 }

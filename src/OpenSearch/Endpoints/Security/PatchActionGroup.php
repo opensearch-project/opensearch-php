@@ -70,5 +70,4 @@ class PatchActionGroup extends AbstractEndpoint
 
         return $this;
     }
-
 }

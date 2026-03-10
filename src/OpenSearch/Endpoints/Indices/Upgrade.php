@@ -57,5 +57,4 @@ class Upgrade extends AbstractEndpoint
     {
         return 'POST';
     }
-
 }

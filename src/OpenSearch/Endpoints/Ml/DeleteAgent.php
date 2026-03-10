@@ -59,5 +59,4 @@ class DeleteAgent extends AbstractEndpoint
 
         return $this;
     }
-
 }

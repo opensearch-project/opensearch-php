@@ -42,5 +42,4 @@ class ConfigUpgradeCheck extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

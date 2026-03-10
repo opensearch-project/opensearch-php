@@ -67,5 +67,4 @@ class GetDataStream extends AbstractEndpoint
 
         return $this;
     }
-
 }

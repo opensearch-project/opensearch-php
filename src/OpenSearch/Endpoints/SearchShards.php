@@ -66,5 +66,4 @@ class SearchShards extends AbstractEndpoint
 
         return $this;
     }
-
 }

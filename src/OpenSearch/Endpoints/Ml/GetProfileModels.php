@@ -68,5 +68,4 @@ class GetProfileModels extends AbstractEndpoint
 
         return $this;
     }
-
 }

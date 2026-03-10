@@ -59,5 +59,4 @@ class GetConfig extends AbstractEndpoint
 
         return $this;
     }
-
 }

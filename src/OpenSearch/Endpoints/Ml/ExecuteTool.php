@@ -69,5 +69,4 @@ class ExecuteTool extends AbstractEndpoint
 
         return $this;
     }
-
 }

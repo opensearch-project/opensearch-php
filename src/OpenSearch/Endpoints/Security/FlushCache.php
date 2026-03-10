@@ -42,5 +42,4 @@ class FlushCache extends AbstractEndpoint
     {
         return 'DELETE';
     }
-
 }

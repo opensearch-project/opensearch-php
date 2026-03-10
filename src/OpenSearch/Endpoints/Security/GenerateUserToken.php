@@ -60,5 +60,4 @@ class GenerateUserToken extends AbstractEndpoint
 
         return $this;
     }
-
 }

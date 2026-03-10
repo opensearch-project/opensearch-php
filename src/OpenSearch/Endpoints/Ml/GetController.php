@@ -59,5 +59,4 @@ class GetController extends AbstractEndpoint
 
         return $this;
     }
-
 }

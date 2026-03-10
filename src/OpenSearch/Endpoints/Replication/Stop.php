@@ -57,5 +57,4 @@ class Stop extends AbstractEndpoint
 
         return $this;
     }
-
 }

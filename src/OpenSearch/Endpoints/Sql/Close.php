@@ -54,5 +54,4 @@ class Close extends AbstractEndpoint
 
         return $this;
     }
-
 }

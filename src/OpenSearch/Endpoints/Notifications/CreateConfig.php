@@ -52,5 +52,4 @@ class CreateConfig extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -56,5 +56,4 @@ class ShardStores extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

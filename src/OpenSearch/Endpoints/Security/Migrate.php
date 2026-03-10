@@ -42,5 +42,4 @@ class Migrate extends AbstractEndpoint
     {
         return 'POST';
     }
-
 }

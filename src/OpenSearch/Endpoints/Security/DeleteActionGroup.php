@@ -60,5 +60,4 @@ class DeleteActionGroup extends AbstractEndpoint
 
         return $this;
     }
-
 }

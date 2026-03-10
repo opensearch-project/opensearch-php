@@ -50,5 +50,4 @@ class CreateConnector extends AbstractEndpoint
 
         return $this;
     }
-
 }

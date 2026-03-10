@@ -56,5 +56,4 @@ class ExplainPolicy extends AbstractEndpoint
 
         return $this;
     }
-
 }

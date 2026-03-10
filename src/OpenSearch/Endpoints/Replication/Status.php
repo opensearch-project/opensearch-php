@@ -47,5 +47,4 @@ class Status extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

@@ -42,5 +42,4 @@ class GetAllowlist extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

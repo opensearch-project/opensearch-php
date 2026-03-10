@@ -57,5 +57,4 @@ class RetryIndex extends AbstractEndpoint
 
         return $this;
     }
-
 }

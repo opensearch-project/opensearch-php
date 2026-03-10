@@ -61,5 +61,4 @@ class GetNodeCertificates extends AbstractEndpoint
 
         return $this;
     }
-
 }

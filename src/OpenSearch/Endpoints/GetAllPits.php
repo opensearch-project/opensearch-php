@@ -40,5 +40,4 @@ class GetAllPits extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

@@ -69,5 +69,4 @@ class UpdateObject extends AbstractEndpoint
 
         return $this;
     }
-
 }

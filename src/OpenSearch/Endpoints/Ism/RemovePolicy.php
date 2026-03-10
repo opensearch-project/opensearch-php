@@ -47,5 +47,4 @@ class RemovePolicy extends AbstractEndpoint
     {
         return 'POST';
     }
-
 }

@@ -52,5 +52,4 @@ class ConfigUpgradePerform extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -60,5 +60,4 @@ class DeleteDistinguishedName extends AbstractEndpoint
 
         return $this;
     }
-
 }

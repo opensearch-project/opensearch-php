@@ -42,5 +42,4 @@ class GetPermissionsInfo extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

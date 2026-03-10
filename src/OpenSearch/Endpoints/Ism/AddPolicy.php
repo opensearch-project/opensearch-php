@@ -57,5 +57,4 @@ class AddPolicy extends AbstractEndpoint
 
         return $this;
     }
-
 }

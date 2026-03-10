@@ -42,5 +42,4 @@ class FollowerStats extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

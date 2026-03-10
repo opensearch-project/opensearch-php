@@ -70,5 +70,4 @@ class UpdateDistinguishedName extends AbstractEndpoint
 
         return $this;
     }
-
 }

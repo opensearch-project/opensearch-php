@@ -59,5 +59,4 @@ class GetWeightedRouting extends AbstractEndpoint
 
         return $this;
     }
-
 }

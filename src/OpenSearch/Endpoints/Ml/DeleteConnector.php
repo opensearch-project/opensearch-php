@@ -57,5 +57,4 @@ class DeleteConnector extends AbstractEndpoint
 
         return $this;
     }
-
 }

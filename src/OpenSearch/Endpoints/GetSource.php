@@ -66,5 +66,4 @@ class GetSource extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

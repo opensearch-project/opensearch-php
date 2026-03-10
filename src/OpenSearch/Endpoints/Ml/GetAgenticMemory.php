@@ -72,5 +72,4 @@ class GetAgenticMemory extends AbstractEndpoint
 
         return $this;
     }
-
 }

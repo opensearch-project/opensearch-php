@@ -46,5 +46,4 @@ class SearchFindingCorrelations extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

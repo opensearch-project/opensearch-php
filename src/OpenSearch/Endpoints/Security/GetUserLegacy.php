@@ -60,5 +60,4 @@ class GetUserLegacy extends AbstractEndpoint
 
         return $this;
     }
-
 }

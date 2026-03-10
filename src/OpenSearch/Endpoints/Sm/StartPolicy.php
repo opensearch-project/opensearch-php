@@ -59,5 +59,4 @@ class StartPolicy extends AbstractEndpoint
 
         return $this;
     }
-
 }

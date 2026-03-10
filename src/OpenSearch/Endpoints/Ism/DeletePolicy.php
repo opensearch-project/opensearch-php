@@ -60,5 +60,4 @@ class DeletePolicy extends AbstractEndpoint
 
         return $this;
     }
-
 }

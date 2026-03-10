@@ -52,5 +52,4 @@ class DatasourcesCreate extends AbstractEndpoint
 
         return $this;
     }
-
 }

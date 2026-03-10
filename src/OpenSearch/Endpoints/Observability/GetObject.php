@@ -59,5 +59,4 @@ class GetObject extends AbstractEndpoint
 
         return $this;
     }
-
 }

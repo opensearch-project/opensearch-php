@@ -58,5 +58,4 @@ class PitSegments extends AbstractEndpoint
 
         return $this;
     }
-
 }

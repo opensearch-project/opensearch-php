@@ -48,5 +48,4 @@ class Explain extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

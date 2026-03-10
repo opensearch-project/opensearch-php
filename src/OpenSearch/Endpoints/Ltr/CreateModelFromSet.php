@@ -85,5 +85,4 @@ class CreateModelFromSet extends AbstractEndpoint
 
         return $this;
     }
-
 }

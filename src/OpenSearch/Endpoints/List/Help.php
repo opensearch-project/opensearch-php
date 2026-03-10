@@ -42,5 +42,4 @@ class Help extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

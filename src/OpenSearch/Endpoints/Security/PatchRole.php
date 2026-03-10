@@ -70,5 +70,4 @@ class PatchRole extends AbstractEndpoint
 
         return $this;
     }
-
 }

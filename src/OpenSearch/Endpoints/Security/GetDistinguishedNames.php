@@ -43,5 +43,4 @@ class GetDistinguishedNames extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

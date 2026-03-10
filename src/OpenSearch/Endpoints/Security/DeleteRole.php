@@ -60,5 +60,4 @@ class DeleteRole extends AbstractEndpoint
 
         return $this;
     }
-
 }

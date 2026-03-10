@@ -81,5 +81,4 @@ class UploadChunk extends AbstractEndpoint
 
         return $this;
     }
-
 }

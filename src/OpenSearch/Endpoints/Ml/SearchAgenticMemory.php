@@ -81,5 +81,4 @@ class SearchAgenticMemory extends AbstractEndpoint
 
         return $this;
     }
-
 }

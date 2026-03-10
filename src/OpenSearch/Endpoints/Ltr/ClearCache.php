@@ -58,5 +58,4 @@ class ClearCache extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -42,5 +42,4 @@ class WhoAmIProtected extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

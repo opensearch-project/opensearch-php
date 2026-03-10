@@ -58,5 +58,4 @@ class Tasks extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

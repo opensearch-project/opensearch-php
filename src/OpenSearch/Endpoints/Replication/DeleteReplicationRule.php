@@ -52,5 +52,4 @@ class DeleteReplicationRule extends AbstractEndpoint
 
         return $this;
     }
-
 }

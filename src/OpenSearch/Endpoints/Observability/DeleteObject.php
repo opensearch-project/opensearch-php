@@ -59,5 +59,4 @@ class DeleteObject extends AbstractEndpoint
 
         return $this;
     }
-
 }

@@ -69,5 +69,4 @@ class TrainModel extends AbstractEndpoint
 
         return $this;
     }
-
 }

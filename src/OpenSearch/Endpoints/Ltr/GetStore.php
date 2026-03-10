@@ -59,5 +59,4 @@ class GetStore extends AbstractEndpoint
 
         return $this;
     }
-
 }

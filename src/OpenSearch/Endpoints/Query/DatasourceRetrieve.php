@@ -59,5 +59,4 @@ class DatasourceRetrieve extends AbstractEndpoint
 
         return $this;
     }
-
 }

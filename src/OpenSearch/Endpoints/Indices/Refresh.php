@@ -55,5 +55,4 @@ class Refresh extends AbstractEndpoint
     {
         return 'POST';
     }
-
 }

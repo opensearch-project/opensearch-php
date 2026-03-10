@@ -52,5 +52,4 @@ class RegisterAgents extends AbstractEndpoint
 
         return $this;
     }
-
 }

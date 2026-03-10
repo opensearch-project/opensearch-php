@@ -53,5 +53,4 @@ class Settings extends AbstractEndpoint
 
         return $this;
     }
-
 }

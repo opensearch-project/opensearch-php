@@ -42,5 +42,4 @@ class GetUsers extends AbstractEndpoint
     {
         return 'GET';
     }
-
 }

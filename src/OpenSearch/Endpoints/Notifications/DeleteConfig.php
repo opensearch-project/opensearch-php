@@ -59,5 +59,4 @@ class DeleteConfig extends AbstractEndpoint
 
         return $this;
     }
-
 }
