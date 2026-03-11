@@ -77,12 +77,6 @@
     "allow-plugins": {
       "php-http/discovery": true,
       "phpstan/extension-installer": true
-    },
-    "audit": {
-      "ignore": [
-        "PKSA-z3gr-8qht-p93v",
-        "PKSA-rkkf-636k-qjb3"
-      ]
     }
   },
   "scripts": {
