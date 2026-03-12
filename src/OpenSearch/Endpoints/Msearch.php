@@ -86,5 +86,6 @@ class Msearch extends AbstractEndpoint
         }
 
         return $this;
+
     }
 }

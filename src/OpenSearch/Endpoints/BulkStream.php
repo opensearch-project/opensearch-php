@@ -83,5 +83,6 @@ class BulkStream extends AbstractEndpoint
         }
 
         return $this;
+
     }
 }
