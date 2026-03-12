@@ -67,6 +67,7 @@ class ClusterNamespace extends AbstractNamespace
     public function allocationExplain(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(AllocationExplain::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -92,6 +93,7 @@ class ClusterNamespace extends AbstractNamespace
     public function deleteComponentTemplate(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -112,6 +114,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteDecommissionAwareness(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDecommissionAwareness::class);
         $endpoint->setParams($params);
 
@@ -132,6 +135,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
@@ -153,6 +157,7 @@ class ClusterNamespace extends AbstractNamespace
     public function deleteWeightedRouting(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -208,6 +213,7 @@ class ClusterNamespace extends AbstractNamespace
     public function getComponentTemplate(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -230,6 +236,7 @@ class ClusterNamespace extends AbstractNamespace
     public function getDecommissionAwareness(array $params = [])
     {
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetDecommissionAwareness::class);
         $endpoint->setParams($params);
         $endpoint->setAwarenessAttributeName($awareness_attribute_name);
@@ -255,6 +262,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function getSettings(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetSettings::class);
         $endpoint->setParams($params);
 
@@ -276,6 +284,7 @@ class ClusterNamespace extends AbstractNamespace
     public function getWeightedRouting(array $params = [])
     {
         $attribute = $this->extractArgument($params, 'attribute');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setAttribute($attribute);
@@ -311,6 +320,7 @@ class ClusterNamespace extends AbstractNamespace
     public function health(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Health::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -334,6 +344,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(PendingTasks::class);
         $endpoint->setParams($params);
 
@@ -356,6 +367,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function postVotingConfigExclusions(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(PostVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
@@ -383,6 +395,7 @@ class ClusterNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutComponentTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -408,6 +421,7 @@ class ClusterNamespace extends AbstractNamespace
     {
         $awareness_attribute_name = $this->extractArgument($params, 'awareness_attribute_name');
         $awareness_attribute_value = $this->extractArgument($params, 'awareness_attribute_value');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutDecommissionAwareness::class);
         $endpoint->setParams($params);
         $endpoint->setAwarenessAttributeName($awareness_attribute_name);
@@ -435,6 +449,7 @@ class ClusterNamespace extends AbstractNamespace
     public function putSettings(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutSettings::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -459,6 +474,7 @@ class ClusterNamespace extends AbstractNamespace
     {
         $attribute = $this->extractArgument($params, 'attribute');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setAttribute($attribute);
@@ -480,6 +496,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function remoteInfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(RemoteInfo::class);
         $endpoint->setParams($params);
 
@@ -508,6 +525,7 @@ class ClusterNamespace extends AbstractNamespace
     public function reroute(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Reroute::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -541,6 +559,7 @@ class ClusterNamespace extends AbstractNamespace
     {
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(State::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
@@ -570,6 +589,7 @@ class ClusterNamespace extends AbstractNamespace
         $index_metric = $this->extractArgument($params, 'index_metric');
         $metric = $this->extractArgument($params, 'metric');
         $node_id = $this->extractArgument($params, 'node_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setIndexMetric($index_metric);

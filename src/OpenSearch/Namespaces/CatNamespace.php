@@ -75,6 +75,7 @@ class CatNamespace extends AbstractNamespace
     public function aliases(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(Aliases::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -101,6 +102,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function allPitSegments(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(AllPitSegments::class);
         $endpoint->setParams($params);
 
@@ -131,6 +133,7 @@ class CatNamespace extends AbstractNamespace
     public function allocation(array $params = [])
     {
         $node_id = $this->extractArgument($params, 'node_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(Allocation::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -159,6 +162,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function clusterManager(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ClusterManager::class);
         $endpoint->setParams($params);
 
@@ -185,6 +189,7 @@ class CatNamespace extends AbstractNamespace
     public function count(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Count::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -213,6 +218,7 @@ class CatNamespace extends AbstractNamespace
     public function fielddata(array $params = [])
     {
         $fields = $this->extractArgument($params, 'fields');
+
         $endpoint = $this->endpointFactory->getEndpoint(Fielddata::class);
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
@@ -240,6 +246,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function health(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Health::class);
         $endpoint->setParams($params);
 
@@ -259,6 +266,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function help(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Help::class);
         $endpoint->setParams($params);
 
@@ -294,6 +302,7 @@ class CatNamespace extends AbstractNamespace
     public function indices(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Indices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -322,6 +331,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function master(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Master::class);
         $endpoint->setParams($params);
 
@@ -349,6 +359,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function nodeattrs(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(NodeAttrs::class);
         $endpoint->setParams($params);
 
@@ -379,6 +390,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function nodes(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Nodes::class);
         $endpoint->setParams($params);
 
@@ -407,6 +419,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(PendingTasks::class);
         $endpoint->setParams($params);
 
@@ -434,6 +447,7 @@ class CatNamespace extends AbstractNamespace
     public function pitSegments(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PitSegments::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -462,6 +476,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function plugins(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Plugins::class);
         $endpoint->setParams($params);
 
@@ -492,6 +507,7 @@ class CatNamespace extends AbstractNamespace
     public function recovery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Recovery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -520,6 +536,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function repositories(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Repositories::class);
         $endpoint->setParams($params);
 
@@ -557,6 +574,7 @@ class CatNamespace extends AbstractNamespace
     public function segmentReplication(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(SegmentReplication::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -587,6 +605,7 @@ class CatNamespace extends AbstractNamespace
     public function segments(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Segments::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -619,6 +638,7 @@ class CatNamespace extends AbstractNamespace
     public function shards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -650,6 +670,7 @@ class CatNamespace extends AbstractNamespace
     public function snapshots(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
+
         $endpoint = $this->endpointFactory->getEndpoint(Snapshots::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
@@ -680,6 +701,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function tasks(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Tasks::class);
         $endpoint->setParams($params);
 
@@ -709,6 +731,7 @@ class CatNamespace extends AbstractNamespace
     public function templates(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(Templates::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -740,6 +763,7 @@ class CatNamespace extends AbstractNamespace
     public function threadPool(array $params = [])
     {
         $thread_pool_patterns = $this->extractArgument($params, 'thread_pool_patterns');
+
         $endpoint = $this->endpointFactory->getEndpoint(ThreadPool::class);
         $endpoint->setParams($params);
         $endpoint->setThreadPoolPatterns($thread_pool_patterns);

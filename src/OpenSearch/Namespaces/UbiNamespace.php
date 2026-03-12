@@ -37,6 +37,7 @@ class UbiNamespace extends AbstractNamespace
      */
     public function initialize(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Initialize::class);
         $endpoint->setParams($params);
 

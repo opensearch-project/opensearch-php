@@ -48,6 +48,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(CreatePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
@@ -71,6 +72,7 @@ class SmNamespace extends AbstractNamespace
     public function deletePolicy(array $params = [])
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeletePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
@@ -93,6 +95,7 @@ class SmNamespace extends AbstractNamespace
     public function explainPolicy(array $params = [])
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
+
         $endpoint = $this->endpointFactory->getEndpoint(ExplainPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
@@ -118,6 +121,7 @@ class SmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
 
@@ -139,6 +143,7 @@ class SmNamespace extends AbstractNamespace
     public function getPolicy(array $params = [])
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
@@ -161,6 +166,7 @@ class SmNamespace extends AbstractNamespace
     public function startPolicy(array $params = [])
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
+
         $endpoint = $this->endpointFactory->getEndpoint(StartPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
@@ -183,6 +189,7 @@ class SmNamespace extends AbstractNamespace
     public function stopPolicy(array $params = [])
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
+
         $endpoint = $this->endpointFactory->getEndpoint(StopPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);
@@ -209,6 +216,7 @@ class SmNamespace extends AbstractNamespace
     {
         $policy_name = $this->extractArgument($params, 'policy_name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(UpdatePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyName($policy_name);

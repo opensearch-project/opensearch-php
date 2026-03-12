@@ -43,6 +43,7 @@ class SearchPipelineNamespace extends AbstractNamespace
     public function delete(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
+
         $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -66,6 +67,7 @@ class SearchPipelineNamespace extends AbstractNamespace
     public function get(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
+
         $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);
@@ -92,6 +94,7 @@ class SearchPipelineNamespace extends AbstractNamespace
     {
         $id = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Put::class);
         $endpoint->setParams($params);
         $endpoint->setId($id);

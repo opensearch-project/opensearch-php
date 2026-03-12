@@ -42,6 +42,7 @@ class WlmNamespace extends AbstractNamespace
     public function createQueryGroup(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(CreateQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -64,6 +65,7 @@ class WlmNamespace extends AbstractNamespace
     public function deleteQueryGroup(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -86,6 +88,7 @@ class WlmNamespace extends AbstractNamespace
     public function getQueryGroup(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -110,6 +113,7 @@ class WlmNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(UpdateQueryGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);

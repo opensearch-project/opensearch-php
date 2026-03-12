@@ -45,6 +45,7 @@ class ObservabilityNamespace extends AbstractNamespace
     public function createObject(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(CreateObject::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -67,6 +68,7 @@ class ObservabilityNamespace extends AbstractNamespace
     public function deleteObject(array $params = [])
     {
         $object_id = $this->extractArgument($params, 'object_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteObject::class);
         $endpoint->setParams($params);
         $endpoint->setObjectId($object_id);
@@ -89,6 +91,7 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function deleteObjects(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteObjects::class);
         $endpoint->setParams($params);
 
@@ -108,6 +111,7 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function getLocalstats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetLocalstats::class);
         $endpoint->setParams($params);
 
@@ -129,6 +133,7 @@ class ObservabilityNamespace extends AbstractNamespace
     public function getObject(array $params = [])
     {
         $object_id = $this->extractArgument($params, 'object_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetObject::class);
         $endpoint->setParams($params);
         $endpoint->setObjectId($object_id);
@@ -149,6 +154,7 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function listObjects(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListObjects::class);
         $endpoint->setParams($params);
 
@@ -172,6 +178,7 @@ class ObservabilityNamespace extends AbstractNamespace
     {
         $object_id = $this->extractArgument($params, 'object_id');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(UpdateObject::class);
         $endpoint->setParams($params);
         $endpoint->setObjectId($object_id);

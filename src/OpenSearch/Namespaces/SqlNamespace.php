@@ -46,6 +46,7 @@ class SqlNamespace extends AbstractNamespace
     public function close(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Close::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -68,6 +69,7 @@ class SqlNamespace extends AbstractNamespace
      */
     public function getStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
 
@@ -91,6 +93,7 @@ class SqlNamespace extends AbstractNamespace
     public function postStats(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PostStats::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -114,6 +117,7 @@ class SqlNamespace extends AbstractNamespace
     public function settings(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Settings::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);

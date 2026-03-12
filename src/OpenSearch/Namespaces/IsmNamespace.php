@@ -52,6 +52,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(AddPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -77,6 +78,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(ChangePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -100,6 +102,7 @@ class IsmNamespace extends AbstractNamespace
     public function deletePolicy(array $params = [])
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeletePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
@@ -150,6 +153,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(ExplainPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -171,6 +175,7 @@ class IsmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
 
@@ -192,6 +197,7 @@ class IsmNamespace extends AbstractNamespace
     public function getPolicy(array $params = [])
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
@@ -217,6 +223,7 @@ class IsmNamespace extends AbstractNamespace
     public function putPolicies(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutPolicies::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -243,6 +250,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutPolicy::class);
         $endpoint->setParams($params);
         $endpoint->setPolicyId($policy_id);
@@ -266,6 +274,7 @@ class IsmNamespace extends AbstractNamespace
     public function refreshSearchAnalyzers(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(RefreshSearchAnalyzers::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -288,6 +297,7 @@ class IsmNamespace extends AbstractNamespace
     public function removePolicy(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(RemovePolicy::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -312,6 +322,7 @@ class IsmNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(RetryIndex::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);

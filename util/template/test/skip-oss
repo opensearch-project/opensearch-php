@@ -1,4 +1,0 @@
-        $this->markTestSkipped(sprintf(
-            "Skip test %s, oss feature not supported",
-            :testname
-        ));

@@ -101,6 +101,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $block = $this->extractArgument($params, 'block');
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(AddBlock::class);
         $endpoint->setParams($params);
         $endpoint->setBlock($block);
@@ -126,6 +127,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Analyze::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -157,6 +159,7 @@ class IndicesNamespace extends AbstractNamespace
     public function clearCache(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(ClearCache::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -189,6 +192,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(CloneIndices::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -220,6 +224,7 @@ class IndicesNamespace extends AbstractNamespace
     public function close(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Close::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -248,6 +253,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Create::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -273,6 +279,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(CreateDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -296,6 +303,7 @@ class IndicesNamespace extends AbstractNamespace
     public function dataStreamsStats(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DataStreamsStats::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -324,6 +332,7 @@ class IndicesNamespace extends AbstractNamespace
     public function delete(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -351,6 +360,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAlias::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -374,6 +384,7 @@ class IndicesNamespace extends AbstractNamespace
     public function deleteDataStream(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -399,6 +410,7 @@ class IndicesNamespace extends AbstractNamespace
     public function deleteIndexTemplate(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -424,6 +436,7 @@ class IndicesNamespace extends AbstractNamespace
     public function deleteTemplate(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -577,6 +590,7 @@ class IndicesNamespace extends AbstractNamespace
     public function flush(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Flush::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -607,6 +621,7 @@ class IndicesNamespace extends AbstractNamespace
     public function forcemerge(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(ForceMerge::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -637,6 +652,7 @@ class IndicesNamespace extends AbstractNamespace
     public function get(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Get::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -665,6 +681,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -688,6 +705,7 @@ class IndicesNamespace extends AbstractNamespace
     public function getDataStream(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetDataStream::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -717,6 +735,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $fields = $this->extractArgument($params, 'fields');
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetFieldMapping::class);
         $endpoint->setParams($params);
         $endpoint->setFields($fields);
@@ -744,6 +763,7 @@ class IndicesNamespace extends AbstractNamespace
     public function getIndexTemplate(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -772,6 +792,7 @@ class IndicesNamespace extends AbstractNamespace
     public function getMapping(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetMapping::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -804,6 +825,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetSettings::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -831,6 +853,7 @@ class IndicesNamespace extends AbstractNamespace
     public function getTemplate(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -856,6 +879,7 @@ class IndicesNamespace extends AbstractNamespace
     public function getUpgrade(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetUpgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -887,6 +911,7 @@ class IndicesNamespace extends AbstractNamespace
     public function open(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Open::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -916,6 +941,7 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutAlias::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -946,6 +972,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -978,6 +1005,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutMapping::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1011,6 +1039,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutSettings::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1040,6 +1069,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(PutTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -1065,6 +1095,7 @@ class IndicesNamespace extends AbstractNamespace
     public function recovery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Recovery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1090,6 +1121,7 @@ class IndicesNamespace extends AbstractNamespace
     public function refresh(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Refresh::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1113,6 +1145,7 @@ class IndicesNamespace extends AbstractNamespace
     public function resolveIndex(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
+
         $endpoint = $this->endpointFactory->getEndpoint(ResolveIndex::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -1144,6 +1177,7 @@ class IndicesNamespace extends AbstractNamespace
         $alias = $this->extractArgument($params, 'alias');
         $new_index = $this->extractArgument($params, 'new_index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Rollover::class);
         $endpoint->setParams($params);
         $endpoint->setAlias($alias);
@@ -1172,6 +1206,7 @@ class IndicesNamespace extends AbstractNamespace
     public function segments(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Segments::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1198,6 +1233,7 @@ class IndicesNamespace extends AbstractNamespace
     public function shardStores(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(ShardStores::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1231,6 +1267,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Shrink::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1259,6 +1296,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(SimulateIndexTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -1288,6 +1326,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(SimulateTemplate::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
@@ -1322,6 +1361,7 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Split::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1357,6 +1397,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $metric = $this->extractArgument($params, 'metric');
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
@@ -1383,6 +1424,7 @@ class IndicesNamespace extends AbstractNamespace
     public function updateAliases(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(UpdateAliases::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -1410,6 +1452,7 @@ class IndicesNamespace extends AbstractNamespace
     public function upgrade(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Upgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -1446,6 +1489,7 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(ValidateQuery::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);

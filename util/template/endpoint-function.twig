@@ -1,8 +1,7 @@
 {{ apidoc }}
     public function {{ endpoint }}(array $params = [])
     {
-{%- if extract %}
-{{ extract }}{% endif %}
+{{ extract }}
         $endpoint = $this->endpointFactory->getEndpoint({{ EndpointClass }}::class);
         $endpoint->setParams($params);
 {{ setparam }}

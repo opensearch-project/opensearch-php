@@ -41,6 +41,7 @@ class RemoteStoreNamespace extends AbstractNamespace
     public function restore(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Restore::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);

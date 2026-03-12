@@ -44,6 +44,7 @@ class IngestionNamespace extends AbstractNamespace
     public function getState(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetState::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -68,6 +69,7 @@ class IngestionNamespace extends AbstractNamespace
     public function pause(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Pause::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
@@ -94,6 +96,7 @@ class IngestionNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(Resume::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);

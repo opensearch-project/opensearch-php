@@ -44,6 +44,7 @@ class KnnNamespace extends AbstractNamespace
     public function deleteModel(array $params = [])
     {
         $model_id = $this->extractArgument($params, 'model_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -66,6 +67,7 @@ class KnnNamespace extends AbstractNamespace
     public function getModel(array $params = [])
     {
         $model_id = $this->extractArgument($params, 'model_id');
+
         $endpoint = $this->endpointFactory->getEndpoint(GetModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -130,6 +132,7 @@ class KnnNamespace extends AbstractNamespace
     public function searchModels(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(SearchModels::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
@@ -155,6 +158,7 @@ class KnnNamespace extends AbstractNamespace
     {
         $node_id = $this->extractArgument($params, 'node_id');
         $stat = $this->extractArgument($params, 'stat');
+
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setNodeId($node_id);
@@ -181,6 +185,7 @@ class KnnNamespace extends AbstractNamespace
     {
         $model_id = $this->extractArgument($params, 'model_id');
         $body = $this->extractArgument($params, 'body');
+
         $endpoint = $this->endpointFactory->getEndpoint(TrainModel::class);
         $endpoint->setParams($params);
         $endpoint->setModelId($model_id);
@@ -204,6 +209,7 @@ class KnnNamespace extends AbstractNamespace
     public function warmup(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
+
         $endpoint = $this->endpointFactory->getEndpoint(Warmup::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
