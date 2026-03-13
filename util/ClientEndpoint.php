@@ -25,14 +25,6 @@ use Exception;
 
 class ClientEndpoint extends NamespaceEndpoint
 {
-    public const CLIENT_CLASS_TEMPLATE = __DIR__ . '/template/client-class';
-    public const NEW_NAMESPACE_TEMPLATE = __DIR__ . '/template/new-namespace';
-    public const NEW_NAMESPACE_DEPRECATED_TEMPLATE = __DIR__ . '/template/new-namespace-deprecated';
-    public const PROPERTY_CLASS_TEMPLATE = __DIR__ . '/template/namespace-property';
-    public const PROPERTY_CLASS_DEPRECATED_TEMPLATE = __DIR__ . '/template/namespace-property-deprecated';
-    public const NAMESPACE_FUNC_TEMPLATE = __DIR__ . '/template/client-namespace-function';
-    public const NAMESPACE_FUNC_DEPRECATED_TEMPLATE = __DIR__ . '/template/client-namespace-function-deprecated';
-
     protected $endpoints = [];
     protected $endpointNames = [];
     protected $namespace = [];
@@ -47,7 +39,8 @@ class ClientEndpoint extends NamespaceEndpoint
         if (empty($this->endpoints)) {
             throw new Exception("No endpoints has been added. I cannot render the class");
         }
-        $class = file_get_contents(self::CLIENT_CLASS_TEMPLATE);
+        $twig = $this->getTwig();
+
         // use Namespace
         $useNamespace = '';
 
@@ -63,7 +56,6 @@ class ClientEndpoint extends NamespaceEndpoint
             }
             $useNamespace .= sprintf("use OpenSearch\Namespaces\%sNamespace;\n", NamespaceEndpoint::normalizeName($name));
         }
-        $class = str_replace(':use-namespaces', $useNamespace, $class);
 
         // new Namespace
         $newNamespace = '';
@@ -71,17 +63,15 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
-            $template = in_array(
-                $name,
-                $deprecatedNamespaces
-            ) ? self::NEW_NAMESPACE_DEPRECATED_TEMPLATE : self::NEW_NAMESPACE_TEMPLATE;
+            $template = in_array($name, $deprecatedNamespaces)
+                ? 'new-namespace-deprecated.twig'
+                : 'new-namespace.twig';
             $normNamespace = NamespaceEndpoint::normalizeName($name);
-            $newName = file_get_contents($template);
-            $newName = str_replace(':namespace', $normNamespace . 'Namespace', $newName);
-            $newName = str_replace(':name', lcfirst($normNamespace), $newName);
-            $newNamespace .= $newName;
+            $newNamespace .= $twig->render($template, [
+                'namespace' => $normNamespace . 'Namespace',
+                'name' => lcfirst($normNamespace),
+            ]);
         }
-        $class = str_replace(':new-namespaces', $newNamespace, $class);
 
         // Properties
         $properties = '';
@@ -89,17 +79,15 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
-            $template = in_array(
-                $name,
-                $deprecatedNamespaces
-            ) ? self::PROPERTY_CLASS_DEPRECATED_TEMPLATE : self::PROPERTY_CLASS_TEMPLATE;
+            $template = in_array($name, $deprecatedNamespaces)
+                ? 'namespace-property-deprecated.twig'
+                : 'namespace-property.twig';
             $normNamespace = NamespaceEndpoint::normalizeName($name);
-            $prop = file_get_contents($template);
-            $prop = str_replace(':namespace', $normNamespace, $prop);
-            $prop = str_replace(':var_namespace', lcfirst($normNamespace), $prop);
-            $properties .= $prop . "\n";
+            $properties .= $twig->render($template, [
+                'namespace' => $normNamespace,
+                'var_namespace' => lcfirst($normNamespace),
+            ]) . "\n";
         }
-        $class = str_replace(':namespace_properties', $properties, $class);
 
         // Endpoints
         $endpoints = '';
@@ -110,14 +98,13 @@ class ClientEndpoint extends NamespaceEndpoint
                 $endpoints .= $this->renderEndpoint($endpoint);
             }
         }
-        $proxyFolder = __DIR__. '/EndpointProxies/';
+        $proxyFolder = __DIR__ . '/EndpointProxies/';
         if (is_dir($proxyFolder)) {
             $proxyFiles = glob($proxyFolder . '/*.php');
             foreach ($proxyFiles as $file) {
                 $endpoints .= require $file;
             }
         }
-        $class = str_replace(':endpoints', $endpoints, $class);
 
         // Namespace functions
         $functions = '';
@@ -125,18 +112,22 @@ class ClientEndpoint extends NamespaceEndpoint
             if (empty($name)) {
                 continue;
             }
-            $template = in_array(
-                $name,
-                $deprecatedNamespaces
-            ) ? self::NAMESPACE_FUNC_DEPRECATED_TEMPLATE : self::NAMESPACE_FUNC_TEMPLATE;
+            $template = in_array($name, $deprecatedNamespaces)
+                ? 'client-namespace-function-deprecated.twig'
+                : 'client-namespace-function.twig';
             $normNamespace = NamespaceEndpoint::normalizeName($name);
-            $func = file_get_contents($template);
-            $func = str_replace(':namespace', $normNamespace . 'Namespace', $func);
-            $func = str_replace(':name', lcfirst($normNamespace), $func);
-            $functions .= $func;
+            $functions .= $twig->render($template, [
+                'namespace' => $normNamespace . 'Namespace',
+                'name' => lcfirst($normNamespace),
+            ]);
         }
-        $class = str_replace(':functions', $functions, $class);
 
-        return $class;
+        return $twig->render('client-class.php.twig', [
+            'use_namespaces' => $useNamespace,
+            'namespace_properties' => $properties,
+            'new_namespaces' => $newNamespace,
+            'endpoints' => $endpoints,
+            'functions' => $functions,
+        ]);
     }
 }

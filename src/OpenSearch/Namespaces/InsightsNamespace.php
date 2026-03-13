@@ -37,6 +37,7 @@ class InsightsNamespace extends AbstractNamespace
      */
     public function topQueries(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(TopQueries::class);
         $endpoint->setParams($params);
 

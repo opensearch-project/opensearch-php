@@ -114,6 +114,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteDecommissionAwareness(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDecommissionAwareness::class);
         $endpoint->setParams($params);
 
@@ -134,6 +135,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteVotingConfigExclusions(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
@@ -181,7 +183,6 @@ class ClusterNamespace extends AbstractNamespace
     public function existsComponentTemplate(array $params = []): bool
     {
         $name = $this->extractArgument($params, 'name');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -261,6 +262,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function getSettings(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetSettings::class);
         $endpoint->setParams($params);
 
@@ -342,6 +344,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function pendingTasks(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(PendingTasks::class);
         $endpoint->setParams($params);
 
@@ -364,6 +367,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function postVotingConfigExclusions(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(PostVotingConfigExclusions::class);
         $endpoint->setParams($params);
 
@@ -492,6 +496,7 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function remoteInfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(RemoteInfo::class);
         $endpoint->setParams($params);
 

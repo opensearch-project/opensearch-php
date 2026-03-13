@@ -69,6 +69,7 @@ class SqlNamespace extends AbstractNamespace
      */
     public function getStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetStats::class);
         $endpoint->setParams($params);
 

@@ -99,6 +99,7 @@ class DanglingIndicesNamespace extends AbstractNamespace
      */
     public function listDanglingIndices(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListDanglingIndices::class);
         $endpoint->setParams($params);
 

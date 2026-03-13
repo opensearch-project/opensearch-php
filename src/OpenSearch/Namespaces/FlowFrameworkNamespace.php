@@ -170,6 +170,7 @@ class FlowFrameworkNamespace extends AbstractNamespace
      */
     public function getSteps(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetSteps::class);
         $endpoint->setParams($params);
 

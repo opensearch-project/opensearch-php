@@ -113,6 +113,7 @@ class AsynchronousSearchNamespace extends AbstractNamespace
      */
     public function stats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
 

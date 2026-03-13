@@ -93,6 +93,7 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function deleteConfigs(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteConfigs::class);
         $endpoint->setParams($params);
 
@@ -198,6 +199,7 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function listChannels(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListChannels::class);
         $endpoint->setParams($params);
 
@@ -217,6 +219,7 @@ class NotificationsNamespace extends AbstractNamespace
      */
     public function listFeatures(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListFeatures::class);
         $endpoint->setParams($params);
 

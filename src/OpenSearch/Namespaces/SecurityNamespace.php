@@ -115,6 +115,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function authinfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Authinfo::class);
         $endpoint->setParams($params);
 
@@ -134,6 +135,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function authtoken(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Authtoken::class);
         $endpoint->setParams($params);
 
@@ -153,6 +155,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function cache(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Cache::class);
         $endpoint->setParams($params);
 
@@ -172,6 +175,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function configUpgradeCheck(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ConfigUpgradeCheck::class);
         $endpoint->setParams($params);
 
@@ -447,6 +451,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function flushCache(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(FlushCache::class);
         $endpoint->setParams($params);
 
@@ -535,6 +540,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAccountDetails(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAccountDetails::class);
         $endpoint->setParams($params);
 
@@ -579,6 +585,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAllCertificates(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAllCertificates::class);
         $endpoint->setParams($params);
 
@@ -598,6 +605,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAllowlist(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAllowlist::class);
         $endpoint->setParams($params);
 
@@ -617,6 +625,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getAuditConfiguration(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAuditConfiguration::class);
         $endpoint->setParams($params);
 
@@ -636,6 +645,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getCertificates(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetCertificates::class);
         $endpoint->setParams($params);
 
@@ -655,6 +665,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getConfiguration(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetConfiguration::class);
         $endpoint->setParams($params);
 
@@ -674,6 +685,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getDashboardsInfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetDashboardsInfo::class);
         $endpoint->setParams($params);
 
@@ -742,6 +754,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getPermissionsInfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPermissionsInfo::class);
         $endpoint->setParams($params);
 
@@ -808,6 +821,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getSslinfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetSslinfo::class);
         $endpoint->setParams($params);
 
@@ -827,6 +841,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getTenancyConfig(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetTenancyConfig::class);
         $endpoint->setParams($params);
 
@@ -915,6 +930,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function getUsersLegacy(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetUsersLegacy::class);
         $endpoint->setParams($params);
 
@@ -935,6 +951,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function health(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Health::class);
         $endpoint->setParams($params);
 
@@ -954,6 +971,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function migrate(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Migrate::class);
         $endpoint->setParams($params);
 
@@ -1221,6 +1239,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function postDashboardsInfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(PostDashboardsInfo::class);
         $endpoint->setParams($params);
 
@@ -1240,6 +1259,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function reloadHttpCertificates(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ReloadHttpCertificates::class);
         $endpoint->setParams($params);
 
@@ -1259,6 +1279,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function reloadTransportCertificates(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ReloadTransportCertificates::class);
         $endpoint->setParams($params);
 
@@ -1278,6 +1299,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function tenantInfo(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(TenantInfo::class);
         $endpoint->setParams($params);
 
@@ -1370,6 +1392,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function validate(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Validate::class);
         $endpoint->setParams($params);
 
@@ -1389,6 +1412,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function whoAmI(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(WhoAmI::class);
         $endpoint->setParams($params);
 
@@ -1408,6 +1432,7 @@ class SecurityNamespace extends AbstractNamespace
      */
     public function whoAmIProtected(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(WhoAmIProtected::class);
         $endpoint->setParams($params);
 

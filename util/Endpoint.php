@@ -23,18 +23,11 @@ namespace OpenSearch\Util;
 
 use Exception;
 use JsonException;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class Endpoint
 {
-    public const ENDPOINT_CLASS_TEMPLATE      = __DIR__ . '/template/endpoint-class';
-    public const ENDPOINT_BULK_CLASS_TEMPLATE = __DIR__ . '/template/endpoint-bulk-class';
-    public const REQUIRED_PART_TEMPLATE       = __DIR__ . '/template/required-part';
-    public const SET_PART_TEMPLATE            = __DIR__ . '/template/set-part';
-    public const SET_PART_LIST_TEMPLATE       = __DIR__ . '/template/set-part-list';
-    public const CHECK_OPTIONS_TEMPLATE       = __DIR__ . '/template/check-options';
-    public const SET_BULK_BODY_TEMPLATE       = __DIR__ . '/template/set-bulk-body';
-    public const DEPRECATED_PART              = __DIR__ . '/template/deprecated';
-    public const DEPRECATED_PARAM             = __DIR__ . '/template/deprecated-param-master-timeout';
     public const PHP_RESERVED_WORDS = [
         'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch',
         'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do',
@@ -135,34 +128,14 @@ class Endpoint
 
     public function renderClass(): string
     {
-        if (isset($this->content['body']['serialize']) &&
-            $this->content['body']['serialize'] === 'bulk') {
-            $class = file_get_contents(self::ENDPOINT_BULK_CLASS_TEMPLATE);
-        } else {
-            $class = file_get_contents(self::ENDPOINT_CLASS_TEMPLATE);
-        }
-        $class = str_replace(
-            ':uri',
-            trim($this->extractUrl($this->content['url']['paths'])),
-            $class
-        );
-        $class = str_replace(
-            ':params',
-            $this->extractParameters(),
-            $class
-        );
-        $class = str_replace(
-            ':namespace',
-            $this->namespace === ''
-                ? $this->normalizeName($this->namespace)
-                : '\\' . $this->normalizeName($this->namespace),
-            $class
-        );
-        $class = isset($this->content['deprecation_message'])
-            ? str_replace(':deprecation-message', $this->content['deprecation_message'], $class)
-            : preg_replace('/\s*\/\*\*\s+\*\s+@deprecated :deprecation-message\s+\*\//', '', $class);
+        $twig = $this->getTwig();
+        $isBulk = isset($this->content['body']['serialize']) && $this->content['body']['serialize'] === 'bulk';
+        $templateName = $isBulk ? 'endpoint-bulk-class.php.twig' : 'endpoint-class.php.twig';
 
-        // Set the HTTP method
+        $namespace = $this->namespace === ''
+            ? $this->normalizeName($this->namespace)
+            : '\\' . $this->normalizeName($this->namespace);
+
         $action = $this->getMethod();
         if ($action === ['POST', 'PUT'] && $this->getClassName() !== 'Bulk') {
             $method = "'PUT'";
@@ -173,13 +146,10 @@ class Endpoint
         } else {
             $method = sprintf("'%s'", reset($action));
         }
-        $class = str_replace(':method', $method, $class);
 
         $parts = '';
-        // Set parts
         if (!empty($this->content['body'])) {
-            if (isset($this->content['body']['serialize']) &&
-                $this->content['body']['serialize'] === 'bulk') {
+            if ($isBulk) {
                 $parts .= $this->getSetBulkBody();
             } else {
                 $parts .= $this->getSetPart('body');
@@ -195,32 +165,37 @@ class Endpoint
                 $parts .= $this->getSetPart($part);
             }
         }
-        $class = str_replace(':set-parts', $parts, $class);
-        $class = str_replace(':endpoint', $this->getClassName(), $class);
-        $class = str_replace(':use-namespace', $this->getNamespaces(), $class);
-        $class = str_replace(':properties', $this->getProperties(), $class);
-        if (isset($this->content['params']['master_timeout'])) {
-            $deprecatedContent = file_get_contents(self::DEPRECATED_PARAM);
-            $class = str_replace(':master_timeout_ParamDeprecation', $deprecatedContent, $class);
-        } else {
-            $class = preg_replace('/\s*:master_timeout_ParamDeprecation\s*\}/', '}', $class);
-        }
 
-        // Adding licence header
+        // extractUrl() calls addNamespace(), so it must run before getNamespaces()
+        $uri = trim($this->extractUrl($this->content['url']['paths']));
+
+        $class = $twig->render($templateName, [
+            'namespace' => $namespace,
+            'use_namespace' => $this->getNamespaces(),
+            'deprecation_message' => $this->content['deprecation_message'] ?? null,
+            'endpoint' => $this->getClassName(),
+            'properties' => $this->getProperties(),
+            'uri' => $uri,
+            'params' => $this->extractParameters(),
+            'method' => $method,
+            'set_parts' => $parts,
+            'has_master_timeout' => isset($this->content['params']['master_timeout']),
+        ]);
+
+        // Add license header if existing file has one
         $currentDir = dirname(__FILE__);
         $baseDir = dirname($currentDir);
         $EndpointName = $this->getClassName();
 
         if (!empty($this->namespace)) {
-            $namespace = str_replace('_', '', ucwords($this->namespace, '_'));
-            $filePath = $baseDir . "/src/OpenSearch/Endpoints/$namespace/$EndpointName.php";
+            $namespace_dir = str_replace('_', '', ucwords($this->namespace, '_'));
+            $filePath = $baseDir . "/src/OpenSearch/Endpoints/$namespace_dir/$EndpointName.php";
         } else {
             $filePath = $baseDir . "/src/OpenSearch/Endpoints/$EndpointName.php";
         }
 
         if (file_exists($filePath)) {
             $content = file_get_contents($filePath);
-
             if (strpos($content, 'Copyright OpenSearch') !== false) {
                 $pattern = '/\/\*\*.*?\*\//s';
                 if (preg_match($pattern, $content, $matches)) {
@@ -228,7 +203,8 @@ class Endpoint
                 }
             }
         }
-        return str_replace(':apiname', $this->apiName, $class);
+
+        return $class;
     }
 
     public function getMethod(): array
@@ -267,7 +243,7 @@ class Endpoint
 
     private function extractUrl(array $paths): string
     {
-        $skeleton = file_get_contents(self::REQUIRED_PART_TEMPLATE);
+        $twig = $this->getTwig();
         $checkPart = '';
         $params = '';
         $deprecated = '';
@@ -278,21 +254,19 @@ class Endpoint
         if (!empty($this->parts)) {
             foreach ($this->parts as $part => $value) {
                 if (in_array($part, $this->requiredParts)) {
-                    $checkPart .= str_replace(
-                        ':endpoint',
-                        $this->name,
-                        str_replace(':part', $part, $skeleton)
-                    );
+                    $checkPart .= $twig->render('required-part.twig', [
+                        'part' => $part,
+                        'endpoint' => $this->name,
+                    ]);
                     $this->addNamespace('OpenSearch\Exception\RuntimeException');
                 } else {
                     $params .= sprintf("%s\$%s = \$this->%s ? rawurlencode(\$this->%s) : null;", $tab8, $part, $part, $part);
                 }
                 if (isset($value['deprecated']) && $value['deprecated']) {
-                    $deprecated .= str_replace(
-                        ':msg',
-                        $this->getDeprecatedMessage($part),
-                        str_replace(':part', $part, file_get_contents(self::DEPRECATED_PART))
-                    );
+                    $deprecated .= $twig->render('deprecated.twig', [
+                        'part' => $part,
+                        'msg' => $this->getDeprecatedMessage($part),
+                    ]);
                 }
             }
         }
@@ -401,28 +375,39 @@ class Endpoint
 
     private function getSetPartList(string $param): string
     {
-        $setPart = file_get_contents(self::SET_PART_LIST_TEMPLATE);
-        $setPart = str_replace(':endpoint', $this->getClassName(), $setPart);
-        $setPart = str_replace(':part', $param, $setPart);
+        $twig = $this->getTwig();
         $this->addProperty($param);
-        return str_replace(':Part', $this->normalizeName($param), $setPart);
+        return $twig->render('set-part-list.twig', [
+            'endpoint' => $this->getClassName(),
+            'part' => $param,
+            'Part' => $this->normalizeName($param),
+        ]);
     }
 
     private function getSetPart(string $param): string
     {
-        $setPart = file_get_contents(self::SET_PART_TEMPLATE);
-        $setPart = str_replace(':endpoint', $this->getClassName(), $setPart);
-        $setPart = str_replace(':part', $param, $setPart);
+        $twig = $this->getTwig();
         $this->addProperty($param);
-        return str_replace(':Part', $this->normalizeName($param), $setPart);
+        return $twig->render('set-part.twig', [
+            'endpoint' => $this->getClassName(),
+            'part' => $param,
+            'Part' => $this->normalizeName($param),
+        ]);
     }
 
     private function getSetBulkBody(): string
     {
-        $setPart = file_get_contents(self::SET_BULK_BODY_TEMPLATE);
+        $twig = $this->getTwig();
         $this->addNamespace('OpenSearch\Common\Exceptions\InvalidArgumentException');
+        return $twig->render('set-bulk-body.twig', [
+            'endpoint' => $this->getClassName(),
+        ]);
+    }
 
-        return str_replace(':endpoint', $this->getClassName(), $setPart);
+    private function getTwig(): Environment
+    {
+        $loader = new FilesystemLoader(__DIR__ . '/template');
+        return new Environment($loader, ['autoescape' => false]);
     }
 
     protected function addProperty(string $name)

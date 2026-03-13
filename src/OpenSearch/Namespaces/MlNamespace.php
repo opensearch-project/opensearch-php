@@ -693,6 +693,7 @@ class MlNamespace extends AbstractNamespace
      */
     public function getAllMemories(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAllMemories::class);
         $endpoint->setParams($params);
 
@@ -737,6 +738,7 @@ class MlNamespace extends AbstractNamespace
      */
     public function getAllTools(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAllTools::class);
         $endpoint->setParams($params);
 

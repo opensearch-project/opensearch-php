@@ -169,6 +169,7 @@ class TransformsNamespace extends AbstractNamespace
      */
     public function search(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Search::class);
         $endpoint->setParams($params);
 

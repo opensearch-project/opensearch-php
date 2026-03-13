@@ -659,6 +659,7 @@ class Client
      */
     public function deleteAllPits(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteAllPits::class);
         $endpoint->setParams($params);
 
@@ -824,7 +825,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -863,7 +863,6 @@ class Client
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -997,6 +996,7 @@ class Client
      */
     public function getAllPits(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAllPits::class);
         $endpoint->setParams($params);
 
@@ -1041,6 +1041,7 @@ class Client
      */
     public function getScriptContext(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetScriptContext::class);
         $endpoint->setParams($params);
 
@@ -1060,6 +1061,7 @@ class Client
      */
     public function getScriptLanguages(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetScriptLanguages::class);
         $endpoint->setParams($params);
 
@@ -1154,6 +1156,7 @@ class Client
      */
     public function info(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Info::class);
         $endpoint->setParams($params);
 
@@ -1309,8 +1312,7 @@ class Client
      * @return bool
      */
     public function ping(array $params = []): bool
-    {
-        // Legacy option to manually make this verbose so we can check status code.
+    {        // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
 

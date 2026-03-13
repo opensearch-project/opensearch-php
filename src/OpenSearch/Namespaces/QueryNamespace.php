@@ -110,6 +110,7 @@ class QueryNamespace extends AbstractNamespace
      */
     public function datasourcesList(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DatasourcesList::class);
         $endpoint->setParams($params);
 

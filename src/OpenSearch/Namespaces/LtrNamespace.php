@@ -126,6 +126,7 @@ class LtrNamespace extends AbstractNamespace
      */
     public function cacheStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(CacheStats::class);
         $endpoint->setParams($params);
 
@@ -168,6 +169,7 @@ class LtrNamespace extends AbstractNamespace
      */
     public function createDefaultStore(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(CreateDefaultStore::class);
         $endpoint->setParams($params);
 
@@ -330,6 +332,7 @@ class LtrNamespace extends AbstractNamespace
      */
     public function deleteDefaultStore(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteDefaultStore::class);
         $endpoint->setParams($params);
 
@@ -551,6 +554,7 @@ class LtrNamespace extends AbstractNamespace
      */
     public function listStores(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListStores::class);
         $endpoint->setParams($params);
 

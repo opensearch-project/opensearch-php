@@ -121,6 +121,7 @@ class SmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
 

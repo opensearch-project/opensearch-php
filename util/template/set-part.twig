@@ -1,0 +1,10 @@
+
+    public function set{{ Part }}(${{ part }}): static
+    {
+        if (is_null(${{ part }})) {
+            return $this;
+        }
+        $this->{{ part }} = ${{ part }};
+
+        return $this;
+    }

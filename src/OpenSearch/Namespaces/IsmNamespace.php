@@ -125,7 +125,6 @@ class IsmNamespace extends AbstractNamespace
     public function existsPolicy(array $params = []): bool
     {
         $policy_id = $this->extractArgument($params, 'policy_id');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -176,6 +175,7 @@ class IsmNamespace extends AbstractNamespace
      */
     public function getPolicies(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetPolicies::class);
         $endpoint->setParams($params);
 

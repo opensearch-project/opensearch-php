@@ -104,6 +104,7 @@ class TasksNamespace extends AbstractNamespace
      */
     public function list(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListTasks::class);
         $endpoint->setParams($params);
 

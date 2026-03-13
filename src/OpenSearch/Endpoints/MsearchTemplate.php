@@ -83,6 +83,6 @@ class MsearchTemplate extends AbstractEndpoint
         }
 
         return $this;
-    }
 
+    }
 }

@@ -135,6 +135,7 @@ class GeospatialNamespace extends AbstractNamespace
      */
     public function getUploadStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetUploadStats::class);
         $endpoint->setParams($params);
 

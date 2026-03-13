@@ -1,0 +1,23 @@
+
+    public function setBody(string|iterable|null $body): static
+    {
+        if (is_null($body)) {
+            return $this;
+        }
+
+        if (is_string($body)) {
+            if (!str_ends_with($body, "\n")) {
+                $body .= "\n";
+            }
+            $this->body = $body;
+            return $this;
+        }
+
+        // Must be an iterable.
+        foreach ($body as $item) {
+            $this->body .= $this->serializer->serialize($item) . "\n";
+        }
+
+        return $this;
+
+    }

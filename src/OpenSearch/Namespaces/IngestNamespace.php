@@ -99,6 +99,7 @@ class IngestNamespace extends AbstractNamespace
      */
     public function processorGrok(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ProcessorGrok::class);
         $endpoint->setParams($params);
 

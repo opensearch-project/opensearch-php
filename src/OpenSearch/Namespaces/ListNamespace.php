@@ -39,6 +39,7 @@ class ListNamespace extends AbstractNamespace
      */
     public function help(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(Help::class);
         $endpoint->setParams($params);
 

@@ -466,7 +466,6 @@ class IndicesNamespace extends AbstractNamespace
     public function exists(array $params = []): bool
     {
         $index = $this->extractArgument($params, 'index');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -499,7 +498,6 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
         $index = $this->extractArgument($params, 'index');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -531,7 +529,6 @@ class IndicesNamespace extends AbstractNamespace
     public function existsIndexTemplate(array $params = []): bool
     {
         $name = $this->extractArgument($params, 'name');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;
@@ -562,7 +559,6 @@ class IndicesNamespace extends AbstractNamespace
     public function existsTemplate(array $params = []): bool
     {
         $name = $this->extractArgument($params, 'name');
-
         // Legacy option to manually make this verbose so we can check status code.
         // @todo remove in 3.0.0
         $params['client']['verbose'] = true;

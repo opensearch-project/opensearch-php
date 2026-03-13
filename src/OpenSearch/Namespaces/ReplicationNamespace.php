@@ -47,6 +47,7 @@ class ReplicationNamespace extends AbstractNamespace
      */
     public function autofollowStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(AutofollowStats::class);
         $endpoint->setParams($params);
 
@@ -112,6 +113,7 @@ class ReplicationNamespace extends AbstractNamespace
      */
     public function followerStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(FollowerStats::class);
         $endpoint->setParams($params);
 
@@ -131,6 +133,7 @@ class ReplicationNamespace extends AbstractNamespace
      */
     public function leaderStats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(LeaderStats::class);
         $endpoint->setParams($params);
 

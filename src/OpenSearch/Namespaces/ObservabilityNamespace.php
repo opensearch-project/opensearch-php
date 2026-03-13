@@ -91,6 +91,7 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function deleteObjects(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(DeleteObjects::class);
         $endpoint->setParams($params);
 
@@ -110,6 +111,7 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function getLocalstats(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetLocalstats::class);
         $endpoint->setParams($params);
 
@@ -152,6 +154,7 @@ class ObservabilityNamespace extends AbstractNamespace
      */
     public function listObjects(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(ListObjects::class);
         $endpoint->setParams($params);
 

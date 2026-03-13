@@ -51,6 +51,7 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
      */
     public function getAlerts(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetAlerts::class);
         $endpoint->setParams($params);
 
@@ -83,6 +84,7 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
      */
     public function getFindings(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(GetFindings::class);
         $endpoint->setParams($params);
 
@@ -106,6 +108,7 @@ class SecurityAnalyticsNamespace extends AbstractNamespace
      */
     public function searchFindingCorrelations(array $params = [])
     {
+
         $endpoint = $this->endpointFactory->getEndpoint(SearchFindingCorrelations::class);
         $endpoint->setParams($params);
 
