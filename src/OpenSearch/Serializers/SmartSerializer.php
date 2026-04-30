@@ -80,7 +80,8 @@ class SmartSerializer implements SerializerInterface
                 $escaped = str_replace('\\', '\\\\', $data);
                 try {
                     return json_decode($escaped, true, 512, JSON_THROW_ON_ERROR);
-                } catch (\JsonException) {
+                } catch (\JsonException $e) {
+                    throw new JsonException($e->getCode(), $escaped, $e);
                 }
             }
 
