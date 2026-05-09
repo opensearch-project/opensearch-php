@@ -22,11 +22,14 @@ class SigningClientFactory
      */
     public const ALLOWED_SERVICES = ['es', 'aoss'];
 
+    protected ?\Closure $provider;
+
     public function __construct(
         protected ?SignatureInterface $signer = null,
-        protected ?CredentialProvider $provider = null,
+        ?callable $provider = null,
         protected ?LoggerInterface $logger = null,
     ) {
+        $this->provider = $provider !== null ? \Closure::fromCallable($provider) : null;
     }
 
     /**
@@ -65,7 +68,7 @@ class SigningClientFactory
      * @param array<string,mixed> $options
      *   The options array.
      */
-    protected function getCredentialProvider(array $options): CredentialProvider|\Closure|null|callable
+    protected function getCredentialProvider(array $options): callable
     {
         // Check for a provided credential provider.
         if ($this->provider) {

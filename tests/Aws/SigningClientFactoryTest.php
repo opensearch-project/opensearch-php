@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Aws;
 
+use Aws\Credentials\CredentialProvider;
+use Aws\Credentials\Credentials;
 use OpenSearch\Aws\SigningClientFactory;
 use OpenSearch\HttpClient\SymfonyHttpClientFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -31,6 +33,22 @@ class SigningClientFactoryTest extends TestCase
         ]);
 
         // Check we get a client back.
+        $this->assertInstanceOf(ClientInterface::class, $client);
+    }
+
+    public function testCreateWithCallableProvider(): void
+    {
+        $symfonyClient = (new SymfonyHttpClientFactory())->create([
+            'base_uri' => 'http://localhost:9200',
+        ]);
+
+        $provider = CredentialProvider::fromCredentials(new Credentials('foo', 'bar'));
+
+        $client = (new SigningClientFactory(provider: $provider))->create($symfonyClient, [
+            'host' => 'example.com',
+            'region' => 'us-east-1',
+        ]);
+
         $this->assertInstanceOf(ClientInterface::class, $client);
     }
 
