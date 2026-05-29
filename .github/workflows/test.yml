@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Use PHP 8.3
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
         with:
           php-version: 8.3
           extensions: yaml, zip, curl
@@ -35,10 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Use PHP 8.3
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
         with:
           php-version: 8.3
           extensions: yaml, zip, curl
@@ -68,10 +68,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Use PHP 8.3
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
         with:
           php-version: 8.3
           extensions: yaml, zip, curl, pcov
@@ -91,7 +91,7 @@ jobs:
         env:
           OPENSEARCH_URL: 'http://localhost:9200'
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457 # v3
         with:
           file: ./clover.xml
 
@@ -112,10 +112,10 @@ jobs:
           - windows-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
     - name: Use PHP ${{ matrix.php-version }}
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
       with:
         php-version: ${{ matrix.php-version }}
         extensions: yaml, zip, curl
@@ -151,10 +151,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
     - name: Use PHP 8.3
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
       with:
         php-version: 8.3
         extensions: yaml, zip, curl
@@ -196,10 +196,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
     - name: Use PHP 8.3
-      uses: shivammathur/setup-php@v2
+      uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
       with:
         php-version: 8.3
         extensions: yaml, zip, curl
