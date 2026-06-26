@@ -52,6 +52,40 @@ class SigningClientFactoryTest extends TestCase
         $this->assertInstanceOf(ClientInterface::class, $client);
     }
 
+    public function testCreateWithDeprecatedCredentialProviderInstance(): void
+    {
+        $symfonyClient = (new SymfonyHttpClientFactory())->create([
+            'base_uri' => 'http://localhost:9200',
+        ]);
+
+        $deprecation = null;
+        set_error_handler(static function (int $errno, string $errstr) use (&$deprecation): bool {
+            $deprecation = $errstr;
+            return true;
+        }, \E_USER_DEPRECATED);
+
+        try {
+            $factory = new SigningClientFactory(provider: new CredentialProvider());
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertNotNull($deprecation, 'Expected a deprecation notice when passing a CredentialProvider instance.');
+        $this->assertStringContainsString('deprecated', $deprecation);
+
+        // The deprecated provider is ignored; the factory still produces a working client.
+        $client = $factory->create($symfonyClient, [
+            'host' => 'example.com',
+            'region' => 'us-east-1',
+            'credentials' => [
+                'access_key' => 'foo',
+                'secret_key' => 'bar',
+            ],
+        ]);
+
+        $this->assertInstanceOf(ClientInterface::class, $client);
+    }
+
     public function testValidateService(): void
     {
         $symfonyClient = (new SymfonyHttpClientFactory())->create([
