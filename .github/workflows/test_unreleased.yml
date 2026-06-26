@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout PHP Client
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v7.0.0
 
       - name: Use PHP 8.3
-        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # ratchet:shivammathur/setup-php@2.37.2
         with:
           php-version: 8.3
           extensions: yaml, zip, curl
@@ -36,7 +36,7 @@ jobs:
           composer install --prefer-dist
 
       - name: Checkout OpenSearch
-        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v7.0.0
         with:
           repository: opensearch-project/OpenSearch
           ref: ${{ matrix.entry.opensearch_ref }}
@@ -49,20 +49,20 @@ jobs:
 
       - name: Restore cached build
         id: cache-restore
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/restore@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # ratchet:actions/cache/restore@v6.0.0
         with:
           path: opensearch/distribution/archives/linux-tar/build/distributions
           key: ${{ steps.get-key.outputs.key }}
 
       - name: Set up Java
-        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520 # ratchet:actions/setup-java@v5.4.0
         with:
           java-version: ${{ matrix.entry.java }}
           distribution: temurin
 
       - name: Set up Gradle JDK runtime
         if: matrix.entry.gradle-runtime && matrix.entry.gradle-runtime != matrix.entry.java
-        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        uses: actions/setup-java@1bcf9fb12cf4aa7d266a90ae39939e61372fe520 # ratchet:actions/setup-java@v5.4.0
         with:
           java-version: ${{ matrix.entry.gradle-runtime }}
           distribution: temurin
@@ -79,7 +79,7 @@ jobs:
 
       - name: Save cached build
         if: steps.cache-restore.outputs.cache-hit != 'true'
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache/save@2c8a9bd7457de244a408f35966fab2fb45fda9c8 # ratchet:actions/cache/save@v6.0.0
         with:
           path: opensearch/distribution/archives/linux-tar/build/distributions
           key: ${{ steps.get-key.outputs.key }}

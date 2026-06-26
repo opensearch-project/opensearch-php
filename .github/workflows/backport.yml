@@ -7,6 +7,6 @@ on:
 jobs:
   backport:
     if: github.repository == 'opensearch-project/opensearch-php'
-    uses: opensearch-project/opensearch-build/.github/workflows/backport-pr.yml@main
+    uses: opensearch-project/opensearch-build/.github/workflows/backport-pr.yml@3e938de92d0c82f59bf28c478e2f7970462650d3 # ratchet:opensearch-project/opensearch-build/.github/workflows/backport-pr.yml@main
     secrets:
       OPENSEARCH_CI_BOT_TOKEN: ${{ secrets.OPENSEARCH_CI_BOT_TOKEN }}

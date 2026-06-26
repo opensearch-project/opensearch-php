@@ -13,12 +13,12 @@ jobs:
       issues: write
       contents: write
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v7.0.0
 
       - id: get_data
         run: echo "approvers=$(cat .github/CODEOWNERS | grep @ | tr -d '* ' | sed 's/@/,/g' | sed 's/,//1')" >> $GITHUB_OUTPUT
 
-      - uses: trstringer/manual-approval@74d99dff7380e3e4b122d4ededcbca2b6ce59367 # v1
+      - uses: trstringer/manual-approval@74d99dff7380e3e4b122d4ededcbca2b6ce59367 # ratchet:trstringer/manual-approval@v1.12.0
         with:
           secret: ${{ github.TOKEN }}
           approvers: ${{ steps.get_data.outputs.approvers }}
@@ -31,6 +31,6 @@ jobs:
         run: curl -XPOST -f -H 'content-type:application/json' 'https://packagist.org/api/update-package?username=opensearch&apiToken=${{secrets.PACKAGIST_PUBLISHING_API_TOKEN}}' -d'{"repository":{"url":"https://github.com/opensearch-project/opensearch-php"}}'
 
       - name: Release on GitHub
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # ratchet:softprops/action-gh-release@v3.0.1
         with:
           generate_release_notes: true
