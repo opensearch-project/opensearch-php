@@ -5,6 +5,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Added
 ### Changed
+- Upgrade `phpunit/phpunit` to `^11.5` ([#414](https://github.com/opensearch-project/opensearch-php/pull/414))
 ### Deprecated
 ### Removed
 ### Fixed
