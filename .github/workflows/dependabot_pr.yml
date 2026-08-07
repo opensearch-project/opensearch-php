@@ -16,18 +16,10 @@ jobs:
       contents: write
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: GitHub App token
-        id: github_app_token
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # ratchet:tibdex/github-app-token@v2.1.0
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
-          installation_id: 22958780
-
       - name: Check out code
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v7.0.0
         with:
-          token: ${{ steps.github_app_token.outputs.token }}
+          token: ${{ secrets.OPENSEARCH_CI_BOT_TOKEN }}
 
       - name: Update the changelog
         uses: dangoslen/dependabot-changelog-helper@291c8cb629d7cd7b57ea065782c435ec2bedb138 # ratchet:dangoslen/dependabot-changelog-helper@v4.3.0

@@ -29,17 +29,14 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
-      - name: GitHub App token
-        id: app-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # ratchet:actions/create-github-app-token@v3.2.0
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Create pull request
         id: cpr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # ratchet:peter-evans/create-pull-request@v8.1.1
         with:
-          token: ${{ steps.app-token.outputs.token }}
+          token: ${{ secrets.OPENSEARCH_CI_BOT_TOKEN }}
+          push-to-fork: opensearch-ci-bot/opensearch-php
+          committer: opensearch-ci-bot <opensearch-infra@amazon.com>
+          author: opensearch-ci-bot <opensearch-infra@amazon.com>
           commit-message: Updated opensearch-php to reflect the latest OpenSearch API spec (${{ steps.date.outputs.date }})
           title: Updated opensearch-php to reflect the latest OpenSearch API spec
           body: |
@@ -47,6 +44,7 @@ jobs:
             Date: ${{ steps.date.outputs.date }}
           branch: automated-api-update
           base: main
+          delete-branch: true
           signoff: true
           labels: |
               autocut
