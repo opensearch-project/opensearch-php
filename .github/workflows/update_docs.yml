@@ -16,11 +16,11 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # ratchet:actions/checkout@v7.0.0
         with:
           fetch-depth: 0
       - name: Use PHP 8.3
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # ratchet:shivammathur/setup-php@2.37.2
         with:
           php-version: 8.3
         env:
@@ -33,7 +33,7 @@ jobs:
         run: composer run apigen
 
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # ratchet:actions/upload-pages-artifact@v5.0.0
         with:
           path: docs
 
@@ -51,4 +51,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # ratchet:actions/deploy-pages@v5.0.0

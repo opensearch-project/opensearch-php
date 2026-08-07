@@ -55,6 +55,28 @@ class SmartSerializerTest extends TestCase
         }
     }
 
+    public function testDeserializeWithUnpairedUtf16Surrogates(): void
+    {
+        $data = '{ "data": "ud83d\\ude4f" }';
+
+        $result = $this->serializer->deserialize($data, []);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('data', $result);
+        $this->assertSame('ud83d\\ude4f', $result['data']);
+    }
+
+    public function testDeserializeWithHighlightedSurrogatePair(): void
+    {
+        $data = '{ "data": "<em>\\ud83c</em>\\udd11" }';
+
+        $result = $this->serializer->deserialize($data, []);
+
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('data', $result);
+        $this->assertSame('<em>\\ud83c</em>\\udd11', $result['data']);
+    }
+
     public function testDeserialize(): void
     {
         $data = '{ "foo" : "bar" }';
