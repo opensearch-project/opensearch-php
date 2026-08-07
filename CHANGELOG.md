@@ -7,10 +7,12 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Upgrade `phpunit/phpunit` to `^11.5` ([#414](https://github.com/opensearch-project/opensearch-php/pull/414))
 ### Deprecated
+- Passing a `CredentialProvider` instance to `SigningClientFactory` is deprecated; pass a `callable` instead ([#404](https://github.com/opensearch-project/opensearch-php/issues/404))
 ### Removed
 - Drop CI integration testing against EOL OpenSearch 1.x and legacy Elasticsearch OSS 7.10.0
 ### Fixed
 - Fix `SmartSerializer` throwing `JsonException` on JSON with unpaired UTF-16 surrogate escape sequences produced by search highlighting ([#403](https://github.com/opensearch-project/opensearch-php/pull/403))
+- Accept any `callable` as the `provider` argument of `SigningClientFactory` so AWS SDK credential providers like `CredentialProvider::sso()` and `CredentialProvider::assumeRole()` can be used ([#404](https://github.com/opensearch-project/opensearch-php/issues/404))
 ### Security
 ### Updated APIs
 

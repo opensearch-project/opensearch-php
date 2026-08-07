@@ -22,11 +22,31 @@ class SigningClientFactory
      */
     public const ALLOWED_SERVICES = ['es', 'aoss'];
 
+    protected ?\Closure $provider;
+
+    /**
+     * @param SignatureInterface|null $signer
+     *   The request signer.
+     * @param callable|CredentialProvider|null $provider
+     *   A credential provider callable. Passing a CredentialProvider instance is
+     *   deprecated; use a callable (e.g. the result of CredentialProvider::sso()).
+     * @param LoggerInterface|null $logger
+     *   The logger.
+     */
     public function __construct(
         protected ?SignatureInterface $signer = null,
-        protected ?CredentialProvider $provider = null,
+        callable|CredentialProvider|null $provider = null,
         protected ?LoggerInterface $logger = null,
     ) {
+        if ($provider instanceof CredentialProvider) {
+            @trigger_error(
+                'Passing a CredentialProvider instance to ' . self::class . ' is deprecated and will be removed in a future release. Pass a callable instead, e.g. the result of CredentialProvider::sso() or CredentialProvider::defaultProvider().',
+                \E_USER_DEPRECATED,
+            );
+            $provider = null;
+        }
+
+        $this->provider = $provider !== null ? \Closure::fromCallable($provider) : null;
     }
 
     /**
@@ -65,7 +85,7 @@ class SigningClientFactory
      * @param array<string,mixed> $options
      *   The options array.
      */
-    protected function getCredentialProvider(array $options): CredentialProvider|\Closure|null|callable
+    protected function getCredentialProvider(array $options): callable
     {
         // Check for a provided credential provider.
         if ($this->provider) {
