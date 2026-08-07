@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 ### Deprecated
 ### Removed
+- Drop CI integration testing against EOL OpenSearch 1.x and legacy Elasticsearch OSS 7.10.0
 ### Fixed
 - Fix `SmartSerializer` throwing `JsonException` on JSON with unpaired UTF-16 surrogate escape sequences produced by search highlighting ([#403](https://github.com/opensearch-project/opensearch-php/pull/403))
 ### Security
