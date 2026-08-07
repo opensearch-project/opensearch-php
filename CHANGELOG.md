@@ -6,6 +6,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Added
 ### Changed
 - Replace deprecated GitHub App token with opensearch-ci-bot in CI workflows ([#416](https://github.com/opensearch-project/opensearch-php/pull/416))
+- Rename `update_api.yml`'s PR branch to avoid colliding with a pre-existing branch of the same name on this repo
 - Upgrade `phpunit/phpunit` to `^11.5` ([#414](https://github.com/opensearch-project/opensearch-php/pull/414))
 ### Deprecated
 ### Removed
