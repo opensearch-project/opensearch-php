@@ -8,10 +8,7 @@
     "elasticsearch"
   ],
   "type": "library",
-  "license": [
-    "Apache-2.0",
-    "LGPL-2.1-only"
-  ],
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Elastic"
