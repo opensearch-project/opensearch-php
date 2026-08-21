@@ -30,8 +30,8 @@ class PplNamespace extends AbstractNamespace
     /**
      * Returns the execution plan for a PPL query.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - format: Specifies the response format (JSON, YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - format: Specifies the response format (JSON, YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to escape special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -55,8 +55,8 @@ class PplNamespace extends AbstractNamespace
     /**
      * Retrieves performance metrics for the PPL plugin.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - format: Specifies the response format (JSON, YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - format: Specifies the response format (JSON, YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to escape special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -77,8 +77,8 @@ class PplNamespace extends AbstractNamespace
     /**
      * Retrieves filtered performance metrics for the PPL plugin.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - format: Specifies the response format (JSON, YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - format: Specifies the response format (JSON, YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to escape special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -102,8 +102,8 @@ class PplNamespace extends AbstractNamespace
     /**
      * Executes a PPL query against OpenSearch indexes.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - format: Specifies the response format (JSON OR YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - format: Specifies the response format (JSON OR YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to sanitize special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)

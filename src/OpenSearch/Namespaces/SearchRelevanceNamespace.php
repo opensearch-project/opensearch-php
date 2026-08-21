@@ -20,6 +20,7 @@ use OpenSearch\Endpoints\SearchRelevance\DeleteJudgments;
 use OpenSearch\Endpoints\SearchRelevance\DeleteQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\DeleteScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\DeleteSearchConfigurations;
+use OpenSearch\Endpoints\SearchRelevance\ExperimentsSearch;
 use OpenSearch\Endpoints\SearchRelevance\GetExperiments;
 use OpenSearch\Endpoints\SearchRelevance\GetJudgments;
 use OpenSearch\Endpoints\SearchRelevance\GetNodeStats;
@@ -27,12 +28,15 @@ use OpenSearch\Endpoints\SearchRelevance\GetQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\GetScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\GetSearchConfigurations;
 use OpenSearch\Endpoints\SearchRelevance\GetStats;
+use OpenSearch\Endpoints\SearchRelevance\JudgmentsSearch;
 use OpenSearch\Endpoints\SearchRelevance\PostQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\PostScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\PutExperiments;
 use OpenSearch\Endpoints\SearchRelevance\PutJudgments;
 use OpenSearch\Endpoints\SearchRelevance\PutQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\PutSearchConfigurations;
+use OpenSearch\Endpoints\SearchRelevance\QuerySetsSearch;
+use OpenSearch\Endpoints\SearchRelevance\SearchConfigurationsSearch;
 
 /**
  * Class SearchRelevanceNamespace
@@ -152,6 +156,29 @@ class SearchRelevanceNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(DeleteSearchConfigurations::class);
         $endpoint->setParams($params);
         $endpoint->setSearchConfigurationId($search_configuration_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Searches for experiments.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
+     * @return array
+     */
+    public function experimentsSearch(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(ExperimentsSearch::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }
@@ -331,6 +358,29 @@ class SearchRelevanceNamespace extends AbstractNamespace
     }
 
     /**
+     * Searches for judgments.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
+     * @return array
+     */
+    public function judgmentsSearch(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(JudgmentsSearch::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Creates a new query set by sampling queries from the user behavior data.
      *
      * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
@@ -462,6 +512,52 @@ class SearchRelevanceNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(PutSearchConfigurations::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Searches for queries in the query sets.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
+     * @return array
+     */
+    public function querySetsSearch(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(QuerySetsSearch::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Searches for search configurations.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
+     * @return array
+     */
+    public function searchConfigurationsSearch(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(SearchConfigurationsSearch::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 

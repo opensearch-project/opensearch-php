@@ -38,7 +38,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Adds a policy to an index.
      *
-     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - index:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -64,7 +64,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Updates the managed index policy to a new policy.
      *
-     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - index:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -139,7 +139,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Retrieves the currently applied policy on the specified indexes.
      *
-     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - index:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -262,7 +262,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Refreshes search analyzers in real time.
      *
-     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -285,7 +285,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Removes a policy from an index.
      *
-     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -308,7 +308,7 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Retries the failed action for an index.
      *
-     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - index:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)

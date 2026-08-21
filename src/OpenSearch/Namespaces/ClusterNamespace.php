@@ -78,7 +78,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array{name?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - name: The name of the component template to delete. Supports wildcard (*) expressions.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout:
      * - timeout:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -168,7 +168,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array{name?: string, cluster_manager_timeout?: string, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - name: The name of the component template. Wildcard (*) expressions are supported.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - local: When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node. (Default: false)
      * - master_timeout:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -197,7 +197,7 @@ class ClusterNamespace extends AbstractNamespace
      *
      * @param array{name?: mixed, cluster_manager_timeout?: string, flat_settings?: bool, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - name: The name of the component template to retrieve. Wildcard (`*`) expressions are supported.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - flat_settings: Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default: false)
      * - local: When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node. (Default: false)
      * - master_timeout:
@@ -246,7 +246,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns cluster settings.
      *
      * @param array{cluster_manager_timeout?: string, flat_settings?: bool, include_defaults?: bool, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - flat_settings: Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default: false)
      * - include_defaults: When `true`, returns default cluster settings from the local node. (Default: false)
      * - master_timeout:
@@ -296,12 +296,12 @@ class ClusterNamespace extends AbstractNamespace
      * @param array{index?: mixed, awareness_attribute?: string, cluster_manager_timeout?: string, expand_wildcards?: mixed, level?: mixed, local?: bool, master_timeout?: string, timeout?: string, wait_for_active_shards?: mixed, wait_for_events?: mixed, wait_for_no_initializing_shards?: bool, wait_for_no_relocating_shards?: bool, wait_for_nodes?: mixed, wait_for_status?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index:
      * - awareness_attribute: The name of the awareness attribute for which to return the cluster health status (for example, `zone`). Applicable only if `level` is set to `awareness_attributes`.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - expand_wildcards:
      * - level: (Options: awareness_attributes, cluster, indices, shards)
      * - local: Whether to return information from the local node only instead of from the cluster manager node. (Default: false)
      * - master_timeout:
-     * - timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - wait_for_active_shards:
      * - wait_for_events:
      * - wait_for_no_initializing_shards: Whether to wait until there are no initializing shards in the cluster. (Default: false)
@@ -330,7 +330,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns a list of pending cluster-level tasks, such as index creation, mapping updates,or new allocations.
      *
      * @param array{cluster_manager_timeout?: string, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - local: When `true`, the request retrieves information from the local node only. When `false`, information is retrieved from the cluster manager node. (Default: false)
      * - master_timeout:
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -376,8 +376,8 @@ class ClusterNamespace extends AbstractNamespace
      * Creates or updates a component template.
      *
      * @param array{name?: string, cluster_manager_timeout?: string, create?: bool, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - name: The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`, `logs-settings`, `metrics-mappings`, `metrics-settings`, `synthetics-mapping`, and `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the [Cluster Update Settings API](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-settings/).
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - name: The name of the component template to create. OpenSearch includes the following built-in component templates: `logs-mappings`, `logs-settings`, `metrics-mappings`, `metrics-settings`, `synthetics-mapping`, and `synthetics-settings`. OpenSearch uses these templates to configure backing indexes for its data streams. If you want to overwrite one of these templates, set the replacement template `version` to a higher value than the current version. If you want to disable all built-in component and index templates, set `stack.templates.enabled` to `false` using the [Cluster Update Settings API](https://docs.opensearch.org/latest/api-reference/cluster-api/cluster-settings/).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - create: When `true`, this request cannot replace or update existing component templates. (Default: false)
      * - master_timeout:
      * - timeout:
@@ -432,7 +432,7 @@ class ClusterNamespace extends AbstractNamespace
      * Updates the cluster settings.
      *
      * @param array{cluster_manager_timeout?: string, flat_settings?: bool, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - flat_settings: Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default: false)
      * - master_timeout:
      * - timeout:
@@ -505,7 +505,7 @@ class ClusterNamespace extends AbstractNamespace
      * Allows to manually change the allocation of individual shards in the cluster.
      *
      * @param array{cluster_manager_timeout?: string, dry_run?: bool, explain?: bool, master_timeout?: string, metric?: mixed, retry_failed?: bool, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - dry_run: When `true`, the request simulates the operation and returns the resulting state.
      * - explain: When `true`, the response contains an explanation of why reroute certain commands can or cannot be executed.
      * - master_timeout:
@@ -535,10 +535,10 @@ class ClusterNamespace extends AbstractNamespace
      * Returns comprehensive information about the state of the cluster.
      *
      * @param array{metric?: mixed, index?: mixed, allow_no_indices?: bool, cluster_manager_timeout?: string, expand_wildcards?: mixed, flat_settings?: bool, ignore_unavailable?: bool, local?: bool, master_timeout?: string, wait_for_metadata_version?: int, wait_for_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - metric: Limits the information returned to only the [specified metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#metric-groups).
+     * - metric: Limits the information returned to only the [specified metric groups](https://docs.opensearch.org/latest/api-reference/cluster-api/cluster-stats/#metric-groups).
      * - index:
      * - allow_no_indices: Whether to ignore a wildcard index expression that resolves into no concrete indexes. This includes the `_all` string or when no indexes have been specified.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - expand_wildcards:
      * - flat_settings: Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default: false)
      * - ignore_unavailable: Whether the specified concrete indexes should be ignored when unavailable (missing or closed).
@@ -570,7 +570,7 @@ class ClusterNamespace extends AbstractNamespace
      * Returns a high-level overview of cluster statistics.
      *
      * @param array{index_metric?: mixed, metric?: mixed, node_id?: mixed, flat_settings?: bool, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - index_metric: A comma-separated list of [index metric groups](https://opensearch.org/docs/latest/api-reference/cluster-api/cluster-stats/#index-metric-groups), for example, `docs,store`.
+     * - index_metric: A comma-separated list of [index metric groups](https://docs.opensearch.org/latest/api-reference/cluster-api/cluster-stats/#index-metric-groups), for example, `docs,store`.
      * - metric: Limit the information returned to the specified metrics.
      * - node_id:
      * - flat_settings: Whether to return settings in the flat form, which can improve readability, especially for heavily nested settings. For example, the flat form of `"cluster": { "max_shards_per_node": 500 }` is `"cluster.max_shards_per_node": "500"`. (Default: false)

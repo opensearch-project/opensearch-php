@@ -585,10 +585,13 @@ class Client
     /**
      * Creates point in time context.
      *
-     * @param array{index?: mixed, allow_partial_pit_creation?: bool, expand_wildcards?: mixed, keep_alive?: string, preference?: string, routing?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, allow_no_indices?: bool, allow_partial_pit_creation?: bool, expand_wildcards?: mixed, ignore_throttled?: bool, ignore_unavailable?: bool, keep_alive?: string, preference?: string, routing?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
+     * - allow_no_indices: If `false`, the request returns an error if any wildcard expression, index alias, or `_all` value targets only missing or closed indexes. This behavior applies even if the request targets other open indexes.
      * - allow_partial_pit_creation: Allow if point in time can be created with partial failures.
      * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
+     * - ignore_throttled: If `true`, concrete, expanded or aliased indexes will be ignored when frozen.
+     * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
      * - keep_alive: Specify the keep alive for point in time.
      * - preference: Specify the node or shard the operation should be performed on. (Default: random)
      * - routing: A comma-separated list of specific routing values.

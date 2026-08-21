@@ -43,7 +43,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array{repository?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: Snapshot repository to clean up.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Period to wait for a connection to the cluster-manager node.
      * - timeout: The amount of time to wait for a response.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -71,7 +71,7 @@ class SnapshotNamespace extends AbstractNamespace
      * - repository: The name of repository which will contain the snapshots clone.
      * - snapshot: The name of the original snapshot.
      * - target_snapshot: The name of the cloned snapshot.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -104,7 +104,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array{repository?: string, snapshot?: string, cluster_manager_timeout?: string, master_timeout?: string, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - repository: The name of the repository where the snapshot will be stored.
      * - snapshot: The name of the snapshot. Must be unique in the repository.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * - wait_for_completion: When `true`, the request returns a response when the snapshot is complete. When `false`, the request returns a response when the snapshot initializes. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -135,7 +135,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array{repository?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, verify?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - repository: The name for the newly registered repository.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - timeout: The amount of time to wait for a response.
      * - verify: When `true`, verifies the creation of the snapshot repository.
@@ -166,7 +166,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array{repository?: string, snapshot?: string, cluster_manager_timeout?: string, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: The name of the snapshot repository to delete.
      * - snapshot: A comma-separated list of snapshot names to delete from the repository.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -193,7 +193,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array{repository?: mixed, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: The name of the snapshot repository to unregister. Wildcard (`*`) patterns are supported.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - timeout: The amount of time to wait for a response.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -220,7 +220,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array{repository?: string, snapshot?: mixed, cluster_manager_timeout?: string, ignore_unavailable?: bool, master_timeout?: string, verbose?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: A comma-separated list of snapshot repository names used to limit the request. Wildcard (*) expressions are supported.
      * - snapshot: A comma-separated list of snapshot names to retrieve. Also accepts wildcard expressions. (`*`). - To get information about all snapshots in a registered repository, use a wildcard (`*`) or `_all`. - To get information about any snapshots that are currently running, use `_current`.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - ignore_unavailable: When `false`, the request returns an error for any snapshots that are unavailable. (Default: false)
      * - master_timeout: Period to wait for a connection to the cluster-manager node. If no response is received before the timeout expires, the request fails and returns an error.
      * - verbose: When `true`, returns additional information about each snapshot, such as the version of OpenSearch which took the snapshot, the start and end times of the snapshot, and the number of shards contained in the snapshot. When `false`, returns only snapshot names and contained indexes. This is useful when the snapshots belong to a cloud-based repository, where each blob read is a cost or performance concern.
@@ -249,7 +249,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array{repository?: mixed, cluster_manager_timeout?: string, local?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: A comma-separated list of repository names.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - local: Whether to get information from the local node. (Default: false)
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -276,7 +276,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array{repository?: string, snapshot?: string, cluster_manager_timeout?: string, master_timeout?: string, wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - repository: The name of the repository containing the snapshot
      * - snapshot: The name of the snapshot to restore.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - wait_for_completion: -| Whether to return a response after the restore operation has completed. When `false`, the request returns a response when the restore operation initializes. When `true`, the request returns a response when the restore operation completes. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -308,7 +308,7 @@ class SnapshotNamespace extends AbstractNamespace
      * @param array{repository?: string, snapshot?: mixed, cluster_manager_timeout?: string, ignore_unavailable?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: The name of the repository containing the snapshot.
      * - snapshot: A comma-separated list of snapshot names.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - ignore_unavailable: Whether to ignore any unavailable snapshots, When `false`, a `SnapshotMissingException` is thrown. (Default: false)
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -336,7 +336,7 @@ class SnapshotNamespace extends AbstractNamespace
      *
      * @param array{repository?: string, cluster_manager_timeout?: string, master_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: The name of the repository containing the snapshot.
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://opensearch.org/docs/latest/api-reference/common-parameters/#time-units).
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
      * - timeout: The amount of time to wait for a response.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)

@@ -49,12 +49,12 @@ class ListNamespace extends AbstractNamespace
     /**
      * Returns paginated information about indexes including number of primaries and replicas, document counts, disk size.
      *
-     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, expand_wildcards?: mixed, format?: string, h?: mixed, health?: mixed, help?: bool, include_unloaded_segments?: bool, local?: bool, master_timeout?: string, next_token?: array, pri?: bool, s?: mixed, size?: int, sort?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, expand_wildcards?: mixed, format?: mixed, h?: mixed, health?: mixed, help?: bool, include_unloaded_segments?: bool, local?: bool, master_timeout?: string, next_token?: array, pri?: bool, s?: mixed, size?: int, sort?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - bytes: The unit used to display byte values.
      * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
      * - expand_wildcards: The type of index that wildcard patterns can match.
-     * - format: A short version of the Accept header, such as `JSON`, `YAML`.
+     * - format: A short version of the Accept header, such as `JSON`, `YAML`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - health: The health status used to limit returned indexes. By default, the response includes indexes of any health status.
      * - help: Return help information. (Default: false)
@@ -89,11 +89,11 @@ class ListNamespace extends AbstractNamespace
     /**
      * Returns paginated details of shard allocation on nodes.
      *
-     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: string, h?: mixed, help?: bool, local?: bool, master_timeout?: string, next_token?: array, s?: mixed, size?: int, sort?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, next_token?: array, s?: mixed, size?: int, sort?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - bytes: The unit used to display byte values.
      * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
-     * - format: A short version of the Accept header, such as `JSON`, `YAML`.
+     * - format: A short version of the Accept header, such as `JSON`, `YAML`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Return help information. (Default: false)
      * - local: Return local information, do not retrieve the state from cluster-manager node. (Default: false)

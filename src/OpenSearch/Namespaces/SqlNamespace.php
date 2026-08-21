@@ -32,8 +32,8 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Closes an open cursor to free server-side resources.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - format: Specifies the response format (JSON or YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - format: Specifies the response format (JSON or YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to escape special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -57,8 +57,8 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Retrieves performance metrics for the SQL plugin.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - format: Specifies the response format (JSON or YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - format: Specifies the response format (JSON or YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to escape special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -79,8 +79,8 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Retrieves filtered performance metrics for the SQL plugin.
      *
-     * @param array{format?: string, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - format: Specifies the response format (JSON or YAML).
+     * @param array{format?: mixed, sanitize?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - format: Specifies the response format (JSON or YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - sanitize: Whether to escape special characters in the results. (Default: true)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
@@ -104,8 +104,8 @@ class SqlNamespace extends AbstractNamespace
     /**
      * Updates SQL plugin settings in the OpenSearch cluster configuration.
      *
-     * @param array{format?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - format: Specifies the response format (JSON or YAML).
+     * @param array{format?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - format: Specifies the response format (JSON or YAML). (Default: jdbc) (Options: cost, csv, extended, jdbc, json, raw, simple, standard, viz, yaml)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
