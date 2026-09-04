@@ -49,6 +49,7 @@ use OpenSearch\Endpoints\Indices\GetMapping;
 use OpenSearch\Endpoints\Indices\GetSettings;
 use OpenSearch\Endpoints\Indices\GetTemplate;
 use OpenSearch\Endpoints\Indices\GetUpgrade;
+use OpenSearch\Endpoints\Indices\ModifyDataStream;
 use OpenSearch\Endpoints\Indices\Open;
 use OpenSearch\Endpoints\Indices\PutAlias;
 use OpenSearch\Endpoints\Indices\PutIndexTemplate;
@@ -883,6 +884,31 @@ class IndicesNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(GetUpgrade::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Adds or removes backing indexes of a data stream with metadata-only actions.This is an experimental API.
+     *
+     * @param array{cluster_manager_timeout?: string, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - timeout: Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: The data stream modify actions. (Required)
+     * @return array
+     */
+    public function modifyDataStream(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(ModifyDataStream::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
     }

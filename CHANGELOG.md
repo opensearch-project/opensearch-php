@@ -17,6 +17,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Update OpenAPI spec download location to `https://api-spec.opensearch.org/opensearch-openapi.yaml` ([#420](https://github.com/opensearch-project/opensearch-php/pull/420))
 ### Security
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@59c22e5](https://github.com/opensearch-project/opensearch-api-specification/commit/59c22e5a0cd79a851451c674b0600307c022fdb4)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@b8c2a41](https://github.com/opensearch-project/opensearch-api-specification/commit/b8c2a411c01f42c6153c7b6e122b9e98285101b7)
 
 

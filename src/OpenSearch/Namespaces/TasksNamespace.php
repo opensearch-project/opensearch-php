@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace OpenSearch\Namespaces;
 
 use OpenSearch\Endpoints\Tasks\Cancel;
+use OpenSearch\Endpoints\Tasks\Delete;
 use OpenSearch\Endpoints\Tasks\Get;
 use OpenSearch\Endpoints\Tasks\ListTasks;
 
@@ -53,6 +54,29 @@ class TasksNamespace extends AbstractNamespace
         $task_id = $this->extractArgument($params, 'task_id');
 
         $endpoint = $this->endpointFactory->getEndpoint(Cancel::class);
+        $endpoint->setParams($params);
+        $endpoint->setTaskId($task_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Deletes a stored completed task result.
+     *
+     * @param array{task_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - task_id: The ID of the stored completed task result to delete (`node_id:task_number`).
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function delete(array $params = [])
+    {
+        $task_id = $this->extractArgument($params, 'task_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(Delete::class);
         $endpoint->setParams($params);
         $endpoint->setTaskId($task_id);
 
