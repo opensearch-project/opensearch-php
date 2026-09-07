@@ -401,6 +401,8 @@ can be passed as the second argument to log the retries.
 [Guzzle Request options](https://docs.guzzlephp.org/en/stable/request-options.html) can be passed to the
 `create()` method. The `base_uri` option is *required*.
 
+`GuzzleClientFactory` supports Guzzle 7 and 8, and `guzzlehttp/psr7` `^2.7` or `^3.0`.
+
 ### Symfony Client Factory
 
 This factory creates an OpenSearch Client instance using the Symfony HTTP client.

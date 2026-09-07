@@ -7,6 +7,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Replace deprecated GitHub App token with opensearch-ci-bot in CI workflows ([#416](https://github.com/opensearch-project/opensearch-php/pull/416))
 - Upgrade `phpunit/phpunit` to `^11.5` ([#414](https://github.com/opensearch-project/opensearch-php/pull/414))
+- Widen `guzzlehttp/psr7` dev dependency constraint to `^2.8.0 || ^3.0.0` to support Guzzle 8 ([#412](https://github.com/opensearch-project/opensearch-php/issues/412))
 ### Deprecated
 - Passing a `CredentialProvider` instance to `SigningClientFactory` is deprecated; pass a `callable` instead ([#404](https://github.com/opensearch-project/opensearch-php/issues/404))
 ### Removed
