@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OpenSearch\Tests\Aws;
 
+use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\CredentialsInterface;
 use Aws\Signature\SignatureV4;
 use OpenSearch\Aws\SigningClientDecorator;
@@ -49,11 +50,12 @@ class SigningClientDecoratorSymfonyTest extends TestCase
         );
 
         $credentials = $this->createMock(CredentialsInterface::class);
+        $credentialProvider = CredentialProvider::fromCredentials($credentials);
         $signer = new SignatureV4('es', 'us-east-1');
 
         $decorator = new SigningClientDecorator(
             $symfonyPsr18Client,
-            $credentials,
+            $credentialProvider,
             $signer,
             [
                 'Host' => 'search.host'

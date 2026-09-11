@@ -2,6 +2,7 @@
 
 namespace OpenSearch\Tests\Aws;
 
+use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\CredentialsInterface;
 use Aws\Signature\SignatureV4;
 use GuzzleHttp\Handler\MockHandler;
@@ -50,11 +51,12 @@ class SigningClientDecoratorGuzzleTest extends TestCase
             $serializer,
         );
         $credentials = $this->createMock(CredentialsInterface::class);
+        $credentialProvider = CredentialProvider::fromCredentials($credentials);
         $signer = new SignatureV4('es', 'us-east-1');
 
         $decorator = new SigningClientDecorator(
             $guzzleClient,
-            $credentials,
+            $credentialProvider,
             $signer,
             [
                 'Host' => 'search.host'
