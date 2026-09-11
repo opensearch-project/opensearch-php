@@ -6,7 +6,6 @@ namespace OpenSearch\Aws;
 
 use Aws\Credentials\CredentialProvider;
 use Aws\Credentials\Credentials;
-use Aws\Exception\CredentialsException;
 use Aws\Signature\SignatureInterface;
 use Aws\Signature\SignatureV4;
 use Psr\Http\Client\ClientInterface;
@@ -65,18 +64,11 @@ class SigningClientFactory
 
         // Get the credentials.
         $provider = $this->getCredentialProvider($options);
-        $promise = $provider();
-        try {
-            $credentials = $promise->wait();
-        } catch (CredentialsException $e) {
-            $this->logger?->error('Failed to get AWS credentials: @message', ['@message' => $e->getMessage()]);
-            $credentials = new Credentials('', '');
-        }
 
         // Get the signer.
         $signer = $this->getSigner($options);
 
-        return new SigningClientDecorator($innerClient, $credentials, $signer, ['host' => $options['host']]);
+        return new SigningClientDecorator($innerClient, $provider, $signer, ['host' => $options['host']]);
     }
 
     /**
