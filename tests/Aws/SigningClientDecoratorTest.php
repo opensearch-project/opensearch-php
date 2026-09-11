@@ -49,20 +49,9 @@ class SigningClientDecoratorTest extends TestCase
 
         $credentials->expects($this->never())->method('__invoke');
 
-        $deprecation = null;
-        set_error_handler(static function (int $errno, string $errstr) use (&$deprecation): bool {
-            $deprecation = $errstr;
-            return true;
-        }, \E_USER_DEPRECATED);
+        $this->expectUserDeprecationMessage('Passing ' . CredentialsInterface::class . ' as the $credentialProvider param in  __construct() is deprecated in 2.8.0 and will be removed in 3.0.0. Pass a callable instead.');
 
-        try {
-            $decorator = new SigningClientDecorator($client, $credentials, $signer, ['Host' => 'server:443']);
-        } finally {
-            restore_error_handler();
-        }
-
-        $this->assertNotNull($deprecation);
-        $this->assertStringContainsString('deprecated', $deprecation ?? '');
+        $decorator = new SigningClientDecorator($client, $credentials, $signer, ['Host' => 'server:443']);
 
         $request = new Request('GET', 'http://localhost:9200/_search');
         $decorator->sendRequest($request);
