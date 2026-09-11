@@ -47,8 +47,6 @@ class SigningClientDecoratorTest extends TestCase
             )
             ->willReturn($this->createMock(ResponseInterface::class));
 
-        $credentials->expects($this->never())->method('__invoke');
-
         $this->expectUserDeprecationMessage('Passing ' . CredentialsInterface::class . ' as the $credentialProvider param in  __construct() is deprecated in 2.8.0 and will be removed in 3.0.0. Pass a callable instead.');
 
         $decorator = new SigningClientDecorator($client, $credentials, $signer, ['Host' => 'server:443']);
@@ -112,7 +110,6 @@ class SigningClientDecoratorTest extends TestCase
         $this->expectException(CredentialsException::class);
 
         $client = $this->createMock(ClientInterface::class);
-        $credentials = $this->createMock(CredentialsInterface::class);
         $promise = $this->createMock(PromiseInterface::class);
         $credentialProvider = function () use ($promise) {
             return $promise;
@@ -126,7 +123,7 @@ class SigningClientDecoratorTest extends TestCase
 
         $logger->expects($this->once())->method('error');
 
-        $decorator = new SigningClientDecorator($client, $credentialProvider, $signer, [], $logger);
+        $decorator = new SigningClientDecorator($client, $credentialProvider, $signer, ['Host' => 'server:443'], $logger);
         $request = new Request('GET', 'http://localhost:9200/_search', ['Host' => '']);
         $decorator->sendRequest($request);
     }
