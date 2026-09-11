@@ -2,6 +2,11 @@
 
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## [Unreleased]
+### Changed
+- Fixed the AWS credentials handling so that expired credentials can be refreshed ([#429](https://github.com/opensearch-project/opensearch-php/pull/429))
+
+
 ## [2.7.0]
 ### Changed
 - Replace deprecated GitHub App token with opensearch-ci-bot in CI workflows ([#416](https://github.com/opensearch-project/opensearch-php/pull/416))
