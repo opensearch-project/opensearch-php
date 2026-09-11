@@ -8,13 +8,15 @@ use Aws\Signature\SignatureInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 
 /**
  * A decorator client that signs requests using the provided AWS credentials and signer.
  */
-class SigningClientDecorator implements ClientInterface
+class SigningClientDecorator implements ClientInterface, LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     protected CredentialsInterface $credentials;
     protected ?\Closure $credentialProvider = null;
 
@@ -30,7 +32,6 @@ class SigningClientDecorator implements ClientInterface
         callable|CredentialsInterface $credentialProvider,
         protected SignatureInterface $signer,
         protected array $headers = [],
-        protected ?LoggerInterface $logger = null,
     ) {
         if (is_callable($credentialProvider)) {
             $this->credentialProvider = \Closure::fromCallable($credentialProvider);

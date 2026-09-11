@@ -123,7 +123,8 @@ class SigningClientDecoratorTest extends TestCase
 
         $logger->expects($this->once())->method('error');
 
-        $decorator = new SigningClientDecorator($client, $credentialProvider, $signer, ['Host' => 'server:443'], $logger);
+        $decorator = new SigningClientDecorator($client, $credentialProvider, $signer, ['Host' => 'server:443']);
+        $decorator->setLogger($logger);
         $request = new Request('GET', 'http://localhost:9200/_search', ['Host' => '']);
         $decorator->sendRequest($request);
     }
