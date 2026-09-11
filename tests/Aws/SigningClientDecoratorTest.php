@@ -47,7 +47,7 @@ class SigningClientDecoratorTest extends TestCase
             )
             ->willReturn($this->createMock(ResponseInterface::class));
 
-        $this->expectUserDeprecationMessage('Passing ' . CredentialsInterface::class . ' as the $credentialProvider param in  __construct() is deprecated in 2.8.0 and will be removed in 3.0.0. Pass a callable instead.');
+        $this->expectUserDeprecationMessage('Passing ' . CredentialsInterface::class . ' as the $credentialProvider param in ' . SigningClientDecorator::class . '::__construct() is deprecated in 2.8.0 and will be removed in 3.0.0. Pass a callable instead.');
 
         $decorator = new SigningClientDecorator($client, $credentials, $signer, ['Host' => 'server:443']);
 
