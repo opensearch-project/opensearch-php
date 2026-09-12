@@ -21,6 +21,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Accept any `callable` as the `provider` argument of `SigningClientFactory` so AWS SDK credential providers like `CredentialProvider::sso()` and `CredentialProvider::assumeRole()` can be used ([#404](https://github.com/opensearch-project/opensearch-php/issues/404))
 - Update OpenAPI spec download location to `https://api-spec.opensearch.org/opensearch-openapi.yaml` ([#420](https://github.com/opensearch-project/opensearch-php/pull/420))
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@412f39c](https://github.com/opensearch-project/opensearch-api-specification/commit/412f39c5dbe4f3387f6a0b4147f5d6c1a51dd08a)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@59c22e5](https://github.com/opensearch-project/opensearch-api-specification/commit/59c22e5a0cd79a851451c674b0600307c022fdb4)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@b8c2a41](https://github.com/opensearch-project/opensearch-api-specification/commit/b8c2a411c01f42c6153c7b6e122b9e98285101b7)
 

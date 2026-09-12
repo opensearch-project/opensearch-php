@@ -53,7 +53,7 @@ class SigningClientDecorator implements ClientInterface, LoggerAwareInterface
 
         if (isset($this->credentialProvider)) {
             try {
-                $credentials = ($this->credentialProvider)()->wait(); 
+                $credentials = ($this->credentialProvider)()->wait();
             } catch (CredentialsException $e) {
                 $this->logger?->error('Failed to get AWS credentials: @message', ['@message' => $e->getMessage()]);
                 throw $e;
