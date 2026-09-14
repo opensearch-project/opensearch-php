@@ -36,7 +36,7 @@ class SigningClientDecorator implements ClientInterface, LoggerAwareInterface
         if (is_callable($credentialProvider)) {
             $this->credentialProvider = \Closure::fromCallable($credentialProvider);
         } else {
-            @trigger_error('Passing ' . CredentialsInterface::class . ' as the $credentialProvider param in ' . __METHOD__ . '() is deprecated in 2.8.0 and will be removed in 3.0.0. Pass a callable instead.', E_USER_DEPRECATED);
+            @trigger_error('Passing ' . CredentialsInterface::class . ' as the $credentialProvider param in ' . __METHOD__ . '() is deprecated in 2.7.1 and will be removed in 3.0.0. Pass a callable instead.', E_USER_DEPRECATED);
             $this->credentials = $credentialProvider;
         }
     }
