@@ -19,7 +19,7 @@ declare(strict_types=1);
  * See the LICENSE file in the project root for more information.
  */
 
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 
 // Set the default timezone. While this doesn't cause any tests to fail, PHP
 // complains if it is not set in 'date.timezone' of php.ini.

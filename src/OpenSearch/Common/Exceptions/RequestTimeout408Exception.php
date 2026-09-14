@@ -27,7 +27,6 @@ namespace OpenSearch\Common\Exceptions;
 /**
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  *
- * @phpstan-ignore class.extendsDeprecatedClass
  */
 class RequestTimeout408Exception extends BadRequest400Exception implements OpenSearchException
 {

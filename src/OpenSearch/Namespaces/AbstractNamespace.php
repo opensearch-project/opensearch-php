@@ -57,7 +57,7 @@ abstract class AbstractNamespace
             @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
             // @phpstan-ignore property.deprecated
             $this->transport = $transport;
-            // @phpstan-ignore new.deprecated
+            // @phpstan-ignore new.deprecatedClass, method.deprecatedClass
             $this->httpTransport = new LegacyTransportWrapper($transport);
         } else {
             $this->httpTransport = $transport;
@@ -65,7 +65,7 @@ abstract class AbstractNamespace
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as $endpointFactory param to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
-            // @phpstan-ignore new.deprecated
+            // @phpstan-ignore new.deprecatedClass, method.deprecatedClass
             $endpointFactory = new LegacyEndpointFactory($endpointFactory);
         } else {
             $endpoints = function ($c) use ($endpointFactory) {

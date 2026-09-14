@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\ConnectionPool;
 
-use OpenSearch\Common\Exceptions\InvalidArgumentException;
 use OpenSearch\ConnectionPool\Selectors\SelectorInterface;
 use OpenSearch\Connections\ConnectionFactoryInterface;
 use OpenSearch\Connections\ConnectionInterface;
@@ -75,13 +74,6 @@ abstract class AbstractConnectionPool implements ConnectionPoolInterface
      */
     public function __construct(array $connections, SelectorInterface $selector, ConnectionFactoryInterface $factory, array $connectionPoolParams)
     {
-        $paramList = array('connections', 'selector', 'connectionPoolParams');
-        foreach ($paramList as $param) {
-            if (isset($$param) === false) {
-                throw new InvalidArgumentException('`' . $param . '` parameter must not be null');
-            }
-        }
-
         if (isset($connectionPoolParams['randomizeHosts']) === true
             && $connectionPoolParams['randomizeHosts'] === true
         ) {

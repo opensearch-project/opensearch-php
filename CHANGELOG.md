@@ -5,7 +5,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ## [Unreleased]
 ### Changed
 - Fixed the AWS credentials handling so that expired credentials can be refreshed ([#429](https://github.com/opensearch-project/opensearch-php/pull/429))
-
+- Upgrade `phpstan/phpstan` to `^2.2` with matching 2.x `phpstan-deprecation-rules`, `phpstan-mockery` and `phpstan-phpunit` ([#424](https://github.com/opensearch-project/opensearch-php/pull/424))
 
 ## [2.7.0]
 ### Changed

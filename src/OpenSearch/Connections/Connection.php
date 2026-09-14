@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Connections;
 
-use Exception;
 use GuzzleHttp\Ring\Core;
 use GuzzleHttp\Ring\Exception\ConnectException;
 use GuzzleHttp\Ring\Exception\RingException;
@@ -655,7 +654,7 @@ class Connection implements ConnectionInterface
         $statusCode = $response['status'];
 
         /**
-         * @var \Exception $exception
+         * @var OpenSearchException $exception
         */
         $exception = $this->tryDeserialize400Error($response);
 
@@ -694,7 +693,7 @@ class Connection implements ConnectionInterface
         $responseBody = $response['body'];
 
         /**
-         * @var \Exception $exception
+         * @var OpenSearchException $exception
         */
         $exception = $this->tryDeserialize500Error($response);
 
@@ -723,7 +722,7 @@ class Connection implements ConnectionInterface
         throw $exception;
     }
 
-    private function convertBodyToString($body, int $statusCode, Exception $exception): string
+    private function convertBodyToString($body, int $statusCode, OpenSearchException $exception): string
     {
         if (empty($body)) {
             return sprintf(

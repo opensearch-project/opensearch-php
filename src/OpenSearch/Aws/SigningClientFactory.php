@@ -53,7 +53,7 @@ class SigningClientFactory
      *
      * @param ClientInterface $innerClient
      *   The decorated inner HTTP client.
-     * @param array<string,string> $options
+     * @param array<string,mixed> $options
      *   The AWS auth options.
      */
     public function create(ClientInterface $innerClient, array $options): ClientInterface
@@ -102,7 +102,7 @@ class SigningClientFactory
     /**
      * Gets the request signer.
      *
-     * @param array<string,string> $options
+     * @param array<string,mixed> $options
      *   The options.
      */
     protected function getSigner(array $options): SignatureInterface

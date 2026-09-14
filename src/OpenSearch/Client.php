@@ -362,7 +362,6 @@ class Client
      * @param callable|EndpointFactoryInterface|null $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
      *
-     * @phpstan-ignore parameter.deprecatedClass
      */
     public function __construct(
         TransportInterface|Transport $transport,
@@ -373,7 +372,7 @@ class Client
             @trigger_error('Passing an instance of \OpenSearch\Transport to ' . __METHOD__ . '() is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\TransportInterface instead.', E_USER_DEPRECATED);
             // @phpstan-ignore property.deprecated
             $this->transport = $transport;
-            // @phpstan-ignore new.deprecated
+            // @phpstan-ignore new.deprecatedClass, method.deprecatedClass
             $this->httpTransport = new LegacyTransportWrapper($transport);
         } else {
             $this->httpTransport = $transport;
@@ -382,7 +381,7 @@ class Client
         if (is_callable($endpointFactory)) {
             @trigger_error('Passing a callable as the $endpointFactory param in ' . __METHOD__ . ' is deprecated in 2.4.0 and will be removed in 3.0.0. Pass an instance of \OpenSearch\EndpointFactoryInterface instead.', E_USER_DEPRECATED);
             $endpoints = $endpointFactory;
-            // @phpstan-ignore new.deprecated
+            // @phpstan-ignore new.deprecatedClass, method.deprecatedClass
             $endpointFactory = new LegacyEndpointFactory($endpointFactory);
         } else {
             if ($endpointFactory === null) {
@@ -397,13 +396,13 @@ class Client
         // @phpstan-ignore property.deprecated
         $this->endpoints = $endpoints;
         $this->endpointFactory = $endpointFactory;
-        // @phpstan-ignore new.deprecated, property.deprecated
+        // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
         $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
         $this->cat = new CatNamespace($transport, $this->endpointFactory);
         $this->cluster = new ClusterNamespace($transport, $this->endpointFactory);
         $this->danglingIndices = new DanglingIndicesNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
+        // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
         $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
         $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
@@ -416,7 +415,7 @@ class Client
         $this->list = new ListNamespace($transport, $this->endpointFactory);
         $this->ltr = new LtrNamespace($transport, $this->endpointFactory);
         $this->ml = new MlNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
+        // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->monitoring = new MonitoringNamespace($transport, $this->endpointFactory);
         $this->neural = new NeuralNamespace($transport, $this->endpointFactory);
         $this->nodes = new NodesNamespace($transport, $this->endpointFactory);
@@ -429,14 +428,14 @@ class Client
         $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
         $this->searchRelevance = new SearchRelevanceNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
+        // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->searchableSnapshots = new SearchableSnapshotsNamespace($transport, $this->endpointFactory);
         $this->security = new SecurityNamespace($transport, $this->endpointFactory);
         $this->securityAnalytics = new SecurityAnalyticsNamespace($transport, $this->endpointFactory);
         $this->sm = new SmNamespace($transport, $this->endpointFactory);
         $this->snapshot = new SnapshotNamespace($transport, $this->endpointFactory);
         $this->sql = new SqlNamespace($transport, $this->endpointFactory);
-        // @phpstan-ignore new.deprecated, property.deprecated
+        // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->ssl = new SslNamespace($transport, $this->endpointFactory);
         $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
         $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);

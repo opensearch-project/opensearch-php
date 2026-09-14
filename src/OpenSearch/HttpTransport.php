@@ -36,7 +36,7 @@ final class HttpTransport implements TransportInterface
         array $params = [],
         mixed $body = null,
         array $headers = [],
-    ): iterable|string|null {
+    ): iterable|string {
         // @todo Remove support for legacy options in 3.0.0.
         // @phpstan-ignore isset.offset
         if (isset($headers['client']['headers'])) {

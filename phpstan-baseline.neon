@@ -1,101 +1,590 @@
 parameters:
 	ignoreErrors:
 		-
-			message: """
-				#^Instantiation of deprecated class OpenSearch\\\\Common\\\\Exceptions\\\\InvalidArgumentException\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\.$#
-			"""
+			message: '''
+				#^Parameter \$transport of method OpenSearch\\Client\:\:__construct\(\) has typehint with deprecated class OpenSearch\\Transport\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 2
+			path: src/OpenSearch/Client.php
+
+		-
+			message: '''
+				#^Instantiation of deprecated class OpenSearch\\Common\\Exceptions\\InvalidArgumentException\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: new.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Endpoints/Monitoring/Bulk.php
 
 		-
-			message: """
-				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Cat\\\\Master\\:
-				To promote inclusive language, use '/_cat/cluster_manager' instead\\.$#
-			"""
+			message: '#^Method OpenSearch\\Exception\\BadRequestHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/BadRequestHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\BadRequestHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/BadRequestHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\BadRequestHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/BadRequestHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\BadRequestHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/BadRequestHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\BadRequestHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/BadRequestHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\ConflictHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/ConflictHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\ConflictHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ConflictHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\ConflictHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ConflictHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\ConflictHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ConflictHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\ConflictHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ConflictHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\ForbiddenHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/ForbiddenHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\ForbiddenHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ForbiddenHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\ForbiddenHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ForbiddenHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\ForbiddenHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ForbiddenHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\ForbiddenHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ForbiddenHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\InternalServerErrorHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/InternalServerErrorHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\InternalServerErrorHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/InternalServerErrorHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\InternalServerErrorHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/InternalServerErrorHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\InternalServerErrorHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/InternalServerErrorHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\InternalServerErrorHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/InternalServerErrorHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\NotAcceptableHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/NotAcceptableHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\NotAcceptableHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotAcceptableHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\NotAcceptableHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotAcceptableHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\NotAcceptableHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotAcceptableHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\NotAcceptableHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotAcceptableHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\NotFoundHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/NotFoundHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\NotFoundHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotFoundHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\NotFoundHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotFoundHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\NotFoundHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotFoundHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\NotFoundHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/NotFoundHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\RequestTimeoutHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/RequestTimeoutHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\RequestTimeoutHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/RequestTimeoutHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\RequestTimeoutHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/RequestTimeoutHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\RequestTimeoutHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/RequestTimeoutHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\RequestTimeoutHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/RequestTimeoutHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\ServiceUnavailableHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/ServiceUnavailableHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\ServiceUnavailableHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ServiceUnavailableHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\ServiceUnavailableHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ServiceUnavailableHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\ServiceUnavailableHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ServiceUnavailableHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\ServiceUnavailableHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/ServiceUnavailableHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\TooManyRequestsHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/TooManyRequestsHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\TooManyRequestsHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/TooManyRequestsHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\TooManyRequestsHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/TooManyRequestsHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\TooManyRequestsHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/TooManyRequestsHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\TooManyRequestsHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/TooManyRequestsHttpException.php
+
+		-
+			message: '#^Method OpenSearch\\Exception\\UnauthorizedHttpException\:\:__construct\(\) overrides method OpenSearch\\Exception\\HttpException\:\:__construct\(\) but misses parameter \#5 \$previous\.$#'
+			identifier: parameter.missing
+			count: 1
+			path: src/OpenSearch/Exception/UnauthorizedHttpException.php
+
+		-
+			message: '#^Parameter \#1 \$message \(string\) of method OpenSearch\\Exception\\UnauthorizedHttpException\:\:__construct\(\) is not contravariant with parameter \#1 \$statusCode \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/UnauthorizedHttpException.php
+
+		-
+			message: '#^Parameter \#2 \$headers \(array\) of method OpenSearch\\Exception\\UnauthorizedHttpException\:\:__construct\(\) is not contravariant with parameter \#2 \$message \(string\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/UnauthorizedHttpException.php
+
+		-
+			message: '#^Parameter \#3 \$code \(int\) of method OpenSearch\\Exception\\UnauthorizedHttpException\:\:__construct\(\) is not contravariant with parameter \#3 \$headers \(array\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/UnauthorizedHttpException.php
+
+		-
+			message: '#^Parameter \#4 \$previous \(Throwable\|null\) of method OpenSearch\\Exception\\UnauthorizedHttpException\:\:__construct\(\) is not contravariant with parameter \#4 \$code \(int\) of method OpenSearch\\Exception\\HttpException\:\:__construct\(\)\.$#'
+			identifier: method.childParameterType
+			count: 1
+			path: src/OpenSearch/Exception/UnauthorizedHttpException.php
+
+		-
+			message: '''
+				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Cat\\Master\:
+				To promote inclusive language, use '/_cat/cluster_manager' instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/CatNamespace.php
 
 		-
-			message: """
-				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Ml\\\\ChunkModel\\:
-				Use `upload_chunk` instead\\.$#
-			"""
+			message: '''
+				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\ChunkModel\:
+				Use `upload_chunk` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
-			message: """
-				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Ml\\\\CreateModelMeta\\:
-				Use `_register_meta` instead\\.$#
-			"""
+			message: '''
+				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\CreateModelMeta\:
+				Use `_register_meta` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
-			message: """
-				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Ml\\\\LoadModel\\:
-				Use `deploy_model` instead\\.$#
-			"""
+			message: '''
+				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\LoadModel\:
+				Use `deploy_model` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
-			message: """
-				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Ml\\\\UnloadModel\\:
-				Use `undeploy_model` instead\\.$#
-			"""
+			message: '''
+				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\UnloadModel\:
+				Use `undeploy_model` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
-			message: """
-				#^Fetching class constant class of deprecated class OpenSearch\\\\Endpoints\\\\Ml\\\\UploadModel\\:
-				Use `register_model` instead\\.$#
-			"""
+			message: '''
+				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\UploadModel\:
+				Use `register_model` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
-			message: """
-				#^Access to deprecated property \\$endpoints of class OpenSearch\\\\Namespaces\\\\AbstractNamespace\\:
-				in 2\\.4\\.0 and will be removed in 3\\.0\\.0\\. Use \\$endpointFactory property instead\\.$#
-			"""
+			message: '''
+				#^Call to method setBody\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\ChunkModel\:
+				Use `upload_chunk` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setBody\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\CreateModelMeta\:
+				Use `_register_meta` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setBody\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\UnloadModel\:
+				Use `undeploy_model` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setBody\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\UploadModel\:
+				Use `register_model` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setChunkNumber\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\ChunkModel\:
+				Use `upload_chunk` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setModelId\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\ChunkModel\:
+				Use `upload_chunk` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setModelId\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\LoadModel\:
+				Use `deploy_model` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Call to method setModelId\(\) of deprecated class OpenSearch\\Endpoints\\Ml\\UnloadModel\:
+				Use `undeploy_model` instead\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Parameter \$transport of method OpenSearch\\Namespaces\\NamespaceBuilderInterface\:\:getObject\(\) has typehint with deprecated class OpenSearch\\Transport\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: parameter.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/NamespaceBuilderInterface.php
+
+		-
+			message: '''
+				#^Access to deprecated property \$endpoints of class OpenSearch\\Namespaces\\AbstractNamespace\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\. Use \$endpointFactory property instead\.$#
+			'''
+			identifier: property.deprecated
 			count: 1
 			path: src/OpenSearch/Namespaces/SecurityNamespace.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{'', '', ''\\}, id\\: 'test'\\} given\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Http\\\\Client\\\\ClientInterface'' and Psr\\Http\\Client\\ClientInterface will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 3
+			path: tests/Aws/SigningClientFactoryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''OpenSearch\\\\Client'' and OpenSearch\\Client will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 5
+			path: tests/ClientBuilderTest.php
+
+		-
+			message: '#^Parameter \#1 \$params of method OpenSearch\\Client\:\:delete\(\) expects array\{id\?\: string, index\?\: string, if_primary_term\?\: int, if_seq_no\?\: int, refresh\?\: mixed, routing\?\: mixed, timeout\?\: string, version\?\: int, \.\.\.\}, array\{index\: array\{'''', '''', ''''\}, id\: ''test''\} given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/ClientIntegrationTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{null, null, null\\}, id\\: 'test'\\} given\\.$#"
+			message: '#^Parameter \#1 \$params of method OpenSearch\\Client\:\:delete\(\) expects array\{id\?\: string, index\?\: string, if_primary_term\?\: int, if_seq_no\?\: int, refresh\?\: mixed, routing\?\: mixed, timeout\?\: string, version\?\: int, \.\.\.\}, array\{index\: array\{null, null, null\}, id\: ''test''\} given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/ClientIntegrationTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: 'test', id\\: null\\} given\\.$#"
+			message: '#^Parameter \#1 \$params of method OpenSearch\\Client\:\:delete\(\) expects array\{id\?\: string, index\?\: string, if_primary_term\?\: int, if_seq_no\?\: int, refresh\?\: mixed, routing\?\: mixed, timeout\?\: string, version\?\: int, \.\.\.\}, array\{index\: ''test'', id\: null\} given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/ClientTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: null, id\\: 'test'\\} given\\.$#"
+			message: '#^Parameter \#1 \$params of method OpenSearch\\Client\:\:delete\(\) expects array\{id\?\: string, index\?\: string, if_primary_term\?\: int, if_seq_no\?\: int, refresh\?\: mixed, routing\?\: mixed, timeout\?\: string, version\?\: int, \.\.\.\}, array\{index\: null, id\: ''test''\} given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/ClientTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{'', '', ''\\}, id\\: 'test'\\} given\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''OpenSearch\\\\Connections\\\\Connection'' and OpenSearch\\Connections\\Connection will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
 			count: 1
-			path: tests/LegacyClientIntegrationTest.php
+			path: tests/Connections/ConnectionTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$params of method OpenSearch\\\\Client\\:\\:delete\\(\\) expects array\\{id\\?\\: string, index\\?\\: string, if_primary_term\\?\\: int, if_seq_no\\?\\: int, refresh\\?\\: mixed, routing\\?\\: mixed, timeout\\?\\: string, version\\?\\: int, \\.\\.\\.\\}, array\\{index\\: array\\{null, null, null\\}, id\\: 'test'\\} given\\.$#"
-			count: 1
-			path: tests/LegacyClientIntegrationTest.php
-
-		-
-			message: "#^Call to an undefined method OpenSearch\\\\Client\\:\\:slm\\(\\)\\.$#"
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''OpenSearch\\\\Client'' and OpenSearch\\Client will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
 			count: 2
+			path: tests/GuzzleClientFactoryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Http\\\\Client\\\\ClientInterface'' and GuzzleHttp\\Client will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/HttpClient/GuzzleHttpClientFactoryTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Psr\\\\Http\\\\Client\\\\ClientInterface'' and Symfony\\Component\\HttpClient\\Psr18Client will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 1
+			path: tests/HttpClient/SymfonyHttpClientFactoryTest.php
+
+		-
+			message: '#^Parameter \#1 \$params of method OpenSearch\\Client\:\:delete\(\) expects array\{id\?\: string, index\?\: string, if_primary_term\?\: int, if_seq_no\?\: int, refresh\?\: mixed, routing\?\: mixed, timeout\?\: string, version\?\: int, \.\.\.\}, array\{index\: array\{'''', '''', ''''\}, id\: ''test''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/LegacyClientIntegrationTest.php
+
+		-
+			message: '#^Parameter \#1 \$params of method OpenSearch\\Client\:\:delete\(\) expects array\{id\?\: string, index\?\: string, if_primary_term\?\: int, if_seq_no\?\: int, refresh\?\: mixed, routing\?\: mixed, timeout\?\: string, version\?\: int, \.\.\.\}, array\{index\: array\{null, null, null\}, id\: ''test''\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/LegacyClientIntegrationTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''GuzzleHttp\\\\Ring\\\\Future\\\\FutureArrayInterface'' and GuzzleHttp\\Ring\\Future\\FutureArrayInterface will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/LegacyTransportTest.php
+
+		-
+			message: '#^Call to method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''OpenSearch\\\\Client'' and OpenSearch\\Client will always evaluate to true\.$#'
+			identifier: method.alreadyNarrowedType
+			count: 2
+			path: tests/SymfonyClientFactoryTest.php
+
+		-
+			message: '#^Call to an undefined method OpenSearch\\Client\:\:slm\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Utility.php
+
+		-
+			message: '''
+				#^Call to method build\(\) of deprecated class OpenSearch\\ClientBuilder\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Utility.php
+
+		-
+			message: '''
+				#^Call to method setConnectionParams\(\) of deprecated class OpenSearch\\ClientBuilder\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Utility.php
+
+		-
+			message: '''
+				#^Call to method setHosts\(\) of deprecated class OpenSearch\\ClientBuilder\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
+			path: tests/Utility.php
+
+		-
+			message: '''
+				#^Call to method setSSLVerification\(\) of deprecated class OpenSearch\\ClientBuilder\:
+				in 2\.4\.0 and will be removed in 3\.0\.0\.$#
+			'''
+			identifier: method.deprecatedClass
+			count: 1
 			path: tests/Utility.php
 

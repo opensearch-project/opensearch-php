@@ -30,7 +30,6 @@ use OpenSearch\Common\Exceptions\TransportException;
 /**
  * @deprecated in 2.4.0 and will be removed in 3.0.0.
  *
- * @phpstan-ignore class.extendsDeprecatedClass
  */
 class CouldNotResolveHostException extends TransportException implements OpenSearchException
 {
