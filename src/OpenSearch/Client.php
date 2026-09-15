@@ -361,7 +361,6 @@ class Client
      * @param TransportInterface|Transport $transport
      * @param callable|EndpointFactoryInterface|null $endpointFactory
      * @param NamespaceBuilderInterface[] $registeredNamespaces
-     *
      */
     public function __construct(
         TransportInterface|Transport $transport,
