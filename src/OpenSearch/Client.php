@@ -1264,7 +1264,7 @@ class Client
     }
 
     /**
-     * Returns multiple termvectors in one request.
+     * Returns multiple term vectors in one request.
      *
      * @param array{index?: string, field_statistics?: bool, fields?: mixed, ids?: mixed, offsets?: bool, payloads?: bool, positions?: bool, preference?: string, realtime?: bool, routing?: mixed, term_statistics?: bool, version?: int, version_type?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - index: The name of the index that contains the document.
@@ -1686,7 +1686,7 @@ class Client
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
      * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * - body: Define parameters and or supply a document to get termvectors for. See documentation.
+     * - body: Define parameters and or supply a document to get term vectors for. See documentation.
      * @return array
      */
     public function termvectors(array $params = [])
