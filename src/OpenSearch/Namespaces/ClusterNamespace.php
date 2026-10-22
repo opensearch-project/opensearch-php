@@ -26,6 +26,7 @@ use OpenSearch\Endpoints\Cluster\DeleteComponentTemplate;
 use OpenSearch\Endpoints\Cluster\DeleteDecommissionAwareness;
 use OpenSearch\Endpoints\Cluster\DeleteVotingConfigExclusions;
 use OpenSearch\Endpoints\Cluster\DeleteWeightedRouting;
+use OpenSearch\Endpoints\Cluster\DescribeSettings;
 use OpenSearch\Endpoints\Cluster\ExistsComponentTemplate;
 use OpenSearch\Endpoints\Cluster\GetComponentTemplate;
 use OpenSearch\Endpoints\Cluster\GetDecommissionAwareness;
@@ -161,6 +162,28 @@ class ClusterNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(DeleteWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Returns definition metadata for cluster settings, including whether each setting is dynamic. Does not return setting values or defaults.
+     *
+     * @param array{cluster_manager_timeout?: string, settings?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
+     * - settings: A comma-separated list of exact setting names to describe. Wildcards are not supported; each name must be an exact, valid setting key. At least one name is required.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function describeSettings(array $params = [])
+    {
+
+        $endpoint = $this->endpointFactory->getEndpoint(DescribeSettings::class);
+        $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
