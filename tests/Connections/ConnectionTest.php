@@ -429,7 +429,7 @@ class ConnectionTest extends TestCase
             ]
         ];
         $response = [
-            'effective_url' => 'http://localhost/info',
+            'effective_url' => 'http://localhost/info?foo=bar',
             'status' => 200,
             'transfer_stats' => [
                 'primary_port' => 9200,
@@ -438,6 +438,8 @@ class ConnectionTest extends TestCase
             'body' => '{}'
         ];
         $connection->logRequestSuccess($request, $response);
+        // Check pretty=true is added to an existing query string in the curl command
+        $this->assertStringContainsString("curl -XGET 'http://localhost:9200/info?pretty=true&foo=bar' -d '{}'", $trace->output[0]);
         // Check for localhost:9200 in trace
         foreach ($trace->output as $row) {
             $this->assertStringContainsString('localhost:9200', $row);

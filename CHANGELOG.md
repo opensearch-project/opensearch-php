@@ -3,6 +3,12 @@
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- Fix trace log curl command dropping `pretty=true` when the URL already has a query string ([#439](https://github.com/opensearch-project/opensearch-php/pull/439))
+### Updated APIs
 
 ## [2.7.1]
 ### Changed

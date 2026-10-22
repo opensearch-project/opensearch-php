@@ -633,7 +633,7 @@ class Connection implements ConnectionInterface
         if (strpos($url, '?') === false) {
             $url .= '?pretty=true';
         } else {
-            str_replace('?', '?pretty=true', $url);
+            $url = str_replace('?', '?pretty=true&', $url);
         }
 
         $curlCommand = 'curl -X' . strtoupper($method);
