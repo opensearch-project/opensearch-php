@@ -22,9 +22,11 @@ use OpenSearch\Endpoints\Security\ChangePassword;
 use OpenSearch\Endpoints\Security\ConfigUpgradeCheck;
 use OpenSearch\Endpoints\Security\ConfigUpgradePerform;
 use OpenSearch\Endpoints\Security\CreateActionGroup;
+use OpenSearch\Endpoints\Security\CreateActionGroups;
 use OpenSearch\Endpoints\Security\CreateAllowlist;
 use OpenSearch\Endpoints\Security\CreateRole;
 use OpenSearch\Endpoints\Security\CreateRoleMapping;
+use OpenSearch\Endpoints\Security\CreateRoleMappings;
 use OpenSearch\Endpoints\Security\CreateTenant;
 use OpenSearch\Endpoints\Security\CreateUpdateTenancyConfig;
 use OpenSearch\Endpoints\Security\CreateUser;
@@ -206,6 +208,29 @@ class SecurityNamespace extends AbstractNamespace
     }
 
     /**
+     * Creates or replaces multiple action groups. Action groups omitted from the request are unchanged. All entries are validated before any changes are written.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: A non-empty object mapping action group names to complete action group definitions. (Required)
+     * @return array
+     */
+    public function createActionGroups(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(CreateActionGroups::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Creates or replaces APIs permitted for users on the allow list. Requires a super admin certificate or REST API permissions.
      *
      * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
@@ -222,6 +247,30 @@ class SecurityNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(CreateAllowlist::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Creates or replaces multiple role mappings. Role mappings omitted from the request are unchanged. Every named role must exist, and all entries are validated before any changes are written.
+     *
+     * @param array{wait_for_completion?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - wait_for_completion: If false, returns a task ID after validation and runs the configuration write and reload asynchronously. (Default: true)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: A non-empty object mapping existing role names to complete role mapping definitions. (Required)
+     * @return array
+     */
+    public function createRoleMappings(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(CreateRoleMappings::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
 
