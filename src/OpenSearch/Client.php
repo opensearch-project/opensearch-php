@@ -583,7 +583,7 @@ class Client
     }
 
     /**
-     * Creates point in time context.
+     * Creates point in time context.Delete the PIT when done. Until then it counts against `search.max_open_pit_context`.
      *
      * @param array{index?: mixed, allow_no_indices?: bool, allow_partial_pit_creation?: bool, expand_wildcards?: mixed, ignore_throttled?: bool, ignore_unavailable?: bool, keep_alive?: string, preference?: string, routing?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of indexes; use `_all` or empty string to perform the operation on all indexes.
@@ -592,7 +592,7 @@ class Client
      * - expand_wildcards: Whether to expand wildcard expression to concrete indexes that are open, closed or both.
      * - ignore_throttled: If `true`, concrete, expanded or aliased indexes will be ignored when frozen.
      * - ignore_unavailable: If `false`, the request returns an error if it targets a missing or closed index.
-     * - keep_alive: Specify the keep alive for point in time.
+     * - keep_alive: Specify the keep alive for point in time. Each search against the PIT restarts it, and a search cannot shorten it. It cannot exceed the `point_in_time.max_keep_alive` cluster setting (24 hours by default).
      * - preference: Specify the node or shard the operation should be performed on. (Default: random)
      * - routing: A comma-separated list of specific routing values.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -648,7 +648,7 @@ class Client
     }
 
     /**
-     * Deletes all active point in time searches.
+     * Deletes all active point in time searches.The response lists each PIT with `successful`. The server can answer 200 while some entries report `successful: false`.Those PITs were not deleted and stay open until their `keep_alive` runs out.
      *
      * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -751,7 +751,7 @@ class Client
     }
 
     /**
-     * Deletes one or more point in time searches based on the IDs passed.
+     * Deletes one or more point in time searches based on the IDs passed.The response lists each PIT with `successful`. The server can answer 200 while some entries report `successful: false`.Those PITs were not deleted and stay open until their `keep_alive` runs out.
      *
      * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
