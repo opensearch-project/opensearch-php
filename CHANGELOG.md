@@ -9,6 +9,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Fixed
 - Fix trace log curl command dropping `pretty=true` when the URL already has a query string ([#439](https://github.com/opensearch-project/opensearch-php/pull/439))
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@fac6af8](https://github.com/opensearch-project/opensearch-api-specification/commit/fac6af8c6a61ab9583dc49c3c9fda7f72a9cb188)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@03d248c](https://github.com/opensearch-project/opensearch-api-specification/commit/03d248c4069c08094fdca77dd21941ba80431ae9)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@2b90873](https://github.com/opensearch-project/opensearch-api-specification/commit/2b908739894c7642a757b5d07b88f8e64d4a2998)
 
