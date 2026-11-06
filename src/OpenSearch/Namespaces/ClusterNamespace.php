@@ -167,11 +167,10 @@ class ClusterNamespace extends AbstractNamespace
     }
 
     /**
-     * Returns definition metadata for cluster settings, including whether each setting is dynamic. Does not return setting values or defaults.
+     * Returns the definition of each requested cluster setting: whether it is dynamic, its declared default, its value type and bounds, and its description. Accepts exact setting names and prefixes ending in `.*`. Does not return configured values.
      *
-     * @param array{cluster_manager_timeout?: string, settings?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
-     * - settings: A comma-separated list of exact setting names to describe. Wildcards are not supported; each name must be an exact, valid setting key. At least one name is required.
+     * @param array{settings?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - settings: A comma-separated list of setting names to describe. Each entry is either an exact setting name or a prefix ending in `.*`, such as `cluster.routing.allocation.*`, which expands to every registered setting under it at any depth. Exact names and prefixes can be mixed. Other wildcard forms are rejected. Affix and group setting templates and secure (keystore) settings are not listed under a prefix; their concrete names can still be requested exactly. At least one entry is required.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)

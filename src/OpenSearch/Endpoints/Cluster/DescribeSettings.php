@@ -30,7 +30,6 @@ class DescribeSettings extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'cluster_manager_timeout',
             'settings',
             'pretty',
             'human',
