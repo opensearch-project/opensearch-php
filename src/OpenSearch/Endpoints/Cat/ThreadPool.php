@@ -46,6 +46,7 @@ class ThreadPool extends AbstractEndpoint
             'format',
             'h',
             'help',
+            'limit',
             'local',
             'master_timeout',
             's',

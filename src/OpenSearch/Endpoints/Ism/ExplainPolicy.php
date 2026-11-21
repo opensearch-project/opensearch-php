@@ -34,6 +34,16 @@ class ExplainPolicy extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'cluster_manager_timeout',
+            'from',
+            'local',
+            'master_timeout',
+            'queryString',
+            'show_policy',
+            'size',
+            'sortField',
+            'sortOrder',
+            'validate_action',
             'pretty',
             'human',
             'error_trace',
@@ -55,5 +65,10 @@ class ExplainPolicy extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

@@ -37,7 +37,10 @@ use OpenSearch\Endpoints\SearchRelevance\PutJudgments;
 use OpenSearch\Endpoints\SearchRelevance\PutQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\PutSearchConfigurations;
 use OpenSearch\Endpoints\SearchRelevance\QuerySetsSearch;
+use OpenSearch\Endpoints\SearchRelevance\RetryJudgments;
 use OpenSearch\Endpoints\SearchRelevance\SearchConfigurationsSearch;
+use OpenSearch\Endpoints\SearchRelevance\UpdateJudgmentRatings;
+use OpenSearch\Endpoints\SearchRelevance\ValidateExperiments;
 
 /**
  * Class SearchRelevanceNamespace
@@ -187,8 +190,9 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets experiments.
      *
-     * @param array{experiment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{experiment_id?: string, query_text?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - experiment_id: The experiment id
+     * - query_text: A query text for visualizing experiment results. Accepted but currently does not change the response.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -233,14 +237,15 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets stats by node.
      *
-     * @param array{node_id?: string, stat?: string, flat_stat_paths?: string, include_all_nodes?: string, include_individual_nodes?: string, include_info?: string, include_metadata?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{node_id?: string, stat?: string, flat_stat_paths?: bool, include_all_nodes?: bool, include_individual_nodes?: bool, include_info?: bool, include_metadata?: bool, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - node_id: The node id
-     * - stat: The statistic to return
+     * - stat: A comma-separated list of statistics to return. Valid values: `cluster_version`, `import_judgment_rating_generations`, `llm_judgment_rating_generations`, `ubi_judgment_rating_generations`, `experiment_executions`, `experiment_pairwise_comparison_executions`, `experiment_pointwise_evaluation_executions`, `experiment_hybrid_optimizer_executions`.
      * - flat_stat_paths: Requests flattened stat paths as keys
      * - include_all_nodes: Whether to include all nodes
      * - include_individual_nodes: Whether to include individual nodes
      * - include_info: Whether to include info
      * - include_metadata: Whether to include metadata
+     * - timeout: The amount of time to wait for a response.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -333,13 +338,14 @@ class SearchRelevanceNamespace extends AbstractNamespace
     /**
      * Gets stats.
      *
-     * @param array{stat?: string, flat_stat_paths?: string, include_all_nodes?: string, include_individual_nodes?: string, include_info?: string, include_metadata?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - stat: The statistic to return
+     * @param array{stat?: string, flat_stat_paths?: bool, include_all_nodes?: bool, include_individual_nodes?: bool, include_info?: bool, include_metadata?: bool, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - stat: A comma-separated list of statistics to return. Valid values: `cluster_version`, `import_judgment_rating_generations`, `llm_judgment_rating_generations`, `ubi_judgment_rating_generations`, `experiment_executions`, `experiment_pairwise_comparison_executions`, `experiment_pointwise_evaluation_executions`, `experiment_hybrid_optimizer_executions`.
      * - flat_stat_paths: Requests flattened stat paths as keys
      * - include_all_nodes: Whether to include all nodes
      * - include_individual_nodes: Whether to include individual nodes
      * - include_info: Whether to include info
      * - include_metadata: Whether to include metadata
+     * - timeout: The amount of time to wait for a response.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -569,6 +575,29 @@ class SearchRelevanceNamespace extends AbstractNamespace
     }
 
     /**
+     * Retries the failed documents in an existing LLM judgment.
+     *
+     * @param array{judgment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - judgment_id: The judgment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function retryJudgments(array $params = [])
+    {
+        $judgment_id = $this->extractArgument($params, 'judgment_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(RetryJudgments::class);
+        $endpoint->setParams($params);
+        $endpoint->setJudgmentId($judgment_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Searches for search configurations.
      *
      * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
@@ -587,6 +616,55 @@ class SearchRelevanceNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(SearchConfigurationsSearch::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Adjusts one or more ratings on an existing LLM judgment in place. Only the listed (`query`, `docId`) pairs are updated; all other ratings are left unchanged.
+     *
+     * @param array{judgment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - judgment_id: The judgment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
+     * @return array
+     */
+    public function updateJudgmentRatings(array $params = [])
+    {
+        $judgment_id = $this->extractArgument($params, 'judgment_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateJudgmentRatings::class);
+        $endpoint->setParams($params);
+        $endpoint->setJudgmentId($judgment_id);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Validates whether an experiment's inputs have drifted from the fingerprint recorded at execution time.
+     *
+     * @param array{experiment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - experiment_id: The experiment id
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function validateExperiments(array $params = [])
+    {
+        $experiment_id = $this->extractArgument($params, 'experiment_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(ValidateExperiments::class);
+        $endpoint->setParams($params);
+        $endpoint->setExperimentId($experiment_id);
 
         return $this->performRequest($endpoint);
     }

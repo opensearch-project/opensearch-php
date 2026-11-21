@@ -40,6 +40,7 @@ class PutPolicy extends AbstractEndpoint
         return [
             'if_primary_term',
             'if_seq_no',
+            'refresh',
             'pretty',
             'human',
             'error_trace',

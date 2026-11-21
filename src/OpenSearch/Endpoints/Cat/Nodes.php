@@ -42,6 +42,7 @@ class Nodes extends AbstractEndpoint
             'full_id',
             'h',
             'help',
+            'limit',
             'local',
             'master_timeout',
             's',

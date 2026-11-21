@@ -46,6 +46,7 @@ class SegmentReplication extends AbstractEndpoint
             'ignore_throttled',
             'ignore_unavailable',
             'index',
+            'limit',
             's',
             'shards',
             'time',

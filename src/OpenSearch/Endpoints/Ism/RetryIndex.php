@@ -34,7 +34,9 @@ class RetryIndex extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'cluster_manager_timeout',
             'index',
+            'master_timeout',
             'pretty',
             'human',
             'error_trace',
@@ -56,5 +58,10 @@ class RetryIndex extends AbstractEndpoint
         $this->body = $body;
 
         return $this;
+    }
+
+    protected function getParamDeprecation(): array
+    {
+        return ['master_timeout' => 'cluster_manager_timeout'];
     }
 }

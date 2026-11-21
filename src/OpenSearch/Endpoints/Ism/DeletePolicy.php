@@ -38,6 +38,7 @@ class DeletePolicy extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'refresh',
             'pretty',
             'human',
             'error_trace',
