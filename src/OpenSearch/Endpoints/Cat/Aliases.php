@@ -46,6 +46,7 @@ class Aliases extends AbstractEndpoint
             'format',
             'h',
             'help',
+            'limit',
             'local',
             's',
             'v',

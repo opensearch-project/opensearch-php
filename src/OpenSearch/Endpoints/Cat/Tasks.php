@@ -41,6 +41,7 @@ class Tasks extends AbstractEndpoint
             'format',
             'h',
             'help',
+            'limit',
             's',
             'time',
             'v',

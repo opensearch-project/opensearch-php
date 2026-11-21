@@ -36,6 +36,7 @@ class GetExperiments extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'query_text',
             'pretty',
             'human',
             'error_trace',
