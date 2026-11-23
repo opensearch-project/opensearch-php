@@ -26,6 +26,7 @@ use OpenSearch\Endpoints\Cluster\DeleteComponentTemplate;
 use OpenSearch\Endpoints\Cluster\DeleteDecommissionAwareness;
 use OpenSearch\Endpoints\Cluster\DeleteVotingConfigExclusions;
 use OpenSearch\Endpoints\Cluster\DeleteWeightedRouting;
+use OpenSearch\Endpoints\Cluster\DescribeSettings;
 use OpenSearch\Endpoints\Cluster\ExistsComponentTemplate;
 use OpenSearch\Endpoints\Cluster\GetComponentTemplate;
 use OpenSearch\Endpoints\Cluster\GetDecommissionAwareness;
@@ -161,6 +162,27 @@ class ClusterNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(DeleteWeightedRouting::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Returns the definition of each requested cluster setting: whether it is dynamic, its declared default, its value type and bounds, and its description. Accepts exact setting names and prefixes ending in `.*`. Does not return configured values.
+     *
+     * @param array{settings?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - settings: A comma-separated list of setting names to describe. Each entry is either an exact setting name or a prefix ending in `.*`, such as `cluster.routing.allocation.*`, which expands to every registered setting under it at any depth. Exact names and prefixes can be mixed. Other wildcard forms are rejected. Affix and group setting templates and secure (keystore) settings are not listed under a prefix; their concrete names can still be requested exactly. At least one entry is required.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function describeSettings(array $params = [])
+    {
+
+        $endpoint = $this->endpointFactory->getEndpoint(DescribeSettings::class);
+        $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }

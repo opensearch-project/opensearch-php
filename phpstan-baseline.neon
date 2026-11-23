@@ -320,57 +320,12 @@ parameters:
 
 		-
 			message: '''
-				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Cat\\Master\:
+				#^Fetching class constant class of deprecated class OpenSearch\\Endpoints\\Cat\\Master\:
 				To promote inclusive language, use '/_cat/cluster_manager' instead\.$#
 			'''
 			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/CatNamespace.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\ChunkModel\:
-				Use `upload_chunk` instead\.$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/OpenSearch/Namespaces/MlNamespace.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\CreateModelMeta\:
-				Use `_register_meta` instead\.$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/OpenSearch/Namespaces/MlNamespace.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\LoadModel\:
-				Use `deploy_model` instead\.$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/OpenSearch/Namespaces/MlNamespace.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\UnloadModel\:
-				Use `undeploy_model` instead\.$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/OpenSearch/Namespaces/MlNamespace.php
-
-		-
-			message: '''
-				#^Access to constant on deprecated class OpenSearch\\Endpoints\\Ml\\UploadModel\:
-				Use `register_model` instead\.$#
-			'''
-			identifier: classConstant.deprecatedClass
-			count: 1
-			path: src/OpenSearch/Namespaces/MlNamespace.php
 
 		-
 			message: '''
@@ -441,6 +396,51 @@ parameters:
 				Use `undeploy_model` instead\.$#
 			'''
 			identifier: method.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Fetching class constant class of deprecated class OpenSearch\\Endpoints\\Ml\\ChunkModel\:
+				Use `upload_chunk` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Fetching class constant class of deprecated class OpenSearch\\Endpoints\\Ml\\CreateModelMeta\:
+				Use `_register_meta` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Fetching class constant class of deprecated class OpenSearch\\Endpoints\\Ml\\LoadModel\:
+				Use `deploy_model` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Fetching class constant class of deprecated class OpenSearch\\Endpoints\\Ml\\UnloadModel\:
+				Use `undeploy_model` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
+			count: 1
+			path: src/OpenSearch/Namespaces/MlNamespace.php
+
+		-
+			message: '''
+				#^Fetching class constant class of deprecated class OpenSearch\\Endpoints\\Ml\\UploadModel\:
+				Use `register_model` instead\.$#
+			'''
+			identifier: classConstant.deprecatedClass
 			count: 1
 			path: src/OpenSearch/Namespaces/MlNamespace.php
 

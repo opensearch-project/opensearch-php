@@ -18,6 +18,7 @@ namespace OpenSearch\Namespaces;
 use OpenSearch\Endpoints\List\Help;
 use OpenSearch\Endpoints\List\Indices;
 use OpenSearch\Endpoints\List\Shards;
+use OpenSearch\Endpoints\List\WlmStats;
 
 /**
  * Class ListNamespace
@@ -118,6 +119,39 @@ class ListNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(Shards::class);
         $endpoint->setParams($params);
         $endpoint->setIndex($index);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Returns paginated workload management statistics in tabular form.
+     *
+     * @param array{node_id?: mixed, workload_group_id?: mixed, breach?: bool, format?: mixed, next_token?: array, order?: mixed, size?: int, sort?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names used to limit the returned statistics.
+     * - workload_group_id: A comma-separated list of workload group IDs used to limit the returned statistics. Use `_all` to return statistics for every workload group.
+     * - breach: When `true`, returns only workload groups that have breached their resource limits.
+     * - format: A short version of the Accept header, such as `JSON`, `YAML`. (Default: text) (Options: cbor, json, smile, text, yaml)
+     * - next_token: Token used to retrieve the next page of workload management statistics.
+     * - order: The sort direction of the page. Allowed values are `asc` and `desc`. Defaults to `asc`. (Options: asc, desc)
+     * - size: The maximum number of node and workload group combinations to return in a page. Allowed range is 1 to 100. (Default: 10)
+     * - sort: The field used to sort results. Allowed values are `node_id` and `workload_group`. Defaults to `node_id`. (Options: node_id, workload_group)
+     * - v: Verbose mode. Display column headers. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function wlmStats(array $params = [])
+    {
+        $node_id = $this->extractArgument($params, 'node_id');
+        $workload_group_id = $this->extractArgument($params, 'workload_group_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(WlmStats::class);
+        $endpoint->setParams($params);
+        $endpoint->setNodeId($node_id);
+        $endpoint->setWorkloadGroupId($workload_group_id);
 
         return $this->performRequest($endpoint);
     }

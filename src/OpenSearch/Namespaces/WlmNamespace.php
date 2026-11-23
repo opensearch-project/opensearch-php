@@ -16,9 +16,14 @@ declare(strict_types=1);
 namespace OpenSearch\Namespaces;
 
 use OpenSearch\Endpoints\Wlm\CreateQueryGroup;
+use OpenSearch\Endpoints\Wlm\CreateWorkloadGroup;
 use OpenSearch\Endpoints\Wlm\DeleteQueryGroup;
+use OpenSearch\Endpoints\Wlm\DeleteWorkloadGroup;
 use OpenSearch\Endpoints\Wlm\GetQueryGroup;
+use OpenSearch\Endpoints\Wlm\GetWorkloadGroup;
+use OpenSearch\Endpoints\Wlm\Stats;
 use OpenSearch\Endpoints\Wlm\UpdateQueryGroup;
+use OpenSearch\Endpoints\Wlm\UpdateWorkloadGroup;
 
 /**
  * Class WlmNamespace
@@ -51,6 +56,29 @@ class WlmNamespace extends AbstractNamespace
     }
 
     /**
+     * Creates a new workload group and sets the resource limits for the new workload group.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
+     * @return array
+     */
+    public function createWorkloadGroup(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(CreateWorkloadGroup::class);
+        $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Deletes the specified query group.
      *
      * @param array{name?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
@@ -67,6 +95,29 @@ class WlmNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
 
         $endpoint = $this->endpointFactory->getEndpoint(DeleteQueryGroup::class);
+        $endpoint->setParams($params);
+        $endpoint->setName($name);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Deletes the specified workload group.
+     *
+     * @param array{name?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The name of the workload group.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function deleteWorkloadGroup(array $params = [])
+    {
+        $name = $this->extractArgument($params, 'name');
+
+        $endpoint = $this->endpointFactory->getEndpoint(DeleteWorkloadGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
 
@@ -97,6 +148,56 @@ class WlmNamespace extends AbstractNamespace
     }
 
     /**
+     * Retrieves the specified workload group. If no workload group is specified, all workload groups in the cluster are retrieved.
+     *
+     * @param array{name?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - name: The name of the workload group.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function getWorkloadGroup(array $params = [])
+    {
+        $name = $this->extractArgument($params, 'name');
+
+        $endpoint = $this->endpointFactory->getEndpoint(GetWorkloadGroup::class);
+        $endpoint->setParams($params);
+        $endpoint->setName($name);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Retrieves workload management statistics for workload groups on one or more nodes.
+     *
+     * @param array{node_id?: mixed, workload_group_id?: mixed, breach?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_id: A comma-separated list of node IDs or names used to limit the returned statistics.
+     * - workload_group_id: A comma-separated list of workload group IDs used to limit the returned statistics. Use `_all` to return statistics for every workload group.
+     * - breach: When `true`, returns only workload groups that have breached their resource limits.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function stats(array $params = [])
+    {
+        $node_id = $this->extractArgument($params, 'node_id');
+        $workload_group_id = $this->extractArgument($params, 'workload_group_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
+        $endpoint->setParams($params);
+        $endpoint->setNodeId($node_id);
+        $endpoint->setWorkloadGroupId($workload_group_id);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Updates the specified query group.
      *
      * @param array{name?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
@@ -115,6 +216,32 @@ class WlmNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(UpdateQueryGroup::class);
+        $endpoint->setParams($params);
+        $endpoint->setName($name);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Updates the specified workload group.
+     *
+     * @param array{name?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - name: The name of the workload group.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
+     * @return array
+     */
+    public function updateWorkloadGroup(array $params = [])
+    {
+        $name = $this->extractArgument($params, 'name');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(UpdateWorkloadGroup::class);
         $endpoint->setParams($params);
         $endpoint->setName($name);
         $endpoint->setBody($body);

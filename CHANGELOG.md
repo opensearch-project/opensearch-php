@@ -3,6 +3,18 @@
 Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
+### Changed
+- Update PHPStan baseline for the reworded deprecated class constant message in `phpstan/phpstan` 2.3.7 ([#443](https://github.com/opensearch-project/opensearch-php/pull/443))
+- Run unit tests on Ubuntu only, dropping the macOS and Windows CI jobs ([#444](https://github.com/opensearch-project/opensearch-php/pull/444))
+- Add PHP 8.6 to the unit test matrix ([#445](https://github.com/opensearch-project/opensearch-php/pull/445))
+### Deprecated
+### Removed
+### Fixed
+- Fix trace log curl command dropping `pretty=true` when the URL already has a query string ([#439](https://github.com/opensearch-project/opensearch-php/pull/439))
+### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@fac6af8](https://github.com/opensearch-project/opensearch-api-specification/commit/fac6af8c6a61ab9583dc49c3c9fda7f72a9cb188)
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@03d248c](https://github.com/opensearch-project/opensearch-api-specification/commit/03d248c4069c08094fdca77dd21941ba80431ae9)
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@2b90873](https://github.com/opensearch-project/opensearch-api-specification/commit/2b908739894c7642a757b5d07b88f8e64d4a2998)
 
 ## [2.7.1]
 ### Changed
@@ -23,6 +35,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - Accept any `callable` as the `provider` argument of `SigningClientFactory` so AWS SDK credential providers like `CredentialProvider::sso()` and `CredentialProvider::assumeRole()` can be used ([#404](https://github.com/opensearch-project/opensearch-php/issues/404))
 - Update OpenAPI spec download location to `https://api-spec.opensearch.org/opensearch-openapi.yaml` ([#420](https://github.com/opensearch-project/opensearch-php/pull/420))
 ### Updated APIs
+- Updated opensearch-php APIs to reflect [opensearch-api-specification@305c445](https://github.com/opensearch-project/opensearch-api-specification/commit/305c4457773f5b405a0faf82b3cb5e455a60e8e7)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@412f39c](https://github.com/opensearch-project/opensearch-api-specification/commit/412f39c5dbe4f3387f6a0b4147f5d6c1a51dd08a)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@59c22e5](https://github.com/opensearch-project/opensearch-api-specification/commit/59c22e5a0cd79a851451c674b0600307c022fdb4)
 - Updated opensearch-php APIs to reflect [opensearch-api-specification@b8c2a41](https://github.com/opensearch-project/opensearch-api-specification/commit/b8c2a411c01f42c6153c7b6e122b9e98285101b7)

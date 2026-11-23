@@ -29,6 +29,7 @@ use OpenSearch\Endpoints\SearchRelevance\GetScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\GetSearchConfigurations;
 use OpenSearch\Endpoints\SearchRelevance\GetStats;
 use OpenSearch\Endpoints\SearchRelevance\JudgmentsSearch;
+use OpenSearch\Endpoints\SearchRelevance\PatchExperiment;
 use OpenSearch\Endpoints\SearchRelevance\PostQuerySets;
 use OpenSearch\Endpoints\SearchRelevance\PostScheduledExperiments;
 use OpenSearch\Endpoints\SearchRelevance\PutExperiments;
@@ -375,6 +376,32 @@ class SearchRelevanceNamespace extends AbstractNamespace
 
         $endpoint = $this->endpointFactory->getEndpoint(JudgmentsSearch::class);
         $endpoint->setParams($params);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Partially updates an experiment's name or description.
+     *
+     * @param array{experiment_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - experiment_id: The experiment id.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body:
+     * @return array
+     */
+    public function patchExperiment(array $params = [])
+    {
+        $experiment_id = $this->extractArgument($params, 'experiment_id');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(PatchExperiment::class);
+        $endpoint->setParams($params);
+        $endpoint->setExperimentId($experiment_id);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
