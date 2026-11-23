@@ -6,6 +6,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 ### Changed
 - Update PHPStan baseline for the reworded deprecated class constant message in `phpstan/phpstan` 2.3.7 ([#443](https://github.com/opensearch-project/opensearch-php/pull/443))
 - Run unit tests on Ubuntu only, dropping the macOS and Windows CI jobs ([#444](https://github.com/opensearch-project/opensearch-php/pull/444))
+- Add PHP 8.6 to the unit test matrix ([#445](https://github.com/opensearch-project/opensearch-php/pull/445))
 ### Deprecated
 ### Removed
 ### Fixed
