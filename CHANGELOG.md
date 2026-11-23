@@ -4,6 +4,7 @@ Inspired from [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## [Unreleased]
 ### Changed
+- Update PHPStan baseline for the reworded deprecated class constant message in `phpstan/phpstan` 2.3.7 ([#443](https://github.com/opensearch-project/opensearch-php/pull/443))
 ### Deprecated
 ### Removed
 ### Fixed
