@@ -47,6 +47,7 @@ class Fielddata extends AbstractEndpoint
             'format',
             'h',
             'help',
+            'limit',
             's',
             'v',
             'pretty',

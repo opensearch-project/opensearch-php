@@ -48,6 +48,7 @@ class Indices extends AbstractEndpoint
             'health',
             'help',
             'include_unloaded_segments',
+            'limit',
             'local',
             'master_timeout',
             'pri',

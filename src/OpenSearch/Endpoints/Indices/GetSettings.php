@@ -35,7 +35,7 @@ class GetSettings extends AbstractEndpoint
         $name = $this->name ? rawurlencode($this->name) : null;
         $index = $this->index ? rawurlencode($this->index) : null;
         if (isset($index) && isset($name)) {
-            return "/$index/_settings/$name";
+            return "/$index/_setting/$name";
         }
         if (isset($index)) {
             return "/$index/_settings";

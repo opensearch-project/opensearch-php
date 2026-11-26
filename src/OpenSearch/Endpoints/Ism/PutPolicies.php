@@ -33,6 +33,7 @@ class PutPolicies extends AbstractEndpoint
             'if_primary_term',
             'if_seq_no',
             'policyID',
+            'refresh',
             'pretty',
             'human',
             'error_trace',

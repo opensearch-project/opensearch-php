@@ -61,6 +61,7 @@ use OpenSearch\Endpoints\Indices\Refresh;
 use OpenSearch\Endpoints\Indices\RefreshSearchAnalyzers;
 use OpenSearch\Endpoints\Indices\ResolveIndex;
 use OpenSearch\Endpoints\Indices\Rollover;
+use OpenSearch\Endpoints\Indices\Scale;
 use OpenSearch\Endpoints\Indices\Segments;
 use OpenSearch\Endpoints\Indices\ShardStores;
 use OpenSearch\Endpoints\Indices\Shrink;
@@ -68,6 +69,7 @@ use OpenSearch\Endpoints\Indices\SimulateIndexTemplate;
 use OpenSearch\Endpoints\Indices\SimulateTemplate;
 use OpenSearch\Endpoints\Indices\Split;
 use OpenSearch\Endpoints\Indices\Stats;
+use OpenSearch\Endpoints\Indices\SyncedFlush;
 use OpenSearch\Endpoints\Indices\UpdateAliases;
 use OpenSearch\Endpoints\Indices\Upgrade;
 use OpenSearch\Endpoints\Indices\ValidateQuery;
@@ -1214,6 +1216,32 @@ class IndicesNamespace extends AbstractNamespace
     }
 
     /**
+     * Scales an index to or from search-only mode.
+     *
+     * @param array{index?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: The name of the index to scale.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * - body: (Required)
+     * @return array
+     */
+    public function scale(array $params = [])
+    {
+        $index = $this->extractArgument($params, 'index');
+        $body = $this->extractArgument($params, 'body');
+
+        $endpoint = $this->endpointFactory->getEndpoint(Scale::class);
+        $endpoint->setParams($params);
+        $endpoint->setIndex($index);
+        $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Provides low-level information about segments in a Lucene index.
      *
      * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_unavailable?: bool, verbose?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
@@ -1427,6 +1455,33 @@ class IndicesNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
         $endpoint->setParams($params);
         $endpoint->setMetric($metric);
+        $endpoint->setIndex($index);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Performs a normal flush. The synced flush operation has been removed and this compatibility route is deprecated.
+     *
+     * @param array{index?: mixed, allow_no_indices?: bool, expand_wildcards?: mixed, ignore_throttled?: bool, ignore_unavailable?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: A comma-separated list of data streams, indexes, and aliases to flush. Supports wildcards.
+     * - allow_no_indices: Whether to return an error when a wildcard expression or `_all` resolves only to missing or closed indexes.
+     * - expand_wildcards: The types of indexes that wildcard expressions can match.
+     * - ignore_throttled: Whether to ignore indexes that are throttled.
+     * - ignore_unavailable: Whether to ignore missing or closed indexes.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function syncedFlush(array $params = [])
+    {
+        $index = $this->extractArgument($params, 'index');
+
+        $endpoint = $this->endpointFactory->getEndpoint(SyncedFlush::class);
+        $endpoint->setParams($params);
         $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);

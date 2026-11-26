@@ -47,6 +47,7 @@ class GetNodeStats extends AbstractEndpoint
             'include_individual_nodes',
             'include_info',
             'include_metadata',
+            'timeout',
             'pretty',
             'human',
             'error_trace',

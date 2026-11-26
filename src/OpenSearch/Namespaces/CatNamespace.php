@@ -56,12 +56,13 @@ class CatNamespace extends AbstractNamespace
     /**
      * Shows information about aliases currently configured to indexes, including filter and routing information.
      *
-     * @param array{name?: mixed, expand_wildcards?: mixed, format?: mixed, h?: mixed, help?: bool, local?: bool, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{name?: mixed, expand_wildcards?: mixed, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - name:
      * - expand_wildcards:
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Whether to return information from the local node only instead of from the cluster manager node. (Default: false)
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - v: Enables verbose mode, which displays column headers. (Default: false)
@@ -86,11 +87,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists all active CAT point-in-time segments.
      *
-     * @param array{bytes?: mixed, format?: mixed, h?: mixed, help?: bool, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{bytes?: mixed, format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - bytes: The units used to display byte values.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - v: Enables verbose mode, which displays column headers. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -112,13 +114,14 @@ class CatNamespace extends AbstractNamespace
     /**
      * Provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
      *
-     * @param array{node_id?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{node_id?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - node_id: A comma-separated list of node IDs or names used to limit the returned information.
      * - bytes: The units used to display byte values.
      * - cluster_manager_timeout: A timeout for connection to the cluster manager node.
      * - format: A short version of the HTTP `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from cluster-manager node. (Default: false)
      * - master_timeout: A timeout for connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -144,11 +147,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about the cluster-manager node.
      *
-     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - cluster_manager_timeout: A timeout for connection to the cluster manager node.
      * - format: A short version of the HTTP `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: A timeout for connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -172,11 +176,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Provides quick access to the document count of the entire cluster or of an individual index.
      *
-     * @param array{index?: mixed, format?: mixed, h?: mixed, help?: bool, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - v: Enables verbose mode, which displays column headers. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -200,12 +205,13 @@ class CatNamespace extends AbstractNamespace
     /**
      * Shows how much heap memory is currently being used by field data on every data node in the cluster.
      *
-     * @param array{fields?: mixed, bytes?: mixed, format?: mixed, h?: mixed, help?: bool, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{fields?: mixed, bytes?: mixed, format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - fields: A comma-separated list of fields used to limit the amount of returned information.
      * - bytes: The units used to display byte values.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - v: Enables verbose mode, which displays column headers. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -229,10 +235,11 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns a concise representation of the cluster health.
      *
-     * @param array{format?: mixed, h?: mixed, help?: bool, s?: mixed, time?: mixed, ts?: bool, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, time?: mixed, ts?: bool, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - time: The unit used to display time values.
      * - ts: When `true`, returns `HH:MM:SS` and Unix epoch timestamps. (Default: true)
@@ -276,7 +283,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists information related to indexes, that is, how much disk space they are using, how many shards they have, their health status, and so on.
      *
-     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, expand_wildcards?: mixed, format?: mixed, h?: mixed, health?: mixed, help?: bool, include_unloaded_segments?: bool, local?: bool, master_timeout?: string, pri?: bool, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, expand_wildcards?: mixed, format?: mixed, h?: mixed, health?: mixed, help?: bool, include_unloaded_segments?: bool, limit?: int, local?: bool, master_timeout?: string, pri?: bool, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - bytes: The units used to display byte values.
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
@@ -286,6 +293,7 @@ class CatNamespace extends AbstractNamespace
      * - health: Limits indexes based on their health status. Supported values are `green`, `yellow`, and `red`.
      * - help: Returns help information. (Default: false)
      * - include_unloaded_segments: Whether to include information from segments not loaded into memory. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - pri: When `true`, returns information only from the primary shards. (Default: false)
@@ -313,11 +321,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about the cluster-manager node.
      *
-     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -341,11 +350,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about custom node attributes.
      *
-     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -369,13 +379,14 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns basic statistics about the performance of cluster nodes.
      *
-     * @param array{bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, full_id?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, full_id?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - bytes: The units used to display byte values.
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - full_id: When `true`, returns the full node ID. When `false`, returns the shortened node ID.
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -400,11 +411,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns a concise representation of the cluster's pending tasks.
      *
-     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -429,11 +441,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists one or several CAT point-in-time segments.
      *
-     * @param array{bytes?: mixed, format?: mixed, h?: mixed, help?: bool, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{bytes?: mixed, format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - bytes: The units used to display byte values.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - v: Enables verbose mode, which displays column headers. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
@@ -458,11 +471,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about the names, components, and versions of the installed plugins.
      *
-     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -486,7 +500,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns all completed and ongoing index and shard recoveries.
      *
-     * @param array{index?: mixed, active_only?: bool, bytes?: mixed, detailed?: bool, format?: mixed, h?: mixed, help?: bool, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, active_only?: bool, bytes?: mixed, detailed?: bool, format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - active_only: If `true`, the response only includes ongoing shard recoveries. (Default: false)
      * - bytes: The units used to display byte values.
@@ -494,6 +508,7 @@ class CatNamespace extends AbstractNamespace
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - time: Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://docs.opensearch.org/latest/api-reference/units/).
      * - v: Enables verbose mode, which displays column headers. (Default: false)
@@ -518,11 +533,12 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about all snapshot repositories for a cluster.
      *
-     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -546,7 +562,7 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns information about active and last-completed segment replication events on each replica shard, including related shard-level metrics. These metrics provide information about how far behind the primary shard the replicas are lagging.
      *
-     * @param array{index?: mixed, active_only?: bool, allow_no_indices?: bool, bytes?: mixed, completed_only?: bool, detailed?: bool, expand_wildcards?: mixed, format?: mixed, h?: mixed, help?: bool, ignore_throttled?: bool, ignore_unavailable?: bool, s?: mixed, shards?: mixed, time?: mixed, timeout?: string, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, active_only?: bool, allow_no_indices?: bool, bytes?: mixed, completed_only?: bool, detailed?: bool, expand_wildcards?: mixed, format?: mixed, h?: mixed, help?: bool, ignore_throttled?: bool, ignore_unavailable?: bool, limit?: int, s?: mixed, shards?: mixed, time?: mixed, timeout?: string, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - active_only: When `true`, the response only includes ongoing segment replication events. (Default: false)
      * - allow_no_indices: Whether to ignore the index if a wildcard index expression resolves to no concrete indexes. This includes the `_all` string or when no indexes have been specified.
@@ -559,6 +575,7 @@ class CatNamespace extends AbstractNamespace
      * - help: Returns help information. (Default: false)
      * - ignore_throttled: Whether specified concrete, expanded, or aliased indexes should be ignored when throttled.
      * - ignore_unavailable: Whether the specified concrete indexes should be ignored when missing or closed.
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - shards: A comma-separated list of shards to display.
      * - time: Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://docs.opensearch.org/latest/api-reference/units/).
@@ -585,13 +602,14 @@ class CatNamespace extends AbstractNamespace
     /**
      * Provides low-level information about the segments in the shards of an index.
      *
-     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index: A comma-separated list of data streams, indexes, and aliases used to limit the request. Supports wildcards (`*`). To target all data streams and indexes, omit this parameter or use `*` or `_all`.
      * - bytes: The units used to display byte values.
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - v: Enables verbose mode, which displays column headers. (Default: false)
@@ -616,13 +634,14 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists the states of all primary and replica shards and how they are distributed.
      *
-     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{index?: mixed, bytes?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - index:
      * - bytes: The units used to display byte values.
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -649,13 +668,14 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists all of the snapshots stored in a specific repository.
      *
-     * @param array{repository?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, ignore_unavailable?: bool, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{repository?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, ignore_unavailable?: bool, limit?: int, master_timeout?: string, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: A comma-separated list of snapshot repositories used to limit the request. Accepts wildcard expressions. `_all` returns all repositories. If any repository fails during the request, OpenSearch returns an error.
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
      * - ignore_unavailable: When `true`, the response does not include information from unavailable snapshots. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - time: Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://docs.opensearch.org/latest/api-reference/units/).
@@ -681,12 +701,13 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists the progress of all tasks currently running on the cluster.
      *
-     * @param array{actions?: mixed, detailed?: bool, format?: mixed, h?: mixed, help?: bool, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, node_id?: mixed, parent_task?: string} $params
+     * @param array{actions?: mixed, detailed?: bool, format?: mixed, h?: mixed, help?: bool, limit?: int, s?: mixed, time?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, node_id?: mixed, parent_task?: string} $params
      * - actions: The task action names used to limit the response.
      * - detailed: If `true`, the response includes detailed information about shard recoveries. (Default: false)
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - s: A comma-separated list of column names or column aliases to sort by.
      * - time: Specifies the time units, for example, `5d` or `7h`. For more information, see [Supported units](https://docs.opensearch.org/latest/api-reference/units/).
      * - v: Enables verbose mode, which displays column headers. (Default: false)
@@ -711,12 +732,13 @@ class CatNamespace extends AbstractNamespace
     /**
      * Lists the names, patterns, order numbers, and version numbers of index templates.
      *
-     * @param array{name?: string, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{name?: string, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - name: The name of the template to return. Accepts wildcard expressions. If omitted, all templates are returned.
      * - cluster_manager_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.
@@ -742,12 +764,13 @@ class CatNamespace extends AbstractNamespace
     /**
      * Returns cluster-wide thread pool statistics per node.By default the active, queued, and rejected statistics are returned for all thread pools.
      *
-     * @param array{thread_pool_patterns?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, local?: bool, master_timeout?: string, s?: mixed, size?: int, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{thread_pool_patterns?: mixed, cluster_manager_timeout?: string, format?: mixed, h?: mixed, help?: bool, limit?: int, local?: bool, master_timeout?: string, s?: mixed, size?: int, v?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - thread_pool_patterns: A comma-separated list of thread pool names used to limit the request. Accepts wildcard expressions.
      * - cluster_manager_timeout: A timeout for connection to the cluster manager node.
      * - format: A short version of the `Accept` header, such as `json` or `yaml`. (Default: text) (Options: cbor, json, smile, text, yaml)
      * - h: A comma-separated list of column names to display.
      * - help: Returns help information. (Default: false)
+     * - limit: The maximum number of rows to return. Must be greater than 0. Applied after sorting (`s`).
      * - local: Returns local information but does not retrieve the state from the cluster manager node. (Default: false)
      * - master_timeout: The amount of time allowed to establish a connection to the cluster manager node.
      * - s: A comma-separated list of column names or column aliases to sort by.

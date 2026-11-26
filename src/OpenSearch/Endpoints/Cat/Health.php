@@ -39,6 +39,7 @@ class Health extends AbstractEndpoint
             'format',
             'h',
             'help',
+            'limit',
             's',
             'time',
             'ts',

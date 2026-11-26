@@ -26,10 +26,12 @@ use OpenSearch\Namespaces\BooleanRequestWrapper;
 use OpenSearch\Namespaces\NamespaceBuilderInterface;
 use OpenSearch\Namespaces\AsyncSearchNamespace;
 use OpenSearch\Namespaces\AsynchronousSearchNamespace;
+use OpenSearch\Namespaces\BlockCacheNamespace;
 use OpenSearch\Namespaces\CatNamespace;
 use OpenSearch\Namespaces\ClusterNamespace;
 use OpenSearch\Namespaces\DanglingIndicesNamespace;
 use OpenSearch\Namespaces\DataFrameTransformDeprecatedNamespace;
+use OpenSearch\Namespaces\FileCacheNamespace;
 use OpenSearch\Namespaces\FlowFrameworkNamespace;
 use OpenSearch\Namespaces\GeospatialNamespace;
 use OpenSearch\Namespaces\IndicesNamespace;
@@ -51,6 +53,7 @@ use OpenSearch\Namespaces\QueryNamespace;
 use OpenSearch\Namespaces\RemoteStoreNamespace;
 use OpenSearch\Namespaces\ReplicationNamespace;
 use OpenSearch\Namespaces\RollupsNamespace;
+use OpenSearch\Namespaces\RulesNamespace;
 use OpenSearch\Namespaces\SearchPipelineNamespace;
 use OpenSearch\Namespaces\SearchRelevanceNamespace;
 use OpenSearch\Namespaces\SearchableSnapshotsNamespace;
@@ -63,6 +66,7 @@ use OpenSearch\Namespaces\SslNamespace;
 use OpenSearch\Namespaces\TasksNamespace;
 use OpenSearch\Namespaces\TransformsNamespace;
 use OpenSearch\Namespaces\UbiNamespace;
+use OpenSearch\Namespaces\ViewsNamespace;
 use OpenSearch\Namespaces\WlmNamespace;
 use OpenSearch\Endpoints\Bulk;
 use OpenSearch\Endpoints\BulkStream;
@@ -79,6 +83,7 @@ use OpenSearch\Endpoints\DeleteScript;
 use OpenSearch\Endpoints\Exists;
 use OpenSearch\Endpoints\ExistsSource;
 use OpenSearch\Endpoints\Explain;
+use OpenSearch\Endpoints\Favicon;
 use OpenSearch\Endpoints\FieldCaps;
 use OpenSearch\Endpoints\Get;
 use OpenSearch\Endpoints\GetAllPits;
@@ -98,6 +103,7 @@ use OpenSearch\Endpoints\RankEval;
 use OpenSearch\Endpoints\Reindex;
 use OpenSearch\Endpoints\ReindexRethrottle;
 use OpenSearch\Endpoints\RenderSearchTemplate;
+use OpenSearch\Endpoints\ScriptsPainlessContext;
 use OpenSearch\Endpoints\ScriptsPainlessExecute;
 use OpenSearch\Endpoints\Scroll;
 use OpenSearch\Endpoints\Search;
@@ -158,6 +164,11 @@ class Client
     protected $asynchronousSearch;
 
     /**
+     * @var BlockCacheNamespace
+     */
+    protected $blockCache;
+
+    /**
      * @var CatNamespace
      */
     protected $cat;
@@ -178,6 +189,11 @@ class Client
      * @deprecated in 2.4.2 and will be removed in 3.0.0.
      */
     protected $dataFrameTransformDeprecated;
+
+    /**
+     * @var FileCacheNamespace
+     */
+    protected $fileCache;
 
     /**
      * @var FlowFrameworkNamespace
@@ -287,6 +303,11 @@ class Client
     protected $rollups;
 
     /**
+     * @var RulesNamespace
+     */
+    protected $rules;
+
+    /**
      * @var SearchPipelineNamespace
      */
     protected $searchPipeline;
@@ -351,6 +372,11 @@ class Client
     protected $ubi;
 
     /**
+     * @var ViewsNamespace
+     */
+    protected $views;
+
+    /**
      * @var WlmNamespace
      */
     protected $wlm;
@@ -398,11 +424,13 @@ class Client
         // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->asyncSearch = new AsyncSearchNamespace($transport, $this->endpointFactory);
         $this->asynchronousSearch = new AsynchronousSearchNamespace($transport, $this->endpointFactory);
+        $this->blockCache = new BlockCacheNamespace($transport, $this->endpointFactory);
         $this->cat = new CatNamespace($transport, $this->endpointFactory);
         $this->cluster = new ClusterNamespace($transport, $this->endpointFactory);
         $this->danglingIndices = new DanglingIndicesNamespace($transport, $this->endpointFactory);
         // @phpstan-ignore new.deprecatedClass, property.deprecated
         $this->dataFrameTransformDeprecated = new DataFrameTransformDeprecatedNamespace($transport, $this->endpointFactory);
+        $this->fileCache = new FileCacheNamespace($transport, $this->endpointFactory);
         $this->flowFramework = new FlowFrameworkNamespace($transport, $this->endpointFactory);
         $this->geospatial = new GeospatialNamespace($transport, $this->endpointFactory);
         $this->indices = new IndicesNamespace($transport, $this->endpointFactory);
@@ -425,6 +453,7 @@ class Client
         $this->remoteStore = new RemoteStoreNamespace($transport, $this->endpointFactory);
         $this->replication = new ReplicationNamespace($transport, $this->endpointFactory);
         $this->rollups = new RollupsNamespace($transport, $this->endpointFactory);
+        $this->rules = new RulesNamespace($transport, $this->endpointFactory);
         $this->searchPipeline = new SearchPipelineNamespace($transport, $this->endpointFactory);
         $this->searchRelevance = new SearchRelevanceNamespace($transport, $this->endpointFactory);
         // @phpstan-ignore new.deprecatedClass, property.deprecated
@@ -439,6 +468,7 @@ class Client
         $this->tasks = new TasksNamespace($transport, $this->endpointFactory);
         $this->transforms = new TransformsNamespace($transport, $this->endpointFactory);
         $this->ubi = new UbiNamespace($transport, $this->endpointFactory);
+        $this->views = new ViewsNamespace($transport, $this->endpointFactory);
         $this->wlm = new WlmNamespace($transport, $this->endpointFactory);
 
         $this->registeredNamespaces = $registeredNamespaces;
@@ -913,6 +943,26 @@ class Client
         $endpoint->setId($id);
         $endpoint->setIndex($index);
         $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Returns the OpenSearch favicon.
+     *
+     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function favicon(array $params = [])
+    {
+
+        $endpoint = $this->endpointFactory->getEndpoint(Favicon::class);
+        $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
     }
@@ -1468,6 +1518,27 @@ class Client
     }
 
     /**
+     * Returns Painless allowlist information for all script contexts or for a specified context.
+     *
+     * @param array{context?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - context: The script context for which to return detailed Painless allowlist information. If omitted, returns the names of all contexts.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function scriptsPainlessContext(array $params = [])
+    {
+
+        $endpoint = $this->endpointFactory->getEndpoint(ScriptsPainlessContext::class);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * Allows an arbitrary script to be executed and a result to be returned.
      *
      * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
@@ -1901,6 +1972,13 @@ class Client
         return $this->asynchronousSearch;
     }
     /**
+     * Returns the blockCache namespace
+     */
+    public function blockCache(): BlockCacheNamespace
+    {
+        return $this->blockCache;
+    }
+    /**
      * Returns the cat namespace
      */
     public function cat(): CatNamespace
@@ -1930,6 +2008,13 @@ class Client
     {
         @trigger_error(__METHOD__ . '() is deprecated since 2.4.2 and will be removed in 3.0.0.', E_USER_DEPRECATED);
         return $this->dataFrameTransformDeprecated;
+    }
+    /**
+     * Returns the fileCache namespace
+     */
+    public function fileCache(): FileCacheNamespace
+    {
+        return $this->fileCache;
     }
     /**
      * Returns the flowFramework namespace
@@ -2082,6 +2167,13 @@ class Client
         return $this->rollups;
     }
     /**
+     * Returns the rules namespace
+     */
+    public function rules(): RulesNamespace
+    {
+        return $this->rules;
+    }
+    /**
      * Returns the searchPipeline namespace
      */
     public function searchPipeline(): SearchPipelineNamespace
@@ -2170,6 +2262,13 @@ class Client
     public function ubi(): UbiNamespace
     {
         return $this->ubi;
+    }
+    /**
+     * Returns the views namespace
+     */
+    public function views(): ViewsNamespace
+    {
+        return $this->views;
     }
     /**
      * Returns the wlm namespace

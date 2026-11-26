@@ -47,6 +47,7 @@ class Recovery extends AbstractEndpoint
             'h',
             'help',
             'index',
+            'limit',
             's',
             'time',
             'v',

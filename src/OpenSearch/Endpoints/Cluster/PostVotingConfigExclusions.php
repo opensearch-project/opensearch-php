@@ -28,8 +28,14 @@ use OpenSearch\Endpoints\AbstractEndpoint;
  */
 class PostVotingConfigExclusions extends AbstractEndpoint
 {
+    protected $node_name;
+
     public function getURI(): string
     {
+        $node_name = $this->node_name ? rawurlencode($this->node_name) : null;
+        if (isset($node_name)) {
+            return "/_cluster/voting_config_exclusions/$node_name";
+        }
         return "/_cluster/voting_config_exclusions";
     }
 
@@ -50,5 +56,15 @@ class PostVotingConfigExclusions extends AbstractEndpoint
     public function getMethod(): string
     {
         return 'POST';
+    }
+
+    public function setNodeName($node_name): static
+    {
+        if (is_null($node_name)) {
+            return $this;
+        }
+        $this->node_name = $node_name;
+
+        return $this;
     }
 }

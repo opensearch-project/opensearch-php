@@ -45,6 +45,7 @@ class Segments extends AbstractEndpoint
             'format',
             'h',
             'help',
+            'limit',
             'master_timeout',
             's',
             'v',

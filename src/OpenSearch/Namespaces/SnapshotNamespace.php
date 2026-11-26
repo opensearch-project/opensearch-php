@@ -307,9 +307,10 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * Returns information about the status of a snapshot.
      *
-     * @param array{repository?: string, snapshot?: mixed, cluster_manager_timeout?: string, ignore_unavailable?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{repository?: string, snapshot?: mixed, index?: mixed, cluster_manager_timeout?: string, ignore_unavailable?: bool, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - repository: The name of the repository containing the snapshot.
      * - snapshot: A comma-separated list of snapshot names.
+     * - index: A comma-separated list of index names for which to return snapshot status information.
      * - cluster_manager_timeout: The amount of time to wait for a response from the cluster manager node. For more information about supported time units, see [Common parameters](https://docs.opensearch.org/latest/api-reference/common-parameters/#time-units).
      * - ignore_unavailable: Whether to ignore any unavailable snapshots, When `false`, a `SnapshotMissingException` is thrown. (Default: false)
      * - master_timeout: Explicit operation timeout for connection to cluster-manager node
@@ -324,11 +325,13 @@ class SnapshotNamespace extends AbstractNamespace
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
+        $index = $this->extractArgument($params, 'index');
 
         $endpoint = $this->endpointFactory->getEndpoint(Status::class);
         $endpoint->setParams($params);
         $endpoint->setRepository($repository);
         $endpoint->setSnapshot($snapshot);
+        $endpoint->setIndex($index);
 
         return $this->performRequest($endpoint);
     }
