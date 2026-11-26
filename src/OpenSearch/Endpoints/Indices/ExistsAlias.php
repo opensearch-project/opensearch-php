@@ -33,15 +33,18 @@ class ExistsAlias extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (!isset($this->name) || $this->name === '') {
-            throw new RuntimeException('name is required for exists_alias');
-        }
-        $name = rawurlencode($this->name);
+        $name = $this->name ? rawurlencode($this->name) : null;
         $index = $this->index ? rawurlencode($this->index) : null;
-        if (isset($index)) {
+        if (isset($index) && isset($name)) {
             return "/$index/_alias/$name";
         }
-        return "/_alias/$name";
+        if (isset($index)) {
+            return "/$index/_alias";
+        }
+        if (isset($name)) {
+            return "/_alias/$name";
+        }
+        throw new RuntimeException('Missing parameter for the endpoint indices.exists_alias');
     }
 
     public function getParamWhitelist(): array

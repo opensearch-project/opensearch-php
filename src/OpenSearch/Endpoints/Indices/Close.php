@@ -21,7 +21,6 @@ declare(strict_types=1);
 
 namespace OpenSearch\Endpoints\Indices;
 
-use OpenSearch\Exception\RuntimeException;
 use OpenSearch\Endpoints\AbstractEndpoint;
 
 /**
@@ -35,7 +34,7 @@ class Close extends AbstractEndpoint
         if (isset($index)) {
             return "/$index/_close";
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.close');
+        return "/_close";
     }
 
     public function getParamWhitelist(): array

@@ -15,7 +15,9 @@ declare(strict_types=1);
 
 namespace OpenSearch\Namespaces;
 
+use OpenSearch\Endpoints\RemoteStore\Metadata;
 use OpenSearch\Endpoints\RemoteStore\Restore;
+use OpenSearch\Endpoints\RemoteStore\Stats;
 
 /**
  * Class RemoteStoreNamespace
@@ -24,6 +26,32 @@ use OpenSearch\Endpoints\RemoteStore\Restore;
  */
 class RemoteStoreNamespace extends AbstractNamespace
 {
+    /**
+     * Returns remote segment and translog metadata for an index or shard.
+     *
+     * @param array{index?: string, shard_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: The index for which to return remote store metadata.
+     * - shard_id: The shard ID for which to return remote store metadata.
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function metadata(array $params = [])
+    {
+        $index = $this->extractArgument($params, 'index');
+        $shard_id = $this->extractArgument($params, 'shard_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(Metadata::class);
+        $endpoint->setParams($params);
+        $endpoint->setIndex($index);
+        $endpoint->setShardId($shard_id);
+
+        return $this->performRequest($endpoint);
+    }
+
     /**
      * Restores from remote store.
      *
@@ -45,6 +73,33 @@ class RemoteStoreNamespace extends AbstractNamespace
         $endpoint = $this->endpointFactory->getEndpoint(Restore::class);
         $endpoint->setParams($params);
         $endpoint->setBody($body);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * Returns remote store statistics for an index or shard.
+     *
+     * @param array{index?: string, shard_id?: string, local?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - index: The index for which to return remote store statistics.
+     * - shard_id: The shard ID for which to return remote store statistics.
+     * - local: Whether to return statistics only from the local node. (Default: false)
+     * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
+     * - human: Whether to return human-readable values for statistics. (Default: false)
+     * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
+     * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
+     * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
+     * @return array
+     */
+    public function stats(array $params = [])
+    {
+        $index = $this->extractArgument($params, 'index');
+        $shard_id = $this->extractArgument($params, 'shard_id');
+
+        $endpoint = $this->endpointFactory->getEndpoint(Stats::class);
+        $endpoint->setParams($params);
+        $endpoint->setIndex($index);
+        $endpoint->setShardId($shard_id);
 
         return $this->performRequest($endpoint);
     }

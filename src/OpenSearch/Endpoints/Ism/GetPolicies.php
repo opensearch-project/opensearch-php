@@ -30,6 +30,11 @@ class GetPolicies extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'from',
+            'queryString',
+            'size',
+            'sortField',
+            'sortOrder',
             'pretty',
             'human',
             'error_trace',

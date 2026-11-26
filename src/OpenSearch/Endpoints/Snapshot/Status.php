@@ -35,6 +35,10 @@ class Status extends AbstractEndpoint
     {
         $repository = $this->repository ? rawurlencode($this->repository) : null;
         $snapshot = $this->snapshot ? rawurlencode($this->snapshot) : null;
+        $index = $this->index ? rawurlencode($this->index) : null;
+        if (isset($repository) && isset($snapshot) && isset($index)) {
+            return "/_snapshot/$repository/$snapshot/$index/_status";
+        }
         if (isset($repository) && isset($snapshot)) {
             return "/_snapshot/$repository/$snapshot/_status";
         }

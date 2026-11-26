@@ -22,8 +22,14 @@ use OpenSearch\Endpoints\AbstractEndpoint;
  */
 class DeleteWeightedRouting extends AbstractEndpoint
 {
+    protected $attribute;
+
     public function getURI(): string
     {
+        $attribute = $this->attribute ? rawurlencode($this->attribute) : null;
+        if (isset($attribute)) {
+            return "/_cluster/routing/awareness/$attribute/weights";
+        }
         return "/_cluster/routing/awareness/weights";
     }
 
@@ -49,6 +55,16 @@ class DeleteWeightedRouting extends AbstractEndpoint
             return $this;
         }
         $this->body = $body;
+
+        return $this;
+    }
+
+    public function setAttribute($attribute): static
+    {
+        if (is_null($attribute)) {
+            return $this;
+        }
+        $this->attribute = $attribute;
 
         return $this;
     }

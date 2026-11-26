@@ -31,11 +31,12 @@ class PutMapping extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index ? rawurlencode($this->index) : null;
-        if (isset($index)) {
-            return "/$index/_mapping";
+        if (!isset($this->index) || $this->index === '') {
+            throw new RuntimeException('index is required for put_mapping');
         }
-        throw new RuntimeException('Missing parameter for the endpoint indices.put_mapping');
+        $index = rawurlencode($this->index);
+
+        return "/$index/_mapping";
     }
 
     public function getParamWhitelist(): array

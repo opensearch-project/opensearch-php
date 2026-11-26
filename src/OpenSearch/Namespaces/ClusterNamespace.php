@@ -146,7 +146,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Delete weighted shard routing weights.
      *
-     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{attribute?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - attribute: The name of the awareness attribute whose weighted routing configuration should be deleted.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -157,10 +158,12 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function deleteWeightedRouting(array $params = [])
     {
+        $attribute = $this->extractArgument($params, 'attribute');
         $body = $this->extractArgument($params, 'body');
 
         $endpoint = $this->endpointFactory->getEndpoint(DeleteWeightedRouting::class);
         $endpoint->setParams($params);
+        $endpoint->setAttribute($attribute);
         $endpoint->setBody($body);
 
         return $this->performRequest($endpoint);
@@ -376,7 +379,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * Updates the cluster voting configuration by excluding certain node IDs or names.
      *
-     * @param array{node_ids?: mixed, node_names?: mixed, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{node_name?: string, node_ids?: mixed, node_names?: mixed, timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - node_name: The name of a node to exclude from the voting configuration.
      * - node_ids: A comma-separated list of node IDs to exclude from the voting configuration. When using this setting, you cannot also specify `node_names`. Either `node_ids` or `node_names` are required to receive a valid response.
      * - node_names: A comma-separated list of node names to exclude from the voting configuration. When using this setting, you cannot also specify `node_ids`. Either `node_ids` or `node_names` are required to receive a valid response.
      * - timeout: When adding a voting configuration exclusion, the API waits for the specified nodes to be excluded from the voting configuration before returning a response. If the timeout expires before the appropriate condition is satisfied, the request fails and returns an error.
@@ -389,9 +393,11 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function postVotingConfigExclusions(array $params = [])
     {
+        $node_name = $this->extractArgument($params, 'node_name');
 
         $endpoint = $this->endpointFactory->getEndpoint(PostVotingConfigExclusions::class);
         $endpoint->setParams($params);
+        $endpoint->setNodeName($node_name);
 
         return $this->performRequest($endpoint);
     }

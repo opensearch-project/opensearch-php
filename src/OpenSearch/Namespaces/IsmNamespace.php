@@ -39,13 +39,13 @@ class IsmNamespace extends AbstractNamespace
      * Adds a policy to an index.
      *
      * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - index:
+     * - index: Comma-separated list of indexes. Required when no index is given in the path; ignored when it is.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
      * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * - body:
+     * - body: (Required)
      * @return array
      */
     public function addPolicy(array $params = [])
@@ -65,13 +65,13 @@ class IsmNamespace extends AbstractNamespace
      * Updates the managed index policy to a new policy.
      *
      * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - index:
+     * - index: Comma-separated list of indexes. Required when no index is given in the path; ignored when it is.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
      * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * - body:
+     * - body: (Required)
      * @return array
      */
     public function changePolicy(array $params = [])
@@ -90,8 +90,9 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Deletes a policy.
      *
-     * @param array{policy_id?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{policy_id?: string, refresh?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
      * - policy_id:
+     * - refresh: Whether to refresh the affected shards to make this operation visible to search. Default is `true`.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -139,8 +140,18 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Retrieves the currently applied policy on the specified indexes.
      *
-     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{index?: mixed, cluster_manager_timeout?: string, from?: int, local?: bool, master_timeout?: string, queryString?: string, show_policy?: bool, size?: int, sortField?: string, sortOrder?: mixed, validate_action?: bool, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - index:
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - from: The starting index of the managed indexes to return. (Default: 0)
+     * - local: Whether to return information from the local node only instead of from the cluster manager node. (Default: false)
+     * - master_timeout: Operation timeout for connection to cluster-manager node.
+     * - queryString: A query string that filters the managed indexes. (Default: *)
+     * - show_policy: Whether to include the policy of each managed index in the response. (Default: false)
+     * - size: The number of managed indexes to return. (Default: 20)
+     * - sortField: The field to sort the managed indexes by. (Default: managed_index.index)
+     * - sortOrder: The sort order of the managed indexes. (Options: asc, desc)
+     * - validate_action: Whether to include the validation result of the current action of each managed index in the response. (Default: false)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -165,7 +176,12 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Retrieves the policies.
      *
-     * @param array{pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * @param array{from?: int, queryString?: string, size?: int, sortField?: string, sortOrder?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
+     * - from: The starting index of the policies to return. (Default: 0)
+     * - queryString: A query string that filters the policies. (Default: *)
+     * - size: The number of policies to return. (Default: 20)
+     * - sortField: The field to sort the policies by. (Default: policy.policy_id.keyword)
+     * - sortOrder: The sort order of the policies. (Options: asc, desc)
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -208,16 +224,17 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Creates or updates policies.
      *
-     * @param array{if_primary_term?: int|float, if_seq_no?: int, policyID?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{if_primary_term?: int, if_seq_no?: int, policyID?: string, refresh?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - if_primary_term: Only perform the operation if the document has this primary term.
      * - if_seq_no: Only perform the operation if the document has this sequence number.
      * - policyID:
+     * - refresh: Whether to refresh the affected shards to make this operation visible to search. Default is `true`.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
      * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * - body:
+     * - body: (Required)
      * @return array
      */
     public function putPolicies(array $params = [])
@@ -234,16 +251,17 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Creates or updates a policy.
      *
-     * @param array{policy_id?: string, if_primary_term?: int|float, if_seq_no?: int, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * @param array{policy_id?: string, if_primary_term?: int, if_seq_no?: int, refresh?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
      * - policy_id:
      * - if_primary_term: Only perform the operation if the document has this primary term.
      * - if_seq_no: Only perform the operation if the document has this sequence number.
+     * - refresh: Whether to refresh the affected shards to make this operation visible to search. Default is `true`.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
      * - source: The URL-encoded request definition. Useful for libraries that do not accept a request body for non-POST requests.
      * - filter_path: A comma-separated list of filters used to filter the response. Use wildcards to match any field or part of a field's name. To exclude fields, use `-`.
-     * - body:
+     * - body: (Required)
      * @return array
      */
     public function putPolicy(array $params = [])
@@ -286,7 +304,7 @@ class IsmNamespace extends AbstractNamespace
      * Removes a policy from an index.
      *
      * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed} $params
-     * - index:
+     * - index: Comma-separated list of indexes. Required when no index is given in the path; ignored when it is.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
@@ -308,8 +326,10 @@ class IsmNamespace extends AbstractNamespace
     /**
      * Retries the failed action for an index.
      *
-     * @param array{index?: mixed, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
-     * - index:
+     * @param array{index?: mixed, cluster_manager_timeout?: string, master_timeout?: string, pretty?: bool, human?: bool, error_trace?: bool, source?: string, filter_path?: mixed, body?: mixed} $params
+     * - index: Comma-separated list of indexes. Required when no index is given in the path; ignored when it is.
+     * - cluster_manager_timeout: Operation timeout for connection to cluster-manager node.
+     * - master_timeout: Operation timeout for connection to cluster-manager node.
      * - pretty: Whether to pretty-format the returned JSON response. (Default: false)
      * - human: Whether to return human-readable values for statistics. (Default: false)
      * - error_trace: Whether to include the stack trace of returned errors. (Default: false)
